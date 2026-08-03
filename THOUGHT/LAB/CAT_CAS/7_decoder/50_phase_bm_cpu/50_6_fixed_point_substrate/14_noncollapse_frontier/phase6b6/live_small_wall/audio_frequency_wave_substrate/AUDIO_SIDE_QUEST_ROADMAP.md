@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FIBER_ACTIVE_GAUGE_SHEAR`
-**Roadmap version:** `14.13`
+**Status:** `STRICT_SCOPE_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING`
+**Roadmap version:** `14.14`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `61cd8fb814a8d243c7106aa62cb3ce68a610fb45`
+**Reconciled source head:** `d066677f758c627aa5dd4acc2e31b4127b2bce6e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_FIBER_ACTIVE_GAUGE_DEPENDENT_PHASE_SHEAR_MAKES_EQUAL_BASE_DIFFERENT_GAUGE_F17_CARRIERS_BOUNDARY_DISTINGUISHABLE_WHILE_INTERLEAVING_NONCOMMUTING_PHASE_AND_LOCAL_GIVENS_MODULES_ON_FIXED51_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_MATCHED17_COMPLEX_PLUS17_GAUGE_SCALAR_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_FIBER_ACTIVE_GAUGE_SHEAR_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_CAUSALITY_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `21_DECLARED_DIRECT_ANGLE_TRIANGULAR_GAUGE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_CAUSALITY_CONDITIONING_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M147_FIBER_ACTIVE_GAUGE_SHEAR`
+**New mechanism development:** `ACTIVE_AFTER_M148_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_WITHOUT_CARTESIAN_RECHARTING_OR_BOUNDED_BISIMULATION_TO_IDENTICAL51_ANGLE_RECURRENCE`
+**Active primary successor:** `UNRESOLVED_MULTI_CONSUMER_PHASE_FIBER_PORT_CONTRACTION_WITHOUT_SCALAR_GAUGE_READOUT_OR_BOUNDED_COLLAPSE_TO_MATCHED_COMPACT_PHASE_FACTOR_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`61cd8fb814a8d243c7106aa62cb3ce68a610fb45`. The current 147-milestone
+`d066677f758c627aa5dd4acc2e31b4127b2bce6e`. The current 148-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_TOPOLOGY_COMPILED_LOCAL_POLAR_GIVENS_PHASE_COUPLING_FACTORS_WEIGHTED_ANISOTROPIC_F17_RADIAL_INTERFERENCE_IN136_TWO_CELL_COUPLERS_WITH_FIXED34_RESIDENT_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_REQUIRES_A2312_BYTE_PUBLIC_PLAN_LOCAL_CARTESIAN_REGISTERS_AND_HAS_THE_IDENTICAL_COMPLEX_GIVENS_RECURRENCE
+BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -6130,6 +6130,83 @@ classical lower bound, global unit-sphere chart, exact algebraic semantics,
 CATVM custody, computational advantage, Small Wall crossing, physical
 waveform execution, physical bit replacement, or unbounded catalytic
 computation.
+
+## M148: Direct phase-angle triangular shared-gauge coupling
+
+M148 replaces the decoded-base shear and local Givens rechart with a direct
+phase update.  At each public step one rotating resident hub gauge translates
+16 target phase triplets; the updated target gauges then translate the hub in
+a reciprocal layer.  The two layers do not commute.  No complex base is
+decoded during an update, no Cartesian chart scratch or chart reconstruction
+is used, and no Givens plan is retained.
+
+```text
+claim
+    BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 51-angle carrier NUMERICAL_PHYSICAL_STATE_RESTORATION
+    update, projection, comparison, and verification buffers NO_RESTORATION_CLAIM
+
+source head
+    d066677f758c627aa5dd4acc2e31b4127b2bce6e
+```
+
+The equal-base/different-gauge witness begins with decoded base agreement of
+`5.888e-16` and gauge separation of `0.714`.  The same public depth-4 program
+separates final decoded states by `0.0131` and final boundaries by `0.0462`;
+both actual carriers restore within `2.704e-15`.
+
+All 21 cases through depth 4096 reproduce the separately executed matched
+51-angle recurrence byte-for-byte.  Maximum boundary difference is
+`4.826e-15`, maximum single-transaction restoration error is `9.860e-13`,
+and 100 same-backing depth-64 cycles restore within `2.780e-13`.  Unrelated
+depth-1537 reuse agrees with fresh execution within `1.714e-13`.  No snapshot,
+inverse history, retained restoration baseline, or post-inverse reload is
+used.
+
+The independent oracle imports neither M148 nor M146.  It shares only M145's
+established phase exponent and shell weights, separately implements the seed
+chart, triangular update, forward/inverse, final commitment and boundary,
+causality witness, mutations, reuse, inverse-conditioning attack, and second
+51-angle recurrence, and passes 129 comparisons.  The qualifier reproduces
+both sealed JSON files byte-for-byte.
+
+The accepted carrier uses 51 `float64` angles or 408 resident bytes, no public
+plan, and four update scratch scalars.  Its named warm peak including the
+public program is 750 bytes.  The executed matched recurrence has the same 51
+scalars, operations, and named warm peak and reproduces final carrier bytes
+exactly.  No optimal classical baseline is claimed.
+
+The originally attempted coupling `5/32` is rejected for the accepted path:
+its depth-4096 restoration error is `1.925`.  The declared `1/32` coupling
+restores within `9.860e-13` for that attack.  This bounds the numerical result;
+it does not establish unbounded-depth stability.
+
+The selected successor is:
+
+```text
+UNRESOLVED_MULTI_CONSUMER_PHASE_FIBER_PORT_CONTRACTION_WITHOUT_SCALAR_GAUGE_READOUT_OR_BOUNDED_COLLAPSE_TO_MATCHED_COMPACT_PHASE_FACTOR_RECURRENCE
+```
+
+It must replace the immediately scalar-readable gauge control with one
+unresolved typed phase-fiber port consumed by multiple noncommuting modules
+and closed only at the final boundary, without relation-table or assignment
+expansion.  It must preserve same-backing inverse restoration and reuse and
+execute the strongest compact phase-factor recurrence.  Another direct-angle
+fixture does not address the obstruction.
+
+M148 establishes no resource beyond compact 51-scalar software, optimal
+classical lower bound, general relational contraction, exact algebraic
+semantics, unbounded numerical stability, CATVM custody, computational
+advantage, Small Wall crossing, physical waveform execution, physical bit
+replacement, or unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

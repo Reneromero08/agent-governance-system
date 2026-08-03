@@ -8606,3 +8606,62 @@ that removes Cartesian recharting, or a bounded bisimulation to the identical
 51-angle recurrence.  M147 establishes no optimal classical lower bound,
 CATVM custody, computational advantage, Small Wall crossing, physical
 execution, physical bit replacement, or unbounded catalytic computation.
+
+## M148: Direct phase-angle triangular shared-gauge coupling
+
+Claim:
+
+```text
+BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE
+```
+
+M148 applies only common translations to resident phase triplets.  One
+rotating hub gauge controls 16 target triplets, then those updated target
+gauges control the hub.  The OUT and IN layers do not commute.  Updates use no
+complex-base decode, Cartesian chart scratch, chart reconstruction, retained
+Givens plan, relation table, or assignment expansion.
+
+Two carriers with decoded base agreement `5.888e-16` and gauge separation
+`0.714` reach final decoded-state separation `0.0131` and boundary separation
+`0.0462` under the same public depth-4 program.  Both actual carriers restore
+within `2.704e-15`; the gauge fiber is therefore causally relevant for this
+declared family.
+
+All 21 cases through depth 4096 reproduce the separately executed identical
+51-angle recurrence byte-for-byte.  Maximum boundary difference is
+`4.826e-15`, maximum transaction restoration is `9.860e-13`, unrelated
+depth-1537 reuse agrees with fresh execution within `1.714e-13`, and 100
+same-backing depth-64 cycles restore within `2.780e-13`.  The resident carrier
+has 51 `float64` angles (408 bytes), no retained public plan, four update
+scratch scalars, and a 750-byte named warm peak including the public program.
+
+The independent oracle imports neither M148 nor M146 and shares only M145's
+established phase exponent and shell weights.  It separately reconstructs
+the seed chart, triangular schedule, commitments, boundaries, inverse,
+witness, mutation controls, reuse, conditioning attack, and matched recurrence
+in 129 comparisons.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`; the carrier restoration class is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`, while transient buffers have
+`NO_RESTORATION_CLAIM`.
+
+The initially attempted strength `5/32` is rejected from the accepted path:
+its depth-4096 inverse error reaches `1.925`.  The accepted `1/32` strength
+restores within `9.860e-13` for the same attack.  This is a bounded numerical
+envelope, not unbounded stability.
+
+The direct phase primitive removes M147's recharting overhead, but the exact
+byte bisimulation and equal resource law establish no distinct phase
+resource or advantage.  The next experiment is:
+
+```text
+UNRESOLVED_MULTI_CONSUMER_PHASE_FIBER_PORT_CONTRACTION_WITHOUT_SCALAR_GAUGE_READOUT_OR_BOUNDED_COLLAPSE_TO_MATCHED_COMPACT_PHASE_FACTOR_RECURRENCE
+```
+
+It must keep one typed phase-fiber port unresolved across multiple
+noncommuting consumers and close it only at the boundary without relation
+tables or assignment expansion.  M148 establishes no optimal classical lower
+bound, general relational contraction, exact algebraic semantics, unbounded
+numerical stability, CATVM custody, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation.

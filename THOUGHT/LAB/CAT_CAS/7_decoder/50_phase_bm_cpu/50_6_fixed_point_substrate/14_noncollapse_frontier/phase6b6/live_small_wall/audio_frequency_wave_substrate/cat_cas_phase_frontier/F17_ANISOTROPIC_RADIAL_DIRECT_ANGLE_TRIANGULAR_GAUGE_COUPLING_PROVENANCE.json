@@ -1,0 +1,117 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "d066677f758c627aa5dd4acc2e31b4127b2bce6e",
+  "scientific_source_parent": "d8bb02851d32a382a5eb69aefd59032a11e9f801",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "a4ee5cdc250c06991baf5a4d835d428e659203c5f120355dafa4477219524b64",
+  "reference_full_oracle_sha256": "748d6f2011e7e4fa970b0cc858cffc3344101953e19d317c102146be1b2cc017",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_direct_angle_triangular_gauge_coupling.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_direct_angle_triangular_gauge_coupling_oracle.py --package PRODUCTION_RESULT --production PRODUCTION_SOURCE --predecessor PREDECESSOR_SOURCE --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_direct_angle_triangular_gauge_coupling.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_direct_angle_triangular_gauge_coupling.py": "45788de89f2e772e2f8e1b11b3d63ca7901ce1dbab14c507587841afaf638d8b",
+    "f17_anisotropic_radial_direct_angle_triangular_gauge_coupling_oracle.py": "2b288ad52a83b1fd270cf809e1d97964a71c36abdf7b9f44e1454dabbed39b8f",
+    "F17_ANISOTROPIC_RADIAL_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING_RESULTS.json": "a4ee5cdc250c06991baf5a4d835d428e659203c5f120355dafa4477219524b64",
+    "F17_ANISOTROPIC_RADIAL_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING_ORACLE_RESULTS.json": "748d6f2011e7e4fa970b0cc858cffc3344101953e19d317c102146be1b2cc017",
+    "F17_ANISOTROPIC_RADIAL_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING_INDEPENDENT_REVIEW.md": "8b88975b02e4b36f80bc352fd0bae6d7820c7097d5171c7a3d7865a0b2acfef0",
+    "qualify_f17_anisotropic_radial_direct_angle_triangular_gauge_coupling.sh": "a64dd18e88c2ce30a609ec2672ba176da492a8399f57cf1ca76a64b478a8bfb2",
+    "f17_anisotropic_radial_stateful_gauge_phasor_lift.py": "27a147d45415e97de5fafd9436cfce7a3f1cb0ae0cbd3410189560282a760590"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "SHELL_NORMALIZED_F17_SQUARED_ANISOTROPIC_RADIAL_VARIABLE_GAUGE_PHASE_FIBER",
+    "resident_chart": "WEIGHTED_THREE_UNIT_PHASOR_ANGLES_PER_COMPLEX_BASE_COORDINATE",
+    "new_update_law": "DIRECT_COMMON_PHASE_TRANSLATION_BY_RESIDENT_CONTROLLER_GAUGE_ON_PUBLIC_ROTATING_HUB16_OUT16_IN_TRIANGULAR_SCHEDULE",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_comparison_count": 129,
+    "independent_methods": [
+      "SEPARATE_WEIGHTED_THREE_PHASOR_SEED_CHART",
+      "SEPARATE51_ANGLE_FORWARD_AND_INVERSE",
+      "SEPARATE_TRIANGULAR_GAUGE_COUPLING",
+      "SEPARATE_EQUAL_BASE_DIFFERENT_GAUGE_CAUSALITY_WITNESS",
+      "SEPARATE_IDENTICAL51_ANGLE_RECURRENCE",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "SEPARATE_DEPTH4096_INVERSE_CONDITIONING_ATTACK"
+    ],
+    "shared_foundation": "ESTABLISHED_M145_PHASE_EXPONENT_AND_SHELL_WEIGHTS_ONLY"
+  },
+  "predeclared_tolerances": {
+    "restoration_phasor_max_abs": 2e-11,
+    "matched_phase_cell_max_abs": 2e-12,
+    "boundary_max_abs": 2e-11
+  },
+  "causality_witness": {
+    "initial_base_state_maximum_error": 5.887846720064157e-16,
+    "initial_gauge_phase_separation": 0.7138985889538234,
+    "final_base_state_maximum_separation": 0.013090063363775566,
+    "final_boundary_separation": 0.04616723046964863,
+    "maximum_restoration_error": 2.7035697373913694e-15
+  },
+  "inverse_conditioning": {
+    "depth": 4096,
+    "accepted_strength": 0.03125,
+    "accepted_restoration_error": 9.859011162473258e-13,
+    "rejected_overstrong_strength": 0.15625,
+    "rejected_overstrong_restoration_error": 1.9247520322985272
+  },
+  "resource_accounting": {
+    "resident_phase_angle_float64_cells": 51,
+    "resident_phase_angle_bytes": 408,
+    "retained_public_plan_bytes": 0,
+    "maximum_named_update_float64_scratch_cells": 4,
+    "maximum_named_update_bytes": 32,
+    "maximum_named_projection_bytes": 112,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 750,
+    "retained_complex_state_cells": 0,
+    "retained_dense_kernel_cells": 0,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "executed_matched_classical_recurrence": {
+    "method": "IDENTICAL51_FLOAT64_ANGLE_TRIANGULAR_RECURRENCE",
+    "resident_float64_cells": 51,
+    "resident_bytes": 408,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 750,
+    "same_update_and_projection_operation_counts": true,
+    "final_angle_bytes_identical": true,
+    "optimal_compact_classical_recurrence_claimed": false
+  },
+  "claim_ceiling": "21_DECLARED_DIRECT_ANGLE_TRIANGULAR_GAUGE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_CAUSALITY_CONDITIONING_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "DIRECT_PHASE_ANGLE_SHARED_GAUGE_COUPLING_WITHOUT_COMPLEX_DECODE_OR_RECHART",
+    "EQUAL_BASE_DIFFERENT_GAUGE_FINAL_BOUNDARY_SEPARATION",
+    "FIXED51_PHASE_ANGLE_CARRIER_WITH_HISTORY_FREE_RESTORATION_AND_REUSE",
+    "EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE",
+    "OVERSTRONG_COUPLING_NUMERICAL_RESTORATION_FAILURE"
+  ],
+  "rejected_interpretations": [
+    "RESOURCE_BEYOND51_FLOAT64_ANGLES",
+    "OPTIMAL_CLASSICAL_BASELINE",
+    "M147_RADIAL_GIVENS_TASK_EQUIVALENCE",
+    "GENERAL_RELATIONAL_CONTRACTION",
+    "EXACT_ALGEBRAIC_SEMANTICS",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
