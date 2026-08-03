@@ -1,0 +1,102 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "3f49909a19b02436ffa900097c7c5cdc068f4d46",
+  "scientific_source_parent": "4472d4b4a3c34f89d47a8f2861df8bf897cd6b21",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "4042f591f2db394293cc73d59b27ca1af80239ace3bcb528d0633dfb8dcd021d",
+  "reference_full_oracle_sha256": "c9cef44d3dcfe7280360337a9167f242ec0908bb425333e8c63b9564616e8367",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f103_c17_superposition_interference_factor_no_go.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f103_c17_superposition_interference_factor_no_go_oracle.py --package PRODUCTION_RESULT --production PRODUCTION_SOURCE --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f103_c17_superposition_interference_factor_no_go.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f103_c17_superposition_interference_factor_no_go.py": "a8e4dac14366fb4edbeb7335ba938f8675e352216840d3cb8a3a8c5a8f93a86a",
+    "f103_c17_superposition_interference_factor_no_go_oracle.py": "c371e87a2037034228f1f2b244889c824c5d6e14147d2e864566507a6124246d",
+    "F103_C17_SUPERPOSITION_INTERFERENCE_FACTOR_NO_GO_RESULTS.json": "4042f591f2db394293cc73d59b27ca1af80239ace3bcb528d0633dfb8dcd021d",
+    "F103_C17_SUPERPOSITION_INTERFERENCE_FACTOR_NO_GO_ORACLE_RESULTS.json": "c9cef44d3dcfe7280360337a9167f242ec0908bb425333e8c63b9564616e8367",
+    "F103_C17_SUPERPOSITION_INTERFERENCE_FACTOR_NO_GO_INDEPENDENT_REVIEW.md": "b930b621ae80d77e2bcafbc1f0f41641d37ce793a6e23f5d8d40624ebe9b9216",
+    "qualify_f103_c17_superposition_interference_factor_no_go.sh": "9275c532ec36b92c65050ccb18eb410c63e52ae63c8ed509a52324c69137dcde",
+    "f17_exact_c17_fiber_port_convolution.py": "1ec87e427dd3c4548b749c6d431208ff19159528d5371cef4391eb6b02144472"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "51_LOGICAL_F103_C17_PHASE_FACTORS_AS867_GENERAL_GROUP_ALGEBRA_COORDINATES",
+    "new_update_law": "REVERSIBLE_TRIANGULAR_NATIVE_CYCLIC_CONVOLUTION_SHEARS_WITH16_OUT16_IN_NONCOMMUTING_SHARED_PORT_CONSUMERS",
+    "depths": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "independent_comparison_count": 126,
+    "independent_methods": [
+      "SEPARATE_PUBLIC_SCHEDULE_COMPILER",
+      "PURE_PYTHON17_MODE_F103_NTT_RECURRENCE",
+      "FULL867_CELL_INVERSE_NTT_RECONSTRUCTION",
+      "SEPARATE_FINAL_BOUNDARY",
+      "SEPARATE_CONTROLS",
+      "SEPARATE100_CYCLE_REUSE"
+    ],
+    "imports_production_or_m149": false
+  },
+  "resource_accounting": {
+    "phase_resident_uint8_cells": 867,
+    "phase_resident_bytes": 867,
+    "phase_maximum_named_warm_execution_live_bytes": 1243,
+    "spectral_resident_uint8_cells": 867,
+    "spectral_resident_bytes": 867,
+    "spectral_maximum_named_warm_execution_live_bytes": 1226,
+    "depth1024_phase_convolution_multiplications": 18939904,
+    "depth1024_spectral_modal_multiplications": 1114112,
+    "phase_to_spectral_convolution_work_ratio": 17,
+    "phase_to_spectral_resident_dimension_ratio": 1,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "executed_matched_classical_recurrence": {
+    "method": "EXECUTED17_MODE_F103_NUMBER_THEORETIC_FACTOR_RECURRENCE",
+    "resident_field_coordinates": 867,
+    "resident_bytes": 867,
+    "full_state_and_boundary_identical_in_every_case": true,
+    "optimal_compact_classical_recurrence_claimed": false
+  },
+  "claim_ceiling": "F103_C17_GROUP_ALGEBRA_ROTATION_ADDITION_AND_CONVOLUTION_SHEARS_ON_THE_DECLARED51_PORT_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH1024_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "GENERAL_MULTI_COORDINATE_F103_C17_SUPERPOSITION",
+    "NATIVE_CONVOLUTION_INTERFERENCE",
+    "NONCOMMUTING_MULTI_CONSUMER_RESIDENT_PORT",
+    "FINAL_ONLY_BOUNDARY",
+    "EXACT_SAME_BACKING_RESTORATION_AND_REUSE",
+    "EXACT17_MODE_SPECTRAL_FACTORIZATION"
+  ],
+  "rejected_interpretations": [
+    "COMPLEX_OR_PHYSICAL_COHERENCE",
+    "GENERAL_PHASE_RELATIONAL_CONTRACTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

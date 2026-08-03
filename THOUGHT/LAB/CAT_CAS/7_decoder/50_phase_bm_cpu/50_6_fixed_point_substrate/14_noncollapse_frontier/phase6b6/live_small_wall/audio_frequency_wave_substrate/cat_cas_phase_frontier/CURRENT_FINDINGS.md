@@ -8714,3 +8714,53 @@ bound, general relational contraction, exact algebraic semantics, unbounded
 numerical stability, CATVM custody, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation.
+
+## M150: F103[C17] superposition interference and spectral factor no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_PHASE_ORBIT_SUPERPOSITION_CONVOLUTION_SHEARS_KEEP_ONE_MULTI_COORDINATE_RESIDENT_PORT_UNPROJECTED_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_CONSUMERS_WITH_EXACT_DESTRUCTIVE_INTERFERENCE_RESTORATION_AND_REUSE_THROUGH_DEPTH1024_BUT_FACTORIZE_EXACTLY_INTO_AN_EXECUTED17_MODE_CLASSICAL_RECURRENCE_WITH_EQUAL_RESIDENT_DIMENSION_AND_LOWER_CONVOLUTION_WORK
+```
+
+M150 removes M149's one-hot restriction. Each of 51 logical phase factors is a
+general 17-coordinate element of `F103[C17]`. One resident port controls 16
+target triangular convolution shears; updated target slot-one factors then
+control reciprocal hub shears. OUT and IN do not commute. The path performs no
+resident angle, exponent, or scalar readout and exposes only the final
+17-coordinate boundary.
+
+All 18 family/depth cases through depth 1024 match an executed 17-mode F103
+number-theoretic recurrence in every final coefficient cell and boundary. The
+accepted cases contain 36,893 exact cancellation events. Every 867-cell
+carrier restores exactly on the same backing without snapshot, inverse
+history, retained baseline, or post-inverse canonicalization. Unrelated
+depth-613 reuse matches fresh state, boundary, and resource signature, and 100
+depth-16 cycles restore exactly.
+
+The pure-Python oracle imports neither production nor M149. It reconstructs
+the three schedules, 17 modal recurrences, inverse NTT, all 867-byte
+commitments, boundaries, support counts, inverse controls, mutations, and
+reuse. All 126 comparisons pass. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`; resident restoration is
+`EXACT_ALGEBRAIC_RESTORATION`, while transient buffers have
+`NO_RESTORATION_CLAIM`.
+
+Since 17 divides 102, the C17 group algebra splits into 17 distinct F103
+characters. The coefficient and spectral paths both retain 867 one-byte field
+coordinates, but the depth-1024 convolution work is 18,939,904 coefficient
+multiplications versus 1,114,112 modal multiplications. Named warm live
+storage is 1,243 versus 1,226 bytes. Thus multi-coordinate superposition and
+exact interference are real bounded mechanisms, but this entire primitive
+algebra still has an exact classical factorization. No optimal classical
+recurrence is claimed.
+
+The next experiment interleaves convolution with a reversible
+coefficientwise quadratic phase shear. Its purpose is to break simultaneous
+character diagonalization and determine whether the resulting mode mixing
+closes natively or merely collapses to the identical 17-coordinate classical
+recurrence. M150 establishes no complex or physical coherence, general
+relational contraction, CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded catalytic computation.
