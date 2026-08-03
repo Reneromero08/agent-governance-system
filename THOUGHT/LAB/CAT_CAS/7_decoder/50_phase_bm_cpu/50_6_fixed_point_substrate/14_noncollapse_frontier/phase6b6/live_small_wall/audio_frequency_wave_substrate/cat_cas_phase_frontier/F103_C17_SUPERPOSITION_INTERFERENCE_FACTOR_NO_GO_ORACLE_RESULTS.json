@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "boundary_commitment": "58b9c94b79183a29594ae9399e9c856af9418d41a17c8d1dcb6d6dd097286a2a",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1,
+      "family": "PRIMARY",
+      "final_commitment": "b877986bc21fa3748aa60b28806e658f94b60dad955a82eb7ac0eda5f30ac72d"
+    },
+    {
+      "boundary_commitment": "3e1a8c4a995f34788ce3b7c242b5eec32b5ebda70b402d04f4bd9edfcbe8d61a",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 4,
+      "family": "PRIMARY",
+      "final_commitment": "5cf90f99f669c8bb9f0e69ae44ef8f4cf7b9535bb4a151a2e1d85e14ae9de892"
+    },
+    {
+      "boundary_commitment": "1a19bcffa450e8aa9475abc9e121e39655e56f84353a2427a9b3e1dc9a348b2c",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 16,
+      "family": "PRIMARY",
+      "final_commitment": "3da34db9a85727df3b0b1d5f0e46f09f0bec46baa949fe8e98db670e80793eec"
+    },
+    {
+      "boundary_commitment": "b26f4a9352c8581eaac44bd4f81f3a308b97e26a9a0b7d78f896e05aeafb43e7",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 64,
+      "family": "PRIMARY",
+      "final_commitment": "85f9329a36415e69b4446f97d73189ef0443f988a10560f6175011b462f3ee7b"
+    },
+    {
+      "boundary_commitment": "0712711bc33578affa727ce103106657912e87ba2c61c139222ee8e8bd078494",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 256,
+      "family": "PRIMARY",
+      "final_commitment": "36bd63a967e511a6702495204898d8c5a0bb07607cb592d56e9269b98ac8516c"
+    },
+    {
+      "boundary_commitment": "ab8da779786297201171973713a4c533788c6a17a3e7f5fd8db044e424622e11",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1024,
+      "family": "PRIMARY",
+      "final_commitment": "ca88f10fec0cfbd178da4c3bb6f1c0e6a81e70e12885b0b5a07358fa20dba327"
+    },
+    {
+      "boundary_commitment": "808eedd3b3963297a7d278faa02fe2fbbec4e981465be53fa520e5227b1b51dd",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1,
+      "family": "REUSE",
+      "final_commitment": "2044d34ecf22a5a2a3481fb1f039f106896a7a1429b61a4c9aedc3739c322ae3"
+    },
+    {
+      "boundary_commitment": "aedd48a6ff1d2fa4cefa3bf088679e69b0b6f3914fb933b5703dadfc4e48659c",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 4,
+      "family": "REUSE",
+      "final_commitment": "5413a19a8ec70d4f7e73d11b7be737390496e9833eaef01b5c06e6a1430bc85a"
+    },
+    {
+      "boundary_commitment": "b697fd4cdd3958094f30ced96cd22026a4a20e5b641169fce86d84219f824b6d",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 16,
+      "family": "REUSE",
+      "final_commitment": "271e3d6285242eb6006e1b4f61cfd7261e038aab5854026e7cb89fab18ad22fa"
+    },
+    {
+      "boundary_commitment": "48f51a06fe453746d33e513b69a2cd208eb4d1f2e9223d8f35ffa1b9bd83f23f",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 64,
+      "family": "REUSE",
+      "final_commitment": "cb5124b85f4e90f29385e22c8fbea49a41528398977d8b2588db2cdf40583022"
+    },
+    {
+      "boundary_commitment": "5329fd73dee36984a26d1130a1b51f8e997b5f745bfd0e7f997802710034aa2b",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 256,
+      "family": "REUSE",
+      "final_commitment": "72b22450107db4e986df277e3a67023bd9989151171e07b596fe1c4cd69c6508"
+    },
+    {
+      "boundary_commitment": "f71ed223c993e14bafc3b7d0c15b6ab39a053d5365675e413da7c09f265fddbe",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1024,
+      "family": "REUSE",
+      "final_commitment": "1f4f586227aae3a060de2185dfb470e620b71cbcbc7b02dd1a3f8d2a38dace76"
+    },
+    {
+      "boundary_commitment": "80a723fa5edca78322ebdd7bf3a67780b1b302817abe5d1ae06360148ced36ce",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1,
+      "family": "ALTERNATE",
+      "final_commitment": "d96b33ff14ba77fe9fc487b0a66b72317de7e5cc0d48f72b11df39c8e0e3f7f3"
+    },
+    {
+      "boundary_commitment": "8524cea07e528c2a39e36d00d7906f4f58d80d1ba969781aede8346ae018c552",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 4,
+      "family": "ALTERNATE",
+      "final_commitment": "eb867080fb984fc6bb5d1db0fdb71c599e01563e963b20bd1ab5985a8122b1ba"
+    },
+    {
+      "boundary_commitment": "e6d28f8c448c207ad563a0f014c47683524ccad2485c0c5c98e7122f624e593a",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 16,
+      "family": "ALTERNATE",
+      "final_commitment": "bd2d01be0699f377ddc106bfa7e45053865c59e2a165b99c0cd7486e3451c4d6"
+    },
+    {
+      "boundary_commitment": "5d726f01ac29518ae8e43b623ad50869d3ed850f35414619f1cffa8ed5dc370c",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 64,
+      "family": "ALTERNATE",
+      "final_commitment": "b339298e3f43ae4432d79ab802e6d985c2ad7e1def3106a75f70500f8b71c792"
+    },
+    {
+      "boundary_commitment": "db37e85e15ecd4f864b4654b76f39c90c70a8d0b0299be527708ed49cb0d747b",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 256,
+      "family": "ALTERNATE",
+      "final_commitment": "b1e0a4b25fbdd4081086612261b0c2a90c3b84e0ee42b9f4bab60636109669e7"
+    },
+    {
+      "boundary_commitment": "bd0e11e4a698479b23b4edd957d67c1e9916fcd8aa2d5eae0cc8f3f02f22174f",
+      "checks": {
+        "boundary_match": true,
+        "coefficient_work_match": true,
+        "commitment_match": true,
+        "inverse_restoration": true,
+        "modal_work_match": true,
+        "support_maximum_match": true,
+        "support_minimum_match": true
+      },
+      "depth": 1024,
+      "family": "ALTERNATE",
+      "final_commitment": "bc51ff4cfbbf095f3510009068bfeac845fdbc9f2c32544d48851bb5a44a2ad9"
+    }
+  ],
+  "claim_ceiling": "F103_C17_GROUP_ALGEBRA_ROTATION_ADDITION_AND_CONVOLUTION_SHEARS_ON_THE_DECLARED51_PORT_ROTATING_HUB_TOPOLOGY_ACROSS18_CASES_THROUGH_DEPTH1024_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all17_basis_ntt_roundtrip": true,
+    "coefficient_convolution_theorem": true,
+    "correct_inverse_restores": true,
+    "explicit_destructive_interference": true,
+    "forward_order_noncommutes": true,
+    "null_port_changes_boundary": true,
+    "reordered_inverse_fails": true,
+    "topology_mutation_changes_boundary": true,
+    "wrong_inverse_fails": true
+  },
+  "independence": {
+    "implementation": "PURE_PYTHON17_MODE_NTT_RECURRENCE_AND_FULL867_CELL_RECONSTRUCTION",
+    "imports_m149_dependency": false,
+    "imports_production": false,
+    "shared_inputs": "SEALED_RESULT_AND_PUBLIC_FORMULAS_ONLY"
+  },
+  "observed_resource_law": {
+    "phase_coefficient_convolution_multiplications_per_shear": 289,
+    "phase_to_spectral_convolution_work_ratio": 17,
+    "phase_to_spectral_resident_dimension_ratio": 1,
+    "resident_field_coordinates_both_paths": 867,
+    "spectral_modal_multiplications_per_shear": 17
+  },
+  "oracle_source_sha256": "c371e87a2037034228f1f2b244889c824c5d6e14147d2e864566507a6124246d",
+  "preserved_subclaims": [
+    "GENERAL_MULTI_COORDINATE_F103_C17_SUPERPOSITION",
+    "NATIVE_CONVOLUTION_INTERFERENCE",
+    "NONCOMMUTING_MULTI_CONSUMER_RESIDENT_PORT",
+    "FINAL_ONLY_BOUNDARY",
+    "EXACT_RESTORATION_AND_REUSE",
+    "EXACT17_MODE_SPECTRAL_FACTORIZATION"
+  ],
+  "production_result_sha256": "4042f591f2db394293cc73d59b27ca1af80239ace3bcb528d0633dfb8dcd021d",
+  "production_source_sha256": "a8e4dac14366fb4edbeb7335ba938f8675e352216840d3cb8a3a8c5a8f93a86a",
+  "rejected_interpretations": [
+    "COMPLEX_OR_PHYSICAL_COHERENCE",
+    "GENERAL_PHASE_RELATIONAL_CONTRACTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "repeated_reuse": {
+    "cycles": 100,
+    "exact_restoration": true,
+    "stable_boundary_count": 1
+  },
+  "schema": "CAT_CAS_F103_C17_SUPERPOSITION_INTERFERENCE_FACTOR_NO_GO_ORACLE_V1",
+  "scope": {
+    "case_count": 18,
+    "depths": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "independent_comparison_count": 126
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
