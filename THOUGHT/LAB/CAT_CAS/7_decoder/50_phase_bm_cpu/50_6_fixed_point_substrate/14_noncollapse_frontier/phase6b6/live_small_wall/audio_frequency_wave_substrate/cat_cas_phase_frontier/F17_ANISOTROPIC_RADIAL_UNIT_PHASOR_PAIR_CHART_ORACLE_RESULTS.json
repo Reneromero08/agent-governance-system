@@ -1,0 +1,36 @@
+{
+  "all_cases_within_predeclared_tolerances": true,
+  "boundary_mutation_detected": true,
+  "case_count": 21,
+  "claim_ceiling": "21_DECLARED_NUMERICAL_PHASE_PAIR_CASES_THROUGH_DEPTH4096_AND_DECLARED_REUSE_CONTROLS_ON_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "dense_fourier_involution_max_abs": 3.1519860099631924e-19,
+  "dense_public_coordinate_visits": 4913,
+  "maximum_production_oracle_classical_boundary_error": 1.6114259675182077e-11,
+  "maximum_production_oracle_phase_boundary_error": 2.263586653336678e-11,
+  "metric_and_boundary_comparisons": 147,
+  "oracle_100_cycle_maximum_restoration_error": 6.5893490380889764e-15,
+  "oracle_method": "INDEPENDENT_COMPLEX_LONG_DOUBLE_DENSE289_COORDINATE_ANISOTROPIC_FOURIER_AND_SEPARATE_PHASE_PAIR_CHART",
+  "oracle_unrelated_reuse_boundary_error": 5.884484744673261e-16,
+  "oracle_unrelated_reuse_restoration_error": 2.949054218438852e-16,
+  "package_sha256": "3b04e5fc44483f7f15db44b871f61cb2a783909ab8d57af91a7f1728a36d1d4e",
+  "preserved_subclaims": [
+    "INDEPENDENT_DENSE_COORDINATE_FOURIER_PARITY",
+    "INDEPENDENT_LONG_DOUBLE_PHASE_PAIR_CHART_AND_CLASSICAL_BOUNDARY_PARITY",
+    "INDEPENDENT_LONG_DOUBLE_INVERSE_AND_REUSE_TOLERANCE_CHECKS"
+  ],
+  "rejected_interpretations": [
+    "EXACT_ALGEBRAIC_RESTORATION",
+    "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT"
+  ],
+  "restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "schema": "CAT_CAS_F17_ANISOTROPIC_RADIAL_UNIT_PHASOR_PAIR_CHART_ORACLE_V1",
+  "source_sha256": "d1f606f74b5180d1fe16e7cc4b7633096398fed77beea79470d39cb4456b4e06",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

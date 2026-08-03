@@ -1,0 +1,991 @@
+{
+  "cases": [
+    {
+      "boundary_error_against_matched_classical": 8.188600426433445e-15,
+      "depth": 1,
+      "family": "PRIMARY",
+      "final_boundary": [
+        4.7773238807458,
+        3.688296456876764
+      ],
+      "final_state_commitment": "e6d5b4b96a51555e3f84f8807455e731ac29c3d16ff5229a205b2b4fe1ba3213",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        4.777323880745794,
+        3.6882964568767695
+      ],
+      "maximum_state_error_against_matched_classical": 2.200099936191181e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "b9c49000853e2d6031e12e97d6fbaf90420e021307161ab6c43e43b7320adf6f",
+      "public_program_json_bytes": 178,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 6.6622777233706215e-15,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 3,
+        "chart_domain_checks": 2,
+        "chart_encodes": 2,
+        "forward_steps": 1,
+        "generated_character_products": 1088,
+        "inverse_steps": 1,
+        "matrix_free_fourier_calls": 2,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 4.242286970020097e-14,
+      "depth": 4,
+      "family": "PRIMARY",
+      "final_boundary": [
+        5.266574127275492,
+        -0.6535096247490246
+      ],
+      "final_state_commitment": "2297892fae506e67b49a20149e198f8095a0580536c84e027c6caefd9e6dacc7",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        5.2665741272755096,
+        -0.6535096247489861
+      ],
+      "maximum_state_error_against_matched_classical": 1.6967262834264222e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "e73292d756bd0dbf54a60e842550361e06f2c074f222b5c1cf0e5e3bfc2618ba",
+      "public_program_json_bytes": 179,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 3.197466404211288e-14,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 9,
+        "chart_domain_checks": 8,
+        "chart_encodes": 8,
+        "forward_steps": 4,
+        "generated_character_products": 4352,
+        "inverse_steps": 4,
+        "matrix_free_fourier_calls": 8,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.514718981575966e-13,
+      "depth": 16,
+      "family": "PRIMARY",
+      "final_boundary": [
+        0.198259953988839,
+        -2.9342888251943484
+      ],
+      "final_state_commitment": "11bc8665775fb139663c7432583d717945fa4069dccac4012178a430ddfaa24c",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        0.19825995398868923,
+        -2.9342888251943258
+      ],
+      "maximum_state_error_against_matched_classical": 6.830353356367181e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "2c4185813b95dc7b21693a5fc6fa482b00b17c855bc4d6d0d93efb69abffdbf1",
+      "public_program_json_bytes": 179,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.0147166299561982e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 33,
+        "chart_domain_checks": 32,
+        "chart_encodes": 32,
+        "forward_steps": 16,
+        "generated_character_products": 17408,
+        "inverse_steps": 16,
+        "matrix_free_fourier_calls": 32,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 32
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 4.166101211869068e-13,
+      "depth": 64,
+      "family": "PRIMARY",
+      "final_boundary": [
+        -3.6904740433044134,
+        2.5694084726151805
+      ],
+      "final_state_commitment": "e77b3c01f42a369676cabe2a1b628365ec7601071b26c5e92f82bb8b76587658",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -3.6904740433045053,
+        2.569408472615587
+      ],
+      "maximum_state_error_against_matched_classical": 2.7234556606088013e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "221aa92911e91839ea4a7d915ec3b6a21721622058caa0b5379fa00890a83c0c",
+      "public_program_json_bytes": 178,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.5987332021056438e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 129,
+        "chart_domain_checks": 128,
+        "chart_encodes": 128,
+        "forward_steps": 64,
+        "generated_character_products": 69632,
+        "inverse_steps": 64,
+        "matrix_free_fourier_calls": 128,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 128
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.414454459390562e-12,
+      "depth": 256,
+      "family": "PRIMARY",
+      "final_boundary": [
+        1.0217728319905226,
+        4.397828703158794
+      ],
+      "final_state_commitment": "ae577c3d20292673767ee7ffaab4c3ba542ae8bf1b5190947425772511fa7a52",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        1.0217728319914898,
+        4.397828703159826
+      ],
+      "maximum_state_error_against_matched_classical": 3.8483683619361584e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "cdf2404fd708f9a3629c3d5112728785aa227d645c2cf40b612d0ce37176cc4b",
+      "public_program_json_bytes": 180,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 3.872486676578776e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 513,
+        "chart_domain_checks": 512,
+        "chart_encodes": 512,
+        "forward_steps": 256,
+        "generated_character_products": 278528,
+        "inverse_steps": 256,
+        "matrix_free_fourier_calls": 512,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 512
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.1526113758508474e-12,
+      "depth": 1024,
+      "family": "PRIMARY",
+      "final_boundary": [
+        -0.730610011397119,
+        -0.6112876031938931
+      ],
+      "final_state_commitment": "2fd4c2b878126bdd7eb805c6190481d4498673115623bdef14142576f2075a6f",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -0.7306100113977044,
+        -0.611287603194886
+      ],
+      "maximum_state_error_against_matched_classical": 3.3331645217694097e-13,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "283fc15d969f967085cdb3cb0844200755734ed2a20db3c6b437657e49612224",
+      "public_program_json_bytes": 182,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.3136145890238847e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 2049,
+        "chart_domain_checks": 2048,
+        "chart_encodes": 2048,
+        "forward_steps": 1024,
+        "generated_character_products": 1114112,
+        "inverse_steps": 1024,
+        "matrix_free_fourier_calls": 2048,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2048
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.3555393713974311e-11,
+      "depth": 4096,
+      "family": "PRIMARY",
+      "final_boundary": [
+        2.939232649463165,
+        -2.0975416655083485
+      ],
+      "final_state_commitment": "828a98224a8889ef021b8ae06da6d9d667daba5d81bee76b23a59f46b5bda762",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        2.939232649471788,
+        -2.0975416655188077
+      ],
+      "maximum_state_error_against_matched_classical": 6.469382138937572e-13,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "f9e0726a39eaefc5c89f57fcd988a0fae072f34f47b294c6bfce9401e12db25c",
+      "public_program_json_bytes": 181,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 4.810600882945838e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 8193,
+        "chart_domain_checks": 8192,
+        "chart_encodes": 8192,
+        "forward_steps": 4096,
+        "generated_character_products": 4456448,
+        "inverse_steps": 4096,
+        "matrix_free_fourier_calls": 8192,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8192
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 2.924442091791823e-14,
+      "depth": 1,
+      "family": "REUSE",
+      "final_boundary": [
+        0.9814502439578454,
+        0.9473264483188935
+      ],
+      "final_state_commitment": "3dd8ee3b9f76c2e6e6b521bbdfb9972f6e4e8c49b0a21294f8a868a23dfbaba3",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        0.9814502439578324,
+        0.9473264483189197
+      ],
+      "maximum_state_error_against_matched_classical": 1.4804785071969285e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "79f0523bb280c20b498e8e9c99c5057af9f08544b1d2fe78a81d03977d6ffd4a",
+      "public_program_json_bytes": 177,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 6.212306108894154e-15,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 3,
+        "chart_domain_checks": 2,
+        "chart_encodes": 2,
+        "forward_steps": 1,
+        "generated_character_products": 1088,
+        "inverse_steps": 1,
+        "matrix_free_fourier_calls": 2,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 7.32222385878943e-14,
+      "depth": 4,
+      "family": "REUSE",
+      "final_boundary": [
+        0.35466679798828277,
+        -1.5724393291837353
+      ],
+      "final_state_commitment": "0db1ed149e83ba5add62d4974acb0abb40f5227adde5baa3b5dd570948bd4f98",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        0.35466679798820955,
+        -1.572439329183736
+      ],
+      "maximum_state_error_against_matched_classical": 3.4377720271620444e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "14bb1891bfb29b41353b56c064ec12668d7eb7c9ed0eec827524925051c2a56f",
+      "public_program_json_bytes": 176,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 3.197466404211288e-14,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 9,
+        "chart_domain_checks": 8,
+        "chart_encodes": 8,
+        "forward_steps": 4,
+        "generated_character_products": 4352,
+        "inverse_steps": 4,
+        "matrix_free_fourier_calls": 8,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.0936141999835115e-13,
+      "depth": 16,
+      "family": "REUSE",
+      "final_boundary": [
+        2.2913319554212483,
+        -3.1207026478228026
+      ],
+      "final_state_commitment": "acd06c4a5100f7a8dae2c1d9aa85c70d49d52f8f9e01242491e4d112ff61b0fe",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        2.2913319554213505,
+        -3.1207026478228417
+      ],
+      "maximum_state_error_against_matched_classical": 3.257995424230881e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "38c5e8dd5e08a692a1089eff4eb25a3eb80d720b32198e3cf6af96a2163b6b4e",
+      "public_program_json_bytes": 176,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.6853687924750832e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 33,
+        "chart_domain_checks": 32,
+        "chart_encodes": 32,
+        "forward_steps": 16,
+        "generated_character_products": 17408,
+        "inverse_steps": 16,
+        "matrix_free_fourier_calls": 32,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 32
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.5061958414353746e-13,
+      "depth": 64,
+      "family": "REUSE",
+      "final_boundary": [
+        1.7646364744298522,
+        2.6064631307342463
+      ],
+      "final_state_commitment": "7939d557ee078518523614518130c0481cc0450170bcb39c17075a6eb2edc5d3",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        1.7646364744297514,
+        2.606463130734358
+      ],
+      "maximum_state_error_against_matched_classical": 1.3617221729802212e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "bc4b15eadf0c3407d7fb4af6e5aa4e4ae563392541baeba5f1911db0ee03b485",
+      "public_program_json_bytes": 177,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 4.725145633677392e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 129,
+        "chart_domain_checks": 128,
+        "chart_encodes": 128,
+        "forward_steps": 64,
+        "generated_character_products": 69632,
+        "inverse_steps": 64,
+        "matrix_free_fourier_calls": 128,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 128
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.4324203993786124e-12,
+      "depth": 256,
+      "family": "REUSE",
+      "final_boundary": [
+        -3.977864368263687,
+        1.635141033069448
+      ],
+      "final_state_commitment": "50f3c9f37353c3160b0c31bfd07f6c3d5eca2c0de3ed74c60b1d8d4980f2319f",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -3.9778643682645187,
+        1.6351410330706142
+      ],
+      "maximum_state_error_against_matched_classical": 4.637730781708178e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "bb0c13f80b49ae7acc93b3e107307debd1c693f9b3c7bbbc3d10aa4728f58257",
+      "public_program_json_bytes": 179,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 3.774772082405138e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 513,
+        "chart_domain_checks": 512,
+        "chart_encodes": 512,
+        "forward_steps": 256,
+        "generated_character_products": 278528,
+        "inverse_steps": 256,
+        "matrix_free_fourier_calls": 512,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 512
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 5.663129194837139e-12,
+      "depth": 1024,
+      "family": "REUSE",
+      "final_boundary": [
+        6.157400348610924,
+        -0.04417279066288099
+      ],
+      "final_state_commitment": "243f0e1583c36a0a8d0212933e27d70ba92148e464d7177f48e8e63cf98ef26b",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        6.1574003486162825,
+        -0.04417279066471369
+      ],
+      "maximum_state_error_against_matched_classical": 2.1525539579458444e-13,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "6aaca17d7aeaac7af15c1d6cec518ff5f56070dc706ce3c0d550f632e2e8ee59",
+      "public_program_json_bytes": 179,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.19771051686024e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 2049,
+        "chart_domain_checks": 2048,
+        "chart_encodes": 2048,
+        "forward_steps": 1024,
+        "generated_character_products": 1114112,
+        "inverse_steps": 1024,
+        "matrix_free_fourier_calls": 2048,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2048
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.6837092978030324e-11,
+      "depth": 4096,
+      "family": "REUSE",
+      "final_boundary": [
+        -5.003523137138474,
+        1.528580810703577
+      ],
+      "final_state_commitment": "fc9e6929f61514fbbf3924a664e221be72789202664e761191917f1cf62671e7",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -5.003523137152479,
+        1.5285808107129233
+      ],
+      "maximum_state_error_against_matched_classical": 8.947696089933557e-13,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "d4b80875a7ee853e976ca398e0da3cdbc169d63decec3233c42f434d61288b65",
+      "public_program_json_bytes": 178,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 5.7636155012456494e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 8193,
+        "chart_domain_checks": 8192,
+        "chart_encodes": 8192,
+        "forward_steps": 4096,
+        "generated_character_products": 4456448,
+        "inverse_steps": 4096,
+        "matrix_free_fourier_calls": 8192,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8192
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 8.005932084973442e-15,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        2.842485580320548,
+        1.2451747636420887
+      ],
+      "final_state_commitment": "ca33e88b5e0a89e19a83a78264e987ce3cadf2c39eb1f99aa930f762bb76deea",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        2.84248558032054,
+        1.2451747636420891
+      ],
+      "maximum_state_error_against_matched_classical": 8.886119947416683e-16,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "5d6ead0620f0cad8b7469c55c2ea65e222514262ef6aff25286b7e7b10009b40",
+      "public_program_json_bytes": 179,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 5.326761570871825e-15,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 3,
+        "chart_domain_checks": 2,
+        "chart_encodes": 2,
+        "forward_steps": 1,
+        "generated_character_products": 1088,
+        "inverse_steps": 1,
+        "matrix_free_fourier_calls": 2,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 4.890075585057728e-14,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        0.924253998983742,
+        -3.344649580355595
+      ],
+      "final_state_commitment": "d83ced30e4485506b7fb5fb3a2b3006d6246130139715825334e3872b7077eb0",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        0.9242539989837867,
+        -3.344649580355575
+      ],
+      "maximum_state_error_against_matched_classical": 1.8013347191190246e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "d86b2cc11985f8b8993f50b7d8d53b2654bdca555c59995a4739d2650478dd30",
+      "public_program_json_bytes": 181,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.9543425168103715e-14,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 9,
+        "chart_domain_checks": 8,
+        "chart_encodes": 8,
+        "forward_steps": 4,
+        "generated_character_products": 4352,
+        "inverse_steps": 4,
+        "matrix_free_fourier_calls": 8,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.3116433430125122e-13,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        0.48105935537783856,
+        3.478771712220362
+      ],
+      "final_state_commitment": "4e0d4ea8d656b4333e42d6ef5981d58ba518fb4b62aec9adc2e48a7e44ec7b22",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        0.4810593553778713,
+        3.478771712220489
+      ],
+      "maximum_state_error_against_matched_classical": 6.882039609910052e-15,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "1fb22cd47eaf0075c078790c0a8b8d33fb6c2c1a0be930432eabf272fd5e93c4",
+      "public_program_json_bytes": 181,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 8.171321126142874e-14,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 33,
+        "chart_domain_checks": 32,
+        "chart_encodes": 32,
+        "forward_steps": 16,
+        "generated_character_products": 17408,
+        "inverse_steps": 16,
+        "matrix_free_fourier_calls": 32,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 32
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 1.6124566717525306e-13,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        -0.20705062252680562,
+        1.9988150115627041
+      ],
+      "final_state_commitment": "df78b5b21a4900d8d5402d5654d8ef0106848df237cf554af8ce8c8b7a8fc77c",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -0.207050622526729,
+        1.998815011562846
+      ],
+      "maximum_state_error_against_matched_classical": 1.64266365679821e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "acb1ac9a95d0b6e7944b6d954296ec69e894058f86f5866bf71a04af1633ead3",
+      "public_program_json_bytes": 181,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.996183550189636e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 129,
+        "chart_domain_checks": 128,
+        "chart_encodes": 128,
+        "forward_steps": 64,
+        "generated_character_products": 69632,
+        "inverse_steps": 64,
+        "matrix_free_fourier_calls": 128,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 128
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 3.466242167509428e-13,
+      "depth": 256,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        -1.1204722115715842,
+        0.6331608139265414
+      ],
+      "final_state_commitment": "ba6120ceebc0188875e1838c268f99c2354de5d799a71795ee54735bee7c15dc",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -1.1204722115719254,
+        0.6331608139266021
+      ],
+      "maximum_state_error_against_matched_classical": 6.684903161497581e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "56ba4c3a4d9e35a5d985cabef754a3ccd7f21d2f10d3db41308a684261a7517c",
+      "public_program_json_bytes": 181,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 4.929445002241413e-13,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 513,
+        "chart_domain_checks": 512,
+        "chart_encodes": 512,
+        "forward_steps": 256,
+        "generated_character_products": 278528,
+        "inverse_steps": 256,
+        "matrix_free_fourier_calls": 512,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 512
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 3.0783587046779304e-12,
+      "depth": 1024,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        3.1967830931761574,
+        0.3521814299819659
+      ],
+      "final_state_commitment": "ddbb637facdf61470b9036715482963c2df9368f08d125a7861fb8baccace845",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        3.196783093179198,
+        0.3521814299814857
+      ],
+      "maximum_state_error_against_matched_classical": 9.73146536168457e-14,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "3c091253be3c9432a2136f37f1e0b5ede7ca02fc47a8fde80c4677d940cb375c",
+      "public_program_json_bytes": 184,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 1.1497517899126524e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 2049,
+        "chart_domain_checks": 2048,
+        "chart_encodes": 2048,
+        "forward_steps": 1024,
+        "generated_character_products": 1114112,
+        "inverse_steps": 1024,
+        "matrix_free_fourier_calls": 2048,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 2048
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    },
+    {
+      "boundary_error_against_matched_classical": 2.2415074405925914e-11,
+      "depth": 4096,
+      "family": "ALTERNATE",
+      "final_boundary": [
+        -5.763537322165375,
+        2.2404051972741224
+      ],
+      "final_state_commitment": "59712dba07e09f3f0a2708333f6cc5a02c34c86f948e034fa47e992608788e44",
+      "inverse_history_cells": 0,
+      "matched_classical_boundary": [
+        -5.763537322183613,
+        2.2404051972871537
+      ],
+      "maximum_state_error_against_matched_classical": 1.6577338366406575e-12,
+      "phase_angle_resident_bytes": 272,
+      "phase_angle_resident_cells": 34,
+      "program_fingerprint": "607b593025e61afe422131ccb70431ef3ad49f82cbc6e7865116b0c26a7b875a",
+      "public_program_json_bytes": 183,
+      "resident_restoration_class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+      "restoration_error": 4.567456209826026e-12,
+      "restoration_generation_after": 1,
+      "restoration_generation_before": 0,
+      "same_backing": true,
+      "snapshot_reload_used": false,
+      "stats": {
+        "chart_decodes": 8193,
+        "chart_domain_checks": 8192,
+        "chart_encodes": 8192,
+        "forward_steps": 4096,
+        "generated_character_products": 4456448,
+        "inverse_steps": 4096,
+        "matrix_free_fourier_calls": 8192,
+        "maximum_named_projection_bytes": 816,
+        "maximum_named_update_bytes": 1056,
+        "maximum_named_update_complex_cells": 66,
+        "maximum_named_update_float_cells": 85,
+        "streamed_gate_rematerializations": 8192
+      },
+      "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM"
+    }
+  ],
+  "claim": "BOUNDED_NUMERICAL_UNIT_PHASOR_PAIR_CHART_REPRESENTS_NORMALIZED_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_STATE_IN_FIXED34_PHASE_ANGLE_COORDINATES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_PHYSICAL_STATE_RESTORATION_AND_REUSE_BUT_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_COMPACT_CLASSICAL_RECURRENCE",
+  "claim_boundary": {
+    "established": [
+      "FIXED34_PHASE_ANGLE_RESIDENCY_FOR21_DECLARED_NUMERICAL_CASES_THROUGH_DEPTH4096",
+      "MATRIX_FREE_NONCOMMUTING_QUARTIC_PHASE_AND_RADIAL_FOURIER_CHART_CLOSURE",
+      "FINAL_ONLY_BOUNDARY_PROJECTION",
+      "HISTORY_FREE_NUMERICAL_INVERSE_RESTORATION_ON_SAME_BACKING",
+      "UNRELATED_AND100_CYCLE_REUSE_WITHIN_PREDECLARED_TOLERANCE"
+    ],
+    "not_established": [
+      "EXACT_ALGEBRAIC_SEMANTICS",
+      "UNBOUNDED_DEPTH_NUMERICAL_STABILITY",
+      "CATVM_MACHINE_ENFORCED_CUSTODY",
+      "DISTINCT_PHASE_RESOURCE",
+      "COMPUTATIONAL_ADVANTAGE",
+      "SMALL_WALL_CROSSING",
+      "PHYSICAL_WAVEFORM_EXECUTION",
+      "PHYSICAL_BIT_REPLACEMENT",
+      "UNBOUNDED_CATALYTIC_COMPUTATION"
+    ]
+  },
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "missing_inverse_changes_state": true,
+    "null_carrier_rejected": true,
+    "phase_disabled_changes_boundary": true,
+    "phase_perturbation_rejected_by_restoration": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_changes_state": true,
+    "wrong_inverse_changes_state": true
+  },
+  "execution_scope": "LINUX_DIRECT_PROCESS_NUMERICAL_SOFTWARE",
+  "matched_classical_baseline": {
+    "all_case_boundaries_within_predeclared_tolerance": true,
+    "comparison_establishes_computational_advantage": false,
+    "comparison_establishes_distinct_phase_resource": false,
+    "method": "IDENTICAL_MATRIX_FREE_NORMALIZED17_COMPLEX_RADIAL_RECURRENCE_WITHOUT_PHASE_PAIR_CHART",
+    "phase_chart_requires_additional_transcendental_work": true,
+    "resident_bytes_equal": true
+  },
+  "next_obstruction": "THE_FIXED34_PHASE_ANGLE_CHART_ACCEPTS_TOLERANCE_DEFINED_CONTINUOUS_STATE_REQUIRES_TRANSCENDENTAL_CANONICAL_CHART_ARITHMETIC_AND_HAS_THE_IDENTICAL17_COMPLEX_CLASSICAL_RECURRENCE_WITH_EQUAL_RESIDENT_BYTES",
+  "predeclared_tolerances": {
+    "boundary_max_abs": 5e-11,
+    "chart_radius_slack": 2e-12,
+    "chart_zero_floor": 1e-07,
+    "restoration_phasor_max_abs": 2e-11
+  },
+  "repeated_reuse": {
+    "cycles": 100,
+    "depth_per_cycle": 64,
+    "inverse_history_cells": 0,
+    "maximum_restoration_error": 8.188123480831508e-12,
+    "restoration_generation": 100,
+    "same_backing": true,
+    "snapshot_reload_used": false
+  },
+  "resource_law": {
+    "chart_transcendentals_per_fourier": "34_COMPLEX_EXP_PLUS17_ABS_PLUS17_ARG_PLUS17_ACOS",
+    "compiled_gate_sequence_cells": 0,
+    "inverse_history_cells": 0,
+    "matched_classical_resident_bytes": 272,
+    "matched_classical_resident_complex128_cells": 17,
+    "matrix_free_character_products_per_fourier": 544,
+    "maximum_named_accepted_live_bytes_including_program_json": 2184,
+    "maximum_named_projection_bytes": 816,
+    "maximum_named_update_bytes": 1056,
+    "maximum_public_program_json_bytes": 184,
+    "named_temporary_bytes_are_component_maxima_not_process_peak": true,
+    "public_program_descriptor_scalars": 4,
+    "python_numpy_allocator_native_library_hashlib_and_whole_process_memory_excluded": true,
+    "resident_phase_angle_bytes": 272,
+    "resident_phase_angle_float64_cells": 34,
+    "retained_dense_fourier_kernel_cells": 0,
+    "retained_inverse_parameter_bytes": 128,
+    "retained_inverse_parameter_int64_cells": 16,
+    "retained_root_table_bytes": 272,
+    "retained_root_table_complex128_cells": 17,
+    "retained_shell_count_bytes": 136,
+    "retained_shell_count_int64_cells": 17,
+    "retained_source_index_bytes": 136,
+    "retained_source_index_int64_cells": 17,
+    "verification_baseline_is_not_accepted_phase_state": true,
+    "verification_baseline_resident_complex128_cells": 17
+  },
+  "restoration": {
+    "class": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "fresh_restored_reuse_equal_within_tolerance": true,
+    "generation_is_package_local_not_catvm_lease": true,
+    "inverse_history_cells": 0,
+    "post_inverse_state_reset_or_canonical_reload_used": false,
+    "repeated_reuse_tested": true,
+    "same_backing": true,
+    "snapshot_reload_used": false,
+    "transient_buffers": "NO_RESTORATION_CLAIM"
+  },
+  "reuse": {
+    "fresh_restored_boundary_error": 1.6453413026825969e-12,
+    "inverse_history_cells": 0,
+    "restoration_error": 2.13473453722933e-12,
+    "restoration_generation": 2,
+    "same_original_backing": true,
+    "snapshot_reload_used": false,
+    "unrelated_reuse_depth": 1537
+  },
+  "schema": "CAT_CAS_F17_ANISOTROPIC_RADIAL_UNIT_PHASOR_PAIR_CHART_V1",
+  "source_scope": {
+    "case_count": 21,
+    "depths": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      1024,
+      4096
+    ],
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "repeated_reuse_cycles": 100,
+    "unrelated_reuse_depth": 1537
+  },
+  "source_sha256": "d1f1159a8c8a7768b5ba90f6ce8d211e4355d324e4a190abef7a8e23097951c6",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
