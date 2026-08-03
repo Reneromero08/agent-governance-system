@@ -1,0 +1,106 @@
+{
+  "schema": "CAT_CAS_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_PROVENANCE_V1",
+  "scientific_source_commit": "2447569946e6e7f5bb8fc5888de2dde7686a1b5c",
+  "scientific_parent_commit": "63883b71b9a5a4ba62b851e5ec5dc530a4ff0b68",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_open_relation_bialgebra_no_go.py",
+      "sha256": "307a1e34ddbfd771807d605254d999b6e9d126ddd996d5c70982d210731ac23f"
+    },
+    "oracle_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_open_relation_bialgebra_no_go_oracle.py",
+      "sha256": "6c3a85dff1d6441b1f0317af3545f9e725c4e6db710e4ee19d7920f98e400f7c"
+    },
+    "production_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_RESULTS.json",
+      "sha256": "b75b84d774888122b91c3221b0c67de5f00713d2b8619061dc7af049adb0a1ef"
+    },
+    "oracle_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "cba82f53c365791ac7194f549af14a7e9dbf7eaba76faed4334aaf89c8525955"
+    },
+    "qualifier": {
+      "path": "cat_cas_phase_frontier/qualify_f103_c17_open_relation_bialgebra_no_go.sh",
+      "sha256": "69fa4275e20f0a19956152dd4183466d2744b1bc4a1a645ca0879fd3f3e809bb"
+    },
+    "review": {
+      "path": "cat_cas_phase_frontier/F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "98bf50904414f6448008d51b748a44c09c8db099cbeb3827bdfbf466d3ea325e"
+    }
+  },
+  "qualifier_execution": {
+    "evidence_directory": "/dev/shm/ags-audio-m152-qualifier-hQ1OQO",
+    "result": "QUALIFIED_F103_C17_OPEN_RELATION_BIALGEBRA_NO_GO_STRICT_SCOPE",
+    "production_output_byte_identical_to_seal": true,
+    "oracle_output_byte_identical_to_seal": true
+  },
+  "scope": {
+    "field_modulus": 103,
+    "cycle_order": 17,
+    "families": [
+      "PRIMARY",
+      "REUSE",
+      "ALTERNATE"
+    ],
+    "depths": [
+      1,
+      4,
+      16,
+      64,
+      256,
+      512
+    ],
+    "case_count": 18,
+    "logical_relation_factors": 27,
+    "resident_field_coordinates": 459,
+    "shared_port_consumers_per_layer": 8,
+    "independent_comparisons": 360
+  },
+  "observed_resource_law": {
+    "phase_resident_bytes": 459,
+    "dual_spectral_resident_bytes": 459,
+    "maximum_named_warm_live_bytes_each": 1096,
+    "depth512_phase_bialgebra_multiplications": 2506752,
+    "depth512_dual_spectral_bialgebra_multiplications": 2506752,
+    "implicit_dense_relation_cells_per_signature": 289,
+    "materialized_dense_relation_table_cells": 0,
+    "materialized_assignment_expansion_cells": 0,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "snapshot_reload_used": false
+  },
+  "custody_scope": {
+    "direct_process_type_and_owner_checks_observed": true,
+    "restoration_generation_sequence_observed": true,
+    "machine_enforced_generation_or_lease_custody": false,
+    "catvm_machine_boundary_used": false
+  },
+  "claim_ceiling": "F103_TRANSLATION_INVARIANT_WEIGHTED_C17_TO_C17_OPEN_RELATIONS_ON_THE_DECLARED9_NODE_THREE_SLOT_ROTATING_HUB_TOPOLOGY_ACROSS_18_CASES_THROUGH_DEPTH512_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "TYPED_TRANSLATION_INVARIANT_WEIGHTED_C17_OPEN_RELATIONS",
+    "NATIVE_HIDDEN_INTERFACE_CYCLIC_CONVOLUTION_COMPOSITION",
+    "NATIVE_PARALLEL_HADAMARD_INTERSECTION",
+    "SHARED_UNRESOLVED_MULTI_CONSUMER_PORT",
+    "NO_DENSE_RELATION_TABLE_OR_ASSIGNMENT_EXPANSION",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "EXACT_SAME_BACKING_RESTORATION_AND_REUSE",
+    "EXECUTED_IDENTICAL459_COORDINATE_COEFFICIENT_AND_DUAL_SPECTRAL_RECURRENCES"
+  ],
+  "rejected_interpretations": [
+    "NON_TRANSLATION_INVARIANT_RELATIONS",
+    "ARBITRARY_PORT_ARITY_OR_GRAPH_TOPOLOGY",
+    "MACHINE_ENFORCED_GENERATION_OR_LEASE_CUSTODY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

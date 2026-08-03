@@ -8813,3 +8813,47 @@ strongest compact classical recurrence. M151 establishes no general
 relational contraction, CATVM custody, distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical
 bit replacement, or unbounded catalytic computation.
+
+## M152: typed open-relation bialgebra and translation-invariance no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_TYPED_OPEN_F103_C17_WEIGHTED_PHASE_RELATIONS_COMPOSE_BY_CYCLIC_CONVOLUTION_AND_INTERSECT_BY_HADAMARD_PRODUCT_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITHOUT_RELATION_TABLE_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH512_BUT_COLLAPSE_TO_IDENTICAL459_COORDINATE_COEFFICIENT_AND_DUAL_SPECTRAL_CLASSICAL_RECURRENCES
+```
+
+M152 encodes a translation-invariant weighted binary relation over `F103` by
+17 coefficients. Cyclic convolution performs hidden-interface composition;
+Hadamard product performs parallel intersection. Compose-then-intersect and
+intersect-then-compose triangular shears consume one unresolved rotating hub
+port across eight targets per layer without resident-port projection, a dense
+17 by 17 relation table, or assignment expansion.
+
+The independent scalar-Python oracle reconstructs all 18 cases through depth
+512, the exact 459-coordinate coefficient recurrence, its coupled 17-mode
+dual, public program fingerprints, projections, work counters, streamed
+relation semantics, inverse attacks, and fresh-versus-restored reuse. All 360
+case-field comparisons pass. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The same carrier backing restores exactly without snapshot, retained inverse
+history, restoration baseline, or canonicalization. Unrelated depth-311 reuse
+and 64 repeated depth-8 reuse cycles match fresh execution. Resident
+restoration is `EXACT_ALGEBRAIC_RESTORATION`; temporary buffers have
+`NO_RESTORATION_CLAIM`. Direct-process type, owner, and generation observations
+do not establish machine-enforced lease custody or CATVM isolation.
+
+Both coefficient and dual-spectral paths retain 459 bytes, reach 1,096 named
+warm bytes, and count 2,506,752 bialgebra field multiplications at depth 512.
+The dual swaps the Hadamard and convolution costs but does not change total
+work. Translation invariance is therefore the decisive quotient: every open
+relation reduces to 17 classical coefficients. No optimal compact classical
+recurrence is claimed.
+
+The next experiment removes translation invariance with exact factored
+`C17 -> C17` relations and tests whether composition/intersection stays compact
+or forces rank growth against matched rematerialized classical contraction.
+M152 establishes no non-translation-invariant closure, CATVM custody, distinct
+phase resource, computational advantage, Small Wall crossing, physical
+execution, physical bit replacement, or unbounded catalytic computation.
