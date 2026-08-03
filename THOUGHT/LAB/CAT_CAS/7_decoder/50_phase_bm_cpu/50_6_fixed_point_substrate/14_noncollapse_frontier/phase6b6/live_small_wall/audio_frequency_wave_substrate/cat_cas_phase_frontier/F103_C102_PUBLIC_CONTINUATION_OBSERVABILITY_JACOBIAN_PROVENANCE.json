@@ -1,0 +1,80 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 159,
+  "scientific_source_head": "c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "underlying_carrier_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "diagnostic_tangent_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_c102_public_continuation_observability_jacobian.py",
+      "sha256": "c5114743934bbe9534709d7a247737e9138284652b28aad27cbfc07873166c8d"
+    },
+    "oracle_source": {
+      "path": "f103_c102_public_continuation_observability_jacobian_oracle.py",
+      "sha256": "878843c70966c55f42a4c5f513288cac53fb15fa16350aefb13d92cdb16bb7a5"
+    },
+    "production_result": {
+      "path": "F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_RESULTS.json",
+      "sha256": "9a5b4f1e718489e09a4cf901ed2f2dc654e0a33e4d17140a7064ca3fdec55806"
+    },
+    "oracle_result": {
+      "path": "F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_ORACLE_RESULTS.json",
+      "sha256": "9ff37e011e8c9b21d05ce8e98c24fd7ce8dc8f704876b37a83d71a3e3022aca1"
+    },
+    "qualifier": {
+      "path": "qualify_f103_c102_public_continuation_observability_jacobian.sh",
+      "sha256": "a0f926aad6f857a6b240158b3f688d5ac5b0eab119c834b5ce567f353cf16697"
+    },
+    "review": {
+      "path": "F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "ea8ac3f34a470c5d050a87a2009b922651efc48b9856a764e7069410cf2be97b"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m159-qualifier-JGt6v9"
+  },
+  "independent_oracle": {
+    "imports_m159_production": false,
+    "imports_m158_production": false,
+    "imports_numpy": false,
+    "reuses_prior_independent_m157_scalar_reference": true,
+    "basis_directions_per_family": 102,
+    "forward_trajectories_per_family": 206,
+    "production_comparisons": 8,
+    "complete_jacobian_commitments_match": true,
+    "whole_recurrence_centered_difference_control": true
+  },
+  "resource_law": {
+    "accepted_phase_carrier_field_cells": 45900,
+    "matched_identical_classical_carrier_field_cells": 45900,
+    "production_tangent_field_cells": 4681800,
+    "independent_jacobian_field_cells": 61200,
+    "simultaneous_oracle_plus_minus_state_field_cells": 10200,
+    "tangent_and_oracle_are_verification_only": true,
+    "numpy_physical_transient_peak_bytes_measured": false
+  },
+  "claim_ceiling": "C5_TWO_PUBLIC_TOPOLOGY_FAMILIES_CONSECUTIVE_DEPTHS1_TO24_ONE_PUBLICLY_DERIVED_SOURCE_POLYNOMIAL_CHART_AND_ALL25_EXPLICIT_PUBLIC_FINAL_ONLY_B_COORDINATE_PROJECTIONS_PER_DEPTH_IN_EXACT_F103_TANGENT_ARITHMETIC",
+  "preserved_subclaims": [
+    "ALTERNATE_PUBLIC_CONTINUATION_JACOBIAN_FIRST_REACHES_RANK102_AT_DEPTH23",
+    "PRIMARY_PUBLIC_CONTINUATION_JACOBIAN_FIRST_REACHES_RANK102_AT_DEPTH24",
+    "SUB102_REGULAR_ALGEBRAIC_LOCAL_QUOTIENTS_ARE_REJECTED_AT_THE_TESTED_CHARTS",
+    "EXACT_UNDERLYING_CARRIER_RESTORATION_AND_SAME_BACKING_REUSE",
+    "INDEPENDENT_FULL_FORWARD_FINITE_DIFFERENCE_JACOBIAN_PARITY"
+  ],
+  "rejected_interpretations": [
+    "GLOBAL_OR_DISCONTINUOUS_QUOTIENT_LOWER_BOUND",
+    "ALL_SOURCE_NODES_COORDINATES_INTERFACES_OR_TOPOLOGIES",
+    "TANGENT_OR_JACOBIAN_AS_ACCEPTED_COMPACT_CARRIER_STATE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}

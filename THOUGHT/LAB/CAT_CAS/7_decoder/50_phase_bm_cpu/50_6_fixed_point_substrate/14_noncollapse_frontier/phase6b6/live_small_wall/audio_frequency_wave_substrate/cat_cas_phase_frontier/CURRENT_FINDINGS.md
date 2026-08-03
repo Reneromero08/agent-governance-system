@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`. The canonical per-milestone
+`c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9117,3 +9117,38 @@ certify the local observable dimension that prevents one. M158 establishes no
 shared multi-consumer latent port, CATVM custody, distinct phase resource,
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded computation.
+
+## M159: exact public-continuation Jacobian is locally full rank
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_PUBLIC_CONTINUATION_FINAL_BOUNDARY_OBSERVABILITY_JACOBIAN_REACHES_FULL_RANK102_ON_BOTH_DECLARED_C5_DUAL_REGISTER_QUADRATIC_SHEAR_FAMILIES_BY_DEPTH24_REJECTING_SUB102_REGULAR_ALGEBRAIC_LOCAL_PHASE_QUOTIENTS_AT_THE_TESTED_SOURCE_CHARTS_WITH_EXACT_UNDERLYING_CARRIER_RESTORATION_AND_REUSE_BUT_THE_TANGENT_CERTIFICATE_EXPANDS102_DIRECTIONS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+The production diagnostic propagates the exact derivative of the actual M158
+recurrence from all 102 directions of one publicly derived source polynomial.
+It compiles 25 public final-only B-coordinate selectors at each consecutive
+depth through 24. The cumulative rank reaches 102 at alternate depth 23 and
+primary depth 24; a depth-5 stop would have falsely suggested nullities 77 and
+82.
+
+This rules out sub-102 regular algebraic local factor states only at the tested
+charts. It leaves singular, discontinuous, finite-set-specific, and global
+quotients open. It also leaves other source locations, interfaces, and public
+topology families untested.
+
+The independent scalar oracle imports neither M159 nor M158 production and no
+NumPy. Complete centered plus/minus trajectories reproduce both 600-by-102
+Jacobian commitments and every prefix rank. A separate combined direction
+matches the linear combination of all basis columns. The production tangent
+uses 4,681,800 field cells and the oracle Jacobian uses 61,200; both are
+verification-only expansions rather than accepted compact carrier state.
+
+The underlying exact 45,900-cell carrier restores and reuses the same backing,
+while the strongest classical baseline is still the identical 45,900-cell
+coefficient recurrence. The next experiment tests the surviving columnwise
+projective sign symmetry with every reversible orientation bit counted. No
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded computation is
+established.

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO`
-**Roadmap version:** `14.24`
+**Status:** `STRICT_SCOPE_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN`
+**Roadmap version:** `14.25`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`
+**Reconciled source head:** `c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C102_DUAL_REGISTER_COEFFICIENTWISE_QUADRATIC_PHASE_SHEAR_OPEN_RELATION_COMPOSITION_BREAKS_THE_SINGLE_CHARACTER_EVALUATION_QUOTIENT_COUPLES_ALL102_CHARACTER_SECTORS_AND_HAS_FULL_RANK102_ONE_SHEAR_QUADRATIC_OBSERVABLE_ON_C5_C7_WITH_EXACT_RESTORATION_AND_REUSE_BUT_THE_ACCEPTED_CARRIER_AND_STRONGEST_MATCHED_CLASSICAL_RECURRENCE_BOTH_RETAIN_THE_IDENTICAL204N2_FIELD_COORDINATES_PER_NODE_AND1836N2_TOTAL_NINE_NODE_PAYLOAD`
-**Current claim ceiling:** `F103_C102_DUAL_REGISTER_QUADRATIC_SHEAR_ON_DECLARED_C5_C7_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH4_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C102_PUBLIC_CONTINUATION_FINAL_BOUNDARY_OBSERVABILITY_JACOBIAN_REACHES_FULL_RANK102_ON_BOTH_DECLARED_C5_DUAL_REGISTER_QUADRATIC_SHEAR_FAMILIES_BY_DEPTH24_REJECTING_SUB102_REGULAR_ALGEBRAIC_LOCAL_PHASE_QUOTIENTS_AT_THE_TESTED_SOURCE_CHARTS_WITH_EXACT_UNDERLYING_CARRIER_RESTORATION_AND_REUSE_BUT_THE_TANGENT_CERTIFICATE_EXPANDS102_DIRECTIONS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `C5_TWO_PUBLIC_TOPOLOGY_FAMILIES_CONSECUTIVE_DEPTHS1_TO24_ONE_PUBLICLY_DERIVED_SOURCE_POLYNOMIAL_CHART_AND_ALL25_EXPLICIT_PUBLIC_FINAL_ONLY_B_COORDINATE_PROJECTIONS_PER_DEPTH_IN_EXACT_F103_TANGENT_ARITHMETIC`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M158_F103_C102_DUAL_REGISTER_QUADRATIC_PHASE_SHEAR_RELATION_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M159_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_C102_PUBLIC_CONTINUATION_OBSERVABILITY_JACOBIAN_RANK_OR_COMPACT_NONLINEAR_PHASE_QUOTIENT_ON_DUAL_REGISTER_SHEAR_CARRIER`
+**Active primary successor:** `EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_WITH_REVERSIBLE_ORIENTATION_LEDGER_AND_MATCHED_CLASSICAL_INFORMATION_ACCOUNTING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d1ceb668d81b4de00e439f51aa032d97c4dd5e4c`. The current 158-milestone
+`c3b0fb28e6587c7ceb0d50cf017423aa46ac93c3`. The current 159-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -6825,6 +6825,53 @@ quadratic forms, and either construct a compact nonlinear phase chart or
 certify the local observable dimension that blocks it. M158 establishes no
 distinct phase resource, computational advantage, Small Wall crossing,
 physical execution, physical bit replacement, or unbounded computation.
+
+## M159: public continuations recover all 102 local source directions
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C102_PUBLIC_CONTINUATION_FINAL_BOUNDARY_OBSERVABILITY_JACOBIAN_REACHES_FULL_RANK102_ON_BOTH_DECLARED_C5_DUAL_REGISTER_QUADRATIC_SHEAR_FAMILIES_BY_DEPTH24_REJECTING_SUB102_REGULAR_ALGEBRAIC_LOCAL_PHASE_QUOTIENTS_AT_THE_TESTED_SOURCE_CHARTS_WITH_EXACT_UNDERLYING_CARRIER_RESTORATION_AND_REUSE_BUT_THE_TANGENT_CERTIFICATE_EXPANDS102_DIRECTIONS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M159 differentiates the real M158 recurrence over exact F103 arithmetic at one
+publicly derived C5 source chart. For each of the two declared topology
+families it accumulates 25 explicit public final-only B-coordinate projections
+at every consecutive depth from 1 through 24. Sparse depth sampling is
+misleading: the depth-5 prefix ranks are only 20 and 25, but the alternate
+family reaches rank 102 at depth 23 and the primary family reaches rank 102 at
+depth 24.
+
+The full-rank 600-by-102 continuation Jacobians reject factorization through a
+regular algebraic local state of dimension below 102 at the tested charts.
+They do not reject singular, discontinuous, finite-set-specific, or global
+encodings, and they do not cover all source nodes, coordinates, interfaces, or
+topology families.
+
+An independent scalar oracle imports neither M159 nor M158 production and does
+not use NumPy. It reconstructs all 102 columns from 206 complete plus/minus
+forward trajectories per family, checks a combined-direction identity, and
+matches both complete Jacobian commitments plus every prefix rank. The
+underlying 45,900-cell M158 carrier still restores exactly and reuses the same
+backing without snapshot; the 4,681,800-cell production tangent and
+61,200-cell oracle Jacobian are verification-only state with
+`NO_RESTORATION_CLAIM`.
+
+The strongest matched classical carrier remains the identical 45,900-cell
+coefficient recurrence. M159 therefore establishes a bounded local quotient
+obstruction, not compact phase closure or advantage. The selected successor
+tests the smallest surviving discrete symmetry rather than extending this
+Jacobian fixture:
+
+```text
+EXACT_F103_C102_COLUMN_PROJECTIVE_SIGN_ORBIT_PHASE_QUOTIENT_WITH_REVERSIBLE_ORIENTATION_LEDGER_AND_MATCHED_CLASSICAL_INFORMATION_ACCOUNTING
+```
+
+It must determine whether columnwise A-register sign orbits produce any
+material compaction once exact borrowed-carrier restoration accounts for every
+orientation bit. M159 establishes no CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical bit
+replacement, or unbounded computation.
 
 ## 10. Roadmap Maintenance
 
