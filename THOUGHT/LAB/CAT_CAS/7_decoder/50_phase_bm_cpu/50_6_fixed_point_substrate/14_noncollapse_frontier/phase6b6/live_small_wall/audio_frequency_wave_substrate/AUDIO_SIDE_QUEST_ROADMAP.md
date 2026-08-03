@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO`
-**Roadmap version:** `14.21`
+**Status:** `STRICT_SCOPE_F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO`
+**Roadmap version:** `14.22`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `2e4e83626ee676244952e2e77c0a5730b162a014`
+**Reconciled source head:** `d7f5c05f9188986fa848e3db15fec94b8b3d6f1a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `F103_CYCLIC_DISPLACEMENT_CHARTS_ON_THE_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH16_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `F103_DUAL_C102_EXPONENT_CRT_RANK_AND_STREAMED_VALUE_MOMENT_CHARTS_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH8_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M155_F103_GROWING_DISPLACEMENT_RANK_OPEN_RELATION_QUOTIENT_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M156_F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_DUAL_MULTIPLICATIVE_PHASE_EXPONENT_AND_VALUE_MOMENT_OPEN_RELATION_CHART_CLOSURE_OR_CONVERSION_NO_GO_WITHOUT_DENSE_ENTRY_TABLES`
+**Active primary successor:** `EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_WITH_DEFERRED_EVALUATION_AND_EXPRESSION_DAG_GROWTH_OR_QUOTIENT_NO_GO`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`2e4e83626ee676244952e2e77c0a5730b162a014`. The current 155-milestone
+`d7f5c05f9188986fa848e3db15fec94b8b3d6f1a`. The current 156-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F103_GROWING_C5_C7_C11_C17_CYCLIC_DISPLACEMENT_RANK_OPEN_RELATION_CHART_STREAMS_FULL_ORDINARY_RANK_SEEDS_FROM_RANK2_GENERATORS_WITHOUT_DENSE_RELATION_TABLES_BUT_ONE_NONCOMMUTING_COMPOSITION_INTERSECTION_LAYER_SATURATES_DISPLACEMENT_RANK_N_AT_EVERY_INTERFACE_THE_CHART_BECOMES_N2_PLUS_N_DENSE_EQUIVALENT_AND_AN_EXECUTED_DENSE_FALLBACK_CLASSICAL_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -6657,6 +6657,64 @@ materialization merely moves between charts. M155 establishes no CATVM
 custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, arbitrary relation
 topology, or unbounded catalytic computation.
+
+## M156: exponent-native intersection fails at additive composition conversion
+
+M156 changes the algebra rather than extending M155's displacement fixtures.
+Each exact F103 relation uses a zero-mask rank chart over F2 plus three rank
+charts for its C102 phase exponent over the CRT factors F2, F3, and F17.
+Hadamard intersection is native exponent addition. Reversible rank-one left
+composition uses one streamed F103 value moment per output column, then
+returns each entry to the exponent charts without retaining an ordinary dense
+relation table.
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+```
+
+All seed exponent components have rank at most two. After the first converted
+composition and native intersection, every converted target has each exponent
+component at rank at least `n-2`: floors are (3,4,4), (5,5,6), (9,10,10), and
+(15,15,16) over (F2,F3,F17) on C5, C7, C11, and C17. Every interface also has
+a converted target at full rank in every component. The fixed factor backing
+is `4n^2+4n` bytes per relation even though no ordinary relation table is
+retained.
+
+The executed dense uint8 F103 recurrence runs the identical public topology
+and matches every final boundary. Across nine relations plus counted generic
+C102 log/power tables, phase/classical resident bytes are 1373/225, 2309/441,
+5045/1089, and 11309/2601. The phase state is therefore 6.10x, 5.24x, 4.63x,
+and 4.35x larger. Named transient accounting includes int64 moments,
+factorization scratch, control vectors, output double buffers, and compiled
+descriptors; Python object/container and allocator overhead, native-library
+internal workspace, and whole-process peaks remain excluded.
+
+The actual canonical carrier reverses exactly without snapshot, retained
+history, or baseline reload. Payload and pivot backing identities restore;
+an unrelated depth-seven program consumes the C11 carrier restored after a
+depth-two transaction, and eight repeated C5 transactions remain exact. The
+plain-Python oracle imports neither production nor NumPy and passes 362
+comparisons across all 32 cases, independently reconstructing descriptors,
+dense forward/inverse semantics, canonical factor bytes and commitments,
+boundaries, CRT ranks, and resident-byte formulas. Backing identity, streamed
+operation totals, transient maxima, runtime exclusions, and custody-control
+implementation remain package-local.
+
+The next test removes the global logarithmic rechart rather than adding depth:
+
+```text
+EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_WITH_DEFERRED_EVALUATION_AND_EXPRESSION_DAG_GROWTH_OR_QUOTIENT_NO_GO
+```
+
+It must retain additive phase superpositions unresolved inside the C102 group
+algebra, defer evaluation to the final boundary, and measure expression-DAG or
+support growth against the direct dense F103 recurrence and the exact
+evaluation quotient. M156 establishes no CATVM custody, distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical bit replacement, arbitrary topology, or unbounded catalytic
+computation.
 
 ## 10. Roadmap Maintenance
 

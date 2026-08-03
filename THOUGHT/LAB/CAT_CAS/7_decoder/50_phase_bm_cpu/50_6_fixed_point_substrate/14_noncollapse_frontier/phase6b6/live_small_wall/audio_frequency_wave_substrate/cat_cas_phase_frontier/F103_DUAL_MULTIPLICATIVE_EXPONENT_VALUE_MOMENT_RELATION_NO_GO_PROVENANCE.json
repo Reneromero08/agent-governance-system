@@ -1,0 +1,85 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 156,
+  "scientific_source_head": "d7f5c05f9188986fa848e3db15fec94b8b3d6f1a",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "carrier_restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_dual_multiplicative_exponent_value_moment_relation_no_go.py",
+      "sha256": "bcbc036dc78417ce5d5c69243f85d818f33be0b58cb8b51bbd3cd42167bfa3ff"
+    },
+    "oracle_source": {
+      "path": "f103_dual_multiplicative_exponent_value_moment_relation_no_go_oracle.py",
+      "sha256": "c4353c1f16ee31792614a4805ff2c3eafb2e77ae3859e05ce1d18b11f0d5fa08"
+    },
+    "production_result": {
+      "path": "F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO_RESULTS.json",
+      "sha256": "5bef713e21fe5449acd3a9cd5fdd7c041938fb21f583123a527a75ebadbe2b57"
+    },
+    "oracle_result": {
+      "path": "F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "640ab2c1627b77dad516bc4c9b0230f58194721f0804726aa3549ce4e0eed522"
+    },
+    "qualifier": {
+      "path": "qualify_f103_dual_multiplicative_exponent_value_moment_relation_no_go.sh",
+      "sha256": "be02b6d31186189dcc256d91a3ff60cf3fa2685e8fbe6c158778e2414529824d"
+    },
+    "review": {
+      "path": "F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "37fce9596e641b6e5bd3b65724d60147a8df01eea48912bbca3035f0c68572a1"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_DUAL_MULTIPLICATIVE_EXPONENT_VALUE_MOMENT_RELATION_NO_GO_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m156-qualifier-PWZPkG"
+  },
+  "independent_oracle": {
+    "imports_production_module": false,
+    "imports_numpy": false,
+    "case_count": 32,
+    "comparison_count": 362,
+    "exact_inverse_cases": 32,
+    "reconstructs_canonical_chart_commitments": true
+  },
+  "resource_law": {
+    "phase_resident_bytes_by_interface": {
+      "5": 1373,
+      "7": 2309,
+      "11": 5045,
+      "17": 11309
+    },
+    "classical_resident_bytes_by_interface": {
+      "5": 225,
+      "7": 441,
+      "11": 1089,
+      "17": 2601
+    },
+    "phase_retained_ordinary_dense_relation_table_cells": 0,
+    "streamed_operation_totals_independently_recounted": false,
+    "declared_transient_scratch_maxima_independently_recounted": false,
+    "python_numpy_runtime_exclusions_independently_recounted": false
+  },
+  "claim_ceiling": "F103_DUAL_C102_EXPONENT_CRT_RANK_AND_STREAMED_VALUE_MOMENT_CHARTS_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH8_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "HADAMARD_INTERSECTION_IS_NATIVE_C102_EXPONENT_ADDITION",
+    "RANK1_LEFT_COMPOSITION_USES_ONE_STREAMED_VALUE_MOMENT_PER_COLUMN",
+    "PHASE_PATH_RETAINS_NO_ORDINARY_DENSE_RELATION_TABLE",
+    "EXACT_ALGEBRAIC_RESTORATION_AND_SAME_BACKING_REUSE",
+    "EXECUTED_DENSE_F103_CLASSICAL_BOUNDARY_PARITY"
+  ],
+  "rejected_interpretations": [
+    "UNIFORM_FIXED_RANK_DUAL_EXPONENT_VALUE_MOMENT_CLOSURE",
+    "SUB_DENSE_PHASE_CARRIER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ]
+}

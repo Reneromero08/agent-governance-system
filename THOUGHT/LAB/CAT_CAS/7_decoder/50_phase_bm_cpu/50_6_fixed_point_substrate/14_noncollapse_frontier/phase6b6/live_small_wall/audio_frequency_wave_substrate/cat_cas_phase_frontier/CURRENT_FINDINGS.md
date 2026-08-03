@@ -8989,3 +8989,48 @@ and compact value-moment composition coexist without dense conversion. M155
 establishes no CATVM custody, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 arbitrary topology, or unbounded catalytic computation.
+
+## M156: dual exponent/value-moment closure fails at the log rechart
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_DUAL_MULTIPLICATIVE_C102_EXPONENT_CRT_RANK_AND_VALUE_MOMENT_OPEN_RELATION_CHART_MAKES_HADAMARD_INTERSECTION_NATIVE_WITHOUT_DENSE_RELATION_TABLES_ON_C5_C7_C11_C17_BUT_ONE_REVERSIBLE_COMPOSITION_CONVERSION_RAISES_THE_EXPONENT_CHART_TO_NEAR_FULL_OR_FULL_RANK_IN_EVERY_CRT_COMPONENT_THE_FIXED_BACKING_IS_AT_LEAST4N2_AND_AN_EXECUTED_DENSE_F103_RECURRENCE_IS_SMALLER_WITH_EXACT_RESTORATION_AND_REUSE
+```
+
+M156 represents each exact F103 relation by a zero-mask F2 rank chart and
+three C102 exponent rank charts over F2, F3, and F17. Hadamard intersection is
+native exponent addition. Rank-one left composition uses one streamed F103
+value moment per output column and converts back to exponent coordinates
+without retaining an ordinary dense relation table.
+
+Seed exponent components have rank at most two. On every converted depth-one
+target, every exponent component already has rank at least `n-2`; at least one
+target reaches full rank in every CRT component at every interface. Fixed
+backing is `4n^2+4n` bytes per relation. Phase/classical resident bytes are
+1373/225 at C5, 2309/441 at C7, 5045/1089 at C11, and 11309/2601 at C17, so
+the exact phase chart is 4.35x--6.10x larger than the executed dense uint8
+F103 recurrence that matches every boundary.
+
+The actual canonical carrier reverses exactly without history, snapshot, or
+baseline reload. Payload and pivot backing identities restore; unrelated and
+repeated restored-carrier reuse match fresh execution. A production-independent
+plain-Python oracle imports neither production nor NumPy and passes 362
+comparisons across 32 cases. It reconstructs descriptors, dense forward and
+inverse semantics, canonical factor bytes and commitments, boundaries, CRT
+ranks, and resident-byte formulas. Backing identity, streamed work totals,
+transient maxima, runtime exclusions, and custody controls remain package-local.
+
+The next experiment avoids global logarithmic recharting by retaining
+unresolved additive phase superpositions in the C102 group algebra until final
+evaluation:
+
+```text
+EXACT_F103_UNRESOLVED_C102_GROUP_ALGEBRA_PHASE_SUPERPOSITION_OPEN_RELATION_COMPOSITION_WITH_DEFERRED_EVALUATION_AND_EXPRESSION_DAG_GROWTH_OR_QUOTIENT_NO_GO
+```
+
+It must measure expression-DAG/support growth and the exact evaluation quotient
+against the direct dense F103 recurrence. M156 establishes no CATVM custody,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, arbitrary topology, or
+unbounded catalytic computation.
