@@ -1,0 +1,92 @@
+{
+  "schema": "CAT_CAS_F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO_PROVENANCE_V1",
+  "scientific_source_commit": "e3e908510b2c171e178282fb36bb37f0d242a6d5",
+  "scientific_parent_commit": "06c1970002cd8263519c53763145da269ad6b691",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "claim": "BOUNDED_EXACT_RANK_ADAPTIVE_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATION_CHART_CLOSES_IDENTITY_PLUS_RANK2_COMPOSITION_AND_RECIPROCAL_RANK2_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITH_EXACT_RANK_ADAPTIVE_CANONICALIZATION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH128_BUT_RANK_SATURATES17_THE_CHART_BECOMES_DENSE_EQUIVALENT_AND_AN_EXECUTED_REMATERIALIZED_CONTROL_HYBRID_CLASSICAL_RECURRENCE_RETAINS_FEWER_RESIDENT_COORDINATES",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_restoration_classification": "NO_RESTORATION_CLAIM",
+  "artifacts": {
+    "production_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_rank_adaptive_open_relation_chart_no_go.py",
+      "sha256": "e0fd159e64d6e3f127ffb83b2e904ec8d7dc25ca28851d6ee46c305b7da44cbf"
+    },
+    "oracle_source": {
+      "path": "cat_cas_phase_frontier/f103_c17_rank_adaptive_open_relation_chart_no_go_oracle.py",
+      "sha256": "d5732914c184a5f53c5518f4898556706ab324a2f2aa896eaff7b625566a2728"
+    },
+    "production_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO_RESULTS.json",
+      "sha256": "77249f28baed7ffa773dfc9fa7a4f95119e78c41ffe048346a5f1a5bcf90fa89"
+    },
+    "oracle_result": {
+      "path": "cat_cas_phase_frontier/F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "74c699dc06b45099baac9405b229d46d497444f812fd5e6b920ff99b955429bb"
+    },
+    "qualifier": {
+      "path": "cat_cas_phase_frontier/qualify_f103_c17_rank_adaptive_open_relation_chart_no_go.sh",
+      "sha256": "1cd78c482f7ec96b9f46556ab77da0310584ca1ae50cf683fbdc4e414fc1609a"
+    },
+    "review": {
+      "path": "cat_cas_phase_frontier/F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "78dc3cc6b6cdd04161856df4fca6baebbb0cbfee2de3e99e55b560bfd1f08c4c"
+    }
+  },
+  "qualifier_execution": {
+    "evidence_directory": "/dev/shm/ags-audio-m154-qualifier-XDo0TP",
+    "result": "QUALIFIED_F103_C17_RANK_ADAPTIVE_OPEN_RELATION_CHART_NO_GO_STRICT_SCOPE",
+    "production_output_byte_identical_to_seal": true,
+    "oracle_output_byte_identical_to_seal": true
+  },
+  "scope": {
+    "field_modulus": 103,
+    "boundary_cardinality": 17,
+    "case_count": 18,
+    "depth_ceiling": 128,
+    "resident_control_relations": 9,
+    "resident_target_relations": 9,
+    "shared_port_consumers_per_layer": 8,
+    "independent_comparisons": 531
+  },
+  "observed_resource_law": {
+    "phase_resident_bytes": 3375,
+    "hybrid_classical_resident_bytes": 2672,
+    "phase_to_classical_resident_byte_ratio": 1.2630988023952097,
+    "phase_named_warm_bytes": 44269,
+    "hybrid_classical_named_warm_bytes": 35950,
+    "maximum_rank_observed": 17,
+    "rank17_target_value_coordinates_each": 289,
+    "rank17_chart_dense_equivalent": true,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "snapshot_reload_used": false
+  },
+  "claim_ceiling": "F103_NON_TRANSLATION_INVARIANT_C17_TO_C17_RELATIONS_REACHED_BY_RECIPROCAL_RANK2_CONTROLS_ON_THE_DECLARED9_NODE_ROTATING_HUB_ACROSS18_CASES_THROUGH_DEPTH128_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "NON_TRANSLATION_INVARIANT_RANK_ADAPTIVE_OPEN_RELATIONS",
+    "IDENTITY_PLUS_RANK2_HIDDEN_INTERFACE_COMPOSITION",
+    "RECIPROCAL_RANK2_PARALLEL_INTERSECTION",
+    "SHARED_UNRESOLVED_EIGHT_CONSUMER_PORT",
+    "EXACT_RANK_GROWTH_TO17",
+    "EXACT_FACTOR_CANONICALIZATION_BEFORE_SATURATION",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "EXACT_SAME_BACKING_RESTORATION_AND_REUSE",
+    "EXECUTED_REMATERIALIZED_CONTROL_CHART_TO_DENSE_HYBRID_CLASSICAL_RECURRENCE"
+  ],
+  "rejected_interpretations": [
+    "SUB_DENSE_FIXED_RANK_CLOSURE_ACROSS_GENERAL_RANK2_INTERSECTION",
+    "INTERFACE_CARDINALITY_GROWTH_BEYOND17",
+    "ARBITRARY_PORT_ARITY_OR_GRAPH_TOPOLOGY",
+    "MACHINE_ENFORCED_GENERATION_OR_LEASE_CUSTODY",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "next_obstruction": "RANK_ADAPTIVE_CANONICALIZATION_CLOSES_THE_DECLARED_NONTRANSLATION_RELATION_ALGEBRA_BUT_INTERSECTION_SATURATES_RANK17_THE_CHART_BECOMES_DENSE_EQUIVALENT_AND_THE_EXECUTED_REMATERIALIZED_CONTROL_CLASSICAL_HYBRID_IS_SMALLER"
+}

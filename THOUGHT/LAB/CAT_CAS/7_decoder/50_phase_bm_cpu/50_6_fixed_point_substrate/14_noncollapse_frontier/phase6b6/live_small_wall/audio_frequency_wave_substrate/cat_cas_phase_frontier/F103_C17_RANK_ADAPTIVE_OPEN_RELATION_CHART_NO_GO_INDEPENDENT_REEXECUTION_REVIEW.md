@@ -4,8 +4,8 @@
 
 `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
 
-Verification level: `INDEPENDENT_ORACLE_REEXECUTION`  
-Carrier restoration: `EXACT_ALGEBRAIC_RESTORATION`  
+Verification level: `INDEPENDENT_ORACLE_REEXECUTION`
+Carrier restoration: `EXACT_ALGEBRAIC_RESTORATION`
 Transient buffers: `NO_RESTORATION_CLAIM`
 
 ## Reconstructed mechanism

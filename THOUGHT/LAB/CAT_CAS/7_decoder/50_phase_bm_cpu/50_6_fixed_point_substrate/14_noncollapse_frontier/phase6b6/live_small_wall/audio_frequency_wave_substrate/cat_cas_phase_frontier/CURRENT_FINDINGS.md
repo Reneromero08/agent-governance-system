@@ -8903,3 +8903,40 @@ M153 establishes no rank-two or arbitrary-rank closure, arbitrary topology,
 CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation.
+
+## M154: exact rank-adaptive closure reaches the dense-equivalent ceiling
+
+Claim:
+
+```text
+BOUNDED_EXACT_RANK_ADAPTIVE_NON_TRANSLATION_INVARIANT_F103_C17_OPEN_RELATION_CHART_CLOSES_IDENTITY_PLUS_RANK2_COMPOSITION_AND_RECIPROCAL_RANK2_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_ACROSS8_NONCOMMUTING_CONSUMERS_WITH_EXACT_RANK_ADAPTIVE_CANONICALIZATION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_THROUGH_DEPTH128_BUT_RANK_SATURATES17_THE_CHART_BECOMES_DENSE_EQUIVALENT_AND_AN_EXECUTED_REMATERIALIZED_CONTROL_HYBRID_CLASSICAL_RECURRENCE_RETAINS_FEWER_RESIDENT_COORDINATES
+```
+
+M154 closes the declared non-translation relation family in an exact
+rank-adaptive chart. Rank-`r` state uses `r(34-r)` values plus pivots.
+Identity-plus-rank-two composition preserves rank, while reversible Hadamard
+intersection with an exact reciprocal-rank-two control grows rank.
+
+The independent scalar oracle imports neither production nor NumPy and passes
+531 comparisons across 18 cases. Maximum final rank is four at depth one,
+eight at depth two, 13--16 at depth four, and 17 by depth eight. All nine
+targets have rank 17 by depth 32 for every public family.
+
+Rank 17 makes the 289-cell chart payload the relation transpose. The phase
+path retains no separate dense table, but its state is dense-equivalent. Its
+fixed carrier is 3,375 bytes, versus 2,672 resident bytes for the executed
+classical hybrid that switches from the same chart to dense at rank nine.
+Conservative named warm maxima are 44,269 versus 35,950 bytes. The phase path
+also performs more counted field work at depth 128 in all three families.
+
+The actual resident relation is reversed without history. One exact
+history-free canonical reduction after the complete inverse restores the
+unique canonical byte state on the same backing. Unrelated reuse and 32
+repeated transactions match fresh execution without snapshot or baseline.
+
+The next test changes from ordinary matrix rank to cyclic displacement rank at
+interfaces 5, 7, 11, and 17. It must either exhibit a uniform exact nonlinear
+relation quotient or reject that route against a matched compact classical
+recurrence. M154 establishes no growing-interface compact closure, CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical bit replacement, or unbounded catalytic computation.
