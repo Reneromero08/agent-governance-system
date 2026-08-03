@@ -1,0 +1,81 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "aa641f93a89c6311f469e222ae4f94e1ecad960f",
+  "scientific_source_parent": "c09daa45519dc62241c7f53f495deb2296ef6f50",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "7e4c1ae8bdd128b358d40127fb9ad1089862f00d0e16e2c2b7e8de9fec561f95",
+  "reference_full_oracle_sha256": "d72c3ad5f0da9522311277d0dc0832b2dabda46eaf646b2c35477ed34cf7dec0",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exchange_symmetric_phase_module_irreducibility.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exchange_symmetric_phase_module_irreducibility_oracle.py --production PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_exchange_symmetric_phase_module_irreducibility.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_exchange_symmetric_phase_module_irreducibility.py": "07d37b41171fcbb34d8cf770b1a86fa4a41d954f8a99101472e479d5cdb604fd",
+    "f17_exchange_symmetric_phase_module_irreducibility_oracle.py": "52e9f9887a0cf0211d0f592c70a4b4a01677167f1c74e1f2d34680fec62e745b",
+    "F17_EXCHANGE_SYMMETRIC_PHASE_MODULE_IRREDUCIBILITY_RESULTS.json": "7e4c1ae8bdd128b358d40127fb9ad1089862f00d0e16e2c2b7e8de9fec561f95",
+    "F17_EXCHANGE_SYMMETRIC_PHASE_MODULE_IRREDUCIBILITY_ORACLE_RESULTS.json": "d72c3ad5f0da9522311277d0dc0832b2dabda46eaf646b2c35477ed34cf7dec0",
+    "F17_EXCHANGE_SYMMETRIC_PHASE_MODULE_IRREDUCIBILITY_INDEPENDENT_REVIEW.md": "2e2b76c9d229e8e9648b64c4330193f34a9ca65a9b1cab3667b0be6c2c03851c",
+    "qualify_f17_exchange_symmetric_phase_module_irreducibility.sh": "1f9b43db14ed39cdba1a9e41bc15f56a9eadae24f204c2e4f8e99501be8bfc17"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "grid_n": 4,
+    "exact_q_zeta17_degrees": [1, 2],
+    "dual_field_degrees": [1, 2, 3, 4],
+    "families": ["PRIMARY", "REUSE"],
+    "occupation_orbit_dimensions": [17, 153, 969, 4845],
+    "primitive_algebra": [
+      "POWER_SUM_PHASE_CHARACTER_P1_THROUGH_PK",
+      "BIDIRECTIONAL_ADJACENT_MODE_SHEAR",
+      "M127_STREAMED_GRID_ORBIT_SHEAR"
+    ],
+    "independent_methods": [
+      "INDEPENDENT_OCCUPATION_RECURRENCE",
+      "EXACT_POWER_SUM_CHARACTER_ORTHOGONALITY",
+      "STREAMED_PREDECESSOR_CONNECTIVITY_CERTIFICATE",
+      "INDEPENDENT_EXACT_AND_DUAL_FIELD_TRANSACTION_REEXECUTION"
+    ]
+  },
+  "resource_accounting": {
+    "resident_phase_field_cells": "48_PLUS_2H_K",
+    "public_occupation_topology_integer_cells": "18H_K",
+    "character_table_cells": 0,
+    "dense_operator_cells": 0,
+    "labelled_tensor_cells": 0,
+    "inverse_history_cells": 0,
+    "certificate_edge_lists_materialized": false,
+    "certificate_named_logical_integer_cells": [357, 3366, 23256, 125970],
+    "final_boundary_field_cells": 1,
+    "full_exact_bit_complexity_established": false,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NATIVE_LIBRARY_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_baselines": [
+    "IDENTICAL_H_K_COORDINATE_EXACT_LINEAR_PHASE_MODULE_RECURRENCE",
+    "INDEPENDENT_EXACT_OCCUPATION_RECURRENCE"
+  ],
+  "claim_ceiling": "K1_TO_K4_EXCHANGE_SYMMETRIC_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_LINEAR_H_K_MODULE_ONLY_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_DIRECT_PROCESS_SOFTWARE",
+  "rejected_interpretations": [
+    "RETROACTIVE_UNEXTENDED_M127_IRREDUCIBILITY",
+    "NONLINEAR_OR_PROGRAM_RESTRICTED_QUOTIENT_LOWER_BOUND",
+    "ARBITRARY_RELATIONAL_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

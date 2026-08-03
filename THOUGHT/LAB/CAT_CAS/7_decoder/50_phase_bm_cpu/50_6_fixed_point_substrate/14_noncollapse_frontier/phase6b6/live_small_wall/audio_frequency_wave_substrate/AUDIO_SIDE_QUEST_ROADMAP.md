@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_GROWING_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_HK_RANK_AND_HEIGHT_OBSTRUCTION_NEXT_EXACT_RANK_REDUCTION_SELECTED`
-**Roadmap version:** `13.3`
+**Status:** `STRICT_SCOPE_EXCHANGE_SYMMETRIC_PHASE_MODULE_LINEAR_IRREDUCIBILITY_OBSTRUCTION_NEXT_NONLINEAR_OR_RESTRICTED_CHART_SELECTED`
+**Roadmap version:** `13.4`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `8d0c04b02460d1f7b5e37c03183cd6c4c77addbc`
+**Reconciled source head:** `aa641f93a89c6311f469e222ae4f94e1ecad960f`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_EXCHANGE_SYMMETRIC_F17_LATENT_GEOMETRY_USES_DEGREE_K_OCCUPATION_ORBITS_WITH_EXACT_LIFTED_FOURIER_NON_SUM_ONLY_POWER_SUM_GRID_CONTROLS_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_CLASSICAL_ORBIT_RECURRENCE`
-**Current claim ceiling:** `GRID_N4_ONLY_EXCHANGE_SYMMETRIC_K1_TO_K4_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_TWO_ORBIT_VECTORS_FINAL_ONLY_PROJECTION_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `K1_TO_K4_EXCHANGE_SYMMETRIC_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_ADJACENT_MODE_SHEAR_LINEAR_H_K_MODULE_ONLY_EXACT_Q_ZETA17_K1_K2_DUAL_FIELD_K1_TO_K4_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M127_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_ORBIT_RANK_AND_HEIGHT_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M128_EXCHANGE_SYMMETRIC_LINEAR_MODULE_IRREDUCIBILITY_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_RELATION_PRESERVING_RANK_REDUCTION_OR_NATIVE_PHASE_CONVOLUTION_ACROSS_GROWING_EXCHANGE_SYMMETRIC_DEGREE_WITHOUT_MOVING_H_K_GROWTH_INTO_PRECISION_OR_HISTORY`
+**Active primary successor:** `NONLINEAR_OR_PROGRAM_RESTRICTED_INTEGRABLE_PHASE_CONVOLUTION_CHART_WITH_EXACT_COMPOSITION_WITHOUT_H_K_COORDINATE_MATERIALIZATION_OR_HIDDEN_PRECISION_HISTORY_GROWTH`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`8d0c04b02460d1f7b5e37c03183cd6c4c77addbc`. The current 127-milestone
+`aa641f93a89c6311f469e222ae4f94e1ecad960f`. The current 128-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4548,6 +4548,64 @@ The surviving obstruction is:
 EXCHANGE_SYMMETRY_REPLACES_LABELLED_17_TO_THE_K_GROWTH_BY_EXACT_H_K_ORBIT_GROWTH_AND_NON_SUM_ONLY_CONTROLS_BUT_THE_RESIDENT_RANK_STILL_GROWS_AS_BINOMIAL_K_PLUS_16_CHOOSE_16_ARITHMETIC_WIDTH_ALSO_GROWS_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
 ```
 
+### 6.128 Exchange-symmetric phase-module linear irreducibility
+
+M128 tests the linear-quotient branch of the M127 obstruction with a distinct
+extension of the orbit carrier. On either `H(k)` orbit module it exposes
+independently selectable `p1,...,pk` phase characters and both orientations
+of adjacent-mode shears. This extension is not retroactive M127 semantics.
+
+```text
+classification                   INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+verification                     INDEPENDENT_ORACLE_REEXECUTION
+resident carrier restoration     EXACT_ALGEBRAIC_RESTORATION
+transient and certificate state  NO_RESTORATION_CLAIM
+source head                      aa641f93a89c6311f469e222ae4f94e1ecad960f
+hosted run                       NOT ESTABLISHED
+```
+
+For `k=1,2,3,4`, exact power-sum signatures have respectively
+`17,153,969,4845` values, equal to `H(k)`. Because `k<17`, Newton identities
+recover each occupation from those signatures. Exact character orthogonality
+generates coordinate projectors, while the bidirectional adjacent-mode
+shears connect the occupation graph. Projected transition entries and path
+products therefore generate all matrix units. Any uniform exact linear
+quotient preserving all declared primitives and the nonzero final occupation
+functional must retain at least `H(k)` field coordinates.
+
+Independent exact `Q(zeta17)` execution agrees at `k=1,2`; `F103/F137`
+execution agrees through `k=4`. The actual transaction projects only the
+final `(k-1 in mode 0, one in mode 1)` occupation, reverses in actual inverse
+order, restores exact zero on the same backing, advances the restoration
+generation, and passes unrelated `k=2` fresh/restored boundary and complete
+reported resource-signature parity without snapshot reload.
+
+Accepted resident state is `48+2H(k)` field cells. Character, shear, and grid
+work is streamed. No character table, dense `H(k) x H(k)` operator, labelled
+tensor, relation table, intermediate serialization, or certificate edge list
+is accepted-path state. The certificate reports signature sets, union-find,
+topology, and other named verification storage separately; Python/native
+containers, allocator and bigint internals, full exact bit complexity, and
+whole-process peak remain excluded.
+
+The strongest compact classical method is the identical `H(k)`-coordinate
+exact linear phase-module recurrence. M128 retires only the uniform exact
+linear quotient route for its added primitive family. It does not reject
+nonlinear or program-restricted charts, establish a lower bound for
+unextended M127, or establish a distinct phase resource or advantage.
+
+The selected successor is:
+
+```text
+NONLINEAR_OR_PROGRAM_RESTRICTED_INTEGRABLE_PHASE_CONVOLUTION_CHART_WITH_EXACT_COMPOSITION_WITHOUT_H_K_COORDINATE_MATERIALIZATION_OR_HIDDEN_PRECISION_HISTORY_GROWTH
+```
+
+The surviving obstruction is:
+
+```text
+THE_POWER_SUM_CHARACTER_AND_CONNECTED_MODE_SHEAR_EXTENSION_MAKES_EACH_DECLARED_EXCHANGE_SYMMETRIC_H_K_PHASE_MODULE_IRREDUCIBLE_SO_ANY_EXACT_UNIFORM_LINEAR_QUOTIENT_RETAINS_ALL_H_K_COORDINATES_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
 ## 7. No-Smuggle and Non-Collapse Laws
 
 Native phase execution must not receive:
@@ -4585,7 +4643,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GROWING_EXCHANGE_SYMMETRIC_F17_LATENT_GEOMETRY_USES_DEGREE_K_OCCUPATION_ORBITS_WITH_EXACT_LIFTED_FOURIER_NON_SUM_ONLY_POWER_SUM_GRID_CONTROLS_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_CLASSICAL_ORBIT_RECURRENCE
+BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -4684,6 +4742,11 @@ fixed-rank or fixed-width exact closure across growing exchange-symmetric degree
 CATVM custody of the M127 direct-process carrier, compiler, or transient buffers
 distinct phase resource or advantage from the M127 identical H(k)-coordinate orbit recurrence
 full exact bit-complexity or whole-process peak accounting for M127
+retroactive irreducibility of the unextended M127 primitive family
+nonlinear, program-restricted, approximate, or integrable quotient lower bounds from M128
+compression below H(k) for operations outside the declared M128 selectable primitive algebra
+CATVM custody of the M128 direct-process carrier or certificate buffers
+distinct phase resource or advantage from the M128 identical H(k)-coordinate recurrence
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -4785,7 +4848,17 @@ The strongest compact classical method executes the identical occupation-orbit
 recurrence. Continue with exact relation-preserving rank reduction or a native
 phase convolution that does not relocate `H(k)` growth into coefficient width,
 retained inverse history, compiler state, or hidden enumeration. Do not add
-larger symmetric degrees unless they test a concrete reduction law.
+larger symmetric degrees unless they test a concrete reduction law. M128 then
+tests the natural uniform linear reduction route by adding independently
+selectable power-sum characters and bidirectional adjacent-mode shears. That
+extended algebra is irreducible on each declared `H(k)` orbit module, so no
+smaller exact uniform linear quotient preserves all of those primitives and
+the final boundary. This result is not retroactive M127 semantics and does not
+apply to nonlinear or program-restricted charts. Continue with the smallest
+nonlinear or integrable phase-convolution chart that composes exactly without
+materializing all `H(k)` coordinates or moving growth into precision, history,
+compiler state, or hidden enumeration. Keep the identical compact classical
+chart or recurrence as the matched baseline.
 
 ## 10. Roadmap Maintenance
 

@@ -7460,3 +7460,66 @@ The obstruction is:
 ```text
 EXCHANGE_SYMMETRY_REPLACES_LABELLED_17_TO_THE_K_GROWTH_BY_EXACT_H_K_ORBIT_GROWTH_AND_NON_SUM_ONLY_CONTROLS_BUT_THE_RESIDENT_RANK_STILL_GROWS_AS_BINOMIAL_K_PLUS_16_CHOOSE_16_ARITHMETIC_WIDTH_ALSO_GROWS_AND_COMPACT_CLASSICAL_SOFTWARE_EXECUTES_THE_IDENTICAL_RECURRENCE
 ```
+
+## Exchange-symmetric selectable phase-module algebra is linearly irreducible
+
+M128 is a distinct extension of M127, not a retroactive reinterpretation. It
+adds independently selectable `p1,...,pk` phase-character primitives and
+both orientations of adjacent-mode shears to either `H(k)` orbit module for
+the declared `k=1,2,3,4` cases.
+
+```text
+claim
+    BOUNDED_EXACT_F17_POWER_SUM_CHARACTER_AND_BIDIRECTIONAL_MODE_SHEAR_PHASE_MODULE_HAS_NO_NONTRIVIAL_LINEAR_QUOTIENT_BELOW_H_K_ON_EACH_DECLARED_EXCHANGE_SYMMETRIC_K1_TO_K4_ORBIT_MODULE_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident carrier      EXACT_ALGEBRAIC_RESTORATION
+    transient/certificate NO_RESTORATION_CLAIM
+
+source head
+    aa641f93a89c6311f469e222ae4f94e1ecad960f
+```
+
+For `k<17`, Newton identities make the complete `p1,...,pk` signature
+injective on occupations. Exact character orthogonality yields every
+coordinate projector. Bidirectional adjacent-mode shears connect the
+occupation graph and, after coordinate projection, isolate its nonzero
+one-particle transitions. Products along the streamed predecessor tree
+generate all matrix units. Thus any uniform exact linear quotient preserving
+every declared selectable primitive and the final nonzero occupation
+functional has dimension at least
+`H(k)=17,153,969,4845` for `k=1,2,3,4`.
+
+Independent exact `Q(zeta17)` transactions agree at `k=1,2`; independent
+`F103/F137` transactions agree through `k=4`. Final-only projection, actual
+reverse order, exact zero restoration on the same backing, generation
+advancement, and unrelated `k=2` reuse all pass. Fresh/restored reuse agrees
+across the complete reported deterministic resource signature.
+
+The accepted carrier retains `48+2H(k)` field cells and streams character,
+shear, and grid work. No character table, dense `H(k) x H(k)` operator,
+labelled tensor, relation table, serialized intermediate, inverse history, or
+certificate edge list is accepted-path state. Certificate signature sets and
+union-find storage are reported separately. Full exact bit complexity,
+Python/native container and allocator storage, bigint internals, and
+whole-process peak remain excluded.
+
+The strongest compact classical baseline is the identical `H(k)`-coordinate
+exact recurrence. M128 rejects only the uniform exact linear quotient route
+for the new primitive algebra. It does not reject nonlinear,
+program-restricted, integrable, approximate, or unextended-M127 quotients and
+does not establish CATVM custody, a distinct phase resource, advantage, Small
+Wall crossing, physical execution, physical bit replacement, or unbounded
+computation.
+
+The next experiment is:
+
+```text
+NONLINEAR_OR_PROGRAM_RESTRICTED_INTEGRABLE_PHASE_CONVOLUTION_CHART_WITH_EXACT_COMPOSITION_WITHOUT_H_K_COORDINATE_MATERIALIZATION_OR_HIDDEN_PRECISION_HISTORY_GROWTH
+```
