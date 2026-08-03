@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ANISOTROPIC_SHARED_SCALE_HEIGHT_OBSTRUCTION`
-**Roadmap version:** `14.7`
+**Status:** `STRICT_SCOPE_ANISOTROPIC_GLOBAL_UNIT_BALANCE_BOUNDED_NO_GO`
+**Roadmap version:** `14.8`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `9f2d0f28946ed32329aa6da2d7b4b3029152fd06`
+**Reconciled source head:** `466557668e8ea4497f58794591291990048d3964`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_SHARED_DENOMINATOR_LEDGER_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BY_MORE_THAN_HALF_ACROSS_21_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_CASES_BUT_COMMON_PI_CONTENT_DOES_NOT_BOUND_RESIDUAL_HEIGHT_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_COMPACT_CLASSICAL_NORMALIZATION_REMAIN`
-**Current claim ceiling:** `21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_AND_DEPTHS1_TO64_IN_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN`
+**Current claim ceiling:** `21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_DEPTHS1_TO64_AND_TWO_DECLARED_UNIT_BALANCERS_IN_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M141_SHARED_SCALE_REDUCTION_AND_COMMON_PI_HEIGHT_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M142_GLOBAL_UNIT_BALANCE_BOUNDED_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GLOBAL_CYCLOTOMIC_UNIT_BALANCING_ON_ANISOTROPIC_RADIAL_SHARED_SCALE_OR_BOUNDED_NO_GO_WITH_IDENTICAL_CLASSICAL_NORMALIZATION`
+**Active primary successor:** `PHASE_STATE_LAW_CHANGE_BEYOND_SHARED_SCALE_AND_GLOBAL_UNIT_GAUGES_WITH_FIXED_MATERIAL_COST_OR_BOUNDED_NO_GO_AGAINST_IDENTICAL_CLASSICAL_EXECUTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`9f2d0f28946ed32329aa6da2d7b4b3029152fd06`. The current 141-milestone
+`466557668e8ea4497f58794591291990048d3964`. The current 142-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_GENERATED_FROM_16_TERM_KLOOSTERMAN_CHARACTER_SUM_REMOVES_THE_RETAINED_289_CELL_PUBLIC_KERNEL_WHILE_PRESERVING_17_CELL_NONCOMMUTING_QUARTIC_PHASE_CLOSURE_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_MATRIX_FREE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN
+BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN
 ```
 
 Not established:
@@ -5685,6 +5685,71 @@ It must test whether exact global unit actions can reduce residual integer
 height after common-pi extraction without shifting the same cost into unit
 ledgers, rematerialization, or the matched classical representation.  Merely
 repeating the 21 fixtures or changing denominator syntax is insufficient.
+
+## M142: Global cyclotomic-unit balance bounded no-go
+
+M142 applies the existing exact log-free 49-direction unit line descent and
+a separate 65,536-bit log-embedding lattice-center control to all 21 M141
+states.  Both balancers return identical exact residuals and seven-entry unit
+ledgers.
+
+```text
+claim
+    BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 17-cell quotient carrier EXACT_ALGEBRAIC_RESTORATION
+    transient scale and unit-search buffers NO_RESTORATION_CLAIM
+
+source head
+    466557668e8ea4497f58794591291990048d3964
+```
+
+All three depth-1 states select ledger `[1,1,1,1,1,1,1]`, repairing the
+common-pi residual representation artifact.  Total residual-and-ledger
+payload falls from 3,579 to 542 bits for `PRIMARY`, 3,553 to 554 for `REUSE`,
+and 3,558 to 599 for `ALTERNATE`.  Every one of the 18 states at depths
+`2,4,8,16,32,64` selects the identity ledger under both balancers.  At depth
+64 the ledger-inclusive payload remains 35,433, 35,377, and 35,388 bits.
+
+The independent retained-kernel oracle reconstructs the shared scale and
+selected unit action without importing M142, M140 production, or M141
+production.  It matches 231 declared state, boundary, ledger, width, and
+payload fields; checks 2,058 exact adjacent-direction energies; restores all
+21 independent seeds; and detects a unit-ledger mutation.  These certificates
+establish local minimality in the declared 49-direction neighborhood, not
+global unit-lattice optimality.
+
+The accepted accounting includes 272 cyclotomic integer coefficients, seven
+unit-ledger integers, one denominator ledger, one common-pi ledger, 49 exact
+directions, and an 8,177-bit compiled exact unit table.  The 65,536-bit
+embedding path is a control, not the accepted balancer.  Python containers,
+allocator/native-library workspace, bigint internals, and whole-process peak
+remain excluded.  The strongest compact classical baseline is the identical
+shared-scale and exact 49-direction balancing recurrence.
+
+Exact reconstruction precedes final-only projection and the actual inverse.
+Same-backing unrelated reuse succeeds without snapshot or inverse history.
+M142 establishes no global or asymptotic height lower bound, CATVM custody,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical bit replacement, or unbounded computation.
+
+The selected successor is:
+
+```text
+PHASE_STATE_LAW_CHANGE_BEYOND_SHARED_SCALE_AND_GLOBAL_UNIT_GAUGES_WITH_FIXED_MATERIAL_COST_OR_BOUNDED_NO_GO_AGAINST_IDENTICAL_CLASSICAL_EXECUTION
+```
+
+It must alter the phase machine's primitive state/update law rather than add
+more cases to the exhausted scale-and-unit gauge route.  Any fixed-cost claim
+must count the complete state, ledgers, rematerialization, projection,
+restoration, and matched classical execution.
 
 ## 10. Roadmap Maintenance
 

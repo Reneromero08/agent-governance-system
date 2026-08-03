@@ -1,0 +1,88 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "466557668e8ea4497f58794591291990048d3964",
+  "scientific_source_parent": "2c639ffaf24be9118832a74714c3da33f338cac7",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "c8846c0d3b899765f641a8740df8e04895746b2813c0938ab4c9eec15ef92358",
+  "reference_full_oracle_sha256": "de6616a17ad80ec50849e41832cfcc46f6261c3e8f452490db1f7ed8cee25792",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_global_unit_balance_no_go.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_global_unit_balance_no_go_oracle.py --package PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_global_unit_balance_no_go.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_global_unit_balance_no_go.py": "127497491d3806d5ec4f6e424bd0cd52cfede4f116a6a2a18a5d9958aed6d845",
+    "f17_anisotropic_radial_global_unit_balance_no_go_oracle.py": "c148087d4acbd5a37e447b093c56ea8bbe61dae12c56587f66a0a11c62e7b287",
+    "F17_ANISOTROPIC_RADIAL_GLOBAL_UNIT_BALANCE_NO_GO_RESULTS.json": "c8846c0d3b899765f641a8740df8e04895746b2813c0938ab4c9eec15ef92358",
+    "F17_ANISOTROPIC_RADIAL_GLOBAL_UNIT_BALANCE_NO_GO_ORACLE_RESULTS.json": "de6616a17ad80ec50849e41832cfcc46f6261c3e8f452490db1f7ed8cee25792",
+    "F17_ANISOTROPIC_RADIAL_GLOBAL_UNIT_BALANCE_NO_GO_INDEPENDENT_REVIEW.md": "39da25ee93006c76e8730dfa510f7723b96309d03fabb240257894c87d27acbc",
+    "qualify_f17_anisotropic_radial_global_unit_balance_no_go.sh": "18561dbe5ab8ebdde64589a42a8233303f11c27b05939eeab6d01e69ba1d983f"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_balance_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "F17_SQUARED",
+    "anisotropic_norm": "X_SQUARED_MINUS_3_Y_SQUARED",
+    "operations": [
+      "MATRIX_FREE_QUARTIC_RADIAL_PHASE_AND_FOURIER_PRODUCTION_RECURRENCE",
+      "SHARED_POWER17_DENOMINATOR_AND_COMMON_PI_SCALE",
+      "LOG_FREE_49_DIRECTION_EXACT_CYCLOTOMIC_UNIT_LINE_DESCENT",
+      "65536_BIT_LOG_EMBEDDING_PARITY_CONTROL_WITH_EXACT_ACCEPTANCE"
+    ],
+    "depths": [1, 2, 4, 8, 16, 32, 64],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "SEPARATE_RETAINED17_BY17_EXACT_FOURIER_RECURRENCE",
+      "INDEPENDENT_SHARED_SCALE_AND_UNIT_LEDGER_MATERIALIZATION",
+      "EXACT98_ADJACENT_DIRECTION_CERTIFICATE_PER_CASE",
+      "SEPARATE_FINAL_COMMITMENT_BOUNDARY_AND_PAYLOAD_MEASUREMENT",
+      "UNIT_LEDGER_MUTATION_CONTROL"
+    ]
+  },
+  "resource_accounting": {
+    "resident_radial_exact_field_cells": 17,
+    "represented_cyclotomic_integer_coefficients": 272,
+    "unit_ledger_integers": 7,
+    "shared_denominator_ledger_integers": 1,
+    "common_pi_ledger_integers": 1,
+    "compiled_exact_direction_count": 49,
+    "compiled_exact_unit_table_payload_bits": 8177,
+    "fixed_precision_proposal_bits": 65536,
+    "fixed_precision_path_is_control_not_accepted_balancer": true,
+    "inverse_history_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "SYMPY_AND_MPMATH_NATIVE_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_baseline": "IDENTICAL_SHARED_SCALE_AND_EXACT49_DIRECTION_GLOBAL_UNIT_BALANCING_RECURRENCE",
+  "claim_ceiling": "21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_DEPTHS1_TO64_AND_TWO_DECLARED_UNIT_BALANCERS_IN_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "ALL_THREE_DEPTH1_COMMON_PI_RESIDUAL_PAYLOAD_ARTIFACTS_REPAIRED",
+    "ALL18_DEPTH2_PLUS_CASES_SELECT_IDENTITY_UNIT_BY_BOTH_DECLARED_BALANCERS",
+    "EXACT98_ADJACENT_DIRECTION_CERTIFICATE_PER_CASE",
+    "EXACT_STATE_RECONSTRUCTION_BEFORE_FINAL_PROJECTION_AND_ACTUAL_INVERSE",
+    "EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE",
+    "INDEPENDENT_EXACT_PARITY_FOR231_DECLARED_METRIC_AND_BOUNDARY_COMPARISONS"
+  ],
+  "rejected_interpretations": [
+    "GLOBAL_CYCLOTOMIC_UNIT_OPTIMALITY",
+    "LOWER_BOUND_FOR_ALL_EXACT_REPRESENTATIONS",
+    "ASYMPTOTIC_HEIGHT_LOWER_BOUND",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

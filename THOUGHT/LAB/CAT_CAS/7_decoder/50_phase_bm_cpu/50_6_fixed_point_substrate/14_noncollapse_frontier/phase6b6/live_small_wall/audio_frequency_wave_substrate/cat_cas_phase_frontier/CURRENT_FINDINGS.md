@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`9f2d0f28946ed32329aa6da2d7b4b3029152fd06`. The canonical per-milestone
+`466557668e8ea4497f58794591291990048d3964`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -8345,3 +8345,49 @@ physical bit replacement, or unbounded computation.  The next selected test
 is exact global cyclotomic-unit balancing on this anisotropic shared-scale
 state, with every unit ledger and rematerialization cost matched in the
 identical classical normalization.
+
+## M142: Global cyclotomic-unit balance bounded no-go
+
+```text
+BOUNDED_EXACT_LOG_FREE_49_DIRECTION_AND_FIXED_PRECISION_LOG_EMBEDDING_GLOBAL_CYCLOTOMIC_UNIT_BALANCERS_AGREE_ON_ALL_21_COMMON_PI_FACTORED_ANISOTROPIC_F17_RADIAL_FINAL_STATES_REPAIR_THE_DEPTH1_PI_RESIDUAL_BLOWUP_BUT_SELECT_THE_IDENTITY_AT_EVERY_DEPTH2_PLUS_CASE_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_BALANCING_PATH_REMAIN
+```
+
+The exact log-free 49-direction unit line descent and a separate 65,536-bit
+log-embedding proposal with exact acceptance agree on every one of the 21
+M141 final states.  At depth 1 they select unit ledger
+`[1,1,1,1,1,1,1]` and repair the common-pi residual artifact:
+
+```text
+family       M141 pi residual bits   balanced all-ledger bits
+PRIMARY                         3579                        542
+REUSE                           3553                        554
+ALTERNATE                       3558                        599
+```
+
+Every tested depth-2-through-64 state selects the identity ledger under both
+balancers.  The ledger-inclusive depth-64 payload remains 35,433 bits for
+`PRIMARY`, 35,377 for `REUSE`, and 35,388 for `ALTERNATE`.  Thus this declared
+global-unit route does not bound the exact residual height.
+
+The independent retained-kernel oracle matches 231 declared fields, verifies
+98 adjacent signed unit directions for each of 21 states, restores every
+exact seed, and detects a unit-ledger mutation.  Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.  The neighborhood certificates do not prove
+global cyclotomic-unit optimality or a lower bound for every exact
+representation.
+
+The resident 17-cell carrier has `EXACT_ALGEBRAIC_RESTORATION`; unit-search
+and scale buffers have `NO_RESTORATION_CLAIM`.  Exact reconstruction occurs
+before final-only projection and inverse, and unrelated same-backing reuse
+uses neither snapshot nor inverse history.  Accounting includes the 272
+integer coefficients, nine scale/unit ledger integers, 49 compiled exact
+directions, and the 8,177-bit unit table.  The strongest compact classical
+baseline is the identical shared-scale and exact 49-direction balancing
+recurrence.
+
+M142 establishes no CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.  The next experiment must change the primitive
+phase state/update law rather than extend this exhausted scale-and-unit gauge
+fixture family.
