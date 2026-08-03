@@ -1,0 +1,101 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "8afa4f0fca8287d78b983dd47009ea5ddda88195",
+  "scientific_source_parent": "6b458afeea94d3b61274e707ac16237043827a3f",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "b0fa25c9e8dcf4273445f7d7c6bb7726c7bca1d321bfedf9a22ced530c395e31",
+  "reference_full_oracle_sha256": "d1eb5b32f10318c80d7205ce06491fcc16c732bb61aee2dfac7929a381cb2ca5",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exact_c17_fiber_port_convolution.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_exact_c17_fiber_port_convolution_oracle.py --package PRODUCTION_RESULT --production PRODUCTION_SOURCE --predecessor PREDECESSOR_SOURCE --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_exact_c17_fiber_port_convolution.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_exact_c17_fiber_port_convolution.py": "1ec87e427dd3c4548b749c6d431208ff19159528d5371cef4391eb6b02144472",
+    "f17_exact_c17_fiber_port_convolution_oracle.py": "18d4d20dbae21aa222bafde155f51f610f706222e5483f0f48a3f2f60c26df20",
+    "F17_EXACT_C17_FIBER_PORT_CONVOLUTION_RESULTS.json": "b0fa25c9e8dcf4273445f7d7c6bb7726c7bca1d321bfedf9a22ced530c395e31",
+    "F17_EXACT_C17_FIBER_PORT_CONVOLUTION_ORACLE_RESULTS.json": "d1eb5b32f10318c80d7205ce06491fcc16c732bb61aee2dfac7929a381cb2ca5",
+    "F17_EXACT_C17_FIBER_PORT_CONVOLUTION_INDEPENDENT_REVIEW.md": "595c3a7ff2040ad158988476a1886b45c08f6f018a5ecd87a34df69453de38c4",
+    "qualify_f17_exact_c17_fiber_port_convolution.sh": "8cdd9021e28ca3470d251e4993e63d8b45b47b9af03dc394b85f5eaf66fe6e70",
+    "f17_anisotropic_radial_local_polar_givens_coupling.py": "e257720dd3eab4ab6d1c7eb1e8e2037ded69d2641faeb8274c1d08b20525f065"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "51_LOGICAL_C17_PHASE_FACTORS_AS867_ONE_HOT_GROUP_ALGEBRA_COORDINATES",
+    "new_update_law": "NATIVE_CYCLIC_CONVOLUTION_BY_RESIDENT_PORT_ON_PUBLIC_ROTATING_HUB16_OUT16_IN_TRIANGULAR_SCHEDULE",
+    "depths": [1, 4, 16, 64, 256, 1024, 4096],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_comparison_count": 323,
+    "independent_methods": [
+      "SEPARATE_PUBLIC_SCHEDULE_COMPILER",
+      "SEPARATE17_BITMASK_GROUP_ACTION",
+      "SEPARATE51_RESIDUE_RECURRENCE",
+      "SEPARATE_CYCLOTOMIC_BOUNDARY",
+      "RECONSTRUCTED867_BYTE_COMMITMENTS",
+      "SEPARATE_CONTROLS",
+      "SEPARATE_UNRELATED_DEPTH1537_REUSE",
+      "SEPARATE100_CYCLE_DEPTH64_REUSE",
+      "SEPARATE_UNRENORMALIZED_COMPLEX_COORDINATE_DIAGNOSTIC"
+    ],
+    "shared_foundation": "PUBLIC_M145_F17_PHASE_EXPONENT_SCHEDULE_ONLY"
+  },
+  "rejected_complex_coordinate_attempt": {
+    "predeclared_unit_norm_failure_tolerance": 1e-8,
+    "first_failure_depth": 64,
+    "canonical_normalization_added": false,
+    "accepted_path": false
+  },
+  "resource_accounting": {
+    "resident_phase_orbit_uint8_cells": 867,
+    "resident_phase_orbit_bytes": 867,
+    "maximum_named_update_uint8_scratch_cells": 391,
+    "maximum_named_projection_int64_cells": 17,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 1479,
+    "forward_logical_convolutions_per_step": 179,
+    "forward_coordinate_multiplications_per_step": 51731,
+    "inverse_history_cells": 0,
+    "retained_restoration_baseline_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "NUMPY_AND_NATIVE_LIBRARY_INTERNAL_STORAGE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "executed_matched_classical_recurrence": {
+    "method": "IDENTICAL51_UINT8_C17_RESIDUE_TRIANGULAR_RECURRENCE",
+    "resident_uint8_cells": 51,
+    "resident_bytes": 51,
+    "maximum_named_warm_execution_live_bytes_including_program_json": 276,
+    "phase_to_classical_resident_byte_ratio": 17,
+    "same_public_topology_and_boundary_semantics": true,
+    "final_expanded_phase_bytes_identical": true,
+    "optimal_compact_classical_recurrence_claimed": false
+  },
+  "claim_ceiling": "FIXED51_ONE_HOT_C17_PHASE_FACTORS_ON_THE_DECLARED_ROTATING_HUB_TRIANGULAR_TOPOLOGY_ACROSS21_CASES_THROUGH_DEPTH4096_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "DIRECT_RESIDENT_PHASE_PORT_CONVOLUTION_WITHOUT_PRODUCTION_EXPONENT_READOUT",
+    "MULTIPLE_NONCOMMUTING_PORT_CONSUMERS",
+    "FINAL_ONLY_BOUNDARY_PROJECTION",
+    "EXACT_SAME_BACKING_RESTORATION_AND_REUSE",
+    "EXECUTED_IDENTICAL51_RESIDUE_RECURRENCE"
+  ],
+  "rejected_interpretations": [
+    "COHERENT_SUPERPOSITION_OVER_MULTIPLE_PHASE_ORBIT_COORDINATES",
+    "RESOURCE_BEYOND51_RESIDUE_RECURRENCE",
+    "OPTIMAL_CLASSICAL_BASELINE",
+    "GENERAL_RELATIONAL_CONTRACTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

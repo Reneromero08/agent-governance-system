@@ -8518,6 +8518,55 @@ custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation.
 
+## M149: Exact C17 phase-fiber port convolution
+
+Claim:
+
+```text
+BOUNDED_EXACT_C17_ONE_HOT_PHASE_FIBER_PORT_CONVOLUTION_CONSUMES_ONE_RESIDENT_PORT_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_UPDATES_WITHOUT_SCALAR_ANGLE_OR_EXPONENT_READOUT_RELATION_TABLE_ASSIGNMENT_EXPANSION_OR_RETAINED_PLAN_ON_FIXED51_BY17_PHASE_ORBIT_COORDINATES_THROUGH_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_IDENTICAL51_RESIDUE_RECURRENCE_WITH17X_LESS_RESIDENT_STATE
+```
+
+M149 stores 51 logical C17 phase factors as 867 one-hot orbit coordinates.
+One resident hub port directly controls 16 target triplets through cyclic
+convolution, and the updated target ports then control reciprocal hub updates.
+OUT and IN do not commute. The accepted update path performs no resident angle
+or exponent readout and uses no relation table, assignment expansion, or
+retained plan.
+
+All 21 cases through depth 4096 match an executed 51-residue recurrence
+exactly in final expanded bytes and final cyclotomic boundary. All 867 carrier
+cells restore exactly on the same backing. Unrelated depth-1537 reuse and 100
+depth-64 reuse cycles also restore exactly without snapshot, inverse history,
+restoration baseline, or post-inverse canonicalization.
+
+The independent bitmask oracle imports neither production nor M145. It
+separately reconstructs the public schedule, one-hot group action, compact
+residue recurrence, byte commitments, boundaries, controls, inverse, and both
+reuse paths. All 323 comparisons pass. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`; resident restoration is
+`EXACT_ALGEBRAIC_RESTORATION`, and transient buffers have
+`NO_RESTORATION_CLAIM`.
+
+The phase-orbit carrier uses 867 resident bytes and a 1,479-byte named warm
+peak. Its forward step performs 179 logical convolutions or 51,731 coordinate
+multiplications. The matched residue recurrence uses 51 resident bytes, 179
+modular additions, and a 276-byte named warm peak. The pure C17 phase orbit
+therefore has an exact 17-times-smaller classical quotient and establishes no
+distinct resource or advantage.
+
+The rejected raw complex-coordinate attempt first exceeds its predeclared
+unit-norm tolerance at depth 64 because radial floating error becomes control
+magnitude. No normalization was inserted or misclassified as exact inverse
+restoration.
+
+The next experiment must introduce coherent superposition across multiple
+C17 phase fibers with native interference closure, or establish a matched
+fixed-rank classical factor no-go. M149 establishes no coherent multi-orbit
+superposition, general relational contraction, CATVM custody, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded catalytic computation.
+
 ## M146: Stateful weighted three-phasor gauge lift
 
 Claim:

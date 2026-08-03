@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING`
-**Roadmap version:** `14.14`
+**Status:** `STRICT_SCOPE_EXACT_C17_FIBER_PORT_CONVOLUTION_NO_GO`
+**Roadmap version:** `14.15`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d066677f758c627aa5dd4acc2e31b4127b2bce6e`
+**Reconciled source head:** `8afa4f0fca8287d78b983dd47009ea5ddda88195`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_DIRECT_PHASE_ANGLE_TRIANGULAR_SHARED_GAUGE_COUPLING_USES_ONE_RESIDENT_GAUGE_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_HUB_UPDATES_WITHOUT_COMPLEX_DECODE_CARTESIAN_SCRATCH_CHART_RECONSTRUCTION_OR_RETAINED_GIVENS_PLAN_ON_FIXED51_PHASE_ANGLES_ACROSS21_CASES_THROUGH_DEPTH4096_WITH_HISTORY_FREE_NUMERICAL_RESTORATION_AND_REUSE_BUT_IS_BYTE_BISIMULATED_BY_AN_EXECUTED_IDENTICAL51_ANGLE_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `21_DECLARED_DIRECT_ANGLE_TRIANGULAR_GAUGE_CASES_THROUGH_DEPTH4096_PLUS_DECLARED_CAUSALITY_CONDITIONING_AND_REUSE_CONTROLS_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_C17_ONE_HOT_PHASE_FIBER_PORT_CONVOLUTION_CONSUMES_ONE_RESIDENT_PORT_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_UPDATES_WITHOUT_SCALAR_ANGLE_OR_EXPONENT_READOUT_RELATION_TABLE_ASSIGNMENT_EXPANSION_OR_RETAINED_PLAN_ON_FIXED51_BY17_PHASE_ORBIT_COORDINATES_THROUGH_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_IDENTICAL51_RESIDUE_RECURRENCE_WITH17X_LESS_RESIDENT_STATE`
+**Current claim ceiling:** `FIXED51_ONE_HOT_C17_PHASE_FACTORS_ON_THE_DECLARED_ROTATING_HUB_TRIANGULAR_TOPOLOGY_ACROSS21_CASES_THROUGH_DEPTH4096_IN_LINUX_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M148_DIRECT_ANGLE_TRIANGULAR_GAUGE_COUPLING`
+**New mechanism development:** `ACTIVE_AFTER_M149_EXACT_C17_FIBER_PORT_CONVOLUTION_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `UNRESOLVED_MULTI_CONSUMER_PHASE_FIBER_PORT_CONTRACTION_WITHOUT_SCALAR_GAUGE_READOUT_OR_BOUNDED_COLLAPSE_TO_MATCHED_COMPACT_PHASE_FACTOR_RECURRENCE`
+**Active primary successor:** `COHERENT_SUPERPOSITION_PORT_OVER_MULTIPLE_C17_PHASE_FIBERS_WITH_NATIVE_INTERFERENCE_CLOSURE_OR_A_MATCHED_FIXED_RANK_CLASSICAL_FACTOR_NO_GO`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d066677f758c627aa5dd4acc2e31b4127b2bce6e`. The current 148-milestone
+`8afa4f0fca8287d78b983dd47009ea5ddda88195`. The current 149-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -6207,6 +6207,79 @@ classical lower bound, general relational contraction, exact algebraic
 semantics, unbounded numerical stability, CATVM custody, computational
 advantage, Small Wall crossing, physical waveform execution, physical bit
 replacement, or unbounded catalytic computation.
+
+## M149: Exact C17 fiber-port convolution and residue quotient
+
+M149 replaces M148's scalar angle and sine control with exact group-algebra
+phase factors. Each logical phase factor is a one-hot C17 orbit vector. One
+resident hub port controls 16 target triplets by native cyclic convolution;
+the updated target ports then control reciprocal hub convolutions. The two
+layers do not commute. No accepted update decodes a resident phase factor to
+an angle or exponent, and no relation table, assignment expansion, or
+retained plan is used.
+
+```text
+claim
+    BOUNDED_EXACT_C17_ONE_HOT_PHASE_FIBER_PORT_CONVOLUTION_CONSUMES_ONE_RESIDENT_PORT_ACROSS16_TARGETS_AND_RECIPROCAL_NONCOMMUTING_UPDATES_WITHOUT_SCALAR_ANGLE_OR_EXPONENT_READOUT_RELATION_TABLE_ASSIGNMENT_EXPANSION_OR_RETAINED_PLAN_ON_FIXED51_BY17_PHASE_ORBIT_COORDINATES_THROUGH_DEPTH4096_WITH_EXACT_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_AN_EXECUTED_IDENTICAL51_RESIDUE_RECURRENCE_WITH17X_LESS_RESIDENT_STATE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 867-cell phase-orbit carrier EXACT_ALGEBRAIC_RESTORATION
+    update, projection, comparison, and verification buffers NO_RESTORATION_CLAIM
+
+source head
+    8afa4f0fca8287d78b983dd47009ea5ddda88195
+```
+
+All 21 declared cases across three public families and depths through 4096
+produce the same expanded phase state and 16-coordinate cyclotomic boundary
+as the separately executed 51-residue recurrence. Every transaction restores
+all 867 resident cells exactly on the same backing. Unrelated depth-1537 reuse
+and 100 depth-64 reuse cycles also restore exactly without snapshot, retained
+history, baseline reload, or post-inverse canonicalization.
+
+The independent oracle imports neither M149 nor the M145 public schedule
+source. It separately reconstructs the schedule, executes a 17-bit-mask group
+action, executes the 51-residue recurrence, rebuilds all 867-byte commitments
+and final boundaries, attacks the inverse and topology controls, and repeats
+both reuse paths. All 323 comparisons pass.
+
+The accepted carrier uses 867 resident bytes and reaches a 1,479-byte named
+warm peak. Its forward step performs 179 logical cyclic convolutions, counted
+as 51,731 coordinate multiplications. The matched recurrence stores 51 bytes,
+uses 179 modular additions, and reaches a 276-byte named warm peak. The phase
+orbit representation is therefore exactly 17 times larger in resident state.
+No optimal classical baseline is claimed, but this exact quotient is already
+strictly stronger than comparison with an expanded representation.
+
+The first raw complex-coordinate attempt is rejected from the accepted path.
+Floating radial drift is reused as control magnitude and first exceeds the
+predeclared unit-norm tolerance at depth 64. No normalization was silently
+added because that would change the restoration classification.
+
+The selected successor is:
+
+```text
+COHERENT_SUPERPOSITION_PORT_OVER_MULTIPLE_C17_PHASE_FIBERS_WITH_NATIVE_INTERFERENCE_CLOSURE_OR_A_MATCHED_FIXED_RANK_CLASSICAL_FACTOR_NO_GO
+```
+
+It must leave the one-hot C17 orbit and maintain a genuine coherent
+superposition across multiple phase fibers, share that unresolved port across
+noncommuting consumers, and close it only at the final boundary. It must avoid
+component enumeration and compare against the strongest fixed-rank classical
+factor or Fourier recurrence. Another pure group-element phase orbit cannot
+remove the exact residue quotient established here.
+
+M149 establishes no coherent multi-orbit superposition, resource beyond the
+51-residue recurrence, optimal classical lower bound, general relational
+contraction, CATVM custody, computational advantage, Small Wall crossing,
+physical waveform execution, physical bit replacement, or unbounded catalytic
+computation.
 
 ## 10. Roadmap Maintenance
 
