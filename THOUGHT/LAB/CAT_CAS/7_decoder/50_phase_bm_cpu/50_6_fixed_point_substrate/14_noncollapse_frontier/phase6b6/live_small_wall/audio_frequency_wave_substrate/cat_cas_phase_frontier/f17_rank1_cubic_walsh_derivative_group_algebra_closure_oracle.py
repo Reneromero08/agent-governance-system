@@ -331,7 +331,7 @@ def mutation_checks() -> dict[str, bool]:
             )
     return {
         "independent_second_signature_rank_two": rank_mod17(rank_two_matrix) == 2,
-        "rank_two_chart_cells_578": 2 * P ** rank_mod17(rank_two_matrix) == 578,
+        "rank_two_canonical_group_algebra_chart_cells_578": 2 * P ** rank_mod17(rank_two_matrix) == 578,
         "mod17_duplicate_signature_rank_one": rank_mod17(duplicate_matrix) == 1,
         "extra_unsampled_monomial_rank_two": rank_mod17(extra_matrix) == 2,
         "wrong_family_inverse_fails_seed_restoration": wrong != [seed, seed],

@@ -113,7 +113,7 @@ assert len(transactions) == 20
 for item in transactions:
     certificate = item["signature_certificate"]
     assert certificate["signature_rank_over_f17"] == 1
-    assert certificate["required_group_algebra_field_cells_for_one_unresolved_bit"] == 34
+    assert certificate["canonical_group_algebra_chart_field_cells_for_signature_rank"] == 34
     assert certificate["rank_one_34_cell_chart_accepted"]
     assert not certificate["sampling_or_truth_table_equivalence_used"]
     assert not certificate["assignment_expansion_used"]
@@ -128,7 +128,7 @@ for item in transactions:
     assert item["same_backing"]
     assert item["restored_exact_zero"]
     assert item["initial_restored_digest_equal"]
-    assert item["restoration_generation_after"] == item["restoration_generation_before"] + 1
+    assert item["package_local_restoration_count_after"] == item["package_local_restoration_count_before"] + 1
     assert item["inverse_history_cells"] == 0
     assert item["inverse_operations_rematerialized_from_public_topology"]
     assert not item["snapshot_reload_used"]
@@ -138,7 +138,7 @@ reuse = production["reuse"]
 assert reuse["same_original_backing"]
 assert reuse["fresh_restored_boundary_equal"]
 assert reuse["fresh_restored_resource_signature_equal"]
-assert reuse["restoration_generation"] == 2
+assert reuse["package_local_restoration_count"] == 2
 assert reuse["restored_exact_zero"]
 assert not reuse["baseline_reload"]
 assert reuse["inverse_history_cells"] == 0
@@ -167,7 +167,7 @@ for key, value in oracle["independent_mutation_checks"].items():
 payloads = [item["maximum_resident_payload_bits"] for item in production["exact_transactions"]]
 assert payloads == [1096, 1120, 1616, 3313, 7607, 16305, 33763, 68588]
 assert production["resource_law"]["resident_exact_field_cells"] == 34
-assert production["resource_law"]["rank_two_required_field_cells"] == 578
+assert production["resource_law"]["rank_two_canonical_group_algebra_chart_field_cells"] == 578
 assert production["matched_baseline"]["same_asymptotic_arithmetic_and_payload_law"]
 assert not production["matched_baseline"]["distinct_phase_resource"]
 assert not production["matched_baseline"]["computational_advantage"]

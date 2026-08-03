@@ -51,8 +51,9 @@ CLAIM = (
     "EXACT_RANK_ONE_CUBIC_PHASE_POLYNOMIAL_WALSH_DERIVATIVE_SIGNATURES_"
     "CLOSE_IN_A_FIXED_34_CELL_C17_GROUP_ALGEBRA_ACROSS_GROWING_BOOLEAN_"
     "BRANCH_COUNT_AND_GATE_DEPTH_WITH_FINAL_ONLY_BOUNDARY_PROJECTION_EXACT_"
-    "RESTORATION_AND_REUSE_WHILE_AN_INDEPENDENT_SECOND_SIGNATURE_REQUIRES_"
-    "A_578_CELL_RANK_TWO_CHART_OR_REJECTION_AND_THE_ACCEPTED_FAMILY_HAS_AN_"
+    "RESTORATION_AND_REUSE_WHILE_AN_INDEPENDENT_SECOND_SIGNATURE_EXPANDS_"
+    "THE_CANONICAL_C17_SQUARED_GROUP_ALGEBRA_CHART_TO_578_CELLS_OR_IS_"
+    "REJECTED_BY_THE_34_CELL_COMPILER_AND_THE_ACCEPTED_FAMILY_HAS_AN_"
     "IDENTICAL_COMPACT_CLASSICAL_CHARACTER_RECURRENCE"
 )
 
@@ -255,7 +256,7 @@ def signature_certificate(program: Program) -> dict[str, Any]:
         "basis_signature_count": len(program.signatures),
         "canonical_boolean_monomials": monomial_count,
         "coordinates_relative_to_first_signature": list(coordinates),
-        "required_group_algebra_field_cells_for_one_unresolved_bit": 2 * (PRIME ** rank),
+        "canonical_group_algebra_chart_field_cells_for_signature_rank": 2 * (PRIME ** rank),
         "rank_one_34_cell_chart_accepted": rank == 1 and all(item >= 0 for item in coordinates),
         "compiler_reads_public_topology_not_final_boundary_values": True,
         "sampling_or_truth_table_equivalence_used": False,
@@ -278,7 +279,7 @@ def validate_program(program: Program) -> None:
     if not certificate["rank_one_34_cell_chart_accepted"]:
         fail(
             "rank-one chart rejected public derivative topology; required cells="
-            f"{certificate['required_group_algebra_field_cells_for_one_unresolved_bit']}"
+            f"{certificate['canonical_group_algebra_chart_field_cells_for_signature_rank']}"
         )
 
 
@@ -303,7 +304,7 @@ class GroupAlgebraCarrier:
     forward_index: int = 0
     inverse_index: int = 0
     projection_calls: int = 0
-    restoration_generation: int = 0
+    package_local_restoration_count: int = 0
     maximum_resident_payload_bits: int = 0
     maximum_update_scratch_payload_bits: int = 0
     maximum_update_scratch_field_cells: int = 0
@@ -342,7 +343,7 @@ class GroupAlgebraCarrier:
             sum(self.alg.payload_bits(value) for value in materialized),
         )
 
-    def digest(self, include_generation: bool = True) -> str:
+    def digest(self, include_package_local_count: bool = True) -> str:
         state = {
             "active_program": self.active_program,
             "active_lease": self.active_lease,
@@ -352,8 +353,8 @@ class GroupAlgebraCarrier:
             "projection_calls": self.projection_calls,
             "rows": [[self.alg.serialize(value) for value in row] for row in self.rows],
         }
-        if include_generation:
-            state["restoration_generation"] = self.restoration_generation
+        if include_package_local_count:
+            state["package_local_restoration_count"] = self.package_local_restoration_count
         return digest_json(state)
 
 
@@ -470,7 +471,7 @@ def inverse(carrier: GroupAlgebraCarrier, program: Program) -> None:
     carrier.forward_index = 0
     carrier.inverse_index = 0
     carrier.projection_calls = 0
-    carrier.restoration_generation += 1
+    carrier.package_local_restoration_count += 1
     if not carrier.exact_zero():
         fail("rank-one carrier did not restore exact canonical zero")
 
@@ -491,8 +492,8 @@ def resource_signature(transaction: dict[str, Any]) -> dict[str, Any]:
         "program_fingerprint",
         "final_boundary",
         "final_state_commitment",
-        "restoration_generation_before",
-        "restoration_generation_after",
+        "package_local_restoration_count_before",
+        "package_local_restoration_count_after",
     }
     return {key: value for key, value in transaction.items() if key not in excluded}
 
@@ -501,9 +502,9 @@ def execute_transaction(carrier: GroupAlgebraCarrier, program: Program) -> dict[
     carrier.maximum_resident_payload_bits = 0
     carrier.maximum_update_scratch_payload_bits = 0
     carrier.maximum_update_scratch_field_cells = 0
-    initial_digest = carrier.digest(include_generation=False)
+    initial_digest = carrier.digest(include_package_local_count=False)
     backing = carrier.backing_identity()
-    generation = carrier.restoration_generation
+    restoration_count = carrier.package_local_restoration_count
     certificate = signature_certificate(program)
     descriptor_bytes = len(json.dumps(program.public_descriptor(), sort_keys=True, separators=(",", ":")).encode())
     begin_forward(carrier, program)
@@ -545,9 +546,9 @@ def execute_transaction(carrier: GroupAlgebraCarrier, program: Program) -> dict[
         "response_released_after_restoration": True,
         "same_backing": carrier.backing_identity() == backing,
         "restored_exact_zero": carrier.exact_zero(),
-        "initial_restored_digest_equal": carrier.digest(include_generation=False) == initial_digest,
-        "restoration_generation_before": generation,
-        "restoration_generation_after": carrier.restoration_generation,
+        "initial_restored_digest_equal": carrier.digest(include_package_local_count=False) == initial_digest,
+        "package_local_restoration_count_before": restoration_count,
+        "package_local_restoration_count_after": carrier.package_local_restoration_count,
         "snapshot_reload_used": False,
         "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
         "compiler_projection_and_commitment_buffers_restoration_class": "NO_RESTORATION_CLAIM",
@@ -715,7 +716,7 @@ def controls() -> dict[str, bool]:
 
     return {
         "reference_restored_exactly": reference["restored_exact_zero"],
-        "rank_two_signature_requires_578_cells": rank_two_certificate["required_group_algebra_field_cells_for_one_unresolved_bit"] == 578,
+        "rank_two_canonical_group_algebra_chart_has_578_cells": rank_two_certificate["canonical_group_algebra_chart_field_cells_for_signature_rank"] == 578,
         "rank_two_signature_rejected_by_34_cell_compiler": rank_two_rejected,
         "mod17_duplicate_terms_canonicalize_to_rank_one": equivalent_rank_one,
         "extra_independent_monomial_not_merged_by_sampling": extra_rank_two,
@@ -808,7 +809,7 @@ def run() -> dict[str, Any]:
             "same_original_backing": reuse_carrier.backing_identity() == backing,
             "fresh_restored_boundary_equal": restored["final_boundary"] == fresh["final_boundary"],
             "fresh_restored_resource_signature_equal": resource_signature(restored) == resource_signature(fresh),
-            "restoration_generation": reuse_carrier.restoration_generation,
+            "package_local_restoration_count": reuse_carrier.package_local_restoration_count,
             "restored_exact_zero": reuse_carrier.exact_zero(),
             "baseline_reload": False,
             "inverse_history_cells": 0,
@@ -817,8 +818,8 @@ def run() -> dict[str, Any]:
         "resource_law": {
             "resident_exact_field_cells": 34,
             "resident_cells_independent_of_branch_pairs_and_rounds": True,
-            "rank_r_generalization_field_cells": "TWO_TIMES_17_TO_THE_R",
-            "rank_two_required_field_cells": 578,
+            "rank_r_canonical_group_algebra_chart_field_cells": "TWO_TIMES_17_TO_THE_R",
+            "rank_two_canonical_group_algebra_chart_field_cells": 578,
             "public_topology_records": "BRANCH_PAIRS_PLUS_TWO_TIMES_ROUNDS",
             "maximum_update_scratch_field_cells": 34,
             "projection_stream_named_field_cells": 6,
