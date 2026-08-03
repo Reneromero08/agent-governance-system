@@ -1,0 +1,175 @@
+{
+  "claim_ceiling": "STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_FACTORED16_TERM_KLOOSTERMAN_TYPE_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "dense_coordinate_controls": [
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "depth": 2,
+      "family": "ALTERNATE",
+      "field": "F103"
+    },
+    {
+      "all_17_shell_values_equal": true,
+      "boundary_equal": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field": "F137"
+    }
+  ],
+  "direct_coordinate_entry_checks": [
+    {
+      "all_equal": true,
+      "entry_checks": 289,
+      "field": "F103"
+    },
+    {
+      "all_equal": true,
+      "entry_checks": 289,
+      "field": "F137"
+    },
+    {
+      "all_equal": true,
+      "entry_checks": 5,
+      "field": "Q_ZETA17"
+    }
+  ],
+  "exact_reexecution": {
+    "all_equal": true,
+    "depths": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "resident_payload_tuple": [
+      2203,
+      2243,
+      4364,
+      8709,
+      17552,
+      35394,
+      70992
+    ],
+    "transaction_count": 7,
+    "transactions": [
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 1,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 2,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 4,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 8,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 16,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 32,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      },
+      {
+        "boundary_equal": true,
+        "commitment_equal": true,
+        "depth": 64,
+        "program_fingerprint_equal": true,
+        "resident_payload_equal": true,
+        "restored_seed_exactly": true
+      }
+    ]
+  },
+  "independence": {
+    "imports_production_module": false,
+    "reconstructs_factorized_forward_and_inverse": true,
+    "reconstructs_final_state_commitment": true,
+    "reconstructs_public_geometry": true,
+    "reconstructs_public_program_schedule": true,
+    "uses_direct_coordinate_character_sums": true,
+    "uses_selected_dense_289_coordinate_dfts": true
+  },
+  "mutations": {
+    "missing_parameter_term_changes_an_entry": true,
+    "wrong_reciprocal_sign_changes_an_entry": true
+  },
+  "not_established": [
+    "CATVM_CUSTODY",
+    "GENERAL_NONLINEAR_RELATION_QUOTIENT",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "passed": true,
+  "production_result_sha256": "d32a6939e546836ae9a0e7edae23ab4a43f5d084287fe3a94dcf5342ae8b386e",
+  "production_source_sha256": "f83b02fac7a5807b47c98577fbcf52b6e646361e8cacc085b0c9ed16c0bcbe0c",
+  "resource_law": {
+    "accepted_assignment_truth_table_coordinate_or_kernel_cells": 0,
+    "character_products_per_factored_fourier": 544,
+    "maximum_live_including_retained_generator_exact_field_cells": 56,
+    "maximum_live_resident_plus_update_scratch_exact_field_cells": 55,
+    "maximum_update_scratch_exact_field_cells": 38,
+    "resident_exact_field_cells": 17,
+    "retained_public_generator_exact_field_cells": 1,
+    "retained_public_kernel_exact_field_cells": 0,
+    "temporary_spectrum_exact_field_cells": 16
+  },
+  "restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_ORACLE_V1",
+  "source_shape": {
+    "accepted_fourier_does_not_call_per_entry_generator": true,
+    "accepted_fourier_has_16_cell_spectrum": true,
+    "accepted_path_has_no_coordinate_enumeration": true,
+    "accepted_path_has_no_normalized_fourier_matrix": true
+  },
+  "structural_reexecution": [
+    {
+      "all_equal": true,
+      "field": "F103",
+      "transaction_count": 24
+    },
+    {
+      "all_equal": true,
+      "field": "F137",
+      "transaction_count": 24
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
