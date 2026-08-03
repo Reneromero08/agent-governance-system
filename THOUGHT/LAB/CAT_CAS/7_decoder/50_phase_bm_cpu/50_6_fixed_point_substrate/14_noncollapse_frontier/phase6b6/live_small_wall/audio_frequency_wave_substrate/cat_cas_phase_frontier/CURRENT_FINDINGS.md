@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`105d1a1944b975382ad1d084ac7bbfd30d317824`. The canonical per-milestone
+`bd76fb590c0653a26de42a2db83c9dd89c4b5d90`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -7812,4 +7812,84 @@ The obstruction is:
 
 ```text
 THE_DECLARED_NONCOMMUTING_AFFINE_REFLECTION_COUPLING_FAMILY_HAS_AN_EXACT_TWO_TO_THE_M_SECANT_RANK_LAW_AND_REQUIRES_EXPONENTIAL_EXPLICIT_PHASE_COMPONENTS_WHILE_ITS_STRONGEST_MATCHED_FULL_STATE_CLASSICAL_RECURRENCE_USES_ONLY_TWO_TO_THE_M_WEIGHTS_AND_ITS_FINAL_BOUNDARY_COLLAPSES_TO_TWO_CLASSICAL_MOMENTS
+```
+
+## The declared Gray-ordered weight tensor has exact bond dimension two
+
+M133 removes M132's explicit component enumeration for the special weight
+tensor, but it does not compact the associated coherent polynomial.
+
+```text
+claim
+    BOUNDED_EXACT_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_COMPRESSES_THE_DECLARED_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COMPONENT_WEIGHTS_FROM_TWO_TO_THE_M_EXPLICIT_COMPONENTS_TO_TWO_M_RESIDENT_PHASE_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_IS_AN_IDENTICAL_PUBLIC_MARKOV_FACTOR_CLASSICAL_RECURRENCE_AND_DOES_NOT_COMPACT_THE_GENERAL_COHERENT_POLYNOMIAL_OR_ESTABLISH_A_STABILIZER_RESOURCE
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident factor carrier EXACT_ALGEBRAIC_RESTORATION
+    transient buffers       NO_RESTORATION_CLAIM
+
+source head
+    bd76fb590c0653a26de42a2db83c9dd89c4b5d90
+```
+
+Writing component index `t` in binary with bits `x_j` and setting
+`x_(m+1)=0`, the reflected-copy weights satisfy
+`w_m(t)=product_j eta_j^(x_j XOR x_(j+1))`. This is an exact open-boundary
+nearest-neighbor MPS. Each internal edge has matrix
+`[[1,eta_j],[eta_j,1]]` and nonzero determinant `1-eta_j^2`, so its minimal
+maximum bond dimension is exactly two for declared depths at least two. The
+independent oracle directly reconstructs small exact tensors and confirms
+rank two across every internal cut.
+
+The accepted `Q(zeta17)` path executes depths
+`1,2,4,8,16,32,64,128`; `F103/F137` structural parity covers depths one
+through six. It stores `2m` resident factor cells, with `m` nontrivial public
+phase factors, and never expands the `2^m` component weights, catalecticant,
+or dense operator. The selected boundary is contracted from resident factors
+with four named working cells.
+
+Each resident site is actually coupled from `(1,0)` to `(1,eta_j)`, consumed,
+and inverted in reverse order to `(1,0)` before unseeding to exact zero on the
+same backing. Unrelated depth-eight `PRIMARY` then depth-sixteen `REUSE`
+execution agrees with a fresh carrier without snapshot or inverse history.
+The reported reuse counter is package-local instrumentation, not CATVM
+custody generation.
+
+The first independent review found that lease ownership was recorded but not
+enforced. The scientific source was repaired before sealing: contraction and
+inverse now validate carrier type, stage, depth, family, and recomputed lease.
+Executed null, wrong projection-owner, and wrong inverse-owner attacks pass.
+The reviewer reexecuted the qualifier and a direct owner mutation and found
+no second claim-breaking defect.
+
+The strongest matched full-signature classical state is the identical `m`
+exact factors. The selected final boundary uses two dynamic moments, while a
+sealed public word compiles to three nonzero lower-triangular transfer
+entries. Exact carrier and boundary payloads, descriptor bytes, and
+commitment bytes are reproduced, but Python containers and allocator,
+bigint/native/hash internals, bit-operation complexity, and whole-process
+peak remain excluded.
+
+M133 does not compact the general coherent binary form: M132's `2^m` secant
+rank remains. Higher moments do not generally close on the two stored
+boundary scalars. This package establishes neither arbitrary-boundary
+closure, conventional stabilizer or Gaussian classification, CATVM custody,
+a distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical bit replacement, nor unbounded catalytic computation.
+
+The next experiment is:
+
+```text
+EXACT_HIGHER_ORDER_GRAY_PHASE_FACTOR_COUPLING_OR_COHERENT_MOMENT_PORT_CLOSURE_BEYOND_PAIRWISE_BOND2_WITH_MATCHED_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_SPECIAL_GRAY_ORDERED_COMPONENT_WEIGHT_TENSOR_HAS_EXACT_BOND2_AND_LINEAR_FACTOR_STORAGE_BUT_THE_ASSOCIATED_COHERENT_BINARY_FORM_RETAINS_SECANT_RANK_TWO_TO_THE_M_ARBITRARY_HIGHER_MOMENT_BOUNDARIES_DO_NOT_CLOSE_ON_TWO_SCALARS_AND_THE_IDENTICAL_PUBLIC_CLASSICAL_FACTOR_RECURRENCE_REMAINS
 ```

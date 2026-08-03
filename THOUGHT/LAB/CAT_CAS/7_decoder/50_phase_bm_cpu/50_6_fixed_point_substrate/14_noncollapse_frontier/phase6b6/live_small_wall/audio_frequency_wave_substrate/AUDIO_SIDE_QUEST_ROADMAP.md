@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ITERATED_AFFINE_REFLECTION_SECANT_RANK_GROWTH_ESTABLISHED_EXPLICIT_COMPONENT_CHART_REJECTED_AS_COMPACT_RESOURCE_NEXT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_DIAGNOSTIC_SELECTED`
-**Roadmap version:** `13.8`
+**Status:** `STRICT_SCOPE_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_ESTABLISHED_FOR_DECLARED_WEIGHT_TENSOR_IDENTICAL_CLASSICAL_FACTOR_RECURRENCE_REMAINS_NEXT_HIGHER_ORDER_COUPLING_DIAGNOSTIC_SELECTED`
+**Roadmap version:** `13.9`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `105d1a1944b975382ad1d084ac7bbfd30d317824`
+**Reconciled source head:** `bd76fb590c0653a26de42a2db83c9dd89c4b5d90`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXECUTION_AND_EXACT_SYMBOLIC_VANDERMONDE_CERTIFICATE_FOR_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COUPLING_SECANT_RANK_TWO_TO_THE_M_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_EXPLICIT_EXPONENTIAL_PHASE_COMPONENT_ENUMERATION_AND_MATCHED_R_WEIGHT_FULL_STATE_OR_TWO_SCALAR_FINAL_BOUNDARY_CLASSICAL_RECURRENCES`
-**Current claim ceiling:** `DECLARED_A_LEVEL_TWO_TO_THE_LEVEL_MINUS_ONE_ITERATED_AFFINE_REFLECTION_FAMILY_BOUNDED_EXECUTION_M1_TO6_ANALYTIC_NORMALIZED_SECANT_RANK_TWO_TO_THE_M_Q_ZETA17_AND_DUAL_FIELD_WHERE_RANK_AT_MOST_MODULUS_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_COMPRESSES_THE_DECLARED_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COMPONENT_WEIGHTS_FROM_TWO_TO_THE_M_EXPLICIT_COMPONENTS_TO_TWO_M_RESIDENT_PHASE_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_IS_AN_IDENTICAL_PUBLIC_MARKOV_FACTOR_CLASSICAL_RECURRENCE_AND_DOES_NOT_COMPACT_THE_GENERAL_COHERENT_POLYNOMIAL_OR_ESTABLISH_A_STABILIZER_RESOURCE`
+**Current claim ceiling:** `DECLARED_GRAY_ORDERED_COMPONENT_WEIGHT_TENSOR_FOR_ITERATED_AFFINE_REFLECTION_FAMILY_EXACT_Q_ZETA17_DEPTHS1_2_4_8_16_32_64_128_DUAL_FIELD_STRUCTURAL_DEPTHS1_TO6_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M132_EXACT_RANK_GROWTH_AND_EXPLICIT_COMPONENT_CHART_COMPACTNESS_FAILURE`
+**New mechanism development:** `ACTIVE_AFTER_M133_BOND2_SPECIAL_WEIGHT_TENSOR_CLOSURE_WITH_IDENTICAL_CLASSICAL_FACTOR_RECURRENCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_FIXED_RANK_GAUSSIAN_OR_STABILIZER_PHASE_CHART_FOR_NONCOMMUTING_SUPERPOSITION_COUPLINGS_OR_A_TRANSFERABLE_NO_GO_THAT_FORCES_A_DIFFERENT_NATIVE_PHASE_RESOURCE`
+**Active primary successor:** `EXACT_HIGHER_ORDER_GRAY_PHASE_FACTOR_COUPLING_OR_COHERENT_MOMENT_PORT_CLOSURE_BEYOND_PAIRWISE_BOND2_WITH_MATCHED_CLASSICAL_TENSOR_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`105d1a1944b975382ad1d084ac7bbfd30d317824`. The current 132-milestone
+`bd76fb590c0653a26de42a2db83c9dd89c4b5d90`. The current 133-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXECUTION_AND_EXACT_SYMBOLIC_VANDERMONDE_CERTIFICATE_FOR_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COUPLING_SECANT_RANK_TWO_TO_THE_M_GROWTH_WITH_EXACT_RESTORATION_AND_REUSE_BUT_EXPLICIT_EXPONENTIAL_PHASE_COMPONENT_ENUMERATION_AND_MATCHED_R_WEIGHT_FULL_STATE_OR_TWO_SCALAR_FINAL_BOUNDARY_CLASSICAL_RECURRENCES
+BOUNDED_EXACT_GRAY_CODE_BOND2_PHASE_FACTOR_CHART_COMPRESSES_THE_DECLARED_ITERATED_NONCOMMUTING_AFFINE_REFLECTION_SUPERPOSITION_COMPONENT_WEIGHTS_FROM_TWO_TO_THE_M_EXPLICIT_COMPONENTS_TO_TWO_M_RESIDENT_PHASE_FACTOR_CELLS_ACROSS_DEPTH128_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE_BUT_IS_AN_IDENTICAL_PUBLIC_MARKOV_FACTOR_CLASSICAL_RECURRENCE_AND_DOES_NOT_COMPACT_THE_GENERAL_COHERENT_POLYNOMIAL_OR_ESTABLISH_A_STABILIZER_RESOURCE
 ```
 
 Not established:
@@ -4822,6 +4822,12 @@ symbolic or nonenumerative accepted execution in M132
 CATVM custody of the M132 direct-process carrier or transient buffers
 distinct phase resource or advantage from the M132 r-weight or two-moment matched baselines
 full exact payload-height or bit-complexity accounting for M132
+general coherent-polynomial compaction from the M133 special Gray weight tensor
+arbitrary-boundary closure from the M133 two-moment selected boundary
+conventional Clifford, stabilizer, or Gaussian classification from the M133 algebraic couplings
+CATVM custody of the M133 direct-process carrier or transient buffers
+distinct phase resource or advantage from the M133 m-factor, two-moment, or three-transfer-scalar matched baselines
+full exact bit complexity or whole-process peak accounting for M133
 ```
 
 A locally controlled verifier is evidence discipline, not official external acceptance.
@@ -5036,6 +5042,54 @@ THE_DECLARED_NONCOMMUTING_AFFINE_REFLECTION_COUPLING_FAMILY_HAS_AN_EXACT_TWO_TO_
 Do not add larger explicit secant fixtures. Test a genuinely fixed-rank
 Gaussian or stabilizer phase chart under noncommuting superposition coupling,
 or derive a transferable no-go that forces a different native phase resource.
+
+M133 resolves the immediate explicit-enumeration defect for the special
+component-weight tensor without weakening M132's coherent-rank obstruction.
+The reflected-copy law has exact Gray factors
+`w_m(t)=product_j eta_j^(x_j XOR x_(j+1))`, so the ordered weight tensor is an
+open-boundary nearest-neighbor MPS of exact maximum bond dimension two. The
+nonzero internal edge determinants `1-eta_j^2` reject bond one. Exact
+`Q(zeta17)` execution reaches depth 128 with `2m` resident factor cells; dual
+finite-field structural execution covers depths one through six.
+
+The carrier performs actual local coupling on resident `(1,eta_j)` pairs,
+projects only the selected final scalar, runs the exact local inverses in
+reverse, restores exact zero on the same backing, and supports unrelated
+reuse without snapshot or retained inverse history. The direct-process
+restoration counter is explicitly package-local, not CATVM-enforced custody
+generation. The initial independent review found an unenforced lease defect;
+the scientific source was repaired to validate type, stage, depth, family,
+and recomputed lease before projection or inverse. Executed null and wrong
+owner attacks now pass, and the repaired package is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE`.
+
+This is not the desired resource. The strongest matched full-signature
+classical state is the identical `m` public factors. The chosen boundary uses
+two dynamic moments, and a sealed public word uses three nonzero transfer
+entries. The associated coherent binary form still has M132 secant rank
+`2^m`, and arbitrary higher-moment boundaries do not close on two scalars.
+M133 therefore establishes a strict bounded factor chart, not general
+coherent-polynomial compaction, a stabilizer/Gaussian resource, CATVM custody,
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.
+
+The next experiment is:
+
+```text
+EXACT_HIGHER_ORDER_GRAY_PHASE_FACTOR_COUPLING_OR_COHERENT_MOMENT_PORT_CLOSURE_BEYOND_PAIRWISE_BOND2_WITH_MATCHED_CLASSICAL_TENSOR_BASELINE
+```
+
+The obstruction is:
+
+```text
+THE_SPECIAL_GRAY_ORDERED_COMPONENT_WEIGHT_TENSOR_HAS_EXACT_BOND2_AND_LINEAR_FACTOR_STORAGE_BUT_THE_ASSOCIATED_COHERENT_BINARY_FORM_RETAINS_SECANT_RANK_TWO_TO_THE_M_ARBITRARY_HIGHER_MOMENT_BOUNDARIES_DO_NOT_CLOSE_ON_TWO_SCALARS_AND_THE_IDENTICAL_PUBLIC_CLASSICAL_FACTOR_RECURRENCE_REMAINS
+```
+
+Do not extend the present depth again. Introduce the smallest exact
+higher-order phase coupling or shared higher-moment consumer that breaks the
+pairwise Markov factorization, then measure whether exact tensor bond must
+grow or a broader compact phase algebra closes against the strongest matched
+classical contraction.
 
 ## 10. Roadmap Maintenance
 
