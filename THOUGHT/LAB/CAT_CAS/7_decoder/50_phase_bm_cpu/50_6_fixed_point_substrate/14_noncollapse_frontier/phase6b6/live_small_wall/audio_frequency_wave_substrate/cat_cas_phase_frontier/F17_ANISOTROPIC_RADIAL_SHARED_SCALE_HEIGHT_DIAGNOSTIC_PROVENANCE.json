@@ -1,0 +1,83 @@
+{
+  "schema": "CAT_CAS_PHASE_FRONTIER_PROVENANCE_V1",
+  "scientific_source_commit": "9f2d0f28946ed32329aa6da2d7b4b3029152fd06",
+  "scientific_source_parent": "1199541743cc20f23bbfc9dc8542b6ea902c4d94",
+  "platform": "Linux x86_64",
+  "python": "repository .venv",
+  "hosted_execution_confirmation": false,
+  "reference_full_result_sha256": "a94bc911ce0636a2a84ac0337ada0b115cef7347bcbd87c26890dbb9f5b29f6e",
+  "reference_full_oracle_sha256": "c639782e4f968c7a72f6ddf941c3e6870ce761cf5e0317ee14fb8317e98e6b1d",
+  "execution": {
+    "production": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_shared_scale_height_diagnostic.py --output PRODUCTION_RESULT",
+    "oracle": "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 LC_ALL=C nice -n 10 REPO_ROOT/.venv/bin/python -X dev cat_cas_phase_frontier/f17_anisotropic_radial_shared_scale_height_diagnostic_oracle.py --package PRODUCTION_RESULT --output ORACLE_RESULT",
+    "qualifier": "cat_cas_phase_frontier/qualify_f17_anisotropic_radial_shared_scale_height_diagnostic.sh EVIDENCE_DIR"
+  },
+  "files": {
+    "f17_anisotropic_radial_shared_scale_height_diagnostic.py": "5133ba36c0658391aef4e37557cd52966d6b8deaabfb1a17eb30d4c766500a98",
+    "f17_anisotropic_radial_shared_scale_height_diagnostic_oracle.py": "e33bc196bc06f6e62d1c5f4938191eabf30db2d4fd89861cb25d4242c25cb714",
+    "F17_ANISOTROPIC_RADIAL_SHARED_SCALE_HEIGHT_DIAGNOSTIC_RESULTS.json": "a94bc911ce0636a2a84ac0337ada0b115cef7347bcbd87c26890dbb9f5b29f6e",
+    "F17_ANISOTROPIC_RADIAL_SHARED_SCALE_HEIGHT_DIAGNOSTIC_ORACLE_RESULTS.json": "c639782e4f968c7a72f6ddf941c3e6870ce761cf5e0317ee14fb8317e98e6b1d",
+    "F17_ANISOTROPIC_RADIAL_SHARED_SCALE_HEIGHT_DIAGNOSTIC_INDEPENDENT_REVIEW.md": "c496176241c47b2b8bfc783be20b1e3f0b61d4cbd83c1b9727fb05f430b2f445",
+    "qualify_f17_anisotropic_radial_shared_scale_height_diagnostic.sh": "974746a6ed1a563a302101888fdd194c749b17041e13f6153859d0d390a7d5ed"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "resident_carrier_restoration_class": "EXACT_ALGEBRAIC_RESTORATION",
+  "transient_scale_buffer_restoration_class": "NO_RESTORATION_CLAIM",
+  "independent_scope": {
+    "coordinate_space": "F17_SQUARED",
+    "anisotropic_norm": "X_SQUARED_MINUS_3_Y_SQUARED",
+    "operations": [
+      "MATRIX_FREE_QUARTIC_RADIAL_PHASE_AND_FOURIER_PRODUCTION_RECURRENCE",
+      "SHARED_POWER17_DENOMINATOR_LEDGER",
+      "GREATEST_COMMON_PI_CONTENT_EXTRACTION"
+    ],
+    "depths": [1, 2, 4, 8, 16, 32, 64],
+    "families": ["PRIMARY", "REUSE", "ALTERNATE"],
+    "independent_methods": [
+      "SEPARATE_PUBLIC_PROGRAM_COMPILER",
+      "SEPARATE_RETAINED17_BY17_EXACT_FOURIER_RECURRENCE",
+      "DIRECT_INTEGER_DIVISION_BY_ONE_MINUS_ZETA17",
+      "SEPARATE_FINAL_COMMITMENT_BOUNDARY_AND_PAYLOAD_MEASUREMENT",
+      "PAYLOAD_MUTATION_CONTROL"
+    ]
+  },
+  "resource_accounting": {
+    "resident_radial_exact_field_cells": 17,
+    "represented_cyclotomic_integer_coefficients": 272,
+    "shared_denominator_ledger_integers": 1,
+    "common_pi_ledger_integers": 1,
+    "retained_public_fourier_kernel_exact_field_cells": 0,
+    "retained_matrix_free_generator_exact_field_cells": 1,
+    "accepted_assignment_truth_table_coordinate_or_kernel_cells": 0,
+    "inverse_history_cells": 0,
+    "excluded": [
+      "PYTHON_CONTAINER_OVERHEAD",
+      "PYTHON_OBJECT_ALLOCATOR",
+      "SYMPY_NATIVE_STORAGE",
+      "BIGINT_INTERNAL_WORKSPACE",
+      "HASHLIB_INTERNAL_STATE",
+      "WHOLE_PROCESS_PEAK"
+    ]
+  },
+  "matched_classical_baseline": "IDENTICAL_SHARED_SCALE_NORMALIZED_MATRIX_FREE17_COORDINATE_RECURRENCE",
+  "claim_ceiling": "21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_AND_DEPTHS1_TO64_IN_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "SHARED_DENOMINATOR_LEDGER_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BY_MORE_THAN_HALF_IN_ALL21_CASES",
+    "ALL_TESTED_DEPTH2_PLUS_STATES_HAVE_ZERO_COMMON_PI_CONTENT",
+    "EXACT_STATE_RECONSTRUCTION_BEFORE_FINAL_PROJECTION_AND_ACTUAL_INVERSE",
+    "EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE",
+    "INDEPENDENT_EXACT_PARITY_FOR252_DECLARED_METRIC_AND_BOUNDARY_COMPARISONS"
+  ],
+  "rejected_interpretations": [
+    "ASYMPTOTIC_OR_UNIVERSAL_HEIGHT_LOWER_BOUND",
+    "OPTIMAL_EXACT_REPRESENTATION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

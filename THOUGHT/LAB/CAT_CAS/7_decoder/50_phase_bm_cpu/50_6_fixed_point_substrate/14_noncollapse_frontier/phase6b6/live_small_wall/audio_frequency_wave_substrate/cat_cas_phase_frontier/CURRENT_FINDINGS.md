@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`bd76fb590c0653a26de42a2db83c9dd89c4b5d90`. The canonical per-milestone
+`9f2d0f28946ed32329aa6da2d7b4b3029152fd06`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -8310,3 +8310,38 @@ EXACT_HEIGHT_STABLE_ANISOTROPIC_RADIAL_PHASE_COUPLING_OR_NO_GO_WITH_MATRIX_FREE_
 M140 establishes neither CATVM custody, a general nonlinear quotient, a
 distinct phase resource, computational advantage, Small Wall crossing,
 physical execution, physical bit replacement, nor unbounded computation.
+
+## M141: Shared-scale exact-height diagnostic
+
+M141 represents each exact M140 final state using 272 integral cyclotomic
+coefficients, one shared base-17 denominator exponent, and one greatest-common
+`1-zeta17` exponent.  It reconstructs the exact 17-cell resident state before
+final projection and inverse.  All 21 cases span three public program families
+and depths `1,2,4,8,16,32,64`.
+
+The shared denominator reduces repeated-denominator final-state accounting by
+more than half in every declared case.  This does not solve exact height.  All
+tested depth-2-and-above states have zero common pi content.  At depth 64 the
+shared-denominator payload is 35,425, 35,369, and 35,380 bits for `PRIMARY`,
+`REUSE`, and `ALTERNATE`; maximum residual signed width is 133, 134, and 133
+bits, and the denominator exponent is 32.
+
+The independent retained-kernel recurrence reproduces all commitments,
+boundaries, denominator powers, pi valuations, widths, and payload records in
+252 comparisons, restores every exact seed, and detects a one-bit payload
+mutation.  Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The resident carrier has `EXACT_ALGEBRAIC_RESTORATION`; transient scale and
+oracle buffers have `NO_RESTORATION_CLAIM`.  Same-backing unrelated reuse uses
+no snapshot or inverse history.  The identical shared-scale-normalized
+matrix-free 17-coordinate recurrence remains the strongest compact classical
+baseline.
+
+This is a bounded representation obstruction, not a universal height theorem
+or an optimality result.  It establishes no CATVM custody, distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical bit replacement, or unbounded computation.  The next selected test
+is exact global cyclotomic-unit balancing on this anisotropic shared-scale
+state, with every unit ledger and rematerialization cost matched in the
+identical classical normalization.

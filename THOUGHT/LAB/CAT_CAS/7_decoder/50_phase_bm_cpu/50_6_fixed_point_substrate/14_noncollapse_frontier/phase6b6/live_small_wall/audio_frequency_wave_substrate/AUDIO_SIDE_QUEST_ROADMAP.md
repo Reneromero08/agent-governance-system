@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_MATRIX_FREE_ANISOTROPIC_RADIAL_PHASE_FOURIER_WITH_PAYLOAD_AND_CLASSICAL_OBSTRUCTION`
-**Roadmap version:** `14.6`
+**Status:** `STRICT_SCOPE_ANISOTROPIC_SHARED_SCALE_HEIGHT_OBSTRUCTION`
+**Roadmap version:** `14.7`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `75de68e25043b2f5bd2fd7da4409c101caec28e9`
+**Reconciled source head:** `9f2d0f28946ed32329aa6da2d7b4b3029152fd06`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_PHASE_FOURIER_GENERATED_FROM_16_TERM_KLOOSTERMAN_CHARACTER_SUM_REMOVES_THE_RETAINED_289_CELL_PUBLIC_KERNEL_WHILE_PRESERVING_17_CELL_NONCOMMUTING_QUARTIC_PHASE_CLOSURE_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_MATRIX_FREE_CLASSICAL_RECURRENCE_AND_GROWING_EXACT_PAYLOAD_REMAIN`
-**Current claim ceiling:** `STRICT_ANISOTROPIC_F17_SQUARED_RADIAL_FUNCTIONS_QUARTIC_NORM_PHASES_FACTORED16_TERM_KLOOSTERMAN_TYPE_PHASE_FOURIER_Q_ZETA17_F103_F137_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_SHARED_DENOMINATOR_LEDGER_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BY_MORE_THAN_HALF_ACROSS_21_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_CASES_BUT_COMMON_PI_CONTENT_DOES_NOT_BOUND_RESIDUAL_HEIGHT_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_COMPACT_CLASSICAL_NORMALIZATION_REMAIN`
+**Current claim ceiling:** `21_DECLARED_ANISOTROPIC_F17_RADIAL_Q_ZETA17_FINAL_STATES_ACROSS_THREE_PUBLIC_FAMILIES_AND_DEPTHS1_TO64_IN_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M140_MATRIX_FREE_KERNEL_REMOVAL_AND_EXACT_PAYLOAD_CLASSICAL_EQUIVALENCE_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M141_SHARED_SCALE_REDUCTION_AND_COMMON_PI_HEIGHT_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_HEIGHT_STABLE_ANISOTROPIC_RADIAL_PHASE_COUPLING_OR_NO_GO_WITH_MATRIX_FREE_CLASSICAL_FRONTIER`
+**Active primary successor:** `EXACT_GLOBAL_CYCLOTOMIC_UNIT_BALANCING_ON_ANISOTROPIC_RADIAL_SHARED_SCALE_OR_BOUNDED_NO_GO_WITH_IDENTICAL_CLASSICAL_NORMALIZATION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`75de68e25043b2f5bd2fd7da4409c101caec28e9`. The current 140-milestone
+`9f2d0f28946ed32329aa6da2d7b4b3029152fd06`. The current 141-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -5616,6 +5616,75 @@ kernel/scratch constant-factor trade as a phase resource.  M140 establishes
 neither CATVM custody, a general nonlinear quotient, a distinct phase
 resource, computational advantage, Small Wall crossing, physical execution,
 physical bit replacement, nor unbounded computation.
+
+## M141: Shared-scale exact-height diagnostic
+
+M141 tests the first exact representation repair against M140's growing
+payload.  It stores one base-17 denominator exponent for the complete
+17-cell radial state, converts the state to 272 cyclotomic integer
+coefficients, and extracts the greatest common power of
+`pi = 1-zeta17`.  It reconstructs the exact resident state before final
+projection and the actual inverse.
+
+```text
+claim
+    BOUNDED_EXACT_SHARED_DENOMINATOR_LEDGER_REDUCES_REPEATED_DENOMINATOR_FINAL_STATE_ACCOUNTING_BY_MORE_THAN_HALF_ACROSS_21_MATRIX_FREE_ANISOTROPIC_F17_RADIAL_CASES_BUT_COMMON_PI_CONTENT_DOES_NOT_BOUND_RESIDUAL_HEIGHT_THROUGH_DEPTH64_WHILE_EXACT_RECONSTRUCTION_RESTORATION_REUSE_AND_THE_IDENTICAL_COMPACT_CLASSICAL_NORMALIZATION_REMAIN
+
+classification
+    INDEPENDENTLY_VERIFIED_STRICT_SCOPE
+
+verification
+    INDEPENDENT_ORACLE_REEXECUTION
+
+restoration
+    resident 17-cell quotient carrier EXACT_ALGEBRAIC_RESTORATION
+    transient scale measurement and oracle buffers NO_RESTORATION_CLAIM
+
+source head
+    9f2d0f28946ed32329aa6da2d7b4b3029152fd06
+```
+
+All 21 cases cover `PRIMARY`, `REUSE`, and `ALTERNATE` public families at
+depths `1,2,4,8,16,32,64`.  The shared-denominator ledger reduces repeated-
+denominator final-state accounting by more than half in every case.  It does
+not close exact height.  All tested states from depth 2 onward have zero
+common pi content; denominator exponent reaches 32 at depth 64, while maximum
+residual signed width reaches 133, 134, and 133 bits for the three families.
+
+```text
+family       shared payload depth1 -> depth64    pi-normalized depth64
+PRIMARY                         957 -> 35425                         35426
+REUSE                           951 -> 35369                         35370
+ALTERNATE                       981 -> 35380                         35381
+```
+
+The separate oracle imports neither M140 nor M141 production code.  It uses
+the older retained exact 17-by-17 Fourier recurrence, independently compiles
+the public schedules, implements integer division by `1-zeta17`, and matches
+all final commitments, boundaries, denominator powers, pi valuations,
+coefficient widths, and payload records in 252 comparisons.  It restores the
+exact seed in every case and detects a one-bit payload mutation.  Its retained
+289-cell kernel is verification-only and is not part of the accepted M140
+matrix-free path.
+
+Exact same-backing restoration and unrelated reuse remain valid without
+snapshot or inverse history.  The strongest compact classical baseline is the
+identical shared-scale-normalized matrix-free 17-coordinate recurrence.
+M141 proves no universal height lower bound or optimal exact representation,
+and establishes no CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded computation.
+
+The next selected experiment is:
+
+```text
+EXACT_GLOBAL_CYCLOTOMIC_UNIT_BALANCING_ON_ANISOTROPIC_RADIAL_SHARED_SCALE_OR_BOUNDED_NO_GO_WITH_IDENTICAL_CLASSICAL_NORMALIZATION
+```
+
+It must test whether exact global unit actions can reduce residual integer
+height after common-pi extraction without shifting the same cost into unit
+ledgers, rematerialization, or the matched classical representation.  Merely
+repeating the 21 fixtures or changing denominator syntax is insufficient.
 
 ## 10. Roadmap Maintenance
 
