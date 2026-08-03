@@ -9231,3 +9231,51 @@ EXACT_F17_C17_COMMON_PHASE_CONGRUENCE_FOR_CONVOLUTION_AND_HADAMARD_INTERSECTION_
 No CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation is established.
+
+## M162: the common linear congruence is full and the compatible jet intersection is scalar
+
+Claim:
+
+```text
+BOUNDED_EXACT_LINEAR_CONGRUENCE_NO_GO_FOR_SIMULTANEOUS_ARBITRARY_C17_CONVOLUTION_AND_COEFFICIENTWISE_HADAMARD_INTERSECTION_OVER_F17_WITH_ONLY_CONSTANT_PUBLIC_HADAMARD_MULTIPLIERS_PRESERVING_RANK2_4_8_NILPOTENT_PHASE_JETS_AND_EXACT_RESTRICTED_PROGRAM_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_COMPACT_CLASSICAL_JET_RECURRENCE_REMAINS
+```
+
+The exact common-kernel certificate closes the immediate M161 question. If a
+linear quotient supports arbitrary coefficientwise Hadamard operands, its
+kernel is invariant under all coordinate projectors. Projecting any nonzero
+kernel vector isolates a coordinate basis vector. Compatibility with cyclic
+convolution then shifts that vector through all 17 coordinates. Every
+nonzero invariant kernel is therefore the full space, so a nonzero quotient
+supporting both arbitrary operations has dimension 17.
+
+An exact constraint solve then asks which fixed coefficient multipliers
+preserve the proper rank-2, rank-4, and rank-8 jet kernels. Production uses
+binomial Hasse rows; the independent oracle uses monomial evaluation rows.
+Both find dimension one at every rank, with normalized basis equal to the
+all-ones vector. Three explicit nonconstant multipliers escape the rank-8
+kernel. The surviving action is scalar multiplication and is not accepted as
+general relation intersection.
+
+The restricted transaction covers 24 cases at depths 1, 4, 16, and 64. It
+retains only 16 rank-8 carrier cells, projects the final B boundary, restores
+the exact same backing, and reuses the restored carrier across families with
+zero inverse history. A separately executed identical compact classical
+recurrence uses the same 16 carrier and 56 conservative logical working cells.
+The independent full-coefficient oracle matches 120 fields, restores all 34
+semantic-reference cells, and passes 54 independent convolution, rotation,
+and constant-Hadamard descent checks.
+
+The result is limited to linear quotients with both bilinear operations
+defined for arbitrary operands. It does not reject nonlinear charts,
+structured subalgebras, or other phase laws. The next experiment therefore
+tests the three-class C17 Paley association relation algebra, whose
+automorphism-orbit basis is a candidate exact subalgebra under both native
+composition and intersection:
+
+```text
+EXACT_C17_PALEY_ASSOCIATION_PHASE_RELATION_ALGEBRA_NATIVE_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_THREE_COORDINATE_CLASSICAL_RECURRENCE
+```
+
+No CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical bit replacement, or unbounded
+catalytic computation is established.

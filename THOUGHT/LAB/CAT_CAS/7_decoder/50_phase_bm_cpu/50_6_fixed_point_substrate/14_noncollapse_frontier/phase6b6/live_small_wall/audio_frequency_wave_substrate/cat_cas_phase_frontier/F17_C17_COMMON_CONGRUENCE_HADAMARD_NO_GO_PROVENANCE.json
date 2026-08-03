@@ -1,0 +1,82 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 162,
+  "scientific_source_head": "3767ff9940270a0e0a3c2d9f9e5742fa81b7c141",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "production_source": {
+      "path": "f17_c17_common_congruence_hadamard_no_go.py",
+      "sha256": "9510107475457e630d78663f3ca9f4c9ad2c9361d64557b1d03d4bf9ab98b10e"
+    },
+    "oracle_source": {
+      "path": "f17_c17_common_congruence_hadamard_no_go_oracle.py",
+      "sha256": "cad6c9cacedb8d418edad1f6655ecb4c45504274295660f53e54a55cc4cb71d9"
+    },
+    "production_result": {
+      "path": "F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_RESULTS.json",
+      "sha256": "85f51b783f8c207757357f7d2aa0327fc94d461b8930fd7648bffb972eb3e964"
+    },
+    "oracle_result": {
+      "path": "F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_ORACLE_RESULTS.json",
+      "sha256": "f07abfe62f6470a337fa0452f1f3293346636c828512bddcb29d22782cb4aff0"
+    },
+    "qualifier": {
+      "path": "qualify_f17_c17_common_congruence_hadamard_no_go.sh",
+      "sha256": "340a4c573c19ceeeddc07e156952232f8573c93f95c4dd3080751f045fa80bd2"
+    },
+    "review": {
+      "path": "F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "3ae9bfb0ee403e48b774d4ec271f49f31151c0571468c87f0503c8d598d41b9b"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m162-qualifier-ComIvN"
+  },
+  "independent_oracle": {
+    "imports_production": false,
+    "imports_numpy": false,
+    "full_group_algebra_reference": true,
+    "case_count": 24,
+    "production_comparisons": 120,
+    "quotient_law_comparisons": 54,
+    "independent_multiplier_basis": "MONOMIAL_EVALUATION_SPACE",
+    "all_pass": true
+  },
+  "resource_law": {
+    "maximum_accepted_carrier_field_cells": 16,
+    "maximum_logical_working_field_cells_peak": 56,
+    "matched_compact_classical_carrier_field_cells": 16,
+    "matched_compact_classical_logical_working_field_cells_peak": 56,
+    "accepted_over_matched_compact_classical_carrier_ratio": 1,
+    "accepted_over_matched_compact_classical_logical_working_ratio": 1,
+    "retained_inverse_history_field_cells": 0,
+    "full_nonzero_common_quotient_two_register_field_cells": 34,
+    "dense_relation_table_cells": 0,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "LINEAR_F17_QUOTIENTS_OF_F17_TO_THE_C17_WITH_ARBITRARY_BILINEAR_CONVOLUTION_AND_HADAMARD_OPERANDS_PLUS_RANK2_4_8_JET_COMPATIBLE_DIAGONAL_MULTIPLIER_SEARCH",
+  "preserved_subclaims": [
+    "ONLY_ZERO_AND_FULL_KERNELS_ARE_INVARIANT_UNDER_ALL_COORDINATE_PROJECTORS_AND_CYCLIC_SHIFT",
+    "EVERY_NONZERO_COMMON_LINEAR_QUOTIENT_RETAINS17_FIELD_COORDINATES_PER_RELATION",
+    "ONLY_CONSTANT_DIAGONAL_MULTIPLIERS_DESCEND_TO_RANK2_4_8_JETS",
+    "FULL17_REFERENCE_AND_RESTRICTED_JET_BOUNDARIES_MATCH_IN24_CASES",
+    "FULL34_CELL_AND_JET_CARRIERS_RESTORE_EXACTLY",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_WITHOUT_SNAPSHOT"
+  ],
+  "rejected_interpretations": [
+    "NO_NONLINEAR_OR_NONQUOTIENT_ENCODING_CAN_SUPPORT_BOTH_OPERATIONS",
+    "NO_OTHER_PHASE_ALGEBRA_CAN_SUPPORT_COMPOSITION_AND_INTERSECTION",
+    "CONSTANT_HADAMARD_MULTIPLIERS_PROVIDE_GENERAL_RELATION_INTERSECTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
