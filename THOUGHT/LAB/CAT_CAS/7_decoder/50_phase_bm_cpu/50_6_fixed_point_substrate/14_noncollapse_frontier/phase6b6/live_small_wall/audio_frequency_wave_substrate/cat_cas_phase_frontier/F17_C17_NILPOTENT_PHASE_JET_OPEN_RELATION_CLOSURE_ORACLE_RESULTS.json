@@ -1,0 +1,496 @@
+{
+  "cases": [
+    {
+      "all_fields_match": true,
+      "boundary": 6,
+      "depth": 1,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "8e8513564889b0e28303efdae3870bda257f63fa6ce26e580af3f1b1bf9548a5",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "a1dd0dd8e7f32354137f3fa5fba945aa1b2df229fe208f82f81a9b9fc090a3d3",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 16,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "ffa860cbc2e11371b46b0c3be94927a44c3c7df31fdb41346820f5bbfba43fc1",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "f0fa7783806fe738c48048e65d25dbe609d45cb9cc64318b79f4b08248b1dc49",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 12,
+      "depth": 16,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "e63d34cebbf80dd663b945921d7092e485d21113bcaca94a51e1eee27e7090e8",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "b0cd92d976ac18137a6a452a09c4728552ae3363c70c2c9180f2da2ca83e13f2",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 10,
+      "depth": 64,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "3da9cd3125356d3de8080a93226e789e2a4ff24065e3de86574eb06b55f9675b",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "a2960b606c2663e6d626c38f82313dceb5f3b91682491030818e920b24dba5cc",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 5,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "4a37d7cf7882fb442ee396d18d17945e763ca60f6e0f913725b8c7c716644c7d",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "b03fc3a69e8c8e8a22c3341845e5cb59915cb5b78e8625d03e53b12b5dc171a3",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 8,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "d0c806c10d557ebdef9c4b405a74f192b2f11577e9036aaa4493db8681381142",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "dc620be1ae661199be7059e0d0a61b8241720cdc982ce25cc872cc79e61a4cbd",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 10,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "5fa16bb0b917282350fc9e0503a6010fe4f873c13e05076927bdbcf8c34f1318",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "d372dc6477331f950a3a73a50494c2812a312d867c4a298289f79b1fe12c31d5",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 4,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "8a7cf573b152cf1ad1ddc6d24a853d1bc4de24246924bcf9cc8f8cbeca8dca32",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "2f70b5a105a9a8063d014bb35dde1be058f0d940d9d82c1a8e24db37037fe67f",
+      "rank": 2
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 16,
+      "depth": 1,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "53ddd561c96b3f2a8decfd9a5b39fb9ff22135229d3e14702a795a69a4b33f7a",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "0f37ea68ab8ab4283e5698fbb35b293722834fcb4178845410ae411ae0082d66",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 13,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "f8528d66b6181b5e88a81fbf4aad04bd139070b80a6c408c882fddcf92148567",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "6d5e6d765c63a556549539474da3dcaed374cac2f54adf6ad2d0e38758108440",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 14,
+      "depth": 16,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "0a6d07ab547a229cfcbece31bcea88513b22551dca6046987875415672fe7a1d",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "6a9bd34401507a41a7657f6cf4a5286a5c73a3597e82beb490dff6bc44b80458",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 13,
+      "depth": 64,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "b09ca5e2b1db6363724fa65ce7d79ab42cb46c6c132218d027915cbb0ce29a41",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "c6838af738715a338acaa9070bd9d08d5e33d2ef2c7dfb1c1103dcad2bc5a540",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 7,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "01680023fd9cba21d8c3b9f30b261644c906fc2e26d37e25b8453c388fd8b7f2",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "5bfab2f37e799719812ed8394347744ebfb0f41c404ac6cd68f4a4c79a840793",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 9,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "88af9e35ce3e023ae854cc60466484d47605f95a5f2ba845a6f3734af616ba93",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "e5a2a4e54ce37f4280659ee056c9b0a6647d295d71c7fe2ad286a2046f256240",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 11,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "7f22d45dde9e405ec60a3c0897b5c3403adb7f7078c2f19b3e0aa8cdec692b9c",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "fe8f10ea38c908ca7c8f5ea38784e334c9251b141c55d179270c9005b57b3d08",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 9,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "56afb118679d28ee6228e59d83b61ef0bcc55c55124ab5a0b4e5e96a8199ff87",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "d8659103f857097df22de6ae84e26caf6c3596dba29e6bb06fa0ee1c68439ed8",
+      "rank": 4
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 5,
+      "depth": 1,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "7a3ce620f0c28595cada9e5e940e0e8b4a31fdeb91a85cf802576dc6a5d84a63",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "8a4461505bc00e78e5e6fd34a2a76fb93ee957f0fef06ae6b5df338f18f44e52",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 5,
+      "depth": 4,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "55ce7ec836c306287d8758c3a732f9f9bccaba866455d9586f5f7b2ac626e8e3",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "7a6e8cf08ce5284dcc9b241a61a531f07bd24778012971189201e2b706094260",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 6,
+      "depth": 16,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "470eea5f42aacca8422f065e872ff69848012c861238ec4e7059c54f433deed7",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "2c7b83f60b80ec4247e9e037d4c436727c3859f13a649a681e241603ecd197ce",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 0,
+      "depth": 64,
+      "family": "PRIMARY",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "f06773f6394bdc917053beeb0c19db7382fe674e235ed95e3dcf8f79d158ade3",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "a715ebf16dca509d148494940e29e389420f786f2cbfcfaa755f1a3f1f635e16",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 8,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "36f53433d54e8b96d9fa1cc1baa1dd4034644c54256bbb34f30cd1d9bc4407b8",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "b778a8279fbbd6fb1f299e1b772e9dc81e5b4d96fba71b09e1674fc6a7c743ba",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 6,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "59926abfb7518bea305e14369bd1d7917330f5bfc21df8e623a22c9ed4ac6aba",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "27c2043bb5cbf1d2511f3d0f027d5c8cb97ba45c41ca5ef6ef688ebf4625c250",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 13,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "c3a6279921a3f4650757f79c74038812cfa7b2f6cbe108a9ed9e78526dd74efa",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "1af965c3a36f6b1587f454c4cbde9fc34d2115f36d1244007543c68c07ac615a",
+      "rank": 8
+    },
+    {
+      "all_fields_match": true,
+      "boundary": 14,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "field_matches": {
+        "boundary": true,
+        "exact_restoration": true,
+        "final_jet_commitment": true,
+        "program_fingerprint": true
+      },
+      "final_jet_commitment": "8d66e10035f315d398d285da36d39984d75a0fc8ec90a6c365002baf246cc67d",
+      "full17_coefficient_restoration": true,
+      "program_fingerprint": "e977ef183b30d833c79ab0ecca0b3bb8f56b2aa960ff12f9efb6a6b7a0a57dda",
+      "rank": 8
+    }
+  ],
+  "claim": "BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT",
+  "claim_ceiling": "F17_C17_TRANSLATION_INVARIANT_OPEN_RELATION_JETS_RANKS2_4_8_TWO_PUBLIC_PROGRAM_FAMILIES_DEPTHS1_4_16_64_FINAL_LINEAR_B_JET_BOUNDARIES",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "imports_numpy": false,
+  "imports_production": false,
+  "oracle_state_law": "FULL17_COEFFICIENT_F17_C17_GROUP_ALGEBRA",
+  "preserved_subclaims": [
+    "FULL17_CYCLIC_CONVOLUTION_MAPS_EXACTLY_TO_TRUNCATED_JET_MULTIPLICATION",
+    "FULL17_NONLINEAR_CONVOLUTION_SHEAR_MAPS_EXACTLY_TO_THE_JET_SHEAR",
+    "FULL17_REFERENCE_AND_ACCEPTED_JET_BOUNDARIES_MATCH_IN24_CASES",
+    "FULL17_AND_JET_CARRIERS_RESTORE_EXACTLY",
+    "HIGHER_HASSE_COORDINATES_ARE_DEMONSTRABLY_DISCARDED",
+    "COEFFICIENTWISE_HADAMARD_INTERSECTION_DOES_NOT_DESCEND_TO_THIS_QUOTIENT"
+  ],
+  "production_comparison": {
+    "all_match": true,
+    "cases": 24,
+    "comparisons": 96
+  },
+  "quotient_law": {
+    "all_pass": true,
+    "all_scope_controls_pass": true,
+    "checks": {
+      "rank2_sample0_addition": true,
+      "rank2_sample0_convolution": true,
+      "rank2_sample0_rotation": true,
+      "rank2_sample1_addition": true,
+      "rank2_sample1_convolution": true,
+      "rank2_sample1_rotation": true,
+      "rank2_sample2_addition": true,
+      "rank2_sample2_convolution": true,
+      "rank2_sample2_rotation": true,
+      "rank2_sample3_addition": true,
+      "rank2_sample3_convolution": true,
+      "rank2_sample3_rotation": true,
+      "rank2_sample4_addition": true,
+      "rank2_sample4_convolution": true,
+      "rank2_sample4_rotation": true,
+      "rank2_sample5_addition": true,
+      "rank2_sample5_convolution": true,
+      "rank2_sample5_rotation": true,
+      "rank4_sample0_addition": true,
+      "rank4_sample0_convolution": true,
+      "rank4_sample0_rotation": true,
+      "rank4_sample1_addition": true,
+      "rank4_sample1_convolution": true,
+      "rank4_sample1_rotation": true,
+      "rank4_sample2_addition": true,
+      "rank4_sample2_convolution": true,
+      "rank4_sample2_rotation": true,
+      "rank4_sample3_addition": true,
+      "rank4_sample3_convolution": true,
+      "rank4_sample3_rotation": true,
+      "rank4_sample4_addition": true,
+      "rank4_sample4_convolution": true,
+      "rank4_sample4_rotation": true,
+      "rank4_sample5_addition": true,
+      "rank4_sample5_convolution": true,
+      "rank4_sample5_rotation": true,
+      "rank8_sample0_addition": true,
+      "rank8_sample0_convolution": true,
+      "rank8_sample0_rotation": true,
+      "rank8_sample1_addition": true,
+      "rank8_sample1_convolution": true,
+      "rank8_sample1_rotation": true,
+      "rank8_sample2_addition": true,
+      "rank8_sample2_convolution": true,
+      "rank8_sample2_rotation": true,
+      "rank8_sample3_addition": true,
+      "rank8_sample3_convolution": true,
+      "rank8_sample3_rotation": true,
+      "rank8_sample4_addition": true,
+      "rank8_sample4_convolution": true,
+      "rank8_sample4_rotation": true,
+      "rank8_sample5_addition": true,
+      "rank8_sample5_convolution": true,
+      "rank8_sample5_rotation": true
+    },
+    "comparison_count": 54,
+    "scope_controls": {
+      "rank2_coefficient_hadamard_does_not_descend": true,
+      "rank2_epsilon_rank_is_discarded": true,
+      "rank4_coefficient_hadamard_does_not_descend": true,
+      "rank4_epsilon_rank_is_discarded": true,
+      "rank8_coefficient_hadamard_does_not_descend": true,
+      "rank8_epsilon_rank_is_discarded": true
+    }
+  },
+  "rejected_interpretations": [
+    "GENERAL_OPEN_RELATION_INTERSECTION_CLOSURE",
+    "LOSSLESS_FULL_F17_C17_RELATION_REPRESENTATION_BELOW17_COORDINATES",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_scope": {
+    "accepted_maximum_jet_carrier_field_cells": 16,
+    "oracle_dense17_by17_relation_table_cells": 0,
+    "oracle_full_coefficient_carrier_field_cells": 34,
+    "oracle_state_is_verification_only": true,
+    "production_backing_identity_independently_observed": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F17_C17_NILPOTENT_PHASE_JET_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
