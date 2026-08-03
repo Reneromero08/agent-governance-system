@@ -1,0 +1,195 @@
+{
+  "claim_ceiling": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "dual_field_k1_through_k4": true,
+    "exact_q_zeta17_k1_k2_only": true,
+    "exchange_symmetric_k1_through_k4_only": true,
+    "exchange_symmetry_is_required": true,
+    "fixed_rank_across_growing_k": false,
+    "grid_n4_only": true,
+    "original_labelled_family_compressed": false,
+    "physical_bits_replaced_with_pi": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "control_receipt_consistency": {
+    "all_required_controls_true": true,
+    "limitation": "LIFECYCLE_RECEIPTS_REQUIRE_SEPARATE_SOURCE_AUDIT_NOT_ORACLE_INFERENCE"
+  },
+  "dual_field_structural_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 3,
+      "oracle_cached_orbit_boundary_field_cells": 1938
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F103",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 4,
+      "oracle_cached_orbit_boundary_field_cells": 9690
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 3,
+      "oracle_cached_orbit_boundary_field_cells": 1938
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "field": "F137",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 4,
+      "oracle_cached_orbit_boundary_field_cells": 9690
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "field": "F103",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 4,
+      "oracle_cached_orbit_boundary_field_cells": 9690
+    }
+  ],
+  "exact_production_parity": [
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 1,
+      "oracle_cached_orbit_boundary_field_cells": 34
+    },
+    {
+      "agreement": true,
+      "family": "PRIMARY",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    },
+    {
+      "agreement": true,
+      "family": "REUSE",
+      "independent_labelled_forward_inverse_restored": true,
+      "k": 2,
+      "oracle_cached_orbit_boundary_field_cells": 306
+    }
+  ],
+  "independence": {
+    "accepted_recurrence_reused": false,
+    "imports_production_or_matchgate_predecessor": false,
+    "latent_oracle": "INDEPENDENT_LABELLED_17_TO_THE_K_TENSOR_DFT_CHIRP_AND_GRID_SHEAR",
+    "matching_oracle": "INDEPENDENT_ROW_PROFILE_PERFECT_MATCHING_RECURRENCE",
+    "oracle_only_labelled_tensor_and_orbit_boundary_cache_materialized": true
+  },
+  "next_obstruction": "THE_EXACT_EXCHANGE_SYMMETRIC_QUOTIENT_REDUCES_LABELLED_EXPONENTIAL_GROWTH_BUT_RETAINS_H_K_ORBIT_RANK_AND_THE_MATCHED_CLASSICAL_RECURRENCE_IS_IDENTICAL",
+  "observed_resource_law": {
+    "oracle_cached_boundary_field_cells": "2_TIMES_BINOMIAL_K_PLUS_16_CHOOSE_16",
+    "oracle_labelled_tensor_field_cells": "2_TIMES_17_TO_THE_K",
+    "production_materializes_neither_oracle_expansion": true,
+    "production_occupation_dimension": "BINOMIAL_K_PLUS_16_CHOOSE_16",
+    "strongest_matched_classical_baseline": "IDENTICAL_OCCUPATION_ORBIT_RECURRENCE_NOT_THE_LABELLED_ORACLE"
+  },
+  "particle_permutation_equivariance": [
+    {
+      "distinct_particle_permutations": 2,
+      "distinct_symmetric_signatures": 1,
+      "exchange_invariant": true,
+      "k": 2
+    },
+    {
+      "distinct_particle_permutations": 6,
+      "distinct_symmetric_signatures": 1,
+      "exchange_invariant": true,
+      "k": 3
+    },
+    {
+      "distinct_particle_permutations": 12,
+      "distinct_symmetric_signatures": 1,
+      "exchange_invariant": true,
+      "k": 4
+    }
+  ],
+  "power_sum_separation": [
+    {
+      "full_power_sums_separate_all_histograms": true,
+      "k": 1,
+      "occupation_dimension": 17,
+      "p1_signature_count": 17,
+      "p1_through_pk_signature_count": 17,
+      "stars_and_bars_dimension": 17,
+      "total_sum_alone_overmerges": false
+    },
+    {
+      "full_power_sums_separate_all_histograms": true,
+      "k": 2,
+      "occupation_dimension": 153,
+      "p1_signature_count": 17,
+      "p1_through_pk_signature_count": 153,
+      "stars_and_bars_dimension": 153,
+      "total_sum_alone_overmerges": true
+    },
+    {
+      "full_power_sums_separate_all_histograms": true,
+      "k": 3,
+      "occupation_dimension": 969,
+      "p1_signature_count": 17,
+      "p1_through_pk_signature_count": 969,
+      "stars_and_bars_dimension": 969,
+      "total_sum_alone_overmerges": true
+    },
+    {
+      "full_power_sums_separate_all_histograms": true,
+      "k": 4,
+      "occupation_dimension": 4845,
+      "p1_signature_count": 17,
+      "p1_through_pk_signature_count": 4845,
+      "stars_and_bars_dimension": 4845,
+      "total_sum_alone_overmerges": true
+    }
+  ],
+  "schema": "CAT_CAS_F17_EXCHANGE_SYMMETRIC_LATENT_GEOMETRY_CLOSURE_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
