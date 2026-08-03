@@ -1,0 +1,64 @@
+{
+  "case_count": 32,
+  "claim_ceiling": "F103_DUAL_C102_EXPONENT_CRT_RANK_AND_STREAMED_VALUE_MOMENT_CHARTS_ON_DECLARED_C5_C7_C11_C17_NINE_NODE_ROTATING_HUB_FAMILIES_THROUGH_DEPTH8_IN_LINUX_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "comparison_count": 362,
+  "exact_inverse_cases": 32,
+  "imports_numpy": false,
+  "imports_production_module": false,
+  "not_verified": [
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION"
+  ],
+  "package_local_fields": [
+    "SAME_NATIVE_ARRAY_BACKING_IDENTITY",
+    "DECLARED_STREAMED_OPERATION_TOTALS",
+    "DECLARED_TRANSIENT_SCRATCH_MAXIMA",
+    "PYTHON_NUMPY_RUNTIME_EXCLUSIONS",
+    "CUSTODY_REJECTION_CONTROL_IMPLEMENTATION"
+  ],
+  "rank_floor": {
+    "11": {
+      "EXP_F17": 10,
+      "EXP_F2": 9,
+      "EXP_F3": 10,
+      "ZERO_F2": 0
+    },
+    "17": {
+      "EXP_F17": 16,
+      "EXP_F2": 15,
+      "EXP_F3": 15,
+      "ZERO_F2": 0
+    },
+    "5": {
+      "EXP_F17": 4,
+      "EXP_F2": 3,
+      "EXP_F3": 4,
+      "ZERO_F2": 0
+    },
+    "7": {
+      "EXP_F17": 6,
+      "EXP_F2": 5,
+      "EXP_F3": 5,
+      "ZERO_F2": 0
+    }
+  },
+  "reconstructed_boundary_commitments": true,
+  "reconstructed_canonical_chart_commitments": true,
+  "reconstructed_crt_rank_law": true,
+  "reconstructed_dense_forward_and_inverse": true,
+  "reconstructed_program_descriptors": true,
+  "reconstructed_resident_byte_law": true,
+  "schema": "CAT_CAS_F103_DUAL_EXPONENT_MOMENT_RELATION_NO_GO_ORACLE_V1",
+  "semantic_controls": {
+    "composition_intersection_order_changes_boundary": true,
+    "disabled_port_changes_boundary": true,
+    "missing_inverse_changes_payload": true,
+    "reordered_inverse_changes_payload": true,
+    "topology_mutation_changes_boundary": true,
+    "wrong_inverse_changes_payload": true
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
