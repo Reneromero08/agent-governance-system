@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`af12c64dba62a59037e6cfb52f0cc000d7daa33b`. The canonical per-milestone
+`04de9642b2ac51a2ed3dea9cb555fadae888adc2`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9764,4 +9764,49 @@ Next:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE
+```
+
+## M174: resident cubic-strength port full separation-rank no-go
+
+The exact direct-process carrier makes the cubic strength a resident
+q-coordinate operand shared by multiple controlled cubic phases separated by
+noncommuting Gaussian transforms. Together with the two-fiber q-coordinate
+data port it occupies `2*q^2` finite-field cells. Only the final scalar
+boundary is projected. The resident amplitudes are not machine-enforced
+hidden, so this result makes no CATVM custody claim.
+
+Across eleven declared cases, the initial latent/data separation rank is one
+and the first controlled cubic raises it to q. All later controlled
+checkpoints and final states retain rank q. The statement is restricted to
+the explicit q-by-2q linear matrix chart; it is not an intrinsic lower bound
+against nonlinear or observable-restricted representations.
+
+Exact reverse execution restores the original discrete payload on the same
+backing without retained inverse history or snapshot reload. Cross-family
+q=23 reuse reaches generation two and matches a fresh boundary and complete
+state commitment.
+
+The identical dense classical recurrence retains the same `2*q^2` leading
+state and `2*q^2+q` peak. A separate exact Rader/NTT recurrence retains the
+same leading state with counted linear scratch. At q=113 depth two its peak is
+26,500 mixed-width logical payload cells with a 223,264-bit capacity upper
+bound. The import-isolated oracle reconstructs all cases, both baselines,
+controls, restoration, and reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q113_ALTERNATE_DEPTH2_Q41_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353
+```
+
+No fixed-rank growing-order closure, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, or unbounded computation
+is established.
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```

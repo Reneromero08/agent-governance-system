@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_DIAGNOSED`
-**Roadmap version:** `14.39`
+**Status:** `STRICT_SCOPE_RESIDENT_CUBIC_STRENGTH_FULL_SEPARATION_RANK_DIAGNOSED`
+**Roadmap version:** `14.40`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `af12c64dba62a59037e6cfb52f0cc000d7daa33b`
+**Reconciled source head:** `04de9642b2ac51a2ed3dea9cb555fadae888adc2`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_PHASE_STATE_BUNDLE_EXECUTES_FACTORWISE_WITH_ACTION_SPAN_EQUAL_TO_EACH_DECLARED_SOURCE_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_FULL_TWO_FIBER_BASIS_ACTION_BUNDLE_USES4Q2_EXPLICIT_FIELD_CELLS_WHILE_MATCHED_PUBLIC_WORD_CLASSICAL_RECURRENCES_INCLUDE_A2Q_MINIMUM_STORAGE_DENSE_STREAM_AND_AN_EXACT_LINEAR_MATERIAL_CELL_RADER_NTT_STREAM`
-**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_SOURCE_RANKS10_OR22_AUXILIARY_NTT_MODULUS998244353_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_IS_SHARED_ACROSS_MULTIPLE_NONCOMMUTING_WEIL_CONSUMERS_AND_REACHES_FULL_Q_LATENT_DATA_SEPARATION_RANK_AFTER_THE_FIRST_CONTROLLED_CUBIC_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_DENSE_AND_EXACT_RADER_NTT_CLASSICAL_RECURRENCES_RETAIN_THE_SAME2Q2_LEADING_STATE`
+**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q113_ALTERNATE_DEPTH2_Q41_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M173_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M174_RESIDENT_CUBIC_STRENGTH_FULL_SEPARATION_RANK_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -60,8 +60,12 @@ the quadratic component chart with actual resident source-state columns, but
 every declared action span equals its source rank. A full explicit basis
 bundle therefore uses `4*q^2` field cells, while the public operator word lets
 matched classical recurrences stream the same final boundary with linear
-material state. The next repair makes the operator parameter itself a shared,
-resident, unresolved phase port instead of another public descriptor.
+material state. M174 makes the cubic strength itself a shared resident port.
+That port reaches full q latent/data separation rank after its first
+controlled interaction; the accepted phase recurrence and its strongest
+matched full-state classical recurrences all retain the same `2*q^2` leading
+state. The next repair tests an observable-preserving nonlinear character
+graph quotient instead of scaling the explicit linear chart.
 
 Every successor must answer:
 
@@ -87,7 +91,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`af12c64dba62a59037e6cfb52f0cc000d7daa33b`. The current 173-milestone
+`04de9642b2ac51a2ed3dea9cb555fadae888adc2`. The current 174-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4716,7 +4720,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_PHASE_STATE_BUNDLE_EXECUTES_FACTORWISE_WITH_ACTION_SPAN_EQUAL_TO_EACH_DECLARED_SOURCE_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_FULL_TWO_FIBER_BASIS_ACTION_BUNDLE_USES4Q2_EXPLICIT_FIELD_CELLS_WHILE_MATCHED_PUBLIC_WORD_CLASSICAL_RECURRENCES_INCLUDE_A2Q_MINIMUM_STORAGE_DENSE_STREAM_AND_AN_EXACT_LINEAR_MATERIAL_CELL_RADER_NTT_STREAM
+BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_IS_SHARED_ACROSS_MULTIPLE_NONCOMMUTING_WEIL_CONSUMERS_AND_REACHES_FULL_Q_LATENT_DATA_SEPARATION_RANK_AFTER_THE_FIRST_CONTROLLED_CUBIC_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_DENSE_AND_EXACT_RADER_NTT_CLASSICAL_RECURRENCES_RETAIN_THE_SAME2Q2_LEADING_STATE
 ```
 
 Not established:
@@ -4746,6 +4750,8 @@ compact carrier or phase-history recursion
 arbitrary interface width or relation arity
 generic two-port phase relation algebra or scheduler
 lower bound against all separable replacements
+intrinsic quadratic lower bound against nonlinear or program-specific algorithms
+machine-enforced custody for the resident cubic-strength operand
 CATVM enforcement for the general affine operator
 general CATVM relational-DAG enforcement
 general Boolean ANF elimination
@@ -7593,7 +7599,7 @@ computation.
 Selected successor:
 
 ```text
-EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE
+EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
 ## M173: actual open-interface action bundle and public-word streaming no-go
@@ -7652,6 +7658,68 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE
+```
+
+## M174: resident cubic-strength port and full separation-rank no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_IS_SHARED_ACROSS_MULTIPLE_NONCOMMUTING_WEIL_CONSUMERS_AND_REACHES_FULL_Q_LATENT_DATA_SEPARATION_RANK_AFTER_THE_FIRST_CONTROLLED_CUBIC_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_DENSE_AND_EXACT_RADER_NTT_CLASSICAL_RECURRENCES_RETAIN_THE_SAME2Q2_LEADING_STATE
+```
+
+The direct-process exact carrier stores one q-coordinate cubic-strength port
+and a two-fiber q-coordinate data port in `2*q^2` finite-field cells. The same
+unprojected strength coordinate controls multiple cubic phases separated by
+noncommuting Gaussian operations on both axes. Public plan construction does
+not inspect the resident amplitudes, and only the declared final scalar is
+projected. `Coherent` here is an exact algebraic software property, not a
+physical or quantum implementation; this package does not enforce CATVM
+custody for the runtime operand.
+
+All nine declared safe-prime orders run at primary depth one. Primary q=113
+and alternate q=41 also run at depth two. Every initial carrier has
+latent/data separation rank one. Cubing is bijective on each declared
+multiplicative group, and every first controlled-cubic checkpoint, later
+controlled checkpoint, and final state has separation rank q. This is a rank
+statement for the explicit q-by-2q linear matrix chart, not a lower bound on
+nonlinear, program-specific, or observable-restricted representations.
+
+Exact reverse factors restore the original discrete payload on the same
+backing, with no retained inverse history or snapshot. An unrelated second
+program consumes the restored q=23 carrier and reaches generation two while
+matching a fresh boundary and complete state commitment.
+
+The strongest comparison is an executed Pareto pair. The identical dense
+matrix-free recurrence retains `2*q^2` field cells and has the same
+`2*q^2+q` peak as the accepted path. The exact work-reduced Rader/NTT
+recurrence retains the same leading state and adds
+`4*q-2+2*M` scratch payload cells. At q=113 depth two it reaches 26,500
+logical payload cells and a 223,264-bit mixed-width capacity upper bound. Its
+5,720,512 convolution bound remains below auxiliary modulus 998,244,353.
+Python objects, allocator behavior, native libraries, and whole-process peaks
+remain excluded.
+
+The import-isolated oracle reconstructs all eleven cases, both classical
+recurrences, direct small-order DFT checks, controls, exact restoration, and
+reuse. M174 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q113_ALTERNATE_DEPTH2_Q41_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353
+```
+
+The result establishes no fixed-rank growing-order closure, intrinsic
+quadratic lower bound, machine-enforced hidden runtime operand, CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
 ## 10. Roadmap Maintenance

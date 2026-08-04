@@ -1,0 +1,17 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_RESIDENT_CUBIC_STRENGTH_PHASE_PORT_WEIL_ACTION_RANK_PROVENANCE_V1",
+  "scientific_source_head": "04de9642b2ac51a2ed3dea9cb555fadae888adc2",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "files": {
+    "growing_prime_resident_cubic_strength_phase_port_weil_action_rank.py": "9faa685880cd7e1c3c9f8613583546255f327b181864461ae51498dd4e696a6b",
+    "GROWING_PRIME_RESIDENT_CUBIC_STRENGTH_PHASE_PORT_WEIL_ACTION_RANK_RESULTS.json": "248c4165cee18634d5cce2d17ccc352ad680a714772d873e48a1f62097ec877d",
+    "growing_prime_resident_cubic_strength_phase_port_weil_action_rank_independent_oracle.py": "90d173deb2be68a6bb6ea1485bf09353bb9ec4fef1c54990b732b28ebe79e65e",
+    "GROWING_PRIME_RESIDENT_CUBIC_STRENGTH_PHASE_PORT_WEIL_ACTION_RANK_INDEPENDENT_ORACLE.json": "7232bfcaaaaf43ea84bebd7288f78dd636bbe77dbb5635eb528f63fc7280c507",
+    "GROWING_PRIME_RESIDENT_CUBIC_STRENGTH_PHASE_PORT_WEIL_ACTION_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "33fd0f01aeb0088f1355bed7c5be22c5e353c26308373cb283fe3da411bc4745",
+    "qualify_growing_prime_resident_cubic_strength_phase_port_weil_action_rank.sh": "297eaee76339fcb1456ee341354ffe5aece46c650da9eb43a2d340b2cf010bb1"
+  },
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q113_ALTERNATE_DEPTH2_Q41_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353"
+}
