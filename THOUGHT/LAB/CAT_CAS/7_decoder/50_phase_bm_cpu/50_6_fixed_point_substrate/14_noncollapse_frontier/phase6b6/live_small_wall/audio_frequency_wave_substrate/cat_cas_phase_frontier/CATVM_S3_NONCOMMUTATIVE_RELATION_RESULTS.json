@@ -1,0 +1,202 @@
+{
+  "claim_candidate": "CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL",
+  "claim_ceiling": "S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controller_computes_boundary": false,
+  "controller_imports_backend": false,
+  "disconnect_control": {
+    "audit_events": [
+      "0:FORWARD_BEGIN",
+      "0:BOUNDARY_RETAINED_INTERNAL",
+      "1:RESTORATION_VERIFIED",
+      "1:RESPONSE_WRITE_ATTEMPT"
+    ],
+    "exit_code": 0,
+    "process_memory_open_denied": true,
+    "restoration_precedes_disconnected_write_attempt": true,
+    "stderr_bytes": 0
+  },
+  "inplace": {
+    "carrier_field_cells": 12,
+    "first_boundary": 11,
+    "first_receipt": 16047637911018114496,
+    "forward_shear_operations": 1024,
+    "fresh_restored_reuse_boundary_parity": true,
+    "fresh_restored_reuse_receipt_parity": true,
+    "fresh_second_boundary": 91,
+    "fresh_second_receipt": 872683804401602260,
+    "process_memory_open_denied": true,
+    "response_write_after_restoration_for_each_transaction": true,
+    "restoration_generation": 2,
+    "same_service_process_reused": true,
+    "second_boundary": 91,
+    "second_receipt": 872683804401602260
+  },
+  "inverse_controls": {
+    "missing": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:INVERSE_OMITTED_AFTER_FORWARD",
+        "0:RESTORATION_FAILED_CONTROL"
+      ],
+      "exit_code": 23,
+      "mutation_executed_after_forward_residency": true,
+      "process_memory_open_denied": true,
+      "response_bytes": 0,
+      "restoration_failure_withheld_response": true,
+      "stderr_bytes": 0
+    },
+    "reordered_noncommuting": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:MUTATED_INVERSE_EXECUTED",
+        "0:RESTORATION_FAILED_CONTROL"
+      ],
+      "exit_code": 23,
+      "mutation_executed_after_forward_residency": true,
+      "process_memory_open_denied": true,
+      "response_bytes": 0,
+      "restoration_failure_withheld_response": true,
+      "stderr_bytes": 0
+    },
+    "wrong": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:MUTATED_INVERSE_EXECUTED",
+        "0:RESTORATION_FAILED_CONTROL"
+      ],
+      "exit_code": 23,
+      "mutation_executed_after_forward_residency": true,
+      "process_memory_open_denied": true,
+      "response_bytes": 0,
+      "restoration_failure_withheld_response": true,
+      "stderr_bytes": 0
+    }
+  },
+  "machine_boundary": "SEPARATE_NON_DUMPABLE_NO_NEW_PRIVS_SAME_UID_LINUX_BINARY_PIPE_SERVICE",
+  "matched_baseline": {
+    "computed_by_controller": false,
+    "independent_execution_required": true,
+    "name": "IDENTICAL_STREAMED_SIX_COORDINATE_S3_GROUP_RECURRENCE"
+  },
+  "no_smuggle": {
+    "audit_contains_relation_values": false,
+    "audit_event_vocabulary_only": true,
+    "audit_file_count": 12,
+    "controller_computes_boundary": false,
+    "controller_imports_backend": false,
+    "receipt_is_one_way_64_bit_commitment": true,
+    "response_contains_intermediate_relation_cells": false
+  },
+  "not_established": [
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "GENERAL_FINITE_GROUP_RELATION_COMPILER",
+    "GENERAL_SIX_LABEL_RELATIONS",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resident_stage_controls": {
+    "early_response": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:EARLY_RESPONSE_DENIED_DURING_FORWARD",
+        "1:RESTORATION_VERIFIED",
+        "1:RESPONSE_WRITE_ATTEMPT",
+        "1:STOP_RESPONSE_WRITE_ATTEMPT"
+      ],
+      "denied_without_boundary": true,
+      "process_memory_open_denied": true,
+      "restored_before_denial_response": true
+    },
+    "hidden_projection": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:HIDDEN_PROJECTION_DENIED_DURING_FORWARD",
+        "1:RESTORATION_VERIFIED",
+        "1:RESPONSE_WRITE_ATTEMPT",
+        "1:STOP_RESPONSE_WRITE_ATTEMPT"
+      ],
+      "denied_without_boundary": true,
+      "process_memory_open_denied": true,
+      "restored_before_denial_response": true
+    },
+    "wrong_owner": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:WRONG_OWNER_DENIED_DURING_FORWARD",
+        "1:RESTORATION_VERIFIED",
+        "1:RESPONSE_WRITE_ATTEMPT",
+        "1:STOP_RESPONSE_WRITE_ATTEMPT"
+      ],
+      "denied_without_boundary": true,
+      "process_memory_open_denied": true,
+      "restored_before_denial_response": true
+    },
+    "wrong_type": {
+      "audit_events": [
+        "0:FORWARD_BEGIN",
+        "0:FORWARD_RESIDENT",
+        "0:WRONG_TYPE_DENIED_DURING_FORWARD",
+        "1:RESTORATION_VERIFIED",
+        "1:RESPONSE_WRITE_ATTEMPT",
+        "1:STOP_RESPONSE_WRITE_ATTEMPT"
+      ],
+      "denied_without_boundary": true,
+      "process_memory_open_denied": true,
+      "restored_before_denial_response": true
+    }
+  },
+  "resource_accounting": {
+    "accepted_carrier_field_cells": 12,
+    "backend_response_bytes": 44,
+    "conservative_accepted_field_value_slots_peak": 37,
+    "controller_request_bytes": 24,
+    "matched_direct_classical_field_value_slots_peak": 25,
+    "port_lease_generation_records": 2,
+    "port_owner_records": 2,
+    "python_object_headers_allocator_interpreter_native_library_and_whole_process_peaks_excluded": true,
+    "readiness_request_bytes_per_service": 24,
+    "readiness_response_bytes_per_service": 44,
+    "retained_compiled_plan_records": 0,
+    "retained_inverse_history_records": 0,
+    "service_process_launches_in_control_package": 12,
+    "snapshot_cells_on_accepted_path": 0,
+    "snapshot_cells_on_sham_path": 12,
+    "snapshot_sham_field_value_slots_peak": 37,
+    "streamed_operation_delta_field_cells": 6,
+    "streamed_public_operand_field_cells": 6,
+    "streamed_public_scalar_field_cells": 1,
+    "temporary_restoration_verification_baseline_field_cells": 12
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CATVM_S3_NONCOMMUTATIVE_RELATION_RESULTS_V1",
+  "simple_denial_controls": {
+    "null_carrier_denied": true,
+    "snapshot_command_on_inplace_service_denied": true,
+    "valid_after_simple_denials_restores": true,
+    "wrong_generation_denied": true
+  },
+  "snapshot_sham": {
+    "boundary": 11,
+    "carrier_field_cells": 12,
+    "classification": "SNAPSHOT_RELOAD",
+    "forward_shear_operations": 4,
+    "inplace_command_on_snapshot_service_denied": true,
+    "matches_inplace_boundary": true,
+    "matches_inplace_receipt": true,
+    "process_memory_open_denied": true,
+    "receipt": 16047637911018114496,
+    "snapshot_field_cells": 12,
+    "snapshot_reload_precedes_response": true
+  },
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}

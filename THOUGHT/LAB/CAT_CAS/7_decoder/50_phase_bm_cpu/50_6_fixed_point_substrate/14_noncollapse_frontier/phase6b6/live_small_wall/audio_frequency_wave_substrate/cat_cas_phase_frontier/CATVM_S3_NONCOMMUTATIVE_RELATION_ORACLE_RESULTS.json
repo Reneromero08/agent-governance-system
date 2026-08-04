@@ -1,0 +1,86 @@
+{
+  "algebra": {
+    "all36_group_and_full_matrix_basis_products_checked": 36,
+    "noncommuting_basis_pair": [
+      1,
+      2
+    ],
+    "noncommuting_products_differ": true,
+    "reordered_depth64_compact_inverse_fails": true
+  },
+  "black_box_service_reexecution": {
+    "accepted_atomic_event_order": true,
+    "accepted_first_matches_oracle": true,
+    "accepted_process_memory_denied": true,
+    "accepted_reuse_matches_oracle": true,
+    "inplace_command_on_snapshot_denied": true,
+    "projection_denied_after_forward_and_restoration": true,
+    "projection_process_memory_denied": true,
+    "reordered_inverse_fails_after_forward_without_response": true,
+    "reordered_process_memory_denied": true,
+    "snapshot_matches_oracle_but_is_reload": true,
+    "snapshot_process_memory_denied": true
+  },
+  "claim": "CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL",
+  "claim_ceiling": "S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "imports_controller": false,
+  "imports_numpy": false,
+  "imports_protocol": false,
+  "imports_service": false,
+  "matched_baseline": "IDENTICAL_STREAMED_SIX_COORDINATE_S3_GROUP_RECURRENCE",
+  "preserved_subclaims": [
+    "ATOMIC_RESPONSE_RELEASE_AFTER_EXACT_RESTORATION_ON_THE_ACCEPTED_PATH",
+    "NON_DUMPABLE_CHILD_PROCESS_MEMORY_OPEN_IS_DENIED_TO_BOTH_CONTROLLERS",
+    "HIDDEN_PROJECTION_IS_ATTEMPTED_AND_DENIED_DURING_FORWARD_RESIDENCY_THEN_RESTORED",
+    "REORDERED_NONCOMMUTING_INVERSE_IS_EXECUTED_AFTER_FORWARD_RESIDENCY_AND_WITHHOLDS_RESPONSE",
+    "INDEPENDENT_FULL72_CELL_RELATION_BOUNDARIES_AND_EXACT_REVERSE_CLEARING",
+    "SAME_SERVICE_UNRELATED_REUSE_MATCHES_FRESH_AND_INDEPENDENT_RECURRENCES",
+    "SNAPSHOT_RELOAD_IS_SEPARATELY_CLASSIFIED"
+  ],
+  "production_boundary_and_receipt_fields_match": true,
+  "rejected_interpretations": [
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "GENERAL_FINITE_GROUP_RELATION_COMPILER",
+    "GENERAL_SIX_LABEL_RELATIONS",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_scope": {
+    "accepted_carrier_field_cells": 12,
+    "accepted_conservative_field_value_slots_peak": 37,
+    "accepted_streamed_public_operand_delta_scalar_field_slots": 13,
+    "accepted_temporary_verification_baseline_field_cells": 12,
+    "matched_streamed_group_classical_field_value_slots_peak": 25,
+    "oracle_full_relation_field_cells": 72,
+    "physical_process_peak_unmeasured": true,
+    "retained_inverse_history_records": 0,
+    "snapshot_sham_field_cells": 12
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CATVM_S3_NONCOMMUTATIVE_RELATION_ORACLE_RESULTS_V1",
+  "semantic_cases": [
+    {
+      "boundary": 11,
+      "compact_matches_full72_cells": true,
+      "compact_restores_exactly": true,
+      "depth": 1,
+      "family": 1,
+      "full72_cells_restore_exactly": true,
+      "receipt": 16047637911018114496
+    },
+    {
+      "boundary": 91,
+      "compact_matches_full72_cells": true,
+      "compact_restores_exactly": true,
+      "depth": 256,
+      "family": 2,
+      "full72_cells_restore_exactly": true,
+      "receipt": 872683804401602260
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
