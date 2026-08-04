@@ -1,0 +1,82 @@
+{
+  "boundary_parity": {
+    "alternate_and_reuse": true,
+    "primary": true
+  },
+  "claim_candidate": "CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE",
+  "claim_ceiling": "EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "imports_controller": false,
+  "imports_numpy": false,
+  "imports_service": false,
+  "oracle_state_law": "FULL17_RELATION_VALUES_FOR_ALL9_DAG_NODES",
+  "preserved_subclaims": [
+    "INDEPENDENT_FULL_RELATION_BOUNDARY_PARITY",
+    "INDEPENDENT_FULL_DAG_REVERSE_CLEARING",
+    "PUBLIC_TOPOLOGY_HAS_SHARED_FANOUT"
+  ],
+  "rejected_interpretations": [
+    "GENERIC_DAG_SCHEDULER",
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_scope": {
+    "accepted_paley_relation_cells": 27,
+    "dense17_by17_relation_table_cells": 0,
+    "oracle_full_relation_cells": 153,
+    "oracle_full_relations_are_verification_only": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CATVM_PALEY_RELATION_DAG_ORACLE_RESULTS_V1",
+  "topologies": [
+    {
+      "boundary": 80,
+      "final_class_values": [
+        38,
+        23,
+        50
+      ],
+      "full153_cells_restore_exactly": true,
+      "schedule_nodes": 7,
+      "shared_fanouts": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 3,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 1,
+        "8": 0
+      },
+      "topology": 1
+    },
+    {
+      "boundary": 5,
+      "final_class_values": [
+        88,
+        62,
+        35
+      ],
+      "full153_cells_restore_exactly": true,
+      "schedule_nodes": 7,
+      "shared_fanouts": {
+        "0": 2,
+        "1": 2,
+        "2": 2,
+        "3": 3,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 1,
+        "8": 0
+      },
+      "topology": 2
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
