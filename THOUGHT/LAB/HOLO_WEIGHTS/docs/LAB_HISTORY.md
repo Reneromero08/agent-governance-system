@@ -730,3 +730,60 @@ B8-min (the ONE probe, Sol's exact spec):
   consistently beat deranged, random, and carrier across prompts and
   positions. Expected result: FAILURE (carrier-conditioned per B7-purify).
   If correct == deranged locally -> CLOSE the holonomy branch.
+
+## 2026-08-04 — B8-min RUN: FINAL VERDICT - the holonomy branch CLOSES
+
+B8-min built to Sol's exact spec (first run exposed a repeated orientation
+bug: Q = polar(Fp.T @ F) = polar(M^T); fixed to the Procrustes-correct
+Q = polar(F.T @ Fp) = polar(F_t^+ F_{t-1}) for the column convention -
+frame-continuity error confirms the fix: polar 1.20 vs identity 1.48 /
+haar 1.48 (polar now minimizes, direct 0.84).)
+
+RESULTS (6 prompts, k=32, L0=3, 6 transport stages, SU(2) coupling,
+exact-suffix readout from L7mlp):
+  correct   0.9750   (exact-suffix cos)
+  deranged  0.9750   == correct EXACTLY
+  random    0.9889   >  correct by +0.0139
+  carrier   0.9826   >  correct by +0.0076
+  identity  0.9781
+  haar      0.9743
+  direct    0.9889   == random EXACTLY
+  nopacket  boundary only
+  boundary cos saturated at 0.9986 for EVERY variant incl. nopacket
+  (Sol's blindness prediction confirmed - the exact-front borrow
+  saturates the boundary metric; the exact-suffix readout was the
+  decisive instrument)
+
+SOL'S ACCEPTANCE - FAILED ON EVERY COUNT:
+  correct > deranged : 0.0000  FAIL (identical)
+  correct > random   : -0.0139 FAIL (correct WORSE)
+  correct > carrier  : -0.0076 FAIL (correct WORSE)
+  local advantage over several stages: none (suffix readouts show the
+  correct packet degrading the boundary coherently)
+
+INTERPRETATION:
+  (1) correct == deranged exactly: the phase packet is a global carrier
+      prior, not prompt-conditioned - B7-purify's finding confirmed at
+      the transport level.
+  (2) correct < random: the exact phases are COHERENT with the
+      truncation-corrupted odd-residue structure, so the SU(2)-mixed
+      correction injects the holo model's own errors coherently; random
+      phases average out. The "correct" packet actively harms the
+      boundary.
+  (3) direct == random: even full complex packet content carries no
+      signal beyond noise - the packet channel is information-free at
+      the boundary, whatever its content.
+  (4) polar transport machinery is now convention-correct and does
+      minimize frame displacement - the mechanism works; the packet
+      content is what carries nothing.
+
+TERMINUS (per Sol's directive: "If correct and deranged packets are
+locally identical under that test, close the holonomy branch"):
+  The holonomy branch is CLOSED. The transported phase packet - correct,
+  deranged, random, carrier, or direct - carries no boundary-relevant
+  information and never beats noise. There is no transported borrowed
+  invariant, no durable holonomy, no phase-native non-collapse
+  compression in this construction. B7's headline gain remains the
+  fold-even carrier (an exact-side-channel codec), the purified phase
+  signal remains a small, global, non-transportable residue, and the
+  phase channel is information-free at the boundary once transported.
