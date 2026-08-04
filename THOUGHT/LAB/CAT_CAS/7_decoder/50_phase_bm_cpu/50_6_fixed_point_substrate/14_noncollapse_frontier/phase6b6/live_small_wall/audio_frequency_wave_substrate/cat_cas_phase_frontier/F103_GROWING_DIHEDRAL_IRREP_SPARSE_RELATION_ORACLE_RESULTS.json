@@ -1,0 +1,311 @@
+{
+  "case_comparisons": [
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 3,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 6,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 17,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 34,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 51,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "independent_restoration_exact": true,
+      "rotation_order": 17,
+      "support_history_matches": true
+    }
+  ],
+  "checks": {
+    "all_case_boundaries_match": true,
+    "all_case_commitments_match": true,
+    "all_declared_representations_are_homomorphisms": true,
+    "all_declared_roots_have_exact_order": true,
+    "all_final_support_records_match": true,
+    "all_group_basis_fourier_roundtrips": true,
+    "all_independent_forward_inverse_runs_restore": true,
+    "all_primary_supports_reach_full_two_port_capacity": true,
+    "all_support_histories_match": true,
+    "missing_inverse_fails_restoration": true,
+    "reordered_inverse_fails_restoration": true,
+    "reordered_modules_change_boundary": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "claim_ceiling": "F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "observed_primary_support_histories": [
+    [
+      {
+        "a_active_block_capacity": 6,
+        "a_nonzero_coordinates": 6,
+        "b_active_block_capacity": 6,
+        "b_nonzero_coordinates": 6,
+        "depth": 1,
+        "total_active_block_capacity": 12
+      },
+      {
+        "a_active_block_capacity": 6,
+        "a_nonzero_coordinates": 6,
+        "b_active_block_capacity": 6,
+        "b_nonzero_coordinates": 6,
+        "depth": 2,
+        "total_active_block_capacity": 12
+      },
+      {
+        "a_active_block_capacity": 6,
+        "a_nonzero_coordinates": 6,
+        "b_active_block_capacity": 6,
+        "b_nonzero_coordinates": 6,
+        "depth": 4,
+        "total_active_block_capacity": 12
+      },
+      {
+        "a_active_block_capacity": 6,
+        "a_nonzero_coordinates": 6,
+        "b_active_block_capacity": 6,
+        "b_nonzero_coordinates": 6,
+        "depth": 8,
+        "total_active_block_capacity": 12
+      },
+      {
+        "a_active_block_capacity": 6,
+        "a_nonzero_coordinates": 6,
+        "b_active_block_capacity": 6,
+        "b_nonzero_coordinates": 6,
+        "depth": 16,
+        "total_active_block_capacity": 12
+      }
+    ],
+    [
+      {
+        "a_active_block_capacity": 12,
+        "a_nonzero_coordinates": 12,
+        "b_active_block_capacity": 10,
+        "b_nonzero_coordinates": 10,
+        "depth": 1,
+        "total_active_block_capacity": 22
+      },
+      {
+        "a_active_block_capacity": 12,
+        "a_nonzero_coordinates": 12,
+        "b_active_block_capacity": 12,
+        "b_nonzero_coordinates": 12,
+        "depth": 2,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 12,
+        "a_nonzero_coordinates": 12,
+        "b_active_block_capacity": 12,
+        "b_nonzero_coordinates": 11,
+        "depth": 4,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 12,
+        "a_nonzero_coordinates": 12,
+        "b_active_block_capacity": 12,
+        "b_nonzero_coordinates": 12,
+        "depth": 8,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 12,
+        "a_nonzero_coordinates": 12,
+        "b_active_block_capacity": 12,
+        "b_nonzero_coordinates": 12,
+        "depth": 16,
+        "total_active_block_capacity": 24
+      }
+    ],
+    [
+      {
+        "a_active_block_capacity": 14,
+        "a_nonzero_coordinates": 14,
+        "b_active_block_capacity": 10,
+        "b_nonzero_coordinates": 10,
+        "depth": 1,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 22,
+        "a_nonzero_coordinates": 21,
+        "b_active_block_capacity": 18,
+        "b_nonzero_coordinates": 18,
+        "depth": 2,
+        "total_active_block_capacity": 40
+      },
+      {
+        "a_active_block_capacity": 34,
+        "a_nonzero_coordinates": 34,
+        "b_active_block_capacity": 34,
+        "b_nonzero_coordinates": 34,
+        "depth": 4,
+        "total_active_block_capacity": 68
+      },
+      {
+        "a_active_block_capacity": 34,
+        "a_nonzero_coordinates": 33,
+        "b_active_block_capacity": 34,
+        "b_nonzero_coordinates": 34,
+        "depth": 8,
+        "total_active_block_capacity": 68
+      },
+      {
+        "a_active_block_capacity": 34,
+        "a_nonzero_coordinates": 34,
+        "b_active_block_capacity": 34,
+        "b_nonzero_coordinates": 33,
+        "depth": 16,
+        "total_active_block_capacity": 68
+      }
+    ],
+    [
+      {
+        "a_active_block_capacity": 14,
+        "a_nonzero_coordinates": 14,
+        "b_active_block_capacity": 10,
+        "b_nonzero_coordinates": 10,
+        "depth": 1,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 22,
+        "a_nonzero_coordinates": 22,
+        "b_active_block_capacity": 18,
+        "b_nonzero_coordinates": 17,
+        "depth": 2,
+        "total_active_block_capacity": 40
+      },
+      {
+        "a_active_block_capacity": 38,
+        "a_nonzero_coordinates": 38,
+        "b_active_block_capacity": 34,
+        "b_nonzero_coordinates": 34,
+        "depth": 4,
+        "total_active_block_capacity": 72
+      },
+      {
+        "a_active_block_capacity": 68,
+        "a_nonzero_coordinates": 68,
+        "b_active_block_capacity": 66,
+        "b_nonzero_coordinates": 60,
+        "depth": 8,
+        "total_active_block_capacity": 134
+      },
+      {
+        "a_active_block_capacity": 68,
+        "a_nonzero_coordinates": 68,
+        "b_active_block_capacity": 68,
+        "b_nonzero_coordinates": 67,
+        "depth": 16,
+        "total_active_block_capacity": 136
+      }
+    ],
+    [
+      {
+        "a_active_block_capacity": 14,
+        "a_nonzero_coordinates": 14,
+        "b_active_block_capacity": 10,
+        "b_nonzero_coordinates": 10,
+        "depth": 1,
+        "total_active_block_capacity": 24
+      },
+      {
+        "a_active_block_capacity": 22,
+        "a_nonzero_coordinates": 22,
+        "b_active_block_capacity": 18,
+        "b_nonzero_coordinates": 18,
+        "depth": 2,
+        "total_active_block_capacity": 40
+      },
+      {
+        "a_active_block_capacity": 38,
+        "a_nonzero_coordinates": 37,
+        "b_active_block_capacity": 34,
+        "b_nonzero_coordinates": 34,
+        "depth": 4,
+        "total_active_block_capacity": 72
+      },
+      {
+        "a_active_block_capacity": 70,
+        "a_nonzero_coordinates": 70,
+        "b_active_block_capacity": 66,
+        "b_nonzero_coordinates": 64,
+        "depth": 8,
+        "total_active_block_capacity": 136
+      },
+      {
+        "a_active_block_capacity": 102,
+        "a_nonzero_coordinates": 102,
+        "b_active_block_capacity": 102,
+        "b_nonzero_coordinates": 101,
+        "depth": 16,
+        "total_active_block_capacity": 204
+      }
+    ]
+  ],
+  "oracle_primitive_state": "FULL_DIHEDRAL_GROUP_COORDINATES",
+  "preserved_subclaims": [
+    "EXACT_DIHEDRAL_GROUP_COORDINATE_AND_IRREP_BLOCK_PARITY",
+    "NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION",
+    "ADAPTIVE_IRREP_SUPPORT_SATURATES_FULL_TWO_PORT_CAPACITY_BY_DEPTH16_IN_ALL_FIVE_PRIMARY_CASES",
+    "FINAL_ONLY_BOUNDARY_WITH_EXACT_FORWARD_INVERSE_RESTORATION"
+  ],
+  "production_module_imported": false,
+  "production_projection_called": false,
+  "production_results_sha256": "15db3250e54ed25c650b481ccf4e75023c28520c375be84d423f4e80cd250cea",
+  "rejected_interpretations": [
+    "GENERAL_FINITE_GROUP_COMPILER",
+    "GENERAL_NON_TRANSLATION_INVARIANT_RELATIONS",
+    "FIXED_RANK_UNBOUNDED_DEPTH_CLOSURE",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_GROWING_DIHEDRAL_IRREP_SPARSE_RELATION_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
