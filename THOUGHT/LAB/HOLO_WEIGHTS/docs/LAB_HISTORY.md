@@ -531,3 +531,77 @@ holo-amplitude-only decoding and SU(2) refresh) - it is now the ONLY
 experiment that can still vindicate a transported borrowed invariant.
 Sol's gate says B8's fixed-phase variant would not establish the claim;
 the covariant variant is the last unrun measurement.
+
+## 2026-08-04 — Sol's gate review: PARTIAL - B7 phase independence FALSIFIED, ONE minimal covariant probe remains
+
+Sol's verdict on the B7-purify gate run:
+
+1. "Phase channel real" narrowly verified (+0.132 at identical mag+support)
+   BUT the hostile fact: prompt-swapped AND layer-swapped phases OUTPERFORM
+   matched phases. Until explained, that argues for reusable carrier
+   geometry / coordinate bias / coupling artifact - not exact odd-residue
+   transport. (Note: my swap test had prompt 0 supplying phases to itself
+   trivially - needs strict derangement.)
+2. B7 as phase demonstration: FALSIFIED (verified). The B7 gain depended
+   on the COMPLETE fold-even vector (direction, amplitude, support,
+   cross-coordinate relations), not merely magnitudes. B7 = successful
+   exact-side-channel codec; NOT phase coherence evidence.
+3. "Global carrier prior" plausible but NOT verified - swap test
+   contaminated by identical carrier, fixed strided global-coordinate
+   support, only 4 prompts, prompt-0 self-supply, possible low-frequency
+   support/carrier alignment. Required: strict derangement (every prompt
+   gets phases from a DIFFERENT prompt; every layer from a NONADJACENT
+   layer), carrier-only phase control, circular-concentration measurement
+   of phases across prompts/layers.
+4. L2/cosine geometry is consistent (relL2^2 = 1+r^2-2rc): correction
+   does RADIAL REPAIR (norm restoration) while rotating away from exact
+   direction. TEST THE RADIAL NULL: y_radial = yH * (||yE||/||yH||) -
+   scaling leaves cosine unchanged; if it matches most of the L2 gain,
+   the odd packet contributes little beyond norm repair. Also decompose
+   b_hat into components parallel/orthogonal to yH.
+5. Top-1 too coarse: need top-5 overlap, exact winner margin, rank of
+   exact winner under each mode, first divergence position in free
+   continuation.
+
+(a) yH + b_hat coupling is correct for the additive-residual claim (which
+    FAILED) but not the cleanest test of phase steering (addition is
+    nonunitary, changes norm, injects orthogonal error at every selected
+    coordinate). Replacement: reversible two-rail coupling with a fixed
+    SU(2) rotation (predeclared pi/4 Givens), retain second rail to
+    boundary, inverse rotation verifies reconstruction. Diagnostic:
+    coefficient-phase replacement c'_S = |c_S| * unit(s_S) with displaced
+    original phases kept in an ancillary rail (reversible).
+(b) Swap test only partially valid: repeat with 3 independent predeclared
+    support patterns, holo-energy-selected support, consistently permuted
+    support, strict prompt + nonadjacent-layer derangements, carrier-only
+    phases. Correct exact phases must beat ALL at identical support+mag.
+(c) GO/NO-GO: NO-GO for the full B8 matrix as designed. CONDITIONAL GO
+    for ONE minimal covariant-transport probe:
+      B=64, 16 held-out prompts, borrow through L0=3, remove AND
+      reversibly uncompute the exact branch, propagate only EIGHT
+      residual stages, fold-even rail ABSENT, holo-only magnitudes,
+      fixed predeclared support, reversible SU(2) coupling. Transport the
+      COMPLETE complex odd packet through moving frames
+      Q_t = polar(F_{t+1}^+ F_t), s_{t+1} = Q_t s_t - do NOT collapse
+      back to sparse phases after each stage. Controls: correct packet
+      polar transport / prompt-deranged same transport / random packet /
+      identity transport / Haar-unitary transport / direct complex packet
+      at identical paid bandwidth / carrier-only packet. Measure after
+      EVERY stage. Proceed to 32 layers + refresh schedules ONLY IF:
+      correct >= 0.05 above random AND carrier-only; correct beats strict
+      derangement; polar beats identity AND Haar; inverse transport
+      numerically reconstructs the initial packet; margin decays smoothly
+      not instantly. Otherwise STOP - no demonstrated transported
+      invariant.
+(d) Reference risk: full-exact=1.0 is self-consistency, not architectural
+    validation. The manual complex loop defines a complex extension of
+    Qwen, not automatically equivalent to engine prefill. Required:
+    carrier-zero equivalence vs exact engine layer-by-layer, real-boundary
+    logit agreement, conjugation equivariance F(z_bar) = conj(F(z)),
+    identical masking/GDN/gates/residual order/final norm, same boundary
+    projection for every mode. If carrier-zero equivalence fails, B7 may
+    measure the manual complex extension, not the model channel.
+
+FINAL: B7 phase independence falsified. ONE tightly scoped norm-preserving
+covariant transport probe remains justified. Failure of that probe closes
+this branch.
