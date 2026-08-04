@@ -873,3 +873,58 @@ measured at stage t are applied AT stage t - they should be fresh, so
 why do they hurt?) - or does it indicate the SU(2) coupling itself is
 mis-scaling (s carries |c| magnitudes, c' = (c + i s)/sqrt2 doubles the
 effective magnitude of the frame component)?
+
+## 2026-08-04 — B8-fresh2 RUN: oracle-verified freshness triangle (instrument validated)
+
+Fixes per Sol: EIGHT stages t08..t15 (L4mix..L7mlp, TEND=16 - the previous
+run's TEND=14 omitted L7); consistent REAL boundary (reference = full
+exact REAL trajectory logits, no carrier); real suffix with sanity check;
+ORACLE SU(2) control (s_oracle = -i(sqrt2 c_E - c)); strict cyclic
+derangement (prompt p <- prompt (p-1) mod 4); residual energy report.
+
+SANITY (instrument validated):
+  oracle identity err (max |c'_oracle - c_E|) = 2.4e-07  -> decoder
+    algebra mechanically correct (oracle == exact framed output)
+  boundary sanity (exact-real-state suffix vs reference) = 0.0
+    -> the real suffix reproduces the full exact real reference to
+    machine precision at every stage; boundary instrument valid
+  residual energy: in-frame = 0.357, out-of-frame = 0.930
+    -> only ~36% of the odd residue lives inside the k=32 frame
+
+RESULTS (4 prompts, k=32, real boundary):
+LOCAL hidden cos: all variants identical per stage to <2e-4
+  (t08 0.7144-0.7175, t12 0.627-0.628, t15 0.551-0.552);
+  oracle == nopacket to 4e-6 - even the EXACT frame component is a
+  negligible state perturbation.
+OUTPUT cos: fresh NEGATIVE at 5/8 stages (t08 -0.446, t10 -0.282,
+  t13 -0.068, t15 -0.034): fresh-phase corrected output is
+  anticorrelated with the exact output; random ~ 0, stale mildly
+  positive at some stages.
+SUFFIX cos: no variant consistently beats nopacket; ORACLE vs NOPACKET
+  deltas: +0.002, -0.032, -0.003, +0.003, +0.001, +0.016, -0.030,
+  +0.007 (mean ~ 0.000, within noise). FRESH vs nopacket: mixed
+  (-0.082, -0.002, +0.040, +0.012, -0.012, +0.046, -0.189, +0.016).
+  FRESH vs deranged: mixed, no consistent ordering.
+
+SOL'S INTERPRETATION RULES:
+  oracle identity fails? NO (2.4e-07) - decoder correct.
+  fresh beats deranged/random? NO - mixed, no advantage.
+  oracle/exactframed works? NO - oracle ~= nopacket: even with PERFECT
+    phase AND amplitude confined to the frame, the boundary does not
+    move. This goes beyond 'phase without amplitude is insufficient':
+    the FRAME ITSELF is boundary-irrelevant at k=32.
+  fresh == stale == deranged == random under valid reference? YES
+    (locally to <2e-4; at the boundary no variant beats nopacket).
+  fresh works locally but stale doesn't? NO - no local advantage for
+    fresh.
+
+VERDICT (pending Sol confirmation): with a validated instrument, the
+phase-only construction CLOSES: the phase packet (any content) and the
+exact frame component (any content) are boundary-irrelevant at k=32.
+The residual-energy split (36% in / 93% out) explains the ceiling: the
+frame cannot reach most of the residue, and the oracle shows it cannot
+even exploit the reachable 36%. The fresh-phase anticorrelation in the
+output cos (5/8 stages negative) is consistent with coherent injection
+of truncation-corrupted structure. The B7-purify finding (carrier-
+conditioned, non-transportable, non-information-bearing phase channel)
+is now confirmed at every level with a validated instrument.
