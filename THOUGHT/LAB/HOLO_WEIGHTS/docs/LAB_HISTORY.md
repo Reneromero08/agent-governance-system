@@ -605,3 +605,32 @@ Sol's verdict on the B7-purify gate run:
 FINAL: B7 phase independence falsified. ONE tightly scoped norm-preserving
 covariant transport probe remains justified. Failure of that probe closes
 this branch.
+
+## 2026-08-04 — B7-ref: Sol's reference validation RUN
+
+1. Carrier-zero equivalence: PASS at the boundary - manual complex loop with
+   c=0 matches the exact engine forward: logit cos 0.9999-1.0000, relL2
+   0.010-0.015 on all 4 prompts. The manual loop IS the model forward at
+   the boundary, so B7's boundary numbers measure the model channel, not a
+   phantom complex extension. (Per-layer hidden trace numbers invalidated:
+   recording-point mismatch - manual captured post-mixer, engine
+   post-MLP. Boundary agreement is the valid signal.)
+2. Conjugation equivariance F(z_bar)=conj(F(z)): FAILS STRUCTURALLY
+   (max rel dev 1.70). Cause: silu is not an odd function, so the twin-rail
+   complex extension (real silu applied per-rail) is NOT a holomorphic
+   complexification - it is a rail construction, which is exactly
+   EIGEN_BUDDY's design. Sol's check (d)2 is not satisfied; recorded as an
+   intrinsic property, not a bug.
+3. Radial null: CONFIRMED - scaling holo logits to the exact norm
+   (y_radial = yH * ||yE||/||yH||) cuts relL2 1.5546 -> 1.2850 (delta 0.27)
+   at ZERO information cost, MORE than the pure-exact phase correction
+   achieved (0.969 -> 0.779, delta 0.19). Cosine unchanged by construction
+   (0.1743 = 0.1743). Sol's reading verified: the correction's L2 gain is
+   mostly norm repair; its angular contribution is net-negative.
+
+Verdict: reference valid at the boundary (B7 numbers measure the model
+channel); twin-rail is non-holomorphic by design (silu); radial repair
+outperforms the phase correction at zero cost. The additive-correction
+branch is now closed by every check Sol specified. Remaining: the ONE
+minimal covariant transport probe (SU(2) rotational coupling, polar-unitary
+packet transport, L0=3, 8 stages).
