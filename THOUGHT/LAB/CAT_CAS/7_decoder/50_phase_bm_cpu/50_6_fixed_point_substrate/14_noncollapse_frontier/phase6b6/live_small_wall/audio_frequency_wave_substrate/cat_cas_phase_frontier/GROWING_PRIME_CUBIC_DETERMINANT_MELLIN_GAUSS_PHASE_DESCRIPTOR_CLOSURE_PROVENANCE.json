@@ -1,0 +1,22 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_CUBIC_DETERMINANT_MELLIN_GAUSS_PHASE_DESCRIPTOR_CLOSURE_PROVENANCE_V1",
+  "scientific_source_head": "f846d978a57de22665808311d1167af66ec56877",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "status": "QUALIFIED_GROWING_PRIME_CUBIC_DETERMINANT_MELLIN_GAUSS_PHASE_DESCRIPTOR_CLOSURE_STRICT_SCOPE",
+    "ephemeral_evidence_path": "/dev/shm/ags-audio-m180-qualifier-x67WV0",
+    "sha256sums_sha256": "1aae2aabf3657ad86385cfd25bd88982ab45aeefbbcda480ba3bf8150844a2df"
+  },
+  "files": {
+    "growing_prime_cubic_determinant_mellin_gauss_phase_descriptor_closure.py": "6a5665a3a1675756a6482716634b2cada0550308e17504b31fffc845520f7439",
+    "GROWING_PRIME_CUBIC_DETERMINANT_MELLIN_GAUSS_PHASE_DESCRIPTOR_CLOSURE_RESULTS.json": "504a16f4304026676c2a3f68d4e9d9a475b812c3f19bee21f1054c4dfdadf5bf",
+    "growing_prime_cubic_determinant_mellin_gauss_phase_descriptor_closure_independent_oracle.py": "fe9190b6d9a6f78c545efe704ff6ffdb9e160a362fc8bef3f4710a9c4bb79fa6",
+    "GROWING_PRIME_CUBIC_DETERMINANT_MELLIN_GAUSS_PHASE_DESCRIPTOR_CLOSURE_INDEPENDENT_ORACLE.json": "7d5f059fb13340968ed34d400d72319c05e292ad8417d787ee0267d745326d56",
+    "GROWING_PRIME_CUBIC_DETERMINANT_MELLIN_GAUSS_PHASE_DESCRIPTOR_CLOSURE_INDEPENDENT_REEXECUTION_REVIEW.md": "5055785e075958f05331d2efdbedd1fdd481b7b480e157b0c6f27e45e5c1c702",
+    "qualify_growing_prime_cubic_determinant_mellin_gauss_phase_descriptor_closure.sh": "44d4ba6b8796e3293198d0361b2ee461b3a96639a9ea1e1d5c3d7fd5bbffccc3"
+  },
+  "claim_ceiling": "PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE"
+}

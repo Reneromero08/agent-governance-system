@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CUBIC_DETERMINANT_GENERATING_RELATION_Q5_LOCAL_CLOSURE_Q7_TRANSFER_REJECTED_BOUNDED_CONDUCTOR_OPEN`
-**Roadmap version:** `14.45`
+**Status:** `STRICT_SCOPE_CUBIC_DETERMINANT_MELLIN_GAUSS_DESCRIPTOR_TRANSFERABLE_WITH_LINEAR_WIDTH_AND_QUADRATIC_COMPILER_WORK`
+**Roadmap version:** `14.46`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `2553cacc5966eb0f70325789741721c87c398640`
+**Reconciled source head:** `f846d978a57de22665808311d1167af66ec56877`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_Q5_SYMMETRIC3_DETERMINANT_OVER_SCALE_CUBIC_GENERATING_PHASE_RELATION_HAS_FULL_BOUNDARY_FOURIER_CLOSURE_AFTER27_PUBLIC_CONGRUENCE_STRATUM_COMPLETION_COORDINATES_IN_F41_BUT_THE_SAME_SEVEN_STRATUM_DESCRIPTOR_FAMILY_REJECTS_ALL1296_CHARACTER_PAIRS_ON576_EVENLY_SPREAD_Q7_OPEN_BOUNDARY_POINTS_WHILE_LOGICAL_STATE_GROWS_AS_Q7_AND_THE_IDENTICAL_SEPARABLE_CLASSICAL_DFT_REMAINS_WITH_EXACT_IN_PLACE_RESTORATION_AND_REUSE_SO_NO_TRANSFERABLE_FIXED_RANK_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED`
-**Current claim ceiling:** `Q5_F41_FULL78125_POINT_AND_Q7_F43_576_POINT_TRANSFER_ATTACK_SYMMETRIC3_DETERMINANT_OVER_SCALE_PUBLIC_SEVEN_CONGRUENCE_STRATA_MULTIPLICATIVE_CHARACTER_COMPLETION_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED`
+**Current claim ceiling:** `PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M179_CUBIC_DETERMINANT_STRATUM_COMPLETION_TRANSFER_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M180_TRANSFERABLE_MELLIN_GAUSS_DESCRIPTOR_LINEAR_WIDTH`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -94,9 +94,17 @@ A 27-coordinate public congruence-stratum completion closes five exact q=5
 character signatures on all 78,125 boundary points, but the same seven-stratum
 family rejects all 1,296 signatures on 576 evenly spread q=7 open-boundary
 points. The carrier grows from `5^7` to `7^7` cells and the completion from 27
-to 37 coordinates, while the identical separable classical DFT remains. The
-selected successor therefore tests a bounded-conductor middle-extension phase
-descriptor rather than adding scalar stratum weights or another Airy fixture.
+to 37 coordinates, while the identical separable classical DFT remains. M180
+then replaces scalar fitting and dense q=7 state with an exact transferable
+Mellin/Gauss descriptor. Its determinant-character transform is verified at
+every symmetric-matrix point for q=5, 7, and 11, while four declared q=5/q=7
+programs are independently reconstructed at the full boundary. The accepted
+resident descriptor has `q-1` cells and peak material state `4*q-3`, but its
+compiler performs theta-q-squared exact work and the identical classical
+character-sum recurrence has the same law. The selected successor therefore
+tests whether the growing Gauss coefficient family has a fixed-state exact
+procedural recurrence or necessarily growing recurrence rank; it must not add
+larger-q boundary fixtures.
 
 Every successor must answer:
 
@@ -122,7 +130,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`2553cacc5966eb0f70325789741721c87c398640`. The current 179-milestone
+`f846d978a57de22665808311d1167af66ec56877`. The current 180-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8018,6 +8026,65 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE
+```
+
+## M180: transferable Mellin/Gauss descriptor closes but grows with q
+
+Claim:
+
+```text
+BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+This is the phase-owned descriptor repair selected after M179. It expands the
+scale variable by multiplicative characters and uses the exact symmetric
+three-by-three determinant transform
+`Gamma(j)=G(j)^2*G(j+quadratic)*G(quadratic)^3`. The transform is verified at
+every one of the `q^6` matrix points for all determinant characters at q=5,
+q=7, and q=11: 62,500, 705,894, and 17,715,610 exact field equalities. Only
+the trivial and quadratic determinant characters have singular support. The
+trivial term is rank-stratified; the quadratic term has the independently
+verified rank-one contribution.
+
+Two q=5 and two q=7 programs are evaluated on all `q^7` final boundary
+points. A no-import oracle independently rebuilds finite fields, determinant,
+rank and congruence classification, character DFTs, and full matrix/reshape
+boundary transforms. Missing-channel and wrong-gamma mutations fail all four
+programs, and the exceptional singular terms are directly necessary.
+
+The accepted descriptor stores `q-1` resident field cells. Its compiler also
+materializes `q-1` Gauss cells, `q-1` gamma cells, and a q-cell discrete-log
+table, for counted accepted peak material state `4*q-3`; boundary evaluation
+uses `q-1` character terms and compilation performs theta-q-squared exact
+work. Dense `q^7` arrays are verification-only and excluded from the accepted
+path. The strongest matched classical implementation is the identical
+Mellin/Gauss character-sum recurrence with the same state, tables, and work.
+
+The character-negation basis change and its inverse restore the exact same
+descriptor backing. The final boundary is evaluated from the dual descriptor
+before inverse, persists outside inverse history, and the generation-two
+unrelated quadratic-index shear consumes the restored backing and restores it
+again without a snapshot. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+This is exact finite-field residue software. It is a formula-defined
+trace-function descriptor, not an implementation of l-adic middle-extension
+sheaf operations. It establishes no fixed-rank phase state, distinct phase
+resource, computational advantage, CATVM custody, Small Wall crossing,
+physical execution, replacement of physical bits with pi, or unbounded
+computation.
+
+Exact ceiling:
+
+```text
+PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE
+```
+
+Selected successor:
+
+```text
+EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
 ## 10. Roadmap Maintenance

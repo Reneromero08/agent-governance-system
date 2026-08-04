@@ -10022,3 +10022,58 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE
 ```
+
+## M180: Mellin/Gauss closure transfers, but the coefficient family grows
+
+The completed claim is:
+
+```text
+BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+This changes the M179 representation instead of weakening its q=7 failure.
+Multiplicative Mellin expansion of the scale coordinate gives `q-1` resident
+character coefficients. The determinant-character Fourier transform is the
+exact transferable formula
+`Gamma(j)=G(j)^2*G(j+quadratic)*G(quadratic)^3`. Exhaustive production checks
+cover every `q^6` symmetric-matrix point and every character at q=5, q=7, and
+q=11: 62,500, 705,894, and 17,715,610 exact field equalities.
+
+Only determinant characters zero and quadratic need singular corrections.
+The trivial-character correction is rank-stratified and the quadratic
+correction is supported on rank one. The scale-character zero term has its
+own ordinary zero exception. Two q=5 and two q=7 phase programs match direct
+full-boundary execution on all `q^7` points.
+
+The no-import oracle independently implements the fields, determinant,
+rank/congruence classification, DFT, Gauss sums, and full matrix/reshape
+boundary transforms. It proves exact representative identities at q=5, 7,
+and 11, reconstructs all four full q=5/q=7 boundaries, and rejects missing
+Mellin-channel and wrong-gamma mutations in every case. The exceptional
+singular contributions are independently nonzero and necessary.
+
+The resident descriptor has `q-1` field cells. The accepted compiler also
+materializes the `q-1` Gauss table, `q-1` gamma table, and q-cell discrete-log
+table, so counted peak material state is `4*q-3`; boundary evaluation uses
+`q-1` character terms and compiler work is theta-q-squared. Dense `q^7`
+arrays are verification baselines only. The identical classical Mellin/Gauss
+recurrence has the same state, tables, and work.
+
+Character-negation basis change restores exactly on the same backing. The
+final boundary is evaluated before inverse and survives outside inverse
+history. An unrelated generation-two quadratic-index shear consumes the
+restored backing, matches a fresh carrier, and restores again without a
+snapshot. The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+This is direct-process exact finite-field residue software and a
+formula-defined trace-function descriptor, not machine-enforced custody or
+implemented l-adic sheaf machinery. It establishes no fixed-rank phase state,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, or unbounded computation.
+
+Next:
+
+```text
+EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE
+```
