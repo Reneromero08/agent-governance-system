@@ -1083,3 +1083,74 @@ Sol's rule 'correct still fails or equals controls: close the phase-only
 construction'. The phase effects are real but tiny (the coherent packet
 is a ~1e-6 relL2 perturbation) and never boundary- or output-relevant
 vs doing nothing. The b8_freshness3 tables are superseded by this run.
+
+## 2026-08-04 — SOL APPROVES CLOSE (user directive: don't stop until Sol approves)
+
+Sol's verdict on B8-fresh4 (clean evidence): VALID for the tested
+construction. DECISION: APPROVE CLOSE. No k=64 or per-prompt rerun
+required.
+
+Verifications:
+(1) Correct vs controls: 2/8 neutral, 2/8 random, 3/8 deranged - no
+    consistent sign or stagewise advantage. Closure condition satisfied
+    for the gauge-aligned k=32 phase-only packet. Wording: "no
+    consistent effect above controls" (NOT "statistical noise" - 4
+    prompts, one random realization, no reliable noise distribution).
+(2) Effect size: partially verified. Hidden-state effect operationally
+    negligible; but relL2 equality at 1e-6 does NOT prove the actual
+    perturbation norm is 1e-6. Direct quantity:
+    ||y_correct - y_neutral||/||y_neutral|| (documentation, not a gate).
+    Safe claim: "correct packet produces no measurable, consistently
+    useful change" - NOT "phase information has magnitude 1e-6".
+(3) t08 random spike (+0.304): acceptable interpretation - decoder is
+    phase-sensitive (control sanity), doesn't support the correct packet.
+(4) exactframed ~= neutral: consistent with bridge failure
+    M(E_C) != E_R(M); closes THIS bridge, not all complex-to-real
+    boundaries.
+(5) b8_freshness / b8_freshness2 / b8_freshness3: SUPERSEDED - debugging
+    history only; none cited as evidence for phase superiority,
+    inferiority, or control equivalence.
+
+APPROVED TERMINUS (5 claims):
+  1. Independent low-rank SVD at k=256-512 does not preserve the measured
+     dense transformer channels sufficiently for coherent depth evolution.
+  2. The tested k=32 output frame captures ~37% of residual NORM but only
+     ~14% of residual ENERGY; most residual energy lies outside it.
+  3. Exact real content in that frame improves the immediate real output
+     consistently, but one-stage replacement does not provide consistent
+     final-boundary control.
+  4. The tested persistent-carrier complex-modulus evolution with real-
+     part collapse is not a commuting bridge to the original real
+     transformer.
+  5. The gauge-aligned k=32 phase-only packet does not outperform
+     neutral, random, or prompt-deranged controls and demonstrates no
+     durable transported invariant.
+  NOT supportable: "no phase-native representation or non-collapse
+  compression can exist" - the terminus belongs to the TESTED SVD
+  family, k=32 frame, carrier construction, SU(2) packet, and real
+  collapse boundary.
+
+NEXT PROGRAM (Sol): complex-native-from-embedding with a predeclared
+COMMUTING real boundary. Required identities before model-scale work:
+  M(L(x)) = x
+  M(E_C(L(x))) = E_R(x)   (real-compatible shell)
+  E_C(z_bar) = conj(E_C(z)) where conjugation symmetry is claimed
+  If the native complex evolution intentionally differs from the real
+  transformer, state that explicitly: it is a new substrate using
+  inherited factors, NOT a compressed reconstruction of the original.
+
+DEEPSEEK CORPUS INSPECTION (svh_ref question, resolved): the corpus
+_experts_k128.holo (deepseek-ai/_holo) contains _svh = NUMERIC int8-
+quantized shared SVh tensors + _svh_scales per tensor (format
+'int8_dedup', k=128). KEY STRUCTURAL FINDING: ALL 256 experts in a
+layer SHARE ONE SVh row space (V deduplicated) - experts differ only in
+their U factors. Per Sol: retained spectra recoverable (row norms of
+dequantized SVh = sigma_i); measurable: retained spectral decay within
+k=128, cross-expert retained-spectrum similarity, principal-angle
+overlap between expert U subspaces. NOT measurable without originals
+(user no longer has them): omitted spectral tail, full-rank effective
+rank, residual energy outside retained k, exact compression error.
+The shared-V structure is itself a compression surface: if expert U
+subspaces overlap in a low-dimensional manifold, the expert set is
+compressible even though each channel is full-rank - the coupled-mode
+direction at the EXPERT level (unmeasured).
