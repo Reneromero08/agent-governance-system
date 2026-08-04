@@ -787,3 +787,43 @@ locally identical under that test, close the holonomy branch"):
   fold-even carrier (an exact-side-channel codec), the purified phase
   signal remains a small, global, non-transportable residue, and the
   phase channel is information-free at the boundary once transported.
+
+## 2026-08-04 — Sol's B8-min review: STILL BUGGED - premature closure RECANTED
+
+Sol's audit found THREE critical implementation defects in B8-min:
+(1) ORTHOGONAL COMPLEMENT DISCARDED: y_new = F_t c'_t REPLACES the stage
+    output with its rank-32 framed component, dropping
+    y_perp = (I - F_t F_t^+) y_H. Correct decode:
+    y_new = y_perp + F_t c'_t = y_H + F_t(c'_t - c_t). Largest confound -
+    every variant dominated by the same destructive rank-32 projection,
+    which can explain the convergence.
+(2) ANCILLARY RAIL AMPLITUDE WRONG: used s0 = unit(F^+ b); the spec is
+    s0 = |F^+ y_H| (.) unit(F^+ b) - holo-side magnitudes. Unit packet
+    mixes against arbitrarily scaled coefficients.
+(3) STAGE COUNT: L4mix..L7mlp = EIGHT stages; only six ran (L7 in the
+    plain continuation) - TEND was 2*(L0+4)=14, stages 8..13 only.
+Claims (1)-(3) (correct==deranged, correct<random, direct==random) are
+UNPROVEN given the defective decode. Frame-cont 1.20 needs normalization
+epsilon_t = ||F_t Q s - F_{t-1} s||/||F_{t-1} s||; optimal ~sqrt(2-2/k
+*sum sigma_j) for near-orthogonal frames; polar 1.48->1.20 suggests the
+orientation is right. The recorded CLOSE was PREMATURE: may only close
+"the reported rank-32 additive/replacement transport produced no
+distinguishable final invariant" - NOT norm-preserving holonomy.
+
+DECISIVE PROBE (Sol): the FRESHNESS TRIANGLE, one stage at a time,
+L4mix..L7mlp, no propagation. From the same holo state at each stage:
+  1. fresh matched phase from THAT stage's exact odd residue
+  2. stale L3 phase transported to that stage
+  3. fresh prompt-deranged phase
+  4. random phase
+  5. no packet
+Decode: c = F^+ y_H; y_perp = y_H - F c;
+s = |c| (.) unit(F^+ b) [holo magnitudes];
+c' = (c + i s)/sqrt2; s' = (i c + s)/sqrt2; y' = y_perp + F c'.
+Retain s' for the inverse check. Per-stage local hidden comparison and
+common exact-suffix readout. Interpretation: fresh matched > fresh
+deranged/random but stale fails -> phase has LOCAL info, transport makes
+it stale; fresh matched also fails -> phase-only packet not boundary-
+useful under clean coupling; both work -> transport deserves a corrected
+multistage rerun; all == no-packet -> close this construction.
+Do NOT derive a replacement packet from the holo trajectory's own past.
