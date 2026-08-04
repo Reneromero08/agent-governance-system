@@ -928,3 +928,54 @@ output cos (5/8 stages negative) is consistent with coherent injection
 of truncation-corrupted structure. The B7-purify finding (carrier-
 conditioned, non-transportable, non-information-bearing phase channel)
 is now confirmed at every level with a validated instrument.
+
+## 2026-08-04 — B8-fresh3 (gauge-aligned) + B8-frame (real-world) RUN: final evidence set
+
+B8-fresh3 (Sol's gauge fix): s_neutral = -i(sqrt2-1)c keeps c' == c
+(packet-free output); p = |c| (.) unit(-i d) is gauge-aligned so that
+i p lands on d's phase; c' = c + i p/sqrt2. Variants: correct/deranged/
+random/neutral/exactframed(dual).
+
+B8-fresh3 SANITY: neutral-rail wiring check 5.97e-08 (neutral ==
+nopacket EXACTLY - decoder wiring correct). Wiring identity
+(h'_framed - h'_nopacket vs Re(F(cE-cH))): dev 3.9e-01 - THE DUAL->REAL
+BRIDGE IS BROKEN: the dual-world correction does not map cleanly onto
+the real trajectory (dual and real stage outputs differ substantially).
+
+B8-fresh3 RESULTS (output cos, PRIMARY): correct vs deranged - correct
+better at only 2/8 stages (t13, t15); correct vs random mixed (mean ~0);
+neutral == random EXACTLY in every table (random packet's net effect
+vanishes over k=32); correct max |cos| = 0.09 (t08: 0.090 vs deranged
+0.125). The previous run's strong anticorrelation (-0.446) is GONE:
+Sol's gauge diagnosis VERIFIED - it was the +pi/2 rotation artifact, not
+anti-usefulness. The gauge-aligned phase packet effect is small
+(relL2 ~1e-4 level) and never beats deranged/random consistently.
+
+B8-frame (REAL-world exact framed replacement, no dual world):
+  REAL-residue energy in/out of F: in=0.374 (norm; ~14% energy),
+    out=0.916 - consistent with the dual measurement.
+  OUTPUT cos: framed beats nopacket 8/8 stages (t08 0.764 vs 0.414,
+    t10 0.505 vs 0.111, t12 0.236 vs 0.005).
+  OUTPUT relL2: framed improves 8/8 stages (t08 0.643 vs 0.938).
+  HIDDEN relL2: MIXED (t08 framed WORSE: 0.752 vs 0.716).
+  SUFFIX cos: MIXED (5/8 framed better; deltas +-0.09, no consistent
+    boundary gain).
+
+INTERPRETATION (the complete final picture):
+(1) The k=32 frame IS a real control surface on the REAL OUTPUT (8/8
+    improvement with exact content) - the dual-world bridge failure
+    (0.39) was why the earlier exactframed looked inert.
+(2) But the frame is NOT a boundary control surface: exact framed
+    replacement does not consistently improve the exact-suffix logits -
+    the nonlinear suffix does not rank states monotonically by local
+    closeness (Sol's point confirmed).
+(3) The gauge-aligned phase packet never beats deranged/random/neutral:
+    per Sol's rule 'correct still fails or equals controls -> close the
+    phase-only construction'. CLOSE.
+(4) The real world is phase-degenerate (real residues, +/-1) - the
+    phase channel exists only in the complex world, and the bridge from
+    the complex world to the real boundary is broken (0.39). The phase
+    channel cannot reach the boundary it is supposed to control.
+(5) Per Sol's rule 'exact framed replacement remains ineffective [at
+    the boundary] -> close this k=32 frame regardless': the frame
+    closes at the boundary level even with exact content.
