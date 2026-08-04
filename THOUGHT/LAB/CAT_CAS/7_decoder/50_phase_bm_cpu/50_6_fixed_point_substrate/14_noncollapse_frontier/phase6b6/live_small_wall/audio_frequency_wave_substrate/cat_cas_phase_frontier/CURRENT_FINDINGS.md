@@ -9279,3 +9279,45 @@ EXACT_C17_PALEY_ASSOCIATION_PHASE_RELATION_ALGEBRA_NATIVE_COMPOSITION_INTERSECTI
 No CATVM custody, distinct phase resource, computational advantage, Small Wall
 crossing, physical execution, physical bit replacement, or unbounded
 catalytic computation is established.
+
+## M163: the Paley orbit subalgebra closes composition and intersection in three coordinates
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_PALEY_THREE_CLASS_ASSOCIATION_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_CYCLIC_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_RELATION_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IS_THE_IDENTICAL_THREE_COORDINATE_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_GENERAL_C17_RELATIONS
+```
+
+This repair restricts the relation family rather than quotienting arbitrary
+C17 relations. Translation-invariant kernels constant on zero, quadratic-
+residue, and quadratic-nonresidue difference classes form a three-coordinate
+association algebra over F103. Hadamard intersection is componentwise, and
+cyclic composition uses the exact intersection numbers `Q*Q=8E0+3Q+4N`,
+`Q*N=4Q+4N`, and `N*N=8E0+4Q+3N`.
+
+Two resident unresolved relation ports each have two consumers per step.
+Nonlinear relation squares, public masks, public kernels, composition shears,
+and intersection shears run in two noncommuting orders across depths through
+1024. The final scalar B boundary is the only projection. All 12 cases restore
+the exact six-cell carrier, and unrelated cross-family reuse matches a fresh
+carrier at restoration generation two without snapshot or history.
+
+The independent full-relation oracle reconstructs the orbit partition and all
+18 basis products, matches 60 production fields, and restores all 34 full
+semantic-reference cells. A delta supported at one residue is rejected as
+outside the family. The independently executed identical three-coordinate
+classical recurrence uses the same six carrier cells and 15-cell conservative
+working peak.
+
+The family is compact and closed under both required relation products, but it
+is fixed and highly structured and has no distinct resource over its matched
+classical recurrence. The next experiment applies the existing automatic DAG
+custody and atomic response ordering to this carrier:
+
+```text
+CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE_COMPOSITION_INTERSECTION_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE
+```
+
+No CATVM custody for this carrier, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical bit replacement,
+or unbounded catalytic computation is established.

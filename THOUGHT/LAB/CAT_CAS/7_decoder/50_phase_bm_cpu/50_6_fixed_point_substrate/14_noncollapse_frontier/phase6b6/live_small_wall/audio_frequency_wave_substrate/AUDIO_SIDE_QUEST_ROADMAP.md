@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO`
-**Roadmap version:** `14.28`
+**Status:** `STRICT_SCOPE_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE`
+**Roadmap version:** `14.29`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3767ff9940270a0e0a3c2d9f9e5742fa81b7c141`
+**Reconciled source head:** `0534622015abebd4ad839a47601fdaecf99ddc8e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_LINEAR_CONGRUENCE_NO_GO_FOR_SIMULTANEOUS_ARBITRARY_C17_CONVOLUTION_AND_COEFFICIENTWISE_HADAMARD_INTERSECTION_OVER_F17_WITH_ONLY_CONSTANT_PUBLIC_HADAMARD_MULTIPLIERS_PRESERVING_RANK2_4_8_NILPOTENT_PHASE_JETS_AND_EXACT_RESTRICTED_PROGRAM_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_COMPACT_CLASSICAL_JET_RECURRENCE_REMAINS`
-**Current claim ceiling:** `LINEAR_F17_QUOTIENTS_OF_F17_TO_THE_C17_WITH_ARBITRARY_BILINEAR_CONVOLUTION_AND_HADAMARD_OPERANDS_PLUS_RANK2_4_8_JET_COMPATIBLE_DIAGONAL_MULTIPLIER_SEARCH`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C17_PALEY_THREE_CLASS_ASSOCIATION_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_CYCLIC_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_RELATION_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IS_THE_IDENTICAL_THREE_COORDINATE_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_GENERAL_C17_RELATIONS`
+**Current claim ceiling:** `C17_TRANSLATION_INVARIANT_RELATIONS_CONSTANT_ON_ZERO_QUADRATIC_RESIDUE_AND_NONRESIDUE_DIFFERENCE_CLASSES_OVER_F103_TWO_PROGRAM_FAMILIES_THROUGH_DEPTH1024`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M162_F17_C17_COMMON_CONGRUENCE_HADAMARD_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M163_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_C17_PALEY_ASSOCIATION_PHASE_RELATION_ALGEBRA_NATIVE_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_THREE_COORDINATE_CLASSICAL_RECURRENCE`
+**Active primary successor:** `CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE_COMPOSITION_INTERSECTION_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3767ff9940270a0e0a3c2d9f9e5742fa81b7c141`. The current 162-milestone
+`0534622015abebd4ad839a47601fdaecf99ddc8e`. The current 163-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -7021,6 +7021,46 @@ EXACT_C17_PALEY_ASSOCIATION_PHASE_RELATION_ALGEBRA_NATIVE_COMPOSITION_INTERSECTI
 M162 establishes no CATVM custody, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded catalytic computation.
+
+## M163: a three-class Paley relation algebra closes both native products
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_PALEY_THREE_CLASS_ASSOCIATION_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_CYCLIC_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_RELATION_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IS_THE_IDENTICAL_THREE_COORDINATE_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_GENERAL_C17_RELATIONS
+```
+
+M163 takes the restricted-subalgebra route left open by M162. C17 differences
+are partitioned into zero, eight nonzero quadratic residues, and eight
+nonresidues. Relations constant on those classes form an exact
+three-coordinate automorphism-orbit algebra. Hadamard intersection is
+componentwise and cyclic composition closes through the independently
+reconstructed Paley intersection numbers.
+
+Two unresolved three-coordinate ports are consumed twice per step by
+nonlinear intersection and composition shears in two public noncommuting
+orders. Twelve cases through depth 1024 retain six carrier cells, project only
+the final B boundary, restore the exact borrowed cells, and reuse the same
+backing across unrelated families without snapshot or inverse history.
+
+The independent oracle imports neither production nor NumPy. It rebuilds the
+three orbit classes, enumerates all nine full C17 basis compositions and nine
+Hadamard products, rejects a one-residue delta as outside the family, matches
+60 production fields, and restores the full 34-cell semantic reference. The
+strongest classical implementation is separately executed and is the
+identical six-carrier-cell, 15-working-cell recurrence, so there is no
+resource advantage.
+
+The next step binds this new relation algebra to the already established
+atomic CATVM and automatic custody laws rather than enlarging the C17 fixture:
+
+```text
+CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE_COMPOSITION_INTERSECTION_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE
+```
+
+M163 establishes no CATVM custody for this carrier, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical
+bit replacement, or unbounded catalytic computation.
 
 ## 10. Roadmap Maintenance
 

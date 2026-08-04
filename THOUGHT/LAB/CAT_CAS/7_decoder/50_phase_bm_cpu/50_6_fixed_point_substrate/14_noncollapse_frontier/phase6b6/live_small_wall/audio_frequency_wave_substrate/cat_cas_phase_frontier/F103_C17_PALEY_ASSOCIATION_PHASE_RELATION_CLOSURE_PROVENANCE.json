@@ -1,0 +1,62 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 163,
+  "scientific_source_head": "0534622015abebd4ad839a47601fdaecf99ddc8e",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "production_source": {"path": "f103_c17_paley_association_phase_relation_closure.py", "sha256": "908ebe0a6214a1fa30fa13ecff432d3a98c013a5fee1d893f308d1b8ba848ff5"},
+    "oracle_source": {"path": "f103_c17_paley_association_phase_relation_closure_oracle.py", "sha256": "3052e933177e83c07d2c821eca631222deedd9248e689e50e4927115538dce81"},
+    "production_result": {"path": "F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE_RESULTS.json", "sha256": "cccd8d218cdafcd5b632ced856210cdf36d1bcf70337d3ff52ce7ccf746ce06f"},
+    "oracle_result": {"path": "F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE_ORACLE_RESULTS.json", "sha256": "a8dc5639baf943bbe096484baa2449505350f8905a6c3c1c519ae13bd76ce251"},
+    "qualifier": {"path": "qualify_f103_c17_paley_association_phase_relation_closure.sh", "sha256": "46e47fc3ca5891c9877d4a9ff334f48503fbe937d0cc7d397b733a0e22d7fa5f"},
+    "review": {"path": "F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE_INDEPENDENT_REEXECUTION_REVIEW.md", "sha256": "ed7a326711d21729afb08db10959919758740f4a0d16cb985dd48125bef0e27f"}
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m163-qualifier-yxkU0B"
+  },
+  "independent_oracle": {
+    "imports_production": false,
+    "imports_numpy": false,
+    "full17_relation_reference": true,
+    "case_count": 12,
+    "production_comparisons": 60,
+    "composition_basis_checks": 9,
+    "hadamard_basis_checks": 9,
+    "all_pass": true
+  },
+  "resource_law": {
+    "accepted_carrier_field_cells": 6,
+    "maximum_logical_working_field_cells_peak": 15,
+    "matched_compact_classical_carrier_field_cells": 6,
+    "matched_compact_classical_logical_working_field_cells_peak": 15,
+    "accepted_over_matched_compact_classical_carrier_ratio": 1,
+    "accepted_over_matched_compact_classical_logical_working_ratio": 1,
+    "retained_inverse_history_field_cells": 0,
+    "oracle_full_relation_carrier_field_cells": 34,
+    "dense_relation_table_cells": 0,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "C17_TRANSLATION_INVARIANT_RELATIONS_CONSTANT_ON_ZERO_QUADRATIC_RESIDUE_AND_NONRESIDUE_DIFFERENCE_CLASSES_OVER_F103_TWO_PROGRAM_FAMILIES_THROUGH_DEPTH1024",
+  "preserved_subclaims": [
+    "THREE_CLASS_PALEY_RELATIONS_CLOSE_UNDER_FULL17_CYCLIC_CONVOLUTION",
+    "THREE_CLASS_PALEY_RELATIONS_CLOSE_UNDER_FULL17_HADAMARD_INTERSECTION",
+    "FULL17_AND_THREE_COORDINATE_BOUNDARIES_MATCH_IN12_CASES",
+    "FULL34_CELL_AND_ACCEPTED_CARRIERS_RESTORE_EXACTLY",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_WITHOUT_SNAPSHOT"
+  ],
+  "rejected_interpretations": [
+    "GENERAL_C17_RELATION_CLOSURE_IN_THREE_COORDINATES",
+    "GENERAL_ASSOCIATION_SCHEME_COMPILER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
