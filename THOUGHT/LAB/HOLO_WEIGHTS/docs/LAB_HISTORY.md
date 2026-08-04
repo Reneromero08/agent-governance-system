@@ -827,3 +827,49 @@ it stale; fresh matched also fails -> phase-only packet not boundary-
 useful under clean coupling; both work -> transport deserves a corrected
 multistage rerun; all == no-packet -> close this construction.
 Do NOT derive a replacement packet from the holo trajectory's own past.
+
+## 2026-08-04 — B8-fresh: FRESHNESS TRIANGLE RUN (Sol's decisive probe, corrected decode)
+
+Setup: one stage at a time, stages t08..t13 (L4mix..L6mlp - NOTE: only 6
+stages again due to the 32-layer frame table covering t<=2*31; t14/t15
+(L7) were NOT included - L7 layers omitted from the frame build for the
+freshness loop - VERIFY with Sol whether this matters), 4 prompts,
+k=32. Corrected decode: c = F^+ y_H; y_perp = y_H - F c;
+s = |c| (.) unit(F^+ b); c' = (c + i s)/sqrt2; y' = y_perp + F c'.
+Variants: fresh (that stage's exact residue) / stale (L3 transported via
+polar chain) / deranged (prompt-0's fresh phases; prompt 0 self-matches -
+contamination noted) / random / nopacket. Metrics: local hidden cos
+(last token, post-stage state minus stage output + correction) and
+exact-suffix boundary logit cos (full-sequence real-only exact
+continuation; reference = full exact trajectory readout with carrier
+rail - methodology mismatch noted, affects all variants equally).
+
+LOCAL hidden cos (all stages): fresh 0.945-0.956, stale 0.945-0.957,
+deranged 0.946-0.956, random 0.9588, nopacket 0.9588. The local metric
+is dominated by the state (stage outputs are tiny relative to the
+state) - the correction's local effect is a ~0.001-0.000 perturbation,
+near the metric's resolution.
+
+EXACT-SUFFIX cos:
+  t08: fresh 0.2246  stale 0.2697  deranged 0.2941  random 0.2904  nopacket 0.2839
+  t09: fresh 0.3230  stale 0.3377  deranged 0.3722  random 0.4217  nopacket 0.3983
+  t10: fresh 0.2511  stale 0.3601  deranged 0.3700  random 0.5459  nopacket 0.5502
+  t11: fresh 0.3481  stale 0.4221  deranged 0.2093  random 0.5127  nopacket 0.5160
+  t12: fresh 0.5847  stale 0.5569  deranged 0.6052  random 0.7009  nopacket 0.6712
+  t13: fresh 0.4500  stale 0.5637  deranged 0.3794  random 0.4177  nopacket 0.3844
+
+READING (pending Sol verification): fresh matched phases are the WORST
+variant at 5/6 stages; random == nopacket at every stage; coherent
+phases (fresh/stale/deranged) all UNDERPERFORM nopacket. Per Sol's
+interpretation rules this maps to rule 2 (fresh fails: phase-only
+packet not boundary-useful under clean coupling) + rule 4 (random ==
+no-packet). The phase channel - even fresh, even with the corrected
+decode - carries no boundary-useful information; coherent exact phases
+ACTIVELY HARM the boundary. OPEN QUESTIONS FOR SOL: (a) does the
+t08..t13 window (missing L7) invalidate the verdict? (b) is the
+real-only suffix vs carrier-reference mismatch a confound? (c) is the
+'fresh worst' pattern explainable as coherent stale-injection (phases
+measured at stage t are applied AT stage t - they should be fresh, so
+why do they hurt?) - or does it indicate the SU(2) coupling itself is
+mis-scaling (s carries |c| magnitudes, c' = (c + i s)/sqrt2 doubles the
+effective magnitude of the frame component)?
