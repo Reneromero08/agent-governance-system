@@ -1040,3 +1040,46 @@ TERMINAL ACTION: no more suffix/transport experiments on this bridge.
 The bridge is formally closed. The phase frontier on REAL transformer
 weights as measured is exhausted within the tested constructions; the
 unmeasured directions are different programs.
+
+## 2026-08-04 — B8-fresh4 RUN: fixed controls, VALID result - phase packet does not beat controls
+
+User directive: don't stop until Sol approves. Bug hunt in my own code
+continued - THREE more bugs fixed in the freshness pipeline:
+  1. RANDOM CONTROL was degenerate (angle(torch.randn) = +-1 -> Re(i p)
+     identically zero, 1.5e-8). FIXED: uniform phases torch.rand*2*pi;
+     sanity ||Re(i F p_random)|| = 0.2251 NONZERO. This had invalidated
+     every freshness 'random' comparison (b8_freshness, b8_freshness2,
+     b8_freshness3).
+  2. DERANGEMENT: prompt 0 self-matched. FIXED: two-pass (precompute all
+     prompts' packets), strict cyclic p <- (p-1) mod N; routing check
+     correct-vs-deranged packet diff 0.1216 (nonzero - derangement real).
+  3. NEUTRAL VARIANT NEVER COMPUTED y_corr (only set s = s_neutral) - the
+     metric read the STALE y_corr from the previous variant (random), so
+     'neutral' displayed random's values: random==neutral was an ALIASING
+     bug, not physics. FIXED: y_corr = yH for neutral (true no-packet).
+     This invalidated the b8_freshness3 tables' neutral column.
+
+B8-fresh4 RESULTS (k=32, stages t08..t15, 4 prompts, gauge-aligned,
+uniform-phase random, strict derangement, true neutral, output cos
+PRIMARY):
+  correct vs neutral : 2/8 stages better (t08 +0.091, t13 +0.023;
+                        t09 -0.015, t10 -0.054, t11 -0.022, t12 -0.006,
+                        t14 -0.030, t15 -0.010)
+  correct vs random  : 2/8 better (t09 +0.006, t13 +0.058; t08 -0.213,
+                        t10 -0.021, t11 -0.001, t12 -0.029, t14 -0.002,
+                        t15 -0.031)
+  correct vs deranged: 3/8 better
+  random vs neutral  : 3/8 better (t08 +0.304 ACCIDENTAL alignment)
+  exactframed(dual)  : ~neutral at most stages (t08 0.329, t13 0.130)
+  OUTPUT relL2: correct ~= neutral (~1e-6 diffs); random WORSE
+    (1.0176 at t08); hidden relL2: correct == neutral to 6 decimals
+    (correction is a negligible state perturbation)
+
+VERDICT (pending Sol approval): with ALL controls now valid (proper
+random phases, true neutral, strict derangement, gauge-aligned packet,
+corrected decoder), the correct-phase packet does NOT beat controls:
+2/8 vs neutral, 2/8 vs random, 3/8 vs deranged - all noise-level. Per
+Sol's rule 'correct still fails or equals controls: close the phase-only
+construction'. The phase effects are real but tiny (the coherent packet
+is a ~1e-6 relL2 perturbation) and never boundary- or output-relevant
+vs doing nothing. The b8_freshness3 tables are superseded by this run.
