@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_RESIDENT_CUBIC_STRENGTH_FULL_SEPARATION_RANK_DIAGNOSED`
-**Roadmap version:** `14.40`
+**Status:** `STRICT_SCOPE_CUBIC_STRENGTH_CHARACTER_GRAPH_TIME_STATE_PARETO_DIAGNOSED`
+**Roadmap version:** `14.41`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `04de9642b2ac51a2ed3dea9cb555fadae888adc2`
+**Reconciled source head:** `2c25bc26030b2590de09b85466916f3bb1c652d6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_IS_SHARED_ACROSS_MULTIPLE_NONCOMMUTING_WEIL_CONSUMERS_AND_REACHES_FULL_Q_LATENT_DATA_SEPARATION_RANK_AFTER_THE_FIRST_CONTROLLED_CUBIC_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_DENSE_AND_EXACT_RADER_NTT_CLASSICAL_RECURRENCES_RETAIN_THE_SAME2Q2_LEADING_STATE`
-**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q113_ALTERNATE_DEPTH2_Q41_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_CHARACTER_GRAPH_STORES3Q_PHASE_FACTOR_CELLS_PLUS12D4_PUBLIC_MORPHISM_INTEGERS_AND_STREAMS_FINAL_ONLY_BOUNDARIES_WITHOUT_Q2_AMPLITUDE_STATE_WITH_EXACT_GRAPH_RESTORATION_AND_REUSE_BUT_PROJECTION_ENUMERATES8Q_TO_THE_2D_BASE_PATHS_AND_IDENTICAL_CLASSICAL_GRAPH_AND_Q2_RADER_NTT_TRANSFER_PARETO_BASELINES_REMAIN`
+**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q11_PRIMARY_DEPTH3_Q5_ALTERNATE_DEPTH2_Q5_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M174_RESIDENT_CUBIC_STRENGTH_FULL_SEPARATION_RANK_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M175_CHARACTER_GRAPH_TIME_STATE_PARETO_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_CHARACTER_SUM_SEPARATOR_MESSAGE_PHASE_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_WORK_OR_TIME_SPACE_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -64,8 +64,13 @@ material state. M174 makes the cubic strength itself a shared resident port.
 That port reaches full q latent/data separation rank after its first
 controlled interaction; the accepted phase recurrence and its strongest
 matched full-state classical recurrences all retain the same `2*q^2` leading
-state. The next repair tests an observable-preserving nonlinear character
-graph quotient instead of scaling the explicit linear chart.
+state. M175 replaces that explicit state with an exact nonlinear character
+graph using `3*q` runtime factor cells plus a linear public morphism stack,
+but cache-free final closure enumerates `8*q^(2*d)` base paths. The identical
+classical graph and the `2*q^2` work-reduced Rader transfer realize the same
+two Pareto points. The next repair targets exact character-sum separator
+messages that would have to combine subquadratic state with polynomial work;
+it must not merely add a generic cache or another depth fixture.
 
 Every successor must answer:
 
@@ -91,7 +96,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`04de9642b2ac51a2ed3dea9cb555fadae888adc2`. The current 174-milestone
+`2c25bc26030b2590de09b85466916f3bb1c652d6`. The current 175-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4720,7 +4725,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_IS_SHARED_ACROSS_MULTIPLE_NONCOMMUTING_WEIL_CONSUMERS_AND_REACHES_FULL_Q_LATENT_DATA_SEPARATION_RANK_AFTER_THE_FIRST_CONTROLLED_CUBIC_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_DENSE_AND_EXACT_RADER_NTT_CLASSICAL_RECURRENCES_RETAIN_THE_SAME2Q2_LEADING_STATE
+BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_CHARACTER_GRAPH_STORES3Q_PHASE_FACTOR_CELLS_PLUS12D4_PUBLIC_MORPHISM_INTEGERS_AND_STREAMS_FINAL_ONLY_BOUNDARIES_WITHOUT_Q2_AMPLITUDE_STATE_WITH_EXACT_GRAPH_RESTORATION_AND_REUSE_BUT_PROJECTION_ENUMERATES8Q_TO_THE_2D_BASE_PATHS_AND_IDENTICAL_CLASSICAL_GRAPH_AND_Q2_RADER_NTT_TRANSFER_PARETO_BASELINES_REMAIN
 ```
 
 Not established:
@@ -7720,6 +7725,63 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+## M175: resident cubic-strength character-graph time/state Pareto no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_CHARACTER_GRAPH_STORES3Q_PHASE_FACTOR_CELLS_PLUS12D4_PUBLIC_MORPHISM_INTEGERS_AND_STREAMS_FINAL_ONLY_BOUNDARIES_WITHOUT_Q2_AMPLITUDE_STATE_WITH_EXACT_GRAPH_RESTORATION_AND_REUSE_BUT_PROJECTION_ENUMERATES8Q_TO_THE_2D_BASE_PATHS_AND_IDENTICAL_CLASSICAL_GRAPH_AND_Q2_RADER_NTT_TRANSFER_PARETO_BASELINES_REMAIN
+```
+
+The direct-process exact carrier stores one q-cell cubic-strength factor, two
+q-cell data factors, and a public typed morphism stack. A depth-d program adds
+`4*d+1` node records and `12*d+4` payload integers. Final declared amplitudes
+are contracted recursively without a q-by-2q amplitude field, memo table, or
+materialized path list.
+
+All twelve declared cases reproduce the expanded exact boundary. Cache-free
+projection executes exactly `8*q^(2*d)` base-path evaluations: 102,152 at
+q=113 depth one, 117,128 at q=11 depth two, and 125,000 at q=5 depth three.
+The result therefore changes the representation but does not combine compact
+state with polynomial work.
+
+Exact inverse descriptors cancel the actual resident morphism stack in reverse
+order and restore the factor payload on the same backing. Unrelated q=23
+cross-family reuse reaches generation two and matches a fresh graph boundary
+and commitment without snapshot reload. This is exact algebraic restoration
+of the discrete graph carrier, not restoration of a materialized amplitude
+state that the accepted graph path never stores.
+
+The import-isolated oracle reconstructs all twelve cases with separate field,
+plan, kernel, graph, dense q-by-2q, inverse, control, and reuse implementations.
+It verifies every inverse map and dense forward/inverse restoration. M175 is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest comparison remains a Pareto pair. An identical classical graph
+uses the same `3*q` factors, public stack, and exponential contraction work.
+The exact Rader/NTT transfer uses polynomial work but retains `2*q^2` state
+plus counted linear scratch. The qualification runner deliberately creates
+that expanded comparison after graph projection, so absence of q² amplitude
+state applies to the accepted graph algorithm, not the whole test process.
+
+Exact ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q11_PRIMARY_DEPTH3_Q5_ALTERNATE_DEPTH2_Q5_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353
+```
+
+The result establishes no 3q amplitude-state closure, fixed work across depth,
+machine-enforced hidden factors, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_CHARACTER_SUM_SEPARATOR_MESSAGE_PHASE_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_WORK_OR_TIME_SPACE_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
 ## 10. Roadmap Maintenance

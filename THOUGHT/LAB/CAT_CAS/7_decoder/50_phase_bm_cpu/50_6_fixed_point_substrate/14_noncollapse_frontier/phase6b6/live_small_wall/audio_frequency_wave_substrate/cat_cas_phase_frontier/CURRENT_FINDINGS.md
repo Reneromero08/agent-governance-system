@@ -9810,3 +9810,44 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_RESIDENT_CUBIC_STRENGTH_DATA_CHARACTER_GRAPH_PHASE_QUOTIENT_CLOSURE_OR_NONLINEAR_OBSERVABILITY_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
+
+## M175: cubic-strength character-graph time/state Pareto no-go
+
+The exact direct-process character graph retains one q-cell cubic-strength
+factor, two q-cell data factors, and a linear public morphism stack. It has no
+q-by-2q amplitude field, recursive cache, or materialized path list. The final
+declared boundary is streamed by recursive character contraction.
+
+Across twelve declared cases the graph boundary matches a separately expanded
+q-by-2q dense recurrence and both production baselines. Its state law is
+`3*q` runtime factor cells plus `4*d+1` public node records and `12*d+4`
+payload integers. Its cache-free work law is exactly `8*q^(2*d)` base paths.
+Thus the q² state has not disappeared without cost; it has been exchanged for
+exponential final contraction.
+
+Exact inverse descriptors cancel the resident graph stack in reverse order,
+restore the same factor and node-list backing, and support unrelated
+generation-two reuse without snapshot reload. The separate oracle verifies
+every inverse map, dense forward/inverse restoration, graph controls, and all
+resource tuples. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION` for the
+discrete graph carrier.
+
+The identical classical graph realizes the same compact/exponential point.
+The work-reduced exact Rader/NTT recurrence realizes the polynomial-work point
+while retaining `2*q^2` state plus counted linear scratch. No subquadratic-
+state polynomial-work closure, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, or unbounded computation
+is established.
+
+Ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH2_Q11_PRIMARY_DEPTH3_Q5_ALTERNATE_DEPTH2_Q5_TWO_FIBER_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353
+```
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_CHARACTER_SUM_SEPARATOR_MESSAGE_PHASE_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_WORK_OR_TIME_SPACE_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
