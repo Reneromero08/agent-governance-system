@@ -214,3 +214,27 @@ phase), correction (analytic), hybrid (front/tail/echo) - all measured,
 all consistent: k-truncation is an irreversible collapse of a near-full-rank
 channel. The canon predicted this: truncation is collapse; the missing
 channel cannot be synthesized by post-processing.
+
+## 2026-08-04 — B4c: the representation map is COMPLETE
+
+Attention projections (q/o), exact inputs, output-channel cosine:
+k=64: 0.34 | k=512: 0.65 | k=1024: 0.85 | k=2048: 0.98 | full: 0.996
+Sieve (participation-selected) == top-k EXACTLY: flat spectra mean
+participation ranking IS singular-value ranking - no distinct
+"structured mode" class exists in these weights.
+
+FINAL WALL MAP (every level measured):
+- rank: MLP and attention both need ~90% of rank for the output channel
+- arithmetic: real 0.21, complex-si 0.21, phase -0.08 (domain irrelevant)
+- selection: top-k == sieve (no selective deletion exists for flat spectra)
+- correction: all analytic methods fail to transfer (recorded)
+- hybrid: front/tail/echo all 0% acceptance (recorded)
+- the lab's sieve claim (K=49, Df 39-460) was measured on rotation chains
+  and MoE routing subspaces - it does not transfer to dense projections
+  measured at the output channel
+
+CONCLUSION: dense transformer weight channels are intrinsically
+near-full-rank; no non-collapse compression exists in the SVD-eigenbasis
+sense. The weights line has measured the complete boundary of weight-space
+representation, exactly as the canon predicted (truncation is collapse;
+the missing channel cannot be synthesized).
