@@ -681,3 +681,52 @@ PROGRAM TERMINUS (whole phase-native frontier, per Sol's decision tree):
   The phase channel carries a small, non-transportable, carrier-conditioned
   residue. There is no non-collapse compression, no transported borrowed
   invariant, no durable holonomy in this construction.
+
+## 2026-08-04 — Sol's final review of B8: UNFAITHFUL - ONE MORE PROBE (B8-min)
+
+Sol's audit verdict on the B8 run:
+(a) Frame choice (u[:, :k] output frames): defensible. But the CONNECTION
+   ORIENTATION is reversed for the column-packet convention:
+   Q_t = polar(F_t^dagger F_{t-1}) minimizes ||F_t Q - F_{t-1}||
+   (orthogonal Procrustes) - I used polar(F_{t-1}^T F_t) = Q^T. The tiny
+   inverse error does not expose this (adjoint transport is also unitary
+   and reversible). Must verify directly: ||F_t s_t - F_{t-1} s_{t-1}||
+   minimized by polar transport.
+(b) The 24-layer holo continuation dilutes/erases the packet effect: the
+   0.982 common baseline is dominated by the suffix. Final equality only
+   establishes "no tested packet changed the final boundary after this
+   suffix", NOT "packets were equivalent during L4-L7". Mandatory control:
+   exact-front + NO packet + holo suffix - if that is also ~0.982, the
+   final metric is nearly blind.
+(c) identity/haar inverse errors are "polar-path mismatch" values, not
+   comparator failures - relabel, exclude from acceptance.
+(d) deranged == correct exactly: carrier dominance is the leading
+   explanation, but wiring must be verified: print ||s_correct-s_deranged||,
+   circular phase distance, L4 decoded-delta distance, prompt-index
+   checksum; inject a synthetic phase watermark to verify derangement
+   changes the decoded rail.
+(e) TERMINUS WORDING: "no boundary-relevant transported invariant was
+   demonstrated by additive output-frame transport" is SUPPORTED. "No
+   non-collapse compression exists" OVERREACHES (exceeds every experiment
+   run). The durable-holonomy claim remains technically open because the
+   norm-preserving SU(2) coupler and stagewise measurements were never run.
+
+B8-min (the ONE probe, Sol's exact spec):
+  B=64, L0=3, 8 prompts, 7 stages (L4mix..L7mlp), fold-even absent,
+  holo-derived rail magnitude only. At extraction place the phase packet
+  on an ancillary rail. Transport each stage with the CONVENTION-CORRECT
+  polar connection. Couple to the main rail with the fixed reversible
+  SU(2): [c'; s'] = (1/sqrt2)[[I, iI],[iI, I]][c; s], c = F_t^dagger y_H.
+  Retain s' (do not overwrite); decode F_t c' to residual space; apply
+  the adjoint at verification (joint-rail reconstruction). Measure after
+  EVERY stage: hidden cos + relL2 vs exact, main- and joint-rail norms,
+  correct-minus-random and correct-minus-deranged margins, frame-
+  continuity error, exact-suffix logit readout from each stage (common
+  boundary measurement), final holo-suffix logits (secondary).
+  Controls: correct/deranged/random/carrier/polar/identity/Haar + explicit
+  no-packet exact-front baseline.
+  ACCEPTANCE: correct-packet advantage appearing LOCALLY and surviving at
+  least several stages; need not be +0.05 immediately, but must
+  consistently beat deranged, random, and carrier across prompts and
+  positions. Expected result: FAILURE (carrier-conditioned per B7-purify).
+  If correct == deranged locally -> CLOSE the holonomy branch.
