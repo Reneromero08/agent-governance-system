@@ -395,3 +395,88 @@ VERIFIED. The phase channel carries genuinely more boundary-relevant
 information per scalar than raw complex storage, in complex space. The
 decisive remaining claim is the holonomy: can si be propagated and the
 exact source UNCOMPUTED before the boundary (B8 source-removal probe)?
+
+## 2026-08-04 — Sol's B8 review: REDESIGN (verdict before running B8)
+
+Sol's verdict on the B7 positive result and proposed B8:
+
+1. B7 is genuinely interesting but has NOT yet isolated phase information
+   from three side channels: (a) exact-derived magnitudes, (b) exact-derived
+   support indices, (c) fold-even carrier leakage. Random phases damaging
+   the boundary only proves phase PARTICIPATES in reconstruction, not that
+   the phase packet independently carries the borrowed invariant.
+
+2. GATE BEFORE B8 - purify B7 (factorial source-separation probe at the
+   extraction layer; zero/uncompute the fold-even branch before
+   reconstruction):
+   - phase source: exact odd-residue phase | random | prompt-swapped |
+     layer-swapped
+   - magnitude source: exact odd-residue magnitude | holo-only | constant
+     unit
+   - support source: exact top-k indices | holo-selected | fixed
+     predeclared (shared across prompts)
+   - DECISIVE COMPARISON: exact phase + holo magnitude + fixed/holo support
+     vs random phase + identical magnitude + identical support. If exact
+     phase still wins -> phase carries source-specific info. If advantage
+     survives prompt-specific phase but dies under prompt-swap -> genuinely
+     input-conditioned, not a global phase prior.
+   - bandwidth accounting MUST include: support-index bits, phase
+     precision, exact-derived magnitude bits, twin-rail state at
+     extraction. Holo magnitude as decoder side information = legitimate
+     (free); exact magnitude = NOT free. The B/2-phase vs B/4-component
+     comparison is fair ONLY if magnitudes are entirely holo-derived and
+     support costs matched.
+   - metrics beyond cosine: relative L2, norm ratio, top-1 agreement,
+     free-generation behavior.
+
+3. B8 = COVARIANT WILSON TRANSPORT (not fixed-phase reuse - fixed phase is
+   geometrically invalid; coordinates change per layer):
+   - frame F_t = stored output frame of out_proj/down_proj at stage t
+     (orthonormal, C^(d x k))
+   - weight-only connection M_t = F_{t+1}^+ F_t; polar unitary
+     Q_t = polar(M_t) = A B^+ where M_t = A S B^+
+   - propagate packet s_{t+1} = Q_t s_t (phase conservation across
+     changing bases; NO later exact branch; preserves packet norm)
+   - carry the COMPLETE complex packet internally (Q_t mixes phase and
+     magnitude; do NOT collapse back to phases); borrowed budget = initial
+     support + phase content; dense evolving packet = orbit-state
+   - decode at stage t using holo-side amplitude only:
+     delta_t = F_t(|F_t^+ z_t^H| (.) unit(s_t))
+   - couple delta_t through the same twin-rail boundary as purified B7
+   - do NOT re-derive si from the holo trajectory's self-difference (that
+     trajectory has no info about missing exact directions; it can define
+     a connection for transporting borrowed info but cannot be the source)
+
+4. EXACT EXPERIMENT MATRIX: 32 layers, both stages; B = 64, 256;
+   L0 (source-removal depth) = 0, 3, 7, 15; K (refresh interval) =
+   inf, 16, 8, 4; >= 16 held-out prompts never used in design decisions.
+   Variants: (1) covariant polar transport, (2) frozen phase/index reuse,
+   (3) identity transport in original frame, (4) direct complex packet
+   transported by the same Q_t, (5) random initial phases with identical
+   support/amplitudes, (6) prompt-swapped initial phases, (7) uncorrected/
+   full-exact/direct exact-front controls. At refresh: do NOT overwrite
+   the old packet - introduce the new odd residue on a second rail and
+   combine with a reversible SU(2) coupler, retaining the relation until
+   the boundary.
+   Metrics after EVERY stage: corrected hidden cosine + relative error,
+   packet norm, TorusOracle circular variance, boundary-logit cosine and
+   top-1, and inverse-transport reconstruction
+   Q_{L0}^+ ... Q_t^+ s_t ~= s_{L0}.
+
+5. FALSIFICATION CONDITIONS:
+   - B7 is falsified as a phase-channel result if its advantage
+     disappears when exact magnitudes AND exact-selected indices are
+     removed.
+   - Durable holonomy falsified if: covariant transport falls to
+     random/direct controls within 2-4 stages; prompt-swapped phases
+     perform as well as correct phases; refresh quality is not monotonic
+     in decreasing K; only exact-derived amplitudes or continually
+     refreshed exact information sustain the boundary; direct packets
+     match or beat si after complete bandwidth accounting.
+   - If purified B7 survives AND polar transport decays smoothly with
+     source distance while inverse transport remains exact -> run B8
+     fully: evidence of a transported borrowed invariant. The fixed-phase
+     B8 would NOT establish that claim.
+
+NEXT ACTION: run the B7 purification gate (b7_purify) per section 2, then
+B8 covariant Wilson transport per section 3-5.
