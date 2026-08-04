@@ -1,0 +1,23 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_HASSE_DAVENPORT_JACOBI_RELATION_RANK_PROVENANCE_V1",
+  "source_commit": "e46667ddc173cdcad4c8f7af2ded75e2f53c5470",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE",
+  "qualifier": {
+    "script": "qualify_growing_prime_hasse_davenport_jacobi_relation_rank.sh",
+    "status": "QUALIFIED_GROWING_PRIME_HASSE_DAVENPORT_JACOBI_RELATION_RANK_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m182-qualifier-m2imUO",
+    "sha256sums_sha256": "e693bcab394b9786e2a1108a9675c7ddf835a1df99cb2cd1aca05ab4453790ad"
+  },
+  "artifacts": {
+    "growing_prime_hasse_davenport_jacobi_relation_rank.py": "02aaff06067d309dcd3a34d6b9f9802e80db6c2d8781f903c42d49a58bd5bd75",
+    "GROWING_PRIME_HASSE_DAVENPORT_JACOBI_RELATION_RANK_RESULTS.json": "3498a7266d61c57cae920ca3fa073f658300d84239c563d6cccf995d7ea20107",
+    "growing_prime_hasse_davenport_jacobi_relation_rank_independent_oracle.py": "c868a6a4a77b264ac8307e324fb64aed67701459dcb9eea5339487582da83f74",
+    "GROWING_PRIME_HASSE_DAVENPORT_JACOBI_RELATION_RANK_INDEPENDENT_ORACLE.json": "366582566a1d284902b09c02e76c9135b273390f4508c54439b9d98816e15709",
+    "GROWING_PRIME_HASSE_DAVENPORT_JACOBI_RELATION_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "c211d46eee7458a1ef290a0134774771cce441fa82213a5e72642701cb15ec7c",
+    "qualify_growing_prime_hasse_davenport_jacobi_relation_rank.sh": "a2e30d6130b9e36667682272f63c79b7b2bb1cf5e82df839b5f9765035f5ab42"
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NO_RESTORATION_CLAIM"
+}
