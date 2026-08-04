@@ -174,3 +174,21 @@ Validated:
   The_Wall_2: missing channel is orthogonal, not magnitude. A single
   trajectory cannot measure direction against nothing; the fold pair
   (conjugate branch) is the required reference.
+
+## 2026-08-04 — B1: phase-domain MLP, first probe (naive re-embedding) FAILED
+
+B1 measured per-layer MLP output cosine on exact inputs (4B, 6 prompts):
+- real-domain .holo MLP:  mean 0.21 (reproduces the 0.177 corruption source)
+- phase re-embedding (e^{i*pi*tanh(v)}): mean -0.08 (WORSE - destroys direction)
+- phase + three-well lock: mean -0.02
+- twin-rail common-mode:   mean -0.08
+
+The Wall_2 sentence re-proven at MLP level: the missing channel cannot be
+recovered by reading phase if phase is not present in the public
+representation. Re-embedding real outputs into phases destroys the existing
+channel rather than creating the absent one.
+
+NOTE: this tested a naive re-embedding, NOT the lab's actual mechanism
+(EIGEN_BUDDY keeps the state complex throughout with the persistent si
+phase channel - phase accumulated, never re-embedded). B1v2 tests the real
+mechanism before the B4 (non-truncating) pivot.
