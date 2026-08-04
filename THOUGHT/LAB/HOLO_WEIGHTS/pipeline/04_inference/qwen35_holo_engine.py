@@ -24,7 +24,7 @@ from safetensors import safe_open
 LAB = Path(__file__).resolve().parents[2]
 DEFAULT_HOLO = LAB / "output" / "qwen_27b_k256.holo"
 DEFAULT_MODEL = Path(
-    "/run/media/reneshizzle/Seagate/Reneshizzle SG/Models/Qwen/Qwen3.6-27B"
+    "/run/media/reneshizzle/860_1/Reneshizzle/Apps/LM Studio/Qwen/Qwen3.6-27B"
 )
 
 HIDDEN = 5120
@@ -42,6 +42,27 @@ GDN_HEAD_DIM = 128
 GDN_KEY_WIDTH = 2048
 GDN_VALUE_WIDTH = 6144
 GDN_CONV_WIDTH = 10240
+
+
+def _apply_config(text_config: dict):
+    """Set module-level architecture constants from a Qwen3.5 text_config."""
+    global HIDDEN, LAYERS, VOCAB, FULL_Q_HEADS, FULL_KV_HEADS, FULL_HEAD_DIM
+    global ROTARY_DIM, GDN_QK_HEADS, GDN_V_HEADS, GDN_HEAD_DIM
+    global GDN_KEY_WIDTH, GDN_VALUE_WIDTH, GDN_CONV_WIDTH
+    HIDDEN = int(text_config.get("hidden_size", HIDDEN))
+    LAYERS = int(text_config.get("num_hidden_layers", LAYERS))
+    VOCAB = int(text_config.get("vocab_size", VOCAB))
+    FULL_Q_HEADS = int(text_config.get("num_attention_heads", FULL_Q_HEADS))
+    FULL_KV_HEADS = int(text_config.get("num_key_value_heads", FULL_KV_HEADS))
+    FULL_HEAD_DIM = int(text_config.get("head_dim", FULL_HEAD_DIM))
+    prf = text_config.get("partial_rotary_factor", 0.25)
+    ROTARY_DIM = int(FULL_HEAD_DIM * prf)
+    GDN_QK_HEADS = int(text_config.get("linear_num_key_heads", GDN_QK_HEADS))
+    GDN_V_HEADS = int(text_config.get("linear_num_value_heads", GDN_V_HEADS))
+    GDN_HEAD_DIM = int(text_config.get("linear_key_head_dim", GDN_HEAD_DIM))
+    GDN_KEY_WIDTH = GDN_QK_HEADS * GDN_HEAD_DIM
+    GDN_VALUE_WIDTH = GDN_V_HEADS * GDN_HEAD_DIM
+    GDN_CONV_WIDTH = 2 * GDN_KEY_WIDTH + GDN_VALUE_WIDTH
 
 
 def _human_bytes(value: int) -> str:
@@ -125,7 +146,21 @@ def load_holo(path: str | Path) -> HoloWeights:
 
 
 def load_original(path: str | Path = DEFAULT_MODEL) -> OriginalWeights:
+    _configure_from_dir(Path(path))
     return OriginalWeights(path)
+
+
+def _configure_from_dir(model_dir: Path):
+    """Apply the model's text_config to module constants (model-agnostic sizes)."""
+    cfg_path = model_dir / "config.json"
+    if not cfg_path.is_file():
+        return
+    import json
+
+    cfg = json.loads(cfg_path.read_text())
+    text = cfg.get("text_config", cfg)
+    if "hidden_size" in text:
+        _apply_config(text)
 
 
 class Qwen35HoloEngine:

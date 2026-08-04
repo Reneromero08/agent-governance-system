@@ -154,11 +154,21 @@ def save_adapters(adapters: dict[str, Adapter], path: Path) -> None:
     temporary.replace(path)
 
 
-def final_logit_cosines(reference: torch.Tensor, candidate: torch.Tensor) -> list[float]:
-    return [
-        float(F.cosine_similarity(reference[i, -1].float(), candidate[i, -1].float(), dim=0))
-        for i in range(reference.shape[0])
-    ]
+def final_logit_cosines(
+    reference: torch.Tensor, candidate: torch.Tensor, lengths: list[int] | None = None
+) -> list[float]:
+    """Last-REAL-token logit cosine per sequence (mask out padding)."""
+    out = []
+    for i in range(reference.shape[0]):
+        pos = (lengths[i] - 1) if lengths else (reference.shape[1] - 1)
+        out.append(
+            float(
+                F.cosine_similarity(
+                    reference[i, pos].float(), candidate[i, pos].float(), dim=0
+                )
+            )
+        )
+    return out
 
 
 def parse_args() -> argparse.Namespace:
@@ -273,7 +283,7 @@ def main() -> None:
             del captures
             gc.collect()
             corrected_logits = student.prefill(heldout_ids, adapters=adapters)
-            cosines = final_logit_cosines(reference_logits, corrected_logits)
+            cosines = final_logit_cosines(reference_logits, corrected_logits, [len(p) for p in prompt_strs[-2:]])
             mean_cosine = sum(cosines) / len(cosines)
             print(
                 f"ROUND {round_index} HELD-OUT FINAL-LOGIT COSINE: "
