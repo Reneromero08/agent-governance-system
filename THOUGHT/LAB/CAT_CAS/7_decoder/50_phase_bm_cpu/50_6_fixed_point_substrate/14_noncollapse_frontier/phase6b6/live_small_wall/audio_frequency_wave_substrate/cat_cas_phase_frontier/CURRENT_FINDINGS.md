@@ -9321,3 +9321,49 @@ CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE
 No CATVM custody for this carrier, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical bit replacement,
 or unbounded catalytic computation is established.
+
+## M164: exact Paley DAG custody is atomic at one fixture ceiling
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
+```
+
+The M163 relation algebra now runs behind a separate Linux userspace service.
+The controller imports only the fixed binary protocol, has no relation
+arithmetic, and does not compute the answer. For two public operation
+assignments the service derives the seven-node schedule from public topology,
+retains all 21 internal F103 relation cells, projects no intermediate, clears
+the actual DAG in reverse, verifies the exact 27-cell backing, increments the
+restoration generation, and only then attempts to write the 44-byte response.
+Boundaries are 80 for the first transaction and 5 for an unrelated restored-
+carrier reuse transaction; the latter matches a fresh service.
+
+The disconnect control reaches exact restoration before its failed response
+write. Hidden projection, null carrier, snapshot, and wrong-generation
+requests release no boundary. Missing, wrong, and reordered inverse commands
+are refused before execution with no response and no stderr. This refusal is
+an API control, not evidence that an executed mutated inverse fails.
+
+An independent oracle importing neither production process reconstructs full
+17-cell relations at all nine nodes. Its 153-cell reference matches both
+compact boundaries and reverses to the exact empty-internal state. The
+accepted path counts six sealed leaf cells, 21 hidden internal cells, zero
+retained inverse-history cells, zero snapshot bytes, 24 request bytes, and 44
+response bytes. Process allocator and physical peak memory remain unmeasured.
+
+The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
+`EXACT_ALGEBRAIC_RESTORATION`, limited to the exact nine-node fixture, two
+public operation assignments, and a same-UID pipe service. It establishes no
+generic scheduler, arbitrary relation program, OS or hardware isolation,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, or unbounded computation.
+
+The measured obstruction is retain-all carrier growth: all seven internal
+relations remain live, even though no inverse history is stored. The next
+phase-machine experiment is:
+
+```text
+TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING
+```

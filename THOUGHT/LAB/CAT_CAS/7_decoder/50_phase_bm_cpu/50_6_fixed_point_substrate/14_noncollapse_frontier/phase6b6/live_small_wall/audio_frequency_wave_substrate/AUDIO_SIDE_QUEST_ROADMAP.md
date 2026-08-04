@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE`
-**Roadmap version:** `14.29`
+**Status:** `STRICT_SCOPE_CATVM_EXACT9_NODE_PALEY_RELATION_DAG_CUSTODY`
+**Roadmap version:** `14.30`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `0534622015abebd4ad839a47601fdaecf99ddc8e`
+**Reconciled source head:** `f7e55db472649c3d84334aa11bd26564efb2a3b4`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C17_PALEY_THREE_CLASS_ASSOCIATION_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_CYCLIC_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_RELATION_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IS_THE_IDENTICAL_THREE_COORDINATE_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_GENERAL_C17_RELATIONS`
-**Current claim ceiling:** `C17_TRANSLATION_INVARIANT_RELATIONS_CONSTANT_ON_ZERO_QUADRATIC_RESIDUE_AND_NONRESIDUE_DIFFERENCE_CLASSES_OVER_F103_TWO_PROGRAM_FAMILIES_THROUGH_DEPTH1024`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M163_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_CLOSURE`
+**New mechanism development:** `ACTIVE_AFTER_M164_CATVM_PALEY_RELATION_DAG_CUSTODY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE_COMPOSITION_INTERSECTION_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_AND_REUSE`
+**Active primary successor:** `TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -36,14 +36,14 @@ CATVM and Small Wall work are retained only when they strengthen or diagnose
 the phase computer. They do not replace the phase-native mission.
 
 **Durable main-goal reminder:** The affine GF(2) lane is a tractable
-machine-law calibration, not the scientific destination. Finish the current
-automatic compact affine-DAG scheduler and its exact recursive custody law,
-then do not extend affine fixture size, owner count, or fanout without a
-specific main-mission blocker. The next post-scheduler frontier must
-prioritize CATVM enforcement for the automatically scheduled shared
-relational DAG, a compact non-affine relation signature or composition
-algebra broader than GF(2) affine relations, or a controlled CATVM Small Wall
-baseline/sham/augmented experiment.
+machine-law calibration, not the scientific destination. Its exact automatic
+15-node scheduler is complete at the fixture ceiling and must not be extended
+in size, owner count, or fanout without a specific main-mission blocker. M164
+now enforces one non-affine Paley relation DAG behind CATVM; its retain-all
+21-cell internal payload is the active obstruction. The next phase-owned step
+is topology-derived reversible rematerialization with matched compact
+classical pebbling, followed by a broader relation family or controlled Small
+Wall diagnostic only when the measured obstruction supports it.
 
 Every successor must answer:
 
@@ -69,7 +69,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`0534622015abebd4ad839a47601fdaecf99ddc8e`. The current 163-milestone
+`f7e55db472649c3d84334aa11bd26564efb2a3b4`. The current 164-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4698,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F17_C17_REPEATED_ROOT_NILPOTENT_PHASE_JET_QUOTIENT_CLOSES_TRANSLATION_INVARIANT_OPEN_RELATION_COMPOSITION_AND_NONLINEAR_CONVOLUTION_SHEAR_IN_RANKS2_4_8_THROUGH_DEPTH64_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_RANK_R_CLASSICAL_JET_RECURRENCE_REMAINS_AND_HIGHER_HASSE_MOMENTS_ARE_EXPLICITLY_OUTSIDE_THE_QUOTIENT
+CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -7061,6 +7061,61 @@ CATVM_ENFORCED_AUTOMATICALLY_SCHEDULED_SHARED_C17_PALEY_RELATION_DAG_WITH_NATIVE
 M163 establishes no CATVM custody for this carrier, distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical
 bit replacement, or unbounded catalytic computation.
+
+## M164: CATVM enforces atomic custody for one exact Paley relation DAG
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
+```
+
+M164 places the M163 three-coordinate relation algebra behind a separate
+Linux userspace service connected by fixed binary pipes. The controller
+imports only the protocol, contains no relation arithmetic, and does not
+compute the boundary. The backend derives a seven-operation forward and
+reverse schedule from each public nine-node topology while retaining two
+sealed three-cell leaves and seven three-cell internal relations. Only the
+final scalar boundary crosses the service boundary.
+
+For both declared public operation assignments the backend performs forward
+execution, retains the final boundary internally, clears the seven internal
+nodes in reverse, verifies exact restoration of the 27-cell backing, advances
+the restoration generation, and only then attempts the response write. The
+primary and unrelated reuse boundaries are 80 and 5; restored-carrier reuse
+matches a fresh service at generation two. Disconnect restores before the
+failed write attempt. Hidden projection, null carrier, snapshot, and wrong
+generation requests yield no boundary. Missing, wrong, and reordered inverse
+commands are rejected before execution with no response; this control does
+not claim that a mutated inverse was executed and then failed restoration.
+
+The independent oracle imports neither service nor controller nor NumPy. It
+reconstructs all nine nodes as full 17-cell relations, matches both compact
+boundaries, and clears the full 153-cell reference exactly. The accepted path
+retains 27 F103 carrier cells: six sealed leaf cells plus 21 internal cells,
+with zero inverse-history cells and zero snapshot bytes. Requests contain 24
+bytes and successful responses contain 44 bytes. Audit records contain only
+event names and generations, never relation values.
+
+The result is limited to this exact two-leaf, seven-internal-node fixture and
+two public operation assignments. It is not a generic scheduler, arbitrary
+Paley program, OS or hardware isolation result, distinct phase resource,
+computational advantage, Small Wall crossing, physical waveform execution,
+replacement of physical bits with pi, or unbounded catalytic computation.
+The 21-cell retain-all internal payload is the next concrete obstruction.
+
+The selected phase-machine repair is:
+
+```text
+TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING
+```
+
+It must derive legal live intervals, release points, reconstruction
+obligations, and exact reverse custody from public topology, reduce actual
+resident relation cells rather than moving history elsewhere, preserve the
+atomic final-only response law and restored-carrier reuse, and compare with
+both retain-all phase execution and the strongest matched classical pebbling
+schedule.
 
 ## 10. Roadmap Maintenance
 

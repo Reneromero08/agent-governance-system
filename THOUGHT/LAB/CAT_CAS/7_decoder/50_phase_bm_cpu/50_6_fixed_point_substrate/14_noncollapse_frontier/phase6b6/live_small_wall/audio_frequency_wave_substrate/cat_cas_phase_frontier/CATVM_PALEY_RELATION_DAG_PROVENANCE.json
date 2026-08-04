@@ -1,0 +1,81 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 164,
+  "scientific_source_head": "f7e55db472649c3d84334aa11bd26564efb2a3b4",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "protocol_source": {"path": "catvm_paley_relation_protocol.py", "sha256": "5772a5cef316dfdd04deb728bf5579ed1d2f91f6c4bd4b895355b6dfc0953844"},
+    "service_source": {"path": "catvm_paley_relation_service.py", "sha256": "b6d0c9841dc973d67ff2e26b8920f373b64119e7183fa592c65dd9ba8b43b6b5"},
+    "controller_source": {"path": "catvm_paley_relation_controller.py", "sha256": "c284e963dd51324625750e8e925643d9aba84ef090264be6810695e0d8e71097"},
+    "oracle_source": {"path": "catvm_paley_relation_oracle.py", "sha256": "009a1ccd753fc8402601853fa1330cf92a2f7250ef3cf88645f9ebaab7c48732"},
+    "production_result": {"path": "CATVM_PALEY_RELATION_DAG_RESULTS.json", "sha256": "5af21c6843cdbfb033ac1be524880e1dda179c7ed63e82a6ee93e2edc2708551"},
+    "oracle_result": {"path": "CATVM_PALEY_RELATION_DAG_ORACLE_RESULTS.json", "sha256": "91e4a6fa1a5d82defeed273f1c59859a3ef5e6e7a461c49cd2a5264a7f89d2a3"},
+    "qualifier": {"path": "qualify_catvm_paley_relation_dag.sh", "sha256": "527d7f9680ffac7b1556fb772c78a453ed52cf514a4e9c5c3fb2cbee1f912303"},
+    "review": {"path": "CATVM_PALEY_RELATION_DAG_INDEPENDENT_REEXECUTION_REVIEW.md", "sha256": "9db7ecb10093d38fa974d9c292290b638476f84a723a1806cc4c6cac172d8418"}
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_CATVM_PALEY_RELATION_DAG_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m164-qualifier-ijerbl"
+  },
+  "independent_oracle": {
+    "imports_service": false,
+    "imports_controller": false,
+    "imports_numpy": false,
+    "full17_relation_reference": true,
+    "topology_count": 2,
+    "full_relation_field_cells": 153,
+    "primary_boundary": 80,
+    "alternate_boundary": 5,
+    "full_reverse_clearing": true,
+    "all_pass": true
+  },
+  "atomicity_and_custody": {
+    "controller_imports_backend": false,
+    "controller_computes_boundary": false,
+    "response_write_after_restoration_for_each_transaction": true,
+    "disconnect_restores_before_write_attempt": true,
+    "hidden_projection_denied": true,
+    "null_carrier_denied": true,
+    "snapshot_denied": true,
+    "wrong_generation_denied": true,
+    "mutated_inverse_requests_rejected_without_response": true,
+    "stderr_bytes_all_services": 0,
+    "audit_contains_relation_values": false
+  },
+  "resource_law": {
+    "accepted_carrier_field_cells": 27,
+    "sealed_leaf_field_cells": 6,
+    "hidden_internal_field_cells": 21,
+    "compiled_schedule_nodes": 7,
+    "retained_inverse_history_field_cells": 0,
+    "snapshot_bytes": 0,
+    "controller_request_bytes": 24,
+    "backend_response_bytes": 44,
+    "dense_relation_table_cells": 0,
+    "oracle_full_relation_field_cells": 153,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS",
+  "preserved_subclaims": [
+    "PUBLIC_TOPOLOGY_DERIVES_THE_SEVEN_NODE_FORWARD_AND_REVERSE_SCHEDULE",
+    "TWENTY_ONE_INTERNAL_F103_CELLS_REMAIN_BACKEND_RESIDENT_AND_UNPROJECTED",
+    "RESPONSE_WRITE_IS_ATTEMPTED_ONLY_AFTER_EXACT_REVERSE_CLEARING_AND_RESTORATION_VERIFICATION",
+    "INDEPENDENT_FULL153_CELL_RELATION_BOUNDARIES_MATCH_BOTH_PUBLIC_OPERATION_ASSIGNMENTS",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_REACHES_RESTORATION_GENERATION_TWO_WITHOUT_SNAPSHOT"
+  ],
+  "rejected_interpretations": [
+    "GENERIC_DAG_SCHEDULER",
+    "ARBITRARY_PALEY_RELATION_PROGRAM",
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "EXECUTED_WRONG_MISSING_OR_REORDERED_INVERSE_RESTORATION_FAILURES",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

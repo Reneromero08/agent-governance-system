@@ -16,11 +16,12 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`65be0046ae02c79ab8c3b3356ef68d891de19e53`. The registry assigns one
+`f7e55db472649c3d84334aa11bd26564efb2a3b4`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-New mechanism development is stopped by user direction. Do not start or
-restart any successor without an explicit user resume instruction.
+The current 164-milestone lane is active by user direction. Continue from the
+selected successor in the roadmap and lane state; do not restart completed
+mechanisms or infer a stop from historical package language.
 
 ## 1. Prime Directive
 
@@ -52,20 +53,22 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_COHERENCE_DEPENDENT_TYPED_OPEN_OBSERVATION_RELATION_CLOSURE_AND_CATALYTIC_HYPOTHESIS_SCORING_ON_COMPACT_NECKLACE_PHASE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE
+CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
 ```
 
 Claim ceiling:
 
 ```text
-DIRECT_PROCESS_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_GRID17_FOUR_ROTOR_SIX_TYPED_OPEN_PUBLIC_OBSERVATION_PORTS_COMPLEX128_SOFTWARE_ONLY
+EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS
 ```
 
-This current result is `SOURCE_AUDITED_PACKAGE_LOCAL`. It has a matched
-classical complex recurrence with identical boundary results and does not
-establish a distinct phase resource, computational advantage, Small Wall
-crossing, physical waveform execution, or replacement of physical bits with
-pi.
+This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+production service retains all 21 internal relation cells, and the identical
+compact classical relation recurrence remains. It does not establish a
+generic DAG scheduler, distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, or replacement of physical
+bits with pi.
 
 The accumulated bounded architecture includes:
 
@@ -204,9 +207,9 @@ a completed roadmap phase
 
 Words such as `final`, `verified`, `complete`, `mission result`, and `highest-value successor` are package-level descriptions. They never authorize stopping.
 
-This owner-only nonterminal law does not override a user-directed development
-stop. While the current stop is active, preserve evidence and return after
-the clean reconciliation checkpoint. Do not select or execute a successor.
+This owner-only nonterminal law does not override a future explicit
+user-directed development stop. No such stop is active at the current
+reconciled source head.
 
 ## 4. Autonomous Authority
 
@@ -228,16 +231,15 @@ update roadmap authority files
 select the next experiment from accumulated evidence
 ```
 
-The present user-directed stop suspends mechanism replacement, experiment
-selection, and successor execution. Authority-file reconciliation, validation,
-the authorized checkpoint commit, and its push remain allowed.
+The user has explicitly resumed autonomous mechanism development, commit, and
+push on the canonical branch. Do not reintroduce a ceremony or approval pause
+from stale predecessor language inside this LAB lane.
 
 Use judgment. Choose work that most directly removes the blocker between current evidence and the next C-rung.
 
 ## 5. Operating Loop
 
-This loop is suspended after the current reconciliation checkpoint until an
-explicit user resume instruction.
+This loop is active.
 
 ```text
 explore
@@ -260,21 +262,23 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-STOPPED_BY_USER
+ACTIVE_AFTER_M164_CATVM_PALEY_RELATION_DAG_CUSTODY
 ```
 
 The named
 `COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
 work already exists at the reconciled source head; do not restart or extend
-it. The unstarted successor held without execution is:
+it. The selected next experiment is:
 
 ```text
-COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
+TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING
 ```
 
-Resume only after explicit user instruction following a clean reconciliation
-checkpoint, and record a verification level plus restoration classification
-for every new result.
+Derive live intervals, releases, reconstruction duties, and exact forward and
+reverse custody from public topology. Reduce actual resident relation cells
+without retaining an equivalent history elsewhere, preserve final-only atomic
+response ordering and restored-carrier reuse, and compare against retain-all
+and the strongest matched compact classical pebbling schedule.
 
 ## 7. Native No-Smuggle Law
 
@@ -396,7 +400,6 @@ AGENTS.md when current milestone or frontier authority changes
 ```
 
 Record the result, claim ceiling, C-rung position, best compact baseline, highest-leverage blocker, selected next work, and `terminal: false`.
-During the current stop, record held work as unstarted and non-executable.
 
 ## 12. Git and Physical Boundaries
 
