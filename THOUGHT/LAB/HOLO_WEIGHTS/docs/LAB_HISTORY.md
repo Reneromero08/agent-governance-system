@@ -480,3 +480,54 @@ Sol's verdict on the B7 positive result and proposed B8:
 
 NEXT ACTION: run the B7 purification gate (b7_purify) per section 2, then
 B8 covariant Wilson transport per section 3-5.
+
+## 2026-08-04 — B7-purify: Sol's factorial gate RUN - B7 headline falsified, weak real phase signal survives
+
+Setup: complex twin-rail as B7; correction with FOLD-EVEN BRANCH ZEROED
+(corr = yH + b_hat) except the baseline replicant. Factors: phase
+(exact/random/prompt-swap/layer-swap), magnitude (exact PAID | holo FREE),
+support (exact PAID | fixed FREE). B=64 (32 phases), 4 prompts, 32 layers.
+
+cos/top1/relL2/norm (vs manual exact-loop reference, full-exact = 1.0):
+  baseline      : 0.9292  4/4  0.634  1.404   (B7 twin-rail replicant - matches 0.9293)
+  pure-exact    : 0.7287  4/4  0.779  1.150   (exact phase + holo mag + fixed support)
+  pure-random   : 0.5967  4/4  0.823  1.016   (random phase + holo mag + fixed support)
+  pure-swap     : 0.7872  4/4  1.454  2.056   (prompt-0 phases on other prompts)
+  pure-swapL    : 0.7873  4/4  1.459  2.063   (previous-layer phases)
+  exactmag      : 0.7898  4/4  1.416  2.022   (exact mag + exact phase + fixed support)
+  exactsupport  : 0.7882  4/4  1.449  2.054   (random phase + exact support + holo mag)
+  uncorrected   : 0.8266  4/4  0.969  1.582
+  full-exact    : 1.0000  4/4  0.000  1.000
+
+GATE VERDICT:
+(1) PHASE CHANNEL IS REAL: pure-exact > pure-random by +0.132 cosine at
+    IDENTICAL magnitude and support (Sol's decisive comparison). The phase
+    packet carries information that magnitudes/support do not.
+(2) SOL'S FALSIFICATION CONDITION TRIGGERED: B7's headline advantage
+    (0.929 vs 0.827 uncorrected) VANISHES when the fold-even carrier is
+    zeroed - pure-exact (0.729) falls BELOW uncorrected (0.827) on cosine.
+    The B7 success was dominated by the exact-derived magnitudes in the
+    fold-even carrier |a| - Sol's side-channel warning confirmed exactly.
+    B7 as a phase-channel demonstration: FALSIFIED.
+(3) PHASES ARE A GLOBAL CARRIER PRIOR, NOT PROMPT-CONDITIONED: pure-swap
+    (0.787) ~= pure-exact (0.729), both ~= exactmag/exactsupport (~0.79).
+    The phase signal is dominated by the fixed complex carrier (identical
+    for every prompt by construction) - consistent with a fixed-carrier
+    exact source, but NOT prompt-specific information.
+(4) NUANCE: on relative L2 the phase correction HELPS (pure-exact 0.779 vs
+    uncorrected 0.969) and restores norm toward 1.0 (1.15 vs 1.58) - the
+    correction moves logits toward exact in distance while slightly
+    degrading direction cosine.
+(5) TOP-1 agreement 4/4 for ALL variants including pure-random and
+    uncorrected - the boundary decision is robust across every mode; the
+    phase effects are in the tail.
+
+DECISION POINT: purified B7 does NOT survive in the strong sense Sol
+required ("advantage disappears when exact magnitudes and exact-selected
+indices removed" -> triggered). The phase packet is real but weak and
+global. The remaining open test of the frontier claim is B8 covariant
+Wilson transport (polar-unitary packet propagation in moving frames with
+holo-amplitude-only decoding and SU(2) refresh) - it is now the ONLY
+experiment that can still vindicate a transported borrowed invariant.
+Sol's gate says B8's fixed-phase variant would not establish the claim;
+the covariant variant is the last unrun measurement.
