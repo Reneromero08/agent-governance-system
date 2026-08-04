@@ -1,0 +1,1838 @@
+{
+  "analytic_rank_law": {
+    "all_components_nonzero": true,
+    "cyclic_fourier_component": "PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+    "cyclic_hankel_rank": "q-1",
+    "nonlinear_or_nonuniform_procedural_compression_rejected": false,
+    "periodic_linear_recurrence_order": "q-1",
+    "scope": "ALL_DECLARED_VALID_PRIME_AND_AUXILIARY_FIELD_PAIRS_BY_EXACT_CHARACTER_ORTHOGONALITY",
+    "source_coefficient_sequence": "C_J=ONE_OVER_QMINUS1_TIMES_G_A_MINUS_J"
+  },
+  "claim": "BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_MELLIN_GAUSS_SOURCE_COEFFICIENT_FAMILIES_STREAM_ONE_FINAL_BOUNDARY_SCALAR_FROM_A_FIXED10_FIELD_CELL_ZERO_WORKSPACE_WITH_TOPOLOGY_REMATERIALIZED_INVERSE_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_WHILE_THE_SOURCE_COEFFICIENT_CYCLIC_HANKEL_RANK_IS_EXACTLY_QMINUS1_AND_THE_DETERMINANT_GAMMA_SEQUENCE_HAS_OBSERVED_RANK_QMINUS1_ON_EVERY_DECLARED_CASE_SO_TABLE_RESIDENCY_IS_REMOVED_BY_A_QUADRATIC_WORK_TIME_SPACE_TRADEOFF_NOT_BY_LINEAR_RECURRENCE_COMPACTION_AND_THE_IDENTICAL_CLASSICAL_STREAM_REMAINS",
+  "claim_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_exact_bit_width": false,
+    "fixed_linear_recurrence_rank": false,
+    "machine_enforced_hidden_intermediate": false,
+    "multi_boundary_amortized_advantage": false,
+    "nonlinear_procedural_compression_no_go": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_computation": false
+  },
+  "claim_ceiling": "PRIME_Q5_7_11_13_17_19_23_29_31_37_41_43_47_53_WITH_AUXILIARY_FIELDS_F41_43_331_157_1361_2053_1013_2437_1861_6661_13121_3613_12973_8269_ONE_DECLARED_RANK3_TRANSACTION_PER_FIELD_PLUS_Q5_RANK1_AND_ZERO_BOUNDARY_BRANCHES_DIRECT_PROCESS_SINGLE_SCALAR_PROJECTION_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_applicable_wrong_gamma_shift_controls_change_boundary": true,
+    "all_missing_inverse_controls_fail": true,
+    "all_omitted_channel_controls_change_boundary": true,
+    "all_reordered_commutative_inverses_restore": true,
+    "all_wrong_inverse_controls_fail": true,
+    "snapshot_used": false,
+    "zero_one_spectral_mode_rank_mutation_detected": true
+  },
+  "declared_fields": [
+    {
+      "auxiliary_prime": 41,
+      "q": 5
+    },
+    {
+      "auxiliary_prime": 43,
+      "q": 7
+    },
+    {
+      "auxiliary_prime": 331,
+      "q": 11
+    },
+    {
+      "auxiliary_prime": 157,
+      "q": 13
+    },
+    {
+      "auxiliary_prime": 1361,
+      "q": 17
+    },
+    {
+      "auxiliary_prime": 2053,
+      "q": 19
+    },
+    {
+      "auxiliary_prime": 1013,
+      "q": 23
+    },
+    {
+      "auxiliary_prime": 2437,
+      "q": 29
+    },
+    {
+      "auxiliary_prime": 1861,
+      "q": 31
+    },
+    {
+      "auxiliary_prime": 6661,
+      "q": 37
+    },
+    {
+      "auxiliary_prime": 13121,
+      "q": 41
+    },
+    {
+      "auxiliary_prime": 3613,
+      "q": 43
+    },
+    {
+      "auxiliary_prime": 12973,
+      "q": 47
+    },
+    {
+      "auxiliary_prime": 8269,
+      "q": 53
+    }
+  ],
+  "execution": "DIRECT_PROCESS_EXACT_FINITE_FIELD_RESIDUE_STREAMING_SOFTWARE",
+  "matched_baselines": {
+    "computational_advantage_established": false,
+    "identical_classical_stream": {
+      "same_exact_boundary": true,
+      "same_gauss_orbit_and_character_search_work": true,
+      "workspace_field_cells": 10
+    },
+    "m180_materialized_table_path": {
+      "accepted_peak_field_cells": "4*q-3",
+      "compiler_work": "THETA(q^2)",
+      "per_boundary_character_terms_after_compile": "q-1"
+    },
+    "many_boundary_projection_advantage_claimed": false,
+    "one_stream_point_dominates_materialized_path": false
+  },
+  "next_obstruction": "M181_REMOVES_QMINUS1_TABLE_RESIDENCY_FOR_ONE_PROJECTED_SCALAR_ONLY_BY_SPENDING_THETA_Q2_REMATERIALIZATION_WORK_WHILE_THE_SOURCE_COEFFICIENT_SEQUENCE_HAS_EXACT_FULL_QMINUS1_CYCLIC_HANKEL_RANK_AND_THE_IDENTICAL_CLASSICAL_STREAM_IS_AVAILABLE_SO_THE_NEXT_TEST_MUST_USE_NONLINEAR_HASSE_DAVENPORT_OR_JACOBI_PHASE_RELATIONS_TO_REDUCE_THE_GAUSS_FAMILY_WORK_STATE_FRONTIER_OR_ESTABLISH_THEIR_GROWING_RELATION_RANK",
+  "observed_resource_law": {
+    "accepted_full_lifecycle_named_exact_field_capacity_bits": "16*CEIL_LOG2_P",
+    "accepted_full_lifecycle_named_exact_field_peak_including_output": 16,
+    "accepted_workspace_carrier_field_cells": 10,
+    "accepted_workspace_cell_count_independent_of_q": true,
+    "accepted_workspace_exact_bit_width_independent_of_q": false,
+    "diagnostic_hankel_and_sequence_materialization_excluded_from_accepted_path": true,
+    "forward_gauss_calls_rank3_nonzero_scale": "4*(q-1)+1",
+    "forward_work_growth_per_projected_scalar": "THETA(q^2)_GAUSS_ORBIT_TERMS_PLUS_CHARACTER_SEARCH",
+    "full_lifecycle_gauss_calls_rank3_nonzero_scale": "8*(q-1)+2",
+    "full_lifecycle_work_growth_per_projected_scalar": "THETA(q^2)_GAUSS_ORBIT_TERMS_PLUS_CHARACTER_SEARCH",
+    "gauss_orbit_terms_per_call": "q-1",
+    "loop_control_integers_python_objects_bigint_expression_and_modular_pow_temporaries_excluded": true,
+    "maximum_named_exact_field_temporaries_outside_workspace": 5,
+    "persisted_projected_output_field_cells_during_inverse": 1,
+    "projection_output_field_cells": 1,
+    "public_field_configuration_integer_scalars": 5,
+    "public_program_and_boundary_scalars": 9,
+    "resident_gauss_or_coefficient_tables": 0,
+    "retained_inverse_history_cells": 0,
+    "workspace_capacity_bits": "10*CEIL_LOG2_P"
+  },
+  "rank_diagnostics": [
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 4,
+      "auxiliary_prime": 41,
+      "determinant_character": 1,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 40,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 4,
+      "gamma_periodic_linear_recurrence_order": 4,
+      "q": 5,
+      "sequence_width": 4,
+      "source_coefficient_cyclic_hankel_rank": 4,
+      "source_coefficient_periodic_linear_recurrence_order": 4,
+      "zero_one_spectral_mode_mutation_rank": 3
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 6,
+      "auxiliary_prime": 43,
+      "determinant_character": 3,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 84,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 6,
+      "gamma_periodic_linear_recurrence_order": 6,
+      "q": 7,
+      "sequence_width": 6,
+      "source_coefficient_cyclic_hankel_rank": 6,
+      "source_coefficient_periodic_linear_recurrence_order": 6,
+      "zero_one_spectral_mode_mutation_rank": 5
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 10,
+      "auxiliary_prime": 331,
+      "determinant_character": 5,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 220,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 10,
+      "gamma_periodic_linear_recurrence_order": 10,
+      "q": 11,
+      "sequence_width": 10,
+      "source_coefficient_cyclic_hankel_rank": 10,
+      "source_coefficient_periodic_linear_recurrence_order": 10,
+      "zero_one_spectral_mode_mutation_rank": 9
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 12,
+      "auxiliary_prime": 157,
+      "determinant_character": 7,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 312,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 12,
+      "gamma_periodic_linear_recurrence_order": 12,
+      "q": 13,
+      "sequence_width": 12,
+      "source_coefficient_cyclic_hankel_rank": 12,
+      "source_coefficient_periodic_linear_recurrence_order": 12,
+      "zero_one_spectral_mode_mutation_rank": 11
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 16,
+      "auxiliary_prime": 1361,
+      "determinant_character": 9,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 544,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 16,
+      "gamma_periodic_linear_recurrence_order": 16,
+      "q": 17,
+      "sequence_width": 16,
+      "source_coefficient_cyclic_hankel_rank": 16,
+      "source_coefficient_periodic_linear_recurrence_order": 16,
+      "zero_one_spectral_mode_mutation_rank": 15
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 18,
+      "auxiliary_prime": 2053,
+      "determinant_character": 11,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 684,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 18,
+      "gamma_periodic_linear_recurrence_order": 18,
+      "q": 19,
+      "sequence_width": 18,
+      "source_coefficient_cyclic_hankel_rank": 18,
+      "source_coefficient_periodic_linear_recurrence_order": 18,
+      "zero_one_spectral_mode_mutation_rank": 17
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 22,
+      "auxiliary_prime": 1013,
+      "determinant_character": 13,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 1012,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 22,
+      "gamma_periodic_linear_recurrence_order": 22,
+      "q": 23,
+      "sequence_width": 22,
+      "source_coefficient_cyclic_hankel_rank": 22,
+      "source_coefficient_periodic_linear_recurrence_order": 22,
+      "zero_one_spectral_mode_mutation_rank": 21
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 28,
+      "auxiliary_prime": 2437,
+      "determinant_character": 15,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 1624,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 28,
+      "gamma_periodic_linear_recurrence_order": 28,
+      "q": 29,
+      "sequence_width": 28,
+      "source_coefficient_cyclic_hankel_rank": 28,
+      "source_coefficient_periodic_linear_recurrence_order": 28,
+      "zero_one_spectral_mode_mutation_rank": 27
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 30,
+      "auxiliary_prime": 1861,
+      "determinant_character": 17,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 1860,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 30,
+      "gamma_periodic_linear_recurrence_order": 30,
+      "q": 31,
+      "sequence_width": 30,
+      "source_coefficient_cyclic_hankel_rank": 30,
+      "source_coefficient_periodic_linear_recurrence_order": 30,
+      "zero_one_spectral_mode_mutation_rank": 29
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 36,
+      "auxiliary_prime": 6661,
+      "determinant_character": 19,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 2664,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 36,
+      "gamma_periodic_linear_recurrence_order": 36,
+      "q": 37,
+      "sequence_width": 36,
+      "source_coefficient_cyclic_hankel_rank": 36,
+      "source_coefficient_periodic_linear_recurrence_order": 36,
+      "zero_one_spectral_mode_mutation_rank": 35
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 40,
+      "auxiliary_prime": 13121,
+      "determinant_character": 21,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 3280,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 40,
+      "gamma_periodic_linear_recurrence_order": 40,
+      "q": 41,
+      "sequence_width": 40,
+      "source_coefficient_cyclic_hankel_rank": 40,
+      "source_coefficient_periodic_linear_recurrence_order": 40,
+      "zero_one_spectral_mode_mutation_rank": 39
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 42,
+      "auxiliary_prime": 3613,
+      "determinant_character": 23,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 3612,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 42,
+      "gamma_periodic_linear_recurrence_order": 42,
+      "q": 43,
+      "sequence_width": 42,
+      "source_coefficient_cyclic_hankel_rank": 42,
+      "source_coefficient_periodic_linear_recurrence_order": 42,
+      "zero_one_spectral_mode_mutation_rank": 41
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 46,
+      "auxiliary_prime": 12973,
+      "determinant_character": 25,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 4324,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 46,
+      "gamma_periodic_linear_recurrence_order": 46,
+      "q": 47,
+      "sequence_width": 46,
+      "source_coefficient_cyclic_hankel_rank": 46,
+      "source_coefficient_periodic_linear_recurrence_order": 46,
+      "zero_one_spectral_mode_mutation_rank": 45
+    },
+    {
+      "analytic_identity": "DFT_J_OF_HINV_G_A_MINUS_J_AT_FREQUENCY_K_EQUALS_PSI_G_TO_K_TIMES_CHI_A_G_TO_K",
+      "analytic_source_coefficient_fourier_support": 52,
+      "auxiliary_prime": 8269,
+      "determinant_character": 27,
+      "diagnostic_materialized_cells_excluded_from_accepted_path": 5512,
+      "every_analytic_spectral_component_nonzero": true,
+      "gamma_cyclic_hankel_rank": 52,
+      "gamma_periodic_linear_recurrence_order": 52,
+      "q": 53,
+      "sequence_width": 52,
+      "source_coefficient_cyclic_hankel_rank": 52,
+      "source_coefficient_periodic_linear_recurrence_order": 52,
+      "zero_one_spectral_mode_mutation_rank": 51
+    }
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "transaction_cases": [
+    {
+      "auxiliary_prime": 41,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 25,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 68,
+          "boundary_channels": 4,
+          "character_calls": 8,
+          "character_orbit_visits": 16,
+          "gauss_calls": 17,
+          "gauss_field_additions": 68,
+          "gauss_field_multiplications": 204,
+          "gauss_orbit_terms": 68
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 68,
+          "boundary_channels": 4,
+          "character_calls": 8,
+          "character_orbit_visits": 16,
+          "gauss_calls": 17,
+          "gauss_field_additions": 68,
+          "gauss_field_multiplications": 204,
+          "gauss_orbit_terms": 68
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 25,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "640974ec56722fd2fd5efecd66e57ff5a3daf418fa616dd1f3b952450ab7ab66"
+      },
+      "program": {
+        "determinant_character": 1,
+        "scale_character": 2
+      },
+      "q": 5,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 3,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 2,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 2,
+        "scale_character": 1
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 4,
+      "workspace_capacity_bits": 60,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 43,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 9,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 150,
+          "boundary_channels": 6,
+          "character_calls": 12,
+          "character_orbit_visits": 36,
+          "gauss_calls": 25,
+          "gauss_field_additions": 150,
+          "gauss_field_multiplications": 450,
+          "gauss_orbit_terms": 150
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 150,
+          "boundary_channels": 6,
+          "character_calls": 12,
+          "character_orbit_visits": 36,
+          "gauss_calls": 25,
+          "gauss_field_additions": 150,
+          "gauss_field_multiplications": 450,
+          "gauss_orbit_terms": 150
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 9,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "f0462a8bd35f20b9a4b7dbc7f16b59e78a32f2d380fc54a9cf8ca06a38421641"
+      },
+      "program": {
+        "determinant_character": 3,
+        "scale_character": 5
+      },
+      "q": 7,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 5,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 10,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 10,
+        "scale_character": 2
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 6,
+      "workspace_capacity_bits": 60,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 331,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 138,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 410,
+          "boundary_channels": 10,
+          "character_calls": 20,
+          "character_orbit_visits": 40,
+          "gauss_calls": 41,
+          "gauss_field_additions": 410,
+          "gauss_field_multiplications": 1230,
+          "gauss_orbit_terms": 410
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 410,
+          "boundary_channels": 10,
+          "character_calls": 20,
+          "character_orbit_visits": 40,
+          "gauss_calls": 41,
+          "gauss_field_additions": 410,
+          "gauss_field_multiplications": 1230,
+          "gauss_orbit_terms": 410
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 138,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "8826522a06b3eccbec433ca9ec13dac520bf378083dbb78593efc02ae8fd0bcb"
+      },
+      "program": {
+        "determinant_character": 5,
+        "scale_character": 8
+      },
+      "q": 11,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 7,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 262,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 262,
+        "scale_character": 1
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 10,
+      "workspace_capacity_bits": 90,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 157,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 95,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 588,
+          "boundary_channels": 12,
+          "character_calls": 24,
+          "character_orbit_visits": 48,
+          "gauss_calls": 49,
+          "gauss_field_additions": 588,
+          "gauss_field_multiplications": 1764,
+          "gauss_orbit_terms": 588
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 588,
+          "boundary_channels": 12,
+          "character_calls": 24,
+          "character_orbit_visits": 48,
+          "gauss_calls": 49,
+          "gauss_field_additions": 588,
+          "gauss_field_multiplications": 1764,
+          "gauss_orbit_terms": 588
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 95,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "f7c8da4123476f4f7589d90c7948ec23e236b62b2037a370bde4227a64df2099"
+      },
+      "program": {
+        "determinant_character": 7,
+        "scale_character": 11
+      },
+      "q": 13,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 9,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 125,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 125,
+        "scale_character": 2
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 12,
+      "workspace_capacity_bits": 80,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 1361,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 190,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 1040,
+          "boundary_channels": 16,
+          "character_calls": 32,
+          "character_orbit_visits": 480,
+          "gauss_calls": 65,
+          "gauss_field_additions": 1040,
+          "gauss_field_multiplications": 3120,
+          "gauss_orbit_terms": 1040
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 1040,
+          "boundary_channels": 16,
+          "character_calls": 32,
+          "character_orbit_visits": 480,
+          "gauss_calls": 65,
+          "gauss_field_additions": 1040,
+          "gauss_field_multiplications": 3120,
+          "gauss_orbit_terms": 1040
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 190,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "738d2bc0ba81d976f4f7ad2dafb6485a0e2d93b523b34d2bdb5b9118b66f31df"
+      },
+      "program": {
+        "determinant_character": 9,
+        "scale_character": 14
+      },
+      "q": 17,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 11,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 633,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 633,
+        "scale_character": 1
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 16,
+      "workspace_capacity_bits": 110,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 2053,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 1339,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 1314,
+          "boundary_channels": 18,
+          "character_calls": 36,
+          "character_orbit_visits": 72,
+          "gauss_calls": 73,
+          "gauss_field_additions": 1314,
+          "gauss_field_multiplications": 3942,
+          "gauss_orbit_terms": 1314
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 1314,
+          "boundary_channels": 18,
+          "character_calls": 36,
+          "character_orbit_visits": 72,
+          "gauss_calls": 73,
+          "gauss_field_additions": 1314,
+          "gauss_field_multiplications": 3942,
+          "gauss_orbit_terms": 1314
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 1339,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "a46d1c8014968dc0ad1db21b4d513489b7868fcc91d1c8a03b42db0cd5a3d945"
+      },
+      "program": {
+        "determinant_character": 11,
+        "scale_character": 17
+      },
+      "q": 19,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 13,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 1342,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 1342,
+        "scale_character": 2
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 18,
+      "workspace_capacity_bits": 120,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 1013,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 852,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 1958,
+          "boundary_channels": 22,
+          "character_calls": 44,
+          "character_orbit_visits": 132,
+          "gauss_calls": 89,
+          "gauss_field_additions": 1958,
+          "gauss_field_multiplications": 5874,
+          "gauss_orbit_terms": 1958
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 1958,
+          "boundary_channels": 22,
+          "character_calls": 44,
+          "character_orbit_visits": 132,
+          "gauss_calls": 89,
+          "gauss_field_additions": 1958,
+          "gauss_field_multiplications": 5874,
+          "gauss_orbit_terms": 1958
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 852,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "a1d69391ff944c0bb500a972a6ae075a20a811067365e86ceb34ba4acbbc8ae6"
+      },
+      "program": {
+        "determinant_character": 13,
+        "scale_character": 20
+      },
+      "q": 23,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 15,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 948,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 948,
+        "scale_character": 1
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 22,
+      "workspace_capacity_bits": 100,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 2437,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 818,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 3164,
+          "boundary_channels": 28,
+          "character_calls": 56,
+          "character_orbit_visits": 112,
+          "gauss_calls": 113,
+          "gauss_field_additions": 3164,
+          "gauss_field_multiplications": 9492,
+          "gauss_orbit_terms": 3164
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 3164,
+          "boundary_channels": 28,
+          "character_calls": 56,
+          "character_orbit_visits": 112,
+          "gauss_calls": 113,
+          "gauss_field_additions": 3164,
+          "gauss_field_multiplications": 9492,
+          "gauss_orbit_terms": 3164
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 818,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "1fb24b0035493e3b5bcba79774044b1ee7d3cdcca378cf2bae0d93353cddf64b"
+      },
+      "program": {
+        "determinant_character": 15,
+        "scale_character": 23
+      },
+      "q": 29,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 17,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 1576,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 1576,
+        "scale_character": 26
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 28,
+      "workspace_capacity_bits": 120,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 1861,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 484,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 3630,
+          "boundary_channels": 30,
+          "character_calls": 60,
+          "character_orbit_visits": 1500,
+          "gauss_calls": 121,
+          "gauss_field_additions": 3630,
+          "gauss_field_multiplications": 10890,
+          "gauss_orbit_terms": 3630
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 3630,
+          "boundary_channels": 30,
+          "character_calls": 60,
+          "character_orbit_visits": 1500,
+          "gauss_calls": 121,
+          "gauss_field_additions": 3630,
+          "gauss_field_multiplications": 10890,
+          "gauss_orbit_terms": 3630
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 484,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "7c1e1519d0b43fb7a488c63c52b0bdfdab2cc48ca57fd68690221e3d80554f41"
+      },
+      "program": {
+        "determinant_character": 17,
+        "scale_character": 26
+      },
+      "q": 31,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 19,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 247,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 247,
+        "scale_character": 29
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 30,
+      "workspace_capacity_bits": 110,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 6661,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 4530,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 5220,
+          "boundary_channels": 36,
+          "character_calls": 72,
+          "character_orbit_visits": 144,
+          "gauss_calls": 145,
+          "gauss_field_additions": 5220,
+          "gauss_field_multiplications": 15660,
+          "gauss_orbit_terms": 5220
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 5220,
+          "boundary_channels": 36,
+          "character_calls": 72,
+          "character_orbit_visits": 144,
+          "gauss_calls": 145,
+          "gauss_field_additions": 5220,
+          "gauss_field_multiplications": 15660,
+          "gauss_orbit_terms": 5220
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 4530,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "4bbb5dbb7e4e33f9e1983cdd086b2b12c342e73c10bcb054428c62f110c47ced"
+      },
+      "program": {
+        "determinant_character": 19,
+        "scale_character": 29
+      },
+      "q": 37,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 21,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 4451,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 4451,
+        "scale_character": 32
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 36,
+      "workspace_capacity_bits": 130,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 13121,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 5951,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 6440,
+          "boundary_channels": 40,
+          "character_calls": 80,
+          "character_orbit_visits": 2160,
+          "gauss_calls": 161,
+          "gauss_field_additions": 6440,
+          "gauss_field_multiplications": 19320,
+          "gauss_orbit_terms": 6440
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 6440,
+          "boundary_channels": 40,
+          "character_calls": 80,
+          "character_orbit_visits": 2160,
+          "gauss_calls": 161,
+          "gauss_field_additions": 6440,
+          "gauss_field_multiplications": 19320,
+          "gauss_orbit_terms": 6440
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 5951,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "28d05336f90d0a949bddc4734e700a8546e13e95d4fb3d777051b67c69472e5a"
+      },
+      "program": {
+        "determinant_character": 21,
+        "scale_character": 32
+      },
+      "q": 41,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 23,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 11073,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 11073,
+        "scale_character": 35
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 40,
+      "workspace_capacity_bits": 140,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 3613,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 2400,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 7098,
+          "boundary_channels": 42,
+          "character_calls": 84,
+          "character_orbit_visits": 2352,
+          "gauss_calls": 169,
+          "gauss_field_additions": 7098,
+          "gauss_field_multiplications": 21294,
+          "gauss_orbit_terms": 7098
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 7098,
+          "boundary_channels": 42,
+          "character_calls": 84,
+          "character_orbit_visits": 2352,
+          "gauss_calls": 169,
+          "gauss_field_additions": 7098,
+          "gauss_field_multiplications": 21294,
+          "gauss_orbit_terms": 7098
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 2400,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "e1c2a389a35ac2741f765b1527f9f580fb1c3dbb1250de3de296d854fb2da4e1"
+      },
+      "program": {
+        "determinant_character": 23,
+        "scale_character": 35
+      },
+      "q": 43,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 25,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 3444,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 3444,
+        "scale_character": 38
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 42,
+      "workspace_capacity_bits": 120,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 12973,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 6893,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 8510,
+          "boundary_channels": 46,
+          "character_calls": 92,
+          "character_orbit_visits": 1748,
+          "gauss_calls": 185,
+          "gauss_field_additions": 8510,
+          "gauss_field_multiplications": 25530,
+          "gauss_orbit_terms": 8510
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 8510,
+          "boundary_channels": 46,
+          "character_calls": 92,
+          "character_orbit_visits": 1748,
+          "gauss_calls": 185,
+          "gauss_field_additions": 8510,
+          "gauss_field_multiplications": 25530,
+          "gauss_orbit_terms": 8510
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 6893,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "0f88c4cf5970b4b8a2f2bea75fe93a0dbd4ab93dcd1361be8eb851943e7b04f2"
+      },
+      "program": {
+        "determinant_character": 25,
+        "scale_character": 38
+      },
+      "q": 47,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 27,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 11327,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 11327,
+        "scale_character": 41
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 46,
+      "workspace_capacity_bits": 140,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 8269,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": true,
+        "wrong_gamma_shift_changes_boundary": true,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 5692,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 10868,
+          "boundary_channels": 52,
+          "character_calls": 104,
+          "character_orbit_visits": 208,
+          "gauss_calls": 209,
+          "gauss_field_additions": 10868,
+          "gauss_field_multiplications": 32604,
+          "gauss_orbit_terms": 10868
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 10868,
+          "boundary_channels": 52,
+          "character_calls": 104,
+          "character_orbit_visits": 208,
+          "gauss_calls": 209,
+          "gauss_field_additions": 10868,
+          "gauss_field_multiplications": 32604,
+          "gauss_orbit_terms": 10868
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 5692,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "d3aa4ac10ad073320f1fb0099f886efdde5d0fc9083368dd40b94c50bca519c1"
+      },
+      "program": {
+        "determinant_character": 27,
+        "scale_character": 41
+      },
+      "q": 53,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 29,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 3977,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 3977,
+        "scale_character": 44
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 52,
+      "workspace_capacity_bits": 140,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 41,
+      "boundary": {
+        "coordinates": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "rank_and_square_class": [
+          1,
+          1
+        ],
+        "scale": 2
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": false,
+        "wrong_gamma_shift_changes_boundary": null,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 31,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 36,
+          "boundary_channels": 4,
+          "character_calls": 4,
+          "character_orbit_visits": 8,
+          "gauss_calls": 9,
+          "gauss_field_additions": 36,
+          "gauss_field_multiplications": 108,
+          "gauss_orbit_terms": 36
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 36,
+          "boundary_channels": 4,
+          "character_calls": 4,
+          "character_orbit_visits": 8,
+          "gauss_calls": 9,
+          "gauss_field_additions": 36,
+          "gauss_field_multiplications": 108,
+          "gauss_orbit_terms": 36
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 31,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "d7496be2673584c9ff32875791e1449e5fe05f4819f9dce884894a5ca3a9c1be"
+      },
+      "program": {
+        "determinant_character": 2,
+        "scale_character": 1
+      },
+      "q": 5,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 0,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 38,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 38,
+        "scale_character": 0
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 4,
+      "workspace_capacity_bits": 60,
+      "workspace_field_cells": 10
+    },
+    {
+      "auxiliary_prime": 41,
+      "boundary": {
+        "coordinates": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "rank_and_square_class": [
+          0,
+          0
+        ],
+        "scale": 0
+      },
+      "controls": {
+        "ascending_inverse_also_restores": true,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_channel": 0,
+        "omitted_channel_changes_boundary": true,
+        "reordered_inverse_applicable": false,
+        "reordered_inverse_reason": "CHANNEL_ACCUMULATION_IS_COMMUTATIVE_IN_THE_EXACT_RESIDUE_FIELD",
+        "snapshot_used": false,
+        "wrong_gamma_shift_applicable": false,
+        "wrong_gamma_shift_changes_boundary": null,
+        "wrong_inverse_fails": true
+      },
+      "generation_or_lease_metadata_enforced": false,
+      "materialized_reference_boundary_scalar": 23,
+      "observed_restoration_passes": 2,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "additive_phase_exponentiations": 20,
+          "boundary_channels": 4,
+          "character_calls": 0,
+          "character_orbit_visits": 0,
+          "gauss_calls": 5,
+          "gauss_field_additions": 20,
+          "gauss_field_multiplications": 60,
+          "gauss_orbit_terms": 20
+        },
+        "inverse_counts": {
+          "additive_phase_exponentiations": 20,
+          "boundary_channels": 4,
+          "character_calls": 0,
+          "character_orbit_visits": 0,
+          "gauss_calls": 5,
+          "gauss_field_additions": 20,
+          "gauss_field_multiplications": 60,
+          "gauss_orbit_terms": 20
+        },
+        "post_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "pre_state_commitment": "673bd3ef5aeb54f72584714396209274563422f978e62b2e3ad350a6a07a64d5",
+        "projected_final_boundary_scalar": 23,
+        "projected_result_survives_inverse": true,
+        "resident_forward_commitment": "d89f3bb373526f3663524d061c6eca310cdc8a25400132b15e4b450f24b101f6"
+      },
+      "program": {
+        "determinant_character": 0,
+        "scale_character": 0
+      },
+      "q": 5,
+      "same_backing_primary": true,
+      "same_backing_reused": true,
+      "unrelated_second_program": {
+        "actual_restored_backing_consumed": true,
+        "boundary": {
+          "coordinates": [
+            3,
+            0,
+            0,
+            2,
+            0,
+            1
+          ],
+          "scale": 3
+        },
+        "determinant_character": 2,
+        "exactly_restored_again": true,
+        "fresh_boundary_scalar": 11,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary_scalar": 11,
+        "scale_character": 3
+      },
+      "verification_only_fresh_carrier_cells": 10,
+      "verification_only_materialized_gauss_table_cells": 4,
+      "workspace_capacity_bits": 60,
+      "workspace_field_cells": 10
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

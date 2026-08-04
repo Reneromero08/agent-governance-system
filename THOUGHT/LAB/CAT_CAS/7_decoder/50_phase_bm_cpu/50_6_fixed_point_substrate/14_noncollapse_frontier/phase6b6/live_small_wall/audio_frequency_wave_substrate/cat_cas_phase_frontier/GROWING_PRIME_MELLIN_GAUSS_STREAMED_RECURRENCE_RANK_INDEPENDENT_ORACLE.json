@@ -1,0 +1,422 @@
+{
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "direct_fourier_checks": [
+    {
+      "boundary_rank": 3,
+      "direct_seven_dimensional_sum": 25,
+      "matches_streamed_boundary": true,
+      "nonzero_source_terms_summed": 49600,
+      "q": 5,
+      "transaction_index": 0
+    },
+    {
+      "boundary_rank": 3,
+      "direct_seven_dimensional_sum": 9,
+      "matches_streamed_boundary": true,
+      "nonzero_source_terms_summed": 603288,
+      "q": 7,
+      "transaction_index": 1
+    },
+    {
+      "boundary_rank": 1,
+      "direct_seven_dimensional_sum": 31,
+      "matches_streamed_boundary": true,
+      "nonzero_source_terms_summed": 49600,
+      "q": 5,
+      "transaction_index": 14
+    },
+    {
+      "boundary_rank": 0,
+      "direct_seven_dimensional_sum": 23,
+      "matches_streamed_boundary": true,
+      "nonzero_source_terms_summed": 49600,
+      "q": 5,
+      "transaction_index": 15
+    }
+  ],
+  "independent_rank_checks": [
+    {
+      "gamma_cyclic_hankel_rank": 4,
+      "matches_production": true,
+      "q": 5,
+      "source_coefficient_cyclic_hankel_rank": 4,
+      "source_coefficient_fourier_support": 4,
+      "source_coefficient_periodic_recurrence_order": 4
+    },
+    {
+      "gamma_cyclic_hankel_rank": 6,
+      "matches_production": true,
+      "q": 7,
+      "source_coefficient_cyclic_hankel_rank": 6,
+      "source_coefficient_fourier_support": 6,
+      "source_coefficient_periodic_recurrence_order": 6
+    },
+    {
+      "gamma_cyclic_hankel_rank": 10,
+      "matches_production": true,
+      "q": 11,
+      "source_coefficient_cyclic_hankel_rank": 10,
+      "source_coefficient_fourier_support": 10,
+      "source_coefficient_periodic_recurrence_order": 10
+    },
+    {
+      "gamma_cyclic_hankel_rank": 12,
+      "matches_production": true,
+      "q": 13,
+      "source_coefficient_cyclic_hankel_rank": 12,
+      "source_coefficient_fourier_support": 12,
+      "source_coefficient_periodic_recurrence_order": 12
+    },
+    {
+      "gamma_cyclic_hankel_rank": 16,
+      "matches_production": true,
+      "q": 17,
+      "source_coefficient_cyclic_hankel_rank": 16,
+      "source_coefficient_fourier_support": 16,
+      "source_coefficient_periodic_recurrence_order": 16
+    },
+    {
+      "gamma_cyclic_hankel_rank": 18,
+      "matches_production": true,
+      "q": 19,
+      "source_coefficient_cyclic_hankel_rank": 18,
+      "source_coefficient_fourier_support": 18,
+      "source_coefficient_periodic_recurrence_order": 18
+    },
+    {
+      "gamma_cyclic_hankel_rank": 22,
+      "matches_production": true,
+      "q": 23,
+      "source_coefficient_cyclic_hankel_rank": 22,
+      "source_coefficient_fourier_support": 22,
+      "source_coefficient_periodic_recurrence_order": 22
+    },
+    {
+      "gamma_cyclic_hankel_rank": 28,
+      "matches_production": true,
+      "q": 29,
+      "source_coefficient_cyclic_hankel_rank": 28,
+      "source_coefficient_fourier_support": 28,
+      "source_coefficient_periodic_recurrence_order": 28
+    },
+    {
+      "gamma_cyclic_hankel_rank": 30,
+      "matches_production": true,
+      "q": 31,
+      "source_coefficient_cyclic_hankel_rank": 30,
+      "source_coefficient_fourier_support": 30,
+      "source_coefficient_periodic_recurrence_order": 30
+    },
+    {
+      "gamma_cyclic_hankel_rank": 36,
+      "matches_production": true,
+      "q": 37,
+      "source_coefficient_cyclic_hankel_rank": 36,
+      "source_coefficient_fourier_support": 36,
+      "source_coefficient_periodic_recurrence_order": 36
+    },
+    {
+      "gamma_cyclic_hankel_rank": 40,
+      "matches_production": true,
+      "q": 41,
+      "source_coefficient_cyclic_hankel_rank": 40,
+      "source_coefficient_fourier_support": 40,
+      "source_coefficient_periodic_recurrence_order": 40
+    },
+    {
+      "gamma_cyclic_hankel_rank": 42,
+      "matches_production": true,
+      "q": 43,
+      "source_coefficient_cyclic_hankel_rank": 42,
+      "source_coefficient_fourier_support": 42,
+      "source_coefficient_periodic_recurrence_order": 42
+    },
+    {
+      "gamma_cyclic_hankel_rank": 46,
+      "matches_production": true,
+      "q": 47,
+      "source_coefficient_cyclic_hankel_rank": 46,
+      "source_coefficient_fourier_support": 46,
+      "source_coefficient_periodic_recurrence_order": 46
+    },
+    {
+      "gamma_cyclic_hankel_rank": 52,
+      "matches_production": true,
+      "q": 53,
+      "source_coefficient_cyclic_hankel_rank": 52,
+      "source_coefficient_fourier_support": 52,
+      "source_coefficient_periodic_recurrence_order": 52
+    }
+  ],
+  "independent_transactions": [
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 5,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 7,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 11,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 13,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 17,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 19,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 23,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 29,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 31,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 37,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 41,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 43,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 47,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 53,
+      "rank": 3,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": true,
+      "wrong_gamma_shift_changes_boundary": true,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 5,
+      "rank": 1,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": false,
+      "wrong_gamma_shift_changes_boundary": null,
+      "wrong_inverse_fails": true
+    },
+    {
+      "actual_restored_backing_reuse_matches_fresh": true,
+      "boundary_matches_table": true,
+      "omitted_channel_changes_boundary": true,
+      "projected_scalar_persists_after_inverse": true,
+      "q": 5,
+      "rank": 0,
+      "snapshot_used": false,
+      "ten_cell_same_backing_primary_restoration": true,
+      "ten_cell_same_backing_second_restoration": true,
+      "wrong_gamma_shift_applicable": false,
+      "wrong_gamma_shift_changes_boundary": null,
+      "wrong_inverse_fails": true
+    }
+  ],
+  "mutations": {
+    "omitted_channel_changes_all_boundaries": true,
+    "wrong_gamma_shift_changes_all_applicable_boundaries": true,
+    "wrong_inverse_fails_all_transactions": true
+  },
+  "observed_resource_law": {
+    "accepted_workspace_field_cells": 10,
+    "diagnostic_log_gauss_hankel_and_direct_sum_state_is_verification_only": true,
+    "fixed_exact_bit_width": false,
+    "identical_classical_stream_preserved": true,
+    "resident_tables": 0,
+    "source_rank": "q-1",
+    "stream_work_per_scalar": "THETA(q^2)"
+  },
+  "oracle_imports_predecessor": false,
+  "oracle_imports_production": false,
+  "production_result_sha256": "8ea6629f18bd66ace2ce86d6ffb3311cac0f812098b8065a2b67c6f2b070304b",
+  "production_source": {
+    "declares_ten_cell_workspace": true,
+    "imports": [
+      "__future__",
+      "argparse",
+      "hashlib",
+      "itertools",
+      "json",
+      "dataclasses",
+      "pathlib",
+      "typing"
+    ],
+    "imports_production_or_predecessor": false,
+    "sha256": "efa5f6361bc2a70c4b5c5ff342bce60e13fad66d0cd7ed290b778af4a39a5de3"
+  },
+  "rejected_interpretations": [
+    "FIXED_LINEAR_RECURRENCE_RANK",
+    "FIXED_EXACT_BIT_WIDTH",
+    "NONLINEAR_PROCEDURAL_COMPRESSION_NO_GO",
+    "MULTI_BOUNDARY_AMORTIZED_ADVANTAGE",
+    "MACHINE_ENFORCED_HIDDEN_INTERMEDIATE_OR_CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE_OR_COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION_OR_REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_COMPUTATION"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
