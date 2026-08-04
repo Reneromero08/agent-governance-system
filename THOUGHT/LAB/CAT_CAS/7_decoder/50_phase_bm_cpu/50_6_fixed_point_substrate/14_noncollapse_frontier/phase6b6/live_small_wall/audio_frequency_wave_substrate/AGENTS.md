@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The registry assigns one
+`6586f2d594357ae255f47d1897a5fd455444e9ff`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 165-milestone lane is active by user direction. Continue from the
+The current 166-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -263,7 +263,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M165_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT
+ACTIVE_AFTER_M166_S3_NONCOMMUTATIVE_RELATION_ALGEBRA_CLASSICAL_IDENTITY_RESULT
 ```
 
 The named
@@ -272,15 +272,16 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_SHARED_RELATION_PORT_ATOMIC_RESPONSE_RESTORATION_REUSE_WITH_EXECUTED_REORDERED_INVERSE_FAILURE_AND_MATCHED_COMPACT_CLASSICAL_BASELINE
 ```
 
-Change the relation algebra rather than enlarging the Paley DAG. Test the
-smallest nonabelian translation-relation carrier with genuinely
-noncommutative native convolution, native pointwise intersection, a shared
-unresolved port consumed by multiple modules, exact restoration and reuse,
-and the strongest compact group/irrep classical recurrence. Preserve M165's
-exact fixture ceiling and negative resource result.
+Put the M166 S3 algebra behind the established CATVM atomic transaction law.
+Keep the shared six-cell relation port backend-resident, with response release
+only after exact restoration. Execute the missing, wrong, and applicable
+reordered-inverse attacks after forward residency, preserve same-backing
+unrelated reuse, and retain the identical six-coordinate group recurrence as
+the strongest compact classical baseline. Preserve M166's direct-process
+ceiling and negative resource result.
 
 ## 7. Native No-Smuggle Law
 

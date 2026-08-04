@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CATVM_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT`
-**Roadmap version:** `14.31`
+**Status:** `STRICT_SCOPE_S3_NONCOMMUTATIVE_RELATION_ALGEBRA_CLASSICAL_IDENTITY_RESULT`
+**Roadmap version:** `14.32`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`
+**Reconciled source head:** `6586f2d594357ae255f47d1897a5fd455444e9ff`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER`
-**Current claim ceiling:** `EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_LOCAL_REVERSIBLE_TOGGLE_LAW_SOURCES_ALWAYS_RESIDENT_CLEAN_FINAL_ONLY_SINK_SEPARATE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS`
+**Current highest milestone:** `BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN`
+**Current claim ceiling:** `S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M165_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT`
+**New mechanism development:** `ACTIVE_AFTER_M166_S3_NONCOMMUTATIVE_RELATION_ALGEBRA_CLASSICAL_IDENTITY_RESULT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE`
+**Active primary successor:** `CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_SHARED_RELATION_PORT_ATOMIC_RESPONSE_RESTORATION_REUSE_WITH_EXECUTED_REORDERED_INVERSE_FAILURE_AND_MATCHED_COMPACT_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -43,9 +43,13 @@ closes the exact Paley-DAG scheduling question: public reversible pebbling
 reduces retain-all storage from 27 to 24 field cells, but the identical
 reversible classical pebbler has the same law and an executed compact
 occurrence recurrence uses only 15. More fixture scaling is not the repair.
-The next phase-owned step changes the composition algebra to the smallest
-noncommutative translation-relation family, with the strongest compact
-classical irrep recurrence retained from the start.
+M166 changes the composition algebra to the smallest nonabelian group and
+establishes exact noncommutative convolution plus intersection, but the
+accepted carrier is the identical six-coordinate group recurrence and the
+irrep transform retains all six information coordinates. The next bounded
+step puts this algebra behind CATVM so that custody, atomic response ordering,
+and reordered-inverse failure are enforced where noncommutation makes that
+control applicable.
 
 Every successor must answer:
 
@@ -4700,7 +4704,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER
+BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN
 ```
 
 Not established:
@@ -7175,6 +7179,72 @@ establishes no generic scheduling result, arbitrary relation-program custody,
 OS or hardware isolation, distinct phase resource, computational advantage,
 Small Wall crossing, physical execution, physical-bit replacement, or
 unbounded computation.
+
+## M166: exact S3 composition is noncommutative but remains classically identical
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN
+```
+
+M166 replaces the commutative C17 Paley algebra with the smallest nonabelian
+group algebra. A translation-invariant relation `R(x,y)=f(x^-1 y)` occupies
+six F103 cells. Native relational composition is nonabelian S3 group
+convolution, while native parallel intersection is coordinatewise Hadamard
+product. Left and right composition differ on an independently checked basis
+witness. Two six-cell ports execute two declared four-shear program families
+at depths 1, 4, 16, 64, 256, and 1024. One unresolved port is consumed by
+multiple left/right composition modules before the declared final scalar
+boundary.
+
+The accepted direct-process path never materializes a 6 by 6 relation table
+or answer-bearing lookup table. It restores the exact canonical 12-cell
+carrier state on the same backing, advances restoration generation to two,
+and reuses that backing for the unrelated alternate family with fresh-run
+boundary and commitment agreement. Missing, wrong, and reordered inverses
+fail exact restoration, and module reordering changes the boundary. These are
+direct-process algebra and restoration controls, not machine-enforced CATVM
+custody.
+
+The independent oracle imports neither production code nor NumPy. It expands
+both ports into explicit 6 by 6 relations using 72 F103 reference cells,
+checks all 36 composition and 36 intersection basis products, confirms all 36
+irrep convolution products, matches all 12 boundaries and commitments, and
+exactly clears all 72 cells in reverse. The S3 Fourier/irrep transform has
+rank six: the trivial, sign, and standard two-dimensional blocks retain six
+information coordinates and do not compress the group carrier.
+
+Resource accounting separates abstract relation state from source-live
+Python values. The accepted and matched group recurrences each use a 12-cell
+carrier and an 18-cell abstract working peak. Conservative source-live counts
+are 70 accepted versus 58 direct classical field-value slots after including
+the current public operands and scalars. Python object headers, allocator,
+interpreter, native-library, and whole-process peaks remain excluded. This is
+a bounded algebraic closure result and a negative resource result, not a
+computational advantage.
+
+Exact ceiling:
+
+```text
+S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE
+```
+
+The next bounded experiment integrates this noncommuting algebra with the
+established CATVM transaction law:
+
+```text
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_SHARED_RELATION_PORT_ATOMIC_RESPONSE_RESTORATION_REUSE_WITH_EXECUTED_REORDERED_INVERSE_FAILURE_AND_MATCHED_COMPACT_CLASSICAL_BASELINE
+```
+
+It must retain intermediate relations only inside the service, attempt the
+response only after exact reverse restoration, execute the applicable
+reordered-inverse failure after forward residency, preserve same-backing
+unrelated reuse, and retain the identical six-coordinate compact classical
+baseline. M166 establishes no CATVM custody, general finite-group compiler,
+general six-label relation closure, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation.
 
 ## 10. Roadmap Maintenance
 

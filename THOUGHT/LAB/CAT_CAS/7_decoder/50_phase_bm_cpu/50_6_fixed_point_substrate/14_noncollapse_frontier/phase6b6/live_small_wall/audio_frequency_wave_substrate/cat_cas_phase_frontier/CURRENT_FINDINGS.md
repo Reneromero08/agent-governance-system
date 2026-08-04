@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The canonical per-milestone
+`6586f2d594357ae255f47d1897a5fd455444e9ff`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9420,3 +9420,57 @@ executed compact group/irrep classical baseline. No generic scheduler,
 arbitrary relation program, OS/hardware isolation, distinct phase resource,
 computational advantage, Small Wall crossing, physical execution, physical-
 bit replacement, or unbounded computation is established.
+
+## M166: nonabelian S3 relation closure retains the classical coordinate law
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN
+```
+
+M166 changes the phase relation algebra rather than enlarging the Paley DAG.
+Translation-invariant F103 relations on S3 occupy six cells and close under
+nonabelian group convolution and coordinatewise Hadamard intersection. Left
+and right composition differ. Two declared four-shear families run at six
+depths through 1024 while a shared six-cell port remains unresolved across
+multiple consumers until the final scalar boundary.
+
+The accepted direct process materializes no 6 by 6 relation table or answer
+lookup. It reverses exactly on the same 12-cell backing and reuses that
+backing at restoration generation two for the alternate family, matching a
+fresh run. Missing, wrong, and reordered inverses fail restoration, but this
+package does not enforce a CATVM process boundary.
+
+An independent no-import, no-NumPy oracle expands the two relations into 72
+F103 cells, verifies all 36 basis compositions, all 36 basis intersections,
+all 36 irrep convolutions, and all 12 production boundaries and commitments,
+then clears all 72 cells exactly. The S3 irrep transform has full rank six;
+it preserves rather than reduces the information dimension.
+
+The accepted and matched group recurrences each use 12 carrier cells and an
+18-cell abstract working peak. Conservative source-live accounting is 70
+accepted versus 58 direct classical field-value slots. Python object headers,
+allocator, interpreter, native-library, and whole-process peaks are excluded.
+Thus M166 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with
+`EXACT_ALGEBRAIC_RESTORATION`, but it establishes no distinct phase resource
+or advantage.
+
+Exact ceiling:
+
+```text
+S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE
+```
+
+Next experiment:
+
+```text
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_SHARED_RELATION_PORT_ATOMIC_RESPONSE_RESTORATION_REUSE_WITH_EXECUTED_REORDERED_INVERSE_FAILURE_AND_MATCHED_COMPACT_CLASSICAL_BASELINE
+```
+
+The next step must enforce hidden relation custody and response-after-restore
+ordering while using this noncommuting algebra to execute an applicable
+reordered-inverse failure. The identical six-coordinate classical recurrence
+remains the baseline. No general finite-group compiler, general six-label
+relation closure, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation is established.

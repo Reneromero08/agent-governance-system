@@ -1,0 +1,86 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 166,
+  "scientific_source_head": "6586f2d594357ae255f47d1897a5fd455444e9ff",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "production_source": {
+      "path": "f103_s3_noncommutative_phase_relation_algebra.py",
+      "sha256": "7a0496734464d71265c035cec01c790d02c706a999a021c184dac1955474d4e2"
+    },
+    "oracle_source": {
+      "path": "f103_s3_noncommutative_phase_relation_oracle.py",
+      "sha256": "18d20f38900d221a4cbbb681eb0936016ea4346b6d689416fc13cf7e57abb648"
+    },
+    "production_result": {
+      "path": "F103_S3_NONCOMMUTATIVE_PHASE_RELATION_RESULTS.json",
+      "sha256": "6ee033a32857f8842a9eb9723bac377a66d9be1f820fd258dc84c5a68430fdbc"
+    },
+    "oracle_result": {
+      "path": "F103_S3_NONCOMMUTATIVE_PHASE_RELATION_ORACLE_RESULTS.json",
+      "sha256": "3011da7f697f3f121651f2aba342ebae6d8e251f0df0b2a9f0a295bcd27380e6"
+    },
+    "qualifier": {
+      "path": "qualify_f103_s3_noncommutative_phase_relation_algebra.sh",
+      "sha256": "23b61875771a616f331ee1d233799ef3cbb1fef12753a57178d24a088f7c92d9"
+    },
+    "review": {
+      "path": "F103_S3_NONCOMMUTATIVE_PHASE_RELATION_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "f5bdb7adab23ed72c7cc9a181c5b6ddb74d5273dfc9a819809815677f8069aac"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_F103_S3_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m166-qualifier-kvkG5H"
+  },
+  "independent_oracle": {
+    "imports_production": false,
+    "imports_numpy": false,
+    "full_six_by_six_relation_reference": true,
+    "basis_composition_checks": 36,
+    "basis_hadamard_checks": 36,
+    "irrep_convolution_checks": 36,
+    "production_case_comparisons": 12,
+    "boundary_and_commitment_comparisons": 24,
+    "full_72_cell_reverse_clearing": true,
+    "all_pass": true
+  },
+  "resource_law": {
+    "accepted_carrier_field_cells": 12,
+    "accepted_abstract_relation_state_working_field_cells_peak": 18,
+    "accepted_conservative_explicit_python_field_value_slots_peak": 70,
+    "matched_group_coordinate_classical_carrier_field_cells": 12,
+    "matched_group_coordinate_classical_abstract_working_field_cells_peak": 18,
+    "matched_group_coordinate_conservative_explicit_python_field_value_slots_peak": 58,
+    "matched_irrep_information_coordinates": 6,
+    "full_relation_oracle_field_cells": 72,
+    "retained_inverse_history_field_cells": 0,
+    "dense_relation_table_cells_on_accepted_path": 0,
+    "python_object_headers_allocator_interpreter_and_whole_process_peaks_excluded": true
+  },
+  "claim_ceiling": "S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE",
+  "preserved_subclaims": [
+    "NONABELIAN_S3_TRANSLATION_RELATIONS_CLOSE_UNDER_FULL_MATRIX_COMPOSITION",
+    "S3_TRANSLATION_RELATIONS_CLOSE_UNDER_FULL_MATRIX_HADAMARD_INTERSECTION",
+    "LEFT_AND_RIGHT_COMPOSITION_ARE_DISTINCT",
+    "ONE_SHARED_SIX_CELL_RELATION_PORT_IS_CONSUMED_MULTIPLE_TIMES_WITHOUT_ACCEPTED_PATH_TABLE_EXPANSION",
+    "INDEPENDENT_FULL72_CELL_ORACLE_MATCHES_ALL12_BOUNDARIES_AND_COMMITMENTS",
+    "EXACT_SAME_BACKING_CARRIER_RESTORATION_AND_CROSS_FAMILY_REUSE",
+    "S3_IRREP_TRANSFORM_HAS_FULL6_INFORMATION_RANK"
+  ],
+  "negative_result": "THE_ACCEPTED_ALGEBRA_IS_THE_IDENTICAL_SIX_COORDINATE_GROUP_RECURRENCE_AND_THE_S3_IRREP_DECOMPOSITION_RETAINS_SIX_INFORMATION_COORDINATES_WHILE_CONSERVATIVE_SOURCE_LIVE_ACCOUNTING_IS70_ACCEPTED_VERSUS58_DIRECT_CLASSICAL_FIELD_VALUE_SLOTS",
+  "rejected_interpretations": [
+    "CATVM_CUSTODY",
+    "GENERAL_FINITE_GROUP_RELATION_COMPILER",
+    "GENERAL_SIX_LABEL_RELATIONS",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}
