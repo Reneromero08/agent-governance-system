@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`d7b56ed4e40564971c68269deeb9b0f3bcefe42b`. The canonical per-milestone
+`f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9581,3 +9581,30 @@ another sparse chart of the full group algebra. No general finite-group
 compiler, CATVM custody, distinct phase resource, computational advantage,
 Small Wall crossing, physical execution, physical-bit replacement, or
 unbounded computation is established.
+
+## M169: fixed-12 two-fiber Paley relation closure
+
+The two-by-two fiber matrix over three Paley difference classes closes exact
+noncommutative composition and Hadamard intersection in twelve coefficients
+per relation across represented vertex counts 10 through 194 and depth 1024.
+All ten transactions restore exactly, and generation-two cross-family reuse
+matches fresh execution on the same backing without a snapshot.
+
+An independent enumerated-class oracle matches every boundary, commitment,
+checkpoint, and reversal. It verifies all 144 ordered composition and
+intersection basis pairs against dense relation semantics at Paley orders 5
+and 13. The strongest compact classical path is the identical twelve-
+coordinate recurrence with the same conservative 72-field-cell named peak.
+
+M169 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`, limited to:
+
+```text
+F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE
+```
+
+Next:
+
+```text
+EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
+```

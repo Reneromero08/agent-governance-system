@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`d7b56ed4e40564971c68269deeb9b0f3bcefe42b`. The registry assigns one
+`f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 168-milestone lane is active by user direction. Continue from the
+The current 169-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,26 +53,25 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE
+BOUNDED_EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_F103_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_VERTEX_COUNTS10_26_34_58_74_106_146_194_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE
+F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. Adaptive
-nonzero dihedral irrep blocks close exact noncommutative composition and
-Hadamard intersection, but all five primary cases reach the full two-port
-group-algebra capacity by depth 16: 12, 24, 68, 136, and 204 field cells for
-group orders 6, 12, 34, 68, and 102. The strongest classical baseline is the
-identical adaptive irrep recurrence. The accepted direct-process carrier
-restores and reuses exact backing, but this result establishes neither CATVM
-custody nor fixed-rank growth, a distinct phase resource, computational
-advantage, Small Wall crossing, physical waveform execution, or replacement
-of physical bits with pi.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. A
+two-by-two fiber matrix over the three Paley difference classes gives twelve
+relation coefficients closed under noncommutative composition and Hadamard
+intersection. The same twelve cells represent each port as the public vertex
+count grows from 10 to 194 and depth reaches 1024. The strongest classical
+baseline is the identical twelve-coordinate recurrence. The result is a
+restricted coherent-configuration closure, not CATVM custody, a distinct
+phase resource, computational advantage, Small Wall crossing, physical
+waveform execution, or replacement of physical bits with pi.
 
 The accumulated bounded architecture includes:
 
@@ -266,7 +265,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M168_GROWING_DIHEDRAL_IRREP_SPARSE_FULL_CAPACITY_NO_GO
+ACTIVE_AFTER_M169_FIXED12_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_CLOSURE
 ```
 
 The named
@@ -275,17 +274,15 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
-The growing dihedral diagnostic has rejected adaptive irrep sparsity as a
-fixed-rank route at its bounded family ceiling. Change the relation algebra,
-not the fixture size: test the smallest growing two-fiber coherent
-configuration whose twelve basis relations are closed under both
-noncommutative composition and Hadamard intersection. Preserve final-only
-projection, exact restoration/reuse, and the identical twelve-coordinate
-classical recurrence. Do not infer a distinct phase resource merely from
-fixed structural rank.
+The fixed twelve-coordinate fusion law is established at its declared family
+ceiling, but it is classically bisimulated. Test the smallest public Fourier-
+chirp phase coupling on the same growing two-fiber geometry and determine
+whether it escapes the fusion basis or closes compactly. Measure any rank or
+class growth where it occurs; preserve final-only projection, exact
+restoration/reuse, and the strongest compact classical recurrence.
 
 ## 7. Native No-Smuggle Law
 
