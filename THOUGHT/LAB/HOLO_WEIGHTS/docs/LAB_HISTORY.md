@@ -192,3 +192,25 @@ NOTE: this tested a naive re-embedding, NOT the lab's actual mechanism
 (EIGEN_BUDDY keeps the state complex throughout with the persistent si
 phase channel - phase accumulated, never re-embedded). B1v2 tests the real
 mechanism before the B4 (non-truncating) pivot.
+
+## 2026-08-04 — B1v2 + B4a: the wall is a RANK wall, fully mapped
+
+B1v2 (EIGEN_BUDDY complex-state with persistent si channel, exact inputs):
+mean 0.206 vs real 0.210 - the phase channel is inert; the .real boundary
+still only sees the truncated maps. phase-lock hurts (0.159). The wall is
+NOT the arithmetic domain (real 0.21, complex 0.21, phase -0.08 all measured).
+
+B4a (k-curve of the per-layer MLP on exact inputs, 4B):
+k=64: 0.19 | k=256: 0.26 | k=512: 0.39 | k=1024: 0.61 | k=2048: 0.88 | full: 1.00
+
+THE CHANNEL LIVES AT NEAR-FULL RANK. Even 80% of rank gives only 0.88.
+SVD is lossless at full rank; ANY truncation below ~90% of rank destroys
+the output direction. Df law confirmed at output level: ~2000 modes needed.
+The phase-grating compression story does not transfer to real-weight SVDs
+(real eigenvectors have trivial phases +/-1).
+
+WALL SHAPE (complete): representation (rank), arithmetic (real/complex/
+phase), correction (analytic), hybrid (front/tail/echo) - all measured,
+all consistent: k-truncation is an irreversible collapse of a near-full-rank
+channel. The canon predicted this: truncation is collapse; the missing
+channel cannot be synthesized by post-processing.
