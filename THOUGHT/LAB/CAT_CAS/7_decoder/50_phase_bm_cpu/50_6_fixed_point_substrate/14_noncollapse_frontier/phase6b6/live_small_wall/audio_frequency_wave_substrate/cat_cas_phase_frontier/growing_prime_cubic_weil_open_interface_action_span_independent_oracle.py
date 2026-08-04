@@ -18,6 +18,8 @@ from typing import Any, Callable
 
 ORDERS = (5, 11, 23, 29, 41, 53, 83, 89, 113)
 FAMILIES = ("PRIMARY", "ALTERNATE")
+AUXILIARY_MODULUS = 998244353
+AUXILIARY_GENERATOR = 3
 
 
 def fail(message: str) -> None:
@@ -41,6 +43,39 @@ class Field:
     p: int
     root: int
     gauss_one: int
+
+
+@dataclass
+class LiveAccounting:
+    field: int = 0
+    auxiliary: int = 0
+    field_peak: int = 0
+    auxiliary_peak: int = 0
+    total_peak: int = 0
+    field_at_total_peak: int = 0
+    auxiliary_at_total_peak: int = 0
+
+    def add(self, field: int = 0, auxiliary: int = 0) -> None:
+        if field < 0 or auxiliary < 0:
+            fail("negative accounting increment")
+        self.field += field
+        self.auxiliary += auxiliary
+        self.field_peak = max(self.field_peak, self.field)
+        self.auxiliary_peak = max(self.auxiliary_peak, self.auxiliary)
+        total = self.field + self.auxiliary
+        if total > self.total_peak:
+            self.total_peak = total
+            self.field_at_total_peak = self.field
+            self.auxiliary_at_total_peak = self.auxiliary
+
+    def drop(self, field: int = 0, auxiliary: int = 0) -> None:
+        self.field -= field
+        self.auxiliary -= auxiliary
+        if self.field < 0 or self.auxiliary < 0:
+            fail("accounting underflow")
+
+    def closed(self) -> bool:
+        return self.field == 0 and self.auxiliary == 0
 
 
 def field_for(q: int) -> Field:
@@ -237,6 +272,7 @@ def blank_work() -> dict[str, int]:
         "cubic_phase_evaluations": 0,
         "cubic_field_multiplications": 0,
         "fiber_field_multiply_adds": 0,
+        "projection_field_multiply_adds": 0,
         "inverse_gaussian_scalar_rematerializations": 0,
         "temporary_vector_field_cells_peak": 0,
     }
@@ -348,10 +384,248 @@ def single_vector(field: Field, vector: list[int], operation: tuple[str, tuple[i
     ]
 
 
+def distinct_prime_divisors(value: int) -> tuple[int, ...]:
+    answer: list[int] = []
+    trial = 2
+    while trial * trial <= value:
+        if value % trial == 0:
+            answer.append(trial)
+            while value % trial == 0:
+                value //= trial
+        trial += 1
+    if value > 1:
+        answer.append(value)
+    return tuple(answer)
+
+
+def least_generator(prime: int) -> int:
+    divisors = distinct_prime_divisors(prime - 1)
+    return next(
+        candidate
+        for candidate in range(2, prime)
+        if all(pow(candidate, (prime - 1) // divisor, prime) != 1 for divisor in divisors)
+    )
+
+
+def radix2_transform(buffer: list[int], undo: bool, work: dict[str, int]) -> None:
+    size = len(buffer)
+    if size & (size - 1) or (AUXILIARY_MODULUS - 1) % size:
+        fail("oracle NTT size unsupported")
+    permutation = 0
+    for position in range(1, size):
+        bit = size >> 1
+        while permutation & bit:
+            permutation ^= bit
+            bit >>= 1
+        permutation ^= bit
+        if position < permutation:
+            buffer[position], buffer[permutation] = buffer[permutation], buffer[position]
+    width = 2
+    while width <= size:
+        omega = pow(AUXILIARY_GENERATOR, (AUXILIARY_MODULUS - 1) // width, AUXILIARY_MODULUS)
+        if undo:
+            omega = pow(omega, -1, AUXILIARY_MODULUS)
+        half = width // 2
+        for base in range(0, size, width):
+            phase_factor = 1
+            for offset in range(half):
+                even = buffer[base + offset]
+                odd = buffer[base + offset + half] * phase_factor % AUXILIARY_MODULUS
+                buffer[base + offset] = (even + odd) % AUXILIARY_MODULUS
+                buffer[base + offset + half] = (even - odd) % AUXILIARY_MODULUS
+                phase_factor = phase_factor * omega % AUXILIARY_MODULUS
+                work["ntt_butterflies"] += 1
+        width *= 2
+    if undo:
+        normalizer = pow(size, -1, AUXILIARY_MODULUS)
+        for position in range(size):
+            buffer[position] = buffer[position] * normalizer % AUXILIARY_MODULUS
+    work["ntt_transforms"] += 1
+
+
+def cyclic_convolution_via_ntt(
+    first_cycle: list[int],
+    second_cycle: list[int],
+    field_modulus: int,
+    bound: int,
+    work: dict[str, int],
+    live: LiveAccounting,
+) -> list[int]:
+    cycle = len(first_cycle)
+    if cycle != len(second_cycle):
+        fail("oracle convolution lengths differ")
+    size = 1
+    while size < 2 * cycle - 1:
+        size *= 2
+    if not 0 < bound < AUXILIARY_MODULUS:
+        fail("oracle exactness modulus insufficient")
+    transformed_left = first_cycle + [0] * (size - cycle)
+    live.add(auxiliary=size)
+    transformed_right = second_cycle + [0] * (size - cycle)
+    live.add(auxiliary=size)
+    work["ntt_max_length"] = max(work["ntt_max_length"], size)
+    work["ntt_temporary_integer_cells_peak"] = max(work["ntt_temporary_integer_cells_peak"], 2 * size)
+    work["exact_convolution_coefficient_bound_peak"] = max(
+        work["exact_convolution_coefficient_bound_peak"], bound
+    )
+    radix2_transform(transformed_left, False, work)
+    radix2_transform(transformed_right, False, work)
+    for position in range(size):
+        transformed_left[position] = transformed_left[position] * transformed_right[position] % AUXILIARY_MODULUS
+        work["ntt_pointwise_multiplications"] += 1
+    radix2_transform(transformed_left, True, work)
+    for position in range(cycle - 1):
+        transformed_left[position] = (
+            transformed_left[position] + transformed_left[position + cycle]
+        ) % field_modulus
+    transformed_right.clear()
+    live.drop(auxiliary=size)
+    live.drop(auxiliary=size)
+    live.add(field=cycle)
+    del transformed_left[cycle:]
+    return transformed_left
+
+
+def prime_dft_rader(
+    values: list[int],
+    root: int,
+    field: Field,
+    work: dict[str, int],
+    live: LiveAccounting,
+) -> list[int]:
+    q, p = field.q, field.p
+    generator = least_generator(q)
+    cycle = q - 1
+    source_cycle = [values[pow(generator, -position % cycle, q)] for position in range(cycle)]
+    live.add(field=cycle)
+    root_cycle = [pow(root, pow(generator, position, q), p) for position in range(cycle)]
+    live.add(field=cycle)
+    coefficient_bound = cycle * (p - 1) ** 2
+    convolution = cyclic_convolution_via_ntt(
+        source_cycle, root_cycle, p, coefficient_bound, work, live
+    )
+    source_cycle.clear()
+    root_cycle.clear()
+    live.drop(field=2 * cycle)
+    answer = [0] * q
+    live.add(field=q)
+    answer[0] = sum(values) % p
+    for position in range(cycle):
+        answer[pow(generator, position, q)] = (values[0] + convolution[position]) % p
+    convolution.clear()
+    live.drop(field=cycle)
+    work["rader_dfts"] += 1
+    return answer
+
+
+def fast_gaussian_vector(
+    field: Field,
+    vector: list[int],
+    payload: tuple[int, ...],
+    work: dict[str, int],
+    live: LiveAccounting,
+) -> list[int]:
+    q, p = field.q, field.p
+    a, b, c, d, coefficient = payload
+    if b % q == 0:
+        output = [coefficient * phase(field, c * d * x * x) * vector[d * x % q] % p for x in range(q)]
+        live.add(field=q)
+        work["sparse_gaussian_terms"] += q
+        return output
+    half_b_inverse = pow(2 * b % q, -1, q)
+    prepared = [phase(field, a * y * y * half_b_inverse) * vector[y] % p for y in range(q)]
+    live.add(field=q)
+    transform = prime_dft_rader(prepared, phase(field, -pow(b, -1, q)), field, work, live)
+    output = [
+        coefficient * phase(field, d * x * x * half_b_inverse) * transform[x] % p
+        for x in range(q)
+    ]
+    live.add(field=q)
+    prepared.clear()
+    transform.clear()
+    live.drop(field=2 * q)
+    work["chirp_field_multiplications"] += 2 * q
+    return output
+
+
+def fast_streamed_boundary(q: int, depth: int, family: str, rank: int) -> dict[str, Any]:
+    field = field_for(q)
+    operations, fiber = compile_plan(q, depth, family)
+    work = {key: 0 for key in (
+        "chirp_field_multiplications",
+        "cubic_field_multiplications",
+        "cubic_phase_evaluations",
+        "exact_convolution_coefficient_bound_peak",
+        "ntt_butterflies",
+        "ntt_max_length",
+        "ntt_pointwise_multiplications",
+        "ntt_temporary_integer_cells_peak",
+        "ntt_transforms",
+        "projection_field_multiply_adds",
+        "rader_dfts",
+        "sparse_gaussian_terms",
+    )}
+    live = LiveAccounting()
+    total = 0
+    for column, row, weight in probes(q, rank, family):
+        source, y = divmod(column, q)
+        target, x = divmod(row, q)
+        vector = [0] * q
+        live.add(field=q)
+        vector[y] = 1
+        for operation in operations:
+            if operation[0] == "GAUSSIAN":
+                output = fast_gaussian_vector(field, vector, operation[1], work, live)
+                vector.clear()
+                live.drop(field=q)
+                vector = output
+            else:
+                multipliers = [phase(field, operation[1][0] * index ** 3) for index in range(q)]
+                live.add(field=q)
+                output = [value * multipliers[index] % field.p for index, value in enumerate(vector)]
+                live.add(field=q)
+                vector.clear()
+                multipliers.clear()
+                live.drop(field=2 * q)
+                vector = output
+                work["cubic_phase_evaluations"] += q
+                work["cubic_field_multiplications"] += q
+        total = (total + weight * fiber[2 * source + target] * vector[x]) % field.p
+        work["projection_field_multiply_adds"] += 3
+        vector.clear()
+        live.drop(field=q)
+    if not live.closed():
+        fail("oracle live-cell account did not close")
+    return {
+        "boundary": total,
+        "live_dynamic_field_cells_peak": live.field_peak,
+        "live_auxiliary_integer_cells_peak": live.auxiliary_peak,
+        "live_dynamic_field_and_auxiliary_integer_cells_peak": live.total_peak,
+        "field_cells_at_combined_material_peak": live.field_at_total_peak,
+        "auxiliary_integer_cells_at_combined_material_peak": live.auxiliary_at_total_peak,
+        "field_cell_bit_capacity": field.p.bit_length(),
+        "auxiliary_integer_cell_bit_capacity": AUXILIARY_MODULUS.bit_length(),
+        "combined_material_payload_bit_capacity_upper_bound_at_peak": (
+            live.field_at_total_peak * field.p.bit_length()
+            + live.auxiliary_at_total_peak * AUXILIARY_MODULUS.bit_length()
+        ),
+        "public_word_plan_cells": 12 * depth,
+        "public_boundary_probe_cells": 12,
+        "retained_ntt_kernel_cache_cells": 0,
+        "source_columns_streamed": len(probes(q, rank, family)),
+        "auxiliary_ntt_prime": AUXILIARY_MODULUS,
+        "single_auxiliary_modulus_exactness_bound_checked": (
+            0 < work["exact_convolution_coefficient_bound_peak"] < AUXILIARY_MODULUS
+        ),
+        "work": work,
+        "cold_start_comparison_used": False,
+    }
+
+
 def streamed_boundary(q: int, depth: int, family: str, rank: int) -> tuple[int, dict[str, int]]:
     field = field_for(q)
     operations, fiber = compile_plan(q, depth, family)
-    work = {key: 0 for key in ("gaussian_kernel_phase_evaluations", "gaussian_field_multiply_adds", "cubic_phase_evaluations", "cubic_field_multiplications")}
+    work = {key: 0 for key in ("gaussian_kernel_phase_evaluations", "gaussian_field_multiply_adds", "cubic_phase_evaluations", "cubic_field_multiplications", "projection_field_multiply_adds")}
     total = 0
     for column, row, weight in probes(q, rank, family):
         source, y = divmod(column, q)
@@ -361,6 +635,7 @@ def streamed_boundary(q: int, depth: int, family: str, rank: int) -> tuple[int, 
         for operation in operations:
             vector = single_vector(field, vector, operation, work)
         total = (total + weight * fiber[2 * source + target] * vector[x]) % field.p
+        work["projection_field_multiply_adds"] += 3
     return total, work
 
 
@@ -370,9 +645,11 @@ def reconstruct_case(production: dict[str, Any]) -> dict[str, Any]:
     before, backing = state.canonical(), state.backing()
     operations, work = forward(state, depth, family)
     boundary = project(state, family)
+    work["projection_field_multiply_adds"] += 3 * len(probes(q, source_rank, family))
     commitment = digest(state)
     action_rank = rank_of(state)
     baseline_boundary, baseline_work = streamed_boundary(q, depth, family, source_rank)
+    rader = fast_streamed_boundary(q, depth, family, source_rank)
     reverse(state, operations, work)
     checks = {
         "boundary": boundary == production["boundary"],
@@ -383,6 +660,17 @@ def reconstruct_case(production: dict[str, Any]) -> dict[str, Any]:
         "work": work == production["work"],
         "streamed_boundary": baseline_boundary == production["matched_source_streamed_classical"]["boundary"],
         "streamed_work": baseline_work == production["matched_source_streamed_classical"]["work"],
+        "rader_ntt_boundary": rader["boundary"] == production["matched_exact_rader_ntt_classical"]["boundary"],
+        "rader_ntt_work": rader["work"] == production["matched_exact_rader_ntt_classical"]["work"],
+        "rader_ntt_field_peak": rader["live_dynamic_field_cells_peak"] == production["matched_exact_rader_ntt_classical"]["live_dynamic_field_cells_peak"],
+        "rader_ntt_auxiliary_peak": rader["live_auxiliary_integer_cells_peak"] == production["matched_exact_rader_ntt_classical"]["live_auxiliary_integer_cells_peak"],
+        "rader_ntt_total_peak": rader["live_dynamic_field_and_auxiliary_integer_cells_peak"] == production["matched_exact_rader_ntt_classical"]["live_dynamic_field_and_auxiliary_integer_cells_peak"],
+        "rader_ntt_peak_composition": (
+            rader["field_cells_at_combined_material_peak"] == production["matched_exact_rader_ntt_classical"]["field_cells_at_combined_material_peak"]
+            and rader["auxiliary_integer_cells_at_combined_material_peak"] == production["matched_exact_rader_ntt_classical"]["auxiliary_integer_cells_at_combined_material_peak"]
+        ),
+        "rader_ntt_peak_bit_capacity": rader["combined_material_payload_bit_capacity_upper_bound_at_peak"] == production["matched_exact_rader_ntt_classical"]["combined_material_payload_bit_capacity_upper_bound_at_peak"],
+        "rader_ntt_exactness_bound": rader["single_auxiliary_modulus_exactness_bound_checked"] and rader["auxiliary_ntt_prime"] == production["matched_exact_rader_ntt_classical"]["auxiliary_ntt_prime"],
         "restoration": state.canonical() == before,
         "same_backing": state.backing() == backing,
     }
@@ -433,6 +721,38 @@ def dense_semantics() -> dict[str, bool]:
         recurrence = [state.values[row * 2 * q : (row + 1) * 2 * q] for row in range(2 * q)]
         results[f"q{q}_full_basis_dense_factor_parity"] = dense == recurrence
         results[f"q{q}_full_action_rank"] = rank_of(state) == 2 * q
+    return results
+
+
+def rader_semantics() -> dict[str, bool]:
+    results: dict[str, bool] = {}
+    for q in (5, 11):
+        field = field_for(q)
+        for root_exponent in (1, 2):
+            values = [((index + 2) * (index + 3) + root_exponent) % field.p for index in range(q)]
+            root = phase(field, root_exponent)
+            direct = [
+                sum(values[y] * pow(root, x * y, field.p) for y in range(q)) % field.p
+                for x in range(q)
+            ]
+            work = {key: 0 for key in (
+                "exact_convolution_coefficient_bound_peak",
+                "ntt_butterflies",
+                "ntt_max_length",
+                "ntt_pointwise_multiplications",
+                "ntt_temporary_integer_cells_peak",
+                "ntt_transforms",
+                "rader_dfts",
+            )}
+            live = LiveAccounting()
+            live.add(field=q)
+            observed = prime_dft_rader(values, root, field, work, live)
+            live.drop(field=2 * q)
+            results[f"q{q}_root{root_exponent}_rader_matches_direct_dft"] = observed == direct
+            results[f"q{q}_root{root_exponent}_account_closes"] = live.closed()
+            results[f"q{q}_root{root_exponent}_coefficient_bound_below_auxiliary_modulus"] = (
+                0 < work["exact_convolution_coefficient_bound_peak"] < AUXILIARY_MODULUS
+            )
     return results
 
 
@@ -503,10 +823,11 @@ def build(production_path: Path) -> dict[str, Any]:
     production = json.loads(production_path.read_text(encoding="utf-8"))
     comparisons = [reconstruct_case(case) for case in production["cases"]]
     dense = dense_semantics()
+    rader_checks = rader_semantics()
     control_results = controls()
     reuse_results = reuse()
     payload = {
-        "schema": "CAT_CAS_GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_INDEPENDENT_ORACLE_V1",
+        "schema": "CAT_CAS_GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_INDEPENDENT_ORACLE_V2",
         "production_result": "GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RESULTS.json",
         "production_result_sha256": hashlib.sha256(production_path.read_bytes()).hexdigest(),
         "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
@@ -519,10 +840,12 @@ def build(production_path: Path) -> dict[str, Any]:
             "production_forward_inverse_or_projection_called": False,
             "production_result_used_only_as_comparison_target": True,
             "separate_field_plan_bundle_rank_and_streaming_recurrences": True,
+            "separate_rader_ntt_and_live_cell_accounting_recurrence": True,
         },
         "all_11_cases_reconstructed": len(comparisons) == 11 and all(all(case["checks"].values()) for case in comparisons),
         "case_comparisons": comparisons,
         "dense_semantic_checks": dense,
+        "rader_ntt_semantic_checks": rader_checks,
         "controls": control_results,
         "restoration_and_reuse": reuse_results,
         "observed_resource_law": {
@@ -532,7 +855,10 @@ def build(production_path: Path) -> dict[str, Any]:
             "declared_bundle_resident_field_cells": "2*Q*R",
             "declared_bundle_resident_plus_temporary_peak_field_cells": "4*Q*R",
             "matched_source_streamed_dynamic_field_cells": "2*Q",
+            "matched_rader_ntt_peak_logical_payload_cells": "4*Q-2+2*NEXT_POWER_OF_TWO_AT_LEAST_2Q_MINUS3",
+            "matched_rader_ntt_peak_bit_capacity_upper_bound": "(4*Q-2)*BIT_LENGTH(P)+2*NEXT_POWER_OF_TWO_AT_LEAST_2Q_MINUS3*30",
             "public_word_descriptor_cells": "12*DEPTH",
+            "public_boundary_probe_cells": 12,
             "fixed_rank_general_open_interface_established": False,
         },
         "claim_ceiling": production["claim_ceiling"],
@@ -542,6 +868,7 @@ def build(production_path: Path) -> dict[str, Any]:
             "FULL_Q5_AND_Q11_TWO_FIBER_BASIS_ACTION_BUNDLES",
             "EXACT_IN_PLACE_RESTORATION_AND_SAME_BACKING_REUSE",
             "EXECUTED_SOURCE_STREAMED_2Q_DYNAMIC_CELL_FINAL_BOUNDARY_BASELINE",
+            "EXECUTED_EXACT_RADER_NTT_LINEAR_MATERIAL_CELL_FINAL_BOUNDARY_BASELINE",
         ],
         "rejected_interpretations": [
             "COMPACT_GENERAL_OPEN_RELATION_CLOSURE",
@@ -555,7 +882,13 @@ def build(production_path: Path) -> dict[str, Any]:
             "UNBOUNDED_CATALYTIC_COMPUTATION",
         ],
     }
-    if not payload["all_11_cases_reconstructed"] or not all(dense.values()) or not all(control_results.values()) or not all(reuse_results.values()):
+    if (
+        not payload["all_11_cases_reconstructed"]
+        or not all(dense.values())
+        or not all(rader_checks.values())
+        or not all(control_results.values())
+        or not all(reuse_results.values())
+    ):
         fail("independent qualification failed")
     return payload
 

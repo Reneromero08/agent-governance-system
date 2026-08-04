@@ -41,6 +41,12 @@ jq -e '
     .same_backing_restored and
     (.snapshot_used | not) and
     .matched_source_streamed_classical.boundary_matches and
+    .matched_exact_rader_ntt_classical.boundary_matches and
+    .matched_exact_rader_ntt_classical.single_auxiliary_modulus_exactness_bound_checked and
+    .matched_exact_rader_ntt_classical.retained_ntt_kernel_cache_cells == 0 and
+    .matched_exact_rader_ntt_classical.work.exact_convolution_coefficient_bound_peak < .matched_exact_rader_ntt_classical.auxiliary_ntt_prime and
+    .matched_exact_rader_ntt_classical.live_dynamic_field_and_auxiliary_integer_cells_peak == (4*.q-2+2*.matched_exact_rader_ntt_classical.work.ntt_max_length) and
+    .matched_exact_rader_ntt_classical.combined_material_payload_bit_capacity_upper_bound_at_peak == (.matched_exact_rader_ntt_classical.field_cells_at_combined_material_peak*.matched_exact_rader_ntt_classical.field_cell_bit_capacity + .matched_exact_rader_ntt_classical.auxiliary_integer_cells_at_combined_material_peak*.matched_exact_rader_ntt_classical.auxiliary_integer_cell_bit_capacity) and
     (.intermediate_columns_serialized | not)] | all) and
   ([.controls[]] | all) and
   ([.dense_small_order_parity[]] | all) and
@@ -51,6 +57,10 @@ jq -e '
   .observed_resource_law.all_full_two_fiber_operators_certified_invertible and
   (.observed_resource_law.fixed_rank_open_interface_across_growing_q_established | not) and
   .matched_baselines.public_operator_word_is_a_complete_rematerialization_descriptor and
+  .matched_baselines.all_rader_ntt_boundaries_match and
+  (.matched_baselines.executed_pareto_pair | length) == 2 and
+  .resource_accounting.mixed_field_and_auxiliary_cell_bit_capacities_counted and
+  .resource_accounting.projection_work_and_public_probe_descriptor_counted and
   (.resource_accounting.advantage_claimed | not)
 ' "$EVIDENCE/reexecuted.json" >/dev/null
 
@@ -62,10 +72,12 @@ jq -e '
   .independence.imports_production_module == false and
   .independence.imports_predecessor_module == false and
   .independence.production_forward_inverse_or_projection_called == false and
+  .independence.separate_rader_ntt_and_live_cell_accounting_recurrence and
   .all_11_cases_reconstructed and
   (.case_comparisons | length) == 11 and
   ([.case_comparisons[].checks[]] | all) and
   ([.dense_semantic_checks[]] | all) and
+  ([.rader_ntt_semantic_checks[]] | all) and
   ([.controls[]] | all) and
   ([.restoration_and_reuse[]] | all) and
   .observed_resource_law.executed_full_source_bundles == ["Q5_R10","Q11_R22"] and
