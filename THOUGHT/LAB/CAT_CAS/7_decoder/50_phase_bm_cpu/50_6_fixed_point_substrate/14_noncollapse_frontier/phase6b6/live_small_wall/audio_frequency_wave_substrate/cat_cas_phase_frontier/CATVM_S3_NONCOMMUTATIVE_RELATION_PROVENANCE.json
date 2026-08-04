@@ -1,0 +1,117 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 167,
+  "scientific_source_head": "7cb8a1764fa4652b521e1daaccfc32fbb1a74116",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "snapshot_comparison_restoration_classification": "SNAPSHOT_RELOAD",
+  "artifacts": {
+    "protocol_source": {
+      "path": "catvm_s3_relation_protocol.py",
+      "sha256": "b59852d800f6a7a4e793a0282354198fc06a4e1bbdf73d63278b01e389dbd217"
+    },
+    "service_source": {
+      "path": "catvm_s3_relation_service.py",
+      "sha256": "a16eea2411b2855c5dd467a660bf6e0e33dcebe723e32bd8b3ae1d5b2a79f081"
+    },
+    "controller_source": {
+      "path": "catvm_s3_relation_controller.py",
+      "sha256": "4db40e94852592454859ac9def320ff8d411d18a928e8ede0be3b97c32ae083f"
+    },
+    "oracle_source": {
+      "path": "catvm_s3_relation_oracle.py",
+      "sha256": "447baf8c95936aec542810f279c398370106e0248680293681b6f0e64ebee2e9"
+    },
+    "production_result": {
+      "path": "CATVM_S3_NONCOMMUTATIVE_RELATION_RESULTS.json",
+      "sha256": "1210b0339ad70bf30767a4ef823e95777b361e8ea1d35f07b853575563936699"
+    },
+    "oracle_result": {
+      "path": "CATVM_S3_NONCOMMUTATIVE_RELATION_ORACLE_RESULTS.json",
+      "sha256": "bd94259835bc1d68ee4ace84bb1a0f6b20a9cabd264c6e256293cf70c072e1c3"
+    },
+    "review": {
+      "path": "CATVM_S3_NONCOMMUTATIVE_RELATION_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "989c2d4eeece8e7ed657632e541ecd4387f2040db0878943a008ffd3c7b3acaa"
+    },
+    "qualifier": {
+      "path": "qualify_catvm_s3_noncommutative_relation.sh",
+      "sha256": "881d11afa4b04bce5eab802cfbe0732f49021050ee999ecd4cc83b241a420fbe"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_CATVM_S3_NONCOMMUTATIVE_RELATION_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m167-qualifier-2lQpY3"
+  },
+  "machine_boundary": {
+    "service": "SEPARATE_NON_DUMPABLE_NO_NEW_PRIVS_SAME_UID_LINUX_BINARY_PIPE_SERVICE",
+    "request_bytes": 24,
+    "response_bytes": 44,
+    "controller_imports_backend": false,
+    "controller_computes_boundary": false,
+    "process_memory_open_denial_errno_limited_to_eacces_or_eperm": true,
+    "os_or_hardware_isolation_claimed": false
+  },
+  "independent_oracle": {
+    "imports_protocol": false,
+    "imports_service": false,
+    "imports_controller": false,
+    "imports_numpy": false,
+    "full_two_register_relation_reference_cells": 72,
+    "group_and_full_matrix_basis_products_checked": 36,
+    "semantic_cases": 2,
+    "raw_binary_protocol_reexecution": true,
+    "boundary_and_commitment_parity": true,
+    "full_relation_reverse_clearing": true
+  },
+  "atomicity_controls": {
+    "accepted_response_after_restoration": true,
+    "hidden_projection_after_forward_residency_denied_then_restored": true,
+    "early_response_after_forward_residency_denied_then_restored": true,
+    "wrong_type_after_forward_residency_denied_then_restored": true,
+    "wrong_owner_after_forward_residency_denied_then_restored": true,
+    "missing_inverse_after_forward_residency_withholds_response": true,
+    "wrong_inverse_after_forward_residency_withholds_response": true,
+    "reordered_noncommuting_inverse_after_forward_residency_withholds_response": true,
+    "disconnect_restores_before_write_attempt": true,
+    "null_carrier_denied": true,
+    "wrong_generation_denied": true,
+    "mode_mismatch_denied": true,
+    "snapshot_sham_separately_classified": true
+  },
+  "resource_law": {
+    "accepted_carrier_field_cells": 12,
+    "accepted_temporary_restoration_verification_baseline_field_cells": 12,
+    "accepted_conservative_field_value_slots_peak": 37,
+    "matched_direct_classical_field_value_slots_peak": 25,
+    "snapshot_sham_field_value_slots_peak": 37,
+    "snapshot_cells_on_accepted_path": 0,
+    "snapshot_cells_on_sham_path": 12,
+    "retained_inverse_history_records": 0,
+    "retained_compiled_plan_records": 0,
+    "python_object_headers_allocator_interpreter_native_library_and_whole_process_peaks_excluded": true
+  },
+  "claim_ceiling": "S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR",
+  "preserved_subclaims": [
+    "ONE_SHARED_SIX_CELL_RELATION_PORT_REMAINS_BACKEND_RESIDENT_ACROSS_MULTIPLE_NONCOMMUTING_CONSUMERS",
+    "ATOMIC_FINAL_ONLY_RESPONSE_RELEASE_AFTER_EXACT_IN_PLACE_RESTORATION",
+    "SAME_SERVICE_CROSS_FAMILY_RESTORED_CARRIER_REUSE_MATCHES_FRESH",
+    "INDEPENDENT_FULL72_CELL_RELATION_ORACLE_MATCHES_BOUNDARIES_COMMITMENTS_AND_REVERSE_CLEARING",
+    "APPLICABLE_REORDERED_NONCOMMUTING_INVERSE_FAILURE_EXECUTES_AFTER_FORWARD_RESIDENCY",
+    "SNAPSHOT_RELOAD_IS_NOT_USED_AS_ACCEPTED_CATALYTIC_RESTORATION"
+  ],
+  "negative_result": "THE_MACHINE_BOUNDARY_ENFORCES_CUSTODY_AND_ATOMIC_RESTORATION_BUT_THE_ACCEPTED_LOGICAL_PEAK_IS37_FIELD_VALUE_SLOTS_VERSUS25_FOR_THE_IDENTICAL_STREAMED_SIX_COORDINATE_CLASSICAL_RECURRENCE",
+  "rejected_interpretations": [
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "GENERAL_FINITE_GROUP_RELATION_COMPILER",
+    "GENERAL_SIX_LABEL_RELATIONS",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

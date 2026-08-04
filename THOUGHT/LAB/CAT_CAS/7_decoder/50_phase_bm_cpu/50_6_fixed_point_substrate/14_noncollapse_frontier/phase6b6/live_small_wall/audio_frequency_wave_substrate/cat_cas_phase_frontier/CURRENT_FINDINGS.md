@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`6586f2d594357ae255f47d1897a5fd455444e9ff`. The canonical per-milestone
+`7cb8a1764fa4652b521e1daaccfc32fbb1a74116`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9474,3 +9474,60 @@ reordered-inverse failure. The identical six-coordinate classical recurrence
 remains the baseline. No general finite-group compiler, general six-label
 relation closure, Small Wall crossing, physical execution, physical-bit
 replacement, or unbounded computation is established.
+
+## M167: CATVM-enforced S3 relation custody and atomic restoration
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL
+```
+
+The exact S3 carrier now runs in a separate non-dumpable, `no_new_privs`,
+same-UID Linux binary-pipe service. One shared six-cell port remains resident
+through multiple noncommuting consumers. Every accepted response follows
+forward execution, internal boundary retention, exact reverse restoration,
+same-backing verification, generation advance, and only then response write.
+The same service carrier is reused for an unrelated depth-256 family and
+matches a fresh service.
+
+An independent no-import oracle reconstructs the full 72-cell two-relation
+semantics, checks all 36 group/full-matrix basis products, and drives a fresh
+service with independently packed raw messages. It matches both accepted
+boundaries and commitments and independently clears the full relations.
+Opening `/proc/<pid>/mem` is denied specifically by `EACCES` or `EPERM` under
+the tested configuration; no broader OS-isolation claim follows.
+
+Hidden projection, early response, wrong type, and wrong owner are attacked
+after forward residency and denied before restoration and response. Missing,
+wrong, and reordered noncommuting inverse attacks run after residency and
+withhold every response. Disconnect restores before the failed write. Null,
+generation, and service-mode controls pass. The snapshot sham is separately
+`SNAPSHOT_RELOAD`; the accepted path uses `EXACT_ALGEBRAIC_RESTORATION` and no
+snapshot.
+
+The accepted conservative logical peak is 37 field slots, including the
+temporary twelve-cell restoration verifier. The identical streamed
+six-coordinate classical recurrence uses 25. Physical process peak memory is
+unmeasured and Python runtime/allocator costs are excluded. M167 therefore
+establishes bounded CATVM custody and atomic machine law, not a distinct phase
+resource or advantage.
+
+Exact ceiling:
+
+```text
+S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR
+```
+
+Selected phase-owned successor:
+
+```text
+EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_FIXED_RANK_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+```
+
+This next diagnostic changes group size and asks whether a sparse nonabelian
+irrep chart remains closed under both composition and intersection, or whether
+support/rank must grow to the full group coordinate law. It must preserve
+exact restoration/reuse and compare the strongest streamed group and irrep
+classical recurrences. No Small Wall crossing, physical execution,
+physical-bit replacement, or unbounded computation is established.

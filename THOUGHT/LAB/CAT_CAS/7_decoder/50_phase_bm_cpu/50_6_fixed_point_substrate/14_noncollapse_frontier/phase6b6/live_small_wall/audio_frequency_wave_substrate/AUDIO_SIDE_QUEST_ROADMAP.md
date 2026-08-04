@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_S3_NONCOMMUTATIVE_RELATION_ALGEBRA_CLASSICAL_IDENTITY_RESULT`
-**Roadmap version:** `14.32`
+**Status:** `STRICT_SCOPE_CATVM_S3_ATOMIC_CUSTODY_WITH_SMALLER_IDENTICAL_CLASSICAL_BASELINE_RESULT`
+**Roadmap version:** `14.33`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6586f2d594357ae255f47d1897a5fd455444e9ff`
+**Reconciled source head:** `7cb8a1764fa4652b521e1daaccfc32fbb1a74116`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN`
-**Current claim ceiling:** `S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL`
+**Current claim ceiling:** `S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M166_S3_NONCOMMUTATIVE_RELATION_ALGEBRA_CLASSICAL_IDENTITY_RESULT`
+**New mechanism development:** `ACTIVE_AFTER_M167_CATVM_S3_ATOMIC_CUSTODY_AND_SMALLER_CLASSICAL_BASELINE_RESULT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_SHARED_RELATION_PORT_ATOMIC_RESPONSE_RESTORATION_REUSE_WITH_EXECUTED_REORDERED_INVERSE_FAILURE_AND_MATCHED_COMPACT_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_FIXED_RANK_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -46,10 +46,12 @@ occurrence recurrence uses only 15. More fixture scaling is not the repair.
 M166 changes the composition algebra to the smallest nonabelian group and
 establishes exact noncommutative convolution plus intersection, but the
 accepted carrier is the identical six-coordinate group recurrence and the
-irrep transform retains all six information coordinates. The next bounded
-step puts this algebra behind CATVM so that custody, atomic response ordering,
-and reordered-inverse failure are enforced where noncommutation makes that
-control applicable.
+irrep transform retains all six information coordinates. M167 puts that
+algebra behind CATVM, enforces response-after-restore ordering, and executes
+the applicable reordered-inverse failure after forward residency. The
+accepted logical peak is 37 field slots versus 25 for the identical streamed
+classical recurrence. The next experiment changes the phase algebra's growth
+law by testing irrep-sparse closure across a growing dihedral family.
 
 Every successor must answer:
 
@@ -75,7 +77,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The current 165-milestone
+`7cb8a1764fa4652b521e1daaccfc32fbb1a74116`. The current 167-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4704,7 +4706,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL
 ```
 
 Not established:
@@ -7245,6 +7247,77 @@ baseline. M166 establishes no CATVM custody, general finite-group compiler,
 general six-label relation closure, distinct phase resource, computational
 advantage, Small Wall crossing, physical execution, physical-bit replacement,
 or unbounded computation.
+
+## M167: CATVM enforces S3 custody while the identical classical recurrence remains smaller
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL
+```
+
+M167 places the exact M166 S3 carrier in a separate non-dumpable,
+`no_new_privs`, same-UID Linux binary-pipe service. One six-cell relation port
+remains resident across multiple left/right composition and intersection
+consumers. The service retains the final scalar internally, reverses the
+actual forward sequence exactly, verifies canonical state on the same
+backing, advances restoration and lease generations, and only then attempts
+the 44-byte response. A second unrelated family at depth 256 consumes the
+same restored service carrier and matches a fresh service and the independent
+reference.
+
+The independent oracle imports no production module or NumPy. It independently
+constructs S3 and a full two-register 72-cell relation reference, verifies all
+36 group/full-matrix basis products, and matches the primary depth-1 and
+alternate depth-256 boundaries, commitments, and exact reverse clearing. It
+also drives a fresh service through independently packed raw binary messages.
+Under the tested Linux configuration, both controllers receive only `EACCES`
+or `EPERM` when opening `/proc/<pid>/mem`; this is not OS or hardware
+isolation.
+
+Hidden projection, early response, wrong type, and wrong owner are attempted
+after forward residency, denied without boundary release, and followed by
+correct restoration before the denial response. Missing, wrong, and reordered
+noncommuting inverses execute after forward residency and terminate without a
+response. Disconnect restores before the failed write attempt. Null carrier,
+wrong generation, and in-place/snapshot mode mismatch controls pass. The
+snapshot sham retains twelve snapshot cells and is classified separately as
+`SNAPSHOT_RELOAD`; the accepted path uses no snapshot.
+
+The accepted logical peak is conservatively 37 field-value slots: twelve
+carrier cells, a twelve-cell restoration-verification baseline, six streamed
+public operand cells, six operation-delta cells, and one scalar. The strongest
+matched direct classical path is the identical streamed six-coordinate group
+recurrence at 25 slots. Python object headers, allocator, interpreter,
+native-library, and whole-process peaks remain excluded. The one-way response
+commitment is truncated to 64 bits and is not an identity proof.
+
+M167 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`. The accepted in-place path is
+`EXACT_ALGEBRAIC_RESTORATION`; the sham is `SNAPSHOT_RELOAD` only.
+
+Exact ceiling:
+
+```text
+S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR
+```
+
+The machine-law uncertainty is resolved for this bounded algebra, but the
+identical classical recurrence is smaller. The next experiment returns to the
+phase machine and asks whether noncommutative irrep sparsity can remain closed
+as group size grows:
+
+```text
+EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_FIXED_RANK_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+```
+
+It must test multiple F103-compatible dihedral orders, native noncommutative
+composition and intersection, exact irrep-support/rank growth, final-only
+projection, exact restoration and reuse, and the strongest streamed group and
+irrep classical recurrences. It may establish a bounded fixed-rank family or
+a no-go; it may not infer a distinct phase resource from avoiding a dense
+relation table. No computational advantage, Small Wall crossing, physical
+execution, physical-bit replacement, or unbounded computation is established.
 
 ## 10. Roadmap Maintenance
 
