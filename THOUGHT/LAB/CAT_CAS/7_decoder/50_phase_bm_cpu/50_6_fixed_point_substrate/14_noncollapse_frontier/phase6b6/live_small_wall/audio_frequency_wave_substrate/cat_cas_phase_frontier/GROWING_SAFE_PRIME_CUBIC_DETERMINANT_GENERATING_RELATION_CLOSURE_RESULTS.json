@@ -1,0 +1,587 @@
+{
+  "claim": "BOUNDED_EXACT_Q5_SYMMETRIC3_DETERMINANT_OVER_SCALE_CUBIC_GENERATING_PHASE_RELATION_HAS_FULL_BOUNDARY_FOURIER_CLOSURE_AFTER27_PUBLIC_CONGRUENCE_STRATUM_COMPLETION_COORDINATES_IN_F41_BUT_THE_SAME_SEVEN_STRATUM_DESCRIPTOR_FAMILY_REJECTS_ALL1296_CHARACTER_PAIRS_ON576_EVENLY_SPREAD_Q7_OPEN_BOUNDARY_POINTS_WHILE_LOGICAL_STATE_GROWS_AS_Q7_AND_THE_IDENTICAL_SEPARABLE_CLASSICAL_DFT_REMAINS_WITH_EXACT_IN_PLACE_RESTORATION_AND_REUSE_SO_NO_TRANSFERABLE_FIXED_RANK_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED",
+  "claim_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_rank_or_fixed_state_growth": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "transferable_growing_prime_closure": false,
+    "unbounded_computation": false
+  },
+  "claim_ceiling": "Q5_F41_FULL78125_POINT_AND_Q7_F43_576_POINT_TRANSFER_ATTACK_SYMMETRIC3_DETERMINANT_OVER_SCALE_PUBLIC_SEVEN_CONGRUENCE_STRATA_MULTIPLICATIVE_CHARACTER_COMPLETION_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "execution": "DIRECT_PROCESS_SOFTWARE_EXACT_FINITE_FIELD_RESIDUE_PHASE_DIAGNOSTIC",
+  "legendre_critical_locus": {
+    "critical_map": "Y=adj(X)/t_AND_v=-det(X)/t^2",
+    "generating_function": "det(X)/t_ON_SYMMETRIC3_X_AND_NONZERO_t",
+    "inverse_critical_map": "X=-adj(Y)/v_AND_t=det(Y)/v^2",
+    "multiplicative_legendre_dual": "-det(Y)/v",
+    "samples": [
+      {
+        "all_pass": true,
+        "exact_invertible_samples": 24,
+        "q": 5
+      },
+      {
+        "all_pass": true,
+        "exact_invertible_samples": 24,
+        "q": 7
+      },
+      {
+        "all_pass": true,
+        "exact_invertible_samples": 24,
+        "q": 11
+      }
+    ]
+  },
+  "matched_baseline": {
+    "cold_start_only_comparison": false,
+    "computational_advantage_established": false,
+    "dense_expansion_only_baseline": false,
+    "identical_character_sum_recurrence": true,
+    "identical_public_congruence_stratum_descriptor": true,
+    "identical_seven_axis_separable_classical_dft": true
+  },
+  "next_obstruction": "THE_Q5_SEVEN_STRATUM_COMPLETION_IS_ARITHMETIC_LOCAL_AND_FAILS_Q7_TRANSFER_WHILE_BOTH_THE_Q7_CARRIER_AND_ITS_CHARACTER_COMPLETION_DESCRIPTOR_GROW_SO_A_TRANSFERABLE_PHASE_LAW_NEEDS_A_BOUNDED_CONDUCTOR_OR_CRITICAL_LOCUS_OBJECT_STRONGER_THAN_SCALAR_STRATUM_WEIGHTS",
+  "observed_resource_law": {
+    "carrier_growth": "q^7_FIELD_CELLS",
+    "completion_descriptor_growth": "5*(q-1)+7_FIELD_COORDINATES",
+    "fixed_rank_transferable_closure_established": false,
+    "logical_phase_cells": {
+      "q5": 78125,
+      "q7": 823543
+    },
+    "q5_closure_is_not_promoted_across_q": true,
+    "singular_completion_coordinates": {
+      "q5": 27,
+      "q7": 37
+    }
+  },
+  "q5_full_boundary_closure": {
+    "additive_root_order": 5,
+    "auxiliary_prime": 41,
+    "character_pairs_tested": 256,
+    "class_counts": [
+      1,
+      62,
+      62,
+      1240,
+      1860,
+      6200,
+      6200
+    ],
+    "congruence_classes": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        -1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        -1
+      ],
+      [
+        3,
+        1
+      ]
+    ],
+    "controls": {
+      "missing_inverse_axis_fails": true,
+      "null_carrier_rejected": true,
+      "one_completion_cell_perturbation_fails": true,
+      "open_stratum_without_completion_fails": true,
+      "reordered_inverse_applicable": false,
+      "reordered_inverse_reason": "SEPARABLE_DFT_AXIS_OPERATORS_COMMUTE",
+      "wrong_target_character_fails": true
+    },
+    "full_boundary_points_per_pair": 78125,
+    "full_closure_match_count": 5,
+    "full_closure_matches": [
+      {
+        "full_boundary_exact": true,
+        "global_scale": 15,
+        "nonzero_source_completion_coordinates": 17,
+        "nonzero_target_completion_coordinates": 3,
+        "source_character_signature": [
+          0,
+          0
+        ],
+        "source_completion_coefficients": [
+          4,
+          0,
+          13,
+          0,
+          20,
+          0,
+          29,
+          0,
+          20,
+          0,
+          12,
+          0,
+          20,
+          0,
+          22,
+          0,
+          20,
+          0,
+          19,
+          0,
+          25,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1
+        ],
+        "target_character_signature": [
+          2,
+          2
+        ],
+        "target_completion_coefficients": [
+          6,
+          0,
+          10,
+          0,
+          0,
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "full_boundary_exact": true,
+        "global_scale": 15,
+        "nonzero_source_completion_coordinates": 17,
+        "nonzero_target_completion_coordinates": 3,
+        "source_character_signature": [
+          0,
+          2
+        ],
+        "source_completion_coefficients": [
+          13,
+          0,
+          4,
+          0,
+          29,
+          0,
+          20,
+          0,
+          12,
+          0,
+          20,
+          0,
+          22,
+          0,
+          20,
+          0,
+          19,
+          0,
+          20,
+          0,
+          30,
+          7,
+          34,
+          35,
+          6,
+          13,
+          28
+        ],
+        "target_character_signature": [
+          0,
+          2
+        ],
+        "target_completion_coefficients": [
+          34,
+          0,
+          9,
+          0,
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "full_boundary_exact": true,
+        "global_scale": 26,
+        "nonzero_source_completion_coordinates": 15,
+        "nonzero_target_completion_coordinates": 3,
+        "source_character_signature": [
+          1,
+          3
+        ],
+        "source_completion_coefficients": [
+          0,
+          0,
+          8,
+          0,
+          11,
+          0,
+          18,
+          0,
+          11,
+          0,
+          23,
+          0,
+          11,
+          0,
+          23,
+          0,
+          11,
+          0,
+          18,
+          0,
+          0,
+          38,
+          38,
+          38,
+          38,
+          4,
+          4
+        ],
+        "target_character_signature": [
+          3,
+          1
+        ],
+        "target_completion_coefficients": [
+          13,
+          0,
+          3,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "full_boundary_exact": true,
+        "global_scale": 15,
+        "nonzero_source_completion_coordinates": 17,
+        "nonzero_target_completion_coordinates": 3,
+        "source_character_signature": [
+          2,
+          2
+        ],
+        "source_completion_coefficients": [
+          25,
+          0,
+          12,
+          0,
+          8,
+          0,
+          28,
+          0,
+          8,
+          0,
+          13,
+          0,
+          8,
+          0,
+          14,
+          0,
+          8,
+          0,
+          27,
+          0,
+          23,
+          9,
+          9,
+          9,
+          9,
+          28,
+          28
+        ],
+        "target_character_signature": [
+          0,
+          0
+        ],
+        "target_completion_coefficients": [
+          39,
+          0,
+          25,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "full_boundary_exact": true,
+        "global_scale": 26,
+        "nonzero_source_completion_coordinates": 17,
+        "nonzero_target_completion_coordinates": 3,
+        "source_character_signature": [
+          3,
+          1
+        ],
+        "source_completion_coefficients": [
+          13,
+          0,
+          23,
+          0,
+          27,
+          0,
+          33,
+          0,
+          27,
+          0,
+          8,
+          0,
+          27,
+          0,
+          20,
+          0,
+          27,
+          0,
+          21,
+          0,
+          30,
+          15,
+          15,
+          15,
+          15,
+          9,
+          9
+        ],
+        "target_character_signature": [
+          1,
+          3
+        ],
+        "target_completion_coefficients": [
+          10,
+          0,
+          24,
+          0,
+          0,
+          0,
+          7,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "joint_boundary_column_rank": 35,
+    "logical_phase_cells": 78125,
+    "matrix_coordinates": 6,
+    "multiplicative_root_order": 4,
+    "primary_source_commitment": "5bd1ea64c47a923ab4158eb085681f554401a021cc7a4478e60f7286575dabe5",
+    "primary_target_commitment": "849761e4215a28b05fae3846303568b7a63bb9248de26794c0c92e88878b57d7",
+    "q": 5,
+    "restoration_and_reuse": {
+      "primary_exactly_restored": true,
+      "primary_forward_commitment": "849761e4215a28b05fae3846303568b7a63bb9248de26794c0c92e88878b57d7",
+      "restoration_generation_after_primary": 1,
+      "restoration_generation_after_reuse": 2,
+      "same_backing_restored": true,
+      "same_backing_reused": true,
+      "second_boundary_commitment": "f89769f281b198a9e910362477796446c7a476ed5fc6926e7555be3b6aa9639c",
+      "second_exactly_restored": true,
+      "second_matches_fresh": true,
+      "second_program": "UNRELATED_LINEAR_COORDINATE_PHASE_SHEAR",
+      "second_program_consumed_actual_restored_backing": true,
+      "snapshot_used": false,
+      "verification_baseline_cells": 156250
+    },
+    "singular_completion_coordinate_count": 27,
+    "work": {
+      "dense_singular_basis_field_cells_materialized": 2109375,
+      "field_multiply_adds_per_full_transform": 2734375,
+      "full_boundary_verification_field_comparisons_per_match": 78125,
+      "separable_dft_axes": 7
+    }
+  },
+  "q7_transfer_attack": {
+    "auxiliary_prime": 43,
+    "character_pairs_tested": 1296,
+    "class_counts": [
+      1,
+      171,
+      171,
+      9576,
+      7182,
+      50274,
+      50274
+    ],
+    "congruence_classes": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        -1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        -1
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        -1
+      ],
+      [
+        3,
+        1
+      ]
+    ],
+    "global_closure_implication": "ANY_GLOBAL_CLOSURE_IN_THE_DECLARED_FAMILY_MUST_PASS_THE_SAMPLE",
+    "logical_phase_cells": 823543,
+    "matrix_samples": 96,
+    "open_boundary_sample_points": 576,
+    "q": 7,
+    "sample_selection": "EVENLY_SPREAD_BY_PUBLIC_LEXICOGRAPHIC_INVERTIBLE_MATRIX_INDEX",
+    "sample_selection_reads_final_values": false,
+    "scale_samples_per_matrix": 6,
+    "singular_completion_coordinate_count": 37,
+    "source_completion_sample_rank": 12,
+    "surviving_character_pair_count": 0,
+    "surviving_character_pairs": [],
+    "work": {
+      "candidate_source_target_pairs_solved": 1296,
+      "dense_source_carrier_field_cells_peak": 823543,
+      "field_multiply_adds_per_source_transform": 40353607,
+      "one_dense_source_carrier_at_a_time": true,
+      "separable_dft_axes": 7,
+      "source_character_signatures_transformed": 36
+    }
+  },
+  "resource_accounting": {
+    "carrier_creation_counted": true,
+    "column_space_solution_work_counted": true,
+    "dense_phase_cells_counted": true,
+    "inverse_and_restoration_verification_counted": true,
+    "projection_and_full_boundary_verification_counted": true,
+    "python_object_allocator_and_native_library_workspace_excluded": true,
+    "reuse_counted": true,
+    "separable_transform_work_counted": true,
+    "singular_basis_materialization_counted": true,
+    "verification_baseline_counted": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

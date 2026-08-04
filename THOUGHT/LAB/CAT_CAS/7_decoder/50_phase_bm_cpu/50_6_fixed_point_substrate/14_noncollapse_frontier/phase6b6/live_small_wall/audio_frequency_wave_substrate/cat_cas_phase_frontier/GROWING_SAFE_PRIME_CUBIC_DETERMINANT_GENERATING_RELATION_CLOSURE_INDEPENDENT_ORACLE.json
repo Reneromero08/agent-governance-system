@@ -1,0 +1,115 @@
+{
+  "claim_ceiling": "Q5_F41_FULL78125_POINT_AND_Q7_F43_576_POINT_TRANSFER_ATTACK_SYMMETRIC3_DETERMINANT_OVER_SCALE_PUBLIC_SEVEN_CONGRUENCE_STRATA_MULTIPLICATIVE_CHARACTER_COMPLETION_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_q5_boundary_points_verified_for_each_surviving_pair": true,
+    "all_q5_character_pairs_searched": true,
+    "all_q7_character_pairs_attacked": true,
+    "digest_not_used_as_state_equality": true,
+    "production_does_not_import_oracle": true,
+    "q7_different_transform_algorithm": true
+  },
+  "observed_resource_law": {
+    "fixed_rank_transferable_closure": false,
+    "matched_classical_separable_transform_remains": true,
+    "q5_completion_coordinates": 27,
+    "q5_phase_cells": 78125,
+    "q7_completion_coordinates": 37,
+    "q7_phase_cells": 823543
+  },
+  "preserved_subclaims": [
+    "Q5_F41_FULL_BOUNDARY_CLOSURE_IN_DECLARED_COMPLETION_FAMILY",
+    "Q7_F43_EXACT_SAMPLE_REJECTION_OF_ALL_DECLARED_CHARACTER_PAIRS",
+    "EXACT_FORWARD_INVERSE_RESTORATION_ON_THE_Q5_RESIDUE_CARRIER",
+    "ACTUAL_RESTORED_BACKING_REUSE"
+  ],
+  "production_source": {
+    "declares_direct_process_scope": true,
+    "declares_no_catvm_custody": true,
+    "imports_oracle": false,
+    "sha256": "a7fe434d16d7686d26a683769d859cd5a8448a560c1e85a3286cd81e4ab293a9",
+    "uses_exact_modular_equality_not_digest_for_closure": true
+  },
+  "q5_full_boundary_reexecution": {
+    "exact_forward_inverse_restoration": true,
+    "full_boundary_points_per_match": 78125,
+    "full_match_count": 5,
+    "full_match_signatures": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      [
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      [
+        [
+          2,
+          2
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      [
+        [
+          3,
+          1
+        ],
+        [
+          1,
+          3
+        ]
+      ]
+    ],
+    "independently_verified_completion_vectors": 5,
+    "joint_boundary_rank": 35,
+    "primary_forward_commitment": "849761e4215a28b05fae3846303568b7a63bb9248de26794c0c92e88878b57d7"
+  },
+  "q7_direct_character_sum_transfer_attack": {
+    "character_pairs_tested": 1296,
+    "independent_algorithm": "DIRECT_SUM_GROUPED_BY_DETERMINANT_TRACE_AND_CONGRUENCE_CLASS",
+    "sample_points": 576,
+    "source_completion_sample_rank": 12,
+    "surviving_pairs": [],
+    "topology_sample_selection_reads_final_values": false
+  },
+  "rejected_interpretations": [
+    "catvm_custody",
+    "computational_advantage",
+    "distinct_phase_resource",
+    "fixed_rank_or_fixed_state_growth",
+    "machine_enforced_hidden_intermediate",
+    "physical_waveform_execution",
+    "replacement_of_physical_bits_with_pi",
+    "small_wall_crossing",
+    "transferable_growing_prime_closure",
+    "unbounded_computation"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
