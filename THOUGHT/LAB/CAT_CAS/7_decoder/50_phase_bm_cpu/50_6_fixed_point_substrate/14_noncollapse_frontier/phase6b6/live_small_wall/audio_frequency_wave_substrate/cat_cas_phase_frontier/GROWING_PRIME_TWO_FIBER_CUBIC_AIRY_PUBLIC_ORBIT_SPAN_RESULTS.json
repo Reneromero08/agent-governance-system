@@ -1,0 +1,1674 @@
+{
+  "cases": [
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 25,
+        "public_two_shear_program_count": 25,
+        "representative_nonzero_level_rank": 5,
+        "work": {
+          "character_sum_terms": 250,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 345,
+          "rank_pivot_inversions": 10,
+          "rank_row_eliminations": 59,
+          "temporary_airy_table_field_cells_peak": 50,
+          "temporary_rank_matrix_field_cells_peak": 90
+        },
+        "zero_level_rank": 5
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 11,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 5,
+      "resident_factor_field_cells": 15,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 8,
+          "expanded_verification_state_field_cells": 50,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "8a834e5e55ae7ce18e705997d99537409eb25fb7cbc568fb737df77fe156fc25",
+          "work": {
+            "controlled_field_multiplications": 100,
+            "controlled_phase_evaluations": 50,
+            "data_gaussian_field_multiply_adds": 250,
+            "data_gaussian_kernel_evaluations": 250,
+            "fiber_field_multiply_adds": 100,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 250,
+            "latent_gaussian_kernel_evaluations": 250,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 5
+          }
+        },
+        {
+          "boundary": 5,
+          "expanded_verification_state_field_cells": 50,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "de8511b523349f3a8bc1c2d0181d25f2817d396e6724b620515f772aa715f9e7",
+          "work": {
+            "controlled_field_multiplications": 100,
+            "controlled_phase_evaluations": 50,
+            "data_gaussian_field_multiply_adds": 250,
+            "data_gaussian_kernel_evaluations": 250,
+            "fiber_field_multiply_adds": 100,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 250,
+            "latent_gaussian_kernel_evaluations": 250,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 5
+          }
+        },
+        {
+          "boundary": 4,
+          "expanded_verification_state_field_cells": 50,
+          "first_public_coefficient": 4,
+          "second_public_coefficient": 2,
+          "state_digest": "d6939073a9e7c4e415fa6f6d623362ac229aab49792d5cc00270c448feb3f0a1",
+          "work": {
+            "controlled_field_multiplications": 100,
+            "controlled_phase_evaluations": 50,
+            "data_gaussian_field_multiply_adds": 250,
+            "data_gaussian_kernel_evaluations": 250,
+            "fiber_field_multiply_adds": 100,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 250,
+            "latent_gaussian_kernel_evaluations": 250,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 5
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "9b70682a17696985538567a39dde2088812f67bcec7bacbcdac228c00c062a88"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 121,
+        "public_two_shear_program_count": 121,
+        "representative_nonzero_level_rank": 11,
+        "work": {
+          "character_sum_terms": 2662,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 5093,
+          "rank_pivot_inversions": 22,
+          "rank_row_eliminations": 441,
+          "temporary_airy_table_field_cells_peak": 242,
+          "temporary_rank_matrix_field_cells_peak": 462
+        },
+        "zero_level_rank": 11
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 23,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 11,
+      "resident_factor_field_cells": 33,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 6,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "ce039cd04d564271582049459cb51b681cc3757753436538a5c2859636d8888c",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        },
+        {
+          "boundary": 3,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "419b1294427903ef5e3fe6f8400c7dbda3aed6f6ffd76c760260f46b42beefef",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        },
+        {
+          "boundary": 1,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 10,
+          "second_public_coefficient": 2,
+          "state_digest": "27f015e90a6b7774c8fcf36ac444c181257e6717e9ec35b1806ee5d24047e4da",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "ffc47048f66faf1d68486d300ba9924bd3fa74acbdb652071b3cf7fd239f162a"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          9,
+          5,
+          3,
+          3,
+          8
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 111,
+        "public_two_shear_program_count": 121,
+        "representative_nonzero_level_rank": 10,
+        "work": {
+          "character_sum_terms": 1331,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 3806,
+          "rank_pivot_inversions": 21,
+          "rank_row_eliminations": 325,
+          "temporary_airy_table_field_cells_peak": 121,
+          "temporary_rank_matrix_field_cells_peak": 462
+        },
+        "zero_level_rank": 11
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 23,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 11,
+      "resident_factor_field_cells": 33,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 12,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "b85a6d97750ee9c8c9ec7452c9d116464b4a999bacba55b51aa23d1bed178dd4",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        },
+        {
+          "boundary": 21,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "c92009d4a734c544feaec7e7daadd01d9e67cf98cbb2bcb1a94906949c3d8a03",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        },
+        {
+          "boundary": 9,
+          "expanded_verification_state_field_cells": 242,
+          "first_public_coefficient": 10,
+          "second_public_coefficient": 2,
+          "state_digest": "d02d717edebade7d645127dbbe147282a94cc6cdf7fff1063c23cc4d564f7187",
+          "work": {
+            "controlled_field_multiplications": 484,
+            "controlled_phase_evaluations": 242,
+            "data_gaussian_field_multiply_adds": 2662,
+            "data_gaussian_kernel_evaluations": 2662,
+            "fiber_field_multiply_adds": 484,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2662,
+            "latent_gaussian_kernel_evaluations": 2662,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 11
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "611cf1585704beab591998a246f12f7d7e9fdee7a9178d439a7c12329ddfe356"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 529,
+        "public_two_shear_program_count": 529,
+        "representative_nonzero_level_rank": 23,
+        "work": {
+          "character_sum_terms": 24334,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 46529,
+          "rank_pivot_inversions": 46,
+          "rank_row_eliminations": 1977,
+          "temporary_airy_table_field_cells_peak": 1058,
+          "temporary_rank_matrix_field_cells_peak": 2070
+        },
+        "zero_level_rank": 23
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 47,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 23,
+      "resident_factor_field_cells": 69,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 38,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "a9e91ac8eb4b2e94d1e21d3227450e646803576360af33d847a473cf086f39bb",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        },
+        {
+          "boundary": 31,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "d66bd48830541ecba30c3157f451f4fde5497a4c7e999ae85b39926b25e9a573",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        },
+        {
+          "boundary": 31,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 22,
+          "second_public_coefficient": 2,
+          "state_digest": "d865866772ef2ccbd070e237649f60cf35e0277d27a03b5c7493fc9f7e1d0e9f",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "9aba096136a370b9e92f686218956b080d24d458086236b95262809cf4196e78"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          3,
+          18,
+          14,
+          21,
+          2
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 507,
+        "public_two_shear_program_count": 529,
+        "representative_nonzero_level_rank": 22,
+        "work": {
+          "character_sum_terms": 12167,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 35535,
+          "rank_pivot_inversions": 45,
+          "rank_row_eliminations": 1500,
+          "temporary_airy_table_field_cells_peak": 529,
+          "temporary_rank_matrix_field_cells_peak": 2070
+        },
+        "zero_level_rank": 23
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 47,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 23,
+      "resident_factor_field_cells": 69,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 15,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "aba33a592bc3c6ae0c74255182ea30b043ce0b5d262918c00e57d99a14f9ceed",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        },
+        {
+          "boundary": 42,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "5c6d851b1eb96da07d3c7cd182684a84fbdc43d3ee65c6e0514c9a2d1438283f",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        },
+        {
+          "boundary": 13,
+          "expanded_verification_state_field_cells": 1058,
+          "first_public_coefficient": 22,
+          "second_public_coefficient": 2,
+          "state_digest": "3befccda31d7b5e42be0c0789ecd5a5dbda5b823b152bf5874151f7e433a641e",
+          "work": {
+            "controlled_field_multiplications": 2116,
+            "controlled_phase_evaluations": 1058,
+            "data_gaussian_field_multiply_adds": 24334,
+            "data_gaussian_kernel_evaluations": 24334,
+            "fiber_field_multiply_adds": 2116,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 24334,
+            "latent_gaussian_kernel_evaluations": 24334,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 23
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "e520c816b9b64d3971d83fca1b8d9895c5b1984d4fdfc67ab5591198f9fddacf"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 841,
+        "public_two_shear_program_count": 841,
+        "representative_nonzero_level_rank": 29,
+        "work": {
+          "character_sum_terms": 48778,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 94337,
+          "rank_pivot_inversions": 58,
+          "rank_row_eliminations": 3195,
+          "temporary_airy_table_field_cells_peak": 1682,
+          "temporary_rank_matrix_field_cells_peak": 3306
+        },
+        "zero_level_rank": 29
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 59,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 29,
+      "resident_factor_field_cells": 87,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 36,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "69ac93ba6eab1355575ed01c0645994ae69cc3f5c483dc4c3829cd04368c41b7",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        },
+        {
+          "boundary": 35,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "9d5e1c220fb39fb0a974a2b351a0ca366c8d3c7434e528be514b818fcd9f9899",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        },
+        {
+          "boundary": 10,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 28,
+          "second_public_coefficient": 2,
+          "state_digest": "4bdf54e66b157abbcd8a42844c40c0408e1ae81a6024dc709b3da0c8c1d1a5a4",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "b97cac01c33255ee9ab02623f307d9026a90ae2de6e98a65ee0d821047e2a9fb"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          23,
+          13,
+          8,
+          7,
+          22
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 813,
+        "public_two_shear_program_count": 841,
+        "representative_nonzero_level_rank": 28,
+        "work": {
+          "character_sum_terms": 24389,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 72413,
+          "rank_pivot_inversions": 57,
+          "rank_row_eliminations": 2440,
+          "temporary_airy_table_field_cells_peak": 841,
+          "temporary_rank_matrix_field_cells_peak": 3306
+        },
+        "zero_level_rank": 29
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 59,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 29,
+      "resident_factor_field_cells": 87,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 7,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "f89db0b708d62445d37f52eff20fe2f75062b95ddb03c665d913b33217587fd3",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        },
+        {
+          "boundary": 21,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "c200483c114776a60ee724cb5a5ac27c0784fbb1b17f2dc6e1688129866e5bd0",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        },
+        {
+          "boundary": 11,
+          "expanded_verification_state_field_cells": 1682,
+          "first_public_coefficient": 28,
+          "second_public_coefficient": 2,
+          "state_digest": "df1333b78633ff63d4100e372cbfc5705495ee19cac42de45b2ee9d5ae72ba1f",
+          "work": {
+            "controlled_field_multiplications": 3364,
+            "controlled_phase_evaluations": 1682,
+            "data_gaussian_field_multiply_adds": 48778,
+            "data_gaussian_kernel_evaluations": 48778,
+            "fiber_field_multiply_adds": 3364,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 48778,
+            "latent_gaussian_kernel_evaluations": 48778,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 29
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "98c0825cd8904cf62931bc20195a8049a200d39678d6e8363650733f756696f7"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 1681,
+        "public_two_shear_program_count": 1681,
+        "representative_nonzero_level_rank": 41,
+        "work": {
+          "character_sum_terms": 137842,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 270641,
+          "rank_pivot_inversions": 82,
+          "rank_row_eliminations": 6519,
+          "temporary_airy_table_field_cells_peak": 3362,
+          "temporary_rank_matrix_field_cells_peak": 6642
+        },
+        "zero_level_rank": 41
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 83,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 41,
+      "resident_factor_field_cells": 123,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 68,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "ed431c4a828c7a4ddd0a7e75ce8bcde008f70b82a1ac24b5e38bdfe9cb94b23a",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        },
+        {
+          "boundary": 55,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "7640c81f062bb2a657d6bd511e39cec27155610414d74d748d6d7add1929c13f",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        },
+        {
+          "boundary": 54,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 40,
+          "second_public_coefficient": 2,
+          "state_digest": "072f2647717686b74cd83adf56dde93b72b0ef60f0b410d3d8d6847152bf0ce0",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "1ef3bbfa68314a26fdf996ce4031136a14da6a04d7a02d575e6dd2876e86d10e"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          5,
+          32,
+          25,
+          37,
+          4
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 1641,
+        "public_two_shear_program_count": 1681,
+        "representative_nonzero_level_rank": 40,
+        "work": {
+          "character_sum_terms": 68921,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 204467,
+          "rank_pivot_inversions": 81,
+          "rank_row_eliminations": 4906,
+          "temporary_airy_table_field_cells_peak": 1681,
+          "temporary_rank_matrix_field_cells_peak": 6642
+        },
+        "zero_level_rank": 41
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 83,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 41,
+      "resident_factor_field_cells": 123,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 55,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "c88166a0dd731b35ca9153be72f7bf78ba729267815f3972dd4f39505040437b",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        },
+        {
+          "boundary": 82,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "398c2068259a02c44572a86b6f28953040bc680217646af602cecf1a7efc2845",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        },
+        {
+          "boundary": 77,
+          "expanded_verification_state_field_cells": 3362,
+          "first_public_coefficient": 40,
+          "second_public_coefficient": 2,
+          "state_digest": "63612889da36a4477acae7af0a31807215dbbdc4c61bd4b89f606ee0b73d3073",
+          "work": {
+            "controlled_field_multiplications": 6724,
+            "controlled_phase_evaluations": 3362,
+            "data_gaussian_field_multiply_adds": 137842,
+            "data_gaussian_kernel_evaluations": 137842,
+            "fiber_field_multiply_adds": 6724,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 137842,
+            "latent_gaussian_kernel_evaluations": 137842,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 41
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "2bc75768e928c19d8924c8e8e81793f02c3210d8a5f66dcdad871ddec64266a0"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 2809,
+        "public_two_shear_program_count": 2809,
+        "representative_nonzero_level_rank": 53,
+        "work": {
+          "character_sum_terms": 297754,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 586286,
+          "rank_pivot_inversions": 106,
+          "rank_row_eliminations": 10956,
+          "temporary_airy_table_field_cells_peak": 5618,
+          "temporary_rank_matrix_field_cells_peak": 11130
+        },
+        "zero_level_rank": 53
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 107,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 53,
+      "resident_factor_field_cells": 159,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 12,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "99fad9ab98969ee276972ba6098c925aace084932fef72d0279673e3776d21c4",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        },
+        {
+          "boundary": 81,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "98532557d0d323f78d74a92b12505dc4cded0fabf91747de107fc5f3e2aa5c40",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        },
+        {
+          "boundary": 16,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 52,
+          "second_public_coefficient": 2,
+          "state_digest": "612f3b7b8f0aab6cfbb14c8d3aeebf3154d878ed85d6817ec85162069d10493e",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "21159ef37cbf08e810d5d990fac550bfc62763735a30bd91fd17b8a68c93d930"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          24,
+          6,
+          50,
+          30,
+          23
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 2757,
+        "public_two_shear_program_count": 2809,
+        "representative_nonzero_level_rank": 52,
+        "work": {
+          "character_sum_terms": 148877,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 441278,
+          "rank_pivot_inversions": 105,
+          "rank_row_eliminations": 8221,
+          "temporary_airy_table_field_cells_peak": 2809,
+          "temporary_rank_matrix_field_cells_peak": 11130
+        },
+        "zero_level_rank": 53
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 107,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 53,
+      "resident_factor_field_cells": 159,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 93,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "06d1c36dc3b994bb1d8ff8bcf99f29b127febd2126037f2af026ec7cbea1e89a",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        },
+        {
+          "boundary": 94,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "eb2bcedb1995b717c63dc621123628cf46dc53856342fa2ee429143c3304a8ce",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        },
+        {
+          "boundary": 22,
+          "expanded_verification_state_field_cells": 5618,
+          "first_public_coefficient": 52,
+          "second_public_coefficient": 2,
+          "state_digest": "492c266c3beee715e8eae9e4529b00ffdf7821caf60a0315713dc0f125f033a7",
+          "work": {
+            "controlled_field_multiplications": 11236,
+            "controlled_phase_evaluations": 5618,
+            "data_gaussian_field_multiply_adds": 297754,
+            "data_gaussian_kernel_evaluations": 297754,
+            "fiber_field_multiply_adds": 11236,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 297754,
+            "latent_gaussian_kernel_evaluations": 297754,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 53
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "b54a2988d7fd810891d525d5db3590a294e7eabcc978cc2c39c8ad35d1da4612"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 6889,
+        "public_two_shear_program_count": 6889,
+        "representative_nonzero_level_rank": 83,
+        "work": {
+          "character_sum_terms": 1143574,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 2269220,
+          "rank_pivot_inversions": 166,
+          "rank_row_eliminations": 27174,
+          "temporary_airy_table_field_cells_peak": 13778,
+          "temporary_rank_matrix_field_cells_peak": 27390
+        },
+        "zero_level_rank": 83
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 167,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 83,
+      "resident_factor_field_cells": 249,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 104,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "7c38db377cef8704312aa672bdee19a51121740956597e2812bb51314f5301b7",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        },
+        {
+          "boundary": 10,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "63c00f28adfc2a74c235624883b1a7a7d6521ac94f16c11e18b9a23e9db8d7c4",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        },
+        {
+          "boundary": 24,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 82,
+          "second_public_coefficient": 2,
+          "state_digest": "5d61854c8903d7b0080e3be8b7cec2e5751021d50f82ff502edbacd993d8d3ef",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "1da7a0c2a35ddbcb338a6e9f66478acf41c636c6eb294044bb791262bd14f669"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          65,
+          37,
+          23,
+          19,
+          64
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 6807,
+        "public_two_shear_program_count": 6889,
+        "representative_nonzero_level_rank": 82,
+        "work": {
+          "character_sum_terms": 571787,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 1703907,
+          "rank_pivot_inversions": 165,
+          "rank_row_eliminations": 20364,
+          "temporary_airy_table_field_cells_peak": 6889,
+          "temporary_rank_matrix_field_cells_peak": 27390
+        },
+        "zero_level_rank": 83
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 167,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 83,
+      "resident_factor_field_cells": 249,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 100,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "aae0a7acd9d591f183635cd4fe44c7574092768698ed3a94fc45e447e8e17266",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        },
+        {
+          "boundary": 0,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "3cb18f4fb2cb316df1bee7ddbb4331db4bd129e05fec195b69491a0c554184f4",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        },
+        {
+          "boundary": 23,
+          "expanded_verification_state_field_cells": 13778,
+          "first_public_coefficient": 82,
+          "second_public_coefficient": 2,
+          "state_digest": "cc0caa0bf9bc0ea40a4282f40304b8ca01f755d7f6ba68cdd34e4513b71ff574",
+          "work": {
+            "controlled_field_multiplications": 27556,
+            "controlled_phase_evaluations": 13778,
+            "data_gaussian_field_multiply_adds": 1143574,
+            "data_gaussian_kernel_evaluations": 1143574,
+            "fiber_field_multiply_adds": 27556,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1143574,
+            "latent_gaussian_kernel_evaluations": 1143574,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 83
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "62c88aa07d87c1ff9e98c6933db47fba9a98abede898262512279f1c8cd6db6d"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 7921,
+        "public_two_shear_program_count": 7921,
+        "representative_nonzero_level_rank": 89,
+        "work": {
+          "character_sum_terms": 1409938,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 2794956,
+          "rank_pivot_inversions": 178,
+          "rank_row_eliminations": 31226,
+          "temporary_airy_table_field_cells_peak": 15842,
+          "temporary_rank_matrix_field_cells_peak": 31506
+        },
+        "zero_level_rank": 89
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 179,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 89,
+      "resident_factor_field_cells": 267,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 117,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "b468afbee310b7164d0b68ca4dfddce69005e9685f5d9cf82b08f6253a92a45e",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        },
+        {
+          "boundary": 103,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "16db20c2babb2cf6a07964058c92e65736be0416a368db4315fad6cc72e01702",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        },
+        {
+          "boundary": 70,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 88,
+          "second_public_coefficient": 2,
+          "state_digest": "4d7b8fb7f6f15cc119fd0d4ffae7984d05bff6f3a9ee8ca9e2f209cd08b20cb9",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "bd870e9c5fe9565e57b436ee2cb749d57d88ebf8771fc1402d0d2bcaa34f5a20"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          40,
+          10,
+          84,
+          50,
+          39
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 7833,
+        "public_two_shear_program_count": 7921,
+        "representative_nonzero_level_rank": 88,
+        "work": {
+          "character_sum_terms": 704969,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 2103782,
+          "rank_pivot_inversions": 177,
+          "rank_row_eliminations": 23461,
+          "temporary_airy_table_field_cells_peak": 7921,
+          "temporary_rank_matrix_field_cells_peak": 31506
+        },
+        "zero_level_rank": 89
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 179,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 89,
+      "resident_factor_field_cells": 267,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 104,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "9f1cdb416b71e8f91f4cf54049e90d4c74db16fb8492d61848ea57e87c70acfa",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        },
+        {
+          "boundary": 159,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "bf8edf7f72840270b50a21fc9e557584cd9f1c4864da8e95056e4180476fd656",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        },
+        {
+          "boundary": 146,
+          "expanded_verification_state_field_cells": 15842,
+          "first_public_coefficient": 88,
+          "second_public_coefficient": 2,
+          "state_digest": "8f50d9713df432e8f6234bdb129eed47c03153c53f3dde1ffa087c8105d8e8aa",
+          "work": {
+            "controlled_field_multiplications": 31684,
+            "controlled_phase_evaluations": 15842,
+            "data_gaussian_field_multiply_adds": 1409938,
+            "data_gaussian_kernel_evaluations": 1409938,
+            "fiber_field_multiply_adds": 31684,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 1409938,
+            "latent_gaussian_kernel_evaluations": 1409938,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 89
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "ea2f0ba1fd4e07a47bc3d821542f446508b87919e3fd3a869ebef5f3a26bf001"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": null,
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "CUBE_PERMUTATION_PLUS_NONZERO_ROW_SCALING",
+        "public_orbit_linear_span": 12769,
+        "public_two_shear_program_count": 12769,
+        "representative_nonzero_level_rank": 113,
+        "work": {
+          "character_sum_terms": 2885794,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 5733507,
+          "rank_pivot_inversions": 226,
+          "rank_row_eliminations": 50513,
+          "temporary_airy_table_field_cells_peak": 25538,
+          "temporary_rank_matrix_field_cells_peak": 50850
+        },
+        "zero_level_rank": 113
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "PRIMARY",
+      "p": 227,
+      "program_family": "PRIMARY",
+      "public_morphism_node_records": 5,
+      "q": 113,
+      "resident_factor_field_cells": 339,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 40,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "772694c081c88d3f5a0900496b76aa072b763065944b4191a1af11ef4ef1a641",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        },
+        {
+          "boundary": 51,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "6cb4045bd985ba2fb6a34e08eb898d74c283d1080d626679aa0ac39118901463",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        },
+        {
+          "boundary": 208,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 112,
+          "second_public_coefficient": 2,
+          "state_digest": "1d90eeb4ea5f32e4c05e7476013ff363a5d16a3cc509c029ca7ba7039182abed",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "1a184b16f34dcce18fc9426186be18f667a913d3446df34073b277a37455a0ba"
+    },
+    {
+      "certificate": {
+        "all_nonzero_levels_equivalent": true,
+        "alternate_quadratic_phase_chart_coefficients": [
+          13,
+          88,
+          69,
+          101,
+          12
+        ],
+        "full_q2_by_q2_public_orbit_matrix_materialized": false,
+        "nonzero_level_equivalence_mechanism": "EXACT_QUADRATIC_PHASE_CHART_PLUS_NONZERO_ROW_AND_COLUMN_SCALING",
+        "public_orbit_linear_span": 12657,
+        "public_two_shear_program_count": 12769,
+        "representative_nonzero_level_rank": 112,
+        "work": {
+          "character_sum_terms": 1442897,
+          "public_orbit_matrix_field_cells_materialized": 0,
+          "rank_field_updates": 4312419,
+          "rank_pivot_inversions": 225,
+          "rank_row_eliminations": 37938,
+          "temporary_airy_table_field_cells_peak": 12769,
+          "temporary_rank_matrix_field_cells_peak": 50850
+        },
+        "zero_level_rank": 113
+      },
+      "exact_graph_payload_restored": true,
+      "expanded_dense_state_used_only_for_sampled_verification": true,
+      "fixture_family": "ALTERNATE",
+      "p": 227,
+      "program_family": "ALTERNATE",
+      "public_morphism_node_records": 5,
+      "q": 113,
+      "resident_factor_field_cells": 339,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "sampled_dense_boundaries": [
+        {
+          "boundary": 42,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 0,
+          "second_public_coefficient": 0,
+          "state_digest": "725cd5b46d4a0a1fbc6c55b211b86424988c2bde0a84a833fdc96098947c45c3",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        },
+        {
+          "boundary": 108,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 1,
+          "second_public_coefficient": 1,
+          "state_digest": "f52ee0124c84b917299c2897ed15152fbd76beb0b46dace65f1935fd20caab65",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        },
+        {
+          "boundary": 103,
+          "expanded_verification_state_field_cells": 25538,
+          "first_public_coefficient": 112,
+          "second_public_coefficient": 2,
+          "state_digest": "84783913aa95583cf487d535ff9ccc0df2c457a4ca73fbb410d81ea0cc4f5d0b",
+          "work": {
+            "controlled_field_multiplications": 51076,
+            "controlled_phase_evaluations": 25538,
+            "data_gaussian_field_multiply_adds": 2885794,
+            "data_gaussian_kernel_evaluations": 2885794,
+            "fiber_field_multiply_adds": 51076,
+            "inverse_gaussian_scalar_rematerializations": 0,
+            "latent_gaussian_field_multiply_adds": 2885794,
+            "latent_gaussian_kernel_evaluations": 2885794,
+            "projection_field_multiply_adds": 0,
+            "temporary_vector_field_cells_peak": 113
+          }
+        }
+      ],
+      "snapshot_used": false,
+      "topology_commitment": "073df4063c55317afc42a1e74466bcb3324198fc985872e360b10576b57e11f3"
+    }
+  ],
+  "claim_boundaries": {
+    "arbitrary_source_or_program_family": false,
+    "catvm_custody": false,
+    "computational_advantage_or_small_wall_crossing": false,
+    "distinct_phase_resource": false,
+    "machine_enforced_hidden_runtime_factors": false,
+    "nonlinear_or_singular_message_quotient_no_go": false,
+    "physical_waveform_or_silicon_execution": false,
+    "polynomial_work_subquadratic_state_closure": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "unbounded_catalytic_computation": false,
+    "universal_subquadratic_state_lower_bound": false
+  },
+  "claim_candidate": "BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_AIRY_PUBLIC_TWO_SHEAR_ORBIT_HAS_FULL_Q2_LINEAR_SPAN_ON_EVERY_DECLARED_PRIMARY_ORDER_AND_AT_LEAST_Q2MINUSQPLUS1_ALTERNATE_SPAN_ON_EVERY_DECLARED_QGE11_ORDER_WITH_BLOCK_FOURIER_CERTIFICATES_EXACT_GRAPH_RESTORATION_AND_REUSE_SO_LINEAR_MESSAGE_QUOTIENTS_BELOW_THE_OBSERVED_SPAN_ARE_REJECTED_AT_THE_TESTED_SOURCE_CHARTS_BUT_NONLINEAR_CLOSURE_REMAINS_OPEN_AND_IDENTICAL_CLASSICAL_FACTOR_GRAPH_AND_Q2_DENSE_RECURRENCES_REMAIN",
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_ALL_ORDERS_ALTERNATE_Q11_23_29_41_53_83_89_113_DEPTH1_PUBLIC_TWO_CONTROLLED_CUBIC_COEFFICIENT_ORBITS_TWO_DECLARED_FIBER_FIXTURES_DIRECT_PROCESS_SOFTWARE",
+  "controls": {
+    "accepted_rank_path_does_not_materialize_q2_by_q2_orbit_matrix": true,
+    "duplicated_second_fiber_primary_span_is_below_q2": true,
+    "missing_inverse_fails": true,
+    "premature_projection_rejected": true,
+    "public_topology_independent_of_factor_values": true,
+    "reordered_inverse_fails": true,
+    "single_fiber_primary_span_is_below_q2": true,
+    "wrong_inverse_fails": true
+  },
+  "matched_baseline": {
+    "cold_start_comparison_used": false,
+    "identical_classical_block_fourier_rank_recurrence": true,
+    "identical_classical_factor_graph_recurrence": true,
+    "identical_dense_q2_joint_state_recurrence": true,
+    "strongest_compact_classical_representation_for_declared_public_orbit": "3Q_FACTOR_CELLS_PLUS_PUBLIC_TWO_COEFFICIENT_DESCRIPTOR_WITH_BLOCK_OR_PATH_EVALUATION"
+  },
+  "next_obstruction": "THE_DECLARED_PRIMARY_TWO_SHEAR_AIRY_PUBLIC_ORBIT_HAS_EXACT_FULL_Q2_LINEAR_SPAN_AND_THE_ALTERNATE_ORBIT_HAS_AT_LEAST_Q2MINUSQPLUS1_SPAN_SO_ANY_SUCCESSOR_MUST_USE_A_GENUINELY_NONLINEAR_OR_SINGULAR_PHASE_MESSAGE_CHART_CHANGE_THE_NATIVE_COUPLING_LAW_OR_ACCEPT_THE_IDENTICAL_COMPACT_CLASSICAL_FACTOR_GRAPH_OR_Q2_DENSE_RECURRENCE",
+  "observed_resource_law": {
+    "accepted_resident_factor_field_cells": "3*Q",
+    "alternate_qge11_public_orbit_linear_span": "Q^2-Q+1",
+    "full_q2_by_q2_public_orbit_matrix_materialized": false,
+    "primary_public_orbit_linear_span": "Q^2",
+    "primary_public_orbit_program_count": "Q^2",
+    "temporary_primary_airy_table_field_cells": "2*Q^2",
+    "temporary_rank_block_field_cells_peak": "AT_MOST_(4*Q-2)*Q"
+  },
+  "resource_accounting": {
+    "advantage_claimed": false,
+    "python_objects_allocator_interpreter_native_libraries_and_whole_process_peak_excluded": true,
+    "resident_factors_public_plan_airy_tables_rank_blocks_elimination_dense_samples_restoration_and_reuse_counted": true
+  },
+  "restoration_and_reuse": {
+    "exact_payload_restored_after_reuse": true,
+    "first_primary_span": 529,
+    "fresh_alternate_span": 507,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_alternate_span": 507,
+    "second_matches_fresh": true,
+    "snapshot_used": false
+  },
+  "schema": "CAT_CAS_GROWING_PRIME_TWO_FIBER_CUBIC_AIRY_PUBLIC_ORBIT_SPAN_V1"
+}
