@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PROJECTIVE_AIRY_HISTORY_QUOTIENT_REJECTED_AT_TESTED_HORIZONS_GENERATING_FUNCTION_PHASE_GEOMETRY_OPEN`
-**Roadmap version:** `14.44`
+**Status:** `STRICT_SCOPE_CUBIC_DETERMINANT_GENERATING_RELATION_Q5_LOCAL_CLOSURE_Q7_TRANSFER_REJECTED_BOUNDED_CONDUCTOR_OPEN`
+**Roadmap version:** `14.45`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6572b784dea775f088e0bbffb2955fbfadb4ebfc`
+**Reconciled source head:** `2553cacc5966eb0f70325789741721c87c398640`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS`
-**Current claim ceiling:** `PRIMARY_TWO_SHEAR_PUBLIC_COEFFICIENT_WORDS_Q5_DEPTHS1_THROUGH4_Q11_DEPTHS1_AND2_FIXED_DECLARED_GAUSSIAN_LAYER_SEQUENCE_TWO_FIBER_DENSE_FULL_STATE_PROJECTIVE_CANONICALIZATION_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_Q5_SYMMETRIC3_DETERMINANT_OVER_SCALE_CUBIC_GENERATING_PHASE_RELATION_HAS_FULL_BOUNDARY_FOURIER_CLOSURE_AFTER27_PUBLIC_CONGRUENCE_STRATUM_COMPLETION_COORDINATES_IN_F41_BUT_THE_SAME_SEVEN_STRATUM_DESCRIPTOR_FAMILY_REJECTS_ALL1296_CHARACTER_PAIRS_ON576_EVENLY_SPREAD_Q7_OPEN_BOUNDARY_POINTS_WHILE_LOGICAL_STATE_GROWS_AS_Q7_AND_THE_IDENTICAL_SEPARABLE_CLASSICAL_DFT_REMAINS_WITH_EXACT_IN_PLACE_RESTORATION_AND_REUSE_SO_NO_TRANSFERABLE_FIXED_RANK_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED`
+**Current claim ceiling:** `Q5_F41_FULL78125_POINT_AND_Q7_F43_576_POINT_TRANSFER_ATTACK_SYMMETRIC3_DETERMINANT_OVER_SCALE_PUBLIC_SEVEN_CONGRUENCE_STRATA_MULTIPLICATIVE_CHARACTER_COMPLETION_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M178_PROJECTIVE_AIRY_HISTORY_QUOTIENT_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M179_CUBIC_DETERMINANT_STRATUM_COMPLETION_TRANSFER_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -88,10 +88,15 @@ classes of size 5 on one rank-5 program subspace, but the same kernel direction
 fails q=11 and q=23 transfer, q=11 depths 1 and 2 remain collision-free, and
 the depth-4 identifier width remains 19 bits. The exact code set itself has
 388,125 entries, while the identical compact factor graph retains only the
-public word. The selected successor therefore changes the phase-machine
-primitive to typed cubic generating functions composed by critical-locus
-elimination; it must establish transferable closure or expose degree growth
-without enumerating program histories or full states.
+public word. M179 changes the phase-machine primitive to the typed rational
+cubic generating relation `det(X)/t` on symmetric three-by-three matrices.
+A 27-coordinate public congruence-stratum completion closes five exact q=5
+character signatures on all 78,125 boundary points, but the same seven-stratum
+family rejects all 1,296 signatures on 576 evenly spread q=7 open-boundary
+points. The carrier grows from `5^7` to `7^7` cells and the completion from 27
+to 37 coordinates, while the identical separable classical DFT remains. The
+selected successor therefore tests a bounded-conductor middle-extension phase
+descriptor rather than adding scalar stratum weights or another Airy fixture.
 
 Every successor must answer:
 
@@ -117,7 +122,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6572b784dea775f088e0bbffb2955fbfadb4ebfc`. The current 178-milestone
+`2553cacc5966eb0f70325789741721c87c398640`. The current 179-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -7965,6 +7970,54 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE
+```
+
+## M179: determinant generating relation has only arithmetic-local closure
+
+Claim:
+
+```text
+BOUNDED_EXACT_Q5_SYMMETRIC3_DETERMINANT_OVER_SCALE_CUBIC_GENERATING_PHASE_RELATION_HAS_FULL_BOUNDARY_FOURIER_CLOSURE_AFTER27_PUBLIC_CONGRUENCE_STRATUM_COMPLETION_COORDINATES_IN_F41_BUT_THE_SAME_SEVEN_STRATUM_DESCRIPTOR_FAMILY_REJECTS_ALL1296_CHARACTER_PAIRS_ON576_EVENLY_SPREAD_Q7_OPEN_BOUNDARY_POINTS_WHILE_LOGICAL_STATE_GROWS_AS_Q7_AND_THE_IDENTICAL_SEPARABLE_CLASSICAL_DFT_REMAINS_WITH_EXACT_IN_PLACE_RESTORATION_AND_REUSE_SO_NO_TRANSFERABLE_FIXED_RANK_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+This replaces full-state Airy orbit enumeration with the non-Gaussian rational
+cubic generating function `det(X)/t` on a symmetric three-by-three matrix.
+Its critical map and inverse are checked exactly at q=5, q=7, and q=11. The
+singular completion is public and descriptor-driven: matrix rank plus
+discriminant square class, with multiplicative scale characters.
+
+At q=5/F41, exhaustive search of all 256 source/target character pairs finds
+exactly five closures. Every surviving completion is verified on all 78,125
+boundary points; the primary `(0,0)->(2,2)` closure has 17 nonzero source and
+three nonzero target completion coordinates. A no-import oracle independently
+recovers the same five signatures and checks the sealed completion vectors.
+
+The closure is not transferable in the declared family. At q=7/F43, a
+different direct character-sum oracle groups terms by determinant, trace, and
+congruence class and rejects all 1,296 pairs on 576 evenly spread open-boundary
+points. Any global closure in the family must pass that sample. The exact
+carrier grows as `q^7` cells and the completion descriptor grows as
+`5*(q-1)+7`, so neither fixed state nor fixed rank is established.
+
+The q=5 residue carrier executes the exact normalized inverse on the same
+backing, then that restored backing executes an unrelated coordinate-phase
+program at generation two and restores again without a snapshot. This is
+direct-process exact finite-field software, not CATVM custody. The identical
+seven-axis separable classical DFT and character-sum recurrence remain.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+Q5_F41_FULL78125_POINT_AND_Q7_F43_576_POINT_TRANSFER_ATTACK_SYMMETRIC3_DETERMINANT_OVER_SCALE_PUBLIC_SEVEN_CONGRUENCE_STRATA_MULTIPLICATIVE_CHARACTER_COMPLETION_DIRECT_PROCESS_SOFTWARE
+```
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

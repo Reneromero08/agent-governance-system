@@ -9981,3 +9981,44 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE
 ```
+
+## M179: cubic determinant generating relation closes locally but not across q
+
+The completed claim is:
+
+```text
+BOUNDED_EXACT_Q5_SYMMETRIC3_DETERMINANT_OVER_SCALE_CUBIC_GENERATING_PHASE_RELATION_HAS_FULL_BOUNDARY_FOURIER_CLOSURE_AFTER27_PUBLIC_CONGRUENCE_STRATUM_COMPLETION_COORDINATES_IN_F41_BUT_THE_SAME_SEVEN_STRATUM_DESCRIPTOR_FAMILY_REJECTS_ALL1296_CHARACTER_PAIRS_ON576_EVENLY_SPREAD_Q7_OPEN_BOUNDARY_POINTS_WHILE_LOGICAL_STATE_GROWS_AS_Q7_AND_THE_IDENTICAL_SEPARABLE_CLASSICAL_DFT_REMAINS_WITH_EXACT_IN_PLACE_RESTORATION_AND_REUSE_SO_NO_TRANSFERABLE_FIXED_RANK_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+The new primitive is the typed non-Gaussian generating relation
+`f(X,t)=det(X)/t` for symmetric three-by-three `X`. Its public singular
+completion uses seven rank/discriminant congruence classes and multiplicative
+scale characters. The exact critical map, inverse, and multiplicative
+Legendre dual are checked at q=5, q=7, and q=11.
+
+At q=5/F41, exhaustive search finds five closures among all 256 character
+pairs. Each is verified on all 78,125 boundary points. A no-import oracle
+independently reconstructs the same signature set and completion identities.
+At q=7/F43, an independent direct character-sum implementation rejects all
+1,296 pairs on 576 evenly spread open points. This rejects a global q=7
+closure in the declared completion family without pretending to enumerate all
+q=7 outputs.
+
+The state law is not compact across q: the dense phase carrier grows as
+`q^7`, and the completion descriptor grows as `5*(q-1)+7` coordinates. The
+q=5 carrier restores exactly by the normalized inverse on the same backing;
+that restored backing executes an unrelated phase program at generation two
+and restores again without a snapshot. The strongest matched classical method
+is the identical seven-axis separable DFT and character-sum recurrence.
+
+The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. It is
+direct-process finite-field residue software and establishes neither CATVM
+custody nor a distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, or unbounded computation.
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_DETERMINANT_MIDDLE_EXTENSION_CONDUCTOR_PHASE_DESCRIPTOR_FOURIER_COMPOSITION_WITH_BOUNDED_CONDUCTOR_TRANSFER_OR_CONDUCTOR_RANK_GROWTH_NO_GO_AND_IDENTICAL_CHARACTER_SUM_CLASSICAL_BASELINE
+```
