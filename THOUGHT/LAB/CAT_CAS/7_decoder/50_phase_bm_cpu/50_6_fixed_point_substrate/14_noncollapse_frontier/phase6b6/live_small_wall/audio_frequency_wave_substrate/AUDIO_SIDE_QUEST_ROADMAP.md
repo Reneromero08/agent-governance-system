@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CUBIC_WEIL_COMPONENT_QUADRATIC_GROWTH_DIAGNOSED`
-**Roadmap version:** `14.38`
+**Status:** `STRICT_SCOPE_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_DIAGNOSED`
+**Roadmap version:** `14.39`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`
+**Reconciled source head:** `af12c64dba62a59037e6cfb52f0cc000d7daa33b`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_GAUSSIAN_COMPONENT_CHART_HAS_AT_LEAST_Q_MINUS3_SQUARED_DEFORMED_PORT_COMPONENTS_AFTER_ONE_CUBIC_INTERSECTION_ON_EVERY_DECLARED_ORDER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_AN_EXECUTED_Q_VECTOR_PUBLIC_WORD_CLASSICAL_RECURRENCE_USES_LINEAR_STATE`
-**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_PHASE_STATE_BUNDLE_EXECUTES_FACTORWISE_WITH_ACTION_SPAN_EQUAL_TO_EACH_DECLARED_SOURCE_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_FULL_TWO_FIBER_BASIS_ACTION_BUNDLE_USES4Q2_EXPLICIT_FIELD_CELLS_WHILE_MATCHED_PUBLIC_WORD_CLASSICAL_RECURRENCES_INCLUDE_A2Q_MINIMUM_STORAGE_DENSE_STREAM_AND_AN_EXACT_LINEAR_MATERIAL_CELL_RADER_NTT_STREAM`
+**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_SOURCE_RANKS10_OR22_AUXILIARY_NTT_MODULUS998244353_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M172_CUBIC_WEIL_COMPONENT_QUADRATIC_GROWTH_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M173_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -55,10 +55,13 @@ quadratic Weil-Gaussian chart in 16 logical field cells, but the field payload
 grows and an identical classical chart has lower warm cocycle work. M172 adds
 the smallest separable cubic deformation and finds at least `(q-3)^2` Weyl
 components after one intersection on every declared order, while an executed
-final-boundary q-vector recurrence uses linear dynamic state. The selected
-repair now tests whether an unresolved multi-source phase-state bundle has a
-compact open-interface action span, rather than mistaking a single projected
-q-vector for a general open relation.
+final-boundary q-vector recurrence uses linear dynamic state. M173 replaces
+the quadratic component chart with actual resident source-state columns, but
+every declared action span equals its source rank. A full explicit basis
+bundle therefore uses `4*q^2` field cells, while the public operator word lets
+matched classical recurrences stream the same final boundary with linear
+material state. The next repair makes the operator parameter itself a shared,
+resident, unresolved phase port instead of another public descriptor.
 
 Every successor must answer:
 
@@ -84,7 +87,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`. The current 172-milestone
+`af12c64dba62a59037e6cfb52f0cc000d7daa33b`. The current 173-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4713,7 +4716,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_F103_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_VERTEX_COUNTS10_26_34_58_74_106_146_194_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_PHASE_STATE_BUNDLE_EXECUTES_FACTORWISE_WITH_ACTION_SPAN_EQUAL_TO_EACH_DECLARED_SOURCE_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_FULL_TWO_FIBER_BASIS_ACTION_BUNDLE_USES4Q2_EXPLICIT_FIELD_CELLS_WHILE_MATCHED_PUBLIC_WORD_CLASSICAL_RECURRENCES_INCLUDE_A2Q_MINIMUM_STORAGE_DENSE_STREAM_AND_AN_EXACT_LINEAR_MATERIAL_CELL_RADER_NTT_STREAM
 ```
 
 Not established:
@@ -7591,6 +7594,64 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE
+```
+
+## M173: actual open-interface action bundle and public-word streaming no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_PHASE_STATE_BUNDLE_EXECUTES_FACTORWISE_WITH_ACTION_SPAN_EQUAL_TO_EACH_DECLARED_SOURCE_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_FULL_TWO_FIBER_BASIS_ACTION_BUNDLE_USES4Q2_EXPLICIT_FIELD_CELLS_WHILE_MATCHED_PUBLIC_WORD_CLASSICAL_RECURRENCES_INCLUDE_A2Q_MINIMUM_STORAGE_DENSE_STREAM_AND_AN_EXACT_LINEAR_MATERIAL_CELL_RADER_NTT_STREAM
+```
+
+The accepted carrier holds `R` actual two-fiber source columns in `2*q*R`
+field cells and applies every cubic, Gaussian, and fiber factor directly. Only
+the four declared probes are projected. Exact inverse factors are
+rematerialized from the public word, restoring the same discrete backing with
+no retained inverse history; unrelated cross-family reuse reaches generation
+two without a snapshot.
+
+All eleven bounded cases reproduce the M172 order/depth ceiling. Source rank
+is 10 at q=5 and 22 elsewhere, and every observed action span equals that
+declared rank. Full two-fiber basis bundles are executed only at q=5 and q=11.
+The `4*q^2` full explicit basis-bundle law is an accounting identity for that
+representation, not a lower bound on nonlinear representations or on the
+public operator-word descriptor.
+
+The matched comparison is an executed Pareto pair. A minimum-storage dense
+q-vector stream uses `2*q` dynamic field cells. A separate exact Rader/NTT
+stream reduces Gaussian transform work while using
+`4*q-2+2*M` logical payload cells, where `M` is the next power of two at least
+`2*q-3`. Its peak at q=113 is 962 cells: 450 eight-bit field cells and 512
+thirty-bit auxiliary cells, for an 18,960-bit payload-capacity upper bound.
+The public `12*depth` word, 12-cell boundary-probe descriptor, projection work,
+and zero retained NTT cache are counted. Exact single-modulus convolution is
+proved only within the declared ceiling; wider orders can require a wider
+modulus or CRT.
+
+The independent oracle imports neither production nor a predecessor. It
+reconstructs all eleven factorwise bundles, both classical recurrences, every
+work and memory tuple, direct DFT parity at q=5 and q=11, controls, restoration,
+and reuse. The repaired scientific source `af12c64d...` supersedes the earlier
+package source `7d9c2b91...`, whose baseline lacked the work-reduced recurrence.
+M173 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_SOURCE_RANKS10_OR22_AUXILIARY_NTT_MODULUS998244353_DIRECT_PROCESS_SOFTWARE
+```
+
+The result establishes no compact general open relation, full-source execution
+at every declared q, nonlinear lower bound, CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE
 ```
 
 ## 10. Roadmap Maintenance

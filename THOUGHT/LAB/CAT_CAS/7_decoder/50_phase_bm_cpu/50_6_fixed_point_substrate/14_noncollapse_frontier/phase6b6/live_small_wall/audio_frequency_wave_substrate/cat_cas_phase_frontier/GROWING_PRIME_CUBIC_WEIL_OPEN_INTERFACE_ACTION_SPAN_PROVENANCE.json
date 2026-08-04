@@ -1,0 +1,19 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_PROVENANCE_V1",
+  "scientific_source_head": "af12c64dba62a59037e6cfb52f0cc000d7daa33b",
+  "supersedes_package_source_head": "7d9c2b91cd4c2ee68e49c9f24a0ab5451a8cce07",
+  "supersession_reason": "The earlier package executed only the minimum-storage dense q-vector baseline. This repair adds the stronger exact Rader/NTT work-reduced baseline, corrects its logical-buffer and mixed-bit-width accounting, and independently reconstructs it.",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "files": {
+    "growing_prime_cubic_weil_open_interface_action_span.py": "6d977561f240e135e1bf665621ca19bbe3278515ca20fae1a62aa9537cf49cae",
+    "GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RESULTS.json": "4837f0aff66fad84e31fa750b211deec51b402850d2f62fd2e3cd25906823858",
+    "growing_prime_cubic_weil_open_interface_action_span_independent_oracle.py": "7f7ccbaa802333f9c9bbe3f369267f2a558dfc17ad3a315953742d536d28d830",
+    "GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_INDEPENDENT_ORACLE.json": "95ea499175256ffdaa8de7185d23cbc5bf15deb12b0b84275aab9c3377eafe37",
+    "GROWING_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_INDEPENDENT_REEXECUTION_REVIEW.md": "4b02a4685cfdabd280ade0fdc112e9cd0b89d7e06e02335a7207212ee580b234",
+    "qualify_growing_prime_cubic_weil_open_interface_action_span.sh": "81089ff23ba2729456917aa18227dea4016c18a2c2e0f4c75c2eb666d45dc5da"
+  },
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_SOURCE_RANKS10_OR22_AUXILIARY_NTT_MODULUS998244353_DIRECT_PROCESS_SOFTWARE"
+}

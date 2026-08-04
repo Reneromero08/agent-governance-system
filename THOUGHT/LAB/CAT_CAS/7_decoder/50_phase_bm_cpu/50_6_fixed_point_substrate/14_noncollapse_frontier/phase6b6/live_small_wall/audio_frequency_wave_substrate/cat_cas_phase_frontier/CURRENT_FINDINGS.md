@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`. The canonical per-milestone
+`af12c64dba62a59037e6cfb52f0cc000d7daa33b`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9722,4 +9722,46 @@ Next:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE
+```
+
+## M173: growing-prime cubic-Weil open-interface action-span no-go
+
+The accepted exact carrier replaces the quadratic component chart with `R`
+actual two-fiber source columns. Public cubic, Gaussian, and fiber factors act
+directly on the resident `2*q*R` field cells, only four probes reach the final
+boundary, and rematerialized inverse factors restore and reuse the same
+backing without retained inverse history or snapshot reload.
+
+All eleven declared cases have action span equal to source rank: 10 at q=5 and
+22 elsewhere. Full bases were executed at q=5 and q=11 only. Carrying a full
+two-fiber basis explicitly therefore uses `4*q^2` cells, but that identity is
+not a lower bound against nonlinear encodings or the complete public-word
+descriptor.
+
+Two matched exact public-word recurrences reproduce every boundary. The dense
+minimum-storage stream uses `2*q` dynamic field cells. The work-reduced
+Rader/NTT stream uses `4*q-2+2*M` mixed-width logical payload cells, peaks at
+962 cells and an 18,960-bit payload-capacity upper bound at q=113, and retains
+no transformed kernel. A separate oracle reconstructs both recurrences, all
+resource/work tuples, direct small-order DFT parity, restoration, controls,
+and generation-two reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The work-reduced exactness proof uses auxiliary modulus 998,244,353 only
+through the declared q<=113 ceiling; no fixed-width extension is claimed. The
+result establishes no compact general open relation, CATVM custody, distinct
+phase resource, advantage, Small Wall crossing, physical execution, or
+unbounded computation.
+
+Ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_SOURCE_RANKS10_OR22_AUXILIARY_NTT_MODULUS998244353_DIRECT_PROCESS_SOFTWARE
+```
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_RESIDENT_COHERENT_CUBIC_STRENGTH_PHASE_PORT_SHARED_WEIL_ACTION_CLOSURE_OR_OPERATOR_SCHMIDT_RANK_NO_GO_WITH_MATCHED_BILINEAR_CLASSICAL_RECURRENCE
 ```
