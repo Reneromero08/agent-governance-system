@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`f0a97ab928af766f3e939b9ce17e1c4e130e0608`. The canonical per-milestone
+`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9367,3 +9367,56 @@ phase-machine experiment is:
 ```text
 TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING
 ```
+
+## M165: exact public pebbling reduces retain-all storage but not the matched classical frontier
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER
+```
+
+The topology-only compiler exhausts the reachable local reversible-pebble
+states at capacities one through five and first finds a clean sink-only state
+at capacity six. Its 15-toggle plan derives exact node/slot/epoch leases,
+releases node 2 at action 5, reconstructs it at action 10, and ends with only
+node 8 resident. The minimum applies only to this exact graph and the declared
+parent-resident toggle law; it is not a generic scheduler claim.
+
+The separate same-UID service stores six sealed-leaf field cells and eighteen
+hidden internal field cells. It retains the boundary internally, reverses the
+exact public plan, compares canonical carrier and custody state plus backing
+identity, advances restoration generation, and only then attempts the fixed
+response. Boundaries 80 and 5 match a fresh service after unrelated same-
+backing reuse. Missing, wrong, and dependency-reordered inverse controls occur
+after forward residency and withhold the response when restoration fails.
+
+The independent full-C17 oracle imports neither production process. It
+reconstructs the same capacity-six certificate, records live intervals,
+release points, reconstruction obligations, and inverse custody, then matches
+both boundaries and exactly clears its 136-cell reference carrier.
+
+The accepted path improves retain-all compact storage from 27 to 24 F103
+cells, with 15 public plan records, six node owners, six epoch owners, and no
+dynamic inverse-value history or snapshot. It evaluates 15 toggles forward
+and 15 in reverse. The matched reversible classical pebbler is identical. An
+executed compact occurrence-expanded recurrence is smaller, using 15 field
+cells and 13 relation evaluations. Operation-local scalar temporaries and
+Python allocator state are excluded consistently from these logical relation-
+storage counts; physical process peak memory is unmeasured.
+
+This closes the retain-all repair at its fixture ceiling and rejects a phase
+resource or Small Wall claim on this route. The next phase-machine experiment
+changes the composition algebra rather than growing the graph:
+
+```text
+EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE
+```
+
+The target is the smallest nonabelian translation-relation carrier, with
+genuinely noncommutative native composition, pointwise native intersection, a
+multiply consumed unresolved port, exact restoration and reuse, and an
+executed compact group/irrep classical baseline. No generic scheduler,
+arbitrary relation program, OS/hardware isolation, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical-
+bit replacement, or unbounded computation is established.

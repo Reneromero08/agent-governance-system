@@ -1,0 +1,120 @@
+{
+  "schema": "CAT_CAS_SCIENTIFIC_PROVENANCE_V1",
+  "milestone": 165,
+  "scientific_source_head": "4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "artifacts": {
+    "protocol_source": {
+      "path": "catvm_paley_relation_protocol.py",
+      "sha256": "5772a5cef316dfdd04deb728bf5579ed1d2f91f6c4bd4b895355b6dfc0953844"
+    },
+    "service_source": {
+      "path": "catvm_paley_relation_rematerialization_service.py",
+      "sha256": "b296e272faeb576e44e997251622bfb392e17068fbb306b994735fc1026fbfcb"
+    },
+    "controller_source": {
+      "path": "catvm_paley_relation_rematerialization_controller.py",
+      "sha256": "3bc9918b928d46e2d8896b430ce04bce427c45008d923b071c8190120da09fd8"
+    },
+    "oracle_source": {
+      "path": "catvm_paley_relation_rematerialization_oracle.py",
+      "sha256": "351cb1dc37830f872b18284ef0ab737678627e330ea10eb1170d5b558799d1fc"
+    },
+    "production_result": {
+      "path": "CATVM_PALEY_RELATION_REMATERIALIZATION_RESULTS.json",
+      "sha256": "e971e9cb36544a0d154b780861fcd5f45c3a712a8a7b13d40a72399cf3030076"
+    },
+    "oracle_result": {
+      "path": "CATVM_PALEY_RELATION_REMATERIALIZATION_ORACLE_RESULTS.json",
+      "sha256": "34bc369e58a8641296a531ff9c648a97e56aa1ca6d33dbe1dc95d5e0efcddfff"
+    },
+    "qualifier": {
+      "path": "qualify_catvm_paley_relation_rematerialization.sh",
+      "sha256": "3a864b90744d4fccb6a05a083f9f695859a0cc0162c90e041e43997a58cdebf3"
+    },
+    "review": {
+      "path": "CATVM_PALEY_RELATION_REMATERIALIZATION_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "074687d9d6b81389ef2e099cf8422abc4fb1ba891329d42715b5cceba48f74ae"
+    }
+  },
+  "qualifier": {
+    "status": "PASS",
+    "token": "QUALIFIED_CATVM_PALEY_RELATION_REMATERIALIZATION_STRICT_SCOPE",
+    "evidence_directory": "/dev/shm/ags-audio-m165-qualifier-DQKz6u"
+  },
+  "independent_oracle": {
+    "imports_service": false,
+    "imports_controller": false,
+    "imports_numpy": false,
+    "public_topology_only_schedule_compilation": true,
+    "capacities_one_through_five_exhausted": true,
+    "minimum_declared_local_clean_reversible_capacity": 6,
+    "forward_toggle_actions": 15,
+    "full17_relation_reference": true,
+    "full_relation_field_cells": 136,
+    "primary_boundary": 80,
+    "alternate_boundary": 5,
+    "full_reverse_clearing": true,
+    "all_pass": true
+  },
+  "atomicity_and_custody": {
+    "controller_imports_backend": false,
+    "controller_computes_boundary": false,
+    "response_write_after_restoration_for_each_transaction": true,
+    "disconnect_restores_before_write_attempt": true,
+    "hidden_projection_denied": true,
+    "null_carrier_denied": true,
+    "snapshot_denied": true,
+    "wrong_generation_denied": true,
+    "missing_wrong_and_dependent_reordered_inverse_run_after_forward": true,
+    "failed_restoration_withholds_response": true,
+    "stderr_bytes_all_services": 0,
+    "audit_contains_relation_values": false
+  },
+  "resource_law": {
+    "accepted_carrier_field_cells": 24,
+    "sealed_leaf_field_cells": 6,
+    "hidden_internal_relation_slots": 6,
+    "hidden_internal_field_cells": 18,
+    "retain_all_carrier_field_cells": 27,
+    "accepted_forward_toggle_actions": 15,
+    "accepted_full_lifecycle_relation_evaluations": 30,
+    "matched_reversible_classical_field_cells": 24,
+    "matched_reversible_classical_lifecycle_relation_evaluations": 30,
+    "occurrence_expanded_compact_classical_field_cells": 15,
+    "occurrence_expanded_compact_classical_relation_evaluations": 13,
+    "retained_dynamic_inverse_history_records": 0,
+    "compiled_public_plan_records": 15,
+    "owner_node_records": 6,
+    "owner_epoch_records": 6,
+    "snapshot_bytes": 0,
+    "controller_request_bytes": 24,
+    "backend_response_bytes": 44,
+    "dense_relation_table_cells": 0,
+    "physical_process_peak_measured": false
+  },
+  "claim_ceiling": "EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_LOCAL_REVERSIBLE_TOGGLE_LAW_SOURCES_ALWAYS_RESIDENT_CLEAN_FINAL_ONLY_SINK_SEPARATE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS",
+  "preserved_subclaims": [
+    "EXACT_MINIMUM6_UNDER_THE_DECLARED_LOCAL_CLEAN_REVERSIBLE_PEBBLE_LAW",
+    "PUBLIC_TOPOLOGY_DERIVES_LIVE_INTERVALS_RELEASES_RECONSTRUCTION_AND_EXACT_REVERSE_CUSTODY",
+    "RETAIN_ALL_INTERNAL_STORAGE_REDUCED_FROM7_TO6_RELATION_SLOTS",
+    "RESPONSE_WRITE_IS_ATTEMPTED_ONLY_AFTER_EXACT_RESTORATION_VERIFICATION",
+    "INDEPENDENT_FULL136_CELL_C17_BOUNDARIES_MATCH_BOTH_PUBLIC_OPERATION_ASSIGNMENTS",
+    "SAME_BACKING_UNRELATED_PROGRAM_REUSE_REACHES_RESTORATION_GENERATION_TWO_WITHOUT_SNAPSHOT"
+  ],
+  "negative_result": "THE_ACCEPTED24_CELL_PATH_IS_IDENTICAL_TO_MATCHED_REVERSIBLE_CLASSICAL_PEBBLING_AND_IS_LARGER_THAN_THE_EXECUTED15_CELL_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE",
+  "rejected_interpretations": [
+    "GENERIC_DAG_SCHEDULER",
+    "ARBITRARY_PALEY_RELATION_PROGRAM",
+    "GLOBAL_MINIMUM_OVER_ALL_COMPUTATION_MODELS",
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ]
+}

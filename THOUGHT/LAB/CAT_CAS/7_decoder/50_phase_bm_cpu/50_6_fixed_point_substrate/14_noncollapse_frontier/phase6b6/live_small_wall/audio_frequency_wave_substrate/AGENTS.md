@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`f7e55db472649c3d84334aa11bd26564efb2a3b4`. The registry assigns one
+`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 164-milestone lane is active by user direction. Continue from the
+The current 165-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,22 +53,23 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
+CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER
 ```
 
 Claim ceiling:
 
 ```text
-EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS
+EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_LOCAL_REVERSIBLE_TOGGLE_LAW_SOURCES_ALWAYS_RESIDENT_CLEAN_FINAL_ONLY_SINK_SEPARATE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
-production service retains all 21 internal relation cells, and the identical
-compact classical relation recurrence remains. It does not establish a
-generic DAG scheduler, distinct phase resource, computational advantage,
-Small Wall crossing, physical waveform execution, or replacement of physical
-bits with pi.
+production service reduces retain-all storage from seven to six internal
+relation slots, but the identical reversible classical pebbler remains and an
+executed occurrence-expanded compact recurrence uses 15 field cells versus
+the accepted path's 24. It does not establish a generic DAG scheduler,
+distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, or replacement of physical bits with pi.
 
 The accumulated bounded architecture includes:
 
@@ -262,7 +263,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M164_CATVM_PALEY_RELATION_DAG_CUSTODY
+ACTIVE_AFTER_M165_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT
 ```
 
 The named
@@ -271,14 +272,15 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING
+EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE
 ```
 
-Derive live intervals, releases, reconstruction duties, and exact forward and
-reverse custody from public topology. Reduce actual resident relation cells
-without retaining an equivalent history elsewhere, preserve final-only atomic
-response ordering and restored-carrier reuse, and compare against retain-all
-and the strongest matched compact classical pebbling schedule.
+Change the relation algebra rather than enlarging the Paley DAG. Test the
+smallest nonabelian translation-relation carrier with genuinely
+noncommutative native convolution, native pointwise intersection, a shared
+unresolved port consumed by multiple modules, exact restoration and reuse,
+and the strongest compact group/irrep classical recurrence. Preserve M165's
+exact fixture ceiling and negative resource result.
 
 ## 7. Native No-Smuggle Law
 

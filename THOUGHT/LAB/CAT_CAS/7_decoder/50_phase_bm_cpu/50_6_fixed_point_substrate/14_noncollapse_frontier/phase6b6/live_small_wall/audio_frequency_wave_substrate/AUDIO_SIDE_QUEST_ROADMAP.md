@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CATVM_EXACT9_NODE_PALEY_RELATION_DAG_CUSTODY`
-**Roadmap version:** `14.30`
+**Status:** `STRICT_SCOPE_CATVM_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT`
+**Roadmap version:** `14.31`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f7e55db472649c3d84334aa11bd26564efb2a3b4`
+**Reconciled source head:** `4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE`
-**Current claim ceiling:** `EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_SEPARATE_LINUX_USERSPACE_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER`
+**Current claim ceiling:** `EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_LOCAL_REVERSIBLE_TOGGLE_LAW_SOURCES_ALWAYS_RESIDENT_CLEAN_FINAL_ONLY_SINK_SEPARATE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M164_CATVM_PALEY_RELATION_DAG_CUSTODY`
+**New mechanism development:** `ACTIVE_AFTER_M165_PALEY_RELATION_DAG_REMATERIALIZATION_NEGATIVE_RESOURCE_RESULT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_DERIVED_REVERSIBLE_PALEY_RELATION_DAG_REMATERIALIZATION_WITH_LIVE_INTERVAL_RELEASE_AND_MATCHED_CLASSICAL_PEBBLING`
+**Active primary successor:** `EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -38,12 +38,14 @@ the phase computer. They do not replace the phase-native mission.
 **Durable main-goal reminder:** The affine GF(2) lane is a tractable
 machine-law calibration, not the scientific destination. Its exact automatic
 15-node scheduler is complete at the fixture ceiling and must not be extended
-in size, owner count, or fanout without a specific main-mission blocker. M164
-now enforces one non-affine Paley relation DAG behind CATVM; its retain-all
-21-cell internal payload is the active obstruction. The next phase-owned step
-is topology-derived reversible rematerialization with matched compact
-classical pebbling, followed by a broader relation family or controlled Small
-Wall diagnostic only when the measured obstruction supports it.
+in size, owner count, or fanout without a specific main-mission blocker. M165
+closes the exact Paley-DAG scheduling question: public reversible pebbling
+reduces retain-all storage from 27 to 24 field cells, but the identical
+reversible classical pebbler has the same law and an executed compact
+occurrence recurrence uses only 15. More fixture scaling is not the repair.
+The next phase-owned step changes the composition algebra to the smallest
+noncommutative translation-relation family, with the strongest compact
+classical irrep recurrence retained from the start.
 
 Every successor must answer:
 
@@ -69,7 +71,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f7e55db472649c3d84334aa11bd26564efb2a3b4`. The current 164-milestone
+`4a49bb5d8b43dd59b9ae1d591d4d4e4ace733e94`. The current 165-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4698,7 +4700,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_9_NODE_SHARED_C17_PALEY_RELATION_DAG_WITH_AUTOMATIC_PUBLIC_TOPOLOGY_SCHEDULING_NATIVE_COMPOSITION_INTERSECTION_ATOMIC_FINAL_ONLY_RESPONSE_RESTORATION_AND_REUSE
+CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER
 ```
 
 Not established:
@@ -7116,6 +7118,63 @@ resident relation cells rather than moving history elsewhere, preserve the
 atomic final-only response law and restored-carrier reuse, and compare with
 both retain-all phase execution and the strongest matched classical pebbling
 schedule.
+
+## M165: bounded reversible rematerialization saves one relation slot but loses to compact occurrence evaluation
+
+Claim:
+
+```text
+CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER
+```
+
+M165 derives the complete toggle and lease plan from the public nine-node
+topology. Independent exhaustive state search rejects capacities one through
+five and first reaches the clean final-only sink state at six internal
+relation slots with 15 toggles. The result is an exact minimum only under the
+declared local reversible-pebble law for this topology: both parents must be
+resident for placement or removal, the two sources remain resident, and the
+forward endpoint contains only the sink. It is not generic scheduler wording.
+
+The accepted service records exact node, slot, and epoch custody. It releases
+and reconstructs node 2, retains only node 8 at the boundary, and reverses the
+public plan exactly. Canonical state includes 24 F103 cells, owner and epoch
+leases, pending actions, active descriptor, generation, and nonce. Exact
+restoration is verified on the same backing before each response; the
+unrelated second operation assignment matches a fresh service at generation
+two. Missing, wrong, and dependency-reordered inverses are now executed or
+omitted only after forward residency and cause restoration failure with no
+response. Disconnect, hidden projection, null-carrier, snapshot, and wrong-
+generation controls retain the M164 response and no-smuggle laws.
+
+The independent oracle reconstructs the scheduler and both semantics without
+importing the service or controller. Full 17-value relations use 136 reference
+cells and reproduce boundaries 80 and 5 with exact reverse clearing. The
+accepted compact carrier uses 24 field cells versus retain-all's 27, retains
+zero dynamic inverse-value history, and counts 15 public plan records plus six
+node and six epoch records. Its full lifecycle requires 30 relation
+evaluations.
+
+The matched reversible classical pebbler is identical. An executed
+occurrence-expanded compact classical recurrence is stronger: it evaluates 13
+relation occurrences with three temporary relation slots and 15 total field
+cells including the sealed leaves. The 24-to-15 loss means rematerialization
+does not establish a distinct phase resource or Small Wall crossing.
+
+The scheduler obstruction is therefore closed at this fixture ceiling. The
+next experiment changes the algebra rather than enlarging the DAG:
+
+```text
+EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_NATIVE_CONVOLUTION_INTERSECTION_WITH_SHARED_UNRESOLVED_PORT_RESTORATION_REUSE_AND_MATCHED_IRREP_CLASSICAL_BASELINE
+```
+
+It must test the smallest nonabelian group relation carrier whose composition
+is genuinely noncommutative while pointwise intersection remains native,
+retain a shared port across multiple consumers, restore and reuse the actual
+carrier, and execute the compact classical group/irrep recurrence. M165
+establishes no generic scheduling result, arbitrary relation-program custody,
+OS or hardware isolation, distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation.
 
 ## 10. Roadmap Maintenance
 
