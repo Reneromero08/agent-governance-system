@@ -1,0 +1,2030 @@
+{
+  "algebra_checks": {
+    "all_120_sl2_q5_elements_enumerated": true,
+    "all_14400_ordered_q5_cocycle_pairs_streamed_equal_closed": true,
+    "all_14400_ordered_q5_projective_products_match_dense_semantics": true,
+    "relation_inverse_composes_to_exact_identity": true,
+    "separable_chirp_hadamard_intersection_matches_dense_semantics": true,
+    "two_fiber_relation_composition_is_noncommutative": true
+  },
+  "cases": [
+    {
+      "boundary": 9,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 1,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 1,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 1,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 56,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 56,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 200,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 9,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 1,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 1,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 1,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 56,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 200,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "bb1933ac2c7a1c374eea94b9480c6d55bfc0d2ccdf087b1b6222574a959ae0fa",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 514,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 11,
+      "q": 5,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "bb1933ac2c7a1c374eea94b9480c6d55bfc0d2ccdf087b1b6222574a959ae0fa",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 7680
+      }
+    },
+    {
+      "boundary": 0,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 72,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 72,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 968,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 0,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 72,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 968,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "2248fbc04b4649b019c3ecdb95e7e077930a7c1b7900ac4b2396390561bef055",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 802,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 23,
+      "q": 11,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "2248fbc04b4649b019c3ecdb95e7e077930a7c1b7900ac4b2396390561bef055",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 16896
+      }
+    },
+    {
+      "boundary": 35,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 88,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 4232,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 35,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 4232,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "e5fa778493091d442f56a84b3634da077d0b846f5cae2110f7a0afa6028958c5",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 946,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 47,
+      "q": 23,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "e5fa778493091d442f56a84b3634da077d0b846f5cae2110f7a0afa6028958c5",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 35328
+      }
+    },
+    {
+      "boundary": 57,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 88,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 88,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 6728,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 57,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 88,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 6728,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "c6ecf1707d281e73b424d8f9f669d475701a49430109020d4269050964db2c6e",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 922,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 59,
+      "q": 29,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "c6ecf1707d281e73b424d8f9f669d475701a49430109020d4269050964db2c6e",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 44544
+      }
+    },
+    {
+      "boundary": 50,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 104,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 13448,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 50,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "691ea75920f6d3461043c317e051463ebf2cee70f1e38d3164b1e1f9f649a8ca",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 970,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 83,
+      "q": 41,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "691ea75920f6d3461043c317e051463ebf2cee70f1e38d3164b1e1f9f649a8ca",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 62976
+      }
+    },
+    {
+      "boundary": 32,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 104,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 22472,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 32,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 22472,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "f5ce20e24d28a266fa998232595b33fdc1c2ad9255c03ba7050490f4ca8244c0",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 994,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 107,
+      "q": 53,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "f5ce20e24d28a266fa998232595b33fdc1c2ad9255c03ba7050490f4ca8244c0",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 81408
+      }
+    },
+    {
+      "boundary": 112,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 120,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 55112,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 112,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 55112,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "fd785d8d641297e041af7883db1bf05cb5c324a53c840fb26af545e9bbc57213",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 988,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 167,
+      "q": 83,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "fd785d8d641297e041af7883db1bf05cb5c324a53c840fb26af545e9bbc57213",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 127488
+      }
+    },
+    {
+      "boundary": 15,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 120,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 63368,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 15,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 63368,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "5da5311a7e6d007f4979d7e199e6a5f67caf32aa58ef361177b0b0fd0d15293e",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 1006,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 179,
+      "q": 89,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "5da5311a7e6d007f4979d7e199e6a5f67caf32aa58ef361177b0b0fd0d15293e",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 136704
+      }
+    },
+    {
+      "boundary": 143,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 256,
+        "logical_resident_payload_bits": 120,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 102152,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 143,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "7a7f69d8f446c42f7142f321dbed89d1d761a31d2836fc5e899d1de189491c2c",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 1024,
+          "closed_cocycle_calls": 1536,
+          "composition_calls": 1024,
+          "inverse_relation_rematerializations": 512,
+          "legendre_symbol_calls": 1006,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 227,
+      "q": 113,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "7a7f69d8f446c42f7142f321dbed89d1d761a31d2836fc5e899d1de189491c2c",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 1024,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 1024,
+        "inverse_relation_rematerializations": 512,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 1536,
+        "streamed_phase_sum_terms": 173568
+      }
+    },
+    {
+      "boundary": 200,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 256,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 1024,
+          "logical_resident_payload_bits": 120,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 1024,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "depth": 1024,
+        "logical_resident_payload_bits": 120,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 102152,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 200,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 256,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 1024,
+            "logical_resident_payload_bits": 120,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 102152,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "23969ee2910368fd13ecb89ffe1cf225c7c4806090e82b1abcbc5df5f10b6ece",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 4096,
+          "closed_cocycle_calls": 6144,
+          "composition_calls": 4096,
+          "inverse_relation_rematerializations": 2048,
+          "legendre_symbol_calls": 4006,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 227,
+      "q": 113,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "23969ee2910368fd13ecb89ffe1cf225c7c4806090e82b1abcbc5df5f10b6ece",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 4096,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 4096,
+        "inverse_relation_rematerializations": 2048,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 6144,
+        "streamed_phase_sum_terms": 694272
+      }
+    },
+    {
+      "boundary": 73,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 4,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 16,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 64,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        },
+        {
+          "depth": 128,
+          "logical_resident_payload_bits": 104,
+          "monomial_kernel_ports": 0,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "resident_fiber_cells": 8,
+          "resident_relation_components": 2,
+          "resident_symplectic_cells": 8,
+          "resident_two_port_cells": 16
+        }
+      ],
+      "depth": 128,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_checkpoint": {
+        "depth": 128,
+        "logical_resident_payload_bits": 104,
+        "monomial_kernel_ports": 0,
+        "ordinary_dense_two_port_relation_cells": 13448,
+        "resident_fiber_cells": 8,
+        "resident_relation_components": 2,
+        "resident_symplectic_cells": 8,
+        "resident_two_port_cells": 16
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_classical": {
+        "boundary": 73,
+        "boundary_matches": true,
+        "checkpoints": [
+          {
+            "depth": 1,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 4,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 16,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 64,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          },
+          {
+            "depth": 128,
+            "logical_resident_payload_bits": 104,
+            "monomial_kernel_ports": 0,
+            "ordinary_dense_two_port_relation_cells": 13448,
+            "resident_fiber_cells": 8,
+            "resident_relation_components": 2,
+            "resident_symplectic_cells": 8,
+            "resident_two_port_cells": 16
+          }
+        ],
+        "checkpoints_match": true,
+        "restoration_matches": true,
+        "semantic_commitment": "70d8ece26a189706f1d29934a19f98feb586420c9bc98d9de32e872dad39bc07",
+        "semantic_commitment_matches": true,
+        "work": {
+          "chirp_intersection_calls": 512,
+          "closed_cocycle_calls": 768,
+          "composition_calls": 512,
+          "inverse_relation_rematerializations": 256,
+          "legendre_symbol_calls": 476,
+          "streamed_cocycle_calls": 0,
+          "streamed_phase_sum_terms": 0
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 83,
+      "q": 41,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "70d8ece26a189706f1d29934a19f98feb586420c9bc98d9de32e872dad39bc07",
+      "snapshot_used": false,
+      "work": {
+        "chirp_intersection_calls": 512,
+        "closed_cocycle_calls": 0,
+        "composition_calls": 512,
+        "inverse_relation_rematerializations": 256,
+        "legendre_symbol_calls": 0,
+        "streamed_cocycle_calls": 768,
+        "streamed_phase_sum_terms": 31488
+      }
+    }
+  ],
+  "claim_candidate": "BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_CLOSES_NATIVE_NONCOMMUTATIVE_COMPOSITION_AND_SEPARABLE_CHIRP_HADAMARD_INTERSECTION_IN_FIXED16_TWO_PORT_CELLS_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL16_CELL_CLASSICAL_CHART_WITH_CLOSED_GAUSS_COCYCLE_REMAINS",
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "missing_inverse_fails_restoration": true,
+    "module_reordering_changes_final_boundary": true,
+    "non_safe_prime_order_rejected": true,
+    "null_family_rejected": true,
+    "premature_boundary_projection_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "experiment": {
+    "coefficient_fields_p": [
+      11,
+      23,
+      47,
+      59,
+      83,
+      107,
+      167,
+      179,
+      227
+    ],
+    "final_boundary_only": true,
+    "hidden_relation_entries_serialized": false,
+    "native_composition": "EXACT_PROJECTIVE_WEIL_COMPOSITION_WITH_STREAMED_PHASE_GAUSS_COCYCLE",
+    "native_intersection": "HADAMARD_MULTIPLICATION_BY_PUBLIC_SEPARABLE_ROW_AND_COLUMN_CHIRP_RELATION",
+    "native_state": "ONE_HOMOGENEOUS_QUADRATIC_WEIL_KERNEL_TIMES_ONE_2X2_FIBER_MATRIX_PER_PORT",
+    "ordinary_relation_table_materialized_on_accepted_path": false,
+    "public_descriptor_compiler_reads_final_answer": false,
+    "resident_cells_per_port": 8,
+    "resident_relation_components": 2,
+    "resident_two_port_cells": 16,
+    "restoration_generation_enforcement": "DIRECT_PROCESS_BOOKKEEPING_ONLY",
+    "retained_compiled_plan_cells": 0,
+    "retained_inverse_history_cells": 0,
+    "safe_prime_orders_q": [
+      5,
+      11,
+      23,
+      29,
+      41,
+      53,
+      83,
+      89,
+      113
+    ]
+  },
+  "fixed16_two_port_cells_across_all_orders_and_depths": true,
+  "matched_baselines": {
+    "classical_composition_work_is_lower_after_one_scalar_gauss_cache": true,
+    "cold_start_comparison_used": false,
+    "dense_relation_matrices_are_verification_ORACLE_NOT_MATCHED_BASELINE": true,
+    "state_law_identical_to_accepted": true,
+    "strongest_executed": "IDENTICAL16_CELL_WEIL_GAUSSIAN_RELATION_CHART_WITH_CLOSED_GAUSS_COCYCLE"
+  },
+  "next_obstruction": "THE_FIXED16_WEIL_GAUSSIAN_CHART_IS_STABILIZER_LIKE_AND_THE_IDENTICAL_CLASSICAL_CHART_HAS_A_LOWER_WORK_CLOSED_GAUSS_COCYCLE_SO_THE_NEXT_PHASE_LAW_MUST_ADD_NON_GAUSSIAN_COUPLING_WITHOUT_COMPONENT_OR_PRECISION_GROWTH",
+  "not_established": [
+    "ARBITRARY_GAUSSIAN_GAUSSIAN_HADAMARD_INTERSECTION",
+    "ADDITIVE_SUPERPOSITION_OF_MULTIPLE_GAUSSIAN_COMPONENTS",
+    "NON_GAUSSIAN_PHASE_CLOSURE",
+    "FIXED_BIT_WIDTH_ACROSS_UNBOUNDED_Q",
+    "GENERAL_RELATION_COMPILER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_accounting": {
+    "accepted_creation_also_computes_public_gauss_one_phase_terms_per_q": "Q",
+    "accepted_streamed_cocycle_terms_per_composition": "Q",
+    "advantage_claimed": false,
+    "carrier_creation_field_cells": 16,
+    "classical_closed_cocycle_uses_legendre_symbol_and_cached_gauss_one": true,
+    "classical_warm_closed_cocycle_state_cells": 1,
+    "conservative_accepted_named_peak_field_cells": 56,
+    "conservative_classical_named_peak_field_cells": 55,
+    "controller_backend_traffic_bytes": 0,
+    "dense_two_port_relation_field_cells": "8*Q^2",
+    "gauss_one_cache_creation_phase_terms_per_q": "Q",
+    "hidden_carrier_field_cells": 16,
+    "package_algebra_qualification_q5_dense_kernel_peak_field_cells": 75,
+    "projection_streams_four_public_entries": true,
+    "public_field_plan_cells_q_p_primitive_root_gauss_one": 5,
+    "python_containers_allocator_interpreter_native_libraries_and_whole_process_peak_excluded": true,
+    "snapshot_cells": 0,
+    "verification_streams_but_does_not_retain_all_8Q2_relation_entries": true
+  },
+  "restoration_and_reuse": {
+    "exact_canonical_state_restored_after_reuse": true,
+    "first_boundary": 36,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 10,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_CLOSURE_RESULTS_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
