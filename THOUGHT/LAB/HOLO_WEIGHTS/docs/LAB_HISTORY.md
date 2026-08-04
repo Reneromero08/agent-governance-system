@@ -979,3 +979,64 @@ INTERPRETATION (the complete final picture):
 (5) Per Sol's rule 'exact framed replacement remains ineffective [at
     the boundary] -> close this k=32 frame regardless': the frame
     closes at the boundary level even with exact content.
+
+## 2026-08-04 — Sol's final review of fresh3+frame: BUGGED as phase test + a bug in MY controls
+
+Sol's verdict: the 0.39 dual->real bridge identity failure INVALIDATES the
+gauge-aligned phase run (Run 1) as evidence about phase usefulness. The
+required commutation M(E_C(z)) = E_R(M(z)) fails: complex-modulus
+normalization + persistent carrier change the dynamics BEFORE collapse;
+Re afterward does not recover the corresponding real channel. Safe
+statement: "No usable phase signal crossed the tested complex-modulus/
+real-part bridge" - NOT "no usable phase signal exists."
+
+NEW BUG FOUND IN MY OWN CONTROLS (diagnostic run): torch.randn() is
+REAL - angle(g) for a real gaussian is 0 or pi (+-1 signs), not uniform
+phases. The "random" packet p = |c| (.) exp(i angle(g)) was REAL, so
+i p was purely imaginary and Re(i p) == 0 to machine precision
+(||Re(i F p_random)||/||yH|| = 1.5e-08). THE RANDOM CONTROL WAS A
+DEGENERATE NULL in every freshness run (b8_freshness, b8_freshness2,
+b8_freshness3): 'random == neutral == nopacket' was the Re-collapse
+killing a real-sign packet, not phases averaging out. Every
+'correct ~ random' comparison in those runs is therefore UNRELIABLE as
+a phase-null test. The correct packet DOES have nonzero real projection
+(|cos| up to 0.09) - its effect is small, but the null it was compared
+against was zero-by-construction.
+
+BRIDGE AUDIT (Sol's 4 conditions - resolved from existing measurements):
+  1. carrier-zero complex path == real path: PASS at the boundary
+     (logit cos 0.9999, relL2 0.01, B7-ref).
+  2. complex exact-framed + collapse == real exact-framed: FAIL
+     (wiring identity dev 0.39).
+  3. random complex phases -> nonzero collapsed perturbation: FAIL
+     (identically zero - degenerate control, this diagnostic).
+  4. conjugation equivariance: FAIL (silu not odd, rel dev 1.7).
+Per Sol: conditions 1-2 cannot hold under complex-modulus normalization
+-> formally close that bridge. CLOSED.
+
+WHAT IS CLOSED (Sol's list):
+  1. Independent low-rank SVD at k=256-512 does not preserve the dense
+     channels (the wall).
+  2. The k=32 frame captures ~14% of residual energy (norm 0.374 ->
+     energy 0.140).
+  3. Exact k=32 framed replacement improves local outputs (8/8 cos and
+     relL2) but not the final boundary consistently.
+  4. The complex-modulus carrier + Re collapse is not a valid bridge to
+     the real model (0.39 identity failure).
+  5. The current phase-only packet has not demonstrated a transported
+     boundary invariant.
+
+NOT CLOSED (Sol): no phase-native representation for real weights; no
+non-collapse compression; complex phase intrinsically unable to affect a
+real boundary. Real vectors can be placed into paired-coordinate /
+Fourier / analytic-signal / Hermitian-dilation representations with
+nondegenerate phases - UNMEASURED, a different program with a
+predeclared commuting real boundary. The complex-native-from-embedding
+system is a different program: it changes native evolution rather than
+retrofitting a noncommuting auxiliary world onto an existing real
+transformer.
+
+TERMINAL ACTION: no more suffix/transport experiments on this bridge.
+The bridge is formally closed. The phase frontier on REAL transformer
+weights as measured is exhausted within the tested constructions; the
+unmeasured directions are different programs.
