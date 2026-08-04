@@ -1,0 +1,132 @@
+{
+  "case_comparisons": [
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 5
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 13
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 17
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 29
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 37
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 53
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 73
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 97
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 1024,
+      "family": "PRIMARY",
+      "independent_restoration_exact": true,
+      "paley_order": 97
+    },
+    {
+      "boundary_matches": true,
+      "checkpoints_match": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "independent_restoration_exact": true,
+      "paley_order": 37
+    }
+  ],
+  "checks": {
+    "all_144_composition_and_intersection_basis_pairs_match_dense_at_q5_and_q13": true,
+    "all_boundaries_match": true,
+    "all_checkpoint_records_match": true,
+    "all_commitments_match": true,
+    "all_declared_class_tables_reconstructed_by_enumeration": true,
+    "all_independent_transactions_restore": true,
+    "fixed12_independent_recurrence_for_all_cases": true,
+    "missing_inverse_fails": true,
+    "reordered_inverse_fails": true,
+    "wrong_inverse_fails": true
+  },
+  "claim_ceiling": "F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "oracle_primitive": "ENUMERATED_PALEY_CLASS_TABLE_PLUS_INDEPENDENT12_COORDINATE_RECURRENCE",
+  "preserved_subclaims": [
+    "FIXED12_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_CLOSURE_ACROSS_ALL_DECLARED_ORDERS_AND_DEPTHS",
+    "NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION",
+    "DENSE_RELATION_SEMANTICS_PARITY_FOR_ALL_BASIS_PAIRS_AT_Q5_AND_Q13",
+    "FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE"
+  ],
+  "production_module_imported": false,
+  "production_projection_called": false,
+  "production_results_sha256": "5592ba6a8128767056e5bde2fbc58e4741fb82c6afef0a6bf7ccb59c51e50d32",
+  "rejected_interpretations": [
+    "GENERAL_COHERENT_CONFIGURATION_COMPILER",
+    "GENERAL_NON_TRANSLATION_INVARIANT_RELATIONS",
+    "ARBITRARY_FIBER_COUNT_OR_PALEY_ORDER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

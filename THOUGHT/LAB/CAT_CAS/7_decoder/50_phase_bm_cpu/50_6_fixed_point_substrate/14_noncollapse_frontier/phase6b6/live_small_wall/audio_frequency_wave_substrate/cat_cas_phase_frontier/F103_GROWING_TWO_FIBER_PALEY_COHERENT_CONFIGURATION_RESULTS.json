@@ -1,0 +1,572 @@
+{
+  "cases": [
+    {
+      "boundary": 4,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 100,
+          "represented_vertices": 10,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 100,
+          "represented_vertices": 10,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 100,
+          "represented_vertices": 10,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 100,
+          "represented_vertices": 10,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 100,
+          "represented_vertices": 10,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "51b9471435aa15cce57e3d075fa1fb03f29389d7fa4bf6bb6eb7355d4dab3000",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 5,
+      "represented_dense_relation_entries_per_port": 100,
+      "represented_vertices": 10,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 85,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 676,
+          "represented_vertices": 26,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 676,
+          "represented_vertices": 26,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 676,
+          "represented_vertices": 26,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 676,
+          "represented_vertices": 26,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 676,
+          "represented_vertices": 26,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "4f6108955104a23a0b71a0e5f9587f8d3ce0249808c48d2a9dc19b87369872ac",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 13,
+      "represented_dense_relation_entries_per_port": 676,
+      "represented_vertices": 26,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 38,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 1156,
+          "represented_vertices": 34,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 1156,
+          "represented_vertices": 34,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 1156,
+          "represented_vertices": 34,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 1156,
+          "represented_vertices": 34,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 1156,
+          "represented_vertices": 34,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "f79606281b03d281e5ba53de40d091c677795af9facee85e13a38210b34ba590",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 17,
+      "represented_dense_relation_entries_per_port": 1156,
+      "represented_vertices": 34,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 4,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 3364,
+          "represented_vertices": 58,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 3364,
+          "represented_vertices": 58,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 3364,
+          "represented_vertices": 58,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 3364,
+          "represented_vertices": 58,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 3364,
+          "represented_vertices": 58,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "04740dbcb1813fad586f72d901be5982ab6167b6d381ee31a3dc0fb48d67dcd2",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 29,
+      "represented_dense_relation_entries_per_port": 3364,
+      "represented_vertices": 58,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 90,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "0f0e2c0f5699f4aaaeb4926ee7e4fde1d402bc353292558dd1a46e91b2dfb7a3",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 37,
+      "represented_dense_relation_entries_per_port": 5476,
+      "represented_vertices": 74,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 34,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 11236,
+          "represented_vertices": 106,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 11236,
+          "represented_vertices": 106,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 11236,
+          "represented_vertices": 106,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 11236,
+          "represented_vertices": 106,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 11236,
+          "represented_vertices": 106,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "d36e52e52b42ece09a417255ac89fab976679166eb4851960e3f27c68c54fdf2",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 53,
+      "represented_dense_relation_entries_per_port": 11236,
+      "represented_vertices": 106,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 75,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 21316,
+          "represented_vertices": 146,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 21316,
+          "represented_vertices": 146,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 21316,
+          "represented_vertices": 146,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 21316,
+          "represented_vertices": 146,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 21316,
+          "represented_vertices": 146,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "3440a772fe1a6a194783e1556a46099567aecb685dbbf2fdd234075533d5cce2",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 73,
+      "represented_dense_relation_entries_per_port": 21316,
+      "represented_vertices": 146,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 65,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 256,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "c3e30a098eda8967fa1c8bcc1efea21385eca7efe6ba0d8ec923e8438716edc9",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 97,
+      "represented_dense_relation_entries_per_port": 37636,
+      "represented_vertices": 194,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 8,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 256,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 1024,
+          "represented_dense_relation_entries_per_port": 37636,
+          "represented_vertices": 194,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 1024,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "forward_commitment": "0fbc9de8f235fecfd01a1ddafb1ec485defcbe079b4565215a79139456eab811",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 97,
+      "represented_dense_relation_entries_per_port": 37636,
+      "represented_vertices": 194,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    },
+    {
+      "boundary": 59,
+      "checkpoints": [
+        {
+          "depth": 1,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 4,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 16,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        },
+        {
+          "depth": 64,
+          "represented_dense_relation_entries_per_port": 5476,
+          "represented_vertices": 74,
+          "resident_relation_cells": 24
+        }
+      ],
+      "depth": 64,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "forward_commitment": "a3696715d9b6ba44fab9cd1449f07745c7a3e3ea57cbe4ea798ed2055153aa0d",
+      "hidden_relation_coefficients_serialized": false,
+      "paley_order": 37,
+      "represented_dense_relation_entries_per_port": 5476,
+      "represented_vertices": 74,
+      "resident_relation_cells": 24,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "snapshot_used": false
+    }
+  ],
+  "claim_candidate": "BOUNDED_EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_F103_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_VERTEX_COUNTS10_26_34_58_74_106_146_194_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE_REMAINS",
+  "claim_ceiling": "F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "all_formula_structure_constants_match_enumeration": true,
+    "invalid_order_rejected": true,
+    "left_and_right_composition_differ": true,
+    "missing_inverse_fails_restoration": true,
+    "module_reordering_changes_boundary": true,
+    "premature_boundary_projection_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "experiment": {
+    "assignment_or_witness_expansion_materialized": false,
+    "coefficient_field": 103,
+    "composition_noncommutative": true,
+    "final_boundary_only": true,
+    "hidden_relation_coefficients_serialized": false,
+    "native_composition": "TWO_BY_TWO_MATRIX_PRODUCT_OVER_PALEY_CLASS_CONVOLUTION_ALGEBRA",
+    "native_intersection": "COEFFICIENTWISE_HADAMARD_PRODUCT_OF_DISJOINT_BASIS_RELATIONS",
+    "ordinary_relation_table_materialized_on_accepted_path": false,
+    "paley_orders": [
+      5,
+      13,
+      17,
+      29,
+      37,
+      53,
+      73,
+      97
+    ],
+    "public_topology_reads_final_answer": false,
+    "relation_basis": "TWO_BY_TWO_FIBER_BLOCKS_TENSOR_IDENTITY_QUADRATIC_RESIDUE_NONRESIDUE_DIFFERENCE_CLASSES",
+    "represented_vertex_counts": [
+      10,
+      26,
+      34,
+      58,
+      74,
+      106,
+      146,
+      194
+    ],
+    "resident_coefficients_per_port": 12
+  },
+  "fixed_rank_law": {
+    "fixed12_across_all_declared_orders_and_depths": true,
+    "maximum_dense_relation_entries_per_port": 37636,
+    "maximum_represented_vertices": 194,
+    "resident_coefficients_per_port": 12,
+    "structural_family_restriction": "TWO_FIBER_PALEY_COHERENT_CONFIGURATION_ONLY",
+    "two_port_carrier_field_cells": 24
+  },
+  "matched_baselines": {
+    "cold_start_comparison_used": false,
+    "dense_relation_expansion_used_as_matched_baseline": false,
+    "strongest": "IDENTICAL12_COORDINATE_TWO_BY_TWO_PALEY_CLASS_ALGEBRA_RECURRENCE",
+    "strongest_law_identical_to_accepted": true
+  },
+  "next_obstruction": "FIXED12_CLOSURE_IS_A_PUBLIC_STRUCTURE_FUSION_AND_HAS_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE;_TEST_WHETHER_A_PHASE_NATIVE_COUPLING_CAN_BREAK_THIS_CLASSICAL_BISIMULATION_WITHOUT_EXPANDING_THE_RELATION_BASIS",
+  "not_established": [
+    "GENERAL_COHERENT_CONFIGURATION_COMPILER",
+    "GENERAL_NON_TRANSLATION_INVARIANT_RELATIONS",
+    "ARBITRARY_FIBER_COUNT_OR_PALEY_ORDER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_accounting": {
+    "accepted_carrier_field_cells": 24,
+    "accepted_conservative_named_field_cell_peak": 72,
+    "accepted_operation_delta_field_cells": 12,
+    "accepted_public_operand_field_cells": 12,
+    "accepted_restoration_verification_baseline_field_cells": 24,
+    "advantage_claimed": false,
+    "matched_identical_classical_conservative_named_field_cell_peak": 72,
+    "python_container_allocator_runtime_and_whole_process_peak_excluded": true,
+    "retained_compiled_structure_table_cells": 0,
+    "retained_inverse_history_cells": 0,
+    "snapshot_cells": 0
+  },
+  "restoration_and_reuse": {
+    "exact_canonical_state_restored_after_reuse": true,
+    "first_boundary": 16,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 60,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_RESULTS_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
