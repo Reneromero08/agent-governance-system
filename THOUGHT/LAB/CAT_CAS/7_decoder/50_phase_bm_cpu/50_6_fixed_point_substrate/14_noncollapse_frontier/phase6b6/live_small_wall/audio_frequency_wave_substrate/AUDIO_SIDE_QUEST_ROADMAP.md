@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CUBIC_AIRY_LINEAR_QUOTIENT_Q2_NO_GO_ESTABLISHED_NONLINEAR_HISTORY_CLOSURE_OPEN`
-**Roadmap version:** `14.43`
+**Status:** `STRICT_SCOPE_PROJECTIVE_AIRY_HISTORY_QUOTIENT_REJECTED_AT_TESTED_HORIZONS_GENERATING_FUNCTION_PHASE_GEOMETRY_OPEN`
+**Roadmap version:** `14.44`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `374f1869640dcfe2f15ba4ce9deeafd58dc7c4e2`
+**Reconciled source head:** `6572b784dea775f088e0bbffb2955fbfadb4ebfc`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_AIRY_PUBLIC_TWO_SHEAR_ORBIT_HAS_FULL_Q2_LINEAR_SPAN_ON_EVERY_DECLARED_PRIMARY_ORDER_AND_AT_LEAST_Q2MINUSQPLUS1_ALTERNATE_SPAN_ON_EVERY_DECLARED_QGE11_ORDER_WITH_BLOCK_FOURIER_CERTIFICATES_EXACT_GRAPH_RESTORATION_AND_REUSE_SO_LINEAR_MESSAGE_QUOTIENTS_BELOW_THE_OBSERVED_SPAN_ARE_REJECTED_AT_THE_TESTED_SOURCE_CHARTS_BUT_NONLINEAR_CLOSURE_REMAINS_OPEN_AND_IDENTICAL_CLASSICAL_FACTOR_GRAPH_AND_Q2_DENSE_RECURRENCES_REMAIN`
-**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_ALL_ORDERS_ALTERNATE_Q11_23_29_41_53_83_89_113_DEPTH1_PUBLIC_TWO_CONTROLLED_CUBIC_COEFFICIENT_ORBITS_TWO_DECLARED_FIBER_FIXTURES_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS`
+**Current claim ceiling:** `PRIMARY_TWO_SHEAR_PUBLIC_COEFFICIENT_WORDS_Q5_DEPTHS1_THROUGH4_Q11_DEPTHS1_AND2_FIXED_DECLARED_GAUSSIAN_LAYER_SEQUENCE_TWO_FIBER_DENSE_FULL_STATE_PROJECTIVE_CANONICALIZATION_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M177_CUBIC_AIRY_LINEAR_QUOTIENT_Q2_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M178_PROJECTIVE_AIRY_HISTORY_QUOTIENT_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_NONLINEAR_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_CANONICALIZATION_ACROSS_GROWING_DEPTH_OR_HISTORY_GROWTH_NO_GO_WITH_IDENTICAL_FACTOR_GRAPH_AND_DENSE_CLASSICAL_RECURRENCES`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -82,7 +82,16 @@ orbit has span `q^2-q+1`. This rejects smaller regular linear Airy-message
 quotients at those source charts, but not the existing compact procedural
 factor graph or a nonlinear or singular chart. The selected repair now tests
 whether a nonlinear projective Airy descriptor canonically closes across
-growing depth without retaining public program history elsewhere.
+growing depth without retaining public program history elsewhere. M178 finds
+no useful transferable repair: q=5 first collides at depth 4 in 625 raw-state
+classes of size 5 on one rank-5 program subspace, but the same kernel direction
+fails q=11 and q=23 transfer, q=11 depths 1 and 2 remain collision-free, and
+the depth-4 identifier width remains 19 bits. The exact code set itself has
+388,125 entries, while the identical compact factor graph retains only the
+public word. The selected successor therefore changes the phase-machine
+primitive to typed cubic generating functions composed by critical-locus
+elimination; it must establish transferable closure or expose degree growth
+without enumerating program histories or full states.
 
 Every successor must answer:
 
@@ -108,7 +117,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`374f1869640dcfe2f15ba4ce9deeafd58dc7c4e2`. The current 177-milestone
+`6572b784dea775f088e0bbffb2955fbfadb4ebfc`. The current 178-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4737,7 +4746,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_AIRY_PUBLIC_TWO_SHEAR_ORBIT_HAS_FULL_Q2_LINEAR_SPAN_ON_EVERY_DECLARED_PRIMARY_ORDER_AND_AT_LEAST_Q2MINUSQPLUS1_ALTERNATE_SPAN_ON_EVERY_DECLARED_QGE11_ORDER_WITH_BLOCK_FOURIER_CERTIFICATES_EXACT_GRAPH_RESTORATION_AND_REUSE_SO_LINEAR_MESSAGE_QUOTIENTS_BELOW_THE_OBSERVED_SPAN_ARE_REJECTED_AT_THE_TESTED_SOURCE_CHARTS_BUT_NONLINEAR_CLOSURE_REMAINS_OPEN_AND_IDENTICAL_CLASSICAL_FACTOR_GRAPH_AND_Q2_DENSE_RECURRENCES_REMAIN
+BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS
 ```
 
 Not established:
@@ -7903,6 +7912,59 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_NONLINEAR_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_CANONICALIZATION_ACROSS_GROWING_DEPTH_OR_HISTORY_GROWTH_NO_GO_WITH_IDENTICAL_FACTOR_GRAPH_AND_DENSE_CLASSICAL_RECURRENCES
+```
+
+## M178: projective Airy program-history quotient no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS
+```
+
+This is the direct nonlinear repair left open by M177. It canonicalizes every
+complete `2*q^2`-cell resident state modulo a nonzero field scalar after each
+declared public coefficient word. The exact equality key is a collision-free
+base-p integer, not a digest. Recursive in-place traversal applies the actual
+inverse after each branch and retains no dense state-history tree.
+
+At q=5, depths 1 through 3 are collision-free with 25, 625, and 15,625
+states. Depth 4 has 390,625 words and 388,125 states: 387,500 singleton
+classes plus exactly 625 classes of size 5. The 3,125 colliding histories form
+one rank-5 subspace of the eight program coefficients, and its classes are
+cosets of the rank-1 direction `(0,0,0,1,0,0,0,-1)`. Every collision is raw
+state equality, not equality introduced by discarding global phase.
+
+The quotient still needs 19 fixed-horizon identifier bits, equal to the
+unquotiented public words. The q=5 direction fails all three exact q=11 and
+all three exact q=23 transfer samples; q=11 depths 1 and 2 are independently
+collision-free. The diagnostic equality set itself contains 388,125 large
+integer codes at q=5 depth 4 and is not accepted as compact carrier state.
+
+The no-import oracle independently rebuilds the fields, kernels, dense carrier,
+forward and inverse traversal, collision linear algebra, transfer attacks, and
+restored-carrier reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION` for
+the discrete resident carrier. The same backing executes an unrelated
+alternate-order program at generation two without a snapshot.
+
+The identical classical in-place recurrence and compact procedural factor
+graph remain. No arbitrary-depth quotient, transferable nonlinear closure,
+universal lower bound, CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.
+
+Exact ceiling:
+
+```text
+PRIMARY_TWO_SHEAR_PUBLIC_COEFFICIENT_WORDS_Q5_DEPTHS1_THROUGH4_Q11_DEPTHS1_AND2_FIXED_DECLARED_GAUSSIAN_LAYER_SEQUENCE_TWO_FIBER_DENSE_FULL_STATE_PROJECTIVE_CANONICALIZATION_DIRECT_PROCESS_SOFTWARE
+```
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

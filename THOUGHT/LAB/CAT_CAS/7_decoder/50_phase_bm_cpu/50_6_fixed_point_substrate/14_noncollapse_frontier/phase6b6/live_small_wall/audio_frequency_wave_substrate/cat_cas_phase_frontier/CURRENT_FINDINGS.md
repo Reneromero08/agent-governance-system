@@ -9942,3 +9942,42 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_NONLINEAR_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_CANONICALIZATION_ACROSS_GROWING_DEPTH_OR_HISTORY_GROWTH_NO_GO_WITH_IDENTICAL_FACTOR_GRAPH_AND_DENSE_CLASSICAL_RECURRENCES
 ```
+
+## M178: projective full-state canonicalization does not close history
+
+The completed claim is:
+
+```text
+BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS
+```
+
+Exact projective full-state codes are collision-free at q=5 depths 1 through
+3. At depth 4, 390,625 public coefficient words produce 388,125 states. The
+625 non-singleton classes each have size 5; their 3,125 histories form a
+rank-5 subspace, and the single collision direction is
+`(0,0,0,1,0,0,0,-1)`. All collisions have raw relative scalar one.
+
+The observed quotient leaves both the word set and state set at 19 dense index
+bits. It also fails transfer: the q=5 direction changes the state on every
+tested q=11 and q=23 sample. The independently rebuilt q=11 depth-1 and
+depth-2 orbits contain 121 and 14,641 distinct states without collisions.
+
+The accepted resident carrier remains `2*q^2` field cells and restores after
+every in-place traversal branch. Missing, wrong, and reordered inverses fail;
+the same restored list backing executes an unrelated alternate-order program
+at generation two and matches a fresh carrier without snapshot use. The exact
+code set is an enumerated diagnostic resource—388,125 large integers at the
+largest case—not a compact phase carrier.
+
+The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+identical classical dense recurrence and compact public factor graph remain.
+No transferable nonlinear closure, distinct phase resource, advantage, Small
+Wall crossing, CATVM custody, physical execution, physical-bit replacement,
+or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_GENERATING_FUNCTION_OPEN_PHASE_RELATION_COMPOSITION_WITH_CRITICAL_LOCUS_SIGNATURE_CLOSURE_OR_DEGREE_GROWTH_NO_GO_AND_IDENTICAL_SYMBOLIC_CLASSICAL_BASELINE
+```
