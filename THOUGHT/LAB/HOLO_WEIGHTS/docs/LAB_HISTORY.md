@@ -238,3 +238,53 @@ near-full-rank; no non-collapse compression exists in the SVD-eigenbasis
 sense. The weights line has measured the complete boundary of weight-space
 representation, exactly as the canon predicted (truncation is collapse;
 the missing channel cannot be synthesized).
+
+## 2026-08-04 — Sol's adversarial verification of the wall hypothesis
+
+VERDICT: PARTIAL.
+
+VERIFIED:
+- The measured channel is not usefully low-rank at k=256-512 (SVD-family
+  failure verified)
+- Changing arithmetic cannot regenerate directions absent from the stored
+  map (narrow claim)
+- Phase operations on an information-starved state do not restore discarded
+  channel directions
+- Independent per-matrix low-rank SVD compression has reached its measured
+  terminus for these projections
+- Sieve==top-k is real for THIS sieve; flat spectrum = terminus for
+  INDEPENDENT per-matrix selection
+
+FAILED / OVERREACH (corrected):
+- "needs ~90% of rank" too precise; actual % depends on each matrix's min
+  dimension and a predeclared fidelity threshold. Correct: "high retained
+  rank required."
+- "no structured modes exist" unproven: participation criterion may be
+  degenerate (ties inherit singular-value ordering). Required checks:
+  (1) rank by participation alone without singular values,
+  (2) random mode-order permutation, (3) Haar-random singular vectors
+  with same spectrum, (4) Spearman(participation, singular value),
+  (5) permutation-invariance of the selected set.
+- KEY NEW DIRECTION: a weight-only criterion could select COUPLED modes
+  across several matrices (Q/K pairing, gate/up multiplication, head
+  structure, residual addition, GDN recurrence = JOINT invariants) even
+  when no individual matrix has privileged modes.
+- "no non-collapse compression exists" overreaches: unmeasured families
+  include full-rank low-bit quantization, structured/block sparsity, shared
+  cross-layer dictionaries, Kronecker/TT/butterfly/low-displacement-rank,
+  head/gate-coupled decompositions, vector/product quantization, nonlinear
+  and wavelet bases, reversible phase multiplexing with accounted carriers.
+  SVD optimality covers low-rank approximation under specific norms; it
+  does not prove representational completeness over these families.
+- Exact-sourced si is a LEGITIMATE EXPERIMENT, not a demonstrated frontier.
+  Qualifies only if: exact substrate borrowed and restored; fold-even
+  cancels; predeclared fold-odd invariant survives source removal; phase
+  channel unresolved until boundary; storage/source bandwidth accounted;
+  IT BEATS DIRECT EXACT-RESIDUAL INJECTION AT EQUAL ORACLE BANDWIDTH;
+  conjugate swap / phase randomization / replay / inverse evolution behave
+  as predicted. If exact info is read every layer and remains necessary at
+  measurement -> oracle-assisted exact computation wearing phase notation.
+  If the source can be uncomputed before the boundary while a compact
+  reversible holonomy preserves coherence -> genuinely new.
+
+DECISIVE FRONTIER CLAIM: UNVERIFIED. DECISIVE SVD-FAMILY FAILURE: VERIFIED.
