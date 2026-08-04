@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_C17_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO`
-**Roadmap version:** `14.36`
+**Status:** `STRICT_SCOPE_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE`
+**Roadmap version:** `14.37`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c3719fecc3b11c3d8194ac5f1eb1b6606898a454`
+**Reconciled source head:** `880ab5d9eab465da2c8ffe87be8432f10ec23790`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_F103_C17_TWO_FIBER_PALEY_PHASE_WEYL_CHIRP_COUPLING_ESCAPES_THE_FIXED12_FUSION_CHART_AND_EXPANDS_THE_INITIAL136_ACTIVE_TWO_PORT_CELLS_TO_AT_LEAST2278_OF2312_WEYL_CELLS_THROUGH_DEPTH16_UNDER_NATIVE_TWISTED_COMPOSITION_AND_PHASE_MODE_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_MATCHED_WEYL_CLASSICAL_RECURRENCE_IS_IDENTICAL`
-**Current claim ceiling:** `F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_CLOSES_NATIVE_NONCOMMUTATIVE_COMPOSITION_AND_SEPARABLE_CHIRP_HADAMARD_INTERSECTION_IN_FIXED16_TWO_PORT_CELLS_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL16_CELL_CLASSICAL_CHART_WITH_CLOSED_GAUSS_COCYCLE_REMAINS`
+**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M170_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M171_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -50,9 +50,11 @@ irrep support reaches full group-algebra capacity. M169 then establishes a
 fixed-12 two-fiber Paley fusion algebra across growing geometry, again with an
 identical classical recurrence. M170 tests the missing phase chirp: it exits
 the fixed-12 fusion chart and produces 2,278 to 2,308 active cells of the 2,312
-cell two-port Weyl capacity. The selected repair now tests whether a growing-
-prime Weil-Gaussian kernel invariant can close composition and intersection
-without moving that near-density elsewhere.
+cell two-port Weyl capacity. M171 closes the declared growing-safe-prime
+quadratic Weil-Gaussian chart in 16 logical field cells, but the field payload
+grows and an identical classical chart has lower warm cocycle work. The
+selected repair now adds the smallest cubic non-Gaussian deformation and
+tests component-rank growth against a matched character-sum recurrence.
 
 Every successor must answer:
 
@@ -78,7 +80,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The current 170-milestone
+`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The current 171-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -7477,6 +7479,57 @@ recurrence. No growing-order chirp closure, general Weyl compiler, compact
 closure below full matrix dimension, CATVM custody, distinct phase resource,
 advantage, Small Wall crossing, physical execution, physical-bit replacement,
 or unbounded computation is established.
+
+## M171: growing-safe-prime Weil-Gaussian chart closes, but remains stabilizer-like
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_CLOSES_NATIVE_NONCOMMUTATIVE_COMPOSITION_AND_SEPARABLE_CHIRP_HADAMARD_INTERSECTION_IN_FIXED16_TWO_PORT_CELLS_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL16_CELL_CLASSICAL_CHART_WITH_CLOSED_GAUSS_COCYCLE_REMAINS
+```
+
+Each unresolved port stores one homogeneous quadratic Weil kernel as an
+`SL(2,q)` chart and one 2-by-2 fiber matrix over `F_(2q+1)`. Projective
+composition streams an exact q-term Gauss cocycle. Hadamard intersection with
+a public separable row/column chirp is an exact left/right unipotent chart
+update. Cross-port fiber composition is noncommutative.
+
+Eleven cases cover safe-prime q values 5 through 113, primary depths through
+1024, and one alternate depth-128 schedule. All retain sixteen logical
+two-port field elements, expose only the declared final scalar boundary,
+restore the exact canonical carrier on the same backing, and pass generation-
+two cross-schedule reuse without a snapshot. This is not fixed material width:
+the disclosed resident payload rises from 56 to 120 bits as q grows.
+
+The separate oracle reconstructs all eleven trajectories, performs 21,648
+streamed-versus-closed cocycle comparisons, and exhaustively checks every one
+of the 14,400 ordered `SL(2,5)` pairs against ordinary dense kernel
+multiplication. Missing, wrong, and reordered inverses fail; module order
+changes the boundary; premature projection and invalid field/family inputs are
+rejected.
+
+M171 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE
+```
+
+The strongest compact classical baseline is the identical sixteen-element
+chart with a closed Gauss cocycle after one public scalar cache. It has lower
+warm composition work than the streamed phase path. The result does not cover
+arbitrary Gaussian Hadamard products, additive Gaussian superpositions, or
+non-Gaussian phase laws, and establishes no CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
+```
 
 ## 10. Roadmap Maintenance
 

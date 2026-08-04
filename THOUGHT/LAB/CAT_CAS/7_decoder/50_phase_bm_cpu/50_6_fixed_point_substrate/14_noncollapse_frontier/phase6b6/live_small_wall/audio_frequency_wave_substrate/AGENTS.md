@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The registry assigns one
+`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 170-milestone lane is active by user direction. Continue from the
+The current 171-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -265,7 +265,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M170_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO
+ACTIVE_AFTER_M171_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE
 ```
 
 The named
@@ -274,16 +274,16 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE
+EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
 ```
 
-The fixed twelve-coordinate fusion law is established at its declared family
-ceiling, and M170 shows that the tested C17 Fourier-chirp coupling escapes it
-but becomes near-dense at 2,278 to 2,308 of 2,312 two-port Weyl cells. Test the
-smallest growing-prime Weil-Gaussian phase-kernel invariant that can preserve
-native composition and intersection without moving component, coefficient,
-or precision growth elsewhere. Preserve final-only projection, exact
-restoration/reuse, and the strongest compact classical recurrence.
+M171 closes the declared growing-safe-prime quadratic Weil-Gaussian family in
+sixteen logical two-port field cells through depth 1024, but the payload width
+still grows with q and the identical classical chart evaluates the same
+cocycle with lower warm work. Test the smallest cubic-deformed Weil kernel
+that can distinguish genuine non-Gaussian closure from growth in Gaussian
+components, field width, or retained history. Preserve final-only projection,
+exact restoration/reuse, and the strongest compact character-sum recurrence.
 
 ## 7. Native No-Smuggle Law
 

@@ -1,0 +1,17 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_CLOSURE_PROVENANCE_V1",
+  "scientific_source_head": "880ab5d9eab465da2c8ffe87be8432f10ec23790",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "files": {
+    "growing_prime_two_fiber_weil_gaussian_phase_kernel_closure.py": "8b7b10511ad665dc87c81104e95a2844f09ab70385c6abaa221f6b2c30fdf5f9",
+    "GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_CLOSURE_RESULTS.json": "44f279664e2fa51d0d016921dcf7e472ff6a55b567b2fb8586a8057ee529736e",
+    "growing_prime_two_fiber_weil_gaussian_phase_kernel_closure_independent_oracle.py": "172841640450d30b450f5d77e67cb7459d86dc9db68f895eb5bfbb1ca09d82d3",
+    "GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_CLOSURE_INDEPENDENT_ORACLE.json": "85e5c666ff4191541fe78861cb491fe6504802db10f7ab8757caebd2ea61a7e9",
+    "GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_CLOSURE_INDEPENDENT_REEXECUTION_REVIEW.md": "4fea829da06195e94e665a26ec45014732ba011a21e45ab9e13f7551454d6425",
+    "qualify_growing_prime_two_fiber_weil_gaussian_phase_kernel_closure.sh": "cce8adac737b7bffb1e50072182670b331efb09d275b468635c8cc115077cd8b"
+  },
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE"
+}

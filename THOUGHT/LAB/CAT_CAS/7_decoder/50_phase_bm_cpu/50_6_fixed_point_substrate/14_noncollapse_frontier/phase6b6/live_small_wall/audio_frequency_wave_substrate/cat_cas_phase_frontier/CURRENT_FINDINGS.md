@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The canonical per-milestone
+`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9646,4 +9646,39 @@ Next:
 
 ```text
 EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+## M171: growing-safe-prime Weil-Gaussian chart closure
+
+The exact two-port carrier stores one homogeneous quadratic Weil kernel and
+one 2-by-2 fiber matrix per port. Projective relation composition uses an exact
+streamed Gauss cocycle, while public separable chirp intersection is an exact
+unipotent update of the symplectic chart. The two fiber matrices cross-compose
+noncommutatively.
+
+All eleven declared safe-prime cases retain 16 logical field elements through
+depth 1024, restore exactly on the same backing, and support cross-schedule
+generation-two reuse without snapshot reload. The logical payload is not
+fixed-width: it rises from 56 to 120 bits over the tested q range.
+
+An independent implementation reproduces every boundary, semantic
+commitment, checkpoint, inverse, and reuse record; compares 21,648 streamed
+and closed trajectory cocycles; and exhaustively matches all 14,400 ordered
+`SL(2,5)` chart products against dense kernel multiplication. The result is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical recurrence is the identical 16-element chart
+with a closed Gauss cocycle and lower warm composition work. The closure is
+therefore a bounded stabilizer-like calibration, not evidence of a distinct
+phase resource or advantage. It is limited to:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE
+```
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
 ```
