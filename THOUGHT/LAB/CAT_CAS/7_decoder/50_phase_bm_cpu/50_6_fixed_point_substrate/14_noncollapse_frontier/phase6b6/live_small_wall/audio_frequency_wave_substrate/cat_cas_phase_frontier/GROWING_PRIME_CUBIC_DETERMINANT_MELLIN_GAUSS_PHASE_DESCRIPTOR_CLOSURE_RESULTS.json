@@ -1,0 +1,371 @@
+{
+  "claim": "BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED",
+  "claim_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_rank_or_fixed_width_closure": false,
+    "general_middle_extension_engine": false,
+    "general_relational_geometry": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_computation": false
+  },
+  "claim_ceiling": "PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "missing_inverse_leaves_dual_basis": true,
+    "null_carrier_rejected": true,
+    "q7_scalar_stratum_completion_failure_is_not_rewritten": true,
+    "reordered_inverse_applicable": false,
+    "reordered_inverse_reason": "PRIMARY_TRANSACTION_HAS_ONE_FOURIER_BASIS_CHANGE_AND_CHARACTER_NEGATION_IS_INVOLUTIVE",
+    "snapshot_used": false,
+    "wrong_inverse_permutation_fails_all_cases": true
+  },
+  "descriptor": {
+    "determinant_gamma_formula": "G(j)^2*G(j+quadratic)*G(quadratic)^3",
+    "fourier_basis": "FORMULA_DEFINED_FULL_BOUNDARY_IMAGES_OF_SOURCE_CHARACTER_MODES",
+    "middle_extension_sheaf_claimed": false,
+    "reason": "THE_EXECUTED_OBJECT_IS_AN_EXACT_TRACE_FUNCTION_DESCRIPTOR_NOT_AN_IMPLEMENTATION_OF_ELL_ADIC_SHEAF_OPERATIONS",
+    "singular_conductor_character_count": 2,
+    "source_basis": "MULTIPLICATIVE_CHARACTERS_OF_DETERMINANT_AND_SCALE_ON_THE_OPEN_LOCUS",
+    "source_phase_expansion": "PSI(Z)=ONE_OVER_QMINUS1_SUM_K_GAUSS_MINUSK_CHI_K(Z)"
+  },
+  "determinant_gamma_law": [
+    {
+      "all_pass": true,
+      "auxiliary_prime": 41,
+      "characters_checked": 4,
+      "exact_field_equalities_checked": 62500,
+      "expected_exceptional_exponents": [
+        0,
+        2
+      ],
+      "gamma_factor_formula": "G(j)^2*G(j+quadratic)*G(quadratic)^3",
+      "points_per_character": 15625,
+      "q": 5,
+      "singular_support_character_exponents": [
+        0,
+        2
+      ]
+    },
+    {
+      "all_pass": true,
+      "auxiliary_prime": 43,
+      "characters_checked": 6,
+      "exact_field_equalities_checked": 705894,
+      "expected_exceptional_exponents": [
+        0,
+        3
+      ],
+      "gamma_factor_formula": "G(j)^2*G(j+quadratic)*G(quadratic)^3",
+      "points_per_character": 117649,
+      "q": 7,
+      "singular_support_character_exponents": [
+        0,
+        3
+      ]
+    },
+    {
+      "all_pass": true,
+      "auxiliary_prime": 331,
+      "characters_checked": 10,
+      "exact_field_equalities_checked": 17715610,
+      "expected_exceptional_exponents": [
+        0,
+        5
+      ],
+      "gamma_factor_formula": "G(j)^2*G(j+quadratic)*G(quadratic)^3",
+      "points_per_character": 1771561,
+      "q": 11,
+      "singular_support_character_exponents": [
+        0,
+        5
+      ]
+    }
+  ],
+  "execution": "DIRECT_PROCESS_EXACT_FINITE_FIELD_RESIDUE_PHASE_DESCRIPTOR_SOFTWARE",
+  "full_descriptor_cases": [
+    {
+      "accepted_peak_materialized_field_cells": 17,
+      "auxiliary_prime": 41,
+      "descriptor_image_commitment": "ffe3b103d10c9cbb248c46c08ccf294eaabd63466dae9dd79a4099e8e55c4efb",
+      "determinant_gamma_compiler_table_cells": 4,
+      "discrete_log_compiler_table_cells": 5,
+      "exceptional_channel_count": 2,
+      "exceptional_channel_indices": [
+        0,
+        2
+      ],
+      "exceptional_law": "ONLY_DETERMINANT_CHARACTERS_0_AND_QUADRATIC_OR_SCALE_CHARACTER_0_HAVE_SINGULAR_BOUNDARY_TERMS",
+      "fourier_image_commitment": "ffe3b103d10c9cbb248c46c08ccf294eaabd63466dae9dd79a4099e8e55c4efb",
+      "full_boundary_exact": true,
+      "full_boundary_points_checked": 78125,
+      "gauss_compiler_table_cells": 4,
+      "program": {
+        "determinant_character": 0,
+        "scale_character": 0,
+        "total_character": 0
+      },
+      "q": 5,
+      "resident_character_coefficient_cells": 4,
+      "restoration_and_reuse": {
+        "dual_total_character": 0,
+        "missing_inverse_leaves_dual_basis": true,
+        "primary_exactly_restored": true,
+        "primary_forward_commitment": "392ca8add3f41ded7d97e76da3ed367f69d275ef8bb7e72688adbb8473b14108",
+        "primary_operation": "EXACT_CHARACTER_NEGATION_BASIS_CHANGE_TO_FORMULA_DEFINED_FOURIER_IMAGE",
+        "projected_final_boundary_scalar": 28,
+        "projected_public_boundary_point": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          1
+        ],
+        "projected_result_survives_inverse": true,
+        "restoration_generation_after_primary": 1,
+        "restoration_generation_after_reuse": 2,
+        "retained_inverse_history_cells": 0,
+        "same_backing_restored": true,
+        "same_backing_reused": true,
+        "second_boundary_commitment": "b4279de3075e573aecad0875c0a1129bb856ea4a312420bd018cc64da26a177c",
+        "second_exactly_restored": true,
+        "second_matches_fresh": true,
+        "second_program": "UNRELATED_QUADRATIC_CHARACTER_INDEX_PHASE_SHEAR",
+        "second_program_consumed_actual_restored_backing": true,
+        "snapshot_used": false,
+        "verification_baseline_cells": 8,
+        "wrong_inverse_permutation_fails": true
+      },
+      "source_commitment": "87151e40bb2bbd458625f1dcea757f65313f22ad213f340c91a67a754af9f8b8",
+      "source_scalar_orbit_equalities_checked": 16,
+      "verification_dense_cells_excluded_from_accepted_path": true,
+      "verification_only_dense_cells": 234375
+    },
+    {
+      "accepted_peak_materialized_field_cells": 17,
+      "auxiliary_prime": 41,
+      "descriptor_image_commitment": "8cc12740849c8fde34194b40c43c680414776605e7609e874810862cafed9ebb",
+      "determinant_gamma_compiler_table_cells": 4,
+      "discrete_log_compiler_table_cells": 5,
+      "exceptional_channel_count": 2,
+      "exceptional_channel_indices": [
+        1,
+        3
+      ],
+      "exceptional_law": "ONLY_DETERMINANT_CHARACTERS_0_AND_QUADRATIC_OR_SCALE_CHARACTER_0_HAVE_SINGULAR_BOUNDARY_TERMS",
+      "fourier_image_commitment": "8cc12740849c8fde34194b40c43c680414776605e7609e874810862cafed9ebb",
+      "full_boundary_exact": true,
+      "full_boundary_points_checked": 78125,
+      "gauss_compiler_table_cells": 4,
+      "program": {
+        "determinant_character": 1,
+        "scale_character": 3,
+        "total_character": 0
+      },
+      "q": 5,
+      "resident_character_coefficient_cells": 4,
+      "restoration_and_reuse": {
+        "dual_total_character": 0,
+        "missing_inverse_leaves_dual_basis": true,
+        "primary_exactly_restored": true,
+        "primary_forward_commitment": "e0cd226026f9ca03612b418cc45b30e3307a6f5a2c235a40a8761024ae4f02b6",
+        "primary_operation": "EXACT_CHARACTER_NEGATION_BASIS_CHANGE_TO_FORMULA_DEFINED_FOURIER_IMAGE",
+        "projected_final_boundary_scalar": 5,
+        "projected_public_boundary_point": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          1
+        ],
+        "projected_result_survives_inverse": true,
+        "restoration_generation_after_primary": 1,
+        "restoration_generation_after_reuse": 2,
+        "retained_inverse_history_cells": 0,
+        "same_backing_restored": true,
+        "same_backing_reused": true,
+        "second_boundary_commitment": "635f5fb25d15edf108b00f744c34be45dd55968671f17c3816b24296d5e3811e",
+        "second_exactly_restored": true,
+        "second_matches_fresh": true,
+        "second_program": "UNRELATED_QUADRATIC_CHARACTER_INDEX_PHASE_SHEAR",
+        "second_program_consumed_actual_restored_backing": true,
+        "snapshot_used": false,
+        "verification_baseline_cells": 8,
+        "wrong_inverse_permutation_fails": true
+      },
+      "source_commitment": "e61c512276afcef6d14172afb6e7af08bc0ff4e27f28a47f4b0f30667212853c",
+      "source_scalar_orbit_equalities_checked": 16,
+      "verification_dense_cells_excluded_from_accepted_path": true,
+      "verification_only_dense_cells": 234375
+    },
+    {
+      "accepted_peak_materialized_field_cells": 25,
+      "auxiliary_prime": 43,
+      "descriptor_image_commitment": "fa033869b924af878937e35ae9c685b668f7f2eef717652894af94e4c60dd86d",
+      "determinant_gamma_compiler_table_cells": 6,
+      "discrete_log_compiler_table_cells": 7,
+      "exceptional_channel_count": 2,
+      "exceptional_channel_indices": [
+        2,
+        5
+      ],
+      "exceptional_law": "ONLY_DETERMINANT_CHARACTERS_0_AND_QUADRATIC_OR_SCALE_CHARACTER_0_HAVE_SINGULAR_BOUNDARY_TERMS",
+      "fourier_image_commitment": "fa033869b924af878937e35ae9c685b668f7f2eef717652894af94e4c60dd86d",
+      "full_boundary_exact": true,
+      "full_boundary_points_checked": 823543,
+      "gauss_compiler_table_cells": 6,
+      "program": {
+        "determinant_character": 1,
+        "scale_character": 2,
+        "total_character": 3
+      },
+      "q": 7,
+      "resident_character_coefficient_cells": 6,
+      "restoration_and_reuse": {
+        "dual_total_character": 3,
+        "missing_inverse_leaves_dual_basis": true,
+        "primary_exactly_restored": true,
+        "primary_forward_commitment": "298efb3c3ec31364b827849d5693d59ee9d990ff91f9ea907c80516cc0d1de8e",
+        "primary_operation": "EXACT_CHARACTER_NEGATION_BASIS_CHANGE_TO_FORMULA_DEFINED_FOURIER_IMAGE",
+        "projected_final_boundary_scalar": 9,
+        "projected_public_boundary_point": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          1
+        ],
+        "projected_result_survives_inverse": true,
+        "restoration_generation_after_primary": 1,
+        "restoration_generation_after_reuse": 2,
+        "retained_inverse_history_cells": 0,
+        "same_backing_restored": true,
+        "same_backing_reused": true,
+        "second_boundary_commitment": "a821445602904ecaf234b559f08205e021a2627e0725d6c82730ec688ac5c77e",
+        "second_exactly_restored": true,
+        "second_matches_fresh": true,
+        "second_program": "UNRELATED_QUADRATIC_CHARACTER_INDEX_PHASE_SHEAR",
+        "second_program_consumed_actual_restored_backing": true,
+        "snapshot_used": false,
+        "verification_baseline_cells": 12,
+        "wrong_inverse_permutation_fails": true
+      },
+      "source_commitment": "c75781c8842a50b13d8b2af8e995da7aff3da1c1bd675eee5676f299cdb441b7",
+      "source_scalar_orbit_equalities_checked": 36,
+      "verification_dense_cells_excluded_from_accepted_path": true,
+      "verification_only_dense_cells": 2470629
+    },
+    {
+      "accepted_peak_materialized_field_cells": 25,
+      "auxiliary_prime": 43,
+      "descriptor_image_commitment": "4006d1512d4297525b92927e1c8b6ad1c3c92411cb8888ebe8d36ad96be4155b",
+      "determinant_gamma_compiler_table_cells": 6,
+      "discrete_log_compiler_table_cells": 7,
+      "exceptional_channel_count": 3,
+      "exceptional_channel_indices": [
+        0,
+        3,
+        4
+      ],
+      "exceptional_law": "ONLY_DETERMINANT_CHARACTERS_0_AND_QUADRATIC_OR_SCALE_CHARACTER_0_HAVE_SINGULAR_BOUNDARY_TERMS",
+      "fourier_image_commitment": "4006d1512d4297525b92927e1c8b6ad1c3c92411cb8888ebe8d36ad96be4155b",
+      "full_boundary_exact": true,
+      "full_boundary_points_checked": 823543,
+      "gauss_compiler_table_cells": 6,
+      "program": {
+        "determinant_character": 3,
+        "scale_character": 4,
+        "total_character": 1
+      },
+      "q": 7,
+      "resident_character_coefficient_cells": 6,
+      "restoration_and_reuse": {
+        "dual_total_character": 5,
+        "missing_inverse_leaves_dual_basis": true,
+        "primary_exactly_restored": true,
+        "primary_forward_commitment": "68c42b7981188312bb428117bc2a36e088bf009646093c36a53f731647334140",
+        "primary_operation": "EXACT_CHARACTER_NEGATION_BASIS_CHANGE_TO_FORMULA_DEFINED_FOURIER_IMAGE",
+        "projected_final_boundary_scalar": 9,
+        "projected_public_boundary_point": [
+          [
+            1,
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          1
+        ],
+        "projected_result_survives_inverse": true,
+        "restoration_generation_after_primary": 1,
+        "restoration_generation_after_reuse": 2,
+        "retained_inverse_history_cells": 0,
+        "same_backing_restored": true,
+        "same_backing_reused": true,
+        "second_boundary_commitment": "df51129cfdad314fbf46b6c7d99f60ed8abca2e4bbc60d6d0ca47d8283d9890f",
+        "second_exactly_restored": true,
+        "second_matches_fresh": true,
+        "second_program": "UNRELATED_QUADRATIC_CHARACTER_INDEX_PHASE_SHEAR",
+        "second_program_consumed_actual_restored_backing": true,
+        "snapshot_used": false,
+        "verification_baseline_cells": 12,
+        "wrong_inverse_permutation_fails": true
+      },
+      "source_commitment": "1fa51c369988cceaa1e0eb1fea2f19a4bf0784d077e77c52d1f46fda55ffda4c",
+      "source_scalar_orbit_equalities_checked": 36,
+      "verification_dense_cells_excluded_from_accepted_path": true,
+      "verification_only_dense_cells": 2470629
+    }
+  ],
+  "matched_baseline": {
+    "cold_start_only_comparison": false,
+    "computational_advantage_established": false,
+    "dense_expansion_only_baseline": false,
+    "identical_boundary_evaluation_work": true,
+    "identical_mellin_gauss_character_sum_recurrence": true,
+    "identical_resident_and_compiler_tables": true
+  },
+  "next_obstruction": "THE_TRANSFERABLE_GAUSS_FORMULA_REMOVES_Q7_DENSE_STATE_AND_ARBITRARY_STRATUM_FITTING_BUT_EXACT_ADDITIVE_PHASE_REQUIRES_QMINUS1_MELLIN_CHANNELS_AND_THETA_Q2_COMPILATION_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE_SO_THE_NEXT_TEST_MUST_CLOSE_THE_GAUSS_COEFFICIENT_FAMILY_PROCEDURALLY_AT_FIXED_STATE_OR_ESTABLISH_ITS_EXACT_RECURRENCE_RANK_GROWTH",
+  "observed_resource_law": {
+    "accepted_peak_field_cells_including_compiler_tables": "4*q-3",
+    "boundary_evaluation_character_terms": "q-1",
+    "compiler_work_growth": "THETA(q^2)",
+    "dense_predecessor_state_cells": "q^7",
+    "dense_q7_materialization_required_by_accepted_path": false,
+    "gauss_table_compiler_multiply_adds": "(q-1)^2",
+    "resident_descriptor_cells": "q-1",
+    "resident_width_growth": "THETA(q)",
+    "resident_width_is_fixed": false,
+    "singular_conductor_character_count": 2
+  },
+  "resource_accounting": {
+    "boundary_evaluation_counted": true,
+    "carrier_creation_counted": true,
+    "compiler_work_counted": true,
+    "dense_verification_arrays_separated_from_accepted_path": true,
+    "gauss_gamma_and_discrete_log_compiler_tables_counted": true,
+    "inverse_and_restoration_verification_counted": true,
+    "python_object_allocator_and_numpy_native_workspace_excluded": true,
+    "resident_coefficients_counted": true,
+    "reuse_counted": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

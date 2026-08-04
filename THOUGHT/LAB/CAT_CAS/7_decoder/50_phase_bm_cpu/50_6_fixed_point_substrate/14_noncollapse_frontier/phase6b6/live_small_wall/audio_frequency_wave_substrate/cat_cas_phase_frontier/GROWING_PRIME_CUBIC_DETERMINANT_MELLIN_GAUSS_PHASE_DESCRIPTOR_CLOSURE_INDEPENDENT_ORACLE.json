@@ -1,0 +1,212 @@
+{
+  "claim": "BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED",
+  "claim_ceiling": "PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "full_boundary_reexecutions": [
+    {
+      "accepted_peak_cells": 17,
+      "auxiliary_prime": 41,
+      "exact_descriptor_restoration": true,
+      "forward_commitment": "392ca8add3f41ded7d97e76da3ed367f69d275ef8bb7e72688adbb8473b14108",
+      "full_boundary_exact": true,
+      "full_boundary_points": 78125,
+      "independent_transform_algorithm": "AXIS_KERNEL_MATRIX_MULTIPLY_AND_RESHAPE",
+      "missing_one_mellin_channel_fails": true,
+      "program": [
+        0,
+        0
+      ],
+      "q": 5,
+      "resident_coefficients": 4,
+      "restoration_generation_after_primary": 1,
+      "restoration_generation_after_reuse": 2,
+      "same_backing_restored": true,
+      "same_backing_reused": true,
+      "second_program_exactly_restored": true,
+      "snapshot_used": false,
+      "unrelated_second_program_matches_fresh": true,
+      "wrong_one_gamma_factor_fails": true
+    },
+    {
+      "accepted_peak_cells": 17,
+      "auxiliary_prime": 41,
+      "exact_descriptor_restoration": true,
+      "forward_commitment": "e0cd226026f9ca03612b418cc45b30e3307a6f5a2c235a40a8761024ae4f02b6",
+      "full_boundary_exact": true,
+      "full_boundary_points": 78125,
+      "independent_transform_algorithm": "AXIS_KERNEL_MATRIX_MULTIPLY_AND_RESHAPE",
+      "missing_one_mellin_channel_fails": true,
+      "program": [
+        1,
+        3
+      ],
+      "q": 5,
+      "resident_coefficients": 4,
+      "restoration_generation_after_primary": 1,
+      "restoration_generation_after_reuse": 2,
+      "same_backing_restored": true,
+      "same_backing_reused": true,
+      "second_program_exactly_restored": true,
+      "snapshot_used": false,
+      "unrelated_second_program_matches_fresh": true,
+      "wrong_one_gamma_factor_fails": true
+    },
+    {
+      "accepted_peak_cells": 25,
+      "auxiliary_prime": 43,
+      "exact_descriptor_restoration": true,
+      "forward_commitment": "298efb3c3ec31364b827849d5693d59ee9d990ff91f9ea907c80516cc0d1de8e",
+      "full_boundary_exact": true,
+      "full_boundary_points": 823543,
+      "independent_transform_algorithm": "AXIS_KERNEL_MATRIX_MULTIPLY_AND_RESHAPE",
+      "missing_one_mellin_channel_fails": true,
+      "program": [
+        1,
+        2
+      ],
+      "q": 7,
+      "resident_coefficients": 6,
+      "restoration_generation_after_primary": 1,
+      "restoration_generation_after_reuse": 2,
+      "same_backing_restored": true,
+      "same_backing_reused": true,
+      "second_program_exactly_restored": true,
+      "snapshot_used": false,
+      "unrelated_second_program_matches_fresh": true,
+      "wrong_one_gamma_factor_fails": true
+    },
+    {
+      "accepted_peak_cells": 25,
+      "auxiliary_prime": 43,
+      "exact_descriptor_restoration": true,
+      "forward_commitment": "68c42b7981188312bb428117bc2a36e088bf009646093c36a53f731647334140",
+      "full_boundary_exact": true,
+      "full_boundary_points": 823543,
+      "independent_transform_algorithm": "AXIS_KERNEL_MATRIX_MULTIPLY_AND_RESHAPE",
+      "missing_one_mellin_channel_fails": true,
+      "program": [
+        3,
+        4
+      ],
+      "q": 7,
+      "resident_coefficients": 6,
+      "restoration_generation_after_primary": 1,
+      "restoration_generation_after_reuse": 2,
+      "same_backing_restored": true,
+      "same_backing_reused": true,
+      "second_program_exactly_restored": true,
+      "snapshot_used": false,
+      "unrelated_second_program_matches_fresh": true,
+      "wrong_one_gamma_factor_fails": true
+    }
+  ],
+  "mutations": {
+    "missing_one_mellin_channel_fails_all_cases": true,
+    "q7_scalar_stratum_failure_preserved": true,
+    "wrong_one_gamma_factor_fails_all_cases": true
+  },
+  "observed_resource_law": {
+    "accepted_peak": "4*q-3",
+    "compiler_work": "THETA(q^2)",
+    "identical_classical_recurrence_preserved": true,
+    "matches_production": true,
+    "resident_width": "q-1",
+    "tuples_q_resident_peak": [
+      [
+        5,
+        4,
+        17
+      ],
+      [
+        5,
+        4,
+        17
+      ],
+      [
+        7,
+        6,
+        25
+      ],
+      [
+        7,
+        6,
+        25
+      ]
+    ]
+  },
+  "preserved_rejections": {
+    "catvm_custody": true,
+    "computational_advantage": true,
+    "distinct_phase_resource": true,
+    "fixed_width": true,
+    "general_middle_extension_engine": true,
+    "physical_execution": true,
+    "small_wall_crossing": true,
+    "unbounded_computation": true
+  },
+  "production_source": {
+    "oracle_imports": [
+      "__future__",
+      "argparse",
+      "ast",
+      "dataclasses",
+      "hashlib",
+      "itertools",
+      "json",
+      "numpy",
+      "pathlib",
+      "typing"
+    ],
+    "oracle_imports_production": false,
+    "sha256": "6a5665a3a1675756a6482716634b2cada0550308e17504b31fffc845520f7439"
+  },
+  "representative_character_sum_attacks": [
+    {
+      "all_pass": true,
+      "auxiliary_prime": 41,
+      "character_exponents": 4,
+      "congruence_equivariance_covers_all_symmetric_boundary_matrices": true,
+      "direct_formula_equalities": 36,
+      "histogram_algorithm": "ONE_PASS_DETERMINANT_AND_THREE_DIAGONAL_COORDINATE_COUNT",
+      "histogram_cells": 625,
+      "omitting_either_exceptional_term_changes_a_direct_sum": true,
+      "orbit_representatives_per_character": 9,
+      "q": 5,
+      "quadratic_character_rank_one_term_nonzero": true,
+      "source_matrices_accumulated": 15625,
+      "trivial_character_singular_term_nonzero": true
+    },
+    {
+      "all_pass": true,
+      "auxiliary_prime": 43,
+      "character_exponents": 6,
+      "congruence_equivariance_covers_all_symmetric_boundary_matrices": true,
+      "direct_formula_equalities": 66,
+      "histogram_algorithm": "ONE_PASS_DETERMINANT_AND_THREE_DIAGONAL_COORDINATE_COUNT",
+      "histogram_cells": 2401,
+      "omitting_either_exceptional_term_changes_a_direct_sum": true,
+      "orbit_representatives_per_character": 11,
+      "q": 7,
+      "quadratic_character_rank_one_term_nonzero": true,
+      "source_matrices_accumulated": 117649,
+      "trivial_character_singular_term_nonzero": true
+    },
+    {
+      "all_pass": true,
+      "auxiliary_prime": 331,
+      "character_exponents": 10,
+      "congruence_equivariance_covers_all_symmetric_boundary_matrices": true,
+      "direct_formula_equalities": 150,
+      "histogram_algorithm": "ONE_PASS_DETERMINANT_AND_THREE_DIAGONAL_COORDINATE_COUNT",
+      "histogram_cells": 14641,
+      "omitting_either_exceptional_term_changes_a_direct_sum": true,
+      "orbit_representatives_per_character": 15,
+      "q": 11,
+      "quadratic_character_rank_one_term_nonzero": true,
+      "source_matrices_accumulated": 1771561,
+      "trivial_character_singular_term_nonzero": true
+    }
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
