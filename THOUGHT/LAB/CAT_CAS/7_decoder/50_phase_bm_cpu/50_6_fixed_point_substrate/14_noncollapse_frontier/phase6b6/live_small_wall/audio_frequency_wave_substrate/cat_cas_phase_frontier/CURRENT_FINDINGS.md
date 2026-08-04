@@ -9893,3 +9893,52 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_AIRY_DATA_PHASE_MESSAGE_FOURIER_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_DEPTH_WORK_OR_COMPONENT_RANK_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
+
+## M177: cubic Airy public-orbit span reaches the linear ceiling
+
+The completed claim is:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_AIRY_PUBLIC_TWO_SHEAR_ORBIT_HAS_FULL_Q2_LINEAR_SPAN_ON_EVERY_DECLARED_PRIMARY_ORDER_AND_AT_LEAST_Q2MINUSQPLUS1_ALTERNATE_SPAN_ON_EVERY_DECLARED_QGE11_ORDER_WITH_BLOCK_FOURIER_CERTIFICATES_EXACT_GRAPH_RESTORATION_AND_REUSE_SO_LINEAR_MESSAGE_QUOTIENTS_BELOW_THE_OBSERVED_SPAN_ARE_REJECTED_AT_THE_TESTED_SOURCE_CHARTS_BUT_NONLINEAR_CLOSURE_REMAINS_OPEN_AND_IDENTICAL_CLASSICAL_FACTOR_GRAPH_AND_Q2_DENSE_RECURRENCES_REMAIN
+```
+
+The primary depth-one public family varies both controlled-cubic coefficients.
+Exact Fourier decomposition over the second coefficient splits the public
+orbit into the level blocks of `s*x^3`. Every primary zero and nonzero block
+has rank q, giving full q-squared orbit span at q=5, 11, 23, 29, 41, 53, 83,
+89, and 113. The alternate q-at-least-11 orbit has one rank-q zero block and
+q-minus-one rank-(q-minus-one) blocks, hence exact span `q^2-q+1`.
+
+The no-import oracle reconstructs every level rank, certifies the alternate
+Airy table as an exact quadratic phase chart, materializes direct full public
+orbits at q=5 and q=11, and reproduces 51 sampled dense boundaries and state
+digests. The growing certificate never materializes a q-squared by q-squared
+orbit matrix, but it does honestly count `2*q^2` temporary primary Airy cells
+and up to `(4*q-2)*q` rank-block cells.
+
+Both distinct data fibers are required for the primary full rank; a single
+fiber and a duplicated second fiber fall below q-squared. Removing the second
+public shear leaves at most q states. Exact inverse descriptors restore the
+factor/graph payload and same node-list backing, and an alternate second
+program consumes it at generation two without snapshot reload.
+
+The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION` for
+the discrete factor and graph carrier. Its ceiling is:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_ALL_ORDERS_ALTERNATE_Q11_23_29_41_53_83_89_113_DEPTH1_PUBLIC_TWO_CONTROLLED_CUBIC_COEFFICIENT_ORBITS_TWO_DECLARED_FIBER_FIXTURES_DIRECT_PROCESS_SOFTWARE
+```
+
+The full span rejects only smaller regular exact linear quotients at the
+declared source orbits. It does not reject nonlinear, singular, procedural, or
+program-specific representations. The identical compact classical factor
+graph and identical q-squared dense recurrence remain, so no phase resource,
+advantage, Small Wall crossing, CATVM custody, physical execution,
+physical-bit replacement, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_NONLINEAR_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_CANONICALIZATION_ACROSS_GROWING_DEPTH_OR_HISTORY_GROWTH_NO_GO_WITH_IDENTICAL_FACTOR_GRAPH_AND_DENSE_CLASSICAL_RECURRENCES
+```
