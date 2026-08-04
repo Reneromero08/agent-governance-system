@@ -1,0 +1,451 @@
+{
+  "case_certificates": [
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "depth": 1,
+      "distinct_projective_full_states": 25,
+      "exact_branch_restoration_comparisons": 25,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 0,
+      "minimum_exact_projective_state_identifier_bits": 5,
+      "minimum_exact_public_history_identifier_bits": 5,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "projective_collision_class_size_histogram": {
+        "1": 25
+      },
+      "projective_collisions": 0,
+      "public_program_histories": 25,
+      "q": 5
+    },
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "depth": 2,
+      "distinct_projective_full_states": 625,
+      "exact_branch_restoration_comparisons": 650,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 0,
+      "minimum_exact_projective_state_identifier_bits": 10,
+      "minimum_exact_public_history_identifier_bits": 10,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "projective_collision_class_size_histogram": {
+        "1": 625
+      },
+      "projective_collisions": 0,
+      "public_program_histories": 625,
+      "q": 5
+    },
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "depth": 3,
+      "distinct_projective_full_states": 15625,
+      "exact_branch_restoration_comparisons": 16275,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 0,
+      "minimum_exact_projective_state_identifier_bits": 14,
+      "minimum_exact_public_history_identifier_bits": 14,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "projective_collision_class_size_histogram": {
+        "1": 15625
+      },
+      "projective_collisions": 0,
+      "public_program_histories": 15625,
+      "q": 5
+    },
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": true,
+        "colliding_history_span_rank": 5,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_vectors": 3125,
+        "collision_events_total": 2500,
+        "normalized_collision_difference_line_generators": [
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4
+          ]
+        ],
+        "single_collision_difference_line": true
+      },
+      "depth": 4,
+      "distinct_projective_full_states": 388125,
+      "exact_branch_restoration_comparisons": 406900,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 3125,
+      "minimum_exact_projective_state_identifier_bits": 19,
+      "minimum_exact_public_history_identifier_bits": 19,
+      "non_singleton_projective_classes": 625,
+      "p": 11,
+      "projective_collision_class_size_histogram": {
+        "1": 387500,
+        "5": 625
+      },
+      "projective_collisions": 2500,
+      "public_program_histories": 390625,
+      "q": 5
+    },
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "depth": 1,
+      "distinct_projective_full_states": 121,
+      "exact_branch_restoration_comparisons": 121,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 0,
+      "minimum_exact_projective_state_identifier_bits": 7,
+      "minimum_exact_public_history_identifier_bits": 7,
+      "non_singleton_projective_classes": 0,
+      "p": 23,
+      "projective_collision_class_size_histogram": {
+        "1": 121
+      },
+      "projective_collisions": 0,
+      "public_program_histories": 121,
+      "q": 11
+    },
+    {
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "depth": 2,
+      "distinct_projective_full_states": 14641,
+      "exact_branch_restoration_comparisons": 14762,
+      "exact_root_restored": true,
+      "histories_in_non_singleton_projective_classes": 0,
+      "minimum_exact_projective_state_identifier_bits": 14,
+      "minimum_exact_public_history_identifier_bits": 14,
+      "non_singleton_projective_classes": 0,
+      "p": 23,
+      "projective_collision_class_size_histogram": {
+        "1": 14641
+      },
+      "projective_collisions": 0,
+      "public_program_histories": 14641,
+      "q": 11
+    }
+  ],
+  "claim_ceiling": "PRIMARY_TWO_SHEAR_PUBLIC_COEFFICIENT_WORDS_Q5_DEPTHS1_THROUGH4_Q11_DEPTHS1_AND2_FIXED_DECLARED_GAUSSIAN_LAYER_SEQUENCE_TWO_FIBER_DENSE_FULL_STATE_PROJECTIVE_CANONICALIZATION_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_six_case_summaries_match_production": true,
+    "missing_inverse_fails": true,
+    "production_controls_all_pass": true,
+    "q5_collision_direction_fails_q11_transfer": true,
+    "q5_collision_direction_fails_q23_transfer": true,
+    "q5_collision_direction_reproduces": true,
+    "reordered_inverse_fails": true,
+    "wrong_inverse_fails": true
+  },
+  "observed_resource_law": {
+    "accepted_algorithm_uses_enumerated_code_set": false,
+    "diagnostic_exact_code_set_entries": "DISTINCT_PROJECTIVE_FULL_STATES",
+    "public_program_descriptor_field_elements": "2*DEPTH",
+    "q5_depth4_exact_code_set_entries": 388125,
+    "q5_depth4_identifier_bits_before_and_after_quotient": 19,
+    "q5_depth4_program_histories": 390625,
+    "resident_dense_state_field_elements": "2*Q^2"
+  },
+  "preserved_subclaims": [
+    "Q5_DEPTHS1_THROUGH3_PROJECTIVE_ORBITS_COLLISION_FREE",
+    "Q5_DEPTH4_HAS625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_SUBSPACE",
+    "Q5_COLLISION_KERNEL_IS_THE_SINGLE_REPORTED_PROGRAM_DIRECTION",
+    "Q11_DEPTHS1_AND2_PROJECTIVE_ORBITS_COLLISION_FREE",
+    "EXACT_IN_PLACE_BRANCH_RESTORATION_AND_RESTORED_CARRIER_REUSE",
+    "IDENTICAL_COMPACT_CLASSICAL_FACTOR_GRAPH_REMAINS"
+  ],
+  "production_result_sha256": "a5153508ee1c674ab78d4c3c1ac2706bb99b677b617a2cab1cd0bd2507bba479",
+  "production_source": {
+    "cryptographic_digest_used_as_state_equality": false,
+    "exact_projective_traversal_present": true,
+    "imports": [
+      "__future__",
+      "argparse",
+      "json",
+      "dataclasses",
+      "pathlib",
+      "typing",
+      "growing_prime_resident_cubic_strength_phase_port_weil_action_rank"
+    ],
+    "production_source_imports_oracle": false,
+    "sha256": "d95869a3103073e72715c1cba6d97637617df03befb5a44b2614572c90dc6a71"
+  },
+  "rejected_interpretations": [
+    "TRANSFERABLE_Q5_COLLISION_DIRECTION",
+    "FIXED_HISTORY_FREE_NONLINEAR_CLOSURE",
+    "PROJECTIVE_IDENTIFIER_BIT_WIDTH_REDUCTION_AT_Q5_DEPTH4",
+    "UNIVERSAL_STATE_OR_INFORMATION_LOWER_BOUND",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_and_reuse": {
+    "exact_payload_restored_after_reuse": true,
+    "first_projective_orbit_size": 625,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_matches_fresh": true,
+    "snapshot_used": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_GROWING_PRIME_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_HISTORY_GROWTH_INDEPENDENT_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

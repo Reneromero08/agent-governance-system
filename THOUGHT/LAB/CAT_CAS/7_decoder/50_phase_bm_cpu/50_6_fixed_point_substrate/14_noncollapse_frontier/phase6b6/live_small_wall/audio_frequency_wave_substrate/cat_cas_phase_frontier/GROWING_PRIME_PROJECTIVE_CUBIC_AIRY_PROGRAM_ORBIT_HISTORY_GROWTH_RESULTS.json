@@ -1,0 +1,1219 @@
+{
+  "cases": [
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "collision_witnesses": [],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 1,
+      "distinct_projective_full_states": 25,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 0,
+      "maximum_projective_collision_class_size": 1,
+      "minimum_exact_projective_state_identifier_bits": 5,
+      "minimum_exact_public_history_identifier_bits": 5,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 25
+      },
+      "projective_collisions": 0,
+      "public_coefficient_history_field_elements": 2,
+      "public_program_histories": 25,
+      "q": 5,
+      "resident_dense_state_field_elements": 50,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 5000,
+        "exact_projective_code_entries_peak": 25,
+        "exact_projective_code_max_bits": 173,
+        "exact_projective_code_payload_bits_sum": 4299,
+        "exact_restoration_comparisons": 25,
+        "forward_branches": 25,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 25000,
+        "inverse_branches": 25,
+        "leaf_projective_canonicalizations": 25,
+        "temporary_axis_vector_field_cells_peak": 5
+      }
+    },
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "collision_witnesses": [],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 2,
+      "distinct_projective_full_states": 625,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 0,
+      "maximum_projective_collision_class_size": 1,
+      "minimum_exact_projective_state_identifier_bits": 10,
+      "minimum_exact_public_history_identifier_bits": 10,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 625
+      },
+      "projective_collisions": 0,
+      "public_coefficient_history_field_elements": 4,
+      "public_program_histories": 625,
+      "q": 5,
+      "resident_dense_state_field_elements": 50,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 130000,
+        "exact_projective_code_entries_peak": 625,
+        "exact_projective_code_max_bits": 173,
+        "exact_projective_code_payload_bits_sum": 107291,
+        "exact_restoration_comparisons": 650,
+        "forward_branches": 650,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 650000,
+        "inverse_branches": 650,
+        "leaf_projective_canonicalizations": 625,
+        "temporary_axis_vector_field_cells_peak": 5
+      }
+    },
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "collision_witnesses": [],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 3,
+      "distinct_projective_full_states": 15625,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 0,
+      "maximum_projective_collision_class_size": 1,
+      "minimum_exact_projective_state_identifier_bits": 14,
+      "minimum_exact_public_history_identifier_bits": 14,
+      "non_singleton_projective_classes": 0,
+      "p": 11,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 15625
+      },
+      "projective_collisions": 0,
+      "public_coefficient_history_field_elements": 6,
+      "public_program_histories": 15625,
+      "q": 5,
+      "resident_dense_state_field_elements": 50,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 3255000,
+        "exact_projective_code_entries_peak": 15625,
+        "exact_projective_code_max_bits": 173,
+        "exact_projective_code_payload_bits_sum": 2686776,
+        "exact_restoration_comparisons": 16275,
+        "forward_branches": 16275,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 16275000,
+        "inverse_branches": 16275,
+        "leaf_projective_canonicalizations": 15625,
+        "temporary_axis_vector_field_cells_peak": 5
+      }
+    },
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": true,
+        "colliding_history_span_rank": 5,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_vectors": 3125,
+        "collision_events_total": 2500,
+        "normalized_collision_difference_line_generators": [
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4
+          ]
+        ],
+        "single_collision_difference_line": true
+      },
+      "collision_witnesses": [
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              2
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        },
+        {
+          "first_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "second_history": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "second_state_global_scalar_over_first": 1
+        }
+      ],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 4,
+      "distinct_projective_full_states": 388125,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 3125,
+      "maximum_projective_collision_class_size": 5,
+      "minimum_exact_projective_state_identifier_bits": 19,
+      "minimum_exact_public_history_identifier_bits": 19,
+      "non_singleton_projective_classes": 625,
+      "p": 11,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 387500,
+        "5": 625
+      },
+      "projective_collisions": 2500,
+      "public_coefficient_history_field_elements": 8,
+      "public_program_histories": 390625,
+      "q": 5,
+      "resident_dense_state_field_elements": 50,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 81380000,
+        "exact_projective_code_entries_peak": 388125,
+        "exact_projective_code_max_bits": 173,
+        "exact_projective_code_payload_bits_sum": 67176831,
+        "exact_restoration_comparisons": 406900,
+        "forward_branches": 406900,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 406900000,
+        "inverse_branches": 406900,
+        "leaf_projective_canonicalizations": 390625,
+        "temporary_axis_vector_field_cells_peak": 5
+      }
+    },
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "collision_witnesses": [],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 1,
+      "distinct_projective_full_states": 121,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 0,
+      "maximum_projective_collision_class_size": 1,
+      "minimum_exact_projective_state_identifier_bits": 7,
+      "minimum_exact_public_history_identifier_bits": 7,
+      "non_singleton_projective_classes": 0,
+      "p": 23,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 121
+      },
+      "projective_collisions": 0,
+      "public_coefficient_history_field_elements": 2,
+      "public_program_histories": 121,
+      "q": 11,
+      "resident_dense_state_field_elements": 242,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 117128,
+        "exact_projective_code_entries_peak": 121,
+        "exact_projective_code_max_bits": 1095,
+        "exact_projective_code_payload_bits_sum": 132358,
+        "exact_restoration_comparisons": 121,
+        "forward_branches": 121,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 1288408,
+        "inverse_branches": 121,
+        "leaf_projective_canonicalizations": 121,
+        "temporary_axis_vector_field_cells_peak": 11
+      }
+    },
+    {
+      "assignment_or_state_tree_materialized": false,
+      "collision_relation_diagnostic": {
+        "all_collisions_are_raw_state_equal_not_only_projectively_equal": true,
+        "colliding_histories_form_complete_linear_subspace": false,
+        "colliding_history_span_rank": 0,
+        "colliding_history_subspace_constraint_basis": [
+          [
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "colliding_history_subspace_rref_basis": [],
+        "colliding_history_vectors": 0,
+        "collision_events_total": 0,
+        "normalized_collision_difference_line_generators": [],
+        "single_collision_difference_line": false
+      },
+      "collision_witnesses": [],
+      "cryptographic_hash_used_as_equality_oracle": false,
+      "depth": 2,
+      "distinct_projective_full_states": 14641,
+      "exact_dense_carrier_restored": true,
+      "exact_projective_code_is_collision_free_base_p_encoding": true,
+      "global_scalar_ledger_field_elements_for_lawful_projective_state": 1,
+      "histories_in_non_singleton_projective_classes": 0,
+      "maximum_projective_collision_class_size": 1,
+      "minimum_exact_projective_state_identifier_bits": 14,
+      "minimum_exact_public_history_identifier_bits": 14,
+      "non_singleton_projective_classes": 0,
+      "p": 23,
+      "program_family": "PRIMARY",
+      "projective_collision_class_size_histogram": {
+        "1": 14641
+      },
+      "projective_collisions": 0,
+      "public_coefficient_history_field_elements": 4,
+      "public_program_histories": 14641,
+      "q": 11,
+      "resident_dense_state_field_elements": 242,
+      "restoration_generation": 1,
+      "retained_dense_history_state_field_elements": 0,
+      "same_backing_restored": true,
+      "snapshot_used": false,
+      "work": {
+        "controlled_field_multiplications": 14289616,
+        "exact_projective_code_entries_peak": 14641,
+        "exact_projective_code_max_bits": 1095,
+        "exact_projective_code_payload_bits_sum": 16013882,
+        "exact_restoration_comparisons": 14762,
+        "forward_branches": 14762,
+        "full_history_state_tree_materialized": false,
+        "gaussian_field_multiply_adds": 157185776,
+        "inverse_branches": 14762,
+        "leaf_projective_canonicalizations": 14641,
+        "temporary_axis_vector_field_cells_peak": 11
+      }
+    }
+  ],
+  "claim_boundaries": {
+    "all_nonlinear_or_singular_quotients_rejected": false,
+    "arbitrary_q_or_depth": false,
+    "catvm_custody": false,
+    "computational_advantage_or_small_wall_crossing": false,
+    "distinct_phase_resource": false,
+    "fixed_history_free_nonlinear_closure": false,
+    "machine_enforced_hidden_intermediates": false,
+    "physical_waveform_or_silicon_execution": false,
+    "polynomial_work_subquadratic_state_closure": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "unbounded_catalytic_computation": false,
+    "universal_state_or_information_lower_bound": false
+  },
+  "claim_candidate": "BOUNDED_EXACT_PRIMARY_TWO_SHEAR_CUBIC_AIRY_PROGRAM_WORD_PROJECTIVE_CANONICALIZATION_FIRST_COLLIDES_AT_Q5_DEPTH4_AFTER_COLLISION_FREE_DEPTHS1_THROUGH3_IN625_RAW_EQUALITY_CLASSES_OF_SIZE5_ON_A_RANK5_PROGRAM_SUBSPACE_BUT_THE_COLLISION_DIRECTION_FAILS_Q11_AND_Q23_TRANSFER_WHILE_Q11_DEPTHS1_AND2_REMAIN_COLLISION_FREE_WITH_EXACT_RESTORATION_AND_REUSE_SO_NO_FIXED_HISTORY_FREE_CLOSURE_OR_ADVANTAGE_IS_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_FACTOR_GRAPH_REMAINS",
+  "claim_ceiling": "PRIMARY_TWO_SHEAR_PUBLIC_COEFFICIENT_WORDS_Q5_DEPTHS1_THROUGH4_Q11_DEPTHS1_AND2_FIXED_DECLARED_GAUSSIAN_LAYER_SEQUENCE_TWO_FIBER_DENSE_FULL_STATE_PROJECTIVE_CANONICALIZATION_DIRECT_PROCESS_SOFTWARE",
+  "controls": {
+    "global_scalar_ledger_remains_required": true,
+    "global_scalar_mutation_preserves_projective_code": true,
+    "missing_inverse_fails": true,
+    "projective_code_uses_exact_base_p_integer_not_hash": true,
+    "q5_depth4_collision_direction_fails_q11_transfer_on_all_three_samples": true,
+    "q5_depth4_collision_direction_fails_q23_transfer_on_all_three_samples": true,
+    "q5_depth4_collision_direction_reproduces_on_three_exact_samples": true,
+    "reordered_inverse_fails": true,
+    "second_public_coefficient_mutation_changes_projective_state": true,
+    "wrong_inverse_fails": true
+  },
+  "matched_baseline": {
+    "cold_start_comparison_used": false,
+    "factor_graph_rematerialization_avoids_dense_history_tree": true,
+    "identical_classical_factor_graph_with_2d_public_coefficients": true,
+    "identical_classical_in_place_dense_traversal": true
+  },
+  "next_obstruction": "THE_FIRST_Q5_PROJECTIVE_COLLISIONS_ARE_A_Q5_LOCAL_RAW_EQUALITY_DIRECTION_ON_A_RANK5_DEPTH4_PROGRAM_SUBSPACE_THAT_DOES_NOT_REDUCE_FIXED_HORIZON_IDENTIFIER_BIT_WIDTH_AND_FAILS_Q11_AND_Q23_TRANSFER_WHILE_THE_IDENTICAL_FACTOR_GRAPH_STORES_ONLY2D_PUBLIC_COEFFICIENTS_SO_THE_NEXT_PHASE_REPAIR_MUST_CHANGE_THE_NATIVE_COUPLING_LAW_OR_FIND_A_TRANSFERABLE_SEMANTIC_QUOTIENT_WITHOUT_MOVING_HISTORY_INTO_A_CODE_SET",
+  "observed_resource_law": {
+    "compact_factor_graph_public_history_field_elements": "2*DEPTH",
+    "exact_code_set_entries": "Q^(2*DEPTH)",
+    "fixed_history_free_projective_closure_established": false,
+    "minimum_exact_horizon_identifier_bits": "CEIL_LOG2_Q^(2*DEPTH)",
+    "resident_dense_state_field_elements": "2*Q^2",
+    "retained_dense_history_state_field_elements": 0,
+    "tested_projective_orbit_entries": "Q^(2*DEPTH)"
+  },
+  "resource_accounting": {
+    "advantage_claimed": false,
+    "dense_carrier_axis_temporaries_public_branches_inverse_work_exact_code_set_restoration_and_reuse_counted": true,
+    "diagnostic_enumerates_all_declared_public_program_histories": true,
+    "python_set_and_integer_object_headers_allocator_interpreter_and_whole_process_peak_excluded": true
+  },
+  "restoration_and_reuse": {
+    "exact_payload_restored_after_reuse": true,
+    "first_projective_orbit_size": 625,
+    "fresh_alternate_boundary": 8,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_matches_fresh": true,
+    "second_unrelated_alternate_boundary": 8,
+    "snapshot_used": false
+  },
+  "schema": "CAT_CAS_GROWING_PRIME_PROJECTIVE_CUBIC_AIRY_PROGRAM_ORBIT_HISTORY_GROWTH_V1"
+}
