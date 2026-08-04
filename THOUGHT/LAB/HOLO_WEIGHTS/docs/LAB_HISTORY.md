@@ -345,3 +345,53 @@ path forward is either (a) complex-native architecture from the start
 (phase is state from the embedding), or (b) the unresolved: accept the
 measured wall - dense transformer channels are near-full-rank and their
 public representation is phase-less.
+
+## 2026-08-04 — B7 complex-fold probe: the phase channel is REAL (first positive signal)
+
+Construction (EIGEN_BUDDY twin-rail): complex state z = x + i*c, x = real
+trajectory, c = evolution of a fixed complex phase carrier (the unconsumed
+exact source - exact branch evolves the carrier exactly, holo branch
+scrambles it). Complex fold pair a = (yE+yH)/sqrt2, b = (yE-yH)/sqrt2 at
+each layer, both stages, 32 layers, held-out prompts.
+
+Equal scalar bandwidth (si: B/2 phases + twin-rail magnitudes from |a|;
+direct: B/4 exact complex components; corrupt: B/2 random phases + |a|):
+
+B=64  (32 phases vs 16 components):
+  uncorrected: complex 0.3172   boundary 0.8267
+  si         : complex 0.5835   boundary 0.9293
+  direct     : complex 0.5700   boundary 0.9249
+  corrupt    : complex 0.4788   boundary 0.3656
+  full-exact : complex 1.0000   boundary 1.0000
+  per-prompt boundary: si [0.983, 0.953, 0.900, 0.881] beats
+                       direct [0.983, 0.950, 0.892, 0.875] on 4/4
+
+B=256 (128 phases vs 64 components):
+  si         : complex 0.6237   boundary 0.9363
+  direct     : complex 0.5996   boundary 0.9296
+  corrupt    : complex 0.4757   boundary 0.2597
+  per-prompt boundary: si [0.985, 0.958, 0.912, 0.891] beats
+                       direct [0.983, 0.953, 0.901, 0.882] on 4/4
+
+FINDINGS:
+(1) In COMPLEX space the fold-odd phase channel is non-degenerate and
+    information-bearing - the first positive signal for the phase-native
+    frontier. B6's degeneracy was a REAL-STATE artifact, as suspected.
+(2) si (phase-only + twin-rail magnitudes) beats direct exact-residual
+    injection at EQUAL scalar bandwidth - Sol's killer control, 4/4
+    prompts at both bandwidths, and the margin scales with B
+    (complex-state: +0.0135 at B=64 -> +0.0241 at B=256).
+(3) Corrupt (random phases) DESTROYS the real-boundary readout
+    (0.366/0.260 vs si 0.929/0.936) while barely moving the complex-state
+    cos (0.479/0.476): the phases themselves are load-bearing for the
+    boundary - the twin-rail magnitudes alone cannot fake the readout.
+(4) Sol's acceptance criteria: "beats direct at equal bandwidth" - PASSED.
+    "phase randomization behaves as predicted" - PASSED (control kills
+    boundary). "survives source removal" - NOT YET TESTED (exact branch
+    still borrowed every layer; the holonomy claim remains open).
+
+VERDICT: the phase-native frontier is no longer falsified - PARTIALLY
+VERIFIED. The phase channel carries genuinely more boundary-relevant
+information per scalar than raw complex storage, in complex space. The
+decisive remaining claim is the holonomy: can si be propagated and the
+exact source UNCOMPUTED before the boundary (B8 source-removal probe)?
