@@ -1,0 +1,333 @@
+{
+  "boundary_parity": {
+    "alternate_and_restored_reuse": true,
+    "primary": true
+  },
+  "claim_candidate": "CATVM_ENFORCED_EXACT_9_NODE_C17_PALEY_RELATION_DAG_PUBLIC_REVERSIBLE_PEBBLE_SCHEDULER_REDUCES_RETAINED_INTERNAL_STATE_FROM_7_TO_6_RELATION_SLOTS_WITH_EXACT_MINIMUM_6_CLEAN_LOCAL_PEBBLE_CERTIFICATE_AT_THIS_TOPOLOGY_FINAL_ONLY_ATOMIC_RESPONSE_RESTORATION_AND_REUSE_BUT_MATCHED_CLASSICAL_PEBBLING_IS_IDENTICAL_AND_AN_EXECUTED_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_IS_SMALLER",
+  "claim_ceiling": "EXACT9_NODE_TWO_LEAF_SEVEN_INTERNAL_C17_PALEY_RELATION_DAG_TWO_PUBLIC_OPERATION_ASSIGNMENTS_LOCAL_REVERSIBLE_TOGGLE_LAW_SOURCES_ALWAYS_RESIDENT_CLEAN_FINAL_ONLY_SINK_SEPARATE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_SINGLE_CONTROLLER_PROCESS",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "full_c17_oracle": [
+    {
+      "boundary": 80,
+      "final_class_values": [
+        38,
+        23,
+        50
+      ],
+      "forward_then_inverse_relation_evaluations": 30,
+      "full136_cells_restore_exactly": true,
+      "full_relation_carrier_cells": 136,
+      "peak_internal_relation_slots": 6,
+      "topology": 1
+    },
+    {
+      "boundary": 5,
+      "final_class_values": [
+        88,
+        62,
+        35
+      ],
+      "forward_then_inverse_relation_evaluations": 30,
+      "full136_cells_restore_exactly": true,
+      "full_relation_carrier_cells": 136,
+      "peak_internal_relation_slots": 6,
+      "topology": 2
+    }
+  ],
+  "imports_controller": false,
+  "imports_numpy": false,
+  "imports_service": false,
+  "matched_compact_classical_baselines": {
+    "accepted_storage_advantage_over_strongest_executed_compact_baseline": false,
+    "accepted_to_occurrence_expanded_field_cell_ratio": 1.6,
+    "accepted_to_retain_all_field_cell_ratio": 0.8888888888888888,
+    "matched_reversible_pebbling": {
+      "field_cells": 24,
+      "forward_toggle_actions": 15,
+      "full_lifecycle_relation_evaluations": 30,
+      "identical_to_accepted_storage_and_toggle_law": true,
+      "relation_slots": 8
+    },
+    "occurrence_expanded_compact_recurrence": [
+      {
+        "boundary": 80,
+        "field_cells": 15,
+        "final_temporary_released": true,
+        "operation_local_scalar_temporaries_excluded_for_both_paths": true,
+        "peak_temporary_relation_slots": 3,
+        "relation_evaluations": 13,
+        "relation_vectors_are_atomic_for_this_accounting": true,
+        "sealed_leaf_relation_slots": 2,
+        "total_relation_slots": 5
+      },
+      {
+        "boundary": 5,
+        "field_cells": 15,
+        "final_temporary_released": true,
+        "operation_local_scalar_temporaries_excluded_for_both_paths": true,
+        "peak_temporary_relation_slots": 3,
+        "relation_evaluations": 13,
+        "relation_vectors_are_atomic_for_this_accounting": true,
+        "sealed_leaf_relation_slots": 2,
+        "total_relation_slots": 5
+      }
+    ],
+    "retain_all": [
+      {
+        "boundary": 80,
+        "field_cells": 27,
+        "relation_evaluations": 7,
+        "relation_slots": 9
+      },
+      {
+        "boundary": 5,
+        "field_cells": 27,
+        "relation_evaluations": 7,
+        "relation_slots": 9
+      }
+    ]
+  },
+  "negative_result": "THE_ACCEPTED_24_FIELD_CELL_REMATERIALIZING_PHASE_PATH_MATCHES_THE_REVERSIBLE_CLASSICAL_PEBBLER_AND_EXCEEDS_THE_EXECUTED_15_FIELD_CELL_OCCURRENCE_EXPANDED_COMPACT_CLASSICAL_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED",
+  "preserved_subclaims": [
+    "EXACT_MINIMUM_6_UNDER_DECLARED_LOCAL_CLEAN_REVERSIBLE_PEBBLE_LAW",
+    "PUBLIC_TOPOLOGY_DERIVED_LIVE_INTERVALS_RELEASES_AND_RECONSTRUCTION",
+    "EXACT_FULL_C17_BOUNDARY_PARITY",
+    "EXACT_FORWARD_INVERSE_CARRIER_RESTORATION",
+    "FRESH_RESTORED_REUSE_BOUNDARY_PARITY",
+    "RETAIN_ALL_INTERNAL_STORAGE_REDUCED_FROM_7_TO_6_RELATION_SLOTS"
+  ],
+  "public_topology_scheduler": {
+    "capacities_1_through_5_exhausted_without_clean_sink_state": true,
+    "compiler_inputs": "PUBLIC_DIRECTED_ACYCLIC_TOPOLOGY_ONLY",
+    "compiler_reads_relation_VALUES_or_BOUNDARY": false,
+    "explored_state_counts_for_capacities_1_through_5": [
+      3,
+      4,
+      12,
+      19,
+      101
+    ],
+    "forward_reconstruction_obligations": [
+      {
+        "epoch": 1,
+        "node": 2,
+        "parents_required_resident": [
+          0,
+          1
+        ],
+        "place_action": 10
+      }
+    ],
+    "forward_toggle_count": 15,
+    "inverse_custody": "EXACT_REVERSE_OF_PUBLIC_FORWARD_TOGGLE_AND_SLOT_LEASE_PLAN",
+    "live_intervals_and_release_points": [
+      {
+        "acquire_action": 1,
+        "epoch": 0,
+        "node": 2,
+        "release_action": 5,
+        "slot": 0
+      },
+      {
+        "acquire_action": 2,
+        "epoch": 0,
+        "node": 3,
+        "release_action": 15,
+        "slot": 1
+      },
+      {
+        "acquire_action": 3,
+        "epoch": 0,
+        "node": 4,
+        "release_action": 12,
+        "slot": 2
+      },
+      {
+        "acquire_action": 4,
+        "epoch": 0,
+        "node": 5,
+        "release_action": 13,
+        "slot": 3
+      },
+      {
+        "acquire_action": 6,
+        "epoch": 0,
+        "node": 6,
+        "release_action": 11,
+        "slot": 0
+      },
+      {
+        "acquire_action": 7,
+        "epoch": 0,
+        "node": 7,
+        "release_action": 9,
+        "slot": 4
+      },
+      {
+        "acquire_action": 8,
+        "epoch": 0,
+        "node": 8,
+        "release_action": "BOUNDARY_THEN_INVERSE_ACTION_1",
+        "slot": 5
+      },
+      {
+        "acquire_action": 10,
+        "epoch": 1,
+        "node": 2,
+        "release_action": 14,
+        "slot": 4
+      }
+    ],
+    "minimum_clean_local_reversible_pebble_capacity": 6,
+    "schedule": [
+      {
+        "action": 1,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 2,
+        "slot": 0
+      },
+      {
+        "action": 2,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 3,
+        "slot": 1
+      },
+      {
+        "action": 3,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 4,
+        "slot": 2
+      },
+      {
+        "action": 4,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 5,
+        "slot": 3
+      },
+      {
+        "action": 5,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 2,
+        "slot": 0
+      },
+      {
+        "action": 6,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 6,
+        "slot": 0
+      },
+      {
+        "action": 7,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 7,
+        "slot": 4
+      },
+      {
+        "action": 8,
+        "epoch": 0,
+        "kind": "PLACE",
+        "node": 8,
+        "slot": 5
+      },
+      {
+        "action": 9,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 7,
+        "slot": 4
+      },
+      {
+        "action": 10,
+        "epoch": 1,
+        "kind": "PLACE",
+        "node": 2,
+        "slot": 4
+      },
+      {
+        "action": 11,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 6,
+        "slot": 0
+      },
+      {
+        "action": 12,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 4,
+        "slot": 2
+      },
+      {
+        "action": 13,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 5,
+        "slot": 3
+      },
+      {
+        "action": 14,
+        "epoch": 1,
+        "kind": "REMOVE",
+        "node": 2,
+        "slot": 4
+      },
+      {
+        "action": 15,
+        "epoch": 0,
+        "kind": "REMOVE",
+        "node": 3,
+        "slot": 1
+      }
+    ],
+    "toggle_nodes": [
+      2,
+      3,
+      4,
+      5,
+      2,
+      6,
+      7,
+      8,
+      7,
+      2,
+      6,
+      4,
+      5,
+      2,
+      3
+    ]
+  },
+  "rejected_interpretations": [
+    "GENERIC_DAG_SCHEDULER",
+    "ARBITRARY_RELATION_PROGRAM",
+    "CATVM_OS_OR_HARDWARE_ISOLATION",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_scope": {
+    "accepted_compact_relation_field_cells": 24,
+    "compiled_public_plan_records": 15,
+    "dense17_by17_relation_table_cells": 0,
+    "independent_full_c17_oracle_field_cells": 136,
+    "occurrence_expanded_compact_relation_field_cells": 15,
+    "operation_local_scalar_temporaries_excluded_for_all_compact_relation_paths": true,
+    "owner_epoch_records": 6,
+    "owner_node_records": 6,
+    "python_allocator_and_interpreter_overhead_excluded_for_all_paths": true,
+    "retain_all_compact_relation_field_cells": 27,
+    "retained_dynamic_inverse_history_records": 0
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CATVM_PALEY_RELATION_REMATERIALIZATION_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
