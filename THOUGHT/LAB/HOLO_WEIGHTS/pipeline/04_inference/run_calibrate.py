@@ -87,15 +87,15 @@ def collect_samples(engine, prompts, tokenizer):
                     "h_in": [],
                     "normed": [],
                     "mix_pre": [],
+                    "mlp_h": [],
                     "mlp_in": [],
                     "mlp_pre": [],
-                    "exact_mix": [],
-                    "exact_mlp": [],
                 },
             )
             entry["h_in"].append(cap["h_in"][0].cpu())
             entry["normed"].append(cap["normed"][0].cpu())
             entry["mix_pre"].append(cap["mix_pre"][0].cpu())
+            entry["mlp_h"].append(cap["mlp_h"][0].cpu())
             entry["mlp_in"].append(cap["mlp_in"][0].cpu())
             entry["mlp_pre"].append(cap["mlp_pre"][0].cpu())
     engine.capture_io = None
@@ -126,7 +126,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--holo", default="output/qwen_27b_k256.holo")
     ap.add_argument("--model-dir", default=str(DEFAULT_MODEL))
-    ap.add_argument("--rank", type=int, default=128)
+    ap.add_argument("--rank", type=int, default=48)
     ap.add_argument("--rounds", type=int, default=4)
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--out", default="output/qwen_corrections_r128.pt")
@@ -154,7 +154,7 @@ def main():
             if len(cap["h_in"]) == 0:
                 continue
             H_mix = torch.cat(cap["h_in"], dim=0).T      # D x T (mixer input h)
-            H_mlp = torch.cat([c for c in cap["h_in"]], dim=0).T  # same h stream
+            H_mlp = torch.cat(cap["mlp_h"], dim=0).T     # D x T (mlp stage input)
             ex_mix, ex_mlp = query_exact(eng_exact, layer, cap)
             E_mix = torch.cat(ex_mix, dim=0).T - torch.cat(cap["mix_pre"], dim=0).T
             E_mlp = torch.cat(ex_mlp, dim=0).T - torch.cat(cap["mlp_pre"], dim=0).T

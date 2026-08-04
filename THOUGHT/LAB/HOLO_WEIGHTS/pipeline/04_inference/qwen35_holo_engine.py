@@ -148,6 +148,8 @@ class Qwen35HoloEngine:
         self.device = torch.device(device)
         self.num_layers = num_layers
         self.lm_head_chunk = lm_head_chunk
+        self.exact_tail = 0  # number of final layers run exactly (oracle tail)
+        self._layer_exact = False
         self.verbose = verbose
         self.kv_cache: dict[int, tuple[torch.Tensor, torch.Tensor]] = {}
         self.last_hidden_rms: list[float] = []
@@ -156,7 +158,9 @@ class Qwen35HoloEngine:
         #   corrections[layer] = {"mix": (A, B), "mlp": (A, B)}
         #   A: D x r, B: D x r; applied as  sub_out += A @ (B.T @ h_in)
         self.corrections: dict[int, dict[str, tuple[torch.Tensor, torch.Tensor]]] = {}
-        self.capture_io: dict[int, dict[str, torch.Tensor]] | None = None
+        # Set this to {} before prefill to capture calibration activations.  Each
+        # projection input is stored as [batch, sequence, input_features] on CPU.
+        self.capture_io: dict[int, dict[str, Any]] | None = None
 
     @property
     def label(self) -> str:
@@ -201,7 +205,7 @@ class Qwen35HoloEngine:
         factorized: bool,
         adapters: dict[str, Any] | None,
     ) -> torch.Tensor:
-        if factorized and not self.exact and self.holo is not None and self.holo.has_factor(name):
+        if factorized and not self.exact and not self._layer_exact and self.holo is not None and self.holo.has_factor(name):
             u, svh = self.holo.factors(name)
             u = u.to(self.device)
             svh = svh.to(self.device)
@@ -213,6 +217,15 @@ class Qwen35HoloEngine:
         if correction is not None:
             base = base + correction.to(base.dtype)
         return base
+
+    def _capture_projection(
+        self, layer: int, name: str, projection_input: torch.Tensor
+    ) -> None:
+        if self.capture_io is None:
+            return
+        entry = self.capture_io.setdefault(layer, {})
+        projections = entry.setdefault("proj", {})
+        projections[name] = projection_input.detach().to("cpu").clone()
 
     @staticmethod
     def _rms_offset(x: torch.Tensor, weight: torch.Tensor) -> torch.Tensor:
@@ -253,8 +266,10 @@ class Qwen35HoloEngine:
     ) -> torch.Tensor:
         prefix = f"model.language_model.layers.{layer}.self_attn"
         batch, length, _ = x.shape
+        q_name = f"{prefix}.q_proj.weight"
+        self._capture_projection(layer, q_name, x)
         q_gate = self._linear(
-            x, f"{prefix}.q_proj.weight", factorized=True, adapters=adapters
+            x, q_name, factorized=True, adapters=adapters
         ).view(batch, length, FULL_Q_HEADS, 2 * FULL_HEAD_DIM)
         q, gate = q_gate.chunk(2, dim=-1)
         gate = gate.reshape(batch, length, -1)
@@ -285,9 +300,12 @@ class Qwen35HoloEngine:
         probabilities = torch.softmax(scores, dim=-1, dtype=torch.float32)
         attended = (probabilities @ v).transpose(1, 2).contiguous()
         attended = attended.reshape(batch, length, -1) * torch.sigmoid(gate.float())
+        attended = attended.to(x.dtype)
+        o_name = f"{prefix}.o_proj.weight"
+        self._capture_projection(layer, o_name, attended)
         return self._linear(
-            attended.to(x.dtype),
-            f"{prefix}.o_proj.weight",
+            attended,
+            o_name,
             factorized=True,
             adapters=adapters,
         )
@@ -300,11 +318,15 @@ class Qwen35HoloEngine:
     ) -> torch.Tensor:
         prefix = f"model.language_model.layers.{layer}.linear_attn"
         batch, length, _ = x.shape
+        qkv_name = f"{prefix}.in_proj_qkv.weight"
+        z_name = f"{prefix}.in_proj_z.weight"
+        self._capture_projection(layer, qkv_name, x)
+        self._capture_projection(layer, z_name, x)
         mixed = self._linear(
-            x, f"{prefix}.in_proj_qkv.weight", factorized=True, adapters=adapters
+            x, qkv_name, factorized=True, adapters=adapters
         )
         z = self._linear(
-            x, f"{prefix}.in_proj_z.weight", factorized=True, adapters=adapters
+            x, z_name, factorized=True, adapters=adapters
         ).view(batch, length, GDN_V_HEADS, GDN_HEAD_DIM)
         # Exact a/b are cheap and control the state dynamics.  beta is sigmoid(b);
         # dt_bias participates in the decay discretization, not the beta gate.
@@ -363,9 +385,12 @@ class Qwen35HoloEngine:
         y = torch.stack(outputs, dim=1)
         norm = self._exact_weight(f"{prefix}.norm.weight").to(self.device)
         y = self._rms_direct(y, norm) * F.silu(z.float())
+        y = y.reshape(batch, length, GDN_VALUE_WIDTH).to(x.dtype)
+        out_name = f"{prefix}.out_proj.weight"
+        self._capture_projection(layer, out_name, y)
         return self._linear(
-            y.reshape(batch, length, GDN_VALUE_WIDTH).to(x.dtype),
-            f"{prefix}.out_proj.weight",
+            y,
+            out_name,
             factorized=True,
             adapters=adapters,
         )
@@ -377,16 +402,23 @@ class Qwen35HoloEngine:
         adapters: dict[str, Any] | None,
     ) -> torch.Tensor:
         prefix = f"model.language_model.layers.{layer}.mlp"
+        gate_name = f"{prefix}.gate_proj.weight"
+        up_name = f"{prefix}.up_proj.weight"
+        self._capture_projection(layer, gate_name, x)
+        self._capture_projection(layer, up_name, x)
         gate = self._linear(
-            x, f"{prefix}.gate_proj.weight", factorized=True, adapters=adapters
+            x, gate_name, factorized=True, adapters=adapters
         )
         up = self._linear(
-            x, f"{prefix}.up_proj.weight", factorized=True, adapters=adapters
+            x, up_name, factorized=True, adapters=adapters
         )
         activated = F.silu(gate.float()) * up.float()
+        activated = activated.to(x.dtype)
+        down_name = f"{prefix}.down_proj.weight"
+        self._capture_projection(layer, down_name, activated)
         return self._linear(
-            activated.to(x.dtype),
-            f"{prefix}.down_proj.weight",
+            activated,
+            down_name,
             factorized=True,
             adapters=adapters,
         )
@@ -430,6 +462,7 @@ class Qwen35HoloEngine:
         adapters: dict[str, Any] | None = None,
         *,
         capture_hidden: bool = False,
+        compute_logits: bool = True,
     ) -> torch.Tensor:
         if input_ids.ndim == 1:
             input_ids = input_ids.unsqueeze(0)
@@ -443,12 +476,14 @@ class Qwen35HoloEngine:
         started = time.perf_counter()
         for layer in range(self.num_layers):
             prefix = f"model.language_model.layers.{layer}"
+            self._layer_exact = self.exact or (layer >= self.num_layers - self.exact_tail)
+            corr_entry = {} if self._layer_exact else self.corrections.get(layer, {})
             residual = hidden
             norm = self._exact_weight(f"{prefix}.input_layernorm.weight").to(self.device)
             mixed_input = self._rms_offset(hidden, norm)
             mixed_pre = self._prefill_layer_mixer(layer, mixed_input, adapters)
             mixed = self._apply_correction(
-                mixed_pre, residual, self.corrections.get(layer, {}).get("mix")
+                mixed_pre, residual, corr_entry.get("mix")
             )
             block = "FULL" if layer % 4 == 3 else "GDN"
             hidden = residual + mixed.to(residual.dtype)
@@ -459,18 +494,19 @@ class Qwen35HoloEngine:
             mlp_input = self._rms_offset(hidden, post)
             mlp_pre = self._mlp(mlp_input, layer, adapters)
             mlp = self._apply_correction(
-                mlp_pre, residual, self.corrections.get(layer, {}).get("mlp")
+                mlp_pre, residual, corr_entry.get("mlp")
             )
             hidden = residual + mlp.to(residual.dtype)
             if self.capture_io is not None:
-                self.capture_io[layer] = {
+                self.capture_io.setdefault(layer, {}).update({
                     "h_in": residual.detach().clone(),      # layer input (pre-norm)
                     "normed": mixed_input.detach().clone(), # mixer input (post-norm)
                     "mix_pre": mixed_pre.detach().clone(),  # mixer output before correction
+                    "mlp_h": residual.detach().clone(),     # mlp stage input (post-mixer)
                     "mlp_in": mlp_input.detach().clone(),   # mlp input (post-norm)
                     "mlp_pre": mlp_pre.detach().clone(),    # mlp output before correction
                     "h_out": hidden.detach().clone(),
-                }
+                })
             rms = float(hidden.float().square().mean().sqrt().item())
             self.last_hidden_rms.append(rms)
             if capture_hidden:
@@ -484,7 +520,7 @@ class Qwen35HoloEngine:
             gc.collect()
         final_norm = self._exact_weight("model.language_model.norm.weight").to(self.device)
         hidden = self._rms_offset(hidden, final_norm)
-        return self._lm_head(hidden)
+        return self._lm_head(hidden) if compute_logits else hidden
 
     def hidden_rms_report(self) -> list[dict[str, float | int | str]]:
         return [
