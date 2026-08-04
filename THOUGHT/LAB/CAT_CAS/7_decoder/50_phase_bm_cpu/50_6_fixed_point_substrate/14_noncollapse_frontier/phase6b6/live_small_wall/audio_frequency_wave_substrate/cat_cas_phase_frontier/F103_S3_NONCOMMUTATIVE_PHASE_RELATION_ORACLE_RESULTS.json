@@ -1,0 +1,157 @@
+{
+  "algebra_oracle": {
+    "all_basis_fourier_roundtrips": true,
+    "all_outputs_translation_invariant": true,
+    "composition_checks": 36,
+    "hadamard_checks": 36,
+    "irrep_convolution_checks": 36,
+    "irrep_coordinate_count": 6,
+    "irrep_transform_compresses_below_group_order": false,
+    "irrep_transform_rank": 6,
+    "noncommuting_basis_pair": [
+      1,
+      2
+    ],
+    "noncommuting_products_differ": true
+  },
+  "cases": [
+    {
+      "boundary": 11,
+      "depth": 1,
+      "family": "PRIMARY",
+      "forward_commitment": "144583ba80723558f2de0cfeafedb1912f4f501e0fa049b279583637c18620f1",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 24,
+      "depth": 4,
+      "family": "PRIMARY",
+      "forward_commitment": "83a184e38258e2f60dff85b6b80306b51050401203331027caea287bdd34739a",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 52,
+      "depth": 16,
+      "family": "PRIMARY",
+      "forward_commitment": "29fb42d109ccef035f9bfd666438e5d4e16aa6844127ebba7f285f65d8eb64e0",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 65,
+      "depth": 64,
+      "family": "PRIMARY",
+      "forward_commitment": "d7ad9faebdb3875b6ed4ee26b2fd8f077518c1084f25dd9c715329cd1c52d06b",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 45,
+      "depth": 256,
+      "family": "PRIMARY",
+      "forward_commitment": "a3be049a37eac9079ce376c964de4f811d15b88366ccf2b946e2d87069bb3122",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 13,
+      "depth": 1024,
+      "family": "PRIMARY",
+      "forward_commitment": "88804632c2b286b7e0aab2ef3aa3243f16b987326ba69bb967d60e27aa7547f8",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 44,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "forward_commitment": "936714b8eb9b9eb3b19416bd0658d6c412dd35358bd4e2ab165bf0310c637827",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 48,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "forward_commitment": "975520c62506a404c11da0148ed91543b2e513eafde73ec0d936bdd5732fc40c",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 29,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "forward_commitment": "2327bed90a90f5252fe27a260732f5c7ffc38b4dd5c8f552a4b4d7ec1494f2c2",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 11,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "forward_commitment": "9b8b2c96b77e1b66588ddd0061147df4c26f79c13c416f3738abc4f683ed7651",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 85,
+      "depth": 256,
+      "family": "ALTERNATE",
+      "forward_commitment": "b46044422354352716255d85867ad77a8be83ce166723c7b1d8f5b05fabcc6b2",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    },
+    {
+      "boundary": 42,
+      "depth": 1024,
+      "family": "ALTERNATE",
+      "forward_commitment": "30688a997e962c87992b65accb90c3e60cf5ddc0041c4453e7a0b93d81c3f9cb",
+      "full72_cells_restore_exactly": true,
+      "translation_invariance_preserved": true
+    }
+  ],
+  "claim": "BOUNDED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_CLOSES_NATIVE_NONABELIAN_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_SIX_COORDINATE_GROUP_AND_IRREP_CLASSICAL_RECURRENCES_REMAIN",
+  "claim_ceiling": "S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_TWO_DECLARED_FOUR_SHEAR_PROGRAM_FAMILIES_THROUGH_DEPTH1024_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "imports_numpy": false,
+  "imports_production": false,
+  "negative_result": "THE_SMALLEST_NONCOMMUTATIVE_TRANSLATION_RELATION_ALGEBRA_BROADENS_THE_PHASE_COMPOSITION_LAW_BUT_HAS_IDENTICAL_SIX_COORDINATE_GROUP_AND_FULL_RANK_IRREP_CLASSICAL_RECURRENCES",
+  "oracle_state_law": "TWO_FULL6_BY6_F103_S3_TRANSLATION_RELATION_MATRICES",
+  "preserved_subclaims": [
+    "NONABELIAN_S3_TRANSLATION_RELATIONS_CLOSE_UNDER_FULL_MATRIX_COMPOSITION",
+    "S3_TRANSLATION_RELATIONS_CLOSE_UNDER_FULL_MATRIX_HADAMARD_INTERSECTION",
+    "LEFT_AND_RIGHT_COMPOSITION_ARE_DISTINCT",
+    "FULL72_CELL_ORACLE_MATCHES_ALL12_FINAL_BOUNDARIES_AND_COMMITMENTS",
+    "EXACT_CARRIER_RESTORATION_AND_CROSS_FAMILY_REUSE",
+    "S3_IRREP_TRANSFORM_HAS_FULL6_INFORMATION_RANK"
+  ],
+  "production_comparison": {
+    "all_match": true,
+    "boundary_and_commitment_comparisons": 24,
+    "cases": 12
+  },
+  "rejected_interpretations": [
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION",
+    "GENERAL_FINITE_GROUP_RELATION_COMPILER",
+    "GENERAL_SIX_LABEL_RELATIONS",
+    "CATVM_CUSTODY"
+  ],
+  "resource_scope": {
+    "accepted_two_register_carrier_field_cells": 12,
+    "answer_bearing_lookup_table_cells": 0,
+    "dense6_by6_relations_are_oracle_only": true,
+    "matched_group_coordinate_carrier_field_cells": 12,
+    "matched_irrep_information_coordinates": 6,
+    "oracle_full_two_register_relation_field_cells": 72,
+    "python_allocator_and_interpreter_overhead_excluded": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_S3_NONCOMMUTATIVE_PHASE_RELATION_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
