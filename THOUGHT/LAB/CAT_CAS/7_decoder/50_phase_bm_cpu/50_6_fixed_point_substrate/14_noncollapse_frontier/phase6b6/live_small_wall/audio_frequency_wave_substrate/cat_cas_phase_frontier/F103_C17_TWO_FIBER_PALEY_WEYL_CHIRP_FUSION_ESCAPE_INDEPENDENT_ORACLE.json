@@ -1,0 +1,165 @@
+{
+  "all_ten_case_boundaries_commitments_support_histories_and_restoration_match": true,
+  "case_comparisons": [
+    {
+      "boundary_matches": true,
+      "depth": 1,
+      "exact_restoration_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 2,
+      "exact_restoration_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 4,
+      "exact_restoration_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 8,
+      "exact_restoration_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 16,
+      "exact_restoration_matches": true,
+      "family": "PRIMARY",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 1,
+      "exact_restoration_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 2,
+      "exact_restoration_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 4,
+      "exact_restoration_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 8,
+      "exact_restoration_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    },
+    {
+      "boundary_matches": true,
+      "depth": 16,
+      "exact_restoration_matches": true,
+      "family": "ALTERNATE",
+      "final_support_matches": true,
+      "generation_matches": true,
+      "same_backing_matches": true,
+      "semantic_commitment_matches": true,
+      "support_history_matches": true
+    }
+  ],
+  "claim_ceiling": "F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "control_attacks": {
+    "missing_inverse_fails_restoration": true,
+    "module_reordering_changes_boundary": true,
+    "null_family_rejected": true,
+    "premature_boundary_projection_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "controls_match_production": true,
+  "fresh_restored_reuse_attack": {
+    "exact_canonical_state_restored_after_reuse": true,
+    "first_boundary": 48,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 0,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "fusion_escape_attack": {
+    "chirped_public_active_weyl_cells": 68,
+    "fixed12_fusion_representation_rejected_by_x_dependence": true,
+    "predecessor_fused_cells_per_port": 12
+  },
+  "independent_representation": "EXACT_34_BY_34_VERTEX_MATRICES_OVER_F103_WITH_INDEPENDENT_DFT_SUPPORT_RECOVERY",
+  "matched_classical_baseline": "THE_PRODUCTION_WEYL_RECURRENCE_REMAINS_THE_STRONGEST_EXECUTED_COMPACT_CLASSICAL_METHOD_AND_IS_IDENTICAL_TO_THE_ACCEPTED_PATH",
+  "observed_two_port_active_weyl_cell_range_after_first_update": {
+    "capacity": 2312,
+    "maximum": 2308,
+    "minimum": 2278
+  },
+  "production_imported": false,
+  "rejected_interpretations": [
+    "GROWING_CYCLIC_ORDER_FOURIER_CHIRP_CLOSURE",
+    "GENERAL_WEYL_RELATION_COMPILER",
+    "COMPACT_CLOSURE_BELOW_FULL_MATRIX_DIMENSION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "reuse_matches_production": true,
+  "schema": "CAT_CAS_F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_INDEPENDENT_ORACLE_V1",
+  "support_range_matches_production": true,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

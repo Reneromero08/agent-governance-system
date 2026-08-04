@@ -1,0 +1,506 @@
+{
+  "algebra_checks": {
+    "chirp_escapes_fixed12_paley_fusion_chart": true,
+    "chirp_inverse_restores_exactly": true,
+    "phase_mode_intersection_matches_dense_hadamard": true,
+    "root_has_exact_order17": true,
+    "twisted_composition_matches_dense_matrix_product": true
+  },
+  "all_observed_post_update_states_use_at_least_2278_of_2312_cells": true,
+  "cases": [
+    {
+      "boundary": 48,
+      "depth": 1,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_support": {
+        "a_active_weyl_cells": 1152,
+        "b_active_weyl_cells": 1128,
+        "depth": 1,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2280
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "bda259ee1c8baa6fe2b1d752d49e6135e5d5043741153c62ec920edf2eafeb5d",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1128,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2280
+        }
+      ]
+    },
+    {
+      "boundary": 77,
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_support": {
+        "a_active_weyl_cells": 1148,
+        "b_active_weyl_cells": 1139,
+        "depth": 2,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2287
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "875f8d9f4fe181de91a516de8222fe2947886c9218a2da3f36d2609d321e79bd",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1128,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2280
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1139,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2287
+        }
+      ]
+    },
+    {
+      "boundary": 77,
+      "depth": 4,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_support": {
+        "a_active_weyl_cells": 1152,
+        "b_active_weyl_cells": 1144,
+        "depth": 4,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2296
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "af0db9c64f9ad119ad1bfe865fae1b5ea5739fca1f4e025ddcd0cf92aab3876e",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1128,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2280
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1139,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2287
+        },
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1144,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2296
+        }
+      ]
+    },
+    {
+      "boundary": 33,
+      "depth": 8,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_support": {
+        "a_active_weyl_cells": 1146,
+        "b_active_weyl_cells": 1146,
+        "depth": 8,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2292
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "d283dcbaef1a592660e8945756115dedcbd401b3f014febe2972f7cdea178dd2",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1128,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2280
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1139,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2287
+        },
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1144,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2296
+        },
+        {
+          "a_active_weyl_cells": 1146,
+          "b_active_weyl_cells": 1146,
+          "depth": 8,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2292
+        }
+      ]
+    },
+    {
+      "boundary": 57,
+      "depth": 16,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_support": {
+        "a_active_weyl_cells": 1146,
+        "b_active_weyl_cells": 1148,
+        "depth": 16,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2294
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "30dc4f7c5806ecb011679a6b3f31b6bfaa4a0093b7246000d6c429b13f459a08",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1128,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2280
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1139,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2287
+        },
+        {
+          "a_active_weyl_cells": 1152,
+          "b_active_weyl_cells": 1144,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2296
+        },
+        {
+          "a_active_weyl_cells": 1146,
+          "b_active_weyl_cells": 1146,
+          "depth": 8,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2292
+        },
+        {
+          "a_active_weyl_cells": 1146,
+          "b_active_weyl_cells": 1148,
+          "depth": 16,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2294
+        }
+      ]
+    },
+    {
+      "boundary": 27,
+      "depth": 1,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_support": {
+        "a_active_weyl_cells": 1156,
+        "b_active_weyl_cells": 1152,
+        "depth": 1,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2308
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "f6a97a49fcf786709405fc97333e4b97bbab023b56832000ee82d8b8393fb4e1",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1156,
+          "b_active_weyl_cells": 1152,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2308
+        }
+      ]
+    },
+    {
+      "boundary": 81,
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_support": {
+        "a_active_weyl_cells": 1148,
+        "b_active_weyl_cells": 1150,
+        "depth": 2,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2298
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "fa8f356f4e7980143c4d13ec3fd2639478e7c0b4c11cfd562b3ea1ed730c827d",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1156,
+          "b_active_weyl_cells": 1152,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2308
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        }
+      ]
+    },
+    {
+      "boundary": 93,
+      "depth": 4,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_support": {
+        "a_active_weyl_cells": 1140,
+        "b_active_weyl_cells": 1138,
+        "depth": 4,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2278
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "9511a929eefabad2b33120d46f9c568490019d9a0bd573aa84e8a46a75a6ff09",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1156,
+          "b_active_weyl_cells": 1152,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2308
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        },
+        {
+          "a_active_weyl_cells": 1140,
+          "b_active_weyl_cells": 1138,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2278
+        }
+      ]
+    },
+    {
+      "boundary": 0,
+      "depth": 8,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_support": {
+        "a_active_weyl_cells": 1148,
+        "b_active_weyl_cells": 1150,
+        "depth": 8,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2298
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "cba918e9c8c06dee8a263f002da4edcf915d9b58df119ea25a8dd0348b53da61",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1156,
+          "b_active_weyl_cells": 1152,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2308
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        },
+        {
+          "a_active_weyl_cells": 1140,
+          "b_active_weyl_cells": 1138,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2278
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 8,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        }
+      ]
+    },
+    {
+      "boundary": 49,
+      "depth": 16,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_support": {
+        "a_active_weyl_cells": 1146,
+        "b_active_weyl_cells": 1138,
+        "depth": 16,
+        "full_two_port_weyl_capacity": 2312,
+        "total_active_weyl_cells": 2284
+      },
+      "hidden_weyl_coefficients_serialized": false,
+      "maximum_public_plus_delta_cells": 1224,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "464cb4e4337c2cb788ad1243f8489c2a145fa974acd0cb5def576b8228e8c85b",
+      "snapshot_used": false,
+      "support_history": [
+        {
+          "a_active_weyl_cells": 1156,
+          "b_active_weyl_cells": 1152,
+          "depth": 1,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2308
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 2,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        },
+        {
+          "a_active_weyl_cells": 1140,
+          "b_active_weyl_cells": 1138,
+          "depth": 4,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2278
+        },
+        {
+          "a_active_weyl_cells": 1148,
+          "b_active_weyl_cells": 1150,
+          "depth": 8,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2298
+        },
+        {
+          "a_active_weyl_cells": 1146,
+          "b_active_weyl_cells": 1138,
+          "depth": 16,
+          "full_two_port_weyl_capacity": 2312,
+          "total_active_weyl_cells": 2284
+        }
+      ]
+    }
+  ],
+  "claim_candidate": "BOUNDED_EXACT_F103_C17_TWO_FIBER_PALEY_PHASE_WEYL_CHIRP_COUPLING_ESCAPES_THE_FIXED12_FUSION_CHART_AND_EXPANDS_THE_INITIAL136_ACTIVE_TWO_PORT_CELLS_TO_AT_LEAST2278_OF2312_WEYL_CELLS_THROUGH_DEPTH16_UNDER_NATIVE_TWISTED_COMPOSITION_AND_PHASE_MODE_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_MATCHED_WEYL_CLASSICAL_RECURRENCE_IS_IDENTICAL",
+  "claim_ceiling": "F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "missing_inverse_fails_restoration": true,
+    "module_reordering_changes_boundary": true,
+    "null_family_rejected": true,
+    "premature_boundary_projection_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "experiment": {
+    "cyclic_order": 17,
+    "fibers": 2,
+    "field": 103,
+    "final_boundary_only": true,
+    "fixed12_predecessor_cells_per_port": 12,
+    "full_weyl_cells_per_port": 1156,
+    "hidden_weyl_coefficients_serialized": false,
+    "native_chirp": "MODE_SHIFT_M_MINUS_2KD_WITH_PHASE_OMEGA_MINUS_KD2",
+    "native_composition": "TWISTED_DISPLACEMENT_PHASE_MODE_CONVOLUTION",
+    "native_intersection": "PHASE_MODE_CONVOLUTION_AT_FIXED_DISPLACEMENT",
+    "native_state": "ADAPTIVE_DISPLACEMENT_PHASE_MODE_WEYL_COEFFICIENTS",
+    "ordinary_relation_table_materialized_on_accepted_path": false,
+    "primitive_phase_root": 72,
+    "public_topology_reads_final_answer": false
+  },
+  "matched_baselines": {
+    "cold_start_comparison_used": false,
+    "dense_matrix_semantics_executed_for_algebra_PARITY": true,
+    "strongest_executed": "IDENTICAL_ADAPTIVE_WEYL_DISPLACEMENT_PHASE_MODE_RECURRENCE",
+    "strongest_law_identical_to_accepted": true
+  },
+  "next_obstruction": "PHASE_CHIRP_BREAKS_THE_FIXED12_FUSION_BUT_THE_EXACT_WEYL_CHART_BECOMES_NEAR_DENSE_AT_2278_TO_2308_OF_2312_TWO_PORT_CELLS_AND_HAS_AN_IDENTICAL_CLASSICAL_RECURRENCE",
+  "not_established": [
+    "GROWING_CYCLIC_ORDER_FOURIER_CHIRP_CLOSURE",
+    "GENERAL_WEYL_RELATION_COMPILER",
+    "COMPACT_CLOSURE_BELOW_FULL_MATRIX_DIMENSION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "observed_two_port_active_weyl_cell_range_after_first_update": {
+    "capacity": 2312,
+    "maximum": 2308,
+    "minimum": 2278
+  },
+  "resource_accounting": {
+    "advantage_claimed": false,
+    "full_two_port_weyl_capacity_field_cells": 2312,
+    "initial_two_port_expanded_weyl_cells": 136,
+    "matched_dense_two_port_relation_field_cells": 2312,
+    "matched_identical_weyl_two_port_field_cells": 2312,
+    "python_container_allocator_runtime_and_whole_process_peak_excluded": true,
+    "retained_compiled_plan_cells": 0,
+    "retained_inverse_history_cells": 0,
+    "snapshot_cells": 0
+  },
+  "restoration_and_reuse": {
+    "exact_canonical_state_restored_after_reuse": true,
+    "first_boundary": 48,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 0,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_RESULTS_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
