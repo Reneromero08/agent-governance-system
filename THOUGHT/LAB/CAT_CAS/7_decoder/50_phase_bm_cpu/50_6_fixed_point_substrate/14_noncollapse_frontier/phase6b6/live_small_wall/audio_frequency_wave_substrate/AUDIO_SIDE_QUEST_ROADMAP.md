@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CATVM_S3_ATOMIC_CUSTODY_WITH_SMALLER_IDENTICAL_CLASSICAL_BASELINE_RESULT`
-**Roadmap version:** `14.33`
+**Status:** `STRICT_SCOPE_GROWING_DIHEDRAL_IRREP_SPARSE_FULL_CAPACITY_NO_GO`
+**Roadmap version:** `14.34`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7cb8a1764fa4652b521e1daaccfc32fbb1a74116`
+**Reconciled source head:** `d7b56ed4e40564971c68269deeb9b0f3bcefe42b`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL`
-**Current claim ceiling:** `S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE`
+**Current claim ceiling:** `F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M167_CATVM_S3_ATOMIC_CUSTODY_AND_SMALLER_CLASSICAL_BASELINE_RESULT`
+**New mechanism development:** `ACTIVE_AFTER_M168_GROWING_DIHEDRAL_IRREP_SPARSE_FULL_CAPACITY_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_FIXED_RANK_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -77,7 +77,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7cb8a1764fa4652b521e1daaccfc32fbb1a74116`. The current 167-milestone
+`d7b56ed4e40564971c68269deeb9b0f3bcefe42b`. The current 168-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4706,7 +4706,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL
+BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE
 ```
 
 Not established:
@@ -7318,6 +7318,67 @@ irrep classical recurrences. It may establish a bounded fixed-rank family or
 a no-go; it may not infer a distinct phase resource from avoiding a dense
 relation table. No computational advantage, Small Wall crossing, physical
 execution, physical-bit replacement, or unbounded computation is established.
+
+## M168: growing dihedral irrep sparsity saturates full capacity
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE
+```
+
+M168 changes the tested group size rather than enlarging fixed S3. Two
+translation-relation ports begin with one active two-dimensional irrep block
+each. Public triangular shears interleave left and right noncommutative group
+composition with Hadamard intersection. The accepted path retains only
+nonzero irrep blocks; each intersection streams one group coefficient at a
+time and retains no full group vector.
+
+The initially active two-port capacity is eight field cells. Every primary
+case reaches the full two-port group-algebra capacity by depth 16: 12, 24, 68,
+136, and 204 cells for group orders 6, 12, 34, 68, and 102. The larger support
+histories include `24 -> 40 -> 68`, `24 -> 40 -> 72 -> 134 -> 136`, and
+`24 -> 40 -> 72 -> 136 -> 204`. Adaptive nonabelian irrep sparsity therefore
+does not establish group-size-independent fixed-rank closure for this family.
+
+The independent no-import oracle uses full group coordinates as its primitive
+state. It reproduces all six boundaries, complete state commitments, every
+support-history tuple, all declared representation homomorphisms, and every
+group-basis Fourier round trip. It independently reverses all cases exactly;
+missing, wrong, and reordered inverses fail. Production same-backing reuse
+matches a fresh unrelated alternate-family run at restoration generation two.
+
+The strongest compact classical baseline is the identical adaptive irrep
+recurrence and consequently has the same state law. The executed full group-
+coordinate recurrence also agrees. Streamed intersection avoids retaining a
+group vector but performs the square of the group order in coefficient scans
+per output transform. Python containers, allocator/runtime state, cached
+public topology, and whole-process memory are excluded.
+
+M168 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE
+```
+
+Selected phase-owned successor:
+
+```text
+EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+```
+
+The successor tests whether a topology-defined coherent-configuration fusion
+law can retain a fixed twelve-coordinate noncommutative relation algebra as
+the represented vertex set grows. It must execute both composition and
+intersection without ordinary relation-table expansion, preserve final-only
+projection and exact restoration/reuse, and retain the identical compact
+classical recurrence. Even success would establish only a restricted
+structural closure, not a distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation.
 
 ## 10. Roadmap Maintenance
 

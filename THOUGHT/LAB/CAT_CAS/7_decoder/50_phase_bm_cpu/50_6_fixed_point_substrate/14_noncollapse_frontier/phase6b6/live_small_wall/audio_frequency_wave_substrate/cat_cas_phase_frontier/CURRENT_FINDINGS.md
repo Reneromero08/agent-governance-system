@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7cb8a1764fa4652b521e1daaccfc32fbb1a74116`. The canonical per-milestone
+`d7b56ed4e40564971c68269deeb9b0f3bcefe42b`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9531,3 +9531,53 @@ support/rank must grow to the full group coordinate law. It must preserve
 exact restoration/reuse and compare the strongest streamed group and irrep
 classical recurrences. No Small Wall crossing, physical execution,
 physical-bit replacement, or unbounded computation is established.
+
+## M168: growing dihedral irrep sparsity reaches full group capacity
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE
+```
+
+Two F103 dihedral translation-relation ports start with one active K1 irrep
+block apiece. Public four-shear layers interleave noncommutative left/right
+composition and Hadamard intersection. The accepted carrier retains adaptive
+nonzero irrep blocks, while each intersection reconstructs and consumes one
+group coefficient at a time without retaining a full group vector.
+
+The two-port active capacity grows from eight cells to the complete group-
+algebra capacity in every primary depth-16 case. The final capacities are 12,
+24, 68, 136, and 204 field cells for group orders 6, 12, 34, 68, and 102.
+Thus the tested adaptive sparsity does not provide fixed-rank closure as group
+size grows.
+
+An independent full-group-coordinate oracle imports no production module. It
+matches all six boundaries, commitments, support histories, and final support
+records, checks every declared representation homomorphism and all group-basis
+Fourier round trips, and independently restores all cases exactly. Missing,
+wrong, and reordered inverse controls fail; module order changes the tested
+boundary. Production same-backing cross-family reuse matches fresh execution.
+
+M168 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical baseline is the identical adaptive irrep
+recurrence. The full group-coordinate recurrence is also executed and agrees.
+
+Exact ceiling:
+
+```text
+F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE
+```
+
+Next experiment:
+
+```text
+EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+```
+
+This tests a structure-preserving fusion-closed relation algebra rather than
+another sparse chart of the full group algebra. No general finite-group
+compiler, CATVM custody, distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.

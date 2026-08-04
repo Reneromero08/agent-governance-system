@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`7cb8a1764fa4652b521e1daaccfc32fbb1a74116`. The registry assigns one
+`d7b56ed4e40564971c68269deeb9b0f3bcefe42b`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 167-milestone lane is active by user direction. Continue from the
+The current 168-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,25 +53,26 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_F103_S3_NONCOMMUTATIVE_TRANSLATION_RELATION_PHASE_ALGEBRA_RETAINS_ONE_SHARED_UNRESOLVED_SIX_CELL_PORT_ACROSS_MULTIPLE_CONSUMERS_WITH_ATOMIC_FINAL_ONLY_RESPONSE_EXACT_RESTORATION_AND_REUSE_BUT_MATCHED_SIX_COORDINATE_CLASSICAL_RECURRENCE_IS_IDENTICAL
+BOUNDED_EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_NO_GO_FINDS_ADAPTIVE_BLOCK_SUPPORT_SATURATES_THE_FULL_TWO_PORT_GROUP_ALGEBRA_CAPACITY_ON_D6_D12_D34_D68_D102_BY_DEPTH16_UNDER_NONCOMMUTATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE
 ```
 
 Claim ceiling:
 
 ```text
-S3_TRANSLATION_INVARIANT_F103_RELATIONS_TWO_SIX_CELL_PORTS_PRIMARY_DEPTH1_ALTERNATE_DEPTH256_CONTROLS_AT_PRIMARY_DEPTH64_SEPARATE_NON_DUMPABLE_SAME_UID_LINUX_BINARY_PIPE_SERVICE_FIXED_PUBLIC_FOUR_SHEAR_PROGRAM_GENERATOR
+F103_SPLIT_DIHEDRAL_TRANSLATION_INVARIANT_RELATIONS_ROTATION_ORDERS3_6_17_34_51_ONE_PRIMARY_DEPTH16_CASE_EACH_ONE_ALTERNATE_D34_DEPTH8_CASE_DIRECT_PROCESS_SOFTWARE
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
-production service keeps a shared six-cell S3 relation port hidden through
-multiple noncommuting consumers and releases the final boundary only after
-exact same-backing restoration. Missing, wrong, and reordered inverses execute
-after forward residency and withhold the response. The accepted logical peak
-is 37 field slots versus 25 for the identical streamed classical recurrence.
-It does not establish OS/hardware isolation, a general finite-group compiler,
-a distinct phase resource, computational advantage, Small Wall crossing,
-physical waveform execution, or replacement of physical bits with pi.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. Adaptive
+nonzero dihedral irrep blocks close exact noncommutative composition and
+Hadamard intersection, but all five primary cases reach the full two-port
+group-algebra capacity by depth 16: 12, 24, 68, 136, and 204 field cells for
+group orders 6, 12, 34, 68, and 102. The strongest classical baseline is the
+identical adaptive irrep recurrence. The accepted direct-process carrier
+restores and reuses exact backing, but this result establishes neither CATVM
+custody nor fixed-rank growth, a distinct phase resource, computational
+advantage, Small Wall crossing, physical waveform execution, or replacement
+of physical bits with pi.
 
 The accumulated bounded architecture includes:
 
@@ -265,7 +266,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M167_CATVM_S3_ATOMIC_CUSTODY_AND_SMALLER_CLASSICAL_BASELINE_RESULT
+ACTIVE_AFTER_M168_GROWING_DIHEDRAL_IRREP_SPARSE_FULL_CAPACITY_NO_GO
 ```
 
 The named
@@ -274,16 +275,17 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_F103_DIHEDRAL_TRANSLATION_RELATION_IRREP_SPARSE_PHASE_ALGEBRA_COMPOSITION_INTERSECTION_RANK_GROWTH_OR_FIXED_RANK_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
+EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_PHASE_RELATION_ALGEBRA_COMPOSITION_INTERSECTION_CLOSURE_WITH_MATCHED_COMPACT_CLASSICAL_RECURRENCE
 ```
 
-Change the phase algebra's growth law rather than adding another CATVM wrapper
-or larger fixed S3 fixture. Test F103-compatible growing dihedral orders for
-exact irrep-sparse closure under noncommutative composition and intersection,
-measure support/rank growth, preserve final-only projection and exact
-restoration/reuse, and execute the strongest streamed group and irrep
-classical recurrences. Preserve M167's machine-law result and negative
-resource comparison.
+The growing dihedral diagnostic has rejected adaptive irrep sparsity as a
+fixed-rank route at its bounded family ceiling. Change the relation algebra,
+not the fixture size: test the smallest growing two-fiber coherent
+configuration whose twelve basis relations are closed under both
+noncommutative composition and Hadamard intersection. Preserve final-only
+projection, exact restoration/reuse, and the identical twelve-coordinate
+classical recurrence. Do not infer a distinct phase resource merely from
+fixed structural rank.
 
 ## 7. Native No-Smuggle Law
 
