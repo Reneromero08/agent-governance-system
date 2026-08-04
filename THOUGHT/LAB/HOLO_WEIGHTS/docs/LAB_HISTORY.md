@@ -288,3 +288,60 @@ FAILED / OVERREACH (corrected):
   reversible holonomy preserves coherence -> genuinely new.
 
 DECISIVE FRONTIER CLAIM: UNVERIFIED. DECISIVE SVD-FAMILY FAILURE: VERIFIED.
+
+## 2026-08-04 — Adversarial check batch (Sol's checks, all three probes run)
+
+PROBE 1 - B4c-checks: Sol's 5 adversarial checks on sieve==top-k (gate_proj,
+k=512, 6 layers, exact inputs):
+- top-k beats every alternative criterion: topk 0.561, IPR-selection 0.366,
+  random 0.250, Haar-random-vectors 0.001
+- Spearman(participation=IPR, singular value) = -0.057: criteria are
+  independent; singular values are the better selector
+- Permutation-invariance FAILS: the IPR-selected top-k set CHANGES under
+  row permutation (which preserves singular values) - the "structured
+  mode" class is not a genuine matrix invariant, it is presentation-dependent
+VERDICT: the flat-spectrum terminus for INDEPENDENT per-matrix selection is
+verified under Sol's own adversarial checks. No data-free per-matrix
+criterion beats top-k.
+
+PROBE 2 - B5 coupled modes: Sol's one unmeasured direction (joint invariants
+across gate/up). Joint-gram selection C = Wg^T Wg + Wu^T Wu, top-k joint
+eigenvectors, both maps projected onto the joint subspace:
+- independent top-k 0.560 vs joint 0.541 (k=512, 6 layers, exact inputs)
+VERDICT: the coupled joint-invariant criterion does NOT beat independent
+top-k. The SVD-family is now closed under adversarial check: no data-free
+criterion - per-matrix or coupled - beats singular-value ranking.
+Sol's "coupled modes could beat top-k" hypothesis: FALSIFIED by measurement.
+
+PROBE 3 - B6 exact-sourced si with Sol's acceptance criteria (bandwidth
+B=64 scalars/layer/stage, 32 layers, held-out prompts):
+- full-exact: 1.000 (upper bound)
+- direct exact-residual injection: 0.791
+- si sign-channel holonomy (twin-rail, magnitudes from fold-even |a|): 0.536
+- corrupt (random signs): 0.097
+- uncorrected pure holo: -0.087
+KEY FINDINGS:
+(1) The fold-odd residue of a REAL transformer state is real: its phase
+    channel is degenerate (+/-1 signs). No phase information exists in the
+    public real representation - Wall_2 measured at the frontier-probe level.
+(2) Sol's killer control FAILS: direct exact-residual injection beats the
+    si holonomy at equal bandwidth (0.791 vs 0.536).
+(3) The correction signal is dominated by the fold-even carrier a (the
+    borrowed exact branch): even random-sign corrupt reaches 0.097 while
+    pure holo is -0.087. The si channel is a negligible add-on on top of
+    the oracle borrow.
+VERDICT: Sol's decisive frontier claim (exact-sourced persistent si that
+survives source removal and beats direct injection) is FALSIFIED in the
+real-domain construction at equal bandwidth. The si holonomy is oracle-
+assisted exact computation wearing phase notation, and worse than direct
+injection. A genuine phase channel requires complex states from the start
+(EIGEN_BUDDY's own architecture) - a different program, not a fix for
+Qwen .holo.
+
+GRAND VERDICT (adversarial batch): SVD-family failure verified (all
+directions closed). The phase-notation frontier, when built on real public
+states, degenerates to sign channels that lose to direct injection. The
+path forward is either (a) complex-native architecture from the start
+(phase is state from the embedding), or (b) the unresolved: accept the
+measured wall - dense transformer channels are near-full-rank and their
+public representation is phase-less.

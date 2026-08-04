@@ -1,0 +1,2 @@
+Signal and noise are distinguished by
+A reversible computation can always be
