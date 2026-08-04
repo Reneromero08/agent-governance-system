@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`. The canonical per-milestone
+`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9607,4 +9607,43 @@ Next:
 
 ```text
 EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+## M170: C17 Weyl-chirp fusion escape becomes near-dense
+
+The exact F103 carrier adds source/target fiber, C17 displacement, and phase-
+mode coordinates. Quadratic chirp acts by `(d,m) -> (d,m-2kd)` with multiplier
+`omega^(-k d^2)`. Relation composition is the corresponding twisted
+convolution; intersection is mode convolution at fixed displacement.
+
+The M169 fused seed expands to 136 active two-port cells. Across primary and
+alternate public families at depths 1, 2, 4, 8, and 16, every observed
+post-update state uses between 2,278 and 2,308 cells of the 2,312-cell Weyl
+capacity. This rejects compact closure in the tested full Weyl chart without
+claiming exact saturation.
+
+A separately implemented exact 34-by-34 dense-matrix oracle imports no
+production code. It reproduces all ten boundaries, semantic commitments,
+support histories, final supports, exact inverses, backing identities,
+generation records, controls, and fresh/restored reuse. Its independent
+Fourier recovery also confirms that the chirped public relation is
+x-dependent within one displacement and therefore cannot remain in the
+fixed-12 Paley fusion chart.
+
+M170 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`, limited to:
+
+```text
+F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE
+```
+
+The strongest compact classical method remains the identical adaptive Weyl
+recurrence. No CATVM custody, distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, or unbounded
+computation is established.
+
+Next:
+
+```text
+EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```

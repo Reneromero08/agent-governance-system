@@ -1,0 +1,17 @@
+{
+  "schema": "CAT_CAS_F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_PROVENANCE_V1",
+  "scientific_source_head": "c3719fecc3b11c3d8194ac5f1eb1b6606898a454",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "files": {
+    "f103_c17_two_fiber_paley_weyl_chirp_fusion_escape.py": "54db895b86fffdd9107ccae4d26d249ffdde20d2087d3a87a3e2c6870632255e",
+    "F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_RESULTS.json": "b9f84cfe9529f071116ed2a0b46a7d0f693c19903185407d8e0ab1eee270b7eb",
+    "f103_c17_two_fiber_paley_weyl_chirp_fusion_escape_independent_oracle.py": "cde627ea2499f0c92f198cee44582b52fab1bfef4abe56c44bde21ea19d798c1",
+    "F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_INDEPENDENT_ORACLE.json": "ec0618b099963e931626bea3955faeac61c9d104da5303881f4299370ee16a14",
+    "F103_C17_TWO_FIBER_PALEY_WEYL_CHIRP_FUSION_ESCAPE_INDEPENDENT_REEXECUTION_REVIEW.md": "0370e347b1a6573820ba04d9a76d9806b980ddab11b14bdcfbb89896dba1654b",
+    "qualify_f103_c17_two_fiber_paley_weyl_chirp_fusion_escape.sh": "b93fa002d43f067d2da6597b740d30d9567a02b324fb207e15d7d9332500802c"
+  },
+  "claim_ceiling": "F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE"
+}

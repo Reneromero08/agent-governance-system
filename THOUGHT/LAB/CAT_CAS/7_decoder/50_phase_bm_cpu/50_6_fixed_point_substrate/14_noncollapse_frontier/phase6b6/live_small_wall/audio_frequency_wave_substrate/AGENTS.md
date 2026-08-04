@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`. The registry assigns one
+`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 169-milestone lane is active by user direction. Continue from the
+The current 170-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -265,7 +265,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M169_FIXED12_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_CLOSURE
+ACTIVE_AFTER_M170_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO
 ```
 
 The named
@@ -274,14 +274,15 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
+EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
 The fixed twelve-coordinate fusion law is established at its declared family
-ceiling, but it is classically bisimulated. Test the smallest public Fourier-
-chirp phase coupling on the same growing two-fiber geometry and determine
-whether it escapes the fusion basis or closes compactly. Measure any rank or
-class growth where it occurs; preserve final-only projection, exact
+ceiling, and M170 shows that the tested C17 Fourier-chirp coupling escapes it
+but becomes near-dense at 2,278 to 2,308 of 2,312 two-port Weyl cells. Test the
+smallest growing-prime Weil-Gaussian phase-kernel invariant that can preserve
+native composition and intersection without moving component, coefficient,
+or precision growth elsewhere. Preserve final-only projection, exact
 restoration/reuse, and the strongest compact classical recurrence.
 
 ## 7. Native No-Smuggle Law

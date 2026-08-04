@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FIXED12_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_CLOSURE`
-**Roadmap version:** `14.35`
+**Status:** `STRICT_SCOPE_C17_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO`
+**Roadmap version:** `14.36`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`
+**Reconciled source head:** `c3719fecc3b11c3d8194ac5f1eb1b6606898a454`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_F103_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_VERTEX_COUNTS10_26_34_58_74_106_146_194_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_F103_C17_TWO_FIBER_PALEY_PHASE_WEYL_CHIRP_COUPLING_ESCAPES_THE_FIXED12_FUSION_CHART_AND_EXPANDS_THE_INITIAL136_ACTIVE_TWO_PORT_CELLS_TO_AT_LEAST2278_OF2312_WEYL_CELLS_THROUGH_DEPTH16_UNDER_NATIVE_TWISTED_COMPOSITION_AND_PHASE_MODE_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_MATCHED_WEYL_CLASSICAL_RECURRENCE_IS_IDENTICAL`
+**Current claim ceiling:** `F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M169_FIXED12_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_CLOSURE`
+**New mechanism development:** `ACTIVE_AFTER_M170_WEYL_CHIRP_FUSION_ESCAPE_NEAR_DENSITY_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -44,14 +44,15 @@ reduces retain-all storage from 27 to 24 field cells, but the identical
 reversible classical pebbler has the same law and an executed compact
 occurrence recurrence uses only 15. More fixture scaling is not the repair.
 M166 changes the composition algebra to the smallest nonabelian group and
-establishes exact noncommutative convolution plus intersection, but the
-accepted carrier is the identical six-coordinate group recurrence and the
-irrep transform retains all six information coordinates. M167 puts that
-algebra behind CATVM, enforces response-after-restore ordering, and executes
-the applicable reordered-inverse failure after forward residency. The
-accepted logical peak is 37 field slots versus 25 for the identical streamed
-classical recurrence. The next experiment changes the phase algebra's growth
-law by testing irrep-sparse closure across a growing dihedral family.
+M167 puts that algebra behind an atomic CATVM boundary, but both retain
+identical compact classical recurrences. M168 shows that adaptive dihedral
+irrep support reaches full group-algebra capacity. M169 then establishes a
+fixed-12 two-fiber Paley fusion algebra across growing geometry, again with an
+identical classical recurrence. M170 tests the missing phase chirp: it exits
+the fixed-12 fusion chart and produces 2,278 to 2,308 active cells of the 2,312
+cell two-port Weyl capacity. The selected repair now tests whether a growing-
+prime Weil-Gaussian kernel invariant can close composition and intersection
+without moving that near-density elsewhere.
 
 Every successor must answer:
 
@@ -77,7 +78,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f169ee9f5c32a3b363b9ec82a6e4887a422e58f8`. The current 169-milestone
+`c3719fecc3b11c3d8194ac5f1eb1b6606898a454`. The current 170-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -7425,6 +7426,57 @@ EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLIN
 No general coherent-configuration compiler, CATVM custody, distinct phase
 resource, advantage, Small Wall crossing, physical execution, physical-bit
 replacement, or unbounded computation is established.
+
+## M170: C17 Weyl-chirp fusion escape and near-density no-go
+
+Claim:
+
+```text
+BOUNDED_EXACT_F103_C17_TWO_FIBER_PALEY_PHASE_WEYL_CHIRP_COUPLING_ESCAPES_THE_FIXED12_FUSION_CHART_AND_EXPANDS_THE_INITIAL136_ACTIVE_TWO_PORT_CELLS_TO_AT_LEAST2278_OF2312_WEYL_CELLS_THROUGH_DEPTH16_UNDER_NATIVE_TWISTED_COMPOSITION_AND_PHASE_MODE_INTERSECTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_MATCHED_WEYL_CLASSICAL_RECURRENCE_IS_IDENTICAL
+```
+
+M170 adds an exact C17 quadratic phase chirp to the M169 two-fiber Paley
+relation substrate. The carrier uses source fiber, target fiber, cyclic
+displacement, and Fourier mode coordinates. Chirp acts by
+`(d,m) -> (d,m-2kd)` with multiplier `omega^(-k d^2)`; composition is the
+corresponding twisted convolution and intersection is mode convolution at
+fixed displacement.
+
+The seed expands to 136 active cells across two ports. In both fixed public
+program families at depths 1, 2, 4, 8, and 16, the post-update support ranges
+from 2,278 to 2,308 active cells of the 2,312-cell capacity. This is near
+density, not exact full-support saturation. Final-only scalar projection,
+exact same-backing inverse restoration, and generation-two unrelated reuse
+all pass without snapshot reload.
+
+The independent oracle imports no production code. It reconstructs exact
+34-by-34 F103 matrices, executes matrix multiplication and Hadamard product,
+recovers Weyl support through a separate inverse Fourier transform, and
+matches all ten boundaries, full-state commitments, support histories,
+controls, restoration records, and reuse results. It also confirms directly
+that the chirped relation is x-dependent within a fixed displacement and
+therefore is outside the fixed-12 fusion chart.
+
+M170 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+F103_C17_TWO_FIBER_PALEY_SEEDS_TWO_FIXED_PUBLIC_WEYL_CHIRP_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_DIRECT_PROCESS_SOFTWARE
+```
+
+Selected successor:
+
+```text
+EXACT_GROWING_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_COMPOSITION_INTERSECTION_FIXED_PARAMETER_CLOSURE_OR_COMPONENT_GROWTH_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+The strongest compact classical baseline remains the identical adaptive Weyl
+recurrence. No growing-order chirp closure, general Weyl compiler, compact
+closure below full matrix dimension, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation is established.
 
 ## 10. Roadmap Maintenance
 
