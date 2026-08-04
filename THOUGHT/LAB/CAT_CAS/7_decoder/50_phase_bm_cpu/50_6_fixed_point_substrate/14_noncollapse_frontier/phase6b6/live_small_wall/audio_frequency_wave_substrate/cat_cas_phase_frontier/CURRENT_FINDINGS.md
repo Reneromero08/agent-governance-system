@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The canonical per-milestone
+`c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9681,4 +9681,45 @@ Next:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
+```
+
+## M172: growing-prime cubic-deformed Weil component-rank no-go
+
+The accepted exact carrier stores one deformed port as Weyl-displacement
+coefficients over a common Weil-Gaussian chart, while a second actual resident
+Gaussian port conjugates it. Public separable cubic phases are consumed by
+exact left/right component convolution. Only the four declared probes are
+projected at the final boundary.
+
+Across the eleven declared cases, one cubic intersection produces at least
+`(q-3)^2` nonzero components. The observed first-layer supports are 4, 100,
+484, 729, 1521, 2500, 6724, 7569, 12321, 12321, and 1521. Exact inverse
+execution restores the same backing, and an unrelated cross-family second
+transaction reaches generation two without snapshot reload.
+
+An independent implementation reconstructs every boundary, component
+commitment, checkpoint, resource point, inverse, and reuse record. It also
+executes the same public operator words on q-vectors, checks all 3,000 q=5
+Gaussian/displacement products against dense semantics, reconstructs q=5 and
+q=11 cubic diagonals, and matches two complete small dense programs. The
+classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The accepted component chart has quadratic growing-order coordinates and a
+fully supported resident law of `3*q^2+19` field cells. The strongest executed
+final-boundary baseline retains only `2*q` dynamic field cells plus the
+counted `12*depth` public plan. Therefore M172 rejects compact non-Gaussian
+closure in this Gaussian-component chart; it does not assert exact full
+`q^2` saturation and establishes no distinct phase resource or advantage.
+
+Ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE
+```
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE
 ```

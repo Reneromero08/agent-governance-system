@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE`
-**Roadmap version:** `14.37`
+**Status:** `STRICT_SCOPE_CUBIC_WEIL_COMPONENT_QUADRATIC_GROWTH_DIAGNOSED`
+**Roadmap version:** `14.38`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `880ab5d9eab465da2c8ffe87be8432f10ec23790`
+**Reconciled source head:** `c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_WEIL_GAUSSIAN_PHASE_KERNEL_RELATION_CHART_CLOSES_NATIVE_NONCOMMUTATIVE_COMPOSITION_AND_SEPARABLE_CHIRP_HADAMARD_INTERSECTION_IN_FIXED16_TWO_PORT_CELLS_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL16_CELL_CLASSICAL_CHART_WITH_CLOSED_GAUSS_COCYCLE_REMAINS`
-**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH256_ALL_PRIMARY_DEPTH1024_Q113_ALTERNATE_DEPTH128_Q41_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_GAUSSIAN_COMPONENT_CHART_HAS_AT_LEAST_Q_MINUS3_SQUARED_DEFORMED_PORT_COMPONENTS_AFTER_ONE_CUBIC_INTERSECTION_ON_EVERY_DECLARED_ORDER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_AN_EXECUTED_Q_VECTOR_PUBLIC_WORD_CLASSICAL_RECURRENCE_USES_LINEAR_STATE`
+**Current claim ceiling:** `SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M171_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE`
+**New mechanism development:** `ACTIVE_AFTER_M172_CUBIC_WEIL_COMPONENT_QUADRATIC_GROWTH_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -52,9 +52,13 @@ identical classical recurrence. M170 tests the missing phase chirp: it exits
 the fixed-12 fusion chart and produces 2,278 to 2,308 active cells of the 2,312
 cell two-port Weyl capacity. M171 closes the declared growing-safe-prime
 quadratic Weil-Gaussian chart in 16 logical field cells, but the field payload
-grows and an identical classical chart has lower warm cocycle work. The
-selected repair now adds the smallest cubic non-Gaussian deformation and
-tests component-rank growth against a matched character-sum recurrence.
+grows and an identical classical chart has lower warm cocycle work. M172 adds
+the smallest separable cubic deformation and finds at least `(q-3)^2` Weyl
+components after one intersection on every declared order, while an executed
+final-boundary q-vector recurrence uses linear dynamic state. The selected
+repair now tests whether an unresolved multi-source phase-state bundle has a
+compact open-interface action span, rather than mistaking a single projected
+q-vector for a general open relation.
 
 Every successor must answer:
 
@@ -80,7 +84,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The current 171-milestone
+`c7471714dc566dddf1375f30dd9f7a3f7f2fbfad`. The current 172-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -7529,6 +7533,64 @@ Selected successor:
 
 ```text
 EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
+```
+
+## M172: cubic deformation forces quadratic Gaussian-component growth
+
+Claim:
+
+```text
+BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_GAUSSIAN_COMPONENT_CHART_HAS_AT_LEAST_Q_MINUS3_SQUARED_DEFORMED_PORT_COMPONENTS_AFTER_ONE_CUBIC_INTERSECTION_ON_EVERY_DECLARED_ORDER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_AN_EXECUTED_Q_VECTOR_PUBLIC_WORD_CLASSICAL_RECURRENCE_USES_LINEAR_STATE
+```
+
+One unresolved port now stores a sparse superposition of Weyl displacements
+of a common Weil-Gaussian kernel. A second actual resident Gaussian port
+conjugates it, and public separable cubic row/column phases act by exact native
+Weyl-component convolution. The two-fiber coupling remains noncommutative;
+only four declared probes reach the final scalar boundary.
+
+Eleven bounded cases cover all nine declared safe-prime orders at primary
+depth 2, q=113 at primary depth 4, and q=41 at alternate depth 3. The first
+cubic intersection produces component supports 4, 100, 484, 729, 1521, 2500,
+6724, 7569, 12321, 12321, and 1521. Every value is at least `(q-3)^2` for its
+case. This rejects compact growing-order closure in the accepted
+Gaussian-component chart; it does not assert exact full `q^2` saturation.
+
+The separate oracle imports neither production nor the Gaussian predecessor.
+It reconstructs all cases, executes the q-vector baseline, checks 3,000 q=5
+Gaussian/displacement products against dense semantics, reconstructs every
+q=5 and q=11 cubic diagonal, and matches complete dense programs at q=5
+depth 2 and q=11 depth 1. Missing, wrong, and reordered inverses fail; module
+order changes the boundary; invalid projection, field, and family operations
+are rejected. Same-backing cross-family reuse reaches generation two without
+a snapshot.
+
+M172 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE
+```
+
+The strongest executed compact classical comparison applies the identical
+public operator word to q-vectors for the declared final probes. It retains
+`2*q` dynamic field cells plus the counted `12*depth` public plan and no
+dynamic relation state. The accepted fully supported two-port component chart
+uses `3*q^2+19` resident field cells, with a conservative two-map update peak
+of `6*q^2+q+19`; Python object, allocator, interpreter, native-library, and
+whole-process peaks remain excluded.
+
+The result establishes no compact non-Gaussian closure, general cubic Weil
+compiler, CATVM custody, distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, or unbounded
+computation.
+
+Selected successor:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_WEIL_OPEN_INTERFACE_ACTION_SPAN_RANK_OR_COMPACT_PHASE_STATE_BUNDLE_CLOSURE_WITH_MATCHED_Q_VECTOR_KRYLOV_RECURRENCE
 ```
 
 ## 10. Roadmap Maintenance

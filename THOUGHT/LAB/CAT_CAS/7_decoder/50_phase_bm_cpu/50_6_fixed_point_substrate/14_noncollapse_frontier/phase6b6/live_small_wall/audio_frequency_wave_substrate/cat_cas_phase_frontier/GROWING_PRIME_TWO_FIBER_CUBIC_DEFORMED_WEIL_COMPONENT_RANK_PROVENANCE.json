@@ -1,0 +1,17 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_COMPONENT_RANK_PROVENANCE_V1",
+  "scientific_source_head": "c7471714dc566dddf1375f30dd9f7a3f7f2fbfad",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "files": {
+    "growing_prime_two_fiber_cubic_deformed_weil_component_rank.py": "6106ae2982ec09af1f86a75381e674666408f2cd92454dd6886a156e625ff27d",
+    "GROWING_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_COMPONENT_RANK_RESULTS.json": "d0fb925fd77ea9f80ffe066d293d23def594f5df0a6ef21c301b1ab7a20007ef",
+    "growing_prime_two_fiber_cubic_deformed_weil_component_rank_independent_oracle.py": "74bb1d0bb8991cd2ccd19e04fa82d51dc7bb9fcd2318712522783b00ad94a7c3",
+    "GROWING_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_COMPONENT_RANK_INDEPENDENT_ORACLE.json": "ef82c839c920452cf2956ad914cfe23057d54d939dc43fd65b39738882b50205",
+    "GROWING_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_COMPONENT_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "3027d9b078bf92feb2bc18033346bd543ede9634f05253316077288257918b12",
+    "qualify_growing_prime_two_fiber_cubic_deformed_weil_component_rank.sh": "f235c74654e77a2ab20f1768c403d66fa3114990e8109abd7ebd7ea1811baecf"
+  },
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE"
+}
