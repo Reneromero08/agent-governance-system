@@ -1,0 +1,25 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_REVERSIBLE_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_PROVENANCE_V1",
+  "scientific_source_head": "f6b4cc46fb4a271d01a0c60e6cbf47668ac8bfb3",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_prime_reversible_bluestein_ntt_gauss_phase_compiler.sh",
+    "status": "QUALIFIED_GROWING_PRIME_REVERSIBLE_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_STRICT_SCOPE",
+    "ephemeral_evidence_path": "/dev/shm/ags-audio-m183-qualifier-4tmg0S",
+    "sha256sums_sha256": "3c7aa864207bd144ad66ef1872eeb63a84cd3fd09cc96de8cebf29e723ab9836"
+  },
+  "files": {
+    "growing_prime_reversible_bluestein_ntt_gauss_phase_compiler.py": "835662e580fb4d55829a82b35c171535b2336876aef0c6c6d3472a0d392d93d2",
+    "GROWING_PRIME_REVERSIBLE_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_RESULTS.json": "aa9fe74f0ee962bc9b15207b7a4feb91607c6e2bf3a1f07d6b0993786bc7d4a0",
+    "growing_prime_reversible_bluestein_ntt_gauss_phase_compiler_independent_oracle.py": "fef937a26c214cadedee15f15791c3428cd316ff5b804169eae064de04b87f42",
+    "GROWING_PRIME_REVERSIBLE_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_INDEPENDENT_ORACLE.json": "e360a1fd87c071136264fcf1463c09b1064a501dbeee007510911da9b022cd75",
+    "GROWING_PRIME_REVERSIBLE_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_INDEPENDENT_REEXECUTION_REVIEW.md": "4364042ff634f7190e5ac310d7c66c588c6fa022490ac3380f6ec2c1b4661ac6",
+    "qualify_growing_prime_reversible_bluestein_ntt_gauss_phase_compiler.sh": "6c65f04d24489313811cdc36564681d0d5eb0ce0b21cc1b5ad3a8c6607d4c3cd"
+  },
+  "claim_ceiling": "FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_LINEAR_DESCRIPTOR_AND_LINEAR_TRANSFORM_SCRATCH"
+}

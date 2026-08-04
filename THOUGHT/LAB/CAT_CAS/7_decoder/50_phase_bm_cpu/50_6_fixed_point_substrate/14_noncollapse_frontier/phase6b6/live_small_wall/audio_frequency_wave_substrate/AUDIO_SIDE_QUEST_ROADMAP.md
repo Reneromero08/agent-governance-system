@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_HASSE_DAVENPORT_JACOBI_FORMAL_RELATION_RANK_OBSTRUCTION`
-**Roadmap version:** `14.48`
+**Status:** `STRICT_SCOPE_REVERSIBLE_BLUESTEIN_NTT_LINEAR_STATE_FRONTIER`
+**Roadmap version:** `14.49`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e46667ddc173cdcad4c8f7af2ded75e2f53c5470`
+**Reconciled source head:** `f6b4cc46fb4a271d01a0c60e6cbf47668ac8bfb3`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ALL_DIVISOR_HASSE_DAVENPORT_GAUSS_PHASE_RELATIONS_HAVE_FORMAL_FREE_MONOMIAL_GENERATOR_RANK_PHI_OF_QMINUS1_AND_GAUSS_NORM_AUGMENTATION_HAS_RANK_HALF_PHI_WHILE_THE_ACTUAL_MELLIN_DETERMINANT_BOUNDARY_CHANNEL_PRODUCTS_SPAN_THE_ENTIRE_REMAINING_QUOTIENT_AND_STREAMED_JACOBI_DEFINITIONS_ADD_NO_GAUSS_CONSTRAINT_WITHOUT_RETAINING_ANSWER_BEARING_VALUES_OR_REMATERIALIZING_Q_TERM_SUMS_SO_THE_DECLARED_SAFE_PRIME_CASES_RETAIN_GROWING_RANK_AND_THE_IDENTICAL_CLASSICAL_RELATION_ALGEBRA_REMAINS`
-**Current claim ceiling:** `FORMAL_INTEGER_EXPONENT_LATTICE_OF_ALL_DIVISOR_HASSE_DAVENPORT_RELATIONS_PLUS_OPTIONAL_GAUSS_NORM_ROWS_AND_APPLICABLE_TWO_CHARACTER_JACOBI_DEFINITIONS_FOR_THE_FOURTEEN_M181_PRIME_FAMILIES_WITH_ONE_DECLARED_RANK3_NONZERO_SCALE_PROGRAM_PER_FIELD_DIRECT_PROCESS_EXACT_RESIDUE_DIAGNOSTIC`
+**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS`
+**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_LINEAR_DESCRIPTOR_AND_LINEAR_TRANSFORM_SCRATCH`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M182_NONLINEAR_MONOMIAL_GAUSS_RELATION_RANK_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M183_SUBQUADRATIC_COMPILER_LINEAR_STATE_FRONTIER`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_REVERSIBLE_MIXED_RADIX_OR_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_WITH_SUBQUADRATIC_WORK_AND_HONEST_LINEAR_STATE_OR_FOURIER_WORKSPACE_OBSTRUCTION_WITH_IDENTICAL_CLASSICAL_NTT_BASELINE`
+**Active primary successor:** `EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -120,7 +120,14 @@ the complete remaining quotient in every field. Jacobi definitions add no
 Gauss constraint unless their answer-bearing values are retained or
 rematerialized. The next repair changes the update law to an exact reversible
 additive Fourier compiler and must count its linear transform workspace
-against the identical classical NTT.
+against the identical classical NTT. M183 makes that change: a reversible
+Bluestein compiler reduces all-Gauss compilation from theta-q-squared to
+theta-M-log-M exact field work, but M is linear in q and the one-backing
+carrier allocates `q-1+3M` field cells. The strongest classical method is the
+identical Bluestein/NTT compiler. The next repair therefore tests whether the
+declared final scalar can be contracted through an adjoint or multilinear
+transform without first materializing the q-minus-one descriptor; merely
+adding larger primes is not responsive to the obstruction.
 
 Every successor must answer:
 
@@ -146,7 +153,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`e46667ddc173cdcad4c8f7af2ded75e2f53c5470`. The current 182-milestone
+`f6b4cc46fb4a271d01a0c60e6cbf47668ac8bfb3`. The current 183-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4775,7 +4782,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ALL_DIVISOR_HASSE_DAVENPORT_GAUSS_PHASE_RELATIONS_HAVE_FORMAL_FREE_MONOMIAL_GENERATOR_RANK_PHI_OF_QMINUS1_AND_GAUSS_NORM_AUGMENTATION_HAS_RANK_HALF_PHI_WHILE_THE_ACTUAL_MELLIN_DETERMINANT_BOUNDARY_CHANNEL_PRODUCTS_SPAN_THE_ENTIRE_REMAINING_QUOTIENT_AND_STREAMED_JACOBI_DEFINITIONS_ADD_NO_GAUSS_CONSTRAINT_WITHOUT_RETAINING_ANSWER_BEARING_VALUES_OR_REMATERIALIZING_Q_TERM_SUMS_SO_THE_DECLARED_SAFE_PRIME_CASES_RETAIN_GROWING_RANK_AND_THE_IDENTICAL_CLASSICAL_RELATION_ALGEBRA_REMAINS
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS
 ```
 
 Not established:
@@ -8214,6 +8221,68 @@ Selected successor:
 
 ```text
 EXACT_REVERSIBLE_MIXED_RADIX_OR_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_WITH_SUBQUADRATIC_WORK_AND_HONEST_LINEAR_STATE_OR_FOURIER_WORKSPACE_OBSTRUCTION_WITH_IDENTICAL_CLASSICAL_NTT_BASELINE
+```
+
+## M183: reversible Bluestein compilation repairs quadratic work, not linear state
+
+Claim:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS
+```
+
+For `h=q-1`, M183 recognizes the complete Gauss family as one length-h
+Fourier transform of the public additive phase orbit. Bluestein chirps reduce
+that transform to a power-of-two convolution of width `M`, the least power of
+two at least `2h-1`. The 14 declared auxiliary fields contain roots of order
+q, 2h, and M. Exact production descriptors match direct Gauss transforms in
+every field.
+
+The accepted carrier is one backing with `h+3M` exact field cells: h resident
+descriptor cells and three M-cell chirp, kernel, and product segments. A
+compute-copy-uncompute compiler clears all 3M scratch cells after forward.
+Each compiler invocation uses six length-M NTTs and exactly
+`3M log2(M)` butterflies. Projection scans public character topology at most
+three times and then advances character values by recurrence, so accepted
+forward-plus-projection work is theta-M-log-M plus q rather than a hidden
+theta-q-squared per-channel scan.
+
+The final scalar survives outside inverse history. Topology-rematerialized
+inverse execution restores the exact zero carrier on the same backing, and
+an unrelated program consumes that restored backing with fresh-carrier
+boundary and resource-signature parity before restoring it again. Missing
+inverse, wrong additive-phase inverse, omitted-frequency inverse, and null
+carrier controls fail. No snapshot or enforced generation/lease metadata is
+used.
+
+A no-import oracle independently reconstructs every field, uses a recursive
+out-of-place radix-two transform rather than production's iterative in-place
+NTT, and matches all 14 descriptors, resident commitments, projections,
+restorations, and reuses. It also directly evaluates the original
+seven-dimensional relation at q=5 and q=7 over 49,600 and 603,288 nonzero
+source terms. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+M ranges from 8 through 128 and allocated carrier size from 28 through 436
+field cells. This is more state than M180's counted table peak and much more
+than M181's ten-cell theta-q-squared stream. Exact capacity also grows with
+auxiliary-prime bit width. The strongest compact classical implementation is
+the identical Bluestein/NTT compiler with the same roots, cells, butterflies,
+projection, inverse, and reuse law. M183 establishes no sublinear state,
+fixed exact bit width, CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation.
+
+Exact ceiling:
+
+```text
+FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_LINEAR_DESCRIPTOR_AND_LINEAR_TRANSFORM_SCRATCH
+```
+
+Selected successor:
+
+```text
+EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

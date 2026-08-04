@@ -10170,3 +10170,53 @@ Next:
 ```text
 EXACT_REVERSIBLE_MIXED_RADIX_OR_BLUESTEIN_NTT_GAUSS_PHASE_COMPILER_WITH_SUBQUADRATIC_WORK_AND_HONEST_LINEAR_STATE_OR_FOURIER_WORKSPACE_OBSTRUCTION_WITH_IDENTICAL_CLASSICAL_NTT_BASELINE
 ```
+
+## M183: exact reversible Bluestein/NTT Gauss compilation
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS
+```
+
+For each of the 14 declared primes q=5 through q=53, the complete Gauss
+family is compiled as a length-`q-1` Fourier transform of the additive phase
+orbit. Bluestein's chirp identity uses a power-of-two convolution width M at
+least `2(q-1)-1`. The exact auxiliary fields contain all required roots. A
+single `q-1+3M`-cell backing holds the resident descriptor and three transform
+segments. Compute-copy-uncompute clears every scratch cell after forward.
+
+One compiler invokes six NTTs and `3M log2(M)` butterflies. Public character
+topology is scanned at most three times during projection; channel character
+values then advance by recurrence. The accepted compiler plus projection is
+theta-M-log-M plus q work. It therefore repairs M181's theta-q-squared
+all-Gauss compilation route, but M is linear in q and exact bit capacity grows.
+
+The final scalar persists outside inverse history. Rematerializing the public
+compiler subtracts the actual resident descriptor and restores the exact zero
+carrier on the same backing. An unrelated second program consumes that
+restored backing, agrees with a fresh carrier in boundary and resource
+signature, and restores again. Missing, wrong-phase, omitted-frequency, and
+null-carrier controls fail. No snapshot is used; direct-process bookkeeping
+does not enforce generation or lease ownership.
+
+The no-import oracle rebuilds field roots, direct Gauss tables, and a recursive
+out-of-place NTT independently. It matches all 14 production descriptors,
+resident commitments, projections, restorations, and reuses, and directly
+sums the original seven-dimensional relation at q=5 and q=7. The result is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Carrier allocation grows from 28 to 436 exact field cells. M180's table path,
+M181's fixed-ten-cell quadratic stream, and M183's linear-state
+subquadratic-work path are all retained as distinct Pareto points. The
+strongest compact classical baseline is the identical Bluestein/NTT compiler,
+so no state/work advantage or distinct phase resource is established. The
+claim also excludes CATVM custody, Small Wall crossing, physical execution,
+physical-bit replacement, and unbounded computation.
+
+Next:
+
+```text
+EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
+```
