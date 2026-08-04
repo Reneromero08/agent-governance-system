@@ -21,6 +21,7 @@ REPO = Path(__file__).resolve().parents[2]
 CONFIG = json.loads((REPO / "config" / "paths.json").read_text())
 
 MODEL_DIR = Path(CONFIG["model"]["qwen3_6_27b"])
+DEFAULT_MODEL_DIR = MODEL_DIR
 INDEX_PATH = MODEL_DIR / "model.safetensors.index.json"
 DEFAULT_OUT = REPO / "output" / "qwen_27b_k256.holo"
 
@@ -76,11 +77,15 @@ def compress_2d(tensor: torch.Tensor, k: int, device: str = "cuda", M=None, over
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--k", type=int, default=DEFAULT_K)
+    ap.add_argument("--model-dir", type=str, default=str(DEFAULT_MODEL_DIR), help="override model dir")
     ap.add_argument("--limit-shards", type=int, default=0, help="smoke test: only first N shards")
     ap.add_argument("--out", type=str, default=str(DEFAULT_OUT))
     ap.add_argument("--device", choices=["cuda", "cpu"], default="cuda")
     ap.add_argument("--no-skip", action="store_true", help="include vision/mtp tensors")
     args = ap.parse_args()
+    global MODEL_DIR, INDEX_PATH
+    MODEL_DIR = Path(args.model_dir)
+    INDEX_PATH = MODEL_DIR / "model.safetensors.index.json"
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

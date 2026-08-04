@@ -181,7 +181,7 @@ class Qwen35HoloEngine:
         self.original = original
         self.exact = exact
         self.device = torch.device(device)
-        self.num_layers = num_layers
+        self.num_layers = min(num_layers, LAYERS)  # respect configured model size
         self.lm_head_chunk = lm_head_chunk
         self.exact_tail = 0  # number of final layers run exactly (oracle tail)
         self._layer_exact = False
@@ -467,9 +467,15 @@ class Qwen35HoloEngine:
     def _lm_head(self, hidden: torch.Tensor) -> torch.Tensor:
         chunks = []
         flat = hidden.reshape(-1, HIDDEN)
+        # Tied-embedding models have no lm_head.weight; fall back to embed rows.
+        head_name = (
+            "lm_head.weight"
+            if "lm_head.weight" in self.original.weight_map
+            else "model.language_model.embed_tokens.weight"
+        )
         for start in range(0, VOCAB, self.lm_head_chunk):
             end = min(start + self.lm_head_chunk, VOCAB)
-            weight = self.original.rows("lm_head.weight", start, end).to(self.device)
+            weight = self.original.rows(head_name, start, end).to(self.device)
             chunks.append((flat.to(weight.dtype) @ weight.transpose(0, 1)).float())
         return torch.cat(chunks, dim=-1).reshape(*hidden.shape[:-1], VOCAB)
 

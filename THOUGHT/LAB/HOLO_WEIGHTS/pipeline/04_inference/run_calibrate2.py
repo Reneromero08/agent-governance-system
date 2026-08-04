@@ -99,9 +99,12 @@ def fit_projection(
 
     # C^T=(X^T X+lI)^-1 X^T E = X^T(XX^T+lI)^-1 E.
     # Therefore C=Z^T X where (XX^T+lI)Z=E.  The largest solve dimension is
-    # the token count (80 with the requested setup), not the model width.
+    # the token count, not the model width.
+    # NORMALIZED ridge (Sol): lambda = alpha * mean(||x_i||^2); the kernel
+    # diagonal is ~d ~ 5000, so an absolute lambda like 1e-3 is ~zero.
     kernel = x2 @ x2.transpose(0, 1)
-    kernel.diagonal().add_(ridge)
+    lam = ridge * kernel.diagonal().mean().item()
+    kernel.diagonal().add_(lam)
     try:
         z = torch.linalg.solve(kernel, error)
     except torch.linalg.LinAlgError:
@@ -176,6 +179,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--holo", default=str(DEFAULT_HOLO))
     parser.add_argument("--model-dir", default=str(DEFAULT_MODEL))
     parser.add_argument("--prompts", type=int, default=12)
+    parser.add_argument("--corpus", type=str, default="", help="text corpus file (one sentence per line)")
     parser.add_argument("--rank", type=int, default=16)
     parser.add_argument("--ridge", type=float, default=1e-3)
     parser.add_argument("--rounds", type=int, default=3)
@@ -203,9 +207,15 @@ def main() -> None:
     from transformers import AutoTokenizer
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_dir, trust_remote_code=True)
-    prompt_strs = REAL_PROMPTS[: args.prompts]
+    if args.corpus:
+        raw = Path(args.corpus).read_text().splitlines()
+        prompt_strs = [ln.strip() for ln in raw if ln.strip()]
+        print(f"using corpus: {len(prompt_strs)} sentences", flush=True)
+    else:
+        prompt_strs = REAL_PROMPTS[: args.prompts]
     ids_batch = [tokenizer(p, return_tensors="pt")["input_ids"][0].tolist() for p in prompt_strs]
-    max_len = max(len(ids) for ids in ids_batch)
+    token_lengths = [len(ids) for ids in ids_batch]
+    max_len = max(token_lengths)
     pad_id = int(getattr(tokenizer, "pad_token_id", None) or getattr(tokenizer, "eos_token_id", 0) or 0)
     ids_padded = [ids + [pad_id] * (max_len - len(ids)) for ids in ids_batch]
     prompts = torch.tensor(ids_padded, dtype=torch.long)
@@ -283,7 +293,7 @@ def main() -> None:
             del captures
             gc.collect()
             corrected_logits = student.prefill(heldout_ids, adapters=adapters)
-            cosines = final_logit_cosines(reference_logits, corrected_logits, [len(p) for p in prompt_strs[-2:]])
+            cosines = final_logit_cosines(reference_logits, corrected_logits, token_lengths[-2:])
             mean_cosine = sum(cosines) / len(cosines)
             print(
                 f"ROUND {round_index} HELD-OUT FINAL-LOGIT COSINE: "
