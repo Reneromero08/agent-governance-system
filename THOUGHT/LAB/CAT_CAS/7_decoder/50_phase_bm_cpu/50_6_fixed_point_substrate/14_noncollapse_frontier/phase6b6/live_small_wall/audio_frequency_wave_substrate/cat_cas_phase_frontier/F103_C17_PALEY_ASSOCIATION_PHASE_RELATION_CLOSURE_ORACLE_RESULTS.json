@@ -1,0 +1,414 @@
+{
+  "algebra_oracle": {
+    "all_outputs_class_constant": true,
+    "class_sizes": [
+      1,
+      8,
+      8
+    ],
+    "composition_basis_checks": [
+      {
+        "left": 0,
+        "result": [
+          1,
+          0,
+          0
+        ],
+        "right": 0
+      },
+      {
+        "left": 0,
+        "result": [
+          0,
+          1,
+          0
+        ],
+        "right": 1
+      },
+      {
+        "left": 0,
+        "result": [
+          0,
+          0,
+          1
+        ],
+        "right": 2
+      },
+      {
+        "left": 1,
+        "result": [
+          0,
+          1,
+          0
+        ],
+        "right": 0
+      },
+      {
+        "left": 1,
+        "result": [
+          8,
+          3,
+          4
+        ],
+        "right": 1
+      },
+      {
+        "left": 1,
+        "result": [
+          0,
+          4,
+          4
+        ],
+        "right": 2
+      },
+      {
+        "left": 2,
+        "result": [
+          0,
+          0,
+          1
+        ],
+        "right": 0
+      },
+      {
+        "left": 2,
+        "result": [
+          0,
+          4,
+          4
+        ],
+        "right": 1
+      },
+      {
+        "left": 2,
+        "result": [
+          8,
+          4,
+          3
+        ],
+        "right": 2
+      }
+    ],
+    "composition_checks": 9,
+    "hadamard_basis_checks": [
+      {
+        "left": 0,
+        "result": [
+          1,
+          0,
+          0
+        ],
+        "right": 0
+      },
+      {
+        "left": 0,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 1
+      },
+      {
+        "left": 0,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 2
+      },
+      {
+        "left": 1,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 0
+      },
+      {
+        "left": 1,
+        "result": [
+          0,
+          1,
+          0
+        ],
+        "right": 1
+      },
+      {
+        "left": 1,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 2
+      },
+      {
+        "left": 2,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 0
+      },
+      {
+        "left": 2,
+        "result": [
+          0,
+          0,
+          0
+        ],
+        "right": 1
+      },
+      {
+        "left": 2,
+        "result": [
+          0,
+          0,
+          1
+        ],
+        "right": 2
+      }
+    ],
+    "hadamard_checks": 9,
+    "intersection_number_tensor": [
+      [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          8,
+          3,
+          4
+        ],
+        [
+          0,
+          4,
+          4
+        ]
+      ],
+      [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          4,
+          4
+        ],
+        [
+          8,
+          4,
+          3
+        ]
+      ]
+    ],
+    "nonresidues": [
+      3,
+      5,
+      6,
+      7,
+      10,
+      11,
+      12,
+      14
+    ],
+    "residues": [
+      1,
+      2,
+      4,
+      8,
+      9,
+      13,
+      15,
+      16
+    ],
+    "single_residue_delta_outside_family_rejected": true,
+    "zeta_order17": true
+  },
+  "cases": [
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1024,
+      "family": "PRIMARY",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 4,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 16,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 64,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 256,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    },
+    {
+      "all_fields_match": true,
+      "boundary_matches": true,
+      "commitment_matches": true,
+      "depth": 1024,
+      "family": "ALTERNATE",
+      "forward_a_matches": true,
+      "forward_b_matches": true,
+      "full34_cells_restore_exactly": true
+    }
+  ],
+  "claim": "BOUNDED_EXACT_F103_C17_PALEY_THREE_CLASS_ASSOCIATION_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_CYCLIC_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_RELATION_PORT_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IS_THE_IDENTICAL_THREE_COORDINATE_COMPACT_CLASSICAL_RECURRENCE_AND_DOES_NOT_COVER_GENERAL_C17_RELATIONS",
+  "claim_ceiling": "C17_TRANSLATION_INVARIANT_RELATIONS_CONSTANT_ON_ZERO_QUADRATIC_RESIDUE_AND_NONRESIDUE_DIFFERENCE_CLASSES_OVER_F103_TWO_PROGRAM_FAMILIES_THROUGH_DEPTH1024",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "imports_numpy": false,
+  "imports_production": false,
+  "oracle_state_law": "FULL17_F103_TRANSLATION_INVARIANT_RELATION_VALUES",
+  "preserved_subclaims": [
+    "THREE_CLASS_PALEY_RELATIONS_CLOSE_UNDER_FULL17_CYCLIC_CONVOLUTION",
+    "THREE_CLASS_PALEY_RELATIONS_CLOSE_UNDER_FULL17_HADAMARD_INTERSECTION",
+    "FULL17_AND_THREE_COORDINATE_BOUNDARIES_MATCH_IN12_CASES",
+    "FULL34_CELL_AND_ACCEPTED_CARRIERS_RESTORE_EXACTLY"
+  ],
+  "production_comparison": {
+    "all_match": true,
+    "cases": 12,
+    "field_comparisons": 60
+  },
+  "rejected_interpretations": [
+    "GENERAL_C17_RELATION_CLOSURE_IN_THREE_COORDINATES",
+    "GENERAL_ASSOCIATION_SCHEME_COMPILER",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_scope": {
+    "accepted_relation_coordinates_per_port": 3,
+    "accepted_two_register_carrier_field_cells": 6,
+    "dense17_by17_relation_table_cells": 0,
+    "full_relation_vectors_are_oracle_only": true,
+    "oracle_full_relation_coordinates_per_port": 17,
+    "oracle_full_two_register_carrier_field_cells": 34,
+    "whole_process_memory_not_measured": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_F103_C17_PALEY_ASSOCIATION_PHASE_RELATION_ORACLE_RESULTS_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
