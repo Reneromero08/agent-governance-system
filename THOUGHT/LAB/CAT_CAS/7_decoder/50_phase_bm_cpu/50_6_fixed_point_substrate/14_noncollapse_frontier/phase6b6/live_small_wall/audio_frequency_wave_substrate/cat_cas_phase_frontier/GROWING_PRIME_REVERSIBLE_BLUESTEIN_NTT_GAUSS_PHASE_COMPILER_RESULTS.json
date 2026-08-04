@@ -1,0 +1,1532 @@
+{
+  "claim": "BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS",
+  "claim_ceiling": "FOURTEEN_DECLARED_Q5_THROUGH_Q53_PRIME_FIELDS_WITH_NEW_AUXILIARY_ROOT_FIELDS_ONE_RANK3_NONZERO_SCALE_PROGRAM_PER_FIELD_DIRECT_PROCESS_EXACT_BLUESTEIN_NTT_DESCRIPTOR_TRANSACTION_AND_UNRELATED_SAME_FIELD_REUSE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_direct_gauss_tables_match": true,
+    "all_missing_inverses_fail": true,
+    "all_null_carriers_rejected": true,
+    "all_omitted_frequency_inverses_fail": true,
+    "all_projection_character_scans_are_linear": true,
+    "all_same_backing_restorations_pass": true,
+    "all_scratch_segments_zero_after_forward": true,
+    "all_unrelated_reuses_match_fresh": true,
+    "all_wrong_additive_phase_inverses_fail": true
+  },
+  "declared_fields": [
+    {
+      "auxiliary_prime": 41,
+      "q": 5
+    },
+    {
+      "auxiliary_prime": 337,
+      "q": 7
+    },
+    {
+      "auxiliary_prime": 5281,
+      "q": 11
+    },
+    {
+      "auxiliary_prime": 1249,
+      "q": 13
+    },
+    {
+      "auxiliary_prime": 5441,
+      "q": 17
+    },
+    {
+      "auxiliary_prime": 32833,
+      "q": 19
+    },
+    {
+      "auxiliary_prime": 16193,
+      "q": 23
+    },
+    {
+      "auxiliary_prime": 38977,
+      "q": 29
+    },
+    {
+      "auxiliary_prime": 29761,
+      "q": 31
+    },
+    {
+      "auxiliary_prime": 127873,
+      "q": 37
+    },
+    {
+      "auxiliary_prime": 78721,
+      "q": 41
+    },
+    {
+      "auxiliary_prime": 231169,
+      "q": 43
+    },
+    {
+      "auxiliary_prime": 691841,
+      "q": 47
+    },
+    {
+      "auxiliary_prime": 264577,
+      "q": 53
+    }
+  ],
+  "matched_baselines": {
+    "m180_materialized_direct_gauss_table": "4Q_MINUS3_CELLS_AND_THETA_Q2_COMPILATION",
+    "m181_single_scalar_stream": "10_CARRIER_CELLS_AND_THETA_Q2_PER_BOUNDARY",
+    "state_advantage": false,
+    "strongest_compact_classical": "IDENTICAL_Q_MINUS1_PLUS3M_REVERSIBLE_BLUESTEIN_NTT_COMPILER",
+    "work_advantage": false
+  },
+  "next_obstruction": "BLUESTEIN_NTT_REPAIRS_QUADRATIC_GAUSS_COMPILATION_WORK_BUT_MOVES_THE_ACCEPTED_PATH_TO_LINEAR_DESCRIPTOR_AND_SCRATCH_STATE_WITH_GROWING_EXACT_BIT_WIDTH_AND_AN_IDENTICAL_CLASSICAL_TRANSFORM_SO_THE_NEXT_REPAIR_MUST_FUSE_FINAL_BOUNDARY_PROJECTION_WITH_THE_ADDITIVE_TRANSFORM_OR_FIND_A_PHASE_NATIVE_OPERATION_NOT_IDENTITY_SIMULABLE_BY_THE_SAME_NTT",
+  "observed_resource_law": {
+    "accepted_forward_compiler_plus_projection_work": "THETA_M_LOG_M_PLUS_Q",
+    "boundary_projection_character_calls": 3,
+    "boundary_projection_character_orbit_visits_upper_bound": "3_TIMES_Q_MINUS1",
+    "boundary_projection_terms": "Q_MINUS1",
+    "boundary_projection_work": "THETA_Q_WITHOUT_A_LOG_TABLE",
+    "butterflies_per_compiler": "3M_LOG2_M",
+    "carrier_field_cells": "Q_MINUS1_PLUS3M",
+    "compiler_field_work": "THETA_M_LOG_M",
+    "convolution_width": "LEAST_POWER_OF_TWO_AT_LEAST_2Q_MINUS3",
+    "exact_bit_width_independent_of_q": false,
+    "full_lifecycle_compiler_work": "TWO_TIMES_FORWARD_COMPILER",
+    "ntt_calls_per_forward_or_inverse_compiler": 6,
+    "python_object_allocator_and_pow_internals_counted": false,
+    "resident_after_forward_field_cells": "Q_MINUS1_WITH3M_ZERO_SCRATCH",
+    "retained_inverse_history_cells": 0,
+    "twiddle_table_cells": 0,
+    "whole_process_memory_claimed": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "strict_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_exact_bit_width": false,
+    "fixed_rank_or_fixed_field_cell_count": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "sublinear_state": false,
+    "unbounded_computation": false
+  },
+  "transaction_cases": [
+    {
+      "auxiliary_prime": 41,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 168,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 4,
+        "descriptor_offset": 0,
+        "kernel_offset": 12,
+        "left_offset": 4,
+        "product_offset": 20,
+        "scratch_segment_cells": 8,
+        "total_carrier_field_cells": 28
+      },
+      "m180_materialized_table_peak_field_cells": 17,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 68,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 382,
+        "forward_counts": {
+          "chirp_exponentiations": 20,
+          "descriptor_shear_additions": 4,
+          "descriptor_shear_multiplications": 4,
+          "initialization_additions": 22,
+          "initialization_multiplications": 8,
+          "ntt_butterflies": 72,
+          "ntt_calls": 6,
+          "ntt_field_additions": 144,
+          "ntt_field_multiplications": 144,
+          "ntt_inverse_scalings": 24,
+          "pointwise_shear_additions": 16,
+          "pointwise_shear_multiplications": 16,
+          "source_phase_exponentiations": 8
+        },
+        "inverse_counted_field_operations": 382,
+        "inverse_counts": {
+          "chirp_exponentiations": 20,
+          "descriptor_shear_additions": 4,
+          "descriptor_shear_multiplications": 4,
+          "initialization_additions": 22,
+          "initialization_multiplications": 8,
+          "ntt_butterflies": 72,
+          "ntt_calls": 6,
+          "ntt_field_additions": 144,
+          "ntt_field_multiplications": 144,
+          "ntt_inverse_scalings": 24,
+          "pointwise_shear_additions": 16,
+          "pointwise_shear_multiplications": 16,
+          "source_phase_exponentiations": 8
+        },
+        "post_state_commitment": "e7f959800ca74bc7eb89c678514374587a52f96ee1d5611c71647963f65ba9d7",
+        "pre_state_commitment": "e7f959800ca74bc7eb89c678514374587a52f96ee1d5611c71647963f65ba9d7",
+        "projected_final_boundary_scalar": 25,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 4,
+          "channel_field_multiplications": 48,
+          "channels": 4,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "7a98091d84a8e793b34eb73a6fe7af8cbc2e5e7db5595dba3937e25f6c10c0b8",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 1,
+        "scale_character": 2
+      },
+      "q": 5,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 2,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 2,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 337,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 486,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 6,
+        "descriptor_offset": 0,
+        "kernel_offset": 22,
+        "left_offset": 6,
+        "product_offset": 38,
+        "scratch_segment_cells": 16,
+        "total_carrier_field_cells": 54
+      },
+      "m180_materialized_table_peak_field_cells": 25,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 150,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 938,
+        "forward_counts": {
+          "chirp_exponentiations": 30,
+          "descriptor_shear_additions": 6,
+          "descriptor_shear_multiplications": 6,
+          "initialization_additions": 34,
+          "initialization_multiplications": 12,
+          "ntt_butterflies": 192,
+          "ntt_calls": 6,
+          "ntt_field_additions": 384,
+          "ntt_field_multiplications": 384,
+          "ntt_inverse_scalings": 48,
+          "pointwise_shear_additions": 32,
+          "pointwise_shear_multiplications": 32,
+          "source_phase_exponentiations": 12
+        },
+        "inverse_counted_field_operations": 938,
+        "inverse_counts": {
+          "chirp_exponentiations": 30,
+          "descriptor_shear_additions": 6,
+          "descriptor_shear_multiplications": 6,
+          "initialization_additions": 34,
+          "initialization_multiplications": 12,
+          "ntt_butterflies": 192,
+          "ntt_calls": 6,
+          "ntt_field_additions": 384,
+          "ntt_field_multiplications": 384,
+          "ntt_inverse_scalings": 48,
+          "pointwise_shear_additions": 32,
+          "pointwise_shear_multiplications": 32,
+          "source_phase_exponentiations": 12
+        },
+        "post_state_commitment": "67abcbe013bf178a28f94a40f8f44a119d72d9f5203a1ab0b90cb247853b1ee4",
+        "pre_state_commitment": "67abcbe013bf178a28f94a40f8f44a119d72d9f5203a1ab0b90cb247853b1ee4",
+        "projected_final_boundary_scalar": 323,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 6,
+          "channel_field_multiplications": 72,
+          "channels": 6,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "resident_descriptor_commitment": "394b243039adc21a4f3d30842c15a19fd39c26aab6c15cc7ae54732a81f9aa76",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 3,
+        "scale_character": 5
+      },
+      "q": 7,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 100,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 100,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 5281,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 1378,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 10,
+        "descriptor_offset": 0,
+        "kernel_offset": 42,
+        "left_offset": 10,
+        "product_offset": 74,
+        "scratch_segment_cells": 32,
+        "total_carrier_field_cells": 106
+      },
+      "m180_materialized_table_peak_field_cells": 41,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 410,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 2242,
+        "forward_counts": {
+          "chirp_exponentiations": 50,
+          "descriptor_shear_additions": 10,
+          "descriptor_shear_multiplications": 10,
+          "initialization_additions": 58,
+          "initialization_multiplications": 20,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 20
+        },
+        "inverse_counted_field_operations": 2242,
+        "inverse_counts": {
+          "chirp_exponentiations": 50,
+          "descriptor_shear_additions": 10,
+          "descriptor_shear_multiplications": 10,
+          "initialization_additions": 58,
+          "initialization_multiplications": 20,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 20
+        },
+        "post_state_commitment": "aef40cbec980a7e445686216fa6580e62a8595edfc31c8dc33567424680f16f0",
+        "pre_state_commitment": "aef40cbec980a7e445686216fa6580e62a8595edfc31c8dc33567424680f16f0",
+        "projected_final_boundary_scalar": 904,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 10,
+          "channel_field_multiplications": 120,
+          "channels": 10,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "3df1676b006e5087ef53f36c4c2a9e360ade62095d54976a26ae8dd126dad11b",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 5,
+        "scale_character": 8
+      },
+      "q": 11,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 4344,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 4344,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 1249,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 1188,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 12,
+        "descriptor_offset": 0,
+        "kernel_offset": 44,
+        "left_offset": 12,
+        "product_offset": 76,
+        "scratch_segment_cells": 32,
+        "total_carrier_field_cells": 108
+      },
+      "m180_materialized_table_peak_field_cells": 49,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 588,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 2262,
+        "forward_counts": {
+          "chirp_exponentiations": 60,
+          "descriptor_shear_additions": 12,
+          "descriptor_shear_multiplications": 12,
+          "initialization_additions": 70,
+          "initialization_multiplications": 24,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 24
+        },
+        "inverse_counted_field_operations": 2262,
+        "inverse_counts": {
+          "chirp_exponentiations": 60,
+          "descriptor_shear_additions": 12,
+          "descriptor_shear_multiplications": 12,
+          "initialization_additions": 70,
+          "initialization_multiplications": 24,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 24
+        },
+        "post_state_commitment": "c2dcbf9adb99cafe98f55cec6da24dabe92858bc46b6372ab5b5e924c2212993",
+        "pre_state_commitment": "c2dcbf9adb99cafe98f55cec6da24dabe92858bc46b6372ab5b5e924c2212993",
+        "projected_final_boundary_scalar": 1141,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 12,
+          "channel_field_multiplications": 144,
+          "channels": 12,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "bc30264be36851d49cd8ef48bb40f9839b963ee373abe44b18a2b5b53db03264",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 7,
+        "scale_character": 11
+      },
+      "q": 13,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 1133,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 1133,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 5441,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 1456,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 16,
+        "descriptor_offset": 0,
+        "kernel_offset": 48,
+        "left_offset": 16,
+        "product_offset": 80,
+        "scratch_segment_cells": 32,
+        "total_carrier_field_cells": 112
+      },
+      "m180_materialized_table_peak_field_cells": 65,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 1040,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 2302,
+        "forward_counts": {
+          "chirp_exponentiations": 80,
+          "descriptor_shear_additions": 16,
+          "descriptor_shear_multiplications": 16,
+          "initialization_additions": 94,
+          "initialization_multiplications": 32,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 32
+        },
+        "inverse_counted_field_operations": 2302,
+        "inverse_counts": {
+          "chirp_exponentiations": 80,
+          "descriptor_shear_additions": 16,
+          "descriptor_shear_multiplications": 16,
+          "initialization_additions": 94,
+          "initialization_multiplications": 32,
+          "ntt_butterflies": 480,
+          "ntt_calls": 6,
+          "ntt_field_additions": 960,
+          "ntt_field_multiplications": 960,
+          "ntt_inverse_scalings": 96,
+          "pointwise_shear_additions": 64,
+          "pointwise_shear_multiplications": 64,
+          "source_phase_exponentiations": 32
+        },
+        "post_state_commitment": "fecb58cd66d076fc9c7ffe4cae7e647819c85ea115a18c1a4342d94db94537e2",
+        "pre_state_commitment": "fecb58cd66d076fc9c7ffe4cae7e647819c85ea115a18c1a4342d94db94537e2",
+        "projected_final_boundary_scalar": 2092,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 16,
+          "channel_field_multiplications": 192,
+          "channels": 16,
+          "character_calls": 3,
+          "character_orbit_visits": 45
+        },
+        "resident_descriptor_commitment": "ef7c6354794e93d772d905b743593a6da998deaf89718cafd24442f0cec4b947",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 9,
+        "scale_character": 14
+      },
+      "q": 17,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 4505,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 4505,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 32833,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 3360,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 18,
+        "descriptor_offset": 0,
+        "kernel_offset": 82,
+        "left_offset": 18,
+        "product_offset": 146,
+        "scratch_segment_cells": 64,
+        "total_carrier_field_cells": 210
+      },
+      "m180_materialized_table_peak_field_cells": 73,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 1314,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 5234,
+        "forward_counts": {
+          "chirp_exponentiations": 90,
+          "descriptor_shear_additions": 18,
+          "descriptor_shear_multiplications": 18,
+          "initialization_additions": 106,
+          "initialization_multiplications": 36,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 36
+        },
+        "inverse_counted_field_operations": 5234,
+        "inverse_counts": {
+          "chirp_exponentiations": 90,
+          "descriptor_shear_additions": 18,
+          "descriptor_shear_multiplications": 18,
+          "initialization_additions": 106,
+          "initialization_multiplications": 36,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 36
+        },
+        "post_state_commitment": "bfd0c5674dc47a99120b46b30301ab2fd7f4987f428d95d6d3556dae428242d2",
+        "pre_state_commitment": "bfd0c5674dc47a99120b46b30301ab2fd7f4987f428d95d6d3556dae428242d2",
+        "projected_final_boundary_scalar": 20160,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 18,
+          "channel_field_multiplications": 216,
+          "channels": 18,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "5910bdbe1aca5ead77c985f96b0b95d33f0bcfc5bd93293333b4623feb143694",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 11,
+        "scale_character": 17
+      },
+      "q": 19,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 17702,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 17702,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 16193,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2996,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 22,
+        "descriptor_offset": 0,
+        "kernel_offset": 86,
+        "left_offset": 22,
+        "product_offset": 150,
+        "scratch_segment_cells": 64,
+        "total_carrier_field_cells": 214
+      },
+      "m180_materialized_table_peak_field_cells": 89,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 1958,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 5274,
+        "forward_counts": {
+          "chirp_exponentiations": 110,
+          "descriptor_shear_additions": 22,
+          "descriptor_shear_multiplications": 22,
+          "initialization_additions": 130,
+          "initialization_multiplications": 44,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 44
+        },
+        "inverse_counted_field_operations": 5274,
+        "inverse_counts": {
+          "chirp_exponentiations": 110,
+          "descriptor_shear_additions": 22,
+          "descriptor_shear_multiplications": 22,
+          "initialization_additions": 130,
+          "initialization_multiplications": 44,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 44
+        },
+        "post_state_commitment": "3254287e3d12e482fae3afc11bcd846834fc0dab721b6b37045bd906a7885d67",
+        "pre_state_commitment": "3254287e3d12e482fae3afc11bcd846834fc0dab721b6b37045bd906a7885d67",
+        "projected_final_boundary_scalar": 139,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 22,
+          "channel_field_multiplications": 264,
+          "channels": 22,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "resident_descriptor_commitment": "b29a3e9d435f22ab9c7b26118ed618600031ae4dd965e1f2bd6478222ceb6665",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 13,
+        "scale_character": 20
+      },
+      "q": 23,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 2367,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 2367,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 38977,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 3520,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 28,
+        "descriptor_offset": 0,
+        "kernel_offset": 92,
+        "left_offset": 28,
+        "product_offset": 156,
+        "scratch_segment_cells": 64,
+        "total_carrier_field_cells": 220
+      },
+      "m180_materialized_table_peak_field_cells": 113,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 3164,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 5334,
+        "forward_counts": {
+          "chirp_exponentiations": 140,
+          "descriptor_shear_additions": 28,
+          "descriptor_shear_multiplications": 28,
+          "initialization_additions": 166,
+          "initialization_multiplications": 56,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 56
+        },
+        "inverse_counted_field_operations": 5334,
+        "inverse_counts": {
+          "chirp_exponentiations": 140,
+          "descriptor_shear_additions": 28,
+          "descriptor_shear_multiplications": 28,
+          "initialization_additions": 166,
+          "initialization_multiplications": 56,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 56
+        },
+        "post_state_commitment": "d8ba4cf5bf46be78d7aae07d3e015f33777659b39e7baa9c335cd1dbe75cfd3a",
+        "pre_state_commitment": "d8ba4cf5bf46be78d7aae07d3e015f33777659b39e7baa9c335cd1dbe75cfd3a",
+        "projected_final_boundary_scalar": 23937,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 28,
+          "channel_field_multiplications": 336,
+          "channels": 28,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "84d74b59b2c74bc2b2f6332ded784c1466daf00294efa8541f9e7803d2a032fc",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 15,
+        "scale_character": 23
+      },
+      "q": 29,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 10806,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 10806,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 29761,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 3330,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 30,
+        "descriptor_offset": 0,
+        "kernel_offset": 94,
+        "left_offset": 30,
+        "product_offset": 158,
+        "scratch_segment_cells": 64,
+        "total_carrier_field_cells": 222
+      },
+      "m180_materialized_table_peak_field_cells": 121,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 3630,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 5354,
+        "forward_counts": {
+          "chirp_exponentiations": 150,
+          "descriptor_shear_additions": 30,
+          "descriptor_shear_multiplications": 30,
+          "initialization_additions": 178,
+          "initialization_multiplications": 60,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 60
+        },
+        "inverse_counted_field_operations": 5354,
+        "inverse_counts": {
+          "chirp_exponentiations": 150,
+          "descriptor_shear_additions": 30,
+          "descriptor_shear_multiplications": 30,
+          "initialization_additions": 178,
+          "initialization_multiplications": 60,
+          "ntt_butterflies": 1152,
+          "ntt_calls": 6,
+          "ntt_field_additions": 2304,
+          "ntt_field_multiplications": 2304,
+          "ntt_inverse_scalings": 192,
+          "pointwise_shear_additions": 128,
+          "pointwise_shear_multiplications": 128,
+          "source_phase_exponentiations": 60
+        },
+        "post_state_commitment": "5b14edc62e9e063795b25c627676ba026d2db519e9ba6a49c45efc978363ae1b",
+        "pre_state_commitment": "5b14edc62e9e063795b25c627676ba026d2db519e9ba6a49c45efc978363ae1b",
+        "projected_final_boundary_scalar": 25935,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 30,
+          "channel_field_multiplications": 360,
+          "channels": 30,
+          "character_calls": 3,
+          "character_orbit_visits": 75
+        },
+        "resident_descriptor_commitment": "7103414a0d843e51a48c9b443d485acc1b0d24af35cbaaef84c9914259d4a2dd",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 17,
+        "scale_character": 26
+      },
+      "q": 31,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 13450,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 13450,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 127873,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 7140,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 36,
+        "descriptor_offset": 0,
+        "kernel_offset": 164,
+        "left_offset": 36,
+        "product_offset": 292,
+        "scratch_segment_cells": 128,
+        "total_carrier_field_cells": 420
+      },
+      "m180_materialized_table_peak_field_cells": 145,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 5220,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 12006,
+        "forward_counts": {
+          "chirp_exponentiations": 180,
+          "descriptor_shear_additions": 36,
+          "descriptor_shear_multiplications": 36,
+          "initialization_additions": 214,
+          "initialization_multiplications": 72,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 72
+        },
+        "inverse_counted_field_operations": 12006,
+        "inverse_counts": {
+          "chirp_exponentiations": 180,
+          "descriptor_shear_additions": 36,
+          "descriptor_shear_multiplications": 36,
+          "initialization_additions": 214,
+          "initialization_multiplications": 72,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 72
+        },
+        "post_state_commitment": "9f43fc48631fcfb199327b02e7464148d99365d5dc713b6bb74c2ddacad05574",
+        "pre_state_commitment": "9f43fc48631fcfb199327b02e7464148d99365d5dc713b6bb74c2ddacad05574",
+        "projected_final_boundary_scalar": 50474,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 36,
+          "channel_field_multiplications": 432,
+          "channels": 36,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "70c5037366f124343ef1b2153b7dcf03b3cef35ba23c12ef1f26ab575e0b1340",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 19,
+        "scale_character": 29
+      },
+      "q": 37,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 66553,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 66553,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 78721,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 7208,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 40,
+        "descriptor_offset": 0,
+        "kernel_offset": 168,
+        "left_offset": 40,
+        "product_offset": 296,
+        "scratch_segment_cells": 128,
+        "total_carrier_field_cells": 424
+      },
+      "m180_materialized_table_peak_field_cells": 161,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 6440,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 12046,
+        "forward_counts": {
+          "chirp_exponentiations": 200,
+          "descriptor_shear_additions": 40,
+          "descriptor_shear_multiplications": 40,
+          "initialization_additions": 238,
+          "initialization_multiplications": 80,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 80
+        },
+        "inverse_counted_field_operations": 12046,
+        "inverse_counts": {
+          "chirp_exponentiations": 200,
+          "descriptor_shear_additions": 40,
+          "descriptor_shear_multiplications": 40,
+          "initialization_additions": 238,
+          "initialization_multiplications": 80,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 80
+        },
+        "post_state_commitment": "021ee13bbf07cdb72c40a04411a801d2b55d88b313a5ededb5f8085053ea3a65",
+        "pre_state_commitment": "021ee13bbf07cdb72c40a04411a801d2b55d88b313a5ededb5f8085053ea3a65",
+        "projected_final_boundary_scalar": 12106,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 40,
+          "channel_field_multiplications": 480,
+          "channels": 40,
+          "character_calls": 3,
+          "character_orbit_visits": 81
+        },
+        "resident_descriptor_commitment": "5aa404bf14b9efcd361ca4133add1fcf86bbfdf532777bc40990a117f9050d1b",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 21,
+        "scale_character": 32
+      },
+      "q": 41,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 65427,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 65427,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 231169,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 7668,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 42,
+        "descriptor_offset": 0,
+        "kernel_offset": 170,
+        "left_offset": 42,
+        "product_offset": 298,
+        "scratch_segment_cells": 128,
+        "total_carrier_field_cells": 426
+      },
+      "m180_materialized_table_peak_field_cells": 169,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 7098,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 12066,
+        "forward_counts": {
+          "chirp_exponentiations": 210,
+          "descriptor_shear_additions": 42,
+          "descriptor_shear_multiplications": 42,
+          "initialization_additions": 250,
+          "initialization_multiplications": 84,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 84
+        },
+        "inverse_counted_field_operations": 12066,
+        "inverse_counts": {
+          "chirp_exponentiations": 210,
+          "descriptor_shear_additions": 42,
+          "descriptor_shear_multiplications": 42,
+          "initialization_additions": 250,
+          "initialization_multiplications": 84,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 84
+        },
+        "post_state_commitment": "5bb33b6a863c0a4f6d245a2294080f80432313762d9e23f59d77bf1788e2fd46",
+        "pre_state_commitment": "5bb33b6a863c0a4f6d245a2294080f80432313762d9e23f59d77bf1788e2fd46",
+        "projected_final_boundary_scalar": 24400,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 42,
+          "channel_field_multiplications": 504,
+          "channels": 42,
+          "character_calls": 3,
+          "character_orbit_visits": 84
+        },
+        "resident_descriptor_commitment": "a9b5d30f9646f35281b21ad6bde2cb97fb00a306f60eb67e719fd4bae381ee12",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 23,
+        "scale_character": 35
+      },
+      "q": 43,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 92992,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 92992,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 691841,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 8600,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 46,
+        "descriptor_offset": 0,
+        "kernel_offset": 174,
+        "left_offset": 46,
+        "product_offset": 302,
+        "scratch_segment_cells": 128,
+        "total_carrier_field_cells": 430
+      },
+      "m180_materialized_table_peak_field_cells": 185,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 8510,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 12106,
+        "forward_counts": {
+          "chirp_exponentiations": 230,
+          "descriptor_shear_additions": 46,
+          "descriptor_shear_multiplications": 46,
+          "initialization_additions": 274,
+          "initialization_multiplications": 92,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 92
+        },
+        "inverse_counted_field_operations": 12106,
+        "inverse_counts": {
+          "chirp_exponentiations": 230,
+          "descriptor_shear_additions": 46,
+          "descriptor_shear_multiplications": 46,
+          "initialization_additions": 274,
+          "initialization_multiplications": 92,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 92
+        },
+        "post_state_commitment": "d006c64d07203eefc85b77f4e80bef6759b1d282b0c9bdbec70e1183f8ffce8d",
+        "pre_state_commitment": "d006c64d07203eefc85b77f4e80bef6759b1d282b0c9bdbec70e1183f8ffce8d",
+        "projected_final_boundary_scalar": 201332,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 46,
+          "channel_field_multiplications": 552,
+          "channels": 46,
+          "character_calls": 3,
+          "character_orbit_visits": 57
+        },
+        "resident_descriptor_commitment": "0da0523bcbead9bd76f5f8ce5419cfcff6da19f3051b0b61c55191e28fc9eb7f",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 25,
+        "scale_character": 38
+      },
+      "q": 47,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 239436,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 239436,
+        "same_backing_after_reuse": true
+      }
+    },
+    {
+      "auxiliary_prime": 264577,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 8284,
+      "controls": {
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "omitted_frequency_inverse_fails": true,
+        "snapshot_used": false,
+        "wrong_additive_phase_inverse_fails": true
+      },
+      "layout": {
+        "descriptor_cells": 52,
+        "descriptor_offset": 0,
+        "kernel_offset": 180,
+        "left_offset": 52,
+        "product_offset": 308,
+        "scratch_segment_cells": 128,
+        "total_carrier_field_cells": 436
+      },
+      "m180_materialized_table_peak_field_cells": 209,
+      "m181_rank3_nonzero_scale_forward_gauss_orbit_terms": 10868,
+      "m181_stream_workspace_field_cells": 10,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counted_field_operations": 12166,
+        "forward_counts": {
+          "chirp_exponentiations": 260,
+          "descriptor_shear_additions": 52,
+          "descriptor_shear_multiplications": 52,
+          "initialization_additions": 310,
+          "initialization_multiplications": 104,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 104
+        },
+        "inverse_counted_field_operations": 12166,
+        "inverse_counts": {
+          "chirp_exponentiations": 260,
+          "descriptor_shear_additions": 52,
+          "descriptor_shear_multiplications": 52,
+          "initialization_additions": 310,
+          "initialization_multiplications": 104,
+          "ntt_butterflies": 2688,
+          "ntt_calls": 6,
+          "ntt_field_additions": 5376,
+          "ntt_field_multiplications": 5376,
+          "ntt_inverse_scalings": 384,
+          "pointwise_shear_additions": 256,
+          "pointwise_shear_multiplications": 256,
+          "source_phase_exponentiations": 104
+        },
+        "post_state_commitment": "f8316cf6891bf0b98c5b589cd0391f315adaec55648ee8590c9dafa97277912b",
+        "pre_state_commitment": "f8316cf6891bf0b98c5b589cd0391f315adaec55648ee8590c9dafa97277912b",
+        "projected_final_boundary_scalar": 154883,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 52,
+          "channel_field_multiplications": 624,
+          "channels": 52,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_descriptor_commitment": "2f23e26d90951bd7affdc024459685f31a562a20da0382b548a0a3392e5c2065",
+        "same_backing": true
+      },
+      "program": {
+        "determinant_character": 27,
+        "scale_character": 41
+      },
+      "q": 53,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 201889,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 201889,
+        "same_backing_after_reuse": true
+      }
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
