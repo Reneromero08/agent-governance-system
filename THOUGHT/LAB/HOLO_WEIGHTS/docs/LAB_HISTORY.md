@@ -634,3 +634,50 @@ outperforms the phase correction at zero cost. The additive-correction
 branch is now closed by every check Sol specified. Remaining: the ONE
 minimal covariant transport probe (SU(2) rotational coupling, polar-unitary
 packet transport, L0=3, 8 stages).
+
+## 2026-08-04 — B8 minimal covariant transport probe: FAILED - the branch closes
+
+Setup (Sol's exact spec): k=32 (B=64), 8 held-out prompts, borrow through
+L0=3, packet extracted at L3mlp, 7 transport stages (L4mix..L7mlp), holo-
+only magnitudes, fold-even absent, frames = top-k output frames of
+out_proj/down_proj in RESIDUAL-STREAM order (flat stage index t=2l+stage),
+connection Q_t = polar(F_{t-1}^T F_t), full 32-layer continuation after
+propagation, 7 variants.
+
+Boundary logit cos / top-1 / norm / inverse-transport error:
+  correct   0.9821  8/8  2.322  3.9e-05
+  deranged  0.9821  8/8  2.322  3.9e-05
+  random    0.9815  8/8  2.137  4.5e-05
+  carrier   0.9820  8/8  2.216  3.3e-05
+  identity  0.9821  8/8  2.327  3.4e+00   (inverse check expected to fail - not polar)
+  haar      0.9821  8/8  2.327  3.8e+00   (same)
+  direct    0.9821  8/8  2.327  1.7e-05
+
+SOL'S ACCEPTANCE CRITERIA - ALL CONTENT GATES FAILED:
+  correct >= random+0.05   : +0.0006   FAIL
+  correct >= carrier+0.05  : +0.0001   FAIL
+  correct >  deranged      :  0.0000   FAIL (identical)
+  polar >  identity        :  0.0000   FAIL
+  polar >  haar            :  0.0000   FAIL
+  inverse transport ~1e-5  :  PASS (but mechanical - orthogonal bookkeeping
+                              only; Sol required it jointly with the content
+                              gates)
+  smooth decay             : not evaluable - no content signal exists
+
+VERDICT: the transported phase packet carries NO boundary-relevant
+information. Exact, random, deranged, and carrier phases are equivalent at
+the boundary (spread < 0.001, four orders below threshold). The transport
+mechanism (polar/identity/Haar) is irrelevant. Per Sol's directive: STOP -
+no demonstrated transported invariant. The full B8 matrix (refresh
+schedules, SU(2) couplers, 32 layers) is NOT justified.
+
+PROGRAM TERMINUS (whole phase-native frontier, per Sol's decision tree):
+  B7 headline gain     : fold-even carrier magnitudes (exact-side codec)
+  purified phase signal: real but weak (+0.132 vs random at extraction),
+                          global carrier prior, net-negative angular
+                          contribution vs uncorrected
+  radial repair        : outperforms the phase correction at zero cost
+  transported packet   : no boundary signal at all
+  The phase channel carries a small, non-transportable, carrier-conditioned
+  residue. There is no non-collapse compression, no transported borrowed
+  invariant, no durable holonomy in this construction.
