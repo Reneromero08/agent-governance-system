@@ -9851,3 +9851,45 @@ Next:
 ```text
 EXACT_GROWING_SAFE_PRIME_CUBIC_CHARACTER_SUM_SEPARATOR_MESSAGE_PHASE_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_WORK_OR_TIME_SPACE_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
+
+## M176: latent Gaussian-or-delta separator-message closure
+
+Conditioning on each data path makes the latent cubic-strength history an
+exact Gaussian-or-delta phase message. Controlled cubic factors update its
+linear exponent, and declared latent Gaussian transforms close natively over
+the two message kinds. The accepted carrier stores `2*q+4` mixed F_p/F_q
+runtime field elements plus the linear public graph, with no q² amplitude
+state, latent vector, cache, or materialized path list.
+
+All thirteen declared boundaries match independent dense execution. Latent
+history elimination reduces cache-free projection from M175's `8*q^(2*d)`
+joint paths to `8*q^d` data paths. Delta transitions occur in executed q=23
+primary and q=5 alternate cases. Exact mixed-width runtime and public-payload
+bit capacities are counted.
+
+The separate oracle imports no production or predecessor. It exhaustively
+checks the local Gaussian/delta closure at q=5 and q=11 and independently
+reconstructs all full cases, dense forward/inverse semantics, controls,
+restoration, and generation-two reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION` for the
+discrete message/data graph carrier.
+
+The data axis exits Gaussian closure under cubic phase updates, so work remains
+exponential in depth. The identical classical message recurrence realizes the
+same `2*q+4`, `8*q^d` point; the exact Rader/NTT transfer retains `2*q^2`
+state and polynomial work. No Airy-message closure, distinct phase resource,
+advantage, CATVM custody, Small Wall crossing, physical execution, or
+unbounded computation is established.
+
+Ceiling:
+
+```text
+SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH1_ALL_PRIMARY_DEPTH3_Q23_PRIMARY_DEPTH4_Q11_PRIMARY_DEPTH6_Q5_ALTERNATE_DEPTH5_Q5_TWO_FIBER_GAUSSIAN_LATENT_FIXTURE_DIRECT_PROCESS_SOFTWARE_AUXILIARY_NTT_MODULUS998244353
+```
+
+Next:
+
+```text
+EXACT_GROWING_SAFE_PRIME_CUBIC_AIRY_DATA_PHASE_MESSAGE_FOURIER_CLOSURE_WITH_SUBQUADRATIC_STATE_AND_POLYNOMIAL_DEPTH_WORK_OR_COMPONENT_RANK_NO_GO_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
