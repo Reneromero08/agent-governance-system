@@ -138,3 +138,22 @@ The wall's measured shape: k=256 truncation destroys token-ranking information
 irrecoverably by no-training means. The corrections fix in-distribution logits
 (0.73-0.87) but cannot transfer; the error is directional, full-rank, and
 trajectory-dependent.
+
+## 2026-08-04 — the corruption source is mapped (control experiment)
+
+Isolated per-layer test: feed each layer the EXACT input trajectory, compare
+.holo vs exact sublayer outputs. NOT a bug - the wall's true shape:
+
+- mixer outputs: mean cosine 0.376 (L0: 0.912 -> L6+: 0.2-0.5)
+- MLP outputs: mean cosine 0.177 (!!) - the dominant corruption source
+- MLP = silu(gate)*up: two k=256-truncated maps through an elementwise
+  product -> the product compounds the truncation error (0.5-cosine inputs
+  -> 0.18-cosine outputs)
+- Corruption is generated CONTINUOUSLY at every layer (exact front -> 0%
+  acceptance; exact tail -> 0-3.8%; phase-echo front -> 0%; k=512 -> 0%)
+
+Lab-native conclusion: the product structure is where error multiplies. In
+the phase domain a product becomes phase ADDITION (HRR/phase_mul, S^1), and
+phase error is what the phase-lock suppresses (0.074 -> 1.6e-16 @ depth
+4096). Next build: phase-domain MLP/attention (.holo forward in complex
+phase with per-layer phase-lock).
