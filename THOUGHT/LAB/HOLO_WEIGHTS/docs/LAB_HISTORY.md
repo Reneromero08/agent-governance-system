@@ -108,3 +108,33 @@ rebuilds per token - the engine needs incremental delta-rule state caching.
 5. Calibrate experts on routed activations (MoE specialists = smaller
    activation-manifold error)
 6. 0.02 GB GPU peak was already demonstrated on the old engine - 12 GB is plenty
+
+## 2026-08-03 evening — the exhausted-matrix (complete evidence)
+
+Every no-training recovery measured on the 4B (Qwen3.5 hybrid, k=256):
+
+| Method | held-out logit cos | top-1 accept | top-5 accept |
+|---|---|---|---|
+| baseline k=256 (no corrections) | ~0.1-0.6 (prompt-dep) | 0/26 = 0.000 | 0/26 = 0.000 |
+| per-projection analytic rank 16/64/256 (ridge-normalized) | 0.28-0.42 (prompt1 0.73, prompt0 0.1) | 1/26 = 0.038 | 2/26 = 0.077 |
+| k=512 distill + corrections | 0.42 | - | - |
+| Eigen-alignment anchor corpus (STABLE_32) | 0.285 | - | - |
+| norm-lock scalars (full-hidden / sublayer) | -0.34 / 0.04..-0.24 | argmax matched once | - |
+
+Structural measurements:
+- L0 mixer error Df = 47.6; 165 modes for 90% energy (input Df = 14.8)
+- W-space residual flat-spectrum: rank-512 only reaches 0.75 W cosine
+- MLP sublayer outputs suppressed up to 10.6x by truncation (directional loss, not amplitude)
+- Speculative-decode acceptance: 0% -> verifier supplies everything -> no speedup, and no local verifier exists for the 284B endgame anyway
+
+Sol's verdict (session 019fc1e4): analytic path exhausted; "more elaborate analytic
+methods would be a fragile surrogate training system, not a plausible route to
+coherent generation." Minimal training path: rank-16 LoRA on all compressed
+projections + trainable residual scalars, logit distillation from exact model
+(top-32 precomputed), 200K tokens, 9-28h on 3060 if GDN is vectorized
+(55-185h as-is - benchmark 100 steps first).
+
+The wall's measured shape: k=256 truncation destroys token-ranking information
+irrecoverably by no-training means. The corrections fix in-distribution logits
+(0.73-0.87) but cannot transfer; the error is directional, full-rank, and
+trajectory-dependent.
