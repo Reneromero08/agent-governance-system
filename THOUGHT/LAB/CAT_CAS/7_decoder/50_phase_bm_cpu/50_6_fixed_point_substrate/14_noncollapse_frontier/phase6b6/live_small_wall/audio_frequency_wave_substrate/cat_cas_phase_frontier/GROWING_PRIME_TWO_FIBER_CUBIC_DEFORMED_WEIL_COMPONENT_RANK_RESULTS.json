@@ -1,0 +1,982 @@
+{
+  "algebra_checks": {
+    "all_120_sl2_q5_elements_enumerated": true,
+    "all_3000_q5_gaussian_displacement_products_match_dense_semantics": true,
+    "all_q5_q11_cubic_spectra_reconstruct_exact_diagonals": true,
+    "cubic_hadamard_intersection_matches_dense_semantics": true
+  },
+  "at_least_q_minus_3_squared_deformed_component_support_after_first_cubic_intersection_all_cases": true,
+  "cases": [
+    {
+      "boundary": 2,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 25,
+          "deformed_port_gaussian_component_support": 4,
+          "depth": 1,
+          "logical_resident_payload_bits": 106,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "packed_component_coordinate_cells": 15,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 31
+        },
+        {
+          "deformed_port_component_capacity": 25,
+          "deformed_port_gaussian_component_support": 4,
+          "depth": 2,
+          "logical_resident_payload_bits": 106,
+          "ordinary_dense_two_port_relation_cells": 200,
+          "packed_component_coordinate_cells": 15,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 31
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 25,
+        "deformed_port_gaussian_component_support": 4,
+        "depth": 2,
+        "logical_resident_payload_bits": 106,
+        "ordinary_dense_two_port_relation_cells": 200,
+        "packed_component_coordinate_cells": 15,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 31
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 2,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 10,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 80,
+          "gaussian_matrix_vector_terms": 500
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 11,
+      "q": 5,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "f0e34962f9733e4820e7d52b1f9e96c66e6e8337538c7fa3742dad197c2e2d35",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 145,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 200,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 100,
+        "weyl_phase_evaluations": 145
+      }
+    },
+    {
+      "boundary": 22,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 121,
+          "deformed_port_gaussian_component_support": 100,
+          "depth": 1,
+          "logical_resident_payload_bits": 1385,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "packed_component_coordinate_cells": 303,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 319
+        },
+        {
+          "deformed_port_component_capacity": 121,
+          "deformed_port_gaussian_component_support": 117,
+          "depth": 2,
+          "logical_resident_payload_bits": 1606,
+          "ordinary_dense_two_port_relation_cells": 968,
+          "packed_component_coordinate_cells": 354,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 370
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 121,
+        "deformed_port_gaussian_component_support": 117,
+        "depth": 2,
+        "logical_resident_payload_bits": 1606,
+        "ordinary_dense_two_port_relation_cells": 968,
+        "packed_component_coordinate_cells": 354,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 370
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 22,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 22,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 176,
+          "gaussian_matrix_vector_terms": 2420
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 23,
+      "q": 11,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "6675057e89019a3cc9b290be9cbae6f93773f47bde6457a132f2d41e124c5085",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 6144,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 968,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 220,
+        "weyl_phase_evaluations": 6144
+      }
+    },
+    {
+      "boundary": 37,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 529,
+          "deformed_port_gaussian_component_support": 484,
+          "depth": 1,
+          "logical_resident_payload_bits": 7848,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "packed_component_coordinate_cells": 1455,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 1471
+        },
+        {
+          "deformed_port_component_capacity": 529,
+          "deformed_port_gaussian_component_support": 517,
+          "depth": 2,
+          "logical_resident_payload_bits": 8376,
+          "ordinary_dense_two_port_relation_cells": 4232,
+          "packed_component_coordinate_cells": 1554,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 1570
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 529,
+        "deformed_port_gaussian_component_support": 517,
+        "depth": 2,
+        "logical_resident_payload_bits": 8376,
+        "ordinary_dense_two_port_relation_cells": 4232,
+        "packed_component_coordinate_cells": 1554,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 1570
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 37,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 46,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 368,
+          "gaussian_matrix_vector_terms": 10580
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 47,
+      "q": 23,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "251da4df8a8c56ad1deab9c302cef36e309a4fab7443cff455bc4556786e3336",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 58458,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 4232,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 460,
+        "weyl_phase_evaluations": 58458
+      }
+    },
+    {
+      "boundary": 33,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 841,
+          "deformed_port_gaussian_component_support": 729,
+          "depth": 1,
+          "logical_resident_payload_bits": 11768,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "packed_component_coordinate_cells": 2190,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 2206
+        },
+        {
+          "deformed_port_component_capacity": 841,
+          "deformed_port_gaussian_component_support": 828,
+          "depth": 2,
+          "logical_resident_payload_bits": 13352,
+          "ordinary_dense_two_port_relation_cells": 6728,
+          "packed_component_coordinate_cells": 2487,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 2503
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 841,
+        "deformed_port_gaussian_component_support": 828,
+        "depth": 2,
+        "logical_resident_payload_bits": 13352,
+        "ordinary_dense_two_port_relation_cells": 6728,
+        "packed_component_coordinate_cells": 2487,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 2503
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 33,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 58,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 464,
+          "gaussian_matrix_vector_terms": 16820
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 59,
+      "q": 29,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "0893b732a00cfde36f52627e8ebce9b7e3d240d68464f3d561999be22fa9054e",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 110704,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 6728,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 580,
+        "weyl_phase_evaluations": 110704
+      }
+    },
+    {
+      "boundary": 16,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 1681,
+          "deformed_port_gaussian_component_support": 1521,
+          "depth": 1,
+          "logical_resident_payload_bits": 29022,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "packed_component_coordinate_cells": 4566,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 4582
+        },
+        {
+          "deformed_port_component_capacity": 1681,
+          "deformed_port_gaussian_component_support": 1659,
+          "depth": 2,
+          "logical_resident_payload_bits": 31644,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "packed_component_coordinate_cells": 4980,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 4996
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 1681,
+        "deformed_port_gaussian_component_support": 1659,
+        "depth": 2,
+        "logical_resident_payload_bits": 31644,
+        "ordinary_dense_two_port_relation_cells": 13448,
+        "packed_component_coordinate_cells": 4980,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 4996
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 16,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 82,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 656,
+          "gaussian_matrix_vector_terms": 33620
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 83,
+      "q": 41,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "f1226cb8e4262e3eb5b0be9757a4b997604cd264b96d5a60b4596bdf0131cddf",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 322105,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 13448,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 820,
+        "weyl_phase_evaluations": 322105
+      }
+    },
+    {
+      "boundary": 77,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 2809,
+          "deformed_port_gaussian_component_support": 2500,
+          "depth": 1,
+          "logical_resident_payload_bits": 47623,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "packed_component_coordinate_cells": 7503,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 7519
+        },
+        {
+          "deformed_port_component_capacity": 2809,
+          "deformed_port_gaussian_component_support": 2790,
+          "depth": 2,
+          "logical_resident_payload_bits": 53133,
+          "ordinary_dense_two_port_relation_cells": 22472,
+          "packed_component_coordinate_cells": 8373,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 8389
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 2809,
+        "deformed_port_gaussian_component_support": 2790,
+        "depth": 2,
+        "logical_resident_payload_bits": 53133,
+        "ordinary_dense_two_port_relation_cells": 22472,
+        "packed_component_coordinate_cells": 8373,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 8389
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 77,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 106,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 848,
+          "gaussian_matrix_vector_terms": 56180
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 107,
+      "q": 53,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "33bec25de82c4813532f32c27e8c46d1420c866dca7896c74f0e67a1365537f1",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 683104,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 22472,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 1060,
+        "weyl_phase_evaluations": 683104
+      }
+    },
+    {
+      "boundary": 38,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 6889,
+          "deformed_port_gaussian_component_support": 6724,
+          "depth": 1,
+          "logical_resident_payload_bits": 148070,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "packed_component_coordinate_cells": 20175,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 20191
+        },
+        {
+          "deformed_port_component_capacity": 6889,
+          "deformed_port_gaussian_component_support": 6846,
+          "depth": 2,
+          "logical_resident_payload_bits": 150754,
+          "ordinary_dense_two_port_relation_cells": 55112,
+          "packed_component_coordinate_cells": 20541,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 20557
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 6889,
+        "deformed_port_gaussian_component_support": 6846,
+        "depth": 2,
+        "logical_resident_payload_bits": 150754,
+        "ordinary_dense_two_port_relation_cells": 55112,
+        "packed_component_coordinate_cells": 20541,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 20557
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 38,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 166,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 1328,
+          "gaussian_matrix_vector_terms": 137780
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 167,
+      "q": 83,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "6aa6ded5a4942bc5f428db0d2278f792a8355aa48fcd1f151d02bd7dfdf05f32",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 2826954,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 55112,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 1660,
+        "weyl_phase_evaluations": 2826954
+      }
+    },
+    {
+      "boundary": 94,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 7921,
+          "deformed_port_gaussian_component_support": 7569,
+          "depth": 1,
+          "logical_resident_payload_bits": 166660,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "packed_component_coordinate_cells": 22710,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 22726
+        },
+        {
+          "deformed_port_component_capacity": 7921,
+          "deformed_port_gaussian_component_support": 7887,
+          "depth": 2,
+          "logical_resident_payload_bits": 173656,
+          "ordinary_dense_two_port_relation_cells": 63368,
+          "packed_component_coordinate_cells": 23664,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 23680
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 7921,
+        "deformed_port_gaussian_component_support": 7887,
+        "depth": 2,
+        "logical_resident_payload_bits": 173656,
+        "ordinary_dense_two_port_relation_cells": 63368,
+        "packed_component_coordinate_cells": 23664,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 23680
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 94,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 178,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 1424,
+          "gaussian_matrix_vector_terms": 158420
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 179,
+      "q": 89,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "665eaf1120c8bf1c5aab10b6f0498223f405d5aa1833f07fdf2c4edb409e0ae3",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 3418669,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 63368,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 1780,
+        "weyl_phase_evaluations": 3418669
+      }
+    },
+    {
+      "boundary": 157,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12321,
+          "depth": 1,
+          "logical_resident_payload_bits": 271204,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 36966,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 36982
+        },
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12706,
+          "depth": 2,
+          "logical_resident_payload_bits": 279674,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 38121,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 38137
+        }
+      ],
+      "depth": 2,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 12769,
+        "deformed_port_gaussian_component_support": 12706,
+        "depth": 2,
+        "logical_resident_payload_bits": 279674,
+        "ordinary_dense_two_port_relation_cells": 102152,
+        "packed_component_coordinate_cells": 38121,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 38137
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 157,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 226,
+        "public_word_plan_cells": 24,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 1808,
+          "gaussian_matrix_vector_terms": 255380
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 227,
+      "q": 113,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "362585f55135f124c240bb5b7a2ca9323615654aa41c33eee20726f13a90f6cb",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 7041955,
+        "composition_calls": 16,
+        "cubic_intersection_calls": 4,
+        "cubic_spectrum_calls": 8,
+        "cubic_spectrum_phase_terms": 102152,
+        "gaussian_conjugation_calls": 4,
+        "inverse_gaussian_rematerializations": 4,
+        "streamed_cocycle_calls": 20,
+        "streamed_phase_sum_terms": 2260,
+        "weyl_phase_evaluations": 7041955
+      }
+    },
+    {
+      "boundary": 120,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12321,
+          "depth": 1,
+          "logical_resident_payload_bits": 271204,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 36966,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 36982
+        },
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12706,
+          "depth": 2,
+          "logical_resident_payload_bits": 279674,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 38121,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 38137
+        },
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12711,
+          "depth": 3,
+          "logical_resident_payload_bits": 279784,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 38136,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 38152
+        },
+        {
+          "deformed_port_component_capacity": 12769,
+          "deformed_port_gaussian_component_support": 12708,
+          "depth": 4,
+          "logical_resident_payload_bits": 279718,
+          "ordinary_dense_two_port_relation_cells": 102152,
+          "packed_component_coordinate_cells": 38127,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 38143
+        }
+      ],
+      "depth": 4,
+      "exact_canonical_state_restored": true,
+      "family": "PRIMARY",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 12769,
+        "deformed_port_gaussian_component_support": 12708,
+        "depth": 4,
+        "logical_resident_payload_bits": 279718,
+        "ordinary_dense_two_port_relation_cells": 102152,
+        "packed_component_coordinate_cells": 38127,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 38143
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 120,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 226,
+        "public_word_plan_cells": 48,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 3616,
+          "gaussian_matrix_vector_terms": 459684
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 227,
+      "q": 113,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "7492871d60010075f222bc2fcfcbe22bd28fb5dcd4746f4b03cedf893c17dada",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 18431213,
+        "composition_calls": 32,
+        "cubic_intersection_calls": 8,
+        "cubic_spectrum_calls": 16,
+        "cubic_spectrum_phase_terms": 204304,
+        "gaussian_conjugation_calls": 8,
+        "inverse_gaussian_rematerializations": 8,
+        "streamed_cocycle_calls": 40,
+        "streamed_phase_sum_terms": 4520,
+        "weyl_phase_evaluations": 18431213
+      }
+    },
+    {
+      "boundary": 67,
+      "checkpoints": [
+        {
+          "deformed_port_component_capacity": 1681,
+          "deformed_port_gaussian_component_support": 1521,
+          "depth": 1,
+          "logical_resident_payload_bits": 29022,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "packed_component_coordinate_cells": 4566,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 4582
+        },
+        {
+          "deformed_port_component_capacity": 1681,
+          "deformed_port_gaussian_component_support": 1669,
+          "depth": 2,
+          "logical_resident_payload_bits": 31834,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "packed_component_coordinate_cells": 5010,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 5026
+        },
+        {
+          "deformed_port_component_capacity": 1681,
+          "deformed_port_gaussian_component_support": 1664,
+          "depth": 3,
+          "logical_resident_payload_bits": 31739,
+          "ordinary_dense_two_port_relation_cells": 13448,
+          "packed_component_coordinate_cells": 4995,
+          "resident_chart_and_fiber_cells": 16,
+          "resident_gaussian_port_component_support": 1,
+          "resident_packed_field_cells": 5011
+        }
+      ],
+      "depth": 3,
+      "exact_canonical_state_restored": true,
+      "family": "ALTERNATE",
+      "final_checkpoint": {
+        "deformed_port_component_capacity": 1681,
+        "deformed_port_gaussian_component_support": 1664,
+        "depth": 3,
+        "logical_resident_payload_bits": 31739,
+        "ordinary_dense_two_port_relation_cells": 13448,
+        "packed_component_coordinate_cells": 4995,
+        "resident_chart_and_fiber_cells": 16,
+        "resident_gaussian_port_component_support": 1,
+        "resident_packed_field_cells": 5011
+      },
+      "hidden_relation_entries_serialized": false,
+      "matched_q_vector_classical": {
+        "boundary": 67,
+        "boundary_matches": true,
+        "cold_start_comparison_used": false,
+        "live_vector_field_cells": 82,
+        "public_word_plan_cells": 36,
+        "resident_dynamic_relation_cells": 0,
+        "work": {
+          "cubic_vector_phase_multiplications": 984,
+          "gaussian_matrix_vector_terms": 47068
+        }
+      },
+      "method": "STREAMED_PHASE_SUM",
+      "p": 83,
+      "q": 41,
+      "restoration_generation": 1,
+      "same_backing_restored": true,
+      "semantic_commitment": "7aa49f5078f0d7b9c6acb6eec42832277d471c7e5c63bca7e52f0bd68139fb8f",
+      "snapshot_used": false,
+      "work": {
+        "closed_cocycle_calls": 0,
+        "component_pair_products": 595407,
+        "composition_calls": 24,
+        "cubic_intersection_calls": 6,
+        "cubic_spectrum_calls": 12,
+        "cubic_spectrum_phase_terms": 20172,
+        "gaussian_conjugation_calls": 6,
+        "inverse_gaussian_rematerializations": 6,
+        "streamed_cocycle_calls": 30,
+        "streamed_phase_sum_terms": 1230,
+        "weyl_phase_evaluations": 595407
+      }
+    }
+  ],
+  "claim_candidate": "BOUNDED_EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_GAUSSIAN_COMPONENT_CHART_HAS_AT_LEAST_Q_MINUS3_SQUARED_DEFORMED_PORT_COMPONENTS_AFTER_ONE_CUBIC_INTERSECTION_ON_EVERY_DECLARED_ORDER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_AN_EXECUTED_Q_VECTOR_PUBLIC_WORD_CLASSICAL_RECURRENCE_USES_LINEAR_STATE",
+  "claim_ceiling": "SAFE_PRIME_PAIRS_Q5_11_23_29_41_53_83_89_113_P11_23_47_59_83_107_167_179_227_PRIMARY_DEPTH2_ALL_PRIMARY_DEPTH4_Q113_ALTERNATE_DEPTH3_Q41_DIRECT_PROCESS_SOFTWARE",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controls": {
+    "missing_inverse_fails_restoration": true,
+    "module_reordering_changes_final_boundary": true,
+    "non_safe_prime_order_rejected": true,
+    "null_cubic_intersection_is_identity": true,
+    "null_family_rejected": true,
+    "premature_boundary_projection_rejected": true,
+    "reordered_inverse_fails_restoration": true,
+    "wrong_inverse_fails_restoration": true
+  },
+  "experiment": {
+    "coefficient_fields_p": [
+      11,
+      23,
+      47,
+      59,
+      83,
+      107,
+      167,
+      179,
+      227
+    ],
+    "deformed_port_state": "PACKED_WEYL_DISPLACEMENT_COEFFICIENTS_TIMES_ONE_COMMON_WEIL_GAUSSIAN_CHART_AND_2X2_FIBER_MATRIX",
+    "final_boundary_only": true,
+    "hidden_relation_entries_serialized": false,
+    "native_composition": "EXACT_PROJECTIVE_WEIL_WEYL_TWISTED_COMPONENT_COMPOSITION",
+    "native_intersection": "PUBLIC_SEPARABLE_CUBIC_ROW_COLUMN_PHASE_HADAMARD_INTERSECTION",
+    "ordinary_relation_table_materialized_on_accepted_path": false,
+    "resident_gaussian_port_consumed_by_deformed_port": true,
+    "restoration_generation_enforcement": "DIRECT_PROCESS_BOOKKEEPING_ONLY",
+    "retained_inverse_history_cells": 0,
+    "safe_prime_orders_q": [
+      5,
+      11,
+      23,
+      29,
+      41,
+      53,
+      83,
+      89,
+      113
+    ],
+    "second_port_state": "ONE_ACTUAL_RESIDENT_WEIL_GAUSSIAN_CHART_AND_2X2_FIBER_MATRIX"
+  },
+  "matched_baselines": {
+    "all_case_boundaries_match": true,
+    "cold_start_comparison_used": false,
+    "dense_relation_matrices_are_QUALIFICATION_ORACLE_NOT_MATCHED_BASELINE": true,
+    "linear_q_dynamic_state": true,
+    "public_word_plan_grows_with_depth_and_is_counted": true,
+    "strongest_executed": "EXACT_STREAMED_Q_VECTOR_PUBLIC_OPERATOR_WORD_RECURRENCE_FOR_THE_DECLARED_FINAL_BOUNDARY"
+  },
+  "next_obstruction": "ONE_CUBIC_INTERSECTION_FORCES_AT_LEAST_Q_MINUS3_SQUARED_WEYL_DISPLACEMENT_COMPONENTS_ON_EVERY_DECLARED_ORDER_WHILE_THE_EXECUTED_FINAL_BOUNDARY_CLASSICAL_WORD_RECURRENCE_USES_ONLY_LINEAR_Q_DYNAMIC_STATE_SO_A_PHASE_NATIVE_ESCAPE_MUST_AVOID_GENERIC_NON_GAUSSIAN_OPERATOR_SUPPORT_OR_USE_A_RESOURCE_BEYOND_FINITE_FIELD_COMPONENT_ARITHMETIC",
+  "not_established": [
+    "COMPACT_NON_GAUSSIAN_CLOSURE",
+    "SUBQUADRATIC_GAUSSIAN_COMPONENT_SUPPORT_ACROSS_GROWING_Q",
+    "EXACT_FULL_Q2_COMPONENT_SATURATION",
+    "GENERAL_CUBIC_WEIL_RELATION_COMPILER",
+    "FIXED_BIT_WIDTH_ACROSS_UNBOUNDED_Q",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "observed_final_component_supports": [
+    4,
+    117,
+    517,
+    828,
+    1659,
+    2790,
+    6846,
+    7887,
+    12706,
+    12708,
+    1664
+  ],
+  "observed_first_cubic_component_supports": [
+    4,
+    100,
+    484,
+    729,
+    1521,
+    2500,
+    6724,
+    7569,
+    12321,
+    12321,
+    1521
+  ],
+  "resource_accounting": {
+    "accepted_component_convolution_pair_products_measured": true,
+    "accepted_cubic_spectrum_generation_phase_terms_per_side": "Q^2",
+    "accepted_cubic_update_conservative_two_map_peak_field_cells": "6*Q^2+Q+19",
+    "accepted_resident_packed_field_cells_at_full_support": "3*Q^2+19",
+    "advantage_claimed": false,
+    "controller_backend_traffic_bytes": 0,
+    "dense_two_port_relation_field_cells": "8*Q^2",
+    "matched_classical_retained_dynamic_relation_cells": 0,
+    "matched_public_word_plan_cells": "12*DEPTH",
+    "matched_q_vector_live_field_cells": "2*Q",
+    "maximum_depth": 4,
+    "maximum_q": 113,
+    "python_dict_list_integer_allocator_interpreter_and_whole_process_peak_excluded": true,
+    "snapshot_cells": 0
+  },
+  "restoration_and_reuse": {
+    "exact_canonical_state_restored_after_reuse": true,
+    "first_boundary": 23,
+    "restoration_generation": 2,
+    "same_backing_reused": true,
+    "second_boundary": 46,
+    "snapshot_used": false,
+    "unrelated_second_boundary_matches_fresh": true,
+    "unrelated_second_commitment_matches_fresh": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CAT_CAS_GROWING_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_COMPONENT_RANK_RESULTS_V1",
+  "verification_level": "PACKAGE_SELF_REVIEW"
+}
