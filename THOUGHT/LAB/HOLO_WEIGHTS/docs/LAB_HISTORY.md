@@ -157,3 +157,20 @@ the phase domain a product becomes phase ADDITION (HRR/phase_mul, S^1), and
 phase error is what the phase-lock suppresses (0.074 -> 1.6e-16 @ depth
 4096). Next build: phase-domain MLP/attention (.holo forward in complex
 phase with per-layer phase-lock).
+
+## 2026-08-04 — ResonanceDecoder built (Cybernetic Truth control law)
+
+T = 1/(R+eps): TorusOracle-style coherence R from rolling hidden-state norms
+on S^1; high R -> low T (deterministic), low R -> high T (exploration).
+
+Validated:
+- EXACT model + resonance: coherent text ("...is formed whilst setting up
+  a dynamic thermodynamic model of") - the law works on a correct model.
+- .holo k=256/512 + resonance: still garbage - sampling modulation cannot
+  manufacture the ranking information truncation destroyed.
+- R traces nearly identical for exact and .holo (0.988 -> 0.93): the
+  norm-based coherence sensor is BLIND to the corruption - the damage is
+  directional (hidden cosine -> 0.19) while norms look healthy. Per
+  The_Wall_2: missing channel is orthogonal, not magnitude. A single
+  trajectory cannot measure direction against nothing; the fold pair
+  (conjugate branch) is the required reference.

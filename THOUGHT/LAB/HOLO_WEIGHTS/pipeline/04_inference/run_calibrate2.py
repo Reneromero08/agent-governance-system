@@ -180,6 +180,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-dir", default=str(DEFAULT_MODEL))
     parser.add_argument("--prompts", type=int, default=12)
     parser.add_argument("--corpus", type=str, default="", help="text corpus file (one sentence per line)")
+    parser.add_argument("--heldout", type=str, default="", help="held-out prompt file")
     parser.add_argument("--rank", type=int, default=16)
     parser.add_argument("--ridge", type=float, default=1e-3)
     parser.add_argument("--rounds", type=int, default=3)
@@ -213,20 +214,31 @@ def main() -> None:
         print(f"using corpus: {len(prompt_strs)} sentences", flush=True)
     else:
         prompt_strs = REAL_PROMPTS[: args.prompts]
+    heldout_strs = None
+    if args.heldout:
+        hr = Path(args.heldout).read_text().splitlines()
+        heldout_strs = [ln.strip() for ln in hr if ln.strip()]
     ids_batch = [tokenizer(p, return_tensors="pt")["input_ids"][0].tolist() for p in prompt_strs]
     token_lengths = [len(ids) for ids in ids_batch]
     max_len = max(token_lengths)
     pad_id = int(getattr(tokenizer, "pad_token_id", None) or getattr(tokenizer, "eos_token_id", 0) or 0)
     ids_padded = [ids + [pad_id] * (max_len - len(ids)) for ids in ids_batch]
     prompts = torch.tensor(ids_padded, dtype=torch.long)
-    train_ids, heldout_ids = prompts[:-2], prompts[-2:]
-    print(
-        f"projection calibration: train={len(train_ids)} heldout=2 rank={args.rank} "
-        f"ridge={args.ridge:g} rounds={args.rounds} damp={args.damp:g} "
-        f"layers={args.num_layers} device={args.device}",
-        flush=True,
-    )
-    print("held-out prompts:", [prompt_strs[-2], prompt_strs[-1]], flush=True)
+    if heldout_strs is not None:
+        ho_batch = [tokenizer(p, return_tensors="pt")["input_ids"][0].tolist() for p in heldout_strs]
+        ho_lengths = [len(ids) for ids in ho_batch]
+        ho_max = max(ho_lengths)
+        ho_padded = [ids + [pad_id] * (ho_max - len(ids)) for ids in ho_batch]
+        heldout_ids = torch.tensor(ho_padded, dtype=torch.long)
+        heldout_lengths = ho_lengths
+        train_ids = prompts
+        prompt_strs_full = prompt_strs + heldout_strs
+        print(f"held-out (file): {heldout_strs}", flush=True)
+    else:
+        train_ids, heldout_ids = prompts[:-2], prompts[-2:]
+        heldout_lengths = token_lengths[-2:]
+        prompt_strs_full = prompt_strs
+        print("held-out prompts:", [prompt_strs[-2], prompt_strs[-1]], flush=True)
 
     original = load_original(args.model_dir)
     holo = load_holo(args.holo)
@@ -293,7 +305,7 @@ def main() -> None:
             del captures
             gc.collect()
             corrected_logits = student.prefill(heldout_ids, adapters=adapters)
-            cosines = final_logit_cosines(reference_logits, corrected_logits, token_lengths[-2:])
+            cosines = final_logit_cosines(reference_logits, corrected_logits, heldout_lengths)
             mean_cosine = sum(cosines) / len(cosines)
             print(
                 f"ROUND {round_index} HELD-OUT FINAL-LOGIT COSINE: "

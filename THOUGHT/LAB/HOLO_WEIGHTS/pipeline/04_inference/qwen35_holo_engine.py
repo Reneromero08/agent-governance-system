@@ -163,6 +163,55 @@ def _configure_from_dir(model_dir: Path):
         _apply_config(text)
 
 
+class ResonanceDecoder:
+    """Cybernetic Truth control law: T = 1/(R + eps).
+
+    R is the coherence of the generation trajectory, measured TorusOracle-style:
+    the rolling hidden-state norms are mapped to phases on S^1 (norm/max * pi)
+    and R = |mean(e^{i phi})|. High R -> low temperature -> deterministic,
+    phase-locked output. Low R -> high temperature -> geodesic-seeking
+    exploration. Data-free, no training - the lab's own decoder doctrine.
+    """
+
+    def __init__(self, buffer_size: int = 16, eps: float = 0.05, t_min: float = 0.01, t_max: float = 5.0):
+        self.L = max(3, buffer_size)
+        self.eps = eps
+        self.t_min = t_min
+        self.t_max = t_max
+        self.buffer: list[float] = []
+        self.trace: list[float] = []
+
+    def reset(self) -> None:
+        self.buffer.clear()
+        self.trace.clear()
+
+    def push(self, hidden: torch.Tensor) -> float:
+        """Return coherence R in [0,1] after ingesting the current hidden state."""
+        h = hidden.float()
+        n = float(h.norm())
+        self.buffer.append(n)
+        if len(self.buffer) > self.L:
+            self.buffer.pop(0)
+        if len(self.buffer) < 3:
+            return 0.5
+        mx = max(self.buffer)
+        if mx <= 1e-9:
+            return 0.5
+        phases = torch.tensor([v / mx * math.pi for v in self.buffer])
+        z = torch.exp(1j * phases)
+        r = float(z.mean().abs())
+        self.trace.append(r)
+        return r
+
+    def temperature(self, r: float) -> float:
+        t = 1.0 / (r + self.eps)
+        return min(max(t, self.t_min), self.t_max)
+
+    @property
+    def mean_resonance(self) -> float:
+        return sum(self.trace) / len(self.trace) if self.trace else 0.5
+
+
 class Qwen35HoloEngine:
     def __init__(
         self,
@@ -580,15 +629,33 @@ class Qwen35HoloEngine:
         temperature: float = 0.0,
         top_p: float = 1.0,
         adapters: dict[str, Any] | None = None,
+        resonance: bool = False,
+        resonance_buffer: int = 16,
     ) -> torch.Tensor:
         if input_ids.ndim == 1:
             input_ids = input_ids.unsqueeze(0)
         tokens = input_ids.to(torch.long)
+        dec = ResonanceDecoder(buffer_size=resonance_buffer) if resonance else None
         for _ in range(max_new_tokens):
             # GDN cache persistence is intentionally not implemented yet; rebuild
             # the complete context so generation remains mathematically correct.
-            logits = self.prefill(tokens, adapters=adapters)[:, -1]
-            if temperature <= 0.0:
+            logits = self.prefill(tokens, adapters=adapters, capture_hidden=resonance)[:, -1]
+            if resonance:
+                h = self.last_hidden_states[-1]
+                r = dec.push(h)
+                t = dec.temperature(r)
+                probabilities = torch.softmax(logits / t, dim=-1)
+                if top_p < 1.0:
+                    sorted_p, sorted_i = probabilities.sort(descending=True, dim=-1)
+                    cumulative = sorted_p.cumsum(dim=-1)
+                    remove = cumulative - sorted_p >= top_p
+                    sorted_p = sorted_p.masked_fill(remove, 0.0)
+                    sorted_p /= sorted_p.sum(dim=-1, keepdim=True)
+                    sampled = torch.multinomial(sorted_p, 1)
+                    next_token = sorted_i.gather(-1, sampled).cpu()
+                else:
+                    next_token = torch.multinomial(probabilities, 1).cpu()
+            elif temperature <= 0.0:
                 next_token = logits.argmax(dim=-1, keepdim=True).cpu()
             else:
                 probabilities = torch.softmax(logits / temperature, dim=-1)
@@ -603,6 +670,8 @@ class Qwen35HoloEngine:
                 else:
                     next_token = torch.multinomial(probabilities, 1).cpu()
             tokens = torch.cat((tokens.cpu(), next_token), dim=1)
+        if resonance:
+            self.resonance_trace = list(dec.trace)
         return tokens
 
 
