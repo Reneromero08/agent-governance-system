@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_CUBIC_DETERMINANT_MELLIN_GAUSS_DESCRIPTOR_TRANSFERABLE_WITH_LINEAR_WIDTH_AND_QUADRATIC_COMPILER_WORK`
-**Roadmap version:** `14.46`
+**Status:** `STRICT_SCOPE_MELLIN_GAUSS_FIXED_WORKSPACE_SINGLE_SCALAR_FULL_LINEAR_RANK`
+**Roadmap version:** `14.47`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f846d978a57de22665808311d1167af66ec56877`
+**Reconciled source head:** `253499d41cd20c3fce563842c942ff7a5484ff8a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_Q5_Q7_Q11_SYMMETRIC3_DETERMINANT_OVER_SCALE_OPEN_PHASE_RELATION_HAS_A_TRANSFERABLE_FULL_BOUNDARY_MELLIN_GAUSS_FOURIER_DESCRIPTOR_WITH_QMINUS1_RESIDENT_CHARACTER_COEFFICIENTS_AND_ONLY_TRIVIAL_OR_QUADRATIC_DETERMINANT_CHARACTER_SINGULAR_TERMS_REPLACING_THE_Q7_FAILURE_OF_SCALAR_CONGRUENCE_STRATUM_COMPLETION_WITH_EXACT_DESCRIPTOR_RESTORATION_AND_REUSE_BUT_WIDTH_AND_COMPILER_WORK_GROW_LINEARLY_AND_QUADRATICALLY_IN_Q_AND_THE_IDENTICAL_CLASSICAL_CHARACTER_SUM_RECURRENCE_REMAINS_SO_NO_FIXED_RANK_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED`
-**Current claim ceiling:** `PRIME_Q5_F41_Q7_F43_Q11_F331_SYMMETRIC3_DETERMINANT_CHARACTER_GAMMA_LAW_ALL_Q6_POINTS_TWO_Q5_AND_TWO_Q7_DECLARED_FULL_SEVEN_DIMENSIONAL_BOUNDARY_PHASE_PROGRAMS_DIRECT_PROCESS_SOFTWARE`
+**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_MELLIN_GAUSS_SOURCE_COEFFICIENT_FAMILIES_STREAM_ONE_FINAL_BOUNDARY_SCALAR_FROM_A_FIXED10_FIELD_CELL_ZERO_WORKSPACE_WITH_TOPOLOGY_REMATERIALIZED_INVERSE_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_WHILE_THE_SOURCE_COEFFICIENT_CYCLIC_HANKEL_RANK_IS_EXACTLY_QMINUS1_AND_THE_DETERMINANT_GAMMA_SEQUENCE_HAS_OBSERVED_RANK_QMINUS1_ON_EVERY_DECLARED_CASE_SO_TABLE_RESIDENCY_IS_REMOVED_BY_A_QUADRATIC_WORK_TIME_SPACE_TRADEOFF_NOT_BY_LINEAR_RECURRENCE_COMPACTION_AND_THE_IDENTICAL_CLASSICAL_STREAM_REMAINS`
+**Current claim ceiling:** `PRIME_Q5_7_11_13_17_19_23_29_31_37_41_43_47_53_WITH_AUXILIARY_FIELDS_F41_43_331_157_1361_2053_1013_2437_1861_6661_13121_3613_12973_8269_ONE_DECLARED_RANK3_TRANSACTION_PER_FIELD_PLUS_Q5_RANK1_AND_ZERO_BOUNDARY_BRANCHES_DIRECT_PROCESS_SINGLE_SCALAR_PROJECTION_SOFTWARE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M180_TRANSFERABLE_MELLIN_GAUSS_DESCRIPTOR_LINEAR_WIDTH`
+**New mechanism development:** `ACTIVE_AFTER_M181_STREAMED_GAUSS_TIME_SPACE_TRADEOFF_FULL_LINEAR_RANK`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_GROWING_PRIME_HASSE_DAVENPORT_JACOBI_PHASE_RELATION_GENERATOR_CLOSURE_WITH_SUBLINEAR_STATE_AND_SUBQUADRATIC_WORK_OR_GROWING_RELATION_RANK_NO_GO_WITH_IDENTICAL_CLASSICAL_CHARACTER_SUM_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -104,7 +104,16 @@ compiler performs theta-q-squared exact work and the identical classical
 character-sum recurrence has the same law. The selected successor therefore
 tests whether the growing Gauss coefficient family has a fixed-state exact
 procedural recurrence or necessarily growing recurrence rank; it must not add
-larger-q boundary fixtures.
+larger-q boundary fixtures. M181 removes those retained tables for a single
+requested scalar by regenerating Gauss factors in a ten-field-cell carrier
+workspace and rematerializing the inverse. The conservative named lifecycle
+peak is 16 exact field scalars including temporaries and the persisted output,
+and work remains theta-q-squared per scalar. Independently, character
+orthogonality proves the source coefficients have exact cyclic Hankel rank
+`q-1`; the determinant gamma sequence also has full rank on all 14 declared
+primes. The selected successor tests nonlinear Hasse-Davenport or Jacobi phase
+relations rather than extending the prime list or relabeling streaming as a
+phase resource.
 
 Every successor must answer:
 
@@ -130,7 +139,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f846d978a57de22665808311d1167af66ec56877`. The current 180-milestone
+`253499d41cd20c3fce563842c942ff7a5484ff8a`. The current 181-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8085,6 +8094,68 @@ Selected successor:
 
 ```text
 EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+## M181: fixed-workspace Gauss streaming exposes full linear rank
+
+Claim:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_MELLIN_GAUSS_SOURCE_COEFFICIENT_FAMILIES_STREAM_ONE_FINAL_BOUNDARY_SCALAR_FROM_A_FIXED10_FIELD_CELL_ZERO_WORKSPACE_WITH_TOPOLOGY_REMATERIALIZED_INVERSE_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_WHILE_THE_SOURCE_COEFFICIENT_CYCLIC_HANKEL_RANK_IS_EXACTLY_QMINUS1_AND_THE_DETERMINANT_GAMMA_SEQUENCE_HAS_OBSERVED_RANK_QMINUS1_ON_EVERY_DECLARED_CASE_SO_TABLE_RESIDENCY_IS_REMOVED_BY_A_QUADRATIC_WORK_TIME_SPACE_TRADEOFF_NOT_BY_LINEAR_RECURRENCE_COMPACTION_AND_THE_IDENTICAL_CLASSICAL_STREAM_REMAINS
+```
+
+This is the exact procedural repair selected after M180. One requested final
+boundary scalar is accumulated by regenerating each source, determinant, and
+scale Gauss factor from the public multiplicative orbit. The accepted carrier
+workspace has ten exact field cells and retains no coefficient, logarithm,
+phase, Gauss, gamma, or Hankel table. A rank-three nonzero-scale forward pass
+makes `4*(q-1)+1` Gauss calls and the full forward/inverse lifecycle makes
+`8*(q-1)+2`; each call visits `q-1` orbit points.
+
+Ten cells is the carrier workspace, not a whole-process memory bound. Five
+additional named exact-field temporaries and one persisted projected output
+give a conservative 16-field-scalar named lifecycle peak. Five public field
+configuration integers and nine public program/boundary scalars are reported
+separately. Loop-control integers, Python objects, bigint expression
+temporaries, and modular-power internals remain excluded. Exact capacity grows
+as `16*ceil(log2(p))` even though the logical field-slot count is fixed.
+
+The coefficient sequence `c_j=(q-1)^-1 G(a-j)` has cyclic Fourier component
+`psi(g^k) chi_a(g^k)`, which is nonzero for every k. Exact character
+orthogonality therefore proves cyclic Hankel rank and periodic linear
+recurrence order `q-1`. Production and a no-import oracle reconstruct that law
+at q=5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, and 53. The determinant
+gamma sequence also has exact observed rank `q-1` at every declared case; that
+second observation is not promoted to an all-prime theorem.
+
+All 16 declared transactions restore the actual zero workspace on the same
+backing and reuse it for an unrelated program with fresh-carrier boundary and
+resource-signature parity. The oracle directly sums the original
+seven-dimensional relation at q=5/q=7 rank-three and q=5 singular boundaries.
+Missing and wrong inverses fail, channel omission and applicable gamma-shift
+mutations change the boundary, and an ascending inverse restores because the
+channel accumulation commutes. No snapshot is used and direct-process pass
+counts are not generation or lease enforcement.
+
+The strongest comparison includes M180's `4*q-3` materialized-table path and
+the identical classical ten-cell stream. The former amortizes compilation
+over many boundaries; the latter trades state for theta-q-squared work per
+scalar. This establishes no fixed exact bit width, nonlinear procedural
+compression no-go, CATVM custody, distinct phase resource, advantage, Small
+Wall crossing, physical execution, physical-bit replacement, or unbounded
+computation. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+PRIME_Q5_7_11_13_17_19_23_29_31_37_41_43_47_53_WITH_AUXILIARY_FIELDS_F41_43_331_157_1361_2053_1013_2437_1861_6661_13121_3613_12973_8269_ONE_DECLARED_RANK3_TRANSACTION_PER_FIELD_PLUS_Q5_RANK1_AND_ZERO_BOUNDARY_BRANCHES_DIRECT_PROCESS_SINGLE_SCALAR_PROJECTION_SOFTWARE
+```
+
+Selected successor:
+
+```text
+EXACT_GROWING_PRIME_HASSE_DAVENPORT_JACOBI_PHASE_RELATION_GENERATOR_CLOSURE_WITH_SUBLINEAR_STATE_AND_SUBQUADRATIC_WORK_OR_GROWING_RELATION_RANK_NO_GO_WITH_IDENTICAL_CLASSICAL_CHARACTER_SUM_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

@@ -10077,3 +10077,56 @@ Next:
 ```text
 EXACT_GROWING_PRIME_MELLIN_GAUSS_COEFFICIENT_SEQUENCE_FIXED_STATE_RECURRENCE_CLOSURE_OR_HANKEL_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_RECURRENCE
 ```
+
+## M181: Gauss tables stream in fixed workspace, but linear rank is full
+
+The completed claim is:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_MELLIN_GAUSS_SOURCE_COEFFICIENT_FAMILIES_STREAM_ONE_FINAL_BOUNDARY_SCALAR_FROM_A_FIXED10_FIELD_CELL_ZERO_WORKSPACE_WITH_TOPOLOGY_REMATERIALIZED_INVERSE_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_WHILE_THE_SOURCE_COEFFICIENT_CYCLIC_HANKEL_RANK_IS_EXACTLY_QMINUS1_AND_THE_DETERMINANT_GAMMA_SEQUENCE_HAS_OBSERVED_RANK_QMINUS1_ON_EVERY_DECLARED_CASE_SO_TABLE_RESIDENCY_IS_REMOVED_BY_A_QUADRATIC_WORK_TIME_SPACE_TRADEOFF_NOT_BY_LINEAR_RECURRENCE_COMPACTION_AND_THE_IDENTICAL_CLASSICAL_STREAM_REMAINS
+```
+
+M181 regenerates each required Gauss factor from the public multiplicative
+orbit, so the single-final-scalar path retains no q-wide coefficient, Gauss,
+gamma, logarithm, or phase table. The carrier workspace is ten field cells.
+Forward rank-three evaluation makes `4*(q-1)+1` Gauss calls; forward plus
+inverse makes `8*(q-1)+2`, with `q-1` orbit terms per call. Reverse
+rematerialization subtracts every term and clears the quadratic Gauss factor.
+
+The resource claim is deliberately narrower than a ten-cell whole-process
+bound. Five named exact-field temporaries outside the carrier and one persisted
+output give a 16-field-scalar named lifecycle peak. Field configuration and
+nine public program/boundary scalars are separate. Control integers, Python
+objects, bigint expression temporaries, and modular-power internals are
+excluded. Exact capacity grows with the auxiliary-field bit width.
+
+The source coefficient sequence obeys the exact identity
+`DFT(c)_k=psi(g^k) chi_a(g^k)`. Every component is nonzero, so its cyclic
+Hankel rank and periodic linear-recurrence order are exactly `q-1` by character
+orthogonality. Independent construction verifies this at 14 declared primes
+q=5 through q=53. The determinant-gamma sequence also reaches observed rank
+`q-1` at all 14 cases. Removing one spectral mode reduces the source rank by
+one, demonstrating sensitivity. The source identity is the theorem; the gamma
+rank remains a bounded observation.
+
+A no-import oracle independently rebuilds all ranks and a separate ten-cell
+machine. All 16 transactions match table evaluation, restore the same backing,
+preserve the final scalar across inverse, and reuse the actual restored backing
+for an unrelated second program with fresh parity. Direct seven-dimensional
+sums at four q=5/q=7 boundaries also match. Missing/wrong inverses and semantic
+mutations fail. Reordered-inverse failure is inapplicable because the exact
+channel sum commutes; the executed alternate order restores.
+
+The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. It is
+direct-process exact residue software. M180's table path and the identical
+classical stream remain the two matched state/work points. No fixed exact bit
+width, nonlinear compression no-go, CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_GROWING_PRIME_HASSE_DAVENPORT_JACOBI_PHASE_RELATION_GENERATOR_CLOSURE_WITH_SUBLINEAR_STATE_AND_SUBQUADRATIC_WORK_OR_GROWING_RELATION_RANK_NO_GO_WITH_IDENTICAL_CLASSICAL_CHARACTER_SUM_BASELINE
+```

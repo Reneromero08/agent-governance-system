@@ -1,0 +1,22 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_MELLIN_GAUSS_STREAMED_RECURRENCE_RANK_PROVENANCE_V1",
+  "scientific_source_head": "253499d41cd20c3fce563842c942ff7a5484ff8a",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "status": "QUALIFIED_GROWING_PRIME_MELLIN_GAUSS_STREAMED_RECURRENCE_RANK_STRICT_SCOPE",
+    "ephemeral_evidence_path": "/dev/shm/ags-audio-m181-qualifier-srhkD5",
+    "sha256sums_sha256": "9ac4ccd3c6055c9e32c1092450e24a1712c579c603bc33c4092dcdf3a6588977"
+  },
+  "files": {
+    "growing_prime_mellin_gauss_streamed_recurrence_rank.py": "efa5f6361bc2a70c4b5c5ff342bce60e13fad66d0cd7ed290b778af4a39a5de3",
+    "GROWING_PRIME_MELLIN_GAUSS_STREAMED_RECURRENCE_RANK_RESULTS.json": "8ea6629f18bd66ace2ce86d6ffb3311cac0f812098b8065a2b67c6f2b070304b",
+    "growing_prime_mellin_gauss_streamed_recurrence_rank_independent_oracle.py": "a78b404362002ebf66aa9d358529cafc2c0ea7a78b7ca350b5f1e886b549e1e0",
+    "GROWING_PRIME_MELLIN_GAUSS_STREAMED_RECURRENCE_RANK_INDEPENDENT_ORACLE.json": "a9448c555b932293a2f04a68f82a4abad4948bcfb462f92334a317eacc2c0899",
+    "GROWING_PRIME_MELLIN_GAUSS_STREAMED_RECURRENCE_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "501595bac56d8abbf7d385055bee6e2e927d2cd4cc4f2a285ad84663dd2b22d0",
+    "qualify_growing_prime_mellin_gauss_streamed_recurrence_rank.sh": "d8328c9a93d45c7803192b442c36a7049d80064680b35b64bcb1f97ea8c2d6ce"
+  },
+  "claim_ceiling": "PRIME_Q5_7_11_13_17_19_23_29_31_37_41_43_47_53_WITH_AUXILIARY_FIELDS_F41_43_331_157_1361_2053_1013_2437_1861_6661_13121_3613_12973_8269_ONE_DECLARED_RANK3_TRANSACTION_PER_FIELD_PLUS_Q5_RANK1_AND_ZERO_BOUNDARY_BRANCHES_DIRECT_PROCESS_SINGLE_SCALAR_PROJECTION_SOFTWARE"
+}
