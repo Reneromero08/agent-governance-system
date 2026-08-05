@@ -11,6 +11,7 @@ import json
 import os
 import re
 import shutil
+import sqlite3
 import subprocess
 import sys
 import tomllib
@@ -291,6 +292,42 @@ def _load_toml(path: Path) -> dict:
         raise ScopeViolation(f"cannot load required config {path}: {exc}") from exc
 
 
+def _active_thread_prompt(expected_cwd: Path) -> object | None:
+    """Read the current turn's persisted prompt without launching nested Codex."""
+    thread_id = os.environ.get("CODEX_THREAD_ID")
+    codex_home = Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
+    state_db = codex_home / "state_5.sqlite"
+    if not thread_id or not state_db.is_file():
+        return None
+    try:
+        with sqlite3.connect(f"file:{state_db}?mode=ro", uri=True) as connection:
+            row = connection.execute(
+                "SELECT rollout_path FROM threads WHERE id = ?", (thread_id,)
+            ).fetchone()
+        if not row:
+            return None
+        events: list[object] = []
+        with Path(row[0]).open(encoding="utf-8") as stream:
+            for raw in stream:
+                event = json.loads(raw)
+                if (
+                    event.get("type") == "event_msg"
+                    and event.get("payload", {}).get("type") == "task_started"
+                ):
+                    events = []
+                events.append(event)
+        turn_cwds = [
+            event.get("payload", {}).get("cwd")
+            for event in events
+            if event.get("type") == "turn_context"
+        ]
+        if not turn_cwds or Path(str(turn_cwds[-1])).resolve() != expected_cwd.resolve():
+            return None
+        return events
+    except (OSError, sqlite3.Error, ValueError, TypeError):
+        return None
+
+
 def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> tuple[str, ...]:
     errors: list[str] = []
     try:
@@ -332,27 +369,29 @@ def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> t
             errors.append("Lab project config must not replace the session's normal sandbox settings")
 
         if prompt_json is None:
-            codex = shutil.which("codex")
-            if not codex:
-                errors.append("Codex executable is unavailable for exact prompt inspection")
-                prompt_payload: object = []
-            else:
-                probe = subprocess.run(
-                    [codex, "debug", "prompt-input", "AGS_LAB_DOCTOR_PROBE"],
-                    cwd=resolved_cwd,
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                )
-                if probe.returncode:
-                    errors.append(f"exact Codex prompt inspection failed: {probe.stderr.strip()}")
+            prompt_payload = _active_thread_prompt(resolved_cwd)
+            if prompt_payload is None:
+                codex = shutil.which("codex")
+                if not codex:
+                    errors.append("Codex executable is unavailable for exact prompt inspection")
                     prompt_payload = []
                 else:
-                    try:
-                        prompt_payload = json.loads(probe.stdout)
-                    except ValueError as exc:
-                        errors.append(f"Codex prompt inspection returned invalid JSON: {exc}")
+                    probe = subprocess.run(
+                        [codex, "debug", "prompt-input", "AGS_LAB_DOCTOR_PROBE"],
+                        cwd=resolved_cwd,
+                        capture_output=True,
+                        text=True,
+                        check=False,
+                    )
+                    if probe.returncode:
+                        errors.append(f"exact Codex prompt inspection failed: {probe.stderr.strip()}")
                         prompt_payload = []
+                    else:
+                        try:
+                            prompt_payload = json.loads(probe.stdout)
+                        except ValueError as exc:
+                            errors.append(f"Codex prompt inspection returned invalid JSON: {exc}")
+                            prompt_payload = []
         elif prompt_json == "-":
             try:
                 prompt_payload = json.load(sys.stdin)
@@ -453,9 +492,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 classify_range(args.base, args.head, args.remote_name), as_json=args.json
             )
         elif args.command == "audit":
-            result = classify_paths(worktree_paths())
-            if args.lab_session and result.route not in {None, PathClass.LAB_PAYLOAD}:
-                raise ScopeViolation(_violation_message(result.paths))
+            paths = staged_paths() if args.lab_session else worktree_paths()
+            result = classify_paths(paths)
             _print_scope(result, as_json=args.json)
         elif args.command == "doctor":
             errors = doctor(args.cwd, args.agent, prompt_json=args.prompt_json)

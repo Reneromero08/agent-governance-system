@@ -45,6 +45,11 @@ python <repo>/CAPABILITY/TOOLS/utilities/lab_scope.py doctor --agent <agent> --c
 python <repo>/CAPABILITY/TOOLS/utilities/lab_scope.py audit --lab-session
 ```
 
+The Lab-session audit classifies the staged commit candidate. It does not
+require the whole worktree to contain only Lab changes. Pure staged main work
+routes through main governance; staged Lab payload mixed with main or boundary
+paths still fails.
+
 ## Runtime access
 
 Lab isolation does not reduce the agent's ordinary filesystem capability.

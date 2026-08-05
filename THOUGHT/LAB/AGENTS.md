@@ -31,4 +31,5 @@ This Codex instruction root is the compact form of `LAB_CONTRACT.md`.
 
 Deeper `AGENTS.md` files may add experiment-specific directions but cannot
 widen this boundary. Run `lab_scope.py doctor` and `audit --lab-session` as
-documented in `LAB_CONTRACT.md` before consequential Git operations.
+documented in `LAB_CONTRACT.md` before consequential Git operations. The audit
+checks the staged commit candidate; unrelated unstaged work does not block it.

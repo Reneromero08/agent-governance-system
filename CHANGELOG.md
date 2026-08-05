@@ -12,6 +12,11 @@
   worktree contained mixed unfinished changes. Normal Git inspection and
   staging remain available; pre-commit and pre-push hooks enforce final scope.
 
+- Make the Lab audit classify the staged commit candidate instead of rejecting
+  unrelated unfinished worktree changes, and let the doctor inspect the active
+  task's persisted prompt without launching a nested Codex process that needs a
+  second Scratch allocation.
+
 - Document the one explicit transition required when an agent starts in main:
   after creating or selecting a Lab worktree, resume or relaunch the task with
   that worktree's `THOUGHT/LAB` as its working root. A shell `cd` alone does not
