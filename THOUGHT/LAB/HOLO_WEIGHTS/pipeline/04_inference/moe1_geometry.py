@@ -47,18 +47,41 @@ def dequant_q8_0(data: np.ndarray) -> np.ndarray:
     return out
 
 
+T_Q8 = 8
+T_F32 = 0
+T_F16 = 1
+
+
 def load_fused(reader, name: str) -> np.ndarray:
-    t = reader.get_tensor(name)
+    """Load a tensor, dequantize, return LOGICAL-shape array.
+
+    Conventions verified on this file:
+    - gguf header shape is the REVERSED logical shape (shared gate header
+      (2048,512) is logical (512,2048)).
+    - Data is stored with the LAST header dim CONTIGUOUS (fastest). For
+      the 3D fused expert tensors (header (2048,512,90)) this means the
+      expert axis is element-interleaved: data[i, o, e] with e fastest,
+      so the per-expert logical matrix is transpose(data[:, :, e]).
+      The 2D case is the same rule: reshape(header) is already row-major
+      logical when header == reversed logical.
+    """
+    by = {t.name: t for t in reader.tensors}
+    t = by[name]
     raw = np.asarray(t.data).reshape(-1)
-    if t.tensor_type == 4:  # Q8_0
+    if t.tensor_type == T_Q8:
         flat = dequant_q8_0(raw)
-    elif t.tensor_type == 1:  # F32
+    elif t.tensor_type == T_F32:
         flat = raw.astype(np.float32)
-    elif t.tensor_type == 0:  # F16
+    elif t.tensor_type == T_F16:
         flat = raw.astype(np.float32)
     else:
         raise ValueError(f"unsupported tensor type {t.tensor_type} for {name}")
-    return flat.reshape(tuple(t.shape))
+    hdr = tuple(int(x) for x in t.shape)
+    data = flat.reshape(hdr)
+    if len(hdr) == 3:
+        # fused experts: expert axis is the contiguous (last) header dim
+        return np.transpose(data, (2, 1, 0))  # (e, dim1, dim0) logical
+    return data  # 2D: header (in, out) -> logical (out, in)
 
 
 def reshape_experts(flat: np.ndarray, shape: tuple, ne: int) -> np.ndarray:
@@ -92,12 +115,13 @@ def main() -> None:
             print("  ", n)
         return
 
+    by = {t.name: t for t in reader.tensors}
     for L in args.layers:
-        for key in ("gate", "up", "down", "gate_inp", "gate_shexp", "up_shexp", "down_shexp"):
+        for key in ("gate_exps", "up_exps", "down_exps", "gate_inp", "gate_shexp", "up_shexp", "down_shexp"):
             nm = f"blk.{L}.ffn_{key}.weight"
-            if nm in names:
-                t = reader.get_tensor(nm)
-                print(f"L{L} {key}: shape={tuple(t.shape)} type={t.tensor_type}")
+            if nm in by:
+                t = by[nm]
+                print(f"L{L} {key}: header={tuple(int(x) for x in t.shape)} type={t.tensor_type}")
             else:
                 print(f"L{L} {key}: missing")
 
@@ -106,13 +130,17 @@ def main() -> None:
         L = args.layers[0]
         nm = f"blk.{L}.ffn_gate_exps.weight"
         w = load_fused(reader, nm)
-        print(f"manual-check {nm}: dequantized shape {w.shape}, "
-              f"std {w.std():.4f}, mean {w.mean():.4f}")
-        if w.shape[0] == N_EXPERTS:
-            e0 = w[0].reshape(EXP_DIM, AMB)
+        print(f"manual-check {nm}: logical shape {w.shape}, std {w.std():.4f}")
+        sh = f"blk.{L}.ffn_gate_shexp.weight"
+        wsh = load_fused(reader, sh)
+        print(f"  shared gate logical {wsh.shape}, std {wsh.std():.4f}")
+        if w.shape == (N_EXPERTS, EXP_DIM, AMB):
+            e0 = w[0]
             x = np.random.default_rng(7).standard_normal((AMB, 8)).astype(np.float32)
-            y = e0 @ x
-            print(f"  expert0 gate matmul ok: out {y.shape} std {y.std():.3f}")
+            y0 = e0 @ x
+            ysh = wsh @ x
+            print(f"  expert0 gate out {y0.shape} std {y0.std():.3f} | shared gate out std {ysh.std():.3f} "
+                  f"(same scale expected - orientation sanity)")
 
     print("=" * 80)
     for L in args.layers:
@@ -123,28 +151,29 @@ def main() -> None:
                 print(f"L{L} {fam}: missing tensor - SKIP")
                 continue
             w = load_fused(reader, nm)
-            exps = reshape_experts(w, w.shape, N_EXPERTS)
-            ncols = exps.shape[1]
             if fam in ("w1", "w3"):
-                assert ncols == EXP_DIM * AMB, f"unexpected cols {ncols}"
-                mats = exps.reshape(N_EXPERTS, EXP_DIM, AMB)  # (512, 2048)
+                assert w.shape == (N_EXPERTS, EXP_DIM, AMB), w.shape
+                mats = w  # (90, 512, 2048) gate/up logical
             else:
-                assert ncols == AMB * EXP_DIM, f"unexpected cols {ncols}"
-                mats = exps.reshape(N_EXPERTS, AMB, EXP_DIM)  # (2048, 512)
-            svals, Bs = [], []
-            for e in range(N_EXPERTS):
-                u, s, vh = np.linalg.svd(mats[e], full_matrices=False)
-                svals.append(s)
-                Bs.append(vh.T[:, : min(EXP_DIM, AMB)] if orient == "in" else u[:, : min(EXP_DIM, AMB)])
-            S = np.stack(svals)
+                assert w.shape == (N_EXPERTS, AMB, EXP_DIM), w.shape
+                mats = w  # (90, 2048, 512) down logical
+            import torch
+            tm = torch.from_numpy(mats).cuda()
+            if orient == "in":
+                u, s, vh = torch.linalg.svd(tm, full_matrices=False)
+                Bs = vh.transpose(1, 2)[:, :, : min(EXP_DIM, AMB)]
+            else:
+                u, s, vh = torch.linalg.svd(tm, full_matrices=False)
+                Bs = u[:, :, : min(EXP_DIM, AMB)]
+            S = s.cpu().numpy()
             en2 = (S**2).sum(axis=1)
-            stable = (S**2).max(axis=1) / en2.clip(1e-30)
-            p = (S**2) / en2[:, None].clip(1e-30)
-            d_eff = np.exp(-(p * np.log(p + 1e-30)).sum(axis=1))
+            stable = en2 / (S**2).max(axis=1).clip(1e-30)  # proper stable rank
+            pr = (S**2) / en2[:, None].clip(1e-30)
+            d_eff = np.exp(-(pr * np.log(pr + 1e-30)).sum(axis=1))
             cum = np.cumsum(S**2, axis=1) / en2[:, None].clip(1e-30)
             d95 = (cum < 0.95).sum(axis=1) + 1
             d99 = (cum < 0.99).sum(axis=1) + 1
-            fam_stats[fam] = (S, Bs)
+            fam_stats[fam] = (S, [b.cpu().numpy() for b in Bs])
             print(f"L{L} {fam}({orient}): stable-rank {stable.mean():.1f} | "
                   f"D_eff {d_eff.mean():.1f} | D95 {d95.mean():.1f} | D99 {d99.mean():.1f} | "
                   f"head/tail {(S[:, 0] / S[:, -1].clip(1e-30)).mean():.1f}")
@@ -153,11 +182,10 @@ def main() -> None:
             if fam not in fam_stats:
                 continue
             Bs = fam_stats[fam][1]
-            P = np.zeros((AMB, AMB), dtype=np.float32)
-            for b in Bs:
-                P += b @ b.T
-            P /= N_EXPERTS
-            ev = np.linalg.eigvalsh(P)[::-1]
+            import torch
+            B = torch.from_numpy(np.stack(Bs)).cuda()  # (90, 2048, 512)
+            P = (B @ B.transpose(1, 2)).mean(0)
+            ev = torch.flip(torch.linalg.eigvalsh(P), dims=[0]).cpu().numpy()
             cum = np.cumsum(ev) / ev.sum()
             print(f"L{L} projector({fam}): D95={(cum < 0.95).sum() + 1} "
                   f"top {ev[0]:.4f} {ev[1]:.4f} {ev[2]:.4f} | "
@@ -165,13 +193,11 @@ def main() -> None:
                   f"| tail50={ev[-50:].mean():.2e}")
         # random-subspace null (w1-style input interface)
         for r in range(args.null_runs):
-            rng = np.random.default_rng(1000 + L * 10 + r)
-            Pn = np.zeros((AMB, AMB), dtype=np.float32)
-            for e in range(N_EXPERTS):
-                q, _ = np.linalg.qr(rng.standard_normal((AMB, EXP_DIM)))
-                Pn += q @ q.T
-            Pn /= N_EXPERTS
-            evn = np.linalg.eigvalsh(Pn)[::-1]
+            import torch
+            g = torch.randn(N_EXPERTS, AMB, EXP_DIM, device="cuda")
+            q, _ = torch.linalg.qr(g)
+            Pn = (q @ q.transpose(1, 2)).mean(0)
+            evn = torch.flip(torch.linalg.eigvalsh(Pn), dims=[0]).cpu().numpy()
             cumn = np.cumsum(evn) / evn.sum()
             print(f"  L{L} null{r}: D95={(cumn < 0.95).sum() + 1} "
                   f"top {evn[0]:.4f} {evn[1]:.4f} | "

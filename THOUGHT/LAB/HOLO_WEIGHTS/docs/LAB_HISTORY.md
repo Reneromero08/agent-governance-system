@@ -1206,3 +1206,51 @@ Sol's REDESIGN verdict on my proposed measurement:
 
 Status: script moe1_geometry.py built (integrity gate + geometry pilot);
 Q8_0 download in progress (5.9GB/14.7GB).
+
+## 2026-08-05 — MOE pilot RUN 1 (Q8, 6 layers) - no manifold signal + L0-down anomaly
+
+PIPELINE FIXES (3 bugs in my own code, found by checking):
+  1. gguf Q8_0 enum value is 8 in this package (not 4); F32=0, F16=1.
+  2. gguf header shape = REVERSED logical shape; data has the LAST
+     header dim CONTIGUOUS - the fused expert tensors are EXPERT-
+     INTERLEAVED at the element level, not block-contiguous per expert.
+     My first reshape produced 71-318 exactly-zero rows per expert
+     (garbage); the interleaved read (transpose(data,(2,1,0))) gives
+     zero rows everywhere and sane spectra. Verified via zero-row
+     counts + shared-gate (2D) control.
+  3. torch has no negative strides - fixed eigvalsh flip.
+
+RESULTS (Qwen3.6-14B-A3B, Q8_0, layers {0,7,15,23,31,39}, 90 experts,
+k=512 full):
+PER-EXPERT SPECTRA (mean over 90 experts):
+  w1/w3 (gate/up, 512x2048): D_eff 446-451 (of 512), stable-rank
+    205-228, D95 438-441, D99 494, head/tail 3.0-3.2 - near-flat.
+  w2 (down, 2048x512): same flat profile at L7/L15/L31 (D_eff 451,
+    stable 228) BUT L0: stable-rank 4.5, D_eff 161, D95 388,
+    head/tail 31.2 - VERY concentrated; L23: stable 129.5; L39:
+    stable 148.9 (mid).
+  L0-down detail: s0 ~ 8.6, s100 ~ 0.83, s[-1] ~ 0.2766; the top ~4-5
+    modes hold most energy, tail flat at ~0.28. Consistent across all
+    90 experts (not an outlier artifact).
+
+HIDDEN-INTERFACE PROJECTOR P = (1/90) sum B_e B_e^T vs RANDOM NULL
+(90 random 2048x512 bases):
+  D95: real 1853-1903 vs null 1903 at every layer - the expert union
+    spans essentially the full 2048-dim space like random subspaces.
+    NO low-dimensional expert manifold (Sol's 'one expert width' ~512
+    threshold: nowhere near).
+  Top eigenvalues: w1 projectors 0.43-0.60 vs null 0.35 (consistently
+    elevated 1.3-1.7x at every layer - a handful of shared input
+    directions, tiny mass fraction); L0-down projector top = 0.9892 +
+    0.6439 (two strong shared OUTPUT directions); tail50 real
+    0.10-0.17 vs null 0.17 (real tail suppressed = fewer distinct
+    directions than random).
+
+PRELIMINARY READING (Q8 caveat - F16 confirmation REQUIRED per Sol
+before any tail/manifold claim): the expert manifold hypothesis FAILS
+at the expert-set level - the union of 90 expert subspaces is
+essentially as spread as random. The wall generalizes to MoE. The only
+structure: a few shared directions per layer, strongest at L0-down
+(2 shared output directions, eigenvalue ~1.0) and the L0-down
+concentration anomaly (stable-rank 4.5). L0-down warrants F16
+confirmation FIRST.
