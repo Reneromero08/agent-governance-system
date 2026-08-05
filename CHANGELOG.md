@@ -16,7 +16,8 @@
   unrelated unfinished worktree changes, and let the doctor inspect the active
   task's persisted prompt without launching a nested Codex process that needs a
   second Scratch allocation. Tolerate incomplete trailing records while the
-  active rollout is still being written.
+  active rollout is still being written, and carry forward the most recent
+  matching instruction record when later turns reuse it without reinjection.
 
 - Document the one explicit transition required when an agent starts in main:
   after creating or selecting a Lab worktree, resume or relaunch the task with

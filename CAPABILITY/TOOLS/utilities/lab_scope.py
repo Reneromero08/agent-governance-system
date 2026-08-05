@@ -307,6 +307,8 @@ def _active_thread_prompt(expected_cwd: Path) -> object | None:
         if not row:
             return None
         events: list[object] = []
+        instruction_event: object | None = None
+        instruction_header = f"# AGENTS.md instructions for {expected_cwd.resolve()}"
         with Path(row[0]).open(encoding="utf-8") as stream:
             for raw in stream:
                 try:
@@ -321,6 +323,18 @@ def _active_thread_prompt(expected_cwd: Path) -> object | None:
                 ):
                     events = []
                 events.append(event)
+                payload = event.get("payload", {})
+                if (
+                    event.get("type") == "response_item"
+                    and payload.get("type") == "message"
+                    and payload.get("role") == "user"
+                ):
+                    message_text = _all_prompt_text(payload.get("content", []))
+                    if (
+                        instruction_header in message_text
+                        and LAB_CONTRACT_SENTINEL in message_text
+                    ):
+                        instruction_event = event
         turn_cwds = [
             event.get("payload", {}).get("cwd")
             for event in events
@@ -328,7 +342,9 @@ def _active_thread_prompt(expected_cwd: Path) -> object | None:
         ]
         if not turn_cwds or Path(str(turn_cwds[-1])).resolve() != expected_cwd.resolve():
             return None
-        return events
+        # World-state and user messages can quote historical governance. The
+        # exact instruction record is the authoritative contamination check.
+        return [instruction_event] if instruction_event is not None else events
     except (OSError, sqlite3.Error, ValueError, TypeError):
         return None
 
