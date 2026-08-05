@@ -222,12 +222,17 @@ def validate_push(
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--refs-file", required=True, type=Path)
+    parser.add_argument("--refs-file", type=Path, help="read refs from this file instead of stdin")
     parser.add_argument("--token-file", required=True, type=Path)
     args = parser.parse_args(argv)
 
     try:
-        refs = parse_push_refs(args.refs_file.read_text(encoding="utf-8"))
+        refs_text = (
+            args.refs_file.read_text(encoding="utf-8")
+            if args.refs_file is not None
+            else sys.stdin.read()
+        )
+        refs = parse_push_refs(refs_text)
     except (OSError, ValueError) as exc:
         print(f"[PRE-PUSH] ERROR: {exc}", file=sys.stderr)
         return 1

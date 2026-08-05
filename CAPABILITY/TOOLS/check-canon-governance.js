@@ -27,6 +27,15 @@ function normalizePath(p) {
     return String(p || "").replace(/\\/g, "/");
 }
 
+function gitPaths(args) {
+    const output = execSync(`git ${args}`, { encoding: "buffer" });
+    return [...new Set(output
+        .toString("utf8")
+        .split("\0")
+        .map((line) => normalizePath(line))
+        .filter(Boolean))];
+}
+
 function getChangedPaths() {
     if (process.env.CANON_GOVERNANCE_CHANGED_PATHS) {
         return process.env.CANON_GOVERNANCE_CHANGED_PATHS
@@ -35,6 +44,16 @@ function getChangedPaths() {
             .filter(Boolean);
     }
     try {
+        if (process.env.CANON_GOVERNANCE_SCOPE === "staged") {
+            return gitPaths("diff --cached --name-only -z --");
+        }
+        if (process.env.CANON_GOVERNANCE_DIFF_RANGE) {
+            const range = process.env.CANON_GOVERNANCE_DIFF_RANGE;
+            if (!/^[0-9a-fA-F.^~]+$/.test(range)) {
+                throw new Error("unsafe CANON_GOVERNANCE_DIFF_RANGE");
+            }
+            return gitPaths(`diff --name-only -z ${range} --`);
+        }
         // Get staged and unstaged changes
         const staged = execSync("git diff --cached --name-only", { encoding: "utf8" }).trim();
         const unstaged = execSync("git diff --name-only", { encoding: "utf8" }).trim();

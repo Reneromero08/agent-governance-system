@@ -48,7 +48,10 @@ def _git_stdout(args: Sequence[str], *, required: bool = False) -> str:
             detail = (result.stderr or result.stdout or "unknown git error").strip()
             raise RuntimeError(f"git command failed: {' '.join(args)}: {detail}")
         return ""
-    return (result.stdout or "").strip()
+    # Preserve the leading XY columns emitted by ``git status --porcelain``.
+    # Trimming them can misclassify the first dirty path (for example, turning
+    # `` D THOUGHT/...`` into ``D THOUGHT/...``).
+    return (result.stdout or "").rstrip()
 
 
 def _resolve_base_sha(base_ref: str | None) -> str | None:

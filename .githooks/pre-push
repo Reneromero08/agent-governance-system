@@ -2,26 +2,28 @@
 # Pre-push hook: require a verification receipt for the commit actually pushed.
 set -e
 
-if [ -x ".venv/Scripts/python.exe" ]; then
-    PYTHON_CMD=".venv/Scripts/python.exe"
-elif [ -x ".venv/bin/python" ]; then
-    PYTHON_CMD=".venv/bin/python"
-elif python3 --version >/dev/null 2>&1; then
-    PYTHON_CMD="python3"
-elif python --version >/dev/null 2>&1; then
-    PYTHON_CMD="python"
-else
+# A foreign-platform virtualenv can still have executable permission. Probe the
+# interpreter instead of trusting its mode bit so Linux does not select a
+# checked-in Windows python.exe (and Windows can still select its own venv).
+PYTHON_CMD=""
+for CANDIDATE in .venv/bin/python .venv/Scripts/python.exe python3 python; do
+    if "$CANDIDATE" --version >/dev/null 2>&1; then
+        PYTHON_CMD="$CANDIDATE"
+        break
+    fi
+done
+if [ -z "$PYTHON_CMD" ]; then
     echo "[PRE-PUSH] ERROR: No Python found"
     exit 1
 fi
 
 ZERO_SHA="0000000000000000000000000000000000000000"
 TOKEN_FILE="LAW/CONTRACTS/_runs/ALLOW_PUSH.token"
-REFS_FILE="LAW/CONTRACTS/_runs/_tmp/pre-push-refs.$$"
 GUARD="CAPABILITY/TOOLS/utilities/pre_push_guard.py"
-mkdir -p "$(dirname "$REFS_FILE")"
-cat > "$REFS_FILE"
-trap 'rm -f "$REFS_FILE"' EXIT HUP INT TERM
+SCOPE_TOOL="CAPABILITY/TOOLS/utilities/lab_scope.py"
+LAB_ACCEPTANCE="CAPABILITY/TOOLS/utilities/lab_isolation_acceptance.py"
+REMOTE_NAME="$1"
+REF_UPDATES=$(cat)
 
 while read local_ref local_sha remote_ref remote_sha; do
     if [ "$local_sha" != "$ZERO_SHA" ] && echo "$remote_ref" | grep -qE '^refs/tags/v[0-9]'; then
@@ -37,16 +39,42 @@ while read local_ref local_sha remote_ref remote_sha; do
             exit 1
         fi
     fi
-done < "$REFS_FILE"
+done <<EOF
+$REF_UPDATES
+EOF
 
 # No-op pushes and deletion-only pushes introduce no new commit content.
-if [ ! -s "$REFS_FILE" ]; then
+if [ -z "$REF_UPDATES" ]; then
     echo "[PRE-PUSH] No ref updates; verification receipt not required."
     exit 0
 fi
-if awk -v zero="$ZERO_SHA" 'NF && $2 != zero { found=1 } END { exit found ? 1 : 0 }' "$REFS_FILE"; then
+if printf '%s\n' "$REF_UPDATES" | awk -v zero="$ZERO_SHA" 'NF && $2 != zero { found=1 } END { exit found ? 1 : 0 }'; then
     echo "[PRE-PUSH] Deletion-only push; verification receipt not required."
     exit 0
+fi
+
+SCOPE=$(printf '%s\n' "$REF_UPDATES" | "$PYTHON_CMD" "$SCOPE_TOOL" check-push --remote-name "$REMOTE_NAME") || exit $?
+if [ "$SCOPE" = "EMPTY" ]; then
+    echo "[PRE-PUSH] No commits are introduced."
+    exit 0
+fi
+
+if [ "$SCOPE" = "LAB_PAYLOAD" ]; then
+    echo "[PRE-PUSH] Route: Lab payload (linear history, no main receipt)."
+    "$PYTHON_CMD" "$SCOPE_TOOL" audit --lab-session >/dev/null
+    if ! git diff --cached --quiet; then
+        echo "PUSH BLOCKED: staged changes are not committed"
+        exit 1
+    fi
+    echo "[PRE-PUSH] Lab push approved."
+    exit 0
+fi
+
+if [ "$SCOPE" = "LAB_BOUNDARY_CONTROL" ]; then
+    echo "[PRE-PUSH] Route: Lab boundary maintenance; running isolation acceptance."
+    "$PYTHON_CMD" "$LAB_ACCEPTANCE"
+else
+    echo "[PRE-PUSH] Route: main governance."
 fi
 
 if [ ! -f "$TOKEN_FILE" ]; then
@@ -58,14 +86,14 @@ if [ ! -f "$TOKEN_FILE" ]; then
 fi
 
 set +e
-"$PYTHON_CMD" "$GUARD" --refs-file "$REFS_FILE" --token-file "$TOKEN_FILE"
+printf '%s\n' "$REF_UPDATES" | "$PYTHON_CMD" "$GUARD" --token-file "$TOKEN_FILE"
 GUARD_RC=$?
 set -e
 
 if [ "$GUARD_RC" -eq 2 ]; then
     echo "[PRE-PUSH] Legacy/manual token detected; running the canonical full gate."
     "$PYTHON_CMD" CAPABILITY/TOOLS/utilities/ci_local_gate.py --full
-    "$PYTHON_CMD" "$GUARD" --refs-file "$REFS_FILE" --token-file "$TOKEN_FILE"
+    printf '%s\n' "$REF_UPDATES" | "$PYTHON_CMD" "$GUARD" --token-file "$TOKEN_FILE"
 elif [ "$GUARD_RC" -ne 0 ]; then
     echo "Re-run: python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full"
     exit "$GUARD_RC"

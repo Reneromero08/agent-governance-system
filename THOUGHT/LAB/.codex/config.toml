@@ -1,0 +1,7 @@
+# The profile is defined with machine-specific absolute paths in the trusted
+# user config. Do not add legacy sandbox_mode settings here: the two permission
+# systems do not compose.
+default_permissions = "ags-lab"
+
+[shell_environment_policy.set]
+PYTHONDONTWRITEBYTECODE = "1"

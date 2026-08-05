@@ -1,6 +1,18 @@
 import CAPABILITY.TOOLS.utilities.ci_local_gate as ci_local_gate
 
 
+def test_git_stdout_preserves_leading_porcelain_status_column(monkeypatch):
+    class Result:
+        returncode = 0
+        stdout = " D THOUGHT/LAB/model.json\n"
+        stderr = ""
+
+    monkeypatch.setattr(ci_local_gate.subprocess, "run", lambda *args, **kwargs: Result())
+    assert ci_local_gate._git_stdout(["git", "status", "--porcelain=v1"]) == (
+        " D THOUGHT/LAB/model.json"
+    )
+
+
 def test_status_entry_paths_handles_renames_and_windows_separators():
     assert ci_local_gate._status_entry_paths("R  old.py -> new.py") == ("old.py", "new.py")
     assert ci_local_gate._status_entry_paths(r"?? folder\file.py") == ("folder/file.py",)

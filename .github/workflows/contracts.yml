@@ -11,8 +11,62 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  scope:
+    name: Classify Change Scope
+    runs-on: ubuntu-latest
+    outputs:
+      route: ${{ steps.classify.outputs.route }}
+    steps:
+      - name: Checkout exact change head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Classify immutable Lab boundary
+        id: classify
+        env:
+          AGS_SCOPE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          ROUTE="$(python CAPABILITY/TOOLS/utilities/lab_scope.py classify-range \
+            --base "$AGS_SCOPE_BASE" \
+            --head "$(git rev-parse HEAD)" \
+            --remote-name origin)"
+          echo "route=$ROUTE" >> "$GITHUB_OUTPUT"
+          echo "Scope route: $ROUTE"
+
+  lab:
+    name: Focused Lab Checks
+    needs: scope
+    if: needs.scope.outputs.route == 'LAB_PAYLOAD'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact change head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify Lab scope engine
+        run: python -m pytest CAPABILITY/TESTBENCH/01_core/test_lab_scope.py -q
+
+      - name: Validate changed Lab Python and JSON
+        env:
+          AGS_SCOPE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          python CAPABILITY/TOOLS/utilities/lab_checks.py \
+            --base "$AGS_SCOPE_BASE" \
+            --head "$(git rev-parse HEAD)"
+
   governance:
     name: Governance Checks
+    needs: scope
+    if: needs.scope.outputs.route != 'LAB_PAYLOAD'
     runs-on: ubuntu-latest
     env:
       AGS_PUSH_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
@@ -26,6 +80,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -49,10 +104,14 @@ jobs:
           node-version: '24'
 
       - name: Run canon governance checks
-        run: node CAPABILITY/TOOLS/check-canon-governance.js
+        run: |
+          CANON_GOVERNANCE_DIFF_RANGE="${AGS_PUSH_BASE}..$(git rev-parse HEAD)" \
+            node CAPABILITY/TOOLS/check-canon-governance.js
 
       - name: Run critic checks
-        run: python CAPABILITY/TOOLS/governance/critic.py
+        run: |
+          CRITIC_DIFF_RANGE="${AGS_PUSH_BASE}..$(git rev-parse HEAD)" \
+            python CAPABILITY/TOOLS/governance/critic.py
 
       - name: Lint tokens
         run: python CAPABILITY/TOOLS/utilities/lint_tokens.py

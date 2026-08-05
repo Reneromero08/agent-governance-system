@@ -1,17 +1,6 @@
 #!/bin/sh
 set -e
 
-# ============================================================
-# AGENT POLICY: Commit Ceremony (AGENTS.md Section 10)
-# ============================================================
-# Every commit requires explicit, per-instance human approval.
-# If you are committing without explicit instructions, STOP.
-# Ask the user: "Ready for the Chunked Commit Ceremony?"
-# This is NOT a gate for humans -- it is a reminder for agents.
-# ============================================================
-echo "[PRE-COMMIT] Agent Policy: Verify explicit commit approval."
-echo "[PRE-COMMIT] If unclear, see AGENTS.md Section 10."
-
 # Cross-platform Python detection
 if python3 --version >/dev/null 2>&1; then
     PYTHON_CMD="python3"
@@ -22,9 +11,19 @@ else
     exit 1
 fi
 
+SCOPE_TOOL="CAPABILITY/TOOLS/utilities/lab_scope.py"
+LAB_CHECKS="CAPABILITY/TOOLS/utilities/lab_checks.py"
+LAB_ACCEPTANCE="CAPABILITY/TOOLS/utilities/lab_isolation_acceptance.py"
+
+SCOPE=$($PYTHON_CMD "$SCOPE_TOOL" check-staged) || exit $?
+if [ "$SCOPE" = "EMPTY" ]; then
+    echo "[PRE-COMMIT] No staged changes."
+    exit 0
+fi
+
 # Block private key commits (Crypto Safe)
 echo "[PRE-COMMIT] Checking for private keys..."
-if git diff --cached --name-only | grep -E '\.key$' | grep -v '\.pub\.key$'; then
+if git diff --cached --name-only -z | $PYTHON_CMD -c 'import sys; p=[x for x in sys.stdin.buffer.read().split(b"\0") if x]; raise SystemExit(0 if any(x.endswith(b".key") and not x.endswith(b".pub.key") for x in p) else 1)'; then
     echo ""
     echo "[PRE-COMMIT] ERROR: Private key file staged for commit!"
     echo "             Signing keys must NEVER be committed to the repository."
@@ -34,16 +33,35 @@ if git diff --cached --name-only | grep -E '\.key$' | grep -v '\.pub\.key$'; the
     exit 1
 fi
 
+if [ "$SCOPE" = "LAB_PAYLOAD" ]; then
+    echo "[PRE-COMMIT] Route: focused Lab payload checks."
+    $PYTHON_CMD "$SCOPE_TOOL" audit --lab-session >/dev/null
+    $PYTHON_CMD "$LAB_CHECKS"
+    echo "[PRE-COMMIT] OK (Lab payload; no main ceremony or changelog gate)"
+    exit 0
+fi
+
+# ============================================================
+# AGENT POLICY: Main/Boundary Commit Ceremony (AGENTS.md Section 10)
+# ============================================================
+echo "[PRE-COMMIT] Agent Policy: Verify explicit main/boundary commit approval."
+echo "[PRE-COMMIT] If unclear, see root AGENTS.md Section 10."
+
+if [ "$SCOPE" = "LAB_BOUNDARY_CONTROL" ]; then
+    echo "[PRE-COMMIT] Route: Lab boundary maintenance plus full main governance."
+    $PYTHON_CMD "$LAB_ACCEPTANCE"
+else
+    echo "[PRE-COMMIT] Route: main governance."
+fi
+
 echo "[PRE-COMMIT] Running canon governance check..."
-node CAPABILITY/TOOLS/check-canon-governance.js
+CANON_GOVERNANCE_SCOPE=staged node CAPABILITY/TOOLS/check-canon-governance.js
 
 echo "[PRE-COMMIT] Running INBOX policy check..."
 $PYTHON_CMD CAPABILITY/SKILLS/inbox/inbox-report-writer/check_inbox_policy.py
 
-echo "[PRE-COMMIT] Running CAT_CAS manifesto critic..."
-$PYTHON_CMD CAPABILITY/TOOLS/governance/critic.py
-CRITIC_EXIT=$?
-if [ $CRITIC_EXIT -ne 0 ]; then
+echo "[PRE-COMMIT] Running main governance critic..."
+if ! $PYTHON_CMD CAPABILITY/TOOLS/governance/critic.py; then
     echo ""
     echo "[PRE-COMMIT] CAT_CAS manifesto violations detected. Commit blocked."
     echo "             Fix violations or request Lead Physicist waiver."

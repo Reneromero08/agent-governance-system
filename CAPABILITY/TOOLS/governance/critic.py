@@ -17,6 +17,7 @@ Exit codes:
 - 1: Violations found
 """
 
+import os
 import re
 import subprocess
 import sys
@@ -80,6 +81,21 @@ RAW_FS_PATTERNS = [
 def get_changed_files() -> List[str]:
     """Get list of files changed in the current commit/staging."""
     try:
+        diff_range = os.environ.get("CRITIC_DIFF_RANGE")
+        if diff_range:
+            if not re.fullmatch(r"[0-9a-fA-F.^~]+", diff_range):
+                raise ValueError("unsafe CRITIC_DIFF_RANGE")
+            result = subprocess.run(
+                ["git", "diff", "--name-only", "-z", diff_range, "--"],
+                capture_output=True, cwd=PROJECT_ROOT
+            )
+            if result.returncode == 0:
+                return [
+                    item.decode("utf-8", "surrogateescape")
+                    for item in result.stdout.split(b"\0")
+                    if item
+                ]
+            return []
         # Check staged files first
         result = subprocess.run(
             ["git", "diff", "--cached", "--name-only"],

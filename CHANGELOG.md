@@ -2,6 +2,34 @@
 
 # Changelog
 
+## 2026-08-05: Cross-agent Lab isolation boundary
+
+- Root normal Lab sessions at `THOUGHT/LAB/.agent-root`, provide one compact
+  shared Lab contract, and select a trusted Codex `ags-lab` permission profile
+  that keeps the repository readable, makes Lab payload writable, makes Lab
+  boundary controls read-only, and denies reads of the root `AGENTS.md`.
+
+- Add a tool-agnostic three-class scope engine for Lab payload, Lab boundary
+  control, and main paths. Route commits, pushes, and CI through that engine;
+  reject mixed payload/governance changes, rename escapes, unsafe paths, and
+  Lab merge history; exclude inherited remote history for new Lab branches.
+
+- Add an OpenCode adapter that denies direct out-of-Lab edit/write/patch tools,
+  overwrites inherited inline configuration, preserves checked-in Lab
+  instructions, routes runtime output to managed disk-backed Scratch, and
+  puts a fail-closed scope-auditing Git shim in that Scratch PATH so
+  shell-created contamination blocks every Git command without claiming an OS
+  sandbox it does not provide. Preserve unrestricted ordinary Bash capability
+  for Lab experiments instead of globally denying shell mutation commands.
+
+- Replace the pre-push governance temp file and irreversible cleanup with an
+  in-memory ref router. Add focused Lab checks, a fail-closed doctor, regression
+  tests, and an acceptance suite that proves the exact Codex prompt excludes
+  root governance and that verification does not mutate main or boundary state.
+  Probe Python interpreters before selecting a cross-platform virtualenv, and
+  preserve porcelain status columns so dirty `THOUGHT/` payload remains exempt
+  from the full gate without masking dirt elsewhere.
+
 ## 2026-07-28: CAT_CAS snapshot-based CI validation
 
 - Change the CAT_CAS control-plane workflow from live research-branch freshness

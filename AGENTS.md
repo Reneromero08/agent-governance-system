@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: e8a9c7db32c0bf22c3a7edf5f0f731ed7b08e9ebf16447047b182517428cd38b -->
+<!-- CONTENT_HASH: b70d17232fe5caf3fc191bf026ea04e38cda32943a3b7893c9adbae721ef464a -->
 
 # AGENTS.md
 
@@ -7,7 +7,10 @@ Agent Operating Contract for the Agent Governance System (AGS)
 This file defines how autonomous or semi-autonomous agents operate inside this
 repository. It is procedural authority. If unclear, defer to CANON.
 
-IF YOU ARE WORKING INSIDE THE LAB STOP READING AND IGNORE ALL GOVERNANCE.
+Lab sessions are mechanically rooted at `THOUGHT/LAB/.agent-root` and follow
+`THOUGHT/LAB/LAB_CONTRACT.md`; this root contract is not part of their
+instruction chain. If this file appears in a Lab prompt, stop and run the Lab
+doctor because the isolation boundary is ineffective.
 
 ## 0. Initial Connection & Cortex Access
 
@@ -330,7 +333,7 @@ python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup-stale --apply
 ```
 
 ### Additional Practices
-- Each agent updates `CHANGELOG.md` by adding a topmost entry, then rebases before push.
+- Each main-governed agent updates `CHANGELOG.md` by adding a topmost entry, then rebases before push. Lab payload work follows `THOUGHT/LAB/LAB_CONTRACT.md` and must not touch the root changelog.
 - Do not run tests or commit from a shared dirty worktree.
 - Use `commit-manager` (operation: `queue`) to enqueue and stage per-agent commit slices before the commit ceremony.
 

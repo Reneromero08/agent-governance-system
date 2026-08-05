@@ -63,5 +63,5 @@ jobs:
       - name: Run cold-agent structural tests
         run: python -m pytest THOUGHT/LAB/CAT_CAS/tests/control_plane/test_phase_lock_control_plane.py -q
 
-      - name: Run CAT_CAS governance critic
-        run: python CAPABILITY/TOOLS/governance/critic.py
+      - name: Run Lab scope engine tests
+        run: python -m pytest CAPABILITY/TESTBENCH/01_core/test_lab_scope.py -q
