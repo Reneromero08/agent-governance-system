@@ -1,0 +1,57 @@
+{
+  "catvm_custody": false,
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_DIRECT_PROCESS_SOFTWARE_TYPED_OPEN_MOMENTUM_PORT_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "missing_inverse_error_field_cells": 2257,
+    "omitted_identity_correction_error_field_cells": 2252,
+    "reordered_inverse_error_field_cells": 2253,
+    "wrong_inverse_error_field_cells": 2252
+  },
+  "distinct_phase_resource_established": false,
+  "factor_verification": {
+    "direct_primary_csr_nonzeros": 172838,
+    "direct_two_body_raw_terms": 684624,
+    "oracle_closure_plan_entries": 168912,
+    "oracle_factor_channels": 16,
+    "oracle_first_pass_plan_entries": 325584,
+    "oracle_full_unpaired_factor_terms_per_scattering": 494496,
+    "primary_factor_direct_mismatch_cells": 0,
+    "primary_signature_order_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "production_reflection_paired_term_law": 331704,
+    "reuse_factor_fresh_transaction_mismatch_cells": 0
+  },
+  "matched_classical_recurrence": "IDENTICAL_REFLECTION_PAIRED_OPEN_MOMENTUM_ONE_BODY_FACTOR_STREAM_ON2277_BRACELET_AND4389_TEMPORARY_NECKLACE_CELLS",
+  "oracle_direct_csr_and_one_body_plans_are_verification_only": true,
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "production_inverse_called": false,
+  "production_projection_called": false,
+  "production_source_imported": false,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "topology": {
+    "bracelet_cells": 2277,
+    "necklace_cells": 4389,
+    "occupation_histograms": 74613,
+    "topology_commitment": "780aca13cc2d1ec2bc333fca42534252f60938ade69d225ecc85413e2e1c84f8"
+  },
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restoration_error_field_cells": 0,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse_boundary": 70,
+    "primary_boundary": 83,
+    "primary_restoration_error_field_cells": 0,
+    "reuse_boundary": 70,
+    "reuse_restoration_error_field_cells": 0,
+    "same_backing_fresh": true,
+    "same_backing_primary": true,
+    "same_backing_reuse": true
+  },
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

@@ -1,0 +1,216 @@
+{
+  "catvm_custody": false,
+  "claim_candidate": "EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_DIRECT_PROCESS_SOFTWARE_TYPED_OPEN_MOMENTUM_PORT_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "control_port_released_to_zero": true,
+    "missing_inverse_error_field_cells": 2257,
+    "null_carrier_rejected": true,
+    "premature_intermediate_projection_rejected": true,
+    "reordered_inverse_control_work": {
+      "closure_one_body_terms": 168912,
+      "cyclic_code_candidates": 5638968,
+      "cyclic_code_rolling_updates": 5307264,
+      "diagonal_pair_signature_mode_terms": 348381,
+      "encoded_move_deltas": 331704,
+      "first_pass_one_body_terms": 162792,
+      "momentum_port_leases": 8,
+      "momentum_port_releases": 8,
+      "port_clear_field_cells": 35112,
+      "scatterings": 1,
+      "topology_index_lookups": 331704
+    },
+    "reordered_inverse_error_field_cells": 2253,
+    "wrong_inverse_control_work": {
+      "closure_one_body_terms": 168912,
+      "cyclic_code_candidates": 5638968,
+      "cyclic_code_rolling_updates": 5307264,
+      "diagonal_pair_signature_mode_terms": 348381,
+      "encoded_move_deltas": 331704,
+      "first_pass_one_body_terms": 162792,
+      "momentum_port_leases": 8,
+      "momentum_port_releases": 8,
+      "port_clear_field_cells": 35112,
+      "scatterings": 1,
+      "topology_index_lookups": 331704
+    },
+    "wrong_inverse_error_field_cells": 2252,
+    "wrong_momentum_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_reflection_control_work": {
+      "closure_one_body_terms": 168912,
+      "cyclic_code_candidates": 5638968,
+      "cyclic_code_rolling_updates": 5307264,
+      "diagonal_pair_signature_mode_terms": 0,
+      "encoded_move_deltas": 331704,
+      "first_pass_one_body_terms": 162792,
+      "momentum_port_leases": 8,
+      "momentum_port_releases": 8,
+      "port_clear_field_cells": 35112,
+      "scatterings": 1,
+      "topology_index_lookups": 331704
+    },
+    "wrong_reflection_pair_error_field_cells": 2254
+  },
+  "distinct_phase_resource_established": false,
+  "factor_law": {
+    "final_closed_bracelet_cells": 2277,
+    "identity": "K_Q_EQUALS_A_MINUS_Q_COMPOSE_A_Q_MINUS_ROTOR_COUNT_IDENTITY",
+    "intermediate_projected": false,
+    "intermediate_released_to_zero_after_each_pair": true,
+    "maximum_simultaneously_live_open_ports": 1,
+    "open_port_logical_cells": 4389,
+    "open_port_type": "MOMENTUM_Q_NECKLACE_PHASE_VECTOR",
+    "public_scattering_weights_are_equal_within_each_pair": true,
+    "reflection_pairs": [
+      [
+        1,
+        16
+      ],
+      [
+        2,
+        15
+      ],
+      [
+        3,
+        14
+      ],
+      [
+        4,
+        13
+      ],
+      [
+        5,
+        12
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        7,
+        10
+      ],
+      [
+        8,
+        9
+      ]
+    ],
+    "retained_inverse_history_bytes": 0,
+    "retained_transition_plan_entries": 0
+  },
+  "matched_classical_recurrence": "IDENTICAL_REFLECTION_PAIRED_OPEN_MOMENTUM_ONE_BODY_FACTOR_STREAM_ON2277_BRACELET_AND4389_TEMPORARY_NECKLACE_CELLS",
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "resource_law": {
+    "accepted_carrier_resident_field_cells": 4554,
+    "accepted_closure_terms_per_scattering": 168912,
+    "accepted_conservative_carrier_plus_open_port_plus_output_field_cells": 11220,
+    "accepted_cyclic_code_candidates_per_scattering": 5638968,
+    "accepted_cyclic_code_rolling_updates_per_scattering": 5307264,
+    "accepted_encoded_move_deltas_per_scattering": 331704,
+    "accepted_first_pass_terms_per_scattering": 162792,
+    "accepted_one_body_term_ratio_to_prior_two_body_moves": 0.48450536352800955,
+    "accepted_one_body_terms_per_scattering": 331704,
+    "accepted_open_port_scratch_field_cells": 4389,
+    "accepted_output_scratch_field_cells": 2277,
+    "accepted_port_clear_field_cells_per_scattering": 35112,
+    "accepted_retained_inverse_history_bytes": 0,
+    "accepted_retained_transition_plan_entries": 0,
+    "accepted_topology_lookups_per_scattering": 331704,
+    "prior_m197_signature_comparisons_per_scattering": 7669494,
+    "prior_m197_triangle_monomial_evaluations_per_scattering": 24767280,
+    "prior_m197_two_body_moves_per_scattering": 684624,
+    "python_containers_allocator_bigint_hash_map_expression_temporaries_timing_and_whole_process_peaks_excluded": true,
+    "relation_table_or_assignment_expansion_cells": 0,
+    "source_compile_temporary_signature_integer_cells": 25047,
+    "source_compile_temporary_signature_order_indices": 2277
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "topology": {
+    "boundary_weight_field_cells": 2277,
+    "bracelet_cells": 2277,
+    "bracelet_encoded_keys": 2277,
+    "necklace_cells": 4389,
+    "necklace_encoded_keys": 4389,
+    "necklace_histogram_descriptor_integers": 74613,
+    "necklace_lookup_indices": 4389,
+    "necklace_to_bracelet_indices": 4389,
+    "occupation_histograms": 74613,
+    "public_topology_compile_reads_final_answers": false,
+    "reflected_necklace_indices": 4389,
+    "topology_commitment": "780aca13cc2d1ec2bc333fca42534252f60938ade69d225ecc85413e2e1c84f8"
+  },
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse_boundary": 70,
+    "fresh_reuse_verification_work": {
+      "closure_one_body_terms": 337824,
+      "cyclic_code_candidates": 11277936,
+      "cyclic_code_rolling_updates": 10614528,
+      "diagonal_pair_signature_mode_terms": 696762,
+      "encoded_move_deltas": 663408,
+      "first_pass_one_body_terms": 325584,
+      "momentum_port_leases": 16,
+      "momentum_port_releases": 16,
+      "port_clear_field_cells": 70224,
+      "scatterings": 2,
+      "topology_index_lookups": 663408
+    },
+    "matched_classical_forward_work": {
+      "closure_one_body_terms": 168912,
+      "cyclic_code_candidates": 5638968,
+      "cyclic_code_rolling_updates": 5307264,
+      "diagonal_pair_signature_mode_terms": 348381,
+      "encoded_move_deltas": 331704,
+      "first_pass_one_body_terms": 162792,
+      "momentum_port_leases": 8,
+      "momentum_port_releases": 8,
+      "port_clear_field_cells": 35112,
+      "scatterings": 1,
+      "topology_index_lookups": 331704
+    },
+    "primary_boundary": 83,
+    "primary_forward_inverse_work": {
+      "closure_one_body_terms": 337824,
+      "cyclic_code_candidates": 11277936,
+      "cyclic_code_rolling_updates": 10614528,
+      "diagonal_pair_signature_mode_terms": 696762,
+      "encoded_move_deltas": 663408,
+      "first_pass_one_body_terms": 325584,
+      "momentum_port_leases": 16,
+      "momentum_port_releases": 16,
+      "port_clear_field_cells": 70224,
+      "scatterings": 2,
+      "topology_index_lookups": 663408
+    },
+    "primary_restoration_error_field_cells": 0,
+    "primary_signature_order_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "restoration_generation_after_reuse": 2,
+    "reuse_boundary": 70,
+    "reuse_forward_inverse_work": {
+      "closure_one_body_terms": 337824,
+      "cyclic_code_candidates": 11277936,
+      "cyclic_code_rolling_updates": 10614528,
+      "diagonal_pair_signature_mode_terms": 696762,
+      "encoded_move_deltas": 663408,
+      "first_pass_one_body_terms": 325584,
+      "momentum_port_leases": 16,
+      "momentum_port_releases": 16,
+      "port_clear_field_cells": 70224,
+      "scatterings": 2,
+      "topology_index_lookups": 663408
+    },
+    "reuse_restoration_error_field_cells": 0,
+    "same_backing_primary": true,
+    "same_backing_reuse": true
+  },
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
