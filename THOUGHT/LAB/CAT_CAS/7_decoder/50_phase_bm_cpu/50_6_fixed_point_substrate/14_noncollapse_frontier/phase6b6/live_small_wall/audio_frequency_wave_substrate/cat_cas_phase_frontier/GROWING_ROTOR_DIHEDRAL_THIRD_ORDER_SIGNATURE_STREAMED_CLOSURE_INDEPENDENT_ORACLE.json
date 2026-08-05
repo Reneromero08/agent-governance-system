@@ -1,0 +1,111 @@
+{
+  "catvm_custody": false,
+  "claim_candidate": "BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_ROTOR6_PRIMARY_DEPTH1_REUSE_DEPTH1_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "distinct_phase_resource_established": false,
+  "explicit_particle_pair_and_triple_oracle": true,
+  "full_anchor_incidence_work_oracle": true,
+  "matched_classical_recurrence": "IDENTICAL_TOPOLOGY_STREAMED_TWO_TRIANGLE_REFINED_SIGNATURE_RECURRENCE",
+  "multiset_occupation_oracle": true,
+  "oracle_recurrence": "INDEPENDENT_EXPLICIT_PARTICLE_BRACELET_PLAN",
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "production_source_imported": false,
+  "production_transition_called": false,
+  "refinement_smaller_than_full_bracelet_identity": false,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_ZERO_RETAINED_SHIFT_PLAN_WITH_MEASURED_REMATERIALIZATION",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "topology_cases": [
+    {
+      "bracelet_cells": 9,
+      "necklace_cells": 9,
+      "occupation_histograms": 153,
+      "prior_materialized_plan_nonzeros": 272,
+      "refined_signature_cells": 9,
+      "refined_signatures_equal_dihedral_orbits": true,
+      "rotors": 2
+    },
+    {
+      "bracelet_cells": 33,
+      "necklace_cells": 57,
+      "occupation_histograms": 969,
+      "prior_materialized_plan_nonzeros": 2448,
+      "refined_signature_cells": 33,
+      "refined_signatures_equal_dihedral_orbits": true,
+      "rotors": 3
+    },
+    {
+      "bracelet_cells": 165,
+      "necklace_cells": 285,
+      "occupation_histograms": 4845,
+      "prior_materialized_plan_nonzeros": 21904,
+      "refined_signature_cells": 165,
+      "refined_signatures_equal_dihedral_orbits": true,
+      "rotors": 4
+    },
+    {
+      "bracelet_cells": 621,
+      "necklace_cells": 1197,
+      "occupation_histograms": 20349,
+      "prior_materialized_plan_nonzeros": 131168,
+      "refined_signature_cells": 621,
+      "refined_signatures_equal_dihedral_orbits": true,
+      "rotors": 5
+    },
+    {
+      "bracelet_cells": 2277,
+      "necklace_cells": 4389,
+      "occupation_histograms": 74613,
+      "prior_materialized_plan_nonzeros": 652048,
+      "refined_signature_cells": 2277,
+      "refined_signatures_equal_dihedral_orbits": true,
+      "rotors": 6
+    }
+  ],
+  "transaction_case": {
+    "baseline_reload_used": false,
+    "controls": {
+      "missing_inverse_error_field_cells": 2257,
+      "null_carrier_rejected": true,
+      "reordered_inverse_error_field_cells": 2253,
+      "wrong_inverse_error_field_cells": 2252
+    },
+    "fresh_restored_reuse_rank_signature_agreement": true,
+    "fresh_reuse_boundary": 70,
+    "matched_classical_boundary": 83,
+    "matched_classical_output_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "multiplicative_generator": 5,
+    "primary_boundary": 83,
+    "primary_depth": 1,
+    "primary_output_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "primary_restoration_error_field_cells": 0,
+    "prime": 103,
+    "refined_signature_cells": 2277,
+    "restoration_generation_after_reuse": 2,
+    "reuse_boundary": 70,
+    "reuse_depth": 1,
+    "reuse_restoration_error_field_cells": 0,
+    "same_backing_primary": true,
+    "same_backing_reuse": true,
+    "seventeenth_root": 72
+  },
+  "transition_audit": {
+    "active_mode_count_histogram": {
+      "0": 40272,
+      "3": 80544,
+      "4": 563808
+    },
+    "analytic_triangle_monomial_delta_evaluations": 24767280,
+    "independent_plan_nonzeros": 652048,
+    "mode_pair_shift_terms": 684624,
+    "peak_analytic_triangle_monomials_per_term": 44,
+    "raw_transition_commitment": "1774f44283dde49154d3aec11bb0dd22179a061290e44448c795402fa2ca0465",
+    "weighted_particle_shift_terms": 1092960
+  },
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
