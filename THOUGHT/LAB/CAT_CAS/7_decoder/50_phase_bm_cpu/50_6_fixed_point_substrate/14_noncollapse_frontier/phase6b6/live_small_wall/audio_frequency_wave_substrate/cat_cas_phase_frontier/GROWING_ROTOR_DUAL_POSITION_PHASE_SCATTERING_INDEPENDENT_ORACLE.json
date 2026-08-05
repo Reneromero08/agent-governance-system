@@ -1,0 +1,84 @@
+{
+  "catvm_custody": false,
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EXACT_BOSONIC_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "missing_fourier_inverse_normalization_matrix_mismatch_cells": 17,
+    "missing_inverse_error_field_cells": 2257,
+    "nonprimitive_phase_root_matrix_mismatch_cells": 272,
+    "reordered_noncommuting_error_field_cells": 2253,
+    "underreported_4389_cell_position_basis_shortfall_cells": 70224,
+    "wrong_inverse_error_field_cells": 2252
+  },
+  "distinct_phase_resource_established": false,
+  "fourier_verification": {
+    "forward_elementary_operations": 288,
+    "forward_inverse_matrix_mismatch_cells": 0,
+    "forward_inverse_scales": 33,
+    "forward_inverse_shears": 544,
+    "forward_inverse_swaps": 0,
+    "forward_network_commitment": "2f22f03da7b08253b0876bab4e40256ea7577e6df9fea5f6e07a13b28cbc4ee2",
+    "inverse_elementary_operations": 289,
+    "inverse_network_commitment": "a060b5b638f1de4d0c02f0b40b01e4600eb11463ed13a82064ed4cf045cedaf5"
+  },
+  "independent_final_state": {
+    "direct_factor_mismatch_cells": 0,
+    "direct_two_body_csr_nonzeros": 172838,
+    "direct_two_body_raw_terms": 684624,
+    "fresh_reuse_boundary": 70,
+    "primary_boundary": 83,
+    "primary_signature_order_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "reuse_boundary": 70,
+    "topology_commitment": "780aca13cc2d1ec2bc333fca42534252f60938ade69d225ecc85413e2e1c84f8"
+  },
+  "matched_classical_baselines": [
+    "IDENTICAL_EXACT_BOSONIC_ELEMENTARY_TRANSFORM_AND_POSITION_DIAGONAL_STREAM",
+    "M199_REFLECTION_PAIRED331704_TERM_OPEN_MOMENTUM_FACTOR_STREAM"
+  ],
+  "network_boundary_nonzero_counts_independently_reexecuted": false,
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "prior_independent_factor_reference_reused": true,
+  "production_position_dual_module_imported": false,
+  "production_position_dual_transform_called": false,
+  "resource_derivation": {
+    "active_numeric_field_cells": 81444,
+    "diagonal_character_terms_per_scattering": 40589472,
+    "forward_inverse_shear_blocks": 8434176,
+    "forward_inverse_shear_polynomial_terms": 33829728,
+    "full_occupation_basis_is_explicitly_enumerated": true,
+    "named_algorithm_field_and_descriptor_slots": 1523509,
+    "occupation_topology_descriptor_integers": 1343034,
+    "predecessor_topology_descriptor_integers": 96723,
+    "shear_blocks_per_shear": 15504,
+    "shear_polynomial_terms_per_shear": 62187,
+    "transform_network_descriptor_integers": 2308
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_NEGATIVE_COMPACTION_RESULT",
+  "small_wall_crossed": false,
+  "spectral_verification": {
+    "occupation_histograms": 74613,
+    "pair_identity_mismatches_across_all_nonzero_momenta": 0,
+    "primary_omit_particle_correction_mutated_occupations": 74613,
+    "primary_weighted_identity_mismatch_cells": 0,
+    "reuse_omit_particle_correction_mutated_occupations": 74613,
+    "reuse_weighted_identity_mismatch_cells": 0,
+    "zero_total_coordinate_cells": 4389
+  },
+  "terminal": false,
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse_restoration_error_field_cells": 0,
+    "fresh_reuse_same_backing": true,
+    "primary_restoration_error_field_cells": 0,
+    "primary_same_backing": true,
+    "restoration_generation_after_reuse": 2,
+    "reuse_restoration_error_field_cells": 0,
+    "reuse_same_backing": true
+  },
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
