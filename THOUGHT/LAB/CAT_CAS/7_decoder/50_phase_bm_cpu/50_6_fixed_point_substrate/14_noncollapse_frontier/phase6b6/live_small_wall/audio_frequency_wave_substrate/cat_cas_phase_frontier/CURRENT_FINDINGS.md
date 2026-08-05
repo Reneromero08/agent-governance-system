@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`04de9642b2ac51a2ed3dea9cb555fadae888adc2`. The canonical per-milestone
+`d992307a8dc5cc3df82e697b175f3b3824c0784e`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -10958,4 +10958,72 @@ Next:
 
 ```text
 EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE
+```
+
+## M201 exact position-dual route is larger than the factor stream
+
+M201 exactly reproduces the 2,277-cell primary state and boundary through a
+bosonic Fourier transform and position-diagonal pair law, but materializes all
+74,613 occupation cells. Its accepted path reaches 81,444 active numeric
+cells, 1,523,509 named field-and-descriptor slots, and 33,829,728 shear terms
+per scattering. It is therefore a strict negative compaction result against
+M199's identical compact factor stream. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+## M202 one-cell stream removes the wide intermediate
+
+M202 computes, consumes, and clears every necklace intermediate through one
+owner-typed field cell. It retains no 4,389-cell port, 74,613-cell occupation
+scratch, dense operator, permanent expansion, transition plan, or inverse
+history. Exact primary and unrelated reuse results agree with the independent
+direct and factor references, and the same backings restore through generation
+two.
+
+The accepted active numeric state is 6,832 field cells, but retained public
+topology raises named state to 105,832 slots. One forward scattering
+rematerializes 1,193,808 rotations and 5,534,928 inverse candidates. The
+identical classical one-cell stream remains. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+## M203 implicit dihedral codes reduce retained topology
+
+The completed strict claim is:
+
+```text
+EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+M203 keeps M202's one-cell owner-typed port and replaces predecessor topology
+containers with sorted canonical codes. The accepted path retains 4,389
+necklace codes, 2,277 bracelet codes, and 2,277 boundary weights. It retains
+no necklace histograms, hash maps, necklace-to-bracelet map, reflection map,
+transition plan, wide port, full occupation scratch, dense operator, or
+permanent enumeration.
+
+Production and the separate code-arithmetic oracle agree on the topology and
+primary-state commitments, boundary 83, unrelated reuse boundary 70, exact
+same-backing restoration, and all declared resource counts. The full forward
+output is committed and released before inverse rematerialization. Reuse
+reaches restoration generation two without baseline reload.
+
+Accepted warm state is 15,775 named slots and 244,592 fixed-width logical
+bits; full-lifecycle logical peak is 31,878 slots. One forward performs
+5,697,720 sorted searches and has a conservative 68,372,640 comparison upper
+bound in addition to the unchanged 5,534,928 fanout candidates. Verification-
+only full topology and plans are explicit and excluded from the accepted
+path. Python/runtime/native and whole-process peaks are excluded, not zero.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest matched baseline is the identical implicit-dihedral classical
+stream. No distinct phase resource, advantage, Small Wall crossing, CATVM
+custody, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_F103_ROTOR6_COHERENT_EIGHT_CHANNEL_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_ONE_BODY_FACTORS_OR_ESTABLISHES_NO_WORK_REDUCTION_WITH_SHARED_DIHEDRAL_REMATERIALIZATION_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM
 ```

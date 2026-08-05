@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_SCALAR_PORT_STREAMING_TOPOLOGY_WORK_TRADEOFF`
-**Roadmap version:** `14.68`
+**Status:** `STRICT_SCOPE_IMPLICIT_DIHEDRAL_STATE_REDUCTION_WITH_SEARCH_WORK_TRADEOFF`
+**Roadmap version:** `14.69`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `9587c5d5dd69d04803fae45bbdd477484d080898`
+**Reconciled source head:** `d992307a8dc5cc3df82e697b175f3b3824c0784e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_ONE_CELL_OWNER_TYPED_OPEN_MOMENTUM_FACTOR_STREAMING_COMPUTES_CONSUMES_AND_CLEARS_EACH_NECKLACE_INTERMEDIATE_ON_THE_SAME_PORT_BACKING_WITHOUT_A4389_CELL_PORT_74613_CELL_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENT_ENUMERATION_OR_RETAINED_TRANSITION_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES5534928_FANOUT_CANDIDATES_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_ONE_CELL_SCALAR_OPEN_MOMENTUM_STREAM_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_IMPLICIT_DIHEDRAL_CODE_ONE_CELL_STREAM_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M202_SCALAR_PORT_STREAMING_TOPOLOGY_WORK_TRADEOFF`
+**New mechanism development:** `ACTIVE_AFTER_M203_IMPLICIT_DIHEDRAL_STATE_REDUCTION_WITH_IDENTICAL_CLASSICAL_STREAM_AND_SEARCH_WORK_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_CLOSURE_OR_TOPOLOGY_WORK_NO_GO_WITHOUT_RETAINED_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_AND_WITH_IDENTICAL_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_F103_ROTOR6_COHERENT_EIGHT_CHANNEL_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_ONE_BODY_FACTORS_OR_ESTABLISHES_NO_WORK_REDUCTION_WITH_SHARED_DIHEDRAL_REMATERIALIZATION_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`9587c5d5dd69d04803fae45bbdd477484d080898`. The current 202-milestone
+`d992307a8dc5cc3df82e697b175f3b3824c0784e`. The current 203-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_F103_ROTOR6_ONE_CELL_OWNER_TYPED_OPEN_MOMENTUM_FACTOR_STREAMING_COMPUTES_CONSUMES_AND_CLEARS_EACH_NECKLACE_INTERMEDIATE_ON_THE_SAME_PORT_BACKING_WITHOUT_A4389_CELL_PORT_74613_CELL_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENT_ENUMERATION_OR_RETAINED_TRANSITION_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES5534928_FANOUT_CANDIDATES_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
 ```
 
 Not established:
@@ -9399,6 +9399,82 @@ reuse. It is a concrete topology-state repair, not authorization for larger
 Rotor fixtures or a CATVM wrapper. If its work law is not competitive, the
 result must be retained as a no-go and the lane must return to a phase
 coupling resource beyond the identical classical stream.
+
+## M203: implicit dihedral codes reduce retained topology but add search work
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+M203 preserves M202's owner-typed one-cell open-momentum stream but replaces
+the retained necklace histograms, hash maps, necklace-to-bracelet map,
+reflection map, and transition plans with on-demand base-seven dihedral code
+arithmetic. The accepted public topology retains only 4,389 sorted necklace
+codes, 2,277 sorted bracelet codes, and 2,277 boundary weights: 8,943 integers
+in total.
+
+The one-cell port is never projected while live. The full forward output is
+committed and released before inverse rematerialization, so the accepted
+active-state count does not retain both complete forward and inverse outputs.
+Exact rematerialize-and-subtract restoration returns the same source, target,
+output, and scalar-port backings. Unrelated restored reuse agrees with fresh
+execution at restoration generation two without baseline reload.
+
+The independent oracle imports no production implicit-dihedral, scalar-stream,
+or M199 module. It separately compiles canonical codes, executes the code
+arithmetic stream, and compares it with its verification-only tuple topology,
+494,496 plan entries, direct 684,624-term CSR, and compact factor reference.
+Topology commitment, full primary state commitment, boundary 83, unrelated
+reuse boundary 70, exact restoration, and resource counts agree.
+
+Accepted warm state is 6,832 active numeric field cells plus 8,943 retained
+topology integers, or 15,775 named logical slots. Fixed-width logical payload
+is 244,592 bits. The topology compiler peaks at 11,072 logical slots, while
+the public source-fixture compiler sets the accepted full-lifecycle peak at
+31,878. These peaks are separate from retained warm state.
+
+One forward scattering performs 1,193,808 source-orbit rotations, 5,534,928
+inverse candidates, 3,403,077 histogram digit decodes, 3,364,368 reflection
+cell operations, and 5,697,720 sorted-code searches. The 68,372,640 comparison
+count is a conservative upper bound derived from sorted-array widths, not an
+instrumented exact count. Python containers, tuples, bisect, arbitrary-width
+integers, allocator/interpreter/native-library memory, timing, and whole-
+process peaks are excluded, not zero.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical baseline is the identical implicit-dihedral
+one-cell stream. Consequently, the descriptor-state reduction does not
+establish a distinct phase resource or computational advantage.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_IMPLICIT_DIHEDRAL_CODE_ONE_CELL_STREAM_ONLY
+```
+
+No CATVM custody, general open-port algebra, arbitrary-rotor transfer,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference, or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_COHERENT_EIGHT_CHANNEL_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_ONE_BODY_FACTORS_OR_ESTABLISHES_NO_WORK_REDUCTION_WITH_SHARED_DIHEDRAL_REMATERIALIZATION_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM
+```
+
+The successor changes the phase-machine interface rather than adding another
+topology container. It will lease one owner-typed eight-channel momentum wave
+port, consume the reflection-paired channels coherently, and test whether
+shared dihedral rematerialization reduces actual work without recreating the
+4,389-cell port or moving state into a retained plan. It must preserve final-
+only projection, exact restoration, unrelated restored reuse, and the
+strongest identical classical eight-channel vector stream. A software vector
+implementation is not itself evidence of physical simultaneous
+superposition.
 
 ## 10. Roadmap Maintenance
 
