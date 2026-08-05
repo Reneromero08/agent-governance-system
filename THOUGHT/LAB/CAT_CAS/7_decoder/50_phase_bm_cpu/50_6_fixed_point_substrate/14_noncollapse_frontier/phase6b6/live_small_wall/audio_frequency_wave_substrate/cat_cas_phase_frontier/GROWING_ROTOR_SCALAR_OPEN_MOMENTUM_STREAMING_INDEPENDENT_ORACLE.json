@@ -1,0 +1,95 @@
+{
+  "catvm_custody": false,
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_ONE_CELL_SCALAR_OPEN_MOMENTUM_STREAM_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "missing_inverse_error_field_cells": 2257,
+    "reordered_noncommuting_error_field_cells": 2253,
+    "wrong_inverse_error_field_cells": 2252,
+    "wrong_reflection_error_field_cells": 2254
+  },
+  "distinct_phase_resource_established": false,
+  "independent_state": {
+    "bracelet_cells": 2277,
+    "direct_two_body_csr_nonzeros": 172838,
+    "direct_two_body_raw_terms": 684624,
+    "fresh_reuse_boundary": 70,
+    "necklace_cells": 4389,
+    "occupation_histograms": 74613,
+    "primary_boundary": 83,
+    "primary_signature_order_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "reuse_boundary": 70,
+    "streamed_direct_mismatch_cells": 0,
+    "streamed_factor_mismatch_cells": 0,
+    "topology_commitment": "780aca13cc2d1ec2bc333fca42534252f60938ade69d225ecc85413e2e1c84f8"
+  },
+  "matched_classical_baselines": [
+    "IDENTICAL_ONE_CELL_TOPOLOGY_REMATERIALIZED_FACTOR_STREAM",
+    "M199_REFLECTION_PAIRED4389_CELL_PORT_FACTOR_STREAM"
+  ],
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "prior_independent_factor_reference_reused": true,
+  "production_m199_module_imported": false,
+  "production_scalar_stream_module_imported": false,
+  "resource_derivation": {
+    "accepted_one_body_contributions": 331704,
+    "active_numeric_field_cells": 6832,
+    "additional_bracelet_lookup_indices": 2277,
+    "dense_operator_cells": 0,
+    "full_occupation_scratch_cells": 0,
+    "inverse_candidate_moves": 5534928,
+    "m199_comparable_named_field_and_descriptor_slots": 107943,
+    "named_algorithm_field_and_descriptor_slots": 105832,
+    "net_named_slot_saving_against_m199": 2111,
+    "permanent_assignment_terms": 0,
+    "predecessor_topology_descriptor_integers": 96723,
+    "source_orbit_rotations": 1193808
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_COMPACT_PORT_STREAMING_WITH_TOPOLOGY_WORK_TRADEOFF",
+  "scalar_port_verification": {
+    "accepted_path_retained_transition_plan_entries": 0,
+    "control_port_restored": true,
+    "logical_field_cells": 1,
+    "maximum_simultaneously_live": 1,
+    "premature_projection_rejected": true,
+    "primary_work": {
+      "closure_one_body_terms": 168912,
+      "first_pass_one_body_terms": 162792,
+      "scalar_port_clear_field_cells": 35112,
+      "scalar_port_leases": 35112,
+      "scalar_port_releases": 35112,
+      "verification_only_transposed_plan_entries_visited": 168912
+    },
+    "projected": false,
+    "reuse_work": {
+      "closure_one_body_terms": 168912,
+      "first_pass_one_body_terms": 162792,
+      "scalar_port_clear_field_cells": 35112,
+      "scalar_port_leases": 35112,
+      "scalar_port_releases": 35112,
+      "verification_only_transposed_plan_entries_visited": 168912
+    },
+    "verification_only_plan_entries": 494496,
+    "verification_only_transposed_plans_retained": true,
+    "wrong_owner_rejected": true,
+    "wrong_type_rejected": true
+  },
+  "small_wall_crossed": false,
+  "terminal": false,
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse_restoration_error_field_cells": 0,
+    "fresh_reuse_same_backing": true,
+    "primary_restoration_error_field_cells": 0,
+    "primary_same_backing": true,
+    "restoration_generation_after_reuse": 2,
+    "reuse_restoration_error_field_cells": 0,
+    "reuse_same_backing": true
+  },
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
