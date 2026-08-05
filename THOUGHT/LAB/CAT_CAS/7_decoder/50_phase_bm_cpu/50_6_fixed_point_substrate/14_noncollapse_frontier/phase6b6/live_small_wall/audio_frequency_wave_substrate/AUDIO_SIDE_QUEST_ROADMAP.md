@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_GROWING_NECKLACE_LINEAR_QUOTIENT_OBSTRUCTION`
-**Roadmap version:** `14.57`
+**Status:** `STRICT_SCOPE_JASTROW_CHART_ESCAPE_OBSTRUCTION`
+**Roadmap version:** `14.58`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`
+**Reconciled source head:** `c95f3e2170e8dda9fb87457116184f02035432ff`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_NINE_PARAMETER_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSES_THE_PUBLIC_DIAGONAL_TWO_BODY_PHASE_AND_IS_DIMENSION_SATURATED_AT_TWO_ROTORS_BUT_ESCAPES_UNDER_OFFDIAGONAL_PAIR_SCATTERING_FROM_THREE_THROUGH_FIVE_ROTORS_WHILE_THE_FULL_NECKLACE_SHEAR_RESTORES_AND_REUSES_EXACTLY_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_AND_ONE_ALTERNATE_PUBLIC_JASTROW_FAMILY_EXACT_K_TIMES_D_GENERATOR_WORD_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M191_GROWING_NECKLACE_QUOTIENT_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M192_JASTROW_CHART_ESCAPE_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES`
+**Active primary successor:** `TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`. The current 191-milestone
+`c95f3e2170e8dda9fb87457116184f02035432ff`. The current 192-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8786,6 +8786,69 @@ as an exact nonlinear multiplicative phase chart under the off-diagonal
 scattering update. It must preserve the full necklace recurrence as the
 matched baseline and must reject the chart at the first exact escape rather
 than adding rotor counts to conceal failure.
+
+## M192: fixed pair-signature Jastrow chart escapes from three rotors
+
+Claim:
+
+```text
+BOUNDED_EXACT_NINE_PARAMETER_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSES_THE_PUBLIC_DIAGONAL_TWO_BODY_PHASE_AND_IS_DIMENSION_SATURATED_AT_TWO_ROTORS_BUT_ESCAPES_UNDER_OFFDIAGONAL_PAIR_SCATTERING_FROM_THREE_THROUGH_FIVE_ROTORS_WHILE_THE_FULL_NECKLACE_SHEAR_RESTORES_AND_REUSES_EXACTLY_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The candidate nonlinear state law uses one global scale and eight relative
+pair-distance coordinates. A necklace amplitude is their pair-signature
+monomial. The declared diagonal two-body phase is therefore closed exactly on
+this nine-coordinate chart over both F103 and F239.
+
+The off-diagonal `K*D` word remains on the chart at two rotors only because
+the chart matrix has full rank nine on the nine-cell carrier. That is
+dimension saturation, not transferable compression. At three rotors, both
+public input families remain nonzero in every necklace cell but fail the
+constructive exponent equations for every prime factor of `p-1`. Escape
+persists at four and five rotors.
+
+An independent implementation imports no production code. It enumerates
+occupations as multisets, builds scattering from ordered particles rather
+than production multiplicities, and constructs and verifies chart parameters
+instead of comparing augmented ranks. It exactly reproduces all eight state
+commitments, boundaries, topology sizes, generator nonzero counts, controls,
+and restoration results.
+
+The accepted fallback is the full-necklace exact two-register shear
+`B += K*D(A)`. Its inverse word is rematerialized from public topology,
+primary and unrelated reuse restore every field cell exactly, and the same
+backing reaches restoration generation two. Missing, wrong, and reordered
+inverse controls all discriminate. The accepted path retains `2D` field
+cells, uses `2D` word scratch, retains no inverse history, and materializes
+no assignment or relation table. Discrete logs and exponent systems are
+verification-only resources.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`EXACT_ALGEBRAIC_RESTORATION`. The strongest compact classical baseline is
+the identical full-necklace exact shear recurrence. This result rejects only
+the fixed nine-parameter chart; it does not reject adaptive atlases, tensor
+factorizations, structural fiber quotients, or every nonlinear representation.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_AND_ONE_ALTERNATE_PUBLIC_JASTROW_FAMILY_EXACT_K_TIMES_D_GENERATOR_WORD_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+```
+
+This successor tests the smallest topology-owned repair: begin from exact
+pair-signature fibers and refine them only when public off-diagonal transition
+profiles force a split. It must either produce an exact compact quotient with
+restoration and reuse, or expose the refinement step at which the full
+necklace state returns. It must retain the identical full-necklace recurrence
+as baseline and must not add more Jastrow inputs, fields, or rotor counts to
+hide the first escape.
 
 ## 10. Roadmap Maintenance
 

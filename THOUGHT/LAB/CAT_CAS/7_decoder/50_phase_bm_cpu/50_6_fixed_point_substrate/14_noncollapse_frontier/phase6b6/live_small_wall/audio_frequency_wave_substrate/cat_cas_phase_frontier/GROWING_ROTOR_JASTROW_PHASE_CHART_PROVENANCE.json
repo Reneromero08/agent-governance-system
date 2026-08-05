@@ -1,0 +1,27 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_JASTROW_PHASE_CHART_PROVENANCE_V1",
+  "scientific_source_head": "c95f3e2170e8dda9fb87457116184f02035432ff",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_FINITE_FIELD_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "IN_PLACE_TWO_REGISTER_F103_AND_F239_NECKLACE_SHEARS_AT_ROTOR_COUNTS2_TO5",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_jastrow_phase_chart_diagnostic.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_JASTROW_PHASE_CHART_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_jastrow_phase_chart_diagnostic.py": "d82150dd58d25e2eda4063420f9758b7e0accfdfa81326e8f4b1eb5b64bc1bc7",
+    "growing_rotor_jastrow_phase_chart_independent_oracle.py": "18319f92561dcff3e73b15e6a5774d57dc654978744555b714b2deb6b14afd10",
+    "GROWING_ROTOR_JASTROW_PHASE_CHART_RESULTS.json": "26ae82edc564353d2ee5827d1c823aedf60be47191393d36a357574476a8d088",
+    "GROWING_ROTOR_JASTROW_PHASE_CHART_INDEPENDENT_ORACLE.json": "eab743214e00d9a14d830bfa1e4f2a1f6ad4b9aa6a31ecda6f06ac93b614e5af",
+    "GROWING_ROTOR_JASTROW_PHASE_CHART_INDEPENDENT_REEXECUTION_REVIEW.md": "d18d5d26b2ebceeb14dda73aba31d67ea9e6d1e1b5dc42b763489719fc11b5a6",
+    "qualify_growing_rotor_jastrow_phase_chart_diagnostic.sh": "60f236b319fc438011191282bb8ea64d85eb5779b818aec3ed652d81e0509b23"
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_AND_ONE_ALTERNATE_PUBLIC_JASTROW_FAMILY_EXACT_K_TIMES_D_GENERATOR_WORD_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

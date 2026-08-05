@@ -10571,3 +10571,43 @@ Next:
 ```text
 EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES
 ```
+
+## M192 fixed Jastrow chart escapes from three rotors
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_NINE_PARAMETER_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSES_THE_PUBLIC_DIAGONAL_TWO_BODY_PHASE_AND_IS_DIMENSION_SATURATED_AT_TWO_ROTORS_BUT_ESCAPES_UNDER_OFFDIAGONAL_PAIR_SCATTERING_FROM_THREE_THROUGH_FIVE_ROTORS_WHILE_THE_FULL_NECKLACE_SHEAR_RESTORES_AND_REUSES_EXACTLY_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+One scale plus eight relative pair-distance coordinates close the declared
+diagonal two-body phase exactly over F103 and F239. The two-rotor result is a
+full-rank nine-coordinate parameterization of the nine-cell carrier, so it is
+not transfer evidence. For both public Jastrow inputs, off-diagonal scattering
+escapes the chart at three rotors and remains outside at four and five.
+
+The three-rotor scattered states have no zero cells and fail the exponent
+equations for every prime factor of `p-1`. A separate implementation uses
+multiset topology, ordered-particle scattering, and constructive modular
+solutions; it exactly matches all state commitments, boundaries, topology
+counts, generator sparsity, inverse controls, and restoration results.
+
+The full-necklace two-register shear is the accepted fallback. It restores
+and reuses every field cell exactly on the same backing with zero retained
+inverse history. It counts `2D` resident field cells and `2D` word scratch,
+while discrete-log and equation matrices are verification-only. The matched
+classical baseline is the identical full-necklace exact recurrence.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`EXACT_ALGEBRAIC_RESTORATION`. Only this fixed nine-parameter chart is
+rejected. Adaptive charts, tensor factorizations, and topology-derived fiber
+quotients remain open. No CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.
+
+Next:
+
+```text
+TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+```

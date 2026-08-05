@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`. The registry assigns one
+`c95f3e2170e8dda9fb87457116184f02035432ff`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 191-milestone lane is active by user direction. Continue from the
+The current 192-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -272,7 +272,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M191_GROWING_NECKLACE_QUOTIENT_OBSTRUCTION
+ACTIVE_AFTER_M192_JASTROW_CHART_ESCAPE_OBSTRUCTION
 ```
 
 The named
@@ -281,18 +281,20 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES
+TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
 ```
 
-M191 establishes that the declared linear scalar continuation is full at two
-and three rotors, one short at four, and prime-dependently near full at five.
-Do not add rotor counts, scalar probes, or shift schedules unless they resolve
-a specific defect. The selected repair changes the candidate phase state to a
-nine-parameter nonlinear multiplicative pair-signature/Jastrow chart and must
-test exact closure or reject it at the first escape. Preserve the full growing
-necklace recurrence as the matched classical baseline. Do not promote chart
-closure for a restricted family to a general bosonic quotient, and do not
-treat chart failure as a reason to stop the lane.
+M192 establishes exact diagonal closure for the nine-parameter multiplicative
+pair-signature/Jastrow chart but off-diagonal escape from three rotors through
+five. Its two-rotor closure is only full-dimensional saturation. Do not add
+Jastrow inputs, fields, or rotor counts unless they resolve a specific defect.
+The selected repair derives the coarsest exact pair-signature fiber refinement
+forced by public off-diagonal transition profiles. It must either close as a
+compact structural quotient or report the precise refinement step at which
+the full necklace state returns. Preserve the full necklace recurrence as the
+matched baseline. Do not promote a restricted equitable partition to a
+general bosonic quotient, and do not treat quotient failure as a reason to
+stop the lane.
 
 ## 7. Native No-Smuggle Law
 
