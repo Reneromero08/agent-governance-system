@@ -1381,3 +1381,51 @@ a minimal qwen35moe forward in Python from the dequantized weights
 (extending the existing 4B hybrid engine: GDN mixer + full-attn are
 already implemented; add router + MoE FFN + shared expert) - gives exact
 offline expert replay (Sol's preference). Pending Sol's direction.
+
+## 2026-08-05 — Sol's MOE-4 review: expert-axis CLOSED, HYBRID trace approved
+
+(a) EXPERT-AXIS CLOSED with hygiene fixes: clamp eigenvalues >= 0 before
+   D_eff (verify |lambda_min| < 1e-5 * lambda_max, else not cosmetic);
+   report max + 95th-pct absolute off-diagonal correlation (catches
+   isolated duplicate pairs). APPROVED CONCLUSION: "The published Q8
+   artifact has no useful shared hidden-space basis, expert-axis template
+   basis, centroid structure, or large expert clusters across its 90
+   routed experts."
+(b) TRACE = HYBRID: llama.cpp = trajectory oracle (capture: token index,
+   layer index, post-norm MoE input x[2048], top-8 expert IDs, top-8
+   router weights, shared-expert gate); Python = measurement chamber
+   (offline replay + rank sweeps). Do NOT extend the Python engine
+   through 40 layers (too many equivalence risks: Q8 interleaving,
+   router scoring/top-8/renorm, shared-expert order, GDN state, 32 value
+   heads, conv4, full-attn q/gate interleave, MRoPE 64-dim, LLLF order,
+   offset RMSNorm, MTP block, untied embeddings). VALIDATE: replay one
+   captured token's 8 expert MLPs from dequantized weights and match
+   llama.cpp's routed output (close numerical agreement) BEFORE the
+   k-curve - settles orientation, router application, renorm, shared
+   expert addition.
+(c) PRIMARY metric: NOT routing-frequency-weighted per-expert cosine
+   (nonlinear). For each token/layer with routing fixed:
+   Y = sum_{e in top8} g_e W2,e[SiLU(W1,e x) . W3,e x]; full-rank Q8 vs
+   simultaneous truncation 16..512. Metrics: token-level aggregate
+   routed-output cosine; aggregate rel L2; median/10th/1st pct/worst
+   token; routing-frequency-weighted aggregate; per-layer distributions.
+   Shared expert kept EXACT in the first test (separate dense channel).
+   Secondary: per-expert conditional cos + rel err, assignment count,
+   router-weighted absolute error contribution, performance vs routing
+   weight, frequent vs rare experts. Two truncation modes: simultaneous
+   gate/up/down rank k AND one-projection-at-a-time (bottleneck).
+   Also: effective rank of routed input matrices X_e, of outputs Y_e,
+   input energy captured by retained right-singular modes. Coverage:
+   >=128 assignments per layer/expert for per-expert summaries; mark
+   rare experts under-sampled.
+(d) L0-DC functional audit: projector mass is the WRONG criterion.
+   Exact shared-output-direction decomposition:
+   W2,e = u_DC a_e^T + W2,e^perp. Measure on routed z_e:
+   y_DC,e = u_DC (a_e^T z_e). Report: fraction of routed down-output
+   energy in DC; cosine(DC contribution, full output); effect of
+   removing DC on aggregate; residual k-curve with DC preserved. If DC
+   carries substantial functional energy: store one shared u_DC + 90
+   short coefficient vectors a_e (legitimate catalytic shared carrier
+   at L0, even though it cannot rescue the global manifold).
+NEXT: instrument llama.cpp, validate one-token replay, routed aggregate
+k-curve + L0-DC functional audit.
