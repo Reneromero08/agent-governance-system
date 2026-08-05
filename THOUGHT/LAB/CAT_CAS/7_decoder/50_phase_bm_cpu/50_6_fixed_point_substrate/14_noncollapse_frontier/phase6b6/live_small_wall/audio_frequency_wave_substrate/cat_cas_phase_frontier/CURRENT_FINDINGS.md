@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`3e93bda7ca071d27e0541b9dbb974eea7698a1ca`. The canonical per-milestone
+`3edd2f2b7d37fbfee06916f3586e18175018edd8`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11273,3 +11273,50 @@ Next:
 ```text
 EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER
 ```
+
+## M211 streamed Jacobi moment rematerialization and projection-state obstruction
+
+The resource-accounting-repaired claim is:
+
+```text
+RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+Each required power moment is rematerialized from the actual 24-center public
+source into one Gaussian-rational scratch cell, consumed into the Jacobi log,
+rematerialized again and subtracted exactly. This eliminates the retained
+13-cell, 47,209-bit moment vector. The same source and scratch backings restore
+exactly, and unrelated 17-center reuse agrees with fresh execution at
+generation two without reload or inverse history.
+
+The tradeoff is explicit. The primary case performs 26 public-word scans, 884
+operation-record visits, 624 source-center visits and 576 nonzero power
+evaluations. It retains the 24-cell, 763-bit source, materializes an 86-cell,
+172,243-bit weighted log, and peaks at 325 exponential cells carrying
+2,480,635 bits. The final 25-cell boundary carries 22,609 bits.
+
+The initial pushed draft
+`18213589522aa72aa3e58817f2fdd604e6cd4662` omitted the already-computed final
+boundary payload from its sealed accounting. The repaired source
+`3edd2f2b7d37fbfee06916f3586e18175018edd8` adds it. An independent
+no-production-import direct-factor and reverse-scan oracle reproduces both
+boundaries, both projected payloads and the full primary resource tuple.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+This is a direct-process bounded-Q-jet result, not CATVM custody or full theta
+evaluation. The identical compact classical stream remains. No phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_CHARACTER_CARRIER_WITH_NATIVE_HAAR_COMPOSITION_AND_CLEBSCH_GORDAN_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_REPRESENTATION_SUPPORT_CLOSURE_OR_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CHARACTER_CLASSICAL_RECURRENCE
+```
+
+This changes the phase-relation geometry instead of adding more theta-jet
+fixtures. It will test continuous non-Abelian SU(2) character composition and
+Clebsch-Gordan intersection on an unresolved shared relation port, with exact
+support/payload accounting, restoration/reuse and the strongest identical
+classical character recurrence.

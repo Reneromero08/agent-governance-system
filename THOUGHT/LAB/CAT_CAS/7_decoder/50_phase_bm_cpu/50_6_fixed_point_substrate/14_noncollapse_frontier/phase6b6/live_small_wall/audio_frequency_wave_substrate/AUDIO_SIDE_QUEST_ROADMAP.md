@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_GENERIC_CENTER_THETA_MOMENT_PRECISION_HIERARCHY_WITH_STREAMED_REMATERIALIZATION_SELECTED`
-**Roadmap version:** `14.76`
+**Status:** `STRICT_STREAMED_JACOBI_MOMENT_VECTOR_REMOVAL_WITH_NONABELIAN_SU2_RELATION_SUCCESSOR_SELECTED`
+**Roadmap version:** `14.77`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3e93bda7ca071d27e0541b9dbb974eea7698a1ca`
+**Reconciled source head:** `3edd2f2b7d37fbfee06916f3586e18175018edd8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_FIRST_HARMONIC_QJET_CLOSES_ON_RUNTIME_POWER_MOMENTS_THROUGH_FLOOR_JPLUS1_OVER2_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_MOMENT_CELLS_GROW_FROM2_TO13_ACROSS_J2_TO24_THE24_CENTER_SOURCE_REMAINS_RESIDENT_AND_IDENTICAL_CLASSICAL_MOMENT_AND_DIRECT_FACTOR_RECURRENCES_REMAIN`
-**Current claim ceiling:** `FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_CENTER_COUNT24_FIRST_HARMONIC_QJET_ORDERS2_4_8_12_16_20_24_PRIMARY_ORDER24_REUSE_CENTER_COUNT17_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM`
+**Current claim ceiling:** `FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_PRIMARY_CENTER_COUNT24_REUSE_CENTER_COUNT17_FIRST_HARMONIC_QJET_ORDER24_STREAMED_MOMENT_REMATERIALIZATION_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M210_GENERIC_CENTER_MOMENT_CHART_CLOSES_BOUNDED_QJETS_BUT_MOMENT_ORDER_PAYLOAD_AND_RUNTIME_SOURCE_RETENTION_REMAIN`
+**New mechanism development:** `ACTIVE_AFTER_M211_STREAMED_JACOBI_REMATERIALIZATION_REMOVES_THE_RETAINED_MOMENT_VECTOR_BUT_LEAVES_SOURCE_SCAN_AND_LARGE_EXACT_PROJECTION_STATE_WITH_AN_IDENTICAL_CLASSICAL_STREAM`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER`
+**Active primary successor:** `EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_CHARACTER_CARRIER_WITH_NATIVE_HAAR_COMPOSITION_AND_CLEBSCH_GORDAN_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_REPRESENTATION_SUPPORT_CLOSURE_OR_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CHARACTER_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
 ```
 
 Not established:
@@ -9953,6 +9953,72 @@ and compare against the executed direct-factor sparse recurrence. If this only
 trades memory for work or leaves the center source as the dominant state,
 preserve that obstruction and change the phase law rather than increasing jet
 orders.
+
+## M211: streamed moments remove one vector, not the projection obstruction
+
+Claim:
+
+```text
+RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+M211 keeps the exact continuous-`S1` generic-center relation and order-24
+first-harmonic boundary, but changes its custody law. For each moment
+`m=0..12`, it scans the actual public source word backward, materializes one
+Gaussian-rational power sum in a single scratch cell, consumes it into the
+Jacobi log, repeats the scan and subtracts it exactly. No moment vector
+survives between moments.
+
+The repair removes M210's 13-cell, 47,209-bit retained moment vector. It does
+not remove the 24-cell, 763-bit runtime source. It performs 26 word scans, 884
+operation-record visits, 624 source-center visits and 576 nonzero power
+evaluations. Projection still materializes 86 weighted-log cells carrying
+172,243 bits and reaches a 325-cell, 2,480,635-bit exponential peak while
+performing 106,586 series products. The final projected boundary contains 25
+coefficients carrying 22,609 bits.
+
+The first pushed draft at
+`18213589522aa72aa3e58817f2fdd604e6cd4662` computed but omitted the final
+boundary payload from its sealed accounting. The repaired source at
+`3edd2f2b7d37fbfee06916f3586e18175018edd8` exposes it. Both Git objects are
+preserved, and only the repaired package is promoted here.
+
+A no-production-import oracle independently reconstructs the public center
+families, forward effective centers, direct factor convolution, reverse-scan
+moments, Jacobi logarithm, formal exponential, boundary commitments, boundary
+payloads and the complete primary resource tuple. Exact scratch uncomputation,
+same-backing restoration and unrelated 17-center reuse reach restoration
+generation two without reload or inverse history.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_PRIMARY_CENTER_COUNT24_REUSE_CENTER_COUNT17_FIRST_HARMONIC_QJET_ORDER24_STREAMED_MOMENT_REMATERIALIZATION_DIRECT_PROCESS_ONLY
+```
+
+This direct-process package does not establish CATVM custody. The identical
+reverse-scan moment/formal-series recurrence and direct-factor recurrence are
+compact classical algorithms. The result does not establish a distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_CHARACTER_CARRIER_WITH_NATIVE_HAAR_COMPOSITION_AND_CLEBSCH_GORDAN_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_REPRESENTATION_SUPPORT_CLOSURE_OR_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CHARACTER_CLASSICAL_RECURRENCE
+```
+
+The S1 theta route has now exposed both precision-state growth and a
+state/work tradeoff without classical separation. The successor changes the
+relation geometry rather than adding jet orders: it tests continuous
+non-Abelian `SU(2)` class-function relations, where Haar composition is
+diagonal in character space and intersection follows the Clebsch-Gordan
+fusion law. It must keep the shared relation port unresolved, count all
+representation support and exact payload growth, restore and reuse the actual
+carrier, and compare with the identical strongest character recurrence.
 
 ## 10. Roadmap Maintenance
 
