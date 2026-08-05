@@ -1,0 +1,50 @@
+{
+  "accepted_path_dense_labelled_wave_cells": 0,
+  "accepted_path_dense_pair_signature_cells": 0,
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "collision_degenerate_states_split": true,
+  "controls": {
+    "missing_inverse_error": 1.4201919739009206,
+    "reordered_inverse_error": 1.4160050871429546,
+    "wrong_inverse_error": 1.4929316779374406
+  },
+  "dense_pair_exponent_integer_cells": 83521,
+  "dense_pair_signature_integer_cells": 751689,
+  "dense_work_complex_cells": 83521,
+  "distinct_pair_signatures": 165,
+  "distinct_phase_resource_established": false,
+  "exchange_symmetric": true,
+  "labelled_complex_cells": 83521,
+  "matched_classical_recurrence": "IDENTICAL_285_COMPLEX_NECKLACE_GENERATOR_AND_DIAGONAL_PAIR_PHASE_RECURRENCE",
+  "necklace_cells_reconstructed": 285,
+  "oracle_representation": "DENSE_LABELLED_17_TO_THE_4_COMPLEX_WAVE_VERIFICATION_ONLY",
+  "primary": {
+    "boundary": [
+      0.49000781983877867,
+      0.41757784261177444,
+      0.016343050126377472,
+      0.07525701294576478,
+      0,
+      0,
+      0.0008142744773393556
+    ],
+    "norm_error": 3.1086244689504383e-15,
+    "restoration_error": 8.474638338605316e-15
+  },
+  "reuse": {
+    "boundary": [
+      0.40808098069113036,
+      0.46903995643815155,
+      0.04305347096708537,
+      0.07688768615358996,
+      0,
+      0,
+      0.0029379057500331916
+    ],
+    "norm_error": 2.55351295663786e-15,
+    "restoration_error": 6.229271353326e-15
+  },
+  "rotation_invariant": true,
+  "small_wall_crossed": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
