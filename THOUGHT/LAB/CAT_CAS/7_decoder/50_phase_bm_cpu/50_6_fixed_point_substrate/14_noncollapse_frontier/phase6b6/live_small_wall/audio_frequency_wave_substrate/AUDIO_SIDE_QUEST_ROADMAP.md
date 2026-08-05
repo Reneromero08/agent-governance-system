@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_STREAMED_PAIR_SIGNATURE_FIBER_QUOTIENT`
-**Roadmap version:** `14.60`
+**Status:** `STRICT_SCOPE_PAIR_SIGNATURE_TRANSFER_NO_GO`
+**Roadmap version:** `14.61`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `16eb8061a7746c20c2fa6767598fa9be98ebd8c8`
+**Reconciled source head:** `3af340dffaa42571cdefb99c4a992abdd3a25868`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TOPOLOGY_STREAMED_PAIR_SIGNATURE_FIBER_QUOTIENT_ELIMINATES_ALL16_RETAINED_SHIFT_BASES_WHILE_CLOSING_THE9_33_165_621_CELL_ROTORS2_TO5_CARRIER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS26S_PUBLIC_INTEGER_DESCRIPTORS_AND_REMATERIALIZES_EACH_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_PAIR_SIGNATURE_FIBER_CONSTANT_INPUTS_ROTORS2_TO5_F103_F239_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M194_STREAMED_PAIR_SIGNATURE_QUOTIENT`
+**New mechanism development:** `ACTIVE_AFTER_M195_PAIR_SIGNATURE_TRANSFER_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
 ```
 
 Not established:
@@ -8976,6 +8976,61 @@ from pair-signature coordinates without stored necklace representatives, or
 produce a strict obstruction showing why that public reconstruction remains
 necessary. It must not add depths, fields, or rotor fixtures, and it must
 retain the identical classical recurrence.
+
+## M195: pair signatures reach a strict transfer ceiling
+
+Claim:
+
+```text
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
+```
+
+M195 tests the outstanding M194 transfer question directly. For rotor counts
+two through five, every pair-signature fiber is exactly a dihedral bracelet
+orbit. The prior quotient cell law `9, 33, 165, 621` is therefore the
+reflection quotient at those declared cases, not evidence for a deeper
+descriptor-free nonlinear kernel.
+
+At six rotors, the exact topology has 74,613 occupations, 4,389 necklaces,
+and 2,277 dihedral bracelets, but only 2,253 pair signatures. The 24 excess
+identifications are non-dihedral homometric fibers, and all 24 fail signed
+shift equitability. The first failure occurs at signed shift one: two members
+of one signature fiber have exact rows of total weight 30 but differ in 39
+destination coefficients. The seal retains the mismatch count, one
+representative coefficient, and commitments to both complete rows rather
+than an expanded destination table.
+
+A separate oracle imports no production source. It generates particle
+multisets, rotation representatives, unordered pair signatures, reflected
+orbits, ordered-particle shift profiles, and Burnside bracelet counts by
+independent code. It reproduces every case record exactly for rotor counts
+two through six.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. This is an exact
+integer topology diagnostic, not a carrier transaction. The strongest
+matched classical method is the identical homometry and signed-shift-profile
+comparison. No CATVM custody, restoration, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation is established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY
+```
+
+Selected successor:
+
+```text
+MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
+
+The successor must add the smallest dihedral-invariant higher-order phase
+signature that separates the 24 homometric collisions, then test closure
+under all sixteen shift bases. It must measure the refined cell and
+descriptor laws, retain the identical compact classical recurrence, and
+report a full-bracelet fallback if no smaller tested refinement closes.
 
 ## 10. Roadmap Maintenance
 

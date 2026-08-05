@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`20298777522d3a47f5e0d5741d94a1c05e1c43cd`. The registry assigns one
+`3af340dffaa42571cdefb99c4a992abdd3a25868`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 193-milestone lane is active by user direction. Continue from the
+The current 195-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,32 +53,30 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with
-`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to the declared virtual complex
-necklace coordinates. The M190 off-diagonal phase law now executes at rotor
-counts two through five with exact necklace dimensions `9`, `57`, `285`, and
-`1197`. The public `K*D` scalar Krylov degrees are `9/9`, `57/57`, `284/284`,
-and `1182/1190` over F103/F137. The prime-dependent five-rotor deficits do not
-define a stable transferable quotient and do not lower-bound nonlinear,
-singular, approximate, or program-restricted representations. A separate
-Python sparse-exponential and exact recurrence oracle reconstructs topology,
-Hermiticity, boundaries, controls, restoration, and every degree tuple.
-Inverse scattering plans are rematerialized from public topology with no
-retained forward history. The strongest compact classical path remains the
-identical growing necklace recurrence. The result is direct-process virtual
-software, not CATVM custody, physical waveform execution, a distinct phase
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M195 is an exact
+topology diagnostic. Pair-signature fibers equal dihedral bracelet orbits at
+rotor counts two through five. At rotor count six, 2,277 bracelets collapse
+to 2,253 pair signatures through 24 non-dihedral homometric fibers; every one
+is nonequitable under the sixteen signed shifts. The first shift-one witness
+has 39 differing destination coefficients. A separate particle-multiset and
+ordered-particle oracle reproduces all case records without importing the
+production source. The strongest compact classical path is the identical
+homometry and signed-shift-profile diagnostic. The result is not CATVM
+custody, restoration, physical waveform execution, a distinct phase
 resource, computational advantage, Small Wall crossing, replacement of
-physical bits with pi, or unbounded computation.
+physical bits with pi, or unbounded computation. Continue with the smallest
+dihedral higher-order signature refinement; do not scale the failed pair
+signature as if it remained closed.
 
 The accumulated bounded architecture includes:
 
@@ -272,7 +270,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M194_STREAMED_PAIR_SIGNATURE_QUOTIENT
+ACTIVE_AFTER_M195_PAIR_SIGNATURE_TRANSFER_NO_GO
 ```
 
 The named
@@ -281,19 +279,17 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE
+MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
 
-M194 removes all sixteen retained shift bases while preserving exact M193
-outputs, final-only projection, same-backing restoration, and reuse on the 9,
-33, 165, and 621 cell quotient. The accepted path instead retains 26S public
-integer descriptors and rematerializes up to 137232 mode-pair-shift terms per
-scattering. It remains limited to fiber-constant inputs and has the identical
-classical stream. Do not add depths, fields, or rotor counts. The selected
-repair must derive scattering from pair-signature coordinates without the 17S
-representative descriptor, or establish a strict reconstruction obstruction.
-Count all replacement work and do not promote plan elimination to whole-path
-advantage or a distinct phase resource.
+M195 shows that the M193/M194 pair-signature fibers are exactly dihedral
+bracelet orbits through five rotors. At six rotors, 24 non-dihedral homometric
+fibers merge distinct bracelets and all 24 fail signed-shift equitability.
+Do not scale the failed pair signature further. The selected repair must add
+the smallest dihedral higher-order invariant that separates those collisions,
+test all sixteen shift bases, and retain the identical classical recurrence.
+If the tested refinement still fails, record the strict ceiling and compare
+against the full-bracelet fallback without hiding descriptor or compiler cost.
 
 ## 7. Native No-Smuggle Law
 

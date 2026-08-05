@@ -1,0 +1,27 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_PAIR_SIGNATURE_DIHEDRAL_TRANSFER_NO_GO_PROVENANCE_V1",
+  "scientific_source_head": "3af340dffaa42571cdefb99c4a992abdd3a25868",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "restoration_scope": "TOPOLOGY_DIAGNOSTIC_ONLY_NO_CARRIER_TRANSACTION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_pair_signature_dihedral_transfer_no_go.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_PAIR_SIGNATURE_DIHEDRAL_TRANSFER_NO_GO_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_pair_signature_dihedral_transfer_no_go.py": "c11720f8caff12b3e6af6745c53da2052bc2102d40f5c9ccab7d0b8fad5a746c",
+    "growing_rotor_pair_signature_dihedral_transfer_no_go_independent_oracle.py": "422a9830429869948b0fb40379dfbf94ea320c4ad8a1f1ea2800e7f708d211f6",
+    "GROWING_ROTOR_PAIR_SIGNATURE_DIHEDRAL_TRANSFER_NO_GO_RESULTS.json": "7dd660be92b82b276a43dcc47e32b8347189b752a84d67b43bda71c895ff5069",
+    "GROWING_ROTOR_PAIR_SIGNATURE_DIHEDRAL_TRANSFER_NO_GO_INDEPENDENT_ORACLE.json": "c29e207313402144bfdf9f71e90bd6bd21b92fefb77faff41a549f3d6f8378fd",
+    "GROWING_ROTOR_PAIR_SIGNATURE_DIHEDRAL_TRANSFER_NO_GO_INDEPENDENT_REEXECUTION_REVIEW.md": "a1c2eaf4f2775948f764e81a7e4f5bf6e80155ab5f6b8e0e4c2321f4368a7096",
+    "qualify_growing_rotor_pair_signature_dihedral_transfer_no_go.sh": "f1c4f804936dcabd2c56065e73fbffbb6e76baa75f07fcd1f85262717e39b0da"
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY"
+}

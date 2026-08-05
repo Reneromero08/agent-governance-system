@@ -10691,3 +10691,45 @@ Next:
 ```text
 PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE
 ```
+
+## M195 pair signatures are a dihedral quotient only through five rotors
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
+```
+
+The pair-signature fibers from M193/M194 equal dihedral bracelet orbits
+exactly at rotor counts two through five. Their cell counts `9, 33, 165, 621`
+therefore describe the reflection quotient of the corresponding `9, 57,
+285, 1197` necklaces at those cases.
+
+The applicability-gated six-rotor test separates that coincidence from a
+transferable kernel. Its 74,613 occupations yield 4,389 necklaces and 2,277
+bracelets but only 2,253 pair signatures. There are 24 non-dihedral
+homometric fibers, and all 24 have member-dependent signed-shift profiles.
+The first failure is at shift one: equal-signature, non-dihedrally-related
+members each have row sum 30 but differ in 39 destination coefficients.
+
+An independent particle-multiset oracle reconstructs rotations, reflections,
+unordered pair signatures, ordered-particle shifts, and Burnside counts. It
+matches all five production case records exactly without importing the
+production source. The seal contains only the mismatch count, one first
+difference, and commitments to the complete rows.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. This topology
+diagnostic does not execute a carrier transaction. It rejects only a
+pair-signature-only scattering kernel transferable through rotor count six;
+it does not reject higher-order compact invariants or prove that full
+bracelet labels are necessary. The identical homometry and shift-profile
+diagnostic is the matched classical path. No custody, restoration, phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation is established.
+
+Next:
+
+```text
+MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE
+```
