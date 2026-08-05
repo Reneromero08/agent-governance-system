@@ -1,0 +1,1705 @@
+{
+  "claim": "BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED",
+  "claim_ceiling": "FOURTEEN_DECLARED_Q5_THROUGH_Q53_NUMPY_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_CASES_WITH_256_CYCLE_REUSE_AND_PREDECLARED_2E_MINUS12_STATE_AND_BOUNDARY_TOLERANCES",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_256_cycle_reuses_within_tolerance": true,
+    "all_actual_inverse_restorations_within_tolerance": true,
+    "all_actual_restored_reuses_match_fresh": true,
+    "all_applicable_reordered_inverses_fail": true,
+    "all_boundaries_match": true,
+    "all_dephased_boundaries_change": true,
+    "all_missing_inverses_fail": true,
+    "all_null_carriers_rejected": true,
+    "all_public_traffic_matches": true,
+    "all_shams_use_snapshot_reload": true,
+    "all_wrong_inverses_fail": true
+  },
+  "direct_restoration_classification": "NO_RESTORATION_CLAIM",
+  "in_place_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "next_obstruction": "VIRTUAL_COHERENT_SUPERPOSITION_IS_CAUSALLY_RELEVANT_BUT_ITS_ONE_EVENT_ABSTRACTION_HIDES_LINEAR_MODES_BANDWIDTH_AND_PRECISION_WHILE_THE_SOFTWARE_BACKEND_IS_THE_IDENTICAL_FFT_SO_A_SUCCESSOR_NEEDS_A_PHASE_COUPLING_LAW_WITH_MEASURED_RESOURCE_NOT_ALREADY_PRESENT_IN_THE_MATCHED_CLASSICAL_MODEL",
+  "resource_accounting": {
+    "compact_direct": "4H_CONSERVATIVE_LOGICAL_COMPLEX_CELLS_TWO_SOFTWARE_FFTS_FOR_PRIMARY_AND_FRESH_REUSE_NO_RESTORATION",
+    "compiled_plan": "PUBLIC_Q_CHIRP_STRENGTH_WEIGHT_SHIFT_GENERATE_PHASES_PROCEDURALLY_ZERO_RETAINED_PLAN_ARRAYS",
+    "controller_backend_traffic": "IDENTICAL_CANONICAL_REQUEST_AND_FINAL_RESPONSE_BYTES_ACROSS_TRIAD",
+    "in_place_virtual_phase": "H_CARRIER_PLUS2H_DECLARED_CHIRP_AND_TRANSFORM_TEMPORARIES_128H_CARRIER_BITS_H_SIMULTANEOUS_MODE_BANDWIDTH_FOUR_ABSTRACT_WAVE_EVENTS_AND_FOUR_ACTUAL_SOFTWARE_FFTS_FOR_PRIMARY_AND_REUSE",
+    "numpy_internal_allocator_and_fft_workspace_fully_measured": false,
+    "snapshot_sham": "4H_CONSERVATIVE_LOGICAL_COMPLEX_CELLS_TWO_FORWARD_SOFTWARE_FFTS_AND3H_COMPLEX_BYTES_OF_ONE_SNAPSHOT_CREATE_PLUS_TWO_RELOADS_FOR_PRIMARY_AND_REUSE",
+    "strongest_compact_classical": "IDENTICAL_3H_IN_PLACE_NUMERICAL_FFT_RECURRENCE_WITH_THE_SAME_FOUR_CALLS_RESTORATION_AND_REUSE_LAW_AS_THE_VIRTUAL_PHASE_PATH",
+    "whole_process_memory_fully_measured": false
+  },
+  "sham_restoration_classification": "SNAPSHOT_RELOAD",
+  "small_wall_decision": {
+    "coherence_advantage_over_compact_classical_software": false,
+    "coherence_causally_relevant": true,
+    "crossing_established": false,
+    "distinct_phase_resource_established": false,
+    "reason": "THE_ONE_EVENT_ABSTRACTION_REQUIRES_LINEAR_MODES_LINEAR_BANDWIDTH_FIXED_PRECISION_PER_MODE_AND_IS_EMULATED_BY_THE_IDENTICAL_COMPACT_SOFTWARE_FFT"
+  },
+  "strict_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_audio_execution": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_computation": false
+  },
+  "triad_cases": [
+    {
+      "compact_direct": {
+        "boundary": [
+          0.9876883405951374,
+          -0.1564344650402325
+        ],
+        "fresh_reuse_boundary": [
+          -0.8090169943749476,
+          0.5877852522924732
+        ],
+        "logical_complex_cells": 16,
+        "request_bytes": 43,
+        "response": {
+          "final_boundary": [
+            0.9876883405951374,
+            -0.1564344650402325
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.9876883405951374,
+          -0.1564344650402325
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 512,
+        "carrier_complex_cells": 4,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 8,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 12,
+        "mode_count": 4,
+        "post_state_commitment": "91acbff3201e6a8639faf23d1542c8a94584bfc95eab1f023ab4a973e33ce9aa",
+        "pre_state_commitment": "6855b4d9e14396a5c78f600349cb94fbb524f3ae2b93df23a12c5ba8cb4fde30",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 2.482534153247273e-16,
+        "request_bytes": 43,
+        "resident_intermediate_commitment": "5e0b8dcdda03f634228e59368469e72b001d26fa913bad5dcd48397ee9d00409",
+        "response": {
+          "final_boundary": [
+            0.9876883405951374,
+            -0.1564344650402325
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 1.1102230246251565e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.6653345369377348e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 4,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 5,
+      "request": {
+        "chirp_strength": 3,
+        "q": 5,
+        "weight_shift": 1
+      },
+      "second_program": {
+        "chirp_strength": 0,
+        "q": 5,
+        "weight_shift": 3
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.9876883405951374,
+          -0.1564344650402325
+        ],
+        "logical_complex_cells": 16,
+        "request_bytes": 43,
+        "response": {
+          "final_boundary": [
+            0.9876883405951374,
+            -0.1564344650402325
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 192,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 32422,
+        "warm_identical_classical_in_place_median_ns": 52731,
+        "warm_in_place_phase_median_ns": 52561,
+        "warm_snapshot_sham_median_ns": 33333
+      },
+      "width": 4
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.4338837391175582,
+          -0.9009688679024181
+        ],
+        "fresh_reuse_boundary": [
+          0.9555728057861402,
+          0.2947551744109063
+        ],
+        "logical_complex_cells": 24,
+        "request_bytes": 43,
+        "response": {
+          "final_boundary": [
+            -0.4338837391175582,
+            -0.9009688679024181
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.4338837391175582,
+          -0.9009688679024181
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 768,
+        "carrier_complex_cells": 6,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 12,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 18,
+        "mode_count": 6,
+        "post_state_commitment": "7f4b55b52c6d0135004117bbd7e888627a59accb8425c1fad283432d0d87c741",
+        "pre_state_commitment": "0b8b06c2e8ebc20a0cb7d2780fa4604432f02f913ea31c2ddc9ba6fd02b0772a",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 7.346438957054527e-14,
+        "request_bytes": 43,
+        "resident_intermediate_commitment": "abceab53f6744f90d1b268debe31e368e7acabea4482b55904baf89ac5b9c9a9",
+        "response": {
+          "final_boundary": [
+            -0.4338837391175582,
+            -0.9009688679024181
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 3.510833468576701e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 7.447602459741819e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 6,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 7,
+      "request": {
+        "chirp_strength": 3,
+        "q": 7,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 7,
+        "weight_shift": 1
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.4338837391175582,
+          -0.9009688679024181
+        ],
+        "logical_complex_cells": 24,
+        "request_bytes": 43,
+        "response": {
+          "final_boundary": [
+            -0.4338837391175582,
+            -0.9009688679024181
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 288,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 34396,
+        "warm_identical_classical_in_place_median_ns": 53192,
+        "warm_in_place_phase_median_ns": 53262,
+        "warm_snapshot_sham_median_ns": 35097
+      },
+      "width": 6
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.5406408174555992,
+          -0.8412535328311807
+        ],
+        "fresh_reuse_boundary": [
+          -0.9853538358476917,
+          -0.17052219263262414
+        ],
+        "logical_complex_cells": 40,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.5406408174555992,
+            -0.8412535328311807
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.5406408174555992,
+          -0.8412535328311807
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 1280,
+        "carrier_complex_cells": 10,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 20,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 30,
+        "mode_count": 10,
+        "post_state_commitment": "c0fc9ed45552e42f8b4f6a1148e67552a2ca8c9e6597b9e3f3d01b006abc66b6",
+        "pre_state_commitment": "bdf7211cb2071782b6d4ce72d678b645a7c32193ecd2802a26424f3a771c9620",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 3.2676411784648686e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "936d453acba29d25404bbf88951bfe714f570dfbe6c84b322760f6405590d7d0",
+        "response": {
+          "final_boundary": [
+            -0.5406408174555992,
+            -0.8412535328311807
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 3.510833468576701e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 4.577566798522237e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 10,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 11,
+      "request": {
+        "chirp_strength": 3,
+        "q": 11,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 11,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.5406408174555992,
+          -0.8412535328311807
+        ],
+        "logical_complex_cells": 40,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.5406408174555992,
+            -0.8412535328311807
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 480,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 34396,
+        "warm_identical_classical_in_place_median_ns": 54845,
+        "warm_in_place_phase_median_ns": 54684,
+        "warm_snapshot_sham_median_ns": 35718
+      },
+      "width": 10
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.9836199069471447,
+          -0.18025503781390467
+        ],
+        "fresh_reuse_boundary": [
+          -0.6927243535095978,
+          -0.721202447343817
+        ],
+        "logical_complex_cells": 48,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.9836199069471447,
+            -0.18025503781390467
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.9836199069471447,
+          -0.18025503781390467
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 1536,
+        "carrier_complex_cells": 12,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 24,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 36,
+        "mode_count": 12,
+        "post_state_commitment": "bdb2c66deaf63beef6ca31257ddd9dd106faa1d65b1bc1a03d06ef2edf571398",
+        "pre_state_commitment": "6a893ea0dc71814601f214994d740e6dc811e809aacc9b5a9a7ad421516d0190",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 6.830247336189095e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "f50b2a1da0d52a18603031413505b9f507feccb218cbb33fe6b1592b84d4af96",
+        "response": {
+          "final_boundary": [
+            0.9836199069471447,
+            -0.18025503781390467
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.710277376051326e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 5.551115123125783e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 12,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 13,
+      "request": {
+        "chirp_strength": 3,
+        "q": 13,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 13,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.9836199069471447,
+          -0.18025503781390467
+        ],
+        "logical_complex_cells": 48,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.9836199069471447,
+            -0.18025503781390467
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 576,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 33724,
+        "warm_identical_classical_in_place_median_ns": 53963,
+        "warm_in_place_phase_median_ns": 53843,
+        "warm_snapshot_sham_median_ns": 35578
+      },
+      "width": 12
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.034642985843339524,
+          -0.9993997516168676
+        ],
+        "fresh_reuse_boundary": [
+          0.9481606475909641,
+          -0.31779141958190615
+        ],
+        "logical_complex_cells": 64,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.034642985843339524,
+            -0.9993997516168676
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.034642985843339524,
+          -0.9993997516168676
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 2048,
+        "carrier_complex_cells": 16,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 32,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 48,
+        "mode_count": 16,
+        "post_state_commitment": "88183ffa5b9817a2bcb4e617f882aa2b6a5e702b6d486e5e8aa67e7ad656be7b",
+        "pre_state_commitment": "f184911d93084011f97cd033932a6d5b0b36666d3a453dd50fc0b8f12a0e090a",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 1.6836267696816565e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "8950e031fdfa42b6af39d3c43148ef8c25fb89a35c4b111cd81d9fddcf7d5dd9",
+        "response": {
+          "final_boundary": [
+            0.034642985843339524,
+            -0.9993997516168676
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 3.510833468576701e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 4.577566798522237e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 16,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 17,
+      "request": {
+        "chirp_strength": 3,
+        "q": 17,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 17,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.034642985843339524,
+          -0.9993997516168676
+        ],
+        "logical_complex_cells": 64,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.034642985843339524,
+            -0.9993997516168676
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 768,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 34967,
+        "warm_identical_classical_in_place_median_ns": 55526,
+        "warm_in_place_phase_median_ns": 56007,
+        "warm_snapshot_sham_median_ns": 36430
+      },
+      "width": 16
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.055087760355864546,
+          0.9984815164333173
+        ],
+        "fresh_reuse_boundary": [
+          0.10087351712028161,
+          0.9948992579873556
+        ],
+        "logical_complex_cells": 72,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.055087760355864546,
+            0.9984815164333173
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.055087760355864546,
+          0.9984815164333173
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 2304,
+        "carrier_complex_cells": 18,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 36,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 54,
+        "mode_count": 18,
+        "post_state_commitment": "1873e2937f889316858b47a8bbd7494710da689e7ce959797556273ed203891b",
+        "pre_state_commitment": "365c9b43d9a11dc9f21be047401e81356f18c1e1e10ddb2207be72a71f0e32a2",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 6.240253418856833e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "454b2c310862d27e7e55ddd9fec52241f5da60d30baee8df1d21e050d859b298",
+        "response": {
+          "final_boundary": [
+            0.055087760355864546,
+            0.9984815164333173
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 6.280369834735101e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.0235750533041806e-15,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 18,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 19,
+      "request": {
+        "chirp_strength": 3,
+        "q": 19,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 19,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.055087760355864546,
+          0.9984815164333173
+        ],
+        "logical_complex_cells": 72,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.055087760355864546,
+            0.9984815164333173
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 864,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 35007,
+        "warm_identical_classical_in_place_median_ns": 56067,
+        "warm_in_place_phase_median_ns": 58081,
+        "warm_snapshot_sham_median_ns": 38043
+      },
+      "width": 18
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.6214072503685453,
+          0.7834877339112608
+        ],
+        "fresh_reuse_boundary": [
+          -0.19128299834649845,
+          0.9815349278266015
+        ],
+        "logical_complex_cells": 88,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6214072503685453,
+            0.7834877339112608
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.6214072503685453,
+          0.7834877339112608
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 2816,
+        "carrier_complex_cells": 22,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 44,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 66,
+        "mode_count": 22,
+        "post_state_commitment": "292f2e6f977689869668f45f08f787ea48a408672c7ae3eab7c2f7a11a09e5e2",
+        "pre_state_commitment": "55500892499c1b589cbefcc96219cbd6f820342e5f8eec7e712717b93a559a00",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 7.457856541844913e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "59f046b3d94b071234d16df1f72d180f023e9a5aabd72f6a02005a24935f364c",
+        "response": {
+          "final_boundary": [
+            -0.6214072503685453,
+            0.7834877339112608
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.652682298944613e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 8.95090418262362e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 22,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 23,
+      "request": {
+        "chirp_strength": 3,
+        "q": 23,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 23,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.6214072503685453,
+          0.7834877339112608
+        ],
+        "logical_complex_cells": 88,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6214072503685453,
+            0.7834877339112608
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1056,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 37572,
+        "warm_identical_classical_in_place_median_ns": 58833,
+        "warm_in_place_phase_median_ns": 58522,
+        "warm_snapshot_sham_median_ns": 39255
+      },
+      "width": 22
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.4022547844761362,
+          -0.9155277649345519
+        ],
+        "fresh_reuse_boundary": [
+          0.8568571761675718,
+          0.5155538571770485
+        ],
+        "logical_complex_cells": 112,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.4022547844761362,
+            -0.9155277649345519
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.4022547844761362,
+          -0.9155277649345519
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 3584,
+        "carrier_complex_cells": 28,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 56,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 84,
+        "mode_count": 28,
+        "post_state_commitment": "3bd5535512c73eabab81f9ce179ed7533b78dbabaafa7a82abdec515737d43e3",
+        "pre_state_commitment": "5072452444cb5fb194f50faa76ae31c0c097ecf3796323538caa9dfb34d50302",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 7.205991039613251e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "d3666b45c453d455335ea946273f8bde8448df2f179d131cdd26d3f3f3b7e39f",
+        "response": {
+          "final_boundary": [
+            -0.4022547844761362,
+            -0.9155277649345519
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 5.881301029635769e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 8.899114524108741e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 28,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 29,
+      "request": {
+        "chirp_strength": 3,
+        "q": 29,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 29,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.4022547844761362,
+          -0.9155277649345519
+        ],
+        "logical_complex_cells": 112,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.4022547844761362,
+            -0.9155277649345519
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1344,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 38073,
+        "warm_identical_classical_in_place_median_ns": 59404,
+        "warm_in_place_phase_median_ns": 59093,
+        "warm_snapshot_sham_median_ns": 39876
+      },
+      "width": 28
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.9377521321470818,
+          0.34730525284481095
+        ],
+        "fresh_reuse_boundary": [
+          -0.7224612869978824,
+          -0.6914113745010033
+        ],
+        "logical_complex_cells": 120,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.9377521321470818,
+            0.34730525284481095
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.9377521321470818,
+          0.34730525284481095
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 3840,
+        "carrier_complex_cells": 30,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 60,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 90,
+        "mode_count": 30,
+        "post_state_commitment": "08264819bb339811cdb4a78bf42dcceeda58d614074c634bfc85ca864e78e57d",
+        "pre_state_commitment": "815d35fe4ed21f19678313d7e074c103bf1da7c637a64f13b85a9170b9367cee",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 6.755734472652849e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "d49a5a6f78b486762f3ee69913b5b6225c7e8c12a161cc1c27c37ac3f030f0f5",
+        "response": {
+          "final_boundary": [
+            -0.9377521321470818,
+            0.34730525284481095
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 5.79553433516819e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.0235750533041808e-15,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 30,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 31,
+      "request": {
+        "chirp_strength": 3,
+        "q": 31,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 31,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.9377521321470818,
+          0.34730525284481095
+        ],
+        "logical_complex_cells": 120,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.9377521321470818,
+            0.34730525284481095
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1440,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 39736,
+        "warm_identical_classical_in_place_median_ns": 61087,
+        "warm_in_place_phase_median_ns": 62680,
+        "warm_snapshot_sham_median_ns": 41600
+      },
+      "width": 30
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.6553467281047248,
+          -0.7553281842764972
+        ],
+        "fresh_reuse_boundary": [
+          -0.688525639939386,
+          0.7252119987604029
+        ],
+        "logical_complex_cells": 144,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6553467281047248,
+            -0.7553281842764972
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.6553467281047248,
+          -0.7553281842764972
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 4608,
+        "carrier_complex_cells": 36,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 72,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 108,
+        "mode_count": 36,
+        "post_state_commitment": "e6f4a146b6db3ba9cce9bfa4d75ebbe8892095b745593cd4f51ffa6e3a4dd67c",
+        "pre_state_commitment": "1cf5417409838bf9063a72b22ad80fcd9c05caf0d9edc7d7ecec28e0bd771e50",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 8.923444754804157e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "b88a8917d6ce1add2ff0141a91a33c4473c46e9ad07b77ebe88b871f975f18d4",
+        "response": {
+          "final_boundary": [
+            -0.6553467281047248,
+            -0.7553281842764972
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 5.79553433516819e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.0053497077208614e-15,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 36,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 37,
+      "request": {
+        "chirp_strength": 3,
+        "q": 37,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 37,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.6553467281047248,
+          -0.7553281842764972
+        ],
+        "logical_complex_cells": 144,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6553467281047248,
+            -0.7553281842764972
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1728,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 51448,
+        "warm_identical_classical_in_place_median_ns": 62139,
+        "warm_in_place_phase_median_ns": 63321,
+        "warm_snapshot_sham_median_ns": 42892
+      },
+      "width": 36
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.6581447852544804,
+          -0.7528913876797465
+        ],
+        "fresh_reuse_boundary": [
+          0.6595858195422226,
+          -0.7516292614439738
+        ],
+        "logical_complex_cells": 160,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.6581447852544804,
+            -0.7528913876797465
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.6581447852544804,
+          -0.7528913876797465
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 5120,
+        "carrier_complex_cells": 40,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 80,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 120,
+        "mode_count": 40,
+        "post_state_commitment": "1042fd7c760dbdc5cf12c0c6c96696bb398628780fbe1fc44d28bd2dd0cec3ff",
+        "pre_state_commitment": "734226a0f431cc24d67c137f27f9886e8db16bce84d784b7620b0e9f0dfd59f2",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 7.039385262501206e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "5ac678640e6c17dfff5d968d7559530ea11ee678a55e869bfa0ac9e13cf39561",
+        "response": {
+          "final_boundary": [
+            0.6581447852544804,
+            -0.7528913876797465
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.779784928769661e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.2325475812854657e-15,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 40,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 41,
+      "request": {
+        "chirp_strength": 3,
+        "q": 41,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 41,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.6581447852544804,
+          -0.7528913876797465
+        ],
+        "logical_complex_cells": 160,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.6581447852544804,
+            -0.7528913876797465
+          ]
+        },
+        "response_bytes": 59,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1920,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 42852,
+        "warm_identical_classical_in_place_median_ns": 65816,
+        "warm_in_place_phase_median_ns": 65074,
+        "warm_snapshot_sham_median_ns": 44866
+      },
+      "width": 40
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.6275613532593751,
+          0.778567112004652
+        ],
+        "fresh_reuse_boundary": [
+          -0.9997034698451408,
+          0.024351024199976035
+        ],
+        "logical_complex_cells": 168,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6275613532593751,
+            0.778567112004652
+          ]
+        },
+        "response_bytes": 58,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.6275613532593751,
+          0.778567112004652
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 5376,
+        "carrier_complex_cells": 42,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 84,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 126,
+        "mode_count": 42,
+        "post_state_commitment": "5ceec74c411d8f9af578626b1c0ef7b85241b53dd7561ad49b35b6300bed27d7",
+        "pre_state_commitment": "69e7e411801f8274b888335784b7125b0485cf86dff1d39697fc1a26d978e2bf",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 5.2061558681150403e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "178a3755b67d5d291842b36a655bdd4aca7cd970002b0a21795c6de676d87268",
+        "response": {
+          "final_boundary": [
+            -0.6275613532593751,
+            0.778567112004652
+          ]
+        },
+        "response_bytes": 58,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 5.578801654593729e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 7.771561172376096e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 42,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 43,
+      "request": {
+        "chirp_strength": 3,
+        "q": 43,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 43,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.6275613532593751,
+          0.778567112004652
+        ],
+        "logical_complex_cells": 168,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            -0.6275613532593751,
+            0.778567112004652
+          ]
+        },
+        "response_bytes": 58,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 2016,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 42952,
+        "warm_identical_classical_in_place_median_ns": 65175,
+        "warm_in_place_phase_median_ns": 65916,
+        "warm_snapshot_sham_median_ns": 44755
+      },
+      "width": 42
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.14192256206265244,
+          -0.9898777633514012
+        ],
+        "fresh_reuse_boundary": [
+          0.1174291700057854,
+          -0.9930812605380032
+        ],
+        "logical_complex_cells": 184,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.14192256206265244,
+            -0.9898777633514012
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.14192256206265244,
+          -0.9898777633514012
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 5888,
+        "carrier_complex_cells": 46,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 92,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 138,
+        "mode_count": 46,
+        "post_state_commitment": "6833ca08457bfbde04b7272ddb88cb3e810b43c5be2787a77d2b0d3777b05e98",
+        "pre_state_commitment": "4f339e47499b67045c44126c98fc24437395523f1faf92c28fdb72aa7239f33d",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 1.0077983384713826e-13,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "1436ff06d792c0cde5eb9f00ec4b06123a8d071afd38dbb983558bbe8694baa1",
+        "response": {
+          "final_boundary": [
+            0.14192256206265244,
+            -0.9898777633514012
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.710277376051326e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 1.2325475812854655e-15,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 46,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 47,
+      "request": {
+        "chirp_strength": 3,
+        "q": 47,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 47,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.14192256206265244,
+          -0.9898777633514012
+        ],
+        "logical_complex_cells": 184,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.14192256206265244,
+            -0.9898777633514012
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 2208,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 45677,
+        "warm_identical_classical_in_place_median_ns": 67660,
+        "warm_in_place_phase_median_ns": 68040,
+        "warm_snapshot_sham_median_ns": 46509
+      },
+      "width": 46
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.39999152660217036,
+          -0.9165188370385334
+        ],
+        "fresh_reuse_boundary": [
+          -0.5453399180376322,
+          -0.8382149925852607
+        ],
+        "logical_complex_cells": 208,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.39999152660217036,
+            -0.9165188370385334
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0,
+        "software_fft_calls": 1,
+        "software_fft_calls_primary_and_reuse": 2
+      },
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_wave_events_primary_and_reuse": 4,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.39999152660217036,
+          -0.9165188370385334
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_bits": 6656,
+        "carrier_complex_cells": 52,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_chirp_and_dft": true,
+          "wrong_inverse_fails": true
+        },
+        "declared_chirp_and_transform_temporary_complex_cells": 104,
+        "failed_null_carrier_fft_attempts": 1,
+        "logical_complex_cells": 156,
+        "mode_count": 52,
+        "post_state_commitment": "0e64d5031255e3d60cb099bf0f9ddefeac3febe3c560eb47b716a524d578febf",
+        "pre_state_commitment": "b2b39d878f2028ae795e747d22a26bd04fc0e61a705092f1f3fe86f9e4276eb3",
+        "precision_bits_per_mode": 128,
+        "repeated_reuse_cycles": 256,
+        "repeated_reuse_max_error": 3.624227794992419e-14,
+        "request_bytes": 44,
+        "resident_intermediate_commitment": "aa2ab832aa68b687cc2ba2cac299133d0c834af7fe5028c8cdb4ee90c48b5d18",
+        "response": {
+          "final_boundary": [
+            0.39999152660217036,
+            -0.9165188370385334
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.847302891456678e-16,
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 7.152448122690996e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 52,
+        "snapshot_bytes": 0,
+        "software_fft_calls_primary_and_reuse": 4,
+        "verification_and_controls_software_fft_calls": 517
+      },
+      "predeclared_boundary_tolerance": 2e-12,
+      "predeclared_state_tolerance": 2e-12,
+      "q": 53,
+      "request": {
+        "chirp_strength": 3,
+        "q": 53,
+        "weight_shift": 5
+      },
+      "second_program": {
+        "chirp_strength": 4,
+        "q": 53,
+        "weight_shift": 7
+      },
+      "snapshot_sham": {
+        "baseline_reload_used": true,
+        "boundary": [
+          0.39999152660217036,
+          -0.9165188370385334
+        ],
+        "logical_complex_cells": 208,
+        "request_bytes": 44,
+        "response": {
+          "final_boundary": [
+            0.39999152660217036,
+            -0.9165188370385334
+          ]
+        },
+        "response_bytes": 60,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 2496,
+        "software_fft_calls_primary_and_reuse": 2,
+        "verification_only_fresh_baseline_fft_calls": 1
+      },
+      "warm_timing": {
+        "repetitions": 17,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_median_ns": 46458,
+        "warm_identical_classical_in_place_median_ns": 68841,
+        "warm_in_place_phase_median_ns": 69693,
+        "warm_snapshot_sham_median_ns": 47331
+      },
+      "width": 52
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

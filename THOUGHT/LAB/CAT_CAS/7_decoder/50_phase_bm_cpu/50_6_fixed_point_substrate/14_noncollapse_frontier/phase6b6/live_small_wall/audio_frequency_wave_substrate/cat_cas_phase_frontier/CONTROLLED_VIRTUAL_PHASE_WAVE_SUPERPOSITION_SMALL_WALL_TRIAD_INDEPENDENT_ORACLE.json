@@ -1,0 +1,426 @@
+{
+  "claim": "BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED",
+  "claim_ceiling": "FOURTEEN_DECLARED_Q5_THROUGH_Q53_STANDALONE_CMATH_DENSE_UNITARY_DFT_BOUNDARY_RESTORATION_REUSE_AND_CONTROL_PARITY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_boundaries_match_production_within_predeclared_tolerance": true,
+    "all_dephased_boundaries_change": true,
+    "all_inverse_restorations_within_predeclared_tolerance": true,
+    "all_missing_inverses_fail": true,
+    "all_reordered_inverses_fail": true,
+    "all_reuses_match_fresh": true,
+    "all_wrong_inverses_fail": true
+  },
+  "oracle_cases": [
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 64,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.8090169943749478,
+        0.5877852522924732
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.9876883405951377,
+        -0.1564344650402322
+      ],
+      "q": 5,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.5700924586837752e-16,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.1102230246251565e-16,
+      "reused_boundary": [
+        -0.8090169943749478,
+        0.5877852522924732
+      ],
+      "second_chirp_strength": 0,
+      "second_weight_shift": 3,
+      "weight_shift": 1,
+      "width": 4,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 144,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.95557280578614,
+        0.2947551744109058
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.4338837391175578,
+        -0.9009688679024181
+      ],
+      "q": 7,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.3911054626160788e-15,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.6504651808933464e-15,
+      "reused_boundary": [
+        0.9555728057861398,
+        0.29475517441090526
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 1,
+      "weight_shift": 5,
+      "width": 6,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 400,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.985353835847692,
+        -0.17052219263262464
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.5406408174555988,
+        -0.8412535328311819
+      ],
+      "q": 11,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.4043333874306805e-15,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 3.1577990563142793e-15,
+      "reused_boundary": [
+        -0.9853538358476915,
+        -0.17052219263262547
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 10,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 576,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.6927243535095974,
+        -0.7212024473438149
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.9836199069471445,
+        -0.18025503781390373
+      ],
+      "q": 13,
+      "reordered_inverse_fails": true,
+      "restoration_error": 2.531698018113677e-15,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 5.4412255833659475e-15,
+      "reused_boundary": [
+        -0.6927243535095949,
+        -0.7212024473438146
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 12,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 1024,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.9481606475909593,
+        -0.31779141958190493
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.03464298584334467,
+        -0.9993997516168659
+      ],
+      "q": 17,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.0322089227061201e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.5099441299614912e-14,
+      "reused_boundary": [
+        0.94816064759096,
+        -0.31779141958190776
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 16,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 1296,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.10087351712028265,
+        0.9948992579873525
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.05508776035586031,
+        0.998481516433317
+      ],
+      "q": 19,
+      "reordered_inverse_fails": true,
+      "restoration_error": 8.122857819188465e-15,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.4300775841839746e-14,
+      "reused_boundary": [
+        0.10087351712028511,
+        0.99489925798735
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 18,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 1936,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.19128299834650223,
+        0.9815349278265981
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.6214072503685496,
+        0.7834877339112601
+      ],
+      "q": 23,
+      "reordered_inverse_fails": true,
+      "restoration_error": 7.455511337993451e-15,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.4757616325112253e-14,
+      "reused_boundary": [
+        -0.19128299834650214,
+        0.9815349278265966
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 22,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 3136,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.8568571761675697,
+        0.515553857177052
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.4022547844761308,
+        -0.9155277649345513
+      ],
+      "q": 29,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.1816575718541734e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.8537732650917785e-14,
+      "reused_boundary": [
+        0.8568571761675666,
+        0.5155538571770523
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 28,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 3600,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.7224612869978791,
+        -0.6914113745010046
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.9377521321470847,
+        0.3473052528448067
+      ],
+      "q": 31,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.2585370877106375e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 1.93181996554482e-14,
+      "reused_boundary": [
+        -0.7224612869978846,
+        -0.6914113745010009
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 30,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 5184,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.6885256399393852,
+        0.7252119987603924
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.6553467281047342,
+        -0.7553281842765055
+      ],
+      "q": 37,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.6210491805865005e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 2.97997695911484e-14,
+      "reused_boundary": [
+        -0.6885256399393892,
+        0.7252119987603874
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 36,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 6400,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.6595858195422366,
+        -0.7516292614439773
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.6581447852544828,
+        -0.7528913876797473
+      ],
+      "q": 41,
+      "reordered_inverse_fails": true,
+      "restoration_error": 2.014771861761105e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 2.889823309113541e-14,
+      "reused_boundary": [
+        0.6595858195422326,
+        -0.7516292614439763
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 40,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 7056,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.99970346984513,
+        0.024351024199969082
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        -0.6275613532593733,
+        0.77856711200465
+      ],
+      "q": 43,
+      "reordered_inverse_fails": true,
+      "restoration_error": 1.510556244683321e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 3.566910047508576e-14,
+      "reused_boundary": [
+        -0.9997034698451381,
+        0.024351024199970754
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 42,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 8464,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        0.11742917000579418,
+        -0.9930812605380102
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.1419225620626672,
+        -0.989877763351389
+      ],
+      "q": 47,
+      "reordered_inverse_fails": true,
+      "restoration_error": 3.05281051460578e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 3.8283099532610395e-14,
+      "reused_boundary": [
+        0.11742917000578812,
+        -0.9930812605379958
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 46,
+      "wrong_inverse_fails": true
+    },
+    {
+      "chirp_strength": 3,
+      "dense_dft_terms_primary_and_reuse_with_inverses": 10816,
+      "dephasing_changes_boundary": true,
+      "fresh_reuse_boundary": [
+        -0.5453399180376252,
+        -0.8382149925852574
+      ],
+      "missing_inverse_fails": true,
+      "projected_boundary": [
+        0.39999152660217574,
+        -0.9165188370385222
+      ],
+      "q": 53,
+      "reordered_inverse_fails": true,
+      "restoration_error": 2.8046703585658504e-14,
+      "reuse_matches_fresh": true,
+      "reuse_restoration_error": 4.685312166713563e-14,
+      "reused_boundary": [
+        -0.545339918037608,
+        -0.8382149925852629
+      ],
+      "second_chirp_strength": 4,
+      "second_weight_shift": 7,
+      "weight_shift": 5,
+      "width": 52,
+      "wrong_inverse_fails": true
+    }
+  ],
+  "oracle_independence": {
+    "imports_production": false,
+    "reconstructs_primitive_roots_phase_orbits_chirps_weights_and_boundaries": true,
+    "reports_oracle_work_not_production_work": true,
+    "uses_numpy_fft": false,
+    "uses_standalone_dense_unitary_dft": true
+  },
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "strict_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_computation": false
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
