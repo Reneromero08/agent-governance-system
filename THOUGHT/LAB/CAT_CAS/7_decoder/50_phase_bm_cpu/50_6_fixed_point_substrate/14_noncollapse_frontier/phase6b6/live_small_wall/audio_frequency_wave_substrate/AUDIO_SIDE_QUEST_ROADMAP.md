@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CONTINUOUS_S1_THETA_DESCRIPTOR_WITH_GROWING_DISCRIMINANT_FIBERS_AND_GENERIC_CENTER_MOMENT_CHART_SELECTED`
-**Roadmap version:** `14.75`
+**Status:** `STRICT_GENERIC_CENTER_THETA_MOMENT_PRECISION_HIERARCHY_WITH_STREAMED_REMATERIALIZATION_SELECTED`
+**Roadmap version:** `14.76`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `e2d67c6781a6429e79992a3d9dc448027c33ecc9`
+**Reconciled source head:** `3e93bda7ca071d27e0541b9dbb974eea7698a1ca`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_KERNELS_COMPOSE_BY_PARAMETER_ADDITION_AND_D_FOLD_INTERSECTION_HAS_AN_A_DMINUS1_THETA_CHART_WITH_D_DISCRIMINANT_FIBERS_A_FOUR_COUNT_PUBLIC_FACTOR_DESCRIPTOR_FINAL_Q24_JET_PROJECTION_EXACT_RESTORATION_REUSE_BUT_LATTICE_RANK_DMINUS1_AND_FIBER_COUNT_D_GROW_TO63_AND64_WHILE_IDENTICAL_CLASSICAL_COUNT_AND_QJET_RECURRENCES_REMAIN`
-**Current claim ceiling:** `FORMAL_WRAPPED_GAUSSIAN_CONTINUOUS_S1_KERNELS_Q_IN_ZERO_ONE_QUARTER_TURN_PHASE_ALPHABET_DECLARED_INTEGER_PARAMETER_COMPOSITION_CASES_UNIT_DIFFUSION_INTERSECTION_FACTOR_COUNTS2_3_4_8_16_32_64_FAMILIES0_1_EXACT_ZERO_HARMONIC_Q_ADIC_JET_ORDER24_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_FIRST_HARMONIC_QJET_CLOSES_ON_RUNTIME_POWER_MOMENTS_THROUGH_FLOOR_JPLUS1_OVER2_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_MOMENT_CELLS_GROW_FROM2_TO13_ACROSS_J2_TO24_THE24_CENTER_SOURCE_REMAINS_RESIDENT_AND_IDENTICAL_CLASSICAL_MOMENT_AND_DIRECT_FACTOR_RECURRENCES_REMAIN`
+**Current claim ceiling:** `FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_CENTER_COUNT24_FIRST_HARMONIC_QJET_ORDERS2_4_8_12_16_20_24_PRIMARY_ORDER24_REUSE_CENTER_COUNT17_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M209_THETA_FACTOR_DESCRIPTOR_IS_FIXED_FOR_THE_QUARTER_TURN_ALPHABET_BUT_CANONICAL_LATTICE_RANK_AND_DISCRIMINANT_FIBERS_GROW_WITH_FACTOR_COUNT`
+**New mechanism development:** `ACTIVE_AFTER_M210_GENERIC_CENTER_MOMENT_CHART_CLOSES_BOUNDED_QJETS_BUT_MOMENT_ORDER_PAYLOAD_AND_RUNTIME_SOURCE_RETENTION_REMAIN`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -9888,6 +9888,71 @@ derive the smallest exact symmetric-moment chart sufficient for bounded
 merely relocates the factor history. It must preserve continuous-S1 semantics,
 final-only projection, exact restoration/reuse, and the strongest matched
 symmetric-moment classical recurrence.
+
+## M210: generic centers close bounded jets, not unbounded precision
+
+Claim:
+
+```text
+EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_FIRST_HARMONIC_QJET_CLOSES_ON_RUNTIME_POWER_MOMENTS_THROUGH_FLOOR_JPLUS1_OVER2_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_MOMENT_CELLS_GROW_FROM2_TO13_ACROSS_J2_TO24_THE24_CENTER_SOURCE_REMAINS_RESIDENT_AND_IDENTICAL_CLASSICAL_MOMENT_AND_DIRECT_FACTOR_RECURRENCES_REMAIN
+```
+
+M210 removes M209's four-symbol phase alphabet. Twenty-four exact runtime
+Gaussian-rational unit phases center analytic wrapped-Gaussian kernels on
+continuous `S1`. The identity `sum log(theta(u_j*x;Q)) = sum p_m L_m x^m`
+closes the requested first-harmonic `Q`-jet on runtime power moments. Ingest
+and whole-relation rotation are noncommuting, moments remain unresolved, and
+only the final jet is projected.
+
+An order-`J` first-harmonic jet uses moments through `floor((J+1)/2)`. The
+Jacobi-product coefficient `(-1)^(m+1) Q^m x^m / m` is nonzero for each `m`,
+so the `m`th moment can first affect that boundary by order `2m-1`. Resident
+moment cells grow from 2 at order 2 to 13 at order 24. Their exact payload
+grows from 621 to 47,209 bits. The 24 source centers remain separately
+resident at 763 bits.
+
+At order 24, projection retains 110 universal-log cells, peaks at 319 sparse
+series cells, and performs 106,586 series products. The public program has 34
+operation records and 68 descriptor slots. The actual moment updates reverse
+exactly on the same source and moment backings; unrelated 17-center reuse and
+fresh reuse agree at restoration generation two without reload or history.
+
+The independent oracle reconstructs effective centers and performs direct
+factor-by-factor sparse `Q`-jet convolution. It reproduces both families at
+orders 2, 4, 8, 12, 16, 20, and 24, every moment commitment, every boundary,
+and reuse.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_CENTER_COUNT24_FIRST_HARMONIC_QJET_ORDERS2_4_8_12_16_20_24_PRIMARY_ORDER24_REUSE_CENTER_COUNT17_DIRECT_PROCESS_ONLY
+```
+
+This is bounded-jet closure, not a fixed-moment full-theta representation.
+The moment and direct-factor recurrences are exact classical algorithms, and
+the moment payload exceeds the retained source at the primary case. No CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, catalytic inference, or unbounded
+computation is established.
+
+Selected successor:
+
+```text
+EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER
+```
+
+The selected repair targets the measured 47,209-bit retained moment payload.
+It must stream each required power moment from the actual center source into
+the universal Jacobi log recurrence, release it immediately, and rematerialize
+for verification/inverse without storing the 13-cell moment vector. It must
+count source scans, center powers, temporary series state, and exact width,
+and compare against the executed direct-factor sparse recurrence. If this only
+trades memory for work or leaves the center source as the dominant state,
+preserve that obstruction and change the phase law rather than increasing jet
+orders.
 
 ## 10. Roadmap Maintenance
 

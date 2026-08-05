@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`e2d67c6781a6429e79992a3d9dc448027c33ecc9`. The registry assigns one
+`3e93bda7ca071d27e0541b9dbb974eea7698a1ca`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 209-milestone lane is active by user direction. Continue from the
+The current 210-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -268,7 +268,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M209_THETA_FACTOR_DESCRIPTOR_IS_FIXED_FOR_THE_QUARTER_TURN_ALPHABET_BUT_CANONICAL_LATTICE_RANK_AND_DISCRIMINANT_FIBERS_GROW_WITH_FACTOR_COUNT
+ACTIVE_AFTER_M210_GENERIC_CENTER_MOMENT_CHART_CLOSES_BOUNDED_QJETS_BUT_MOMENT_ORDER_PAYLOAD_AND_RUNTIME_SOURCE_RETENTION_REMAIN
 ```
 
 The named
@@ -277,19 +277,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE
+EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER
 ```
 
-M209 establishes exact wrapped-Gaussian parameter composition and a fixed
-four-count procedural descriptor for the declared quarter-turn alphabet, but
-the canonical coefficient chart has `A_(d-1)` lattice rank `d-1` and `d`
-discriminant fibers. Its accepted boundary is only an exact order-24 `Q`-jet,
-and the identical classical count and sparse-jet recurrences remain. Do not
-add factor-count fixtures. Replace the finite phase alphabet with runtime-
-resident generic Gaussian-rational centers and test exact symmetric-moment
-closure across increasing requested jet precision, counting any relocated
-center history. Preserve exact restoration/reuse and the strongest matched
-moment recurrence.
+M210 removes the finite phase alphabet and closes bounded first-harmonic jets
+on runtime power moments, but moment cells grow as `floor((J+1)/2)+1`, their
+payload reaches 47,209 bits at order 24, and all 24 exact source centers remain
+resident. The identical classical moment and direct-factor recurrences remain.
+Do not add jet-order fixtures. Stream and immediately release each required
+moment from the actual source into the Jacobi log recurrence, counting source
+rescans, power work, series state, and width against the direct-factor
+baseline. Preserve exact restoration/reuse; if the repair merely trades state
+for work, change the phase law.
 
 ## 7. Native No-Smuggle Law
 

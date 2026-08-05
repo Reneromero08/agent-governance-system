@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`e2d67c6781a6429e79992a3d9dc448027c33ecc9`. The canonical per-milestone
+`3e93bda7ca071d27e0541b9dbb974eea7698a1ca`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11242,4 +11242,34 @@ Next:
 
 ```text
 EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE
+```
+
+## M210 generic-center theta moment hierarchy
+
+Runtime Gaussian-rational unit centers remove M209's finite phase alphabet.
+Their continuous-S1 theta product has an exact first-harmonic `Q`-jet moment
+formula. Order `J` requires moments through `floor((J+1)/2)`; the new `m`th
+moment has a nonzero Jacobi-log route to the boundary by order `2m-1`.
+
+Across orders 2 through 24, resident moments grow from 2 to 13 cells and from
+621 to 47,209 exact payload bits. The 24 actual source centers remain resident
+at 763 bits. The order-24 formal projection peaks at 319 series cells and
+106,586 products. An independent direct-factor convolution reproduces every
+moment and boundary commitment.
+
+Exact reverse execution restores the same source and moment backings; an
+unrelated 17-center program and fresh execution agree at generation two.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+This is bounded-jet closure with growing precision state and retained input,
+not a distinct phase resource or full infinite-theta evaluator. The classical
+moment and direct-factor recurrences remain. No CATVM custody, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, catalytic
+inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER
 ```

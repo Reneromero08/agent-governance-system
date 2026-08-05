@@ -1,0 +1,71 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_FIRST_HARMONIC_QJET_CLOSES_ON_RUNTIME_POWER_MOMENTS_THROUGH_FLOOR_JPLUS1_OVER2_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_MOMENT_CELLS_GROW_FROM2_TO13_ACROSS_J2_TO24_THE24_CENTER_SOURCE_REMAINS_RESIDENT_AND_IDENTICAL_CLASSICAL_MOMENT_AND_DIRECT_FACTOR_RECURRENCES_REMAIN",
+  "scientific_source_commit": "3e93bda7ca071d27e0541b9dbb974eea7698a1ca",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_CENTER_COUNT24_FIRST_HARMONIC_QJET_ORDERS2_4_8_12_16_20_24_PRIMARY_ORDER24_REUSE_CENTER_COUNT17_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {"path": "continuous_s1_generic_center_theta_moment_qjet.py", "sha256": "8d258127d31d9b83591a0cac58837809e46497207c0329d0d1f94d1793f00093"},
+    "independent_oracle": {"path": "continuous_s1_generic_center_theta_moment_independent_oracle.py", "sha256": "64b24e0b5aa5ba887d82c2d2ea0ef6e7c57bc02feb4bf274496a4ab689c90b74"},
+    "results": {"path": "CONTINUOUS_S1_GENERIC_CENTER_THETA_MOMENT_RESULTS.json", "sha256": "351375b52a6d1ae878c47c2de96c0554eb3ea00d8b8bced4bc405ff296bd1cfa"},
+    "independent_oracle_results": {"path": "CONTINUOUS_S1_GENERIC_CENTER_THETA_MOMENT_INDEPENDENT_ORACLE.json", "sha256": "9d15b17a07f631b03c51c3823a3d5a2ebfd8ba3136b65d27cf1ea924b2e56eac"},
+    "review": {"path": "CONTINUOUS_S1_GENERIC_CENTER_THETA_MOMENT_INDEPENDENT_REEXECUTION_REVIEW.md", "sha256": "1f27ce2dfaba0f9a6b21f8e68dba272e396dc7e4051893edea3e46a4abc21cb5"},
+    "qualifier": {"path": "qualify_continuous_s1_generic_center_theta_moment.sh", "sha256": "672481329a328d8b864b463256e4e48f8134c67e047f52a54fbf100af8121f4b"}
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "algorithms": [
+      "DIRECT_EFFECTIVE_CENTER_LIST_RECONSTRUCTION",
+      "DIRECT_FACTOR_BY_FACTOR_SPARSE_QJET_CONVOLUTION",
+      "JACOBI_PRODUCT_LOG_COEFFICIENT_HIERARCHY"
+    ],
+    "q_jet_orders": [2, 4, 8, 12, 16, 20, 24],
+    "program_families": 2,
+    "resident_moment_commitments_match": true,
+    "boundary_commitments_match": true,
+    "moment_hierarchy_matches": true,
+    "forward_inverse_identity": true,
+    "same_backing_restoration": true,
+    "fresh_restored_reuse_agreement": true
+  },
+  "controls": [
+    "WRONG_OWNER",
+    "WRONG_OPERATION_TYPE",
+    "PREMATURE_PROJECTION",
+    "MISSING_INVERSE",
+    "REORDERED_INVERSE",
+    "NULL_CARRIER",
+    "MODULE_ORDER"
+  ],
+  "resource_law": {
+    "primary_q_jet_order": 24,
+    "primary_runtime_source_center_cells": 24,
+    "primary_runtime_source_payload_bits": 763,
+    "primary_resident_moment_cells": 13,
+    "primary_resident_moment_payload_bits": 47209,
+    "primary_projection_universal_log_cells": 110,
+    "primary_projection_peak_series_cells": 319,
+    "primary_projection_series_products": 106586,
+    "compiled_public_program_operation_records": 34,
+    "compiled_public_program_descriptor_slots": 68,
+    "retained_inverse_history": 0,
+    "additional_retained_plan": 0,
+    "matched_moment_baseline": "IDENTICAL_RUNTIME_POWER_MOMENT_LOG_THETA_EXP_RECURRENCE",
+    "matched_direct_baseline": "EXACT_FACTOR_BY_FACTOR_SPARSE_QJET_RECURRENCE"
+  },
+  "claim_limits": {
+    "fixed_moment_count_unbounded_precision": false,
+    "full_infinite_theta_scalar_evaluated": false,
+    "source_center_retention_removed": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}
