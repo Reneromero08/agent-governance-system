@@ -1,0 +1,1025 @@
+{
+  "all_diagonal_only_cases_closed": true,
+  "all_rotor_counts_have_primary_and_alternate_escape": false,
+  "cases": [
+    {
+      "alternate_output_commitment": "5a758ad04fa48c9ed535f990d8e2e67cf34c440b3c8ddd4f1f7584feea2273ca",
+      "alternate_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 9,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 9,
+        "wrong_inverse_error_field_cells": 9
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 91,
+      "generator_enumerated_terms": 272,
+      "generator_unique_terms": 78,
+      "multiplicative_generator": 5,
+      "necklace_cells": 9,
+      "occupation_histograms_visited": 153,
+      "primary_boundary": 3,
+      "primary_output_commitment": "cf38c08b19bd8b50eaa9e604008ae50ddb91b053219b908d5883974b6c1c8a79",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "4efca526c8ba6f1f31523b3a4ba68c90302ee696af1522b4f2e6851ed18c5805",
+      "reuse_boundary": 91,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 2,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "3eda2f398ce96ad219c5f0d2d6d357c99a42af041b77cba783a9094588b39889",
+      "alternate_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 9,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 9,
+        "wrong_inverse_error_field_cells": 9
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 164,
+      "generator_enumerated_terms": 272,
+      "generator_unique_terms": 78,
+      "multiplicative_generator": 7,
+      "necklace_cells": 9,
+      "occupation_histograms_visited": 153,
+      "primary_boundary": 150,
+      "primary_output_commitment": "5f6be2ae2272e1deb3e32fa0e593a9b5968a99ffbcf8802ffbe98534ad263322",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "78d35095c22eaa08979b85e6854602ee4e81a7a2f115482567a315c60ae4faaf",
+      "reuse_boundary": 164,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 2,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "fa379f36e5e6a6d6992896fb27f2b0e153854c959d061f5604a58d0a6de7af43",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 57,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 57,
+        "wrong_inverse_error_field_cells": 57
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 73,
+      "generator_enumerated_terms": 4624,
+      "generator_unique_terms": 1238,
+      "multiplicative_generator": 5,
+      "necklace_cells": 57,
+      "occupation_histograms_visited": 969,
+      "primary_boundary": 21,
+      "primary_output_commitment": "5db502d0afc37cf141a2b1a5eb990ab768ff37307ef136a4bc0e47bc3260abc0",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "c0c5ddaf519cc4623cd89a47fab58a3a6f0f8ee23e7ae9392f8b4a061d6548a5",
+      "reuse_boundary": 73,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 3,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "2e56e7fa9b766534c244a50d7b672059b703425ad997162939bce62119bc869e",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 57,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 57,
+        "wrong_inverse_error_field_cells": 57
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 102,
+      "generator_enumerated_terms": 4624,
+      "generator_unique_terms": 1238,
+      "multiplicative_generator": 7,
+      "necklace_cells": 57,
+      "occupation_histograms_visited": 969,
+      "primary_boundary": 62,
+      "primary_output_commitment": "979afac9fdd42663041b8dcbfd780baae2bd1baa620515a722bee3dd8aeab01b",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "3355f713e19c658057de7197090a65cbb437c35c138d0acc3797167e0030cd42",
+      "reuse_boundary": 102,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 3,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "6e73615de9089be76cade26bf0220805d548f556dd83593d467ff6ef761c5254",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 2
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 283,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 281,
+        "wrong_inverse_error_field_cells": 283
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 3,
+      "generator_enumerated_terms": 41616,
+      "generator_unique_terms": 10991,
+      "multiplicative_generator": 5,
+      "necklace_cells": 285,
+      "occupation_histograms_visited": 4845,
+      "primary_boundary": 0,
+      "primary_output_commitment": "74edf065534bd9be5233364cf7bf44fe4815e399a3d4a2f1cb069a079d253e95",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "b75967bb9ca395736efcc3496132abd01ee560c0c6c9e15116ac330ab2fa952a",
+      "reuse_boundary": 3,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 4,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "21b16e536e270533503f33c2ec7e6fb1180d64d9ac5d9c9c7aad0bfcd6bb1486",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 2
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 283,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 285,
+        "wrong_inverse_error_field_cells": 285
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 165,
+      "generator_enumerated_terms": 41616,
+      "generator_unique_terms": 10991,
+      "multiplicative_generator": 7,
+      "necklace_cells": 285,
+      "occupation_histograms_visited": 4845,
+      "primary_boundary": 154,
+      "primary_output_commitment": "ee027098d7a9a734f3a0c806ab291b53c22b3304a9fe8b2d728f78732d05792e",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "be3d4ab89fb8d34cc95ddea3a829b6c5c31bb79d66ed2be7380a4c85cb29cac9",
+      "reuse_boundary": 165,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 4,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "f40d85b889bc05e66548fe14c2180e5a7945797339a46038ce12f58e863caf8e",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 6
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 1195,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 1192,
+        "wrong_inverse_error_field_cells": 1173
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 38,
+      "generator_enumerated_terms": 263568,
+      "generator_unique_terms": 68997,
+      "multiplicative_generator": 5,
+      "necklace_cells": 1197,
+      "occupation_histograms_visited": 20349,
+      "primary_boundary": 51,
+      "primary_output_commitment": "cbf5b91c706782bad35102fbec790d7c41f3dffeda11a362b62dae7f4fd837d1",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 3
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "42d0d5c137b124b265fa47a950fe28a41cee61552345697e130fd60bc4c7064d",
+      "reuse_boundary": 38,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 5,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 3
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "93d9769b4e28dd6f354065ed173185391da4cf1a9b3951267d09260ee297de22",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 10,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "chart_parameter_cells": 9,
+      "controls": {
+        "missing_inverse_error_field_cells": 1189,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 1189,
+        "wrong_inverse_error_field_cells": 1193
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 139,
+      "generator_enumerated_terms": 263568,
+      "generator_unique_terms": 68997,
+      "multiplicative_generator": 7,
+      "necklace_cells": 1197,
+      "occupation_histograms_visited": 20349,
+      "primary_boundary": 166,
+      "primary_output_commitment": "0e9ca2b890747936f82f10f480facf95c617bbeec17b055d33955f8dd7ec360a",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 2
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 7
+          },
+          {
+            "augmented_rank": -1,
+            "chart_rank": 9,
+            "consistent": false,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 8
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "restored_carrier_commitment": "edeb3d0bc7de94720ba2618d61996bad176c13c15023481cee4bcad273a0f333",
+      "reuse_boundary": 139,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 5,
+      "same_backing_primary": true,
+      "same_backing_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 2
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 7
+          },
+          {
+            "augmented_rank": 9,
+            "chart_rank": 9,
+            "consistent": true,
+            "factor": 17
+          }
+        ],
+        "zero_cells": 0
+      }
+    }
+  ],
+  "catvm_custody": false,
+  "claim_candidate": "BOUNDED_EXACT_NINE_PARAMETER_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSES_THE_PUBLIC_DIAGONAL_TWO_BODY_PHASE_AND_IS_DIMENSION_SATURATED_AT_TWO_ROTORS_BUT_ESCAPES_UNDER_OFFDIAGONAL_PAIR_SCATTERING_FROM_THREE_THROUGH_FIVE_ROTORS_WHILE_THE_FULL_NECKLACE_SHEAR_RESTORES_AND_REUSES_EXACTLY_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_AND_ONE_ALTERNATE_PUBLIC_JASTROW_FAMILY_EXACT_K_TIMES_D_GENERATOR_WORD_DIRECT_PROCESS_SOFTWARE_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "distinct_phase_resource_established": false,
+  "first_primary_escape_rotor_count": 3,
+  "matched_classical_recurrence": "IDENTICAL_FULL_NECKLACE_EXACT_K_TIMES_D_SHEAR_RECURRENCE",
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "resource_law": {
+    "accepted_assignment_or_relation_table_cells": 0,
+    "accepted_maximum_public_generator_entries": "REPORTED_PER_CASE",
+    "accepted_resident_field_cells": "TWO_TIMES_NECKLACE_DIMENSION",
+    "accepted_retained_inverse_history_bytes": 0,
+    "accepted_word_scratch_field_cells": "TWO_TIMES_NECKLACE_DIMENSION",
+    "candidate_chart_parameter_field_cells": 9,
+    "chart_rank_and_discrete_log_matrices": "VERIFICATION_ONLY",
+    "inverse_word_rematerialized_from_public_topology": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "two_rotor_chart_closure_is_dimension_saturation_not_transfer": true,
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

@@ -1,0 +1,964 @@
+{
+  "cases": [
+    {
+      "alternate_output_commitment": "5a758ad04fa48c9ed535f990d8e2e67cf34c440b3c8ddd4f1f7584feea2273ca",
+      "alternate_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "21e129b8fc5d2246434c7efaecadf742ff8b0323ddc07d42cf138689c0b164ae",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "220399decbf5c852ecd543172f63ea88f8a173f25fc613bd7e5fae04d2eb1982",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "b41ab6e56f0453d3caa97e2d3ae568ae6d0ddd8633ce5b70a187bae3a9c54669",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 9,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 9,
+        "wrong_inverse_error_field_cells": 9
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "5aed8eee4eacb9939d30f4ce9f5f35708c1095d02e9028a7abbbec43dd01006d",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 91,
+      "generator_unique_terms": 78,
+      "multiplicative_generator": 5,
+      "necklace_cells": 9,
+      "occupation_histograms_visited": 153,
+      "primary_boundary": 3,
+      "primary_output_commitment": "cf38c08b19bd8b50eaa9e604008ae50ddb91b053219b908d5883974b6c1c8a79",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "2aa370676919c402fa719721fcd2e8870c094376dc855b78e11cc352847afd0d",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "e982109da7a9ae20a3d654c5f8074cb69f7771b65b378477036dfd8f72fa9e6e",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "f864ad4e95950e8c0a631ce227d3422242c5f209f45893950f0b22ac90283561",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 91,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 2,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "3eda2f398ce96ad219c5f0d2d6d357c99a42af041b77cba783a9094588b39889",
+      "alternate_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "f7d0055b6e7b02508f8d2e2a601f0e076e33d1a72ce6a6aed60bc7a0bbbae034",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "1e4bac620a9a08a860ffdbc085e02fb71ccee0f1e460709d42565478296c5b0a",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "c4c3a2109c2e3137cbdd1bd69443743a8376f82da8d8d63f6df91bca6419c6c3",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 9,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 9,
+        "wrong_inverse_error_field_cells": 9
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "da62b3424d7d173a9cc1604ff3c57e8d6fc138ffa647c8247c5ba6b289993ef4",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 164,
+      "generator_unique_terms": 78,
+      "multiplicative_generator": 7,
+      "necklace_cells": 9,
+      "occupation_histograms_visited": 153,
+      "primary_boundary": 150,
+      "primary_output_commitment": "5f6be2ae2272e1deb3e32fa0e593a9b5968a99ffbcf8802ffbe98534ad263322",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "090ce16c285f1aaf5f9cd7b8f5947a96648ef0e5b735057009e00a0554a7f319",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "b71c3aa7c86dc09cb5bab48b0eb695eec8080413e0d9f926deac67f51fa50524",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "aea34022d2f8961c02017542ddc1771c0186ab14f54668c3692bc9d759ceacf0",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 164,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 2,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "fa379f36e5e6a6d6992896fb27f2b0e153854c959d061f5604a58d0a6de7af43",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 57,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 57,
+        "wrong_inverse_error_field_cells": 57
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fa1a75673d48356db973bf94b17e7b7049d444a860b8484d4ed1f4873dbb8b79",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 73,
+      "generator_unique_terms": 1238,
+      "multiplicative_generator": 5,
+      "necklace_cells": 57,
+      "occupation_histograms_visited": 969,
+      "primary_boundary": 21,
+      "primary_output_commitment": "5db502d0afc37cf141a2b1a5eb990ab768ff37307ef136a4bc0e47bc3260abc0",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 73,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 3,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "2e56e7fa9b766534c244a50d7b672059b703425ad997162939bce62119bc869e",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 57,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 57,
+        "wrong_inverse_error_field_cells": 57
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "241b58f1a3ae7545514031598b59539e2a42ee2143a0063473c999747dada820",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 102,
+      "generator_unique_terms": 1238,
+      "multiplicative_generator": 7,
+      "necklace_cells": 57,
+      "occupation_histograms_visited": 969,
+      "primary_boundary": 62,
+      "primary_output_commitment": "979afac9fdd42663041b8dcbfd780baae2bd1baa620515a722bee3dd8aeab01b",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 102,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 3,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "6e73615de9089be76cade26bf0220805d548f556dd83593d467ff6ef761c5254",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 2
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 283,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 281,
+        "wrong_inverse_error_field_cells": 283
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "0d93713a24f9000ce4fd6cf3eaf49aa9caba890383066c3771bbd95372d94207",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 3,
+      "generator_unique_terms": 10991,
+      "multiplicative_generator": 5,
+      "necklace_cells": 285,
+      "occupation_histograms_visited": 4845,
+      "primary_boundary": 0,
+      "primary_output_commitment": "74edf065534bd9be5233364cf7bf44fe4815e399a3d4a2f1cb069a079d253e95",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 3,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 4,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "21b16e536e270533503f33c2ec7e6fb1180d64d9ac5d9c9c7aad0bfcd6bb1486",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 2
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 283,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 285,
+        "wrong_inverse_error_field_cells": 285
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "71730e9dc1566f69de61f3b2ba90e3e214f8424f6b05c4e38382fee67aed10bf",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 165,
+      "generator_unique_terms": 10991,
+      "multiplicative_generator": 7,
+      "necklace_cells": 285,
+      "occupation_histograms_visited": 4845,
+      "primary_boundary": 154,
+      "primary_output_commitment": "ee027098d7a9a734f3a0c806ab291b53c22b3304a9fe8b2d728f78732d05792e",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 165,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 4,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "f40d85b889bc05e66548fe14c2180e5a7945797339a46038ce12f58e863caf8e",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 6
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 1195,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 1192,
+        "wrong_inverse_error_field_cells": 1173
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "08673e2ee2f99e0a37fe2c6979ca0958d13bdf059ed32b1eef162873a5129727",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 38,
+      "generator_unique_terms": 68997,
+      "multiplicative_generator": 5,
+      "necklace_cells": 1197,
+      "occupation_histograms_visited": 20349,
+      "primary_boundary": 51,
+      "primary_output_commitment": "cbf5b91c706782bad35102fbec790d7c41f3dffeda11a362b62dae7f4fd837d1",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 3,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 2
+      },
+      "prime": 103,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 38,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 5,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 72,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 3,
+            "solution_commitment": "a67eb9c82a502e5d3ae0a6fa4bd2209c04cd9d1c6b695928b2685b879ac901fe",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    },
+    {
+      "alternate_output_commitment": "93d9769b4e28dd6f354065ed173185391da4cf1a9b3951267d09260ee297de22",
+      "alternate_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "solution_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "controls": {
+        "missing_inverse_error_field_cells": 1189,
+        "null_carrier_rejected": true,
+        "reordered_inverse_error_field_cells": 1189,
+        "wrong_inverse_error_field_cells": 1193
+      },
+      "diagonal_only_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "901096ece4ae7107c08c2a06374369158c280cafcd30d07626236bf0cd4251b7",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      },
+      "fresh_reuse_boundary": 139,
+      "generator_unique_terms": 68997,
+      "multiplicative_generator": 7,
+      "necklace_cells": 1197,
+      "occupation_histograms_visited": 20349,
+      "primary_boundary": 166,
+      "primary_output_commitment": "0e9ca2b890747936f82f10f480facf95c617bbeec17b055d33955f8dd7ec360a",
+      "primary_restoration_error_field_cells": 0,
+      "primary_scattering_chart_membership": {
+        "closed": false,
+        "factor_checks": [
+          {
+            "consistent": false,
+            "factor": 2,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 7,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          },
+          {
+            "consistent": false,
+            "factor": 17,
+            "reason": "ZERO_OUTSIDE_TORUS"
+          }
+        ],
+        "zero_cells": 8
+      },
+      "prime": 239,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary": 139,
+      "reuse_restoration_error_field_cells": 0,
+      "rotors": 5,
+      "same_backing_primary_and_reuse": true,
+      "seventeenth_root": 211,
+      "source_chart_membership": {
+        "closed": true,
+        "factor_checks": [
+          {
+            "consistent": true,
+            "factor": 2,
+            "solution_commitment": "7cfb2af611ae79c0d8a00137e4b56d088acb442691e6959043a5a35c16ddf060",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 7,
+            "solution_commitment": "170ff49e7e89af4b78a22ea159b8f4117ba1d2e2a88053d402a7b9c2ab48b6fd",
+            "solved_rank": 9
+          },
+          {
+            "consistent": true,
+            "factor": 17,
+            "solution_commitment": "fb63a2b6b1286a511b47eab6340fa8accf6ed07b6acfbceed12a02077d0d331e",
+            "solved_rank": 9
+          }
+        ],
+        "zero_cells": 0
+      }
+    }
+  ],
+  "catvm_custody": false,
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "compact_nine_parameter_chart_survives_growing_offdiagonal_scattering": false,
+  "computational_advantage": false,
+  "distinct_phase_resource_established": false,
+  "first_escape_rotor_count": 3,
+  "matched_classical_recurrence": "IDENTICAL_FULL_NECKLACE_EXACT_K_TIMES_D_SHEAR_RECURRENCE",
+  "oracle_equation_matrices_are_verification_only": true,
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "production_inverse_called": false,
+  "production_membership_called": false,
+  "production_projection_called": false,
+  "production_source_imported": false,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "two_rotor_chart_closure_is_dimension_saturation_not_transfer": true,
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
