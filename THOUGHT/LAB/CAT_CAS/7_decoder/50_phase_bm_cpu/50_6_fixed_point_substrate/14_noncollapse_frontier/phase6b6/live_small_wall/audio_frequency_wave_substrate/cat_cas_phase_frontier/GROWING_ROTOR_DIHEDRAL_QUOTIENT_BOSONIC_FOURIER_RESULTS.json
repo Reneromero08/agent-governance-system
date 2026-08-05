@@ -1,0 +1,103 @@
+{
+  "catvm_custody": false,
+  "claim_candidate": "EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "first_nonzero_shear_breaks_fixed_rotation_quotient": true,
+    "generic_subset_dp_equals720_assignment_permanent": true,
+    "wrong_sector_cancels_by_rotation_character": true,
+    "zero_first_shear_factor_would_remove_reported_orbit_mismatch": true
+  },
+  "direct_kernel_route": {
+    "complete2277_by2277_transform_executed": false,
+    "dense_column_commitment": "336899609d818d12bcdab312912ea71fbe16343bae25c629aa606f2e3de65c14",
+    "dense_column_constant": 17,
+    "dense_column_nonzero_entries": 2277,
+    "dense_column_subset_transitions": 437184,
+    "dense_row_commitment": "0adbc1adfcbadd38229e8ebfcd4e424e96db4ef348f6d34b1d0b4abf91d1bf9d",
+    "dense_row_nonzero_entries": 2277,
+    "dense_row_subset_transitions": 437184,
+    "full_kernel_cells_if_retained": 5184729,
+    "full_transform_kernel_evaluations_if_streamed": 5184729,
+    "generic_permanent_assignment_terms": 720,
+    "generic_permanent_assignment_value": 65,
+    "generic_permanent_subset_transitions": 192,
+    "generic_permanent_subset_value": 65,
+    "maximum_subset_states_if_every_kernel_is_streamed": 331822656,
+    "permanent_subset_state_width": 64,
+    "universal_structured_transform_lower_bound_established": false,
+    "wrong_sector_orbit_kernel": 0,
+    "wrong_total_coordinate": 1
+  },
+  "distinct_phase_resource_established": false,
+  "matched_classical_baselines": [
+    "IDENTICAL_EXACT_F103_DIRECT_BOSONIC_FOURIER_KERNEL_SUBSET_DP",
+    "M201_IDENTICAL74613_CELL_BOSONIC_ELEMENTARY_TRANSFORM",
+    "M204_IDENTICAL_EIGHT_CHANNEL_IMPLICIT_DIHEDRAL_VECTOR_STREAM"
+  ],
+  "physical_bit_replacement": false,
+  "physical_waveform_execution": false,
+  "preserved_subclaims": [
+    "M204_EXECUTION_EXACT_RESTORATION_AND_REUSE_REMAIN_SEPARATELY_VALID",
+    "THE_SOURCE_AND_TARGET_SYMMETRY_SECTORS_HAVE_EQUAL2277_DIMENSION",
+    "THE_TESTED_STANDARD_BUTTERFLY_AND_DIRECT_KERNEL_ROUTES_ARE_EXACTLY_CHARACTERIZED"
+  ],
+  "quotient_geometry": {
+    "full_exchange_symmetric_occupation_cells": 74613,
+    "momentum_bracelet_cells": 2277,
+    "position_zero_total_cells_before_reflection": 4389,
+    "position_zero_total_reflection_closed_cells": 2277
+  },
+  "rejected_interpretations": [
+    "UNIVERSAL_NO_GO_FOR_EVERY_STRUCTURED2277_CELL_TRANSFORM",
+    "FULL_DIRECT_QUOTIENT_TRANSFORM_EXECUTION",
+    "CATVM_CUSTODY",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "resource_law": {
+    "accepted_dense_row_and_column_field_cells": 4554,
+    "accepted_diagnostic_dense_kernel_cells": 0,
+    "accepted_diagnostic_full_occupation_scratch_cells": 0,
+    "accepted_diagnostic_retained_transition_plan_entries": 0,
+    "accepted_kernel_dp_field_cells": 128,
+    "accepted_public_quotient_representative_histogram_cells": 77418,
+    "production_imports_and_retains_predecessor_topology_for_diagnostic": true,
+    "python_object_bigint_allocator_interpreter_timing_and_whole_process_peaks_excluded": true
+  },
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "result": "PASS_TESTED_FIXED_QUOTIENT_FOURIER_ROUTES_RETAIN_FORBIDDEN_COST",
+  "small_wall_crossed": false,
+  "standard_butterfly_route": {
+    "first_forward_gate": [
+      "SHEAR",
+      15,
+      16,
+      10
+    ],
+    "first_gate_orbit_coefficient_mismatch": 60,
+    "first_gate_rotation_commutator_nonzero_entries": 2,
+    "first_inverse_gate": [
+      "SHEAR",
+      15,
+      16,
+      31
+    ],
+    "fixed2277_coordinate_quotient_closed_gate_by_gate": false,
+    "forward_elementary_gates": 288,
+    "forward_gates_commuting_with_global_rotation": 0,
+    "inverse_elementary_gates": 289,
+    "inverse_gates_commuting_with_global_rotation": 0,
+    "m201_required_occupation_scratch_cells": 74613,
+    "total_elementary_gates": 577
+  },
+  "terminal": false,
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

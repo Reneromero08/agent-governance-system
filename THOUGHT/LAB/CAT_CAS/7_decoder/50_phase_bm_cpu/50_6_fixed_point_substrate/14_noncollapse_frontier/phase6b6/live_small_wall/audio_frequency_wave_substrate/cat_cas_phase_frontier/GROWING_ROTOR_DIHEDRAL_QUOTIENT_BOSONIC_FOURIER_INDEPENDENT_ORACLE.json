@@ -1,0 +1,37 @@
+{
+  "butterfly": {
+    "first_gate_orbit_coefficient_mismatch": 60,
+    "independently_derived_first_gate": [
+      "SHEAR",
+      15,
+      16,
+      10
+    ]
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "drop_orbit_factor_changes_origin_column_from17_to1": true,
+    "wrong_sector_orbit_kernel": 0,
+    "wrong_sector_total_coordinate": 1
+  },
+  "direct_kernel": {
+    "dense_column_commitment": "336899609d818d12bcdab312912ea71fbe16343bae25c629aa606f2e3de65c14",
+    "dense_column_constant": 17,
+    "dense_column_nonzero_entries": 2277,
+    "dense_row_commitment": "0adbc1adfcbadd38229e8ebfcd4e424e96db4ef348f6d34b1d0b4abf91d1bf9d",
+    "dense_row_nonzero_entries": 2277,
+    "generic_assignment_permanent": 65,
+    "generic_ryser_permanent": 65
+  },
+  "oracle_imports_cat_cas_modules": false,
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "terminal": false,
+  "topology": {
+    "momentum_bracelets": 2277,
+    "occupations": 74613,
+    "reflection_closed_position_cells": 2277,
+    "zero_total_position_occupations": 4389
+  },
+  "universal_structured_transform_lower_bound_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
