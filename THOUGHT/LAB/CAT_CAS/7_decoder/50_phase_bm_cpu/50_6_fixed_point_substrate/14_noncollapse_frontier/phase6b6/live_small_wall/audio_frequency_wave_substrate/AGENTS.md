@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`c95f3e2170e8dda9fb87457116184f02035432ff`. The registry assigns one
+`20298777522d3a47f5e0d5741d94a1c05e1c43cd`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 192-milestone lane is active by user direction. Continue from the
+The current 193-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -272,7 +272,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M192_JASTROW_CHART_ESCAPE_OBSTRUCTION
+ACTIVE_AFTER_M193_PAIR_SIGNATURE_FIBER_QUOTIENT
 ```
 
 The named
@@ -281,20 +281,20 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM
 ```
 
-M192 establishes exact diagonal closure for the nine-parameter multiplicative
-pair-signature/Jastrow chart but off-diagonal escape from three rotors through
-five. Its two-rotor closure is only full-dimensional saturation. Do not add
-Jastrow inputs, fields, or rotor counts unless they resolve a specific defect.
-The selected repair derives the coarsest exact pair-signature fiber refinement
-forced by public off-diagonal transition profiles. It must either close as a
-compact structural quotient or report the precise refinement step at which
-the full necklace state returns. Preserve the full necklace recurrence as the
-matched baseline. Do not promote a restricted equitable partition to a
-general bosonic quotient, and do not treat quotient failure as a reason to
-stop the lane.
+M193 establishes that arbitrary values on pair-signature fibers close exactly
+under all sixteen signed shift bases and the diagonal pair phase, reducing
+necklace dimensions 9, 57, 285, 1197 to quotient dimensions 9, 33, 165, 621.
+The result applies only to fiber-constant inputs and retains a 16-basis public
+plan with up to 131168 nonzeros. Do not add depths, fields, or rotor counts
+unless they resolve a specific defect. The selected repair must remove that
+retained plan without re-expanding the resident fiber state or hiding public
+topology rematerialization and per-update scratch. Preserve exact full-state
+parity and the identical compact classical stream. Do not promote carrier
+reduction to whole-path advantage, and do not treat a failed streaming repair
+as a reason to stop the lane.
 
 ## 7. Native No-Smuggle Law
 

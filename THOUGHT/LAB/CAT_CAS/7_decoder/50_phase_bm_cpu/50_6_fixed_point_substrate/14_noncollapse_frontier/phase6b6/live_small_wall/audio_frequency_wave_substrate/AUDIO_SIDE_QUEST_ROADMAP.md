@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_JASTROW_CHART_ESCAPE_OBSTRUCTION`
-**Roadmap version:** `14.58`
+**Status:** `STRICT_SCOPE_PAIR_SIGNATURE_FIBER_QUOTIENT`
+**Roadmap version:** `14.59`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c95f3e2170e8dda9fb87457116184f02035432ff`
+**Reconciled source head:** `20298777522d3a47f5e0d5741d94a1c05e1c43cd`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_NINE_PARAMETER_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSES_THE_PUBLIC_DIAGONAL_TWO_BODY_PHASE_AND_IS_DIMENSION_SATURATED_AT_TWO_ROTORS_BUT_ESCAPES_UNDER_OFFDIAGONAL_PAIR_SCATTERING_FROM_THREE_THROUGH_FIVE_ROTORS_WHILE_THE_FULL_NECKLACE_SHEAR_RESTORES_AND_REUSES_EXACTLY_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_AND_ONE_ALTERNATE_PUBLIC_JASTROW_FAMILY_EXACT_K_TIMES_D_GENERATOR_WORD_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSES_ALL16_OFFDIAGONAL_SHIFT_BASES_AND_DIAGONAL_TWO_BODY_PHASE_ON9_33_165_621_CELLS_FOR_ROTORS2_TO5_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_CLASSICAL_QUOTIENT_RECURRENCE_REMAINS`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ALL16_SIGNED_PAIR_SHIFT_BASES_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M192_JASTROW_CHART_ESCAPE_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M193_PAIR_SIGNATURE_FIBER_QUOTIENT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING`
+**Active primary successor:** `TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c95f3e2170e8dda9fb87457116184f02035432ff`. The current 192-milestone
+`20298777522d3a47f5e0d5741d94a1c05e1c43cd`. The current 193-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8839,7 +8839,7 @@ GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ONE_PRIMARY_A
 Selected successor:
 
 ```text
-TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
 ```
 
 This successor tests the smallest topology-owned repair: begin from exact
@@ -8849,6 +8849,68 @@ restoration and reuse, or expose the refinement step at which the full
 necklace state returns. It must retain the identical full-necklace recurrence
 as baseline and must not add more Jastrow inputs, fields, or rotor counts to
 hide the first escape.
+
+## M193: pair-signature fibers form an exact equitable quotient
+
+Claim:
+
+```text
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSES_ALL16_OFFDIAGONAL_SHIFT_BASES_AND_DIAGONAL_TWO_BODY_PHASE_ON9_33_165_621_CELLS_FOR_ROTORS2_TO5_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_CLASSICAL_QUOTIENT_RECURRENCE_REMAINS
+```
+
+M193 replaces the failed nine-parameter monomial chart with arbitrary field
+values on distinct pair-signature fibers. Public topology compilation checks
+each target necklace against every other member of its fiber and proves exact
+equitability separately for all sixteen signed pair-scattering shift bases.
+The diagonal two-body phase is constant on each fiber, so every declared
+weighted composition closes on the quotient.
+
+Exact quotient dimensions are 9, 33, 165, and 621 at rotor counts two through
+five, versus 9, 57, 285, and 1197 necklace cells. This is a fiber-constant
+invariant subspace, not a quotient for arbitrary necklace inputs, and it is
+not fixed rank across growing rotor count.
+
+The independent oracle imports no production implementation. It constructs
+occupations from multisets, enumerates ordered particle moves, retains all
+full-necklace shift bases as verification state, and derives the quotient
+separately. Exact depth-eight quotient and full-necklace outputs match over
+F103 and F239. Both implementations agree on every state commitment, public
+boundary, compiler count, plan count, restoration result, and control.
+
+The two-register quotient carrier restores and reuses exactly on the same
+backing. Missing, wrong, reordered, and null controls discriminate. The
+accepted state counts 2S resident field cells and 2S word scratch with zero
+inverse history, but it retains sixteen public shift-basis plans. Those plans
+contain 272, 2448, 21904, and 131168 nonzero coefficients. At five rotors
+public compilation still visits 20349 occupation histograms and 383040
+ordered-particle-shift terms. Full-necklace vectors and plans are
+verification-only; Python containers, allocator internals, big-integer
+temporaries, and whole-process peaks remain excluded.
+
+Classification is INDEPENDENTLY_VERIFIED_STRICT_SCOPE at
+INDEPENDENT_ORACLE_REEXECUTION with EXACT_ALGEBRAIC_RESTORATION. The strongest
+compact classical baseline is the identical pair-signature fiber quotient
+recurrence. The logical carrier is smaller, but the public plan and compiler
+remain material, so no whole-path advantage or distinct phase resource is
+established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ALL16_SIGNED_PAIR_SHIFT_BASES_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM
+```
+
+The successor must remove the retained 16-basis plan without re-expanding the
+621-cell resident carrier or hiding topology-rematerialization cost. It must
+retain exact final-boundary parity, restoration, reuse, and the identical
+classical stream. It must report if zero resident plan merely moves the same
+material burden into larger compiler or per-update scratch.
 
 ## 10. Roadmap Maintenance
 

@@ -1,0 +1,27 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_PAIR_SIGNATURE_FIBER_QUOTIENT_PROVENANCE_V1",
+  "scientific_source_head": "20298777522d3a47f5e0d5741d94a1c05e1c43cd",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_FINITE_FIELD_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "IN_PLACE_TWO_REGISTER_F103_AND_F239_PAIR_SIGNATURE_FIBER_CARRIERS_AT_ROTOR_COUNTS2_TO5",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_pair_signature_fiber_quotient.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_PAIR_SIGNATURE_FIBER_QUOTIENT_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_pair_signature_fiber_quotient.py": "669885bf1784baad5b000814a28d5e3951699e8d822aa654a4c2dee6d7640bfe",
+    "growing_rotor_pair_signature_fiber_quotient_independent_oracle.py": "60bfb467f893043554bbf3303e1394330b6bf0893b3405ab34697d2b85a9945f",
+    "GROWING_ROTOR_PAIR_SIGNATURE_FIBER_QUOTIENT_RESULTS.json": "75837c1496375945ed5398bdf34382e8243470dcdb104c8c0075536a0a41734d",
+    "GROWING_ROTOR_PAIR_SIGNATURE_FIBER_QUOTIENT_INDEPENDENT_ORACLE.json": "d969afba65ab49ececa83028cb70c47c2885fd8b061542290e87a75a644f6991",
+    "GROWING_ROTOR_PAIR_SIGNATURE_FIBER_QUOTIENT_INDEPENDENT_REEXECUTION_REVIEW.md": "f9bacb905c24a35c68cd14b074d49d521f023fffee024b6fd8a6fc1a040a3a41",
+    "qualify_growing_rotor_pair_signature_fiber_quotient.sh": "7b89856838387de85e3cd802a28cf81ab890110f26f000fbd79a124172be9d5b"
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ALL16_SIGNED_PAIR_SHIFT_BASES_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

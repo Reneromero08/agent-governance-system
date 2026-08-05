@@ -10609,5 +10609,43 @@ unbounded computation is established.
 Next:
 
 ```text
-TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_BISIMULATION_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+TOPOLOGY_DERIVED_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSURE_OR_FULL_REFINEMENT_UNDER_OFFDIAGONAL_SCATTERING
+```
+
+## M193 pair-signature fibers close exactly but the public plan dominates
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSES_ALL16_OFFDIAGONAL_SHIFT_BASES_AND_DIAGONAL_TWO_BODY_PHASE_ON9_33_165_621_CELLS_FOR_ROTORS2_TO5_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_CLASSICAL_QUOTIENT_RECURRENCE_REMAINS
+```
+
+Arbitrary values on pair-signature fibers, rather than one nine-parameter
+monomial, form an exact invariant subspace under every one of the sixteen
+signed shift bases and the diagonal two-body phase. Quotient dimensions are
+9, 33, 165, and 621, compared with 9, 57, 285, and 1197 necklace cells.
+
+A no-production oracle uses multiset occupations and ordered-particle moves.
+It independently proves equitability, retains full-necklace shift bases for
+parity, and exactly reproduces all boundaries, commitments, controls, and
+resource counts over F103 and F239 at primary depth eight.
+
+Exact same-backing restoration and unrelated reuse pass with zero field-cell
+error. The accepted carrier counts 2S resident cells plus 2S word scratch and
+no inverse history. The public plan nevertheless retains sixteen bases with
+up to 131168 nonzeros, and five-rotor compilation visits 20349 occupation
+histograms and 383040 ordered-particle-shift terms. Full necklace state is
+verification-only, but compiler and plan costs remain material.
+
+Classification is INDEPENDENTLY_VERIFIED_STRICT_SCOPE at
+INDEPENDENT_ORACLE_REEXECUTION with EXACT_ALGEBRAIC_RESTORATION. The quotient
+applies only to fiber-constant inputs and grows with rotor count. The strongest
+compact classical baseline is the identical quotient recurrence, so no phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation is established.
+
+Next:
+
+```text
+TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM
 ```
