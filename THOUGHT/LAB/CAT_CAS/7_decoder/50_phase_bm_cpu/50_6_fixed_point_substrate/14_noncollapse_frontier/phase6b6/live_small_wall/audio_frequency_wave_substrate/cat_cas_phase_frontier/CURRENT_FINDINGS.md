@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`3419e28f019c1b9421389f2d01aa97dd6444df11`. The canonical per-milestone
+`c1f56149596c6f587074500a08f4da2200fc7268`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11068,4 +11068,44 @@ Next:
 
 ```text
 EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_CHANNEL_OPERATOR_AND_PUBLIC_WEIGHT_SPAN_RANK8_CERTIFICATE_OR_UNIFORM_LINEAR_COHERENT_PORT_QUOTIENT_BELOW8_NO_GO_WITH_STREAMED_WITNESS_AND_IDENTICAL_CLASSICAL_ALGEBRA
+```
+
+## M205 port reachability, channel operators, and public weights have rank eight
+
+The completed strict claim is:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_PORT_MAP_CHANNEL_OPERATORS_AND_DECLARED_PUBLIC_WEIGHT_FAMILY_EACH_HAVE_RANK8_WITH_NONZERO8X8_STREAMED_WITNESS_MINORS_SO_NO_EXACT_F103_PORT_ENCODING_BELOW8_CELLS_OR_UNIFORM_LINEAR_OPERATOR_QUOTIENT_BELOW8_PRESERVES_THE_DECLARED_FAMILIES_BUT_THE_CERTIFICATES_ARE_IDENTICAL_CLASSICAL_LINEAR_ALGEBRA
+```
+
+Three streamed exact minors are nonsingular in F103. The first-pass port map
+has witness `6 I_8`, determinant 98, and image cardinality `103^8`. The paired
+channel operators have witness `2 I_8`, determinant 50. Public family-zero
+steps zero through seven have weight determinant 80; the independent oracle
+also finds rank eight over all seven families and seventeen steps.
+
+Thus every exact lossless encoding of the declared port values using the same
+F103 cell alphabet needs at least eight cells, and every uniform F103-linear
+operator quotient preserving the declared operators and weights has rank at
+least eight. Lossy/program-specialized quotients and fewer cells with a larger
+alphabet remain outside the result.
+
+The accepted path peaks at 292 named logical slots and retains no dense
+2,277-squared operator, occupation sector, transition plan, or permanent
+expansion. The independent oracle imports no CAT_CAS module and enumerates the
+full 74,613/4,389/2,277 topology only for verification. Direct and one-body
+factor derivations agree on the target-oriented `2 I_8` operator witness.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M204 restoration
+and reuse remain separately valid. The strongest matched baseline is the
+identical streamed F103 classical linear algebra. No distinct phase resource,
+advantage, Small Wall crossing, CATVM custody, physical execution, physical-
+bit replacement, catalytic inference, or unbounded computation is
+established.
+
+Next:
+
+```text
+EXACT_F103_ROTOR6_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_PHASE_BUTTERFLY_CLOSURE_OR_DIRECT2277_CELL_TRANSFORM_NO_GO_WITHOUT74613_OCCUPATION_SCRATCH_DENSE2277_SQUARED_MATRIX_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_TRANSFORM
 ```

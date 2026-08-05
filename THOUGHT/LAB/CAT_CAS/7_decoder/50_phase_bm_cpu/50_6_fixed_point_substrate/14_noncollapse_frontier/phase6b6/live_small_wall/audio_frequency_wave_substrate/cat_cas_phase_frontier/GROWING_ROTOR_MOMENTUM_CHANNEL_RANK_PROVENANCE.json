@@ -1,0 +1,37 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_PROVENANCE_V1",
+  "scientific_source_head": "c1f56149596c6f587074500a08f4da2200fc7268",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_F103_STREAMED_RANK_DIAGNOSTIC",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_momentum_channel_rank.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_momentum_channel_rank_diagnostic.py": "bdfc846dcf151843c5813e3b5827350bbca17094f6df5a86b7badddf3efccda8",
+    "growing_rotor_momentum_channel_rank_independent_oracle.py": "eed9bc7b102c7b4b28a7b819d7692ed5c21f4fadd6b9c50689983f7ca4d873ce",
+    "GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_RESULTS.json": "545c2e45305bbc015c366c0d717683c24a354021c374d2ab5f3d69cbf5f06bd7",
+    "GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_INDEPENDENT_ORACLE.json": "cc7a4339afa2c79e5bb3d521b0ba5c6d934cc8a429af8879cd037e576e901daa",
+    "GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "e92000b613bbacafec005375de92ecd4f83689e1a970a19b16ffc7f0f0235b1a",
+    "qualify_growing_rotor_momentum_channel_rank.sh": "244c773e96be5868d17e21688667b4664c9434c1830dc3912eef0f54608014bf"
+  },
+  "dependencies": {
+    "growing_rotor_coherent_momentum_wave_streaming_closure.py": "32879c8ed220a3d49fca1e06e7d113aa7958d9291d74b3f5b7b5f61a6faf4a56",
+    "production_imports_predecessor_wave_module": true,
+    "independent_oracle_imports_any_cat_cas_module": false,
+    "independent_oracle_enumerates_full_topology_for_verification_only": true
+  },
+  "package_local_fields": [
+    "ACCEPTED_292_SLOT_COUNT_EXCLUDES_PYTHON_OBJECT_BIGINT_ALLOCATOR_INTERPRETER_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS",
+    "INDEPENDENT_FULL_74613_OCCUPATION_4389_NECKLACE_AND2277_BRACELET_TOPOLOGY_IS_VERIFICATION_ONLY",
+    "THE_CERTIFICATE_IS_IDENTICAL_CLASSICAL_F103_LINEAR_ALGEBRA"
+  ],
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_CHANNELS1_TO8_PUBLIC_FAMILY0_STEPS0_TO7_DIRECT_PROCESS_STREAMED_LINEAR_WITNESS_ONLY"
+}

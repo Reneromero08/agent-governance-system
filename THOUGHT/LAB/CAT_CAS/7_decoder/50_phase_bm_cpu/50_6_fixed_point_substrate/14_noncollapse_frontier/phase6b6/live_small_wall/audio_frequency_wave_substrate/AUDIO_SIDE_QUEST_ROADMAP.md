@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_COHERENT_CHANNEL_FUSION_WITH_FULL_SEARCH_AND_CLASSICAL_EQUIVALENCE_OBSTRUCTION`
-**Roadmap version:** `14.70`
+**Status:** `STRICT_SCOPE_RANK8_PORT_AND_OPERATOR_NO_GO_WITH_DIRECT_QUOTIENT_TRANSFORM_SELECTED`
+**Roadmap version:** `14.71`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3419e28f019c1b9421389f2d01aa97dd6444df11`
+**Reconciled source head:** `c1f56149596c6f587074500a08f4da2200fc7268`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_OWNER_TYPED_EIGHT_CHANNEL_COHERENT_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_FACTORS_WITH4389_LEASES_AND149226_SHARED_SOURCE_ORBIT_ROTATIONS_WITHOUT_WIDE_PORT_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENTS_OR_RETAINED_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS5697720_SORTED_SEARCHES5534928_FANOUT_CANDIDATES_AND_AN_IDENTICAL_CLASSICAL_VECTOR_STREAM`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EIGHT_CHANNEL_IMPLICIT_DIHEDRAL_MOMENTUM_WAVE_STREAM_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_PORT_MAP_CHANNEL_OPERATORS_AND_DECLARED_PUBLIC_WEIGHT_FAMILY_EACH_HAVE_RANK8_WITH_NONZERO8X8_STREAMED_WITNESS_MINORS_SO_NO_EXACT_F103_PORT_ENCODING_BELOW8_CELLS_OR_UNIFORM_LINEAR_OPERATOR_QUOTIENT_BELOW8_PRESERVES_THE_DECLARED_FAMILIES_BUT_THE_CERTIFICATES_ARE_IDENTICAL_CLASSICAL_LINEAR_ALGEBRA`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_CHANNELS1_TO8_PUBLIC_FAMILY0_STEPS0_TO7_DIRECT_PROCESS_STREAMED_LINEAR_WITNESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M204_COHERENT_CHANNEL_FUSION_REDUCES_ORBIT_DECODE_AND_REFLECTION_WORK_BUT_RETAINS_FULL_SEARCH_FANOUT_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM`
+**New mechanism development:** `ACTIVE_AFTER_M205_RANK8_PORT_AND_OPERATOR_NO_GO_REJECTS_SAME_ALPHABET_PORT_COMPACTION_WHILE_SEARCH_FANOUT_AND_IDENTICAL_CLASSICAL_ALGEBRA_REMAIN`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_CHANNEL_OPERATOR_AND_PUBLIC_WEIGHT_SPAN_RANK8_CERTIFICATE_OR_UNIFORM_LINEAR_COHERENT_PORT_QUOTIENT_BELOW8_NO_GO_WITH_STREAMED_WITNESS_AND_IDENTICAL_CLASSICAL_ALGEBRA`
+**Active primary successor:** `EXACT_F103_ROTOR6_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_PHASE_BUTTERFLY_CLOSURE_OR_DIRECT2277_CELL_TRANSFORM_NO_GO_WITHOUT74613_OCCUPATION_SCRATCH_DENSE2277_SQUARED_MATRIX_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_TRANSFORM`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3419e28f019c1b9421389f2d01aa97dd6444df11`. The current 204-milestone
+`c1f56149596c6f587074500a08f4da2200fc7268`. The current 205-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -9539,6 +9539,78 @@ small nonzero witness minor or constructs a valid uniform quotient below
 eight. Any witness path must exclude dense 2,277-squared operator retention,
 occupation expansion, answer-bearing tables, and retained transition plans;
 the matched classical path is the identical streamed linear algebra.
+
+## M205: exact port reachability and operator spans require rank eight
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_PORT_MAP_CHANNEL_OPERATORS_AND_DECLARED_PUBLIC_WEIGHT_FAMILY_EACH_HAVE_RANK8_WITH_NONZERO8X8_STREAMED_WITNESS_MINORS_SO_NO_EXACT_F103_PORT_ENCODING_BELOW8_CELLS_OR_UNIFORM_LINEAR_OPERATOR_QUOTIENT_BELOW8_PRESERVES_THE_DECLARED_FAMILIES_BUT_THE_CERTIFICATES_ARE_IDENTICAL_CLASSICAL_LINEAR_ALGEBRA
+```
+
+M205 finds three independent exact rank-eight certificates. At the valid
+all-six-at-one-mode necklace, eight valid input bracelet coordinates give the
+first-pass port witness `6 I_8`, with determinant 98 in F103. The port map is
+therefore surjective onto `F103^8`, whose image has
+12,667,700,813,876,161 elements. No exact lossless encoding of every declared
+port value into fewer than eight cells of the same F103 alphabet exists.
+
+Eight valid off-diagonal bracelet rows against the all-six-at-one-mode source
+give the reflection-paired channel-operator witness `2 I_8`, with determinant
+50. Public family zero, steps zero through seven, gives an eight-weight
+witness with determinant 80. The independent oracle also checks all seven
+families across all seventeen steps and finds rank eight. Consequently no
+uniform F103-linear operator quotient below eight preserves both the declared
+operator and public-weight families.
+
+The accepted diagnostic retains three 64-cell witnesses, 64 rank/determinant
+scratch cells, three determinants, 17 topology codes, and 16 program
+descriptor integers, for a 292-slot named peak. It streams 64 port-coordinate
+comparisons and 896 nonzero direct operator candidates, with 16 accepted
+contributions. It retains no dense `2,277 x 2,277` operator, 74,613-cell
+occupation sector, transition plan, or permanent expansion.
+
+The independent oracle imports no CAT_CAS module. It enumerates all 74,613
+occupations, 4,389 necklaces, and 2,277 bracelets as verification-only state;
+reconstructs the operator witness independently from direct two-body and
+one-body factor laws; evaluates determinants by the 8! permutation formula;
+and confirms that drop and duplicate mutations reduce each applicable rank
+to seven. The exploratory source-oriented coefficient `60 I_8` was corrected
+before sealing after the actual target-oriented operator law was inspected;
+the accepted direct and factor witnesses both equal `2 I_8`.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M204's execution,
+exact restoration, and reuse remain separately valid. Python objects,
+arbitrary-width integer storage, allocator/interpreter memory, serialization,
+timing, and whole-process peaks are excluded, not zero. The strongest matched
+baseline is the identical streamed F103 classical linear algebra.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_CHANNELS1_TO8_PUBLIC_FAMILY0_STEPS0_TO7_DIRECT_PROCESS_STREAMED_LINEAR_WITNESS_ONLY
+```
+
+The result does not reject lossy or program-specialized quotients, or fewer
+cells of a larger alphabet. It does not establish general rotor transfer,
+CATVM custody, a distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_PHASE_BUTTERFLY_CLOSURE_OR_DIRECT2277_CELL_TRANSFORM_NO_GO_WITHOUT74613_OCCUPATION_SCRATCH_DENSE2277_SQUARED_MATRIX_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_TRANSFORM
+```
+
+The eight-cell interface is not the dominant remaining cost. The successor
+therefore changes the phase-machine basis law and tests whether the bosonic
+Fourier diagonalization can act directly on the 2,277-cell dihedral quotient,
+removing per-channel canonical search and fanout without moving material cost
+into the full occupation sector, a dense quotient transform, permanent
+enumeration, or a retained plan. It must retain the identical classical
+transform as the matched baseline and preserve M204 restoration separately.
 
 ## 10. Roadmap Maintenance
 
