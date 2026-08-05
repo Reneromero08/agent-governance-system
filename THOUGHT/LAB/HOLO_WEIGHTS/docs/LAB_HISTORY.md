@@ -1429,3 +1429,47 @@ offline expert replay (Sol's preference). Pending Sol's direction.
    at L0, even though it cannot rescue the global manifold).
 NEXT: instrument llama.cpp, validate one-token replay, routed aggregate
 k-curve + L0-DC functional audit.
+
+## 2026-08-05 — MOE functional trace: CAPTURE MACHINERY BLOCKED (fork suspected)
+
+Built the hybrid trace per Sol: llama.cpp oracle + Python replay. Used the
+Neo3000 llama.cpp fork (version 393) with per-node eval-callback dumps of
+the MoE tensors (post-norm input, router logits, topk, final weights,
+routed output). CPU build, LLAMA_GRAPH_REUSE_DISABLE=1.
+
+FOUND BUGS IN MY OWN PIPELINE (fixed): (1) gguf Q8_0 enum=8; (2) fused
+expert tensors are EXPERT-INTERLEAVED (element-level); (3) torch eigvalsh
+flip; (4) seq-counter trigger mismatched the renamed capture tensor (all
+computes dumped under seq 0000, cross-compute mixing); (5) 2D loader
+missing transpose. Fixed all; captures became self-consistent.
+
+RELIABLE captures (verified internally): router logits -> softmax -> topk
+EXACT match; topk + final weights (renormed, sum=1) + out norm plausible.
+
+FUNDAMENTAL BLOCK: the mul_mat algebra fails. Multiple independent
+captures of the router input agree EXACTLY (build_lora_mm input copy,
+mul_mat node src1, build_moe_ffn entry copy - all identical, norm 24.3)
+and the router weight matches my GGUF dequant (cos 1.0) - yet
+logits != W^T @ x (cos 0.022, identical in BOTH the llamafile build and
+a no-llamafile build). The captured logits (mean -6.4, std 1.3) are not
+producible from the captured input+weight. The captured input has norm
+24.3; the logits' scale implies an input ~10x larger (unnormalized
+residual?). The fork's llamafile sgemm call passes m=ne01 where the
+sgemm doc says m = rows-in-C (ne10) - a potential overflow bug for
+out<in matmuls (the router: out=90 << in=2048) - but disabling llamafile
+does NOT change the mismatch, so it is not the (only) cause.
+
+Also: seq/token attribution remains fragile (layer-0 tensors of later
+computes land under wrong seqs; attn_residual-0 missing for the prefill
+seq).
+
+CANDIDATE EXPLANATIONS (unresolved): the Neo3000 fork's catalytic
+modifications (carrier machinery, custom graph paths) make the router
+computation nonstandard in ways invisible to the captures; OR my
+capture of the input tensor is somehow not the buffer the kernel reads.
+
+OPTIONS (pending Sol): (a) rebuild the capture on a CLEAN llama.cpp
+(same commit as the fork's upstream) as a control - if clean llama.cpp
+reproduces the mismatch, my capture machinery is broken; if not, the
+fork is the variable; (b) accept the weight-level verdict and drop the
+functional trace; (c) other diagnosis.
