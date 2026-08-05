@@ -1352,3 +1352,32 @@ only if Gram shows structure; 5) instrument GGUF + routed k-curve.
 STATUS: 'one shared expert subspace' FALSIFIED; individual expert
 low-rank compression strongly disfavored; expert-axis templates,
 clusters, activation-conditioned routing remain OPEN.
+
+## 2026-08-05 — MOE-4 expert-axis Gram test RUN: NO template surface
+
+Sol's expert-axis tensor-rank test on the Q8 GGUF, layers {0,7,15,23,31,
+39}, 90 experts, raw + centroid-centered, per family + triplet:
+  w1 (gate) raw: D_eff 90.0, D95 86, pair-corr ~0.0001 (ORTHOGONAL axes)
+  w3 (up)   raw: D_eff 90.0, D95 86, pair-corr ~0.0001
+  w2 (down) raw: D_eff 53.6 (L0) / 90.0 (others), D95 84 (L0) / 86,
+                 pair-corr 0.225 (L0 - the DC mode) / ~0.0001 (others)
+  triplet raw: D95 85-86, corr 0.117 (L0) / 0.0001 (others)
+  centered: D95 85-89 everywhere; centroid energy share 0.0001-0.0026
+  (negligible template structure). (D_eff nan on some centered rows is
+  a cosmetic float-sign issue in the entropy formula - D50-99 valid.)
+
+THRESHOLD VERDICT (Sol predeclared: strong D95<=16, partial 16<D95<=32,
+none D95>=72): NO surface - D95 84-89 at every layer/family/triplet.
+The only axis structure is L0-down's DC-related correlation (corr 0.225,
+D95 84) - consistent with the shared DC mode; negligible.
+Per Sol's decision rule, the CLUSTER test is SKIPPED (no Gram/pairwise
+structure to cluster).
+
+REMAINING (Sol step 5): the FUNCTIONAL TRACE - routed inputs -> expert
+MLP k-curves (ranks 16..512), per-expert + routing-frequency-weighted
+output cos/rel error/worst decile. Requires genuine forward execution of
+the GGUF: options (a) instrument llama.cpp for the exact GGUF, (b) build
+a minimal qwen35moe forward in Python from the dequantized weights
+(extending the existing 4B hybrid engine: GDN mixer + full-attn are
+already implemented; add router + MoE FFN + shared expert) - gives exact
+offline expert replay (Sol's preference). Pending Sol's direction.
