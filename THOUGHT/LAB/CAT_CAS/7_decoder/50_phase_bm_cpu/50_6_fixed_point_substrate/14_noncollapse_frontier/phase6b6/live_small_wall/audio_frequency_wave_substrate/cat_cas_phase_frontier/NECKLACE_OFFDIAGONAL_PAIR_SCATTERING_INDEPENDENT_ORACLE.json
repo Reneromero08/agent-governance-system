@@ -1,0 +1,56 @@
+{
+  "accepted_path_dense_necklace_operator_cells": 0,
+  "accepted_path_occupation_cells": 0,
+  "accepted_path_sparse_generator_cells": 0,
+  "catvm_custody": false,
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "controls": {
+    "missing_inverse_error": 1.4142194258902459,
+    "reordered_inverse_error": 0.7422128292995099,
+    "swapped_phase_scattering_boundary_difference": 0.005779156282262221,
+    "wrong_inverse_error": 1.4351202915203884,
+    "zero_scattering_boundary_difference": 0.047261974571473075
+  },
+  "distinct_phase_resource_established": false,
+  "matched_classical_recurrence": "IDENTICAL_285_COMPLEX_NECKLACE_PAIR_SCATTERING_AND_DIAGONAL_PHASE_RECURRENCE",
+  "necklace_cells_reconstructed": 285,
+  "occupation_cells": 4845,
+  "oracle_representation": "FULL_4845_CELL_EXCHANGE_SYMMETRIC_OCCUPATION_SPACE_VERIFICATION_ONLY",
+  "physical_waveform_execution": false,
+  "primary": {
+    "boundary": [
+      0.6366378829493952,
+      0.3207848035128683,
+      0.019186791782535472,
+      0.023104244518787436,
+      0.0,
+      0.0,
+      0.00028627723641436116
+    ],
+    "norm_error": 0.0,
+    "restoration_error": 1.6014638307197335e-15
+  },
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "reuse": {
+    "boundary": [
+      0.6430413581439058,
+      0.3164070056722892,
+      0.018251071157045017,
+      0.021886142947137414,
+      0.0,
+      0.0,
+      0.00041442207962455544
+    ],
+    "norm_error": 0.0,
+    "restoration_error": 1.1556693615859794e-15
+  },
+  "rotation_invariance_error": 3.705370968959021e-18,
+  "scattering_basis_count": 8,
+  "scattering_basis_streamed_terms": 707472,
+  "scattering_basis_total_nnz": 350608,
+  "small_wall_crossed": false,
+  "unbounded_computation_established": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "weighted_hermitian_max_error": 1.1102230246251565e-16
+}
