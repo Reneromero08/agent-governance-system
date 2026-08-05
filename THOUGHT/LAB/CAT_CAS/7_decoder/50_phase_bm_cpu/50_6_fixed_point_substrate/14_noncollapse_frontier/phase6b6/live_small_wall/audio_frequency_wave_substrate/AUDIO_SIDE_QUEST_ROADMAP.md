@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_OPEN_MOMENTUM_FACTOR_CLOSURE`
-**Roadmap version:** `14.65`
+**Status:** `STRICT_SCOPE_ATOMIC_OPEN_MOMENTUM_CATVM_CUSTODY`
+**Roadmap version:** `14.66`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7438a30ec885e13d92c00e156a57dea637964dbc`
+**Reconciled source head:** `4ad9956a5d709686ac5199a0adec50f5e5411846`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_DIRECT_PROCESS_SOFTWARE_TYPED_OPEN_MOMENTUM_PORT_ONLY`
+**Current highest milestone:** `CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS`
+**Current claim ceiling:** `LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M199_OPEN_MOMENTUM_FACTOR_CLOSURE`
+**New mechanism development:** `ACTIVE_AFTER_M200_ATOMIC_OPEN_MOMENTUM_CATVM_CUSTODY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND`
+**Active primary successor:** `EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7438a30ec885e13d92c00e156a57dea637964dbc`. The current 199-milestone
+`4ad9956a5d709686ac5199a0adec50f5e5411846`. The current 200-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
+CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS
 ```
 
 Not established:
@@ -9213,6 +9213,55 @@ Selected successor:
 
 ```text
 CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND
+```
+
+## M200: atomic CATVM custody for the open-momentum port
+
+Claim:
+
+```text
+CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS
+```
+
+M200 runs the actual M199 carrier and one persistent 4,389-cell port in a
+separate same-UID Linux process with core dumps disabled, `PR_SET_DUMPABLE=0`,
+`PR_SET_NO_NEW_PRIVS=1`, and fixed 24-byte request/44-byte response records.
+The service retains the final scalar internally, rematerializes and subtracts
+the exact forward contribution, verifies source, zero target, idle and zero
+port, and unchanged source/target/port backing, advances the generation, and
+only then constructs the response. Primary/reuse boundaries are 83/70 at
+generation two and agree with a fresh reuse service.
+
+An independent oracle imports no CATVM service, controller, protocol, or
+production factor module. It reconstructs the direct 684,624-term primary
+operator, 331,704-term paired factor law, topology commitment, and boundaries,
+then drives the binary service using separately declared structs. Runtime
+audits show 32 port lease/release pairs across the accepted two transactions
+and response writes after restoration. Projection, early response, wrong
+type/owner, missing/wrong/reordered/wrong-reflection inverse, snapshot/in-place
+mode confusion, null, disconnect, and process-memory controls discriminate.
+
+The accepted carrier has 8,943 field cells; including exact source
+verification and two bracelet work buffers gives 15,774 conservative named
+field cells. Snapshot sham adds 8,943 saved cells and is classified only as
+`SNAPSHOT_RELOAD`. One accepted forward/inverse transaction uses 663,408
+one-body terms, 11,277,936 cyclic-code candidates, and 70,224 port-clear
+writes. Protocol traffic, audit bytes, topology, controls, and verification
+launches are counted. Python/runtime/native and whole-process peaks remain
+excluded, not zero.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+boundary is same-UID process custody, not cryptographic, different-UID,
+container, kernel, or hardware isolation. The identical classical factor
+stream remains, so no distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, or unbounded
+computation is established.
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

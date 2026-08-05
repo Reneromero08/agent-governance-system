@@ -1,0 +1,34 @@
+{
+  "schema": "CAT_CAS_CATVM_GROWING_ROTOR_OPEN_MOMENTUM_PROVENANCE_V1",
+  "scientific_source_head": "4ad9956a5d709686ac5199a0adec50f5e5411846",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_EXACT_F103_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_catvm_growing_rotor_open_momentum.sh",
+    "status": "QUALIFIED_CATVM_GROWING_ROTOR_OPEN_MOMENTUM_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "catvm_growing_rotor_open_momentum_protocol.py": "06f03fef5ab935536cf9036988ff79a4db69e1b7533215a25eeb76598d438fab",
+    "catvm_growing_rotor_open_momentum_service.py": "cf71d81d835e589353c8404105559ba4759ef05f09f88d9fd2ac559c77a87d52",
+    "catvm_growing_rotor_open_momentum_controller.py": "8436481d3fdc4834b86ea964d91e15c8bd1dfd478355431765a59c395fbdbd61",
+    "catvm_growing_rotor_open_momentum_independent_oracle.py": "c7eb3a6435715146c473d7d4afdc2b45efa20f11384ed4c6c9526a32e926eac2",
+    "CATVM_GROWING_ROTOR_OPEN_MOMENTUM_RESULTS.json": "7aa14813f21f6853f6b8966eef0cc496843b1f3d167c897074c8acc2ffb01f2d",
+    "CATVM_GROWING_ROTOR_OPEN_MOMENTUM_INDEPENDENT_ORACLE.json": "8acbc7128146c673df62a3f3ea5d02d483d7fd29286d189ebb909b7bf6ab42f1",
+    "CATVM_GROWING_ROTOR_OPEN_MOMENTUM_INDEPENDENT_REEXECUTION_REVIEW.md": "8ad5eaf84e3c8889cdf42112e17c3bed67b6dc9ab9458709029c5507d44385e9",
+    "qualify_catvm_growing_rotor_open_momentum.sh": "7f9e07a87d06fdb82c04004a985ac56b934a85e110a015efcebaa491b68ef897"
+  },
+  "dependencies": {
+    "growing_rotor_open_momentum_factor_closure.py": "3d21f7e576bd4fc64d7c15fd9c0a4df5aa2d831bd000de3bc5d077d523965396",
+    "growing_rotor_open_momentum_factor_independent_oracle.py": "25911e8186095265b1d6ab55a5d26c56dc984bc6ece113234fd3d1c2771cec18",
+    "growing_rotor_pair_signature_streamed_quotient.py": "c60a3de2c314d73b72a5e4edc05e971838652cb290969120134901ec44685901",
+    "independent_oracle_imports_production_dependency": false
+  },
+  "claim_ceiling": "LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY"
+}
