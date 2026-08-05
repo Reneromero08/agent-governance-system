@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`0c5979379369e571227e87806b360be228eb7887`. The canonical per-milestone
+`e2d67c6781a6429e79992a3d9dc448027c33ecc9`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11211,4 +11211,35 @@ Next:
 
 ```text
 EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE
+```
+
+## M209 continuous S1 theta descriptor and discriminant-fiber obstruction
+
+Wrapped-Gaussian kernels on continuous `S1` compose exactly by diffusion and
+quarter-turn phase parameter addition. Their `d`-fold intersection has the
+`A_(d-1)` lattice Gram matrix `I+J`, hence rank `d-1`, determinant `d`, and
+`d` discriminant fibers. The apparent two-factor parity chart reaches rank 63
+and 64 fibers at factor count 64.
+
+The declared four-phase alphabet still admits a four-integer procedural factor
+descriptor. The accepted final boundary is an exact zero-harmonic `Q`-adic jet
+through order 24. Its factor-64 projection peaks at 325 sparse cells and uses
+100,809 sparse transitions. Exact reverse execution restores the same backing
+and unrelated factor-37 reuse reaches generation two without reload.
+
+A separate implementation uses grouped polynomial binary exponentiation and
+an eigenvalue/unimodular-difference lattice certificate. It reproduces all
+declared boundary commitments, ranks, determinants, fibers, restoration, and
+reuse. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The full infinite theta scalar is not evaluated, and the factor descriptor and
+jet recurrence are identically classical. No CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, catalytic inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE
 ```

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`0c5979379369e571227e87806b360be228eb7887`. The registry assigns one
+`e2d67c6781a6429e79992a3d9dc448027c33ecc9`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 208-milestone lane is active by user direction. Continue from the
+The current 209-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -268,7 +268,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M208_CONTINUOUS_S1_RELATION_CARRIER_CLOSES_EXACTLY_BUT_FULL_RELATION_HANKEL_RANK_GROWS_WHILE_FINAL_BOUNDARY_STREAMS_IN_CONSTANT_LOGICAL_CELLS
+ACTIVE_AFTER_M209_THETA_FACTOR_DESCRIPTOR_IS_FIXED_FOR_THE_QUARTER_TURN_ALPHABET_BUT_CANONICAL_LATTICE_RANK_AND_DISCRIMINANT_FIBERS_GROW_WITH_FACTOR_COUNT
 ```
 
 The named
@@ -277,18 +277,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE
+EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE
 ```
 
-M208 establishes exact analytic continuous-S1 open-relation composition and
-intersection on one unresolved port, but its full Laurent relation has degree
-and finite-support Hankel rank `d+2`. The same declared final boundary streams
-with two resident and four warm Gaussian-rational cells. Do not add Laurent
-depth fixtures or return to rotor variants. Test whether a wrapped-Gaussian
-theta relation family closes composition by parameter addition and
-intersection in a fixed number of parity fibers, or whether rank, fiber count,
-coefficient width, or rematerialization still grows. Preserve continuous-S1
-semantics, exact restoration/reuse, and the strongest matched theta recurrence.
+M209 establishes exact wrapped-Gaussian parameter composition and a fixed
+four-count procedural descriptor for the declared quarter-turn alphabet, but
+the canonical coefficient chart has `A_(d-1)` lattice rank `d-1` and `d`
+discriminant fibers. Its accepted boundary is only an exact order-24 `Q`-jet,
+and the identical classical count and sparse-jet recurrences remain. Do not
+add factor-count fixtures. Replace the finite phase alphabet with runtime-
+resident generic Gaussian-rational centers and test exact symmetric-moment
+closure across increasing requested jet precision, counting any relocated
+center history. Preserve exact restoration/reuse and the strongest matched
+moment recurrence.
 
 ## 7. Native No-Smuggle Law
 

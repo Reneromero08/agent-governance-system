@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CONTINUOUS_S1_OPEN_RELATION_CLOSURE_WITH_GROWING_HANKEL_RANK_AND_THETA_PHASE_CHART_SELECTED`
-**Roadmap version:** `14.74`
+**Status:** `STRICT_CONTINUOUS_S1_THETA_DESCRIPTOR_WITH_GROWING_DISCRIMINANT_FIBERS_AND_GENERIC_CENTER_MOMENT_CHART_SELECTED`
+**Roadmap version:** `14.75`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `0c5979379369e571227e87806b360be228eb7887`
+**Reconciled source head:** `e2d67c6781a6429e79992a3d9dc448027c33ecc9`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_COMPOSES_BY_HARMONIC_HADAMARD_ROTATION_AND_INTERSECTS_BY_LAURENT_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_THE_DECLARED_DEPTH_D_FAMILY_HAS_REDUCED_NUMERATOR_DEGREE_AND_FINITE_SUPPORT_HANKEL_RANK_DPLUS2_WHILE_A_MATCHED_PUBLIC_WORD_FINAL_BOUNDARY_STREAM_USES_TWO_RESIDENT_AND_FOUR_WARM_NAMED_GAUSSIAN_RATIONAL_CELLS`
-**Current claim ceiling:** `ANALYTIC_NONNEGATIVE_HARMONIC_TRANSLATION_INVARIANT_S1_KERNELS_WITH_ONE_PUBLIC_GAUSSIAN_RATIONAL_SOURCE_FACTOR_TWO_ROTATIONS_TWO_LINEAR_INTERSECTION_FACTORS_DECLARED_PROGRAM_FAMILIES_DEPTHS1_TO64_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_KERNELS_COMPOSE_BY_PARAMETER_ADDITION_AND_D_FOLD_INTERSECTION_HAS_AN_A_DMINUS1_THETA_CHART_WITH_D_DISCRIMINANT_FIBERS_A_FOUR_COUNT_PUBLIC_FACTOR_DESCRIPTOR_FINAL_Q24_JET_PROJECTION_EXACT_RESTORATION_REUSE_BUT_LATTICE_RANK_DMINUS1_AND_FIBER_COUNT_D_GROW_TO63_AND64_WHILE_IDENTICAL_CLASSICAL_COUNT_AND_QJET_RECURRENCES_REMAIN`
+**Current claim ceiling:** `FORMAL_WRAPPED_GAUSSIAN_CONTINUOUS_S1_KERNELS_Q_IN_ZERO_ONE_QUARTER_TURN_PHASE_ALPHABET_DECLARED_INTEGER_PARAMETER_COMPOSITION_CASES_UNIT_DIFFUSION_INTERSECTION_FACTOR_COUNTS2_3_4_8_16_32_64_FAMILIES0_1_EXACT_ZERO_HARMONIC_Q_ADIC_JET_ORDER24_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M208_CONTINUOUS_S1_RELATION_CARRIER_CLOSES_EXACTLY_BUT_FULL_RELATION_HANKEL_RANK_GROWS_WHILE_FINAL_BOUNDARY_STREAMS_IN_CONSTANT_LOGICAL_CELLS`
+**New mechanism development:** `ACTIVE_AFTER_M209_THETA_FACTOR_DESCRIPTOR_IS_FIXED_FOR_THE_QUARTER_TURN_ALPHABET_BUT_CANONICAL_LATTICE_RANK_AND_DISCRIMINANT_FIBERS_GROW_WITH_FACTOR_COUNT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -9828,6 +9828,66 @@ closes in a fixed number of theta parity fibers or merely moves growth into
 fiber count, parameters, coefficient height, or rematerialization. It must
 remain on continuous `S1`, preserve the unresolved shared port and exact
 restoration/reuse, and compare against the strongest matched theta recurrence.
+
+## M209: wrapped-Gaussian composition closes, but parity fibers do not
+
+Claim:
+
+```text
+EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_KERNELS_COMPOSE_BY_PARAMETER_ADDITION_AND_D_FOLD_INTERSECTION_HAS_AN_A_DMINUS1_THETA_CHART_WITH_D_DISCRIMINANT_FIBERS_A_FOUR_COUNT_PUBLIC_FACTOR_DESCRIPTOR_FINAL_Q24_JET_PROJECTION_EXACT_RESTORATION_REUSE_BUT_LATTICE_RANK_DMINUS1_AND_FIBER_COUNT_D_GROW_TO63_AND64_WHILE_IDENTICAL_CLASSICAL_COUNT_AND_QJET_RECURRENCES_REMAIN
+```
+
+The analytic heat kernel `K_(a,p)[n] = Q^(a*n^2) i^(p*n)` lives on continuous
+`S1` without finite angle sampling. Harmonic Hadamard composition adds the
+diffusion and quarter-turn phase parameters exactly. Intersecting `d`
+unit-diffusion kernels gives an `A_(d-1)` lattice-theta chart. Its reduced Gram
+matrix is `I+J`, with rank `d-1`, Smith invariants `1,...,1,d`, determinant
+`d`, and `d` discriminant fibers. The two-factor parity chart therefore grows
+to 64 fibers and rank 63 at 64 factors.
+
+For the declared four-phase alphabet, a four-integer count descriptor still
+names the complete analytic product relation. Public rotations permute those
+counts and public intersections increment one count; their order matters. The
+exact accepted boundary is the zero-harmonic `Q`-adic jet through order 24,
+not the full infinite theta scalar. At 64 factors it uses 325 peak sparse
+projection cells and 100,809 sparse transitions. The public program retains
+126 operation records and 252 descriptor slots.
+
+The same descriptor-list backing is reversed exactly and reused by an
+unrelated factor-37 program, with restoration generation two and no reload,
+inverse history, or additional plan. A no-production-import oracle uses
+phase-type polynomial binary exponentiation and an independent lattice
+eigenvalue/Smith certificate; it reproduces both families at factor counts
+2, 3, 4, 8, 16, 32, and 64, plus reuse.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_WRAPPED_GAUSSIAN_CONTINUOUS_S1_KERNELS_Q_IN_ZERO_ONE_QUARTER_TURN_PHASE_ALPHABET_DECLARED_INTEGER_PARAMETER_COMPOSITION_CASES_UNIT_DIFFUSION_INTERSECTION_FACTOR_COUNTS2_3_4_8_16_32_64_FAMILIES0_1_EXACT_ZERO_HARMONIC_Q_ADIC_JET_ORDER24_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY
+```
+
+The four-count descriptor and sparse jet recurrence have identical classical
+implementations. The result does not establish full infinite-theta
+evaluation, generic phase-center closure, CATVM custody, a distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, catalytic inference, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_CONTINUOUS_S1_GENERIC_GAUSSIAN_RATIONAL_CENTER_THETA_MOMENT_QJET_CLOSURE_OR_PRECISION_HIERARCHY_GROWTH_WITH_RUNTIME_RESIDENT_CENTERS_EXACT_RESTORATION_REUSE_AND_MATCHED_SYMMETRIC_MOMENT_CLASSICAL_RECURRENCE
+```
+
+The fixed four-symbol alphabet is now the compaction loophole. The successor
+must replace it with runtime-resident generic Gaussian-rational phase centers,
+derive the smallest exact symmetric-moment chart sufficient for bounded
+`Q`-jets, and determine whether moment count grows with requested precision or
+merely relocates the factor history. It must preserve continuous-S1 semantics,
+final-only projection, exact restoration/reuse, and the strongest matched
+symmetric-moment classical recurrence.
 
 ## 10. Roadmap Maintenance
 
