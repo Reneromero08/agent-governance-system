@@ -1,0 +1,32 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE_PROVENANCE_V1",
+  "scientific_source_head": "25da72941fea2e2d04481a87f050a4e9393fee32",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_FINITE_FIELD_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "IN_PLACE_TWO_REGISTER_F103_AND_F239_ROTOR6_REFINED_SIGNATURE_CARRIER_PRIMARY_DEPTH3_REUSE_DEPTH2",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_dihedral_third_order_signature_closure.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_dihedral_third_order_signature_closure.py": "fcb266341ca7daf22f9a89a6928736eec98741e69e76cd31755c26eee8cb31d3",
+    "growing_rotor_dihedral_third_order_signature_closure_independent_oracle.py": "6db63f6dd8062684b5cfb9c17db3404011151f73c1ee84fc077c7dc5878f450c",
+    "GROWING_ROTOR_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE_RESULTS.json": "b8457c5df397fdd07fc425935006b271e6904d34c03781671378879810965858",
+    "GROWING_ROTOR_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE_INDEPENDENT_ORACLE.json": "6f287f7526a4d8b723c255410948f25d14c46221784fb161b4ce439d2193d737",
+    "GROWING_ROTOR_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE_INDEPENDENT_REEXECUTION_REVIEW.md": "fb8145e847d7b20f7f65532440ecba4d616ea2f46ee83feeaf331cd26f79cbbd",
+    "qualify_growing_rotor_dihedral_third_order_signature_closure.sh": "066ea17d8e27d3d55a828d89779291e1866b3fb71a21b35615b62ab8a20a218c"
+  },
+  "production_dependency": {
+    "growing_rotor_pair_signature_streamed_quotient.py": "c60a3de2c314d73b72a5e4edc05e971838652cb290969120134901ec44685901",
+    "scope": "PUBLIC_PAIR_DELTA_PROGRAM_WEIGHT_AND_FINITE_FIELD_UTILITIES_ONLY",
+    "independent_oracle_uses_dependency": false
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`3af340dffaa42571cdefb99c4a992abdd3a25868`. The registry assigns one
+`25da72941fea2e2d04481a87f050a4e9393fee32`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 195-milestone lane is active by user direction. Continue from the
+The current 196-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,30 +53,27 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
+BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M195 is an exact
-topology diagnostic. Pair-signature fibers equal dihedral bracelet orbits at
-rotor counts two through five. At rotor count six, 2,277 bracelets collapse
-to 2,253 pair signatures through 24 non-dihedral homometric fibers; every one
-is nonequitable under the sixteen signed shifts. The first shift-one witness
-has 39 differing destination coefficients. A separate particle-multiset and
-ordered-particle oracle reproduces all case records without importing the
-production source. The strongest compact classical path is the identical
-homometry and signed-shift-profile diagnostic. The result is not CATVM
-custody, restoration, physical waveform execution, a distinct phase
-resource, computational advantage, Small Wall crossing, replacement of
-physical bits with pi, or unbounded computation. Continue with the smallest
-dihedral higher-order signature refinement; do not scale the failed pair
-signature as if it remained closed.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M196 adds
+the triangle counts `(1,2,3)` and `(1,4,5)` to the pair signature. No one of
+the 33 observed triangle coordinates separates all 24 R6 homometric bracelet
+pairs, while the selected pair does. The repaired 2,277-cell signature equals
+bracelet dimension and closes all sixteen shifts. Its F103/F239 carrier
+restores and reuses exactly, but retains sixteen public shift plans with
+652,048 nonzeros and has the identical classical recurrence. The result is
+not CATVM custody, physical waveform execution, a distinct phase resource,
+computational advantage, Small Wall crossing, replacement of physical bits
+with pi, or unbounded computation. Continue by recovering zero-plan residency
+with an exact analytic two-triangle delta at the same R6 ceiling.
 
 The accumulated bounded architecture includes:
 
@@ -270,7 +267,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M195_PAIR_SIGNATURE_TRANSFER_NO_GO
+ACTIVE_AFTER_M196_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE
 ```
 
 The named
@@ -279,17 +276,16 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE
+TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM
 ```
 
-M195 shows that the M193/M194 pair-signature fibers are exactly dihedral
-bracelet orbits through five rotors. At six rotors, 24 non-dihedral homometric
-fibers merge distinct bracelets and all 24 fail signed-shift equitability.
-Do not scale the failed pair signature further. The selected repair must add
-the smallest dihedral higher-order invariant that separates those collisions,
-test all sixteen shift bases, and retain the identical classical recurrence.
-If the tested refinement still fails, record the strict ceiling and compare
-against the full-bracelet fallback without hiding descriptor or compiler cost.
+M196 repairs all 24 R6 homometric collisions with two triangle counts but
+equals bracelet dimension and retains sixteen plans with 652,048 nonzeros.
+Do not add another rotor fixture. The selected repair must compute both
+triangle-coordinate deltas analytically during row-local scattering, remove
+retained plan residency, and count all rematerialized work and descriptors.
+If zero-plan execution merely moves the same burden into repeated arithmetic,
+record that tradeoff and retain the identical classical stream.
 
 ## 7. Native No-Smuggle Law
 

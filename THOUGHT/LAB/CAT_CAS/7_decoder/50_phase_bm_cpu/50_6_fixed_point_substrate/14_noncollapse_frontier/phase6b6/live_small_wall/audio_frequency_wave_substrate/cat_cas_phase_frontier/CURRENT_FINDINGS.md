@@ -10733,3 +10733,51 @@ Next:
 ```text
 MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE
 ```
+
+## M196 two third-order coordinates repair closure at bracelet dimension
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The pair signature augmented by triangle counts `(1,2,3)` and `(1,4,5)`
+equals the dihedral bracelet partition for rotor counts two through six. At
+R6 it restores the missing 24 separations and changes the M195 cell count from
+2253 to 2277. All sixteen signed shift bases are equitable.
+
+The selection is minimal only within the declared 33 observed individual
+triangle-count coordinates. No single coordinate separates all 24 homometric
+bracelet pairs; eight coordinate pairs do, and the accepted pair is the
+lexicographically first. The result does not prove minimality among arbitrary
+nonlinear invariants.
+
+The exact R6 carrier executes depth three over F103 and F239, projects one
+final scalar, rematerializes and subtracts the public word from the same
+target backing, restores every field cell, and reuses the same allocation for
+a different depth-two program. Fresh/restored boundaries agree and missing,
+wrong, reordered, and null controls discriminate.
+
+The repair counts its regression from M194. The accepted path retains sixteen
+shift plans with 652048 nonzeros, 25047 signature integers, 38709
+representative integers, and 2277 boundary weights. Public compilation visits
+74613 occupations and performs 13692480 selected-triangle shape tests. The
+carrier uses 4554 field cells and conservatively counts 4554 word-scratch
+cells. Verification-only topology and minimality material remains excluded
+from the accepted path but is reported separately.
+
+An independent multiset and ordered-particle oracle imports neither
+production nor M194 and matches every shared field exactly. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest classical baseline is the identical plan-compiled refined-signature
+recurrence. No CATVM custody, distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, or unbounded
+computation is established.
+
+Next:
+
+```text
+TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM
+```

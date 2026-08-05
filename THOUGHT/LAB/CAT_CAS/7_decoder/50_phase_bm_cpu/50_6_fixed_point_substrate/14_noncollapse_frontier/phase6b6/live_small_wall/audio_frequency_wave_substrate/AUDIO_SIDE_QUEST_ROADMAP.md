@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PAIR_SIGNATURE_TRANSFER_NO_GO`
-**Roadmap version:** `14.61`
+**Status:** `STRICT_SCOPE_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE`
+**Roadmap version:** `14.62`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3af340dffaa42571cdefb99c4a992abdd3a25868`
+**Reconciled source head:** `25da72941fea2e2d04481a87f050a4e9393fee32`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M195_PAIR_SIGNATURE_TRANSFER_NO_GO`
+**New mechanism development:** `ACTIVE_AFTER_M196_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `MINIMAL_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_CLOSURE_OR_FULL_BRACELET_FALLBACK_AT_ROTOR6_WITH_MATCHED_CLASSICAL_RECURRENCE`
+**Active primary successor:** `TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING
+BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -9031,6 +9031,70 @@ signature that separates the 24 homometric collisions, then test closure
 under all sixteen shift bases. It must measure the refined cell and
 descriptor laws, retain the identical compact classical recurrence, and
 report a full-bracelet fallback if no smaller tested refinement closes.
+
+## M196: two third-order coordinates repair R6 closure at bracelet dimension
+
+Claim:
+
+```text
+BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+M196 augments the nine pair counts with the two dihedral triangle counts
+`(1,2,3)` and `(1,4,5)`. Among the 33 observed individual triangle
+coordinates at six rotors, no single coordinate separates all 24 homometric
+bracelet pairs. Eight coordinate pairs do; the selected pair is the
+lexicographically first. Two is therefore minimal within this declared
+candidate family.
+
+The refined cell law is `9, 33, 165, 621, 2277` for rotor counts two through
+six and equals the exact bracelet count at every case. All sixteen signed
+shift bases are equitable. The repair avoids an explicit bracelet identifier
+but does not compact below bracelet dimension at R6.
+
+The R6 two-register carrier executes depth three over F103 and F239, projects
+only one final scalar, recomputes and subtracts the public word, restores all
+field cells exactly on the same backing, and reuses the allocation under a
+different depth-two program. Fresh and restored reuse boundaries agree;
+missing, wrong, reordered, and null controls discriminate.
+
+The repair has a material regression from M194. It retains sixteen public
+shift plans with 652048 nonzeros, plus 25047 signature integers, 38709
+representative integers, and 2277 boundary weights. Public compilation visits
+74613 occupations, handles 684624 mode-pair-shift terms and 1092960 weighted
+particle shifts, and performs 13692480 selected-triangle shape tests. The
+accepted carrier is 4554 field cells with another 4554 conservatively counted
+word-scratch cells. Python and allocator internals and whole-process peaks are
+excluded, not zero.
+
+An independent multiset and ordered-particle oracle imports no production or
+M194 source. It reproduces the minimality result, all five topology records,
+both transactions, every plan count, boundary, commitment, restoration value,
+and control exactly.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical method is the identical plan-compiled refined
+signature recurrence. No CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM
+```
+
+The successor must recover M194's zero-plan residency for the repaired R6
+signature using an exact analytic triangle-coordinate delta, or establish a
+strict work/descriptor obstruction. It must use the same rotor ceiling and
+retain the identical classical stream.
 
 ## 10. Roadmap Maintenance
 
