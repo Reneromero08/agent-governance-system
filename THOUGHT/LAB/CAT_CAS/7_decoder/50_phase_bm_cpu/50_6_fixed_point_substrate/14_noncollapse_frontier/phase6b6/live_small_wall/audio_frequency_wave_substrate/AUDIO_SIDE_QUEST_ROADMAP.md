@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_VIRTUAL_PHASE_WAVE_SMALL_WALL_NO_CROSSING`
-**Roadmap version:** `14.52`
+**Status:** `STRICT_SCOPE_LOCAL_NONLINEAR_PHASE_FULL_STATE_COLLAPSE`
+**Roadmap version:** `14.53`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `b595323ba6d175f347c00fa6a6725ff0027ff913`
+**Reconciled source head:** `3b6469210f533fffe58bb17a5113fcc10c545ded`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
-**Current claim ceiling:** `FOURTEEN_DECLARED_Q5_THROUGH_Q53_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_TRANSACTIONS_WITH_QMINUS1_SIMULTANEOUS_MODES_LINEAR_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE`
+**Current highest milestone:** `BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
+**Current claim ceiling:** `FOUR_DECLARED_WIDTH_DEPTH_PAIRS_8_8_THROUGH64_64_COMPLEX128_DIRECT_PROCESS_LOCAL_BRICKWORK_COUPLER_AND_INTENSITY_FEEDBACK_TRANSACTIONS_WITH_N_MODES_N_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M186_VIRTUAL_PHASE_WAVE_SMALL_WALL_NO_CROSSING`
+**New mechanism development:** `ACTIVE_AFTER_M187_LOCAL_NONLINEAR_PHASE_FULL_STATE_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING`
+**Active primary successor:** `COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -153,7 +153,13 @@ path. The next mechanism must therefore change the phase update law rather
 than relabel the same linear transform. It tests reversible local
 interference-dependent phase feedback with all modal, precision, inverse, and
 classical-state costs exposed; another free global-transform fixture would
-not answer the obstruction.
+not answer the obstruction. M187 makes that change with periodic brickwork
+unitary couplers and local intensity-dependent phase feedback. The nonlinear
+law is causally active and reversible, but its best compact classical path is
+still the identical n-complex full-state recurrence. The next experiment asks
+whether the public continuation boundaries admit any smaller regular local
+message quotient; it must either construct one or produce a bounded full-rank
+observability no-go with an independent derivative oracle.
 
 Every successor must answer:
 
@@ -179,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`b595323ba6d175f347c00fa6a6725ff0027ff913`. The current 186-milestone
+`3b6469210f533fffe58bb17a5113fcc10c545ded`. The current 187-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8474,6 +8480,66 @@ Selected successor:
 
 ```text
 CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING
+```
+
+## M187: local nonlinear phase coupling changes the law but not the resource
+
+Claim:
+
+```text
+BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+```
+
+The declared width/depth cases 8/8, 16/16, 32/32, and 64/64 replace M186's
+global DFT with two periodic nearest-neighbour unitary-coupler sublayers and
+one local intensity-dependent phase-feedback sublayer per depth. Feedback and
+couplers do not commute. Missing, wrong, and reordered inverses, dephasing,
+zero feedback, swapped coupler order, and null carrier all discriminate.
+
+Each forward program uses exactly `n*d` two-cell couplers and `n*d` feedback
+operations. The accepted primary-plus-unrelated-reuse lifecycle, including
+both actual inverses, uses `4*n*d` of each and locally parallel depth `12*d`.
+It retains n complex128 modes plus two pair temporaries and counts n
+simultaneous bandwidth units and 128 bits per mode. Source construction and
+final projection stream without n-cell public vectors.
+
+Accepted in-place state is n+2 complex cells. Restoration verification and
+sequential adversarial controls peak at 4n+2 cells and serialize `3*16*n`
+commitment bytes. Snapshot sham uses 2n+2 accepted cells, peaks at 3n+2 with
+fresh verification, and accounts for `3*16*n` snapshot bytes. These controls
+and verification resources are separate from the accepted operation totals.
+
+Actual inverse execution restores the same `numpy.ndarray` backing below
+`6.20e-16` on the primary path and below `6.91e-16` after unrelated reuse.
+Across 128 alternating reuse cycles, drift stays below `2.54e-14` under the
+predeclared `2e-10` state tolerance. The restoration class is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` only for virtual complex coordinates;
+the sham is `SNAPSHOT_RELOAD` and the fresh baseline has
+`NO_RESTORATION_CLAIM`.
+
+A standalone no-production, no-NumPy oracle compiles explicit public pair and
+feedback words, reverses them operation by operation, and matches every final
+boundary within `2.24e-16`. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The mechanism removes the free global transform and makes nonlinear phase
+feedback causally relevant, but the strongest compact classical implementation
+is the identical n-complex full-state local recurrence. No compact quotient,
+distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+physical waveform execution, physical-bit replacement, or unbounded
+computation is established.
+
+Exact ceiling:
+
+```text
+FOUR_DECLARED_WIDTH_DEPTH_PAIRS_8_8_THROUGH64_64_COMPLEX128_DIRECT_PROCESS_LOCAL_BRICKWORK_COUPLER_AND_INTENSITY_FEEDBACK_TRANSACTIONS_WITH_N_MODES_N_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE
+```
+
+Selected successor:
+
+```text
+COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE
 ```
 
 ## 10. Roadmap Maintenance

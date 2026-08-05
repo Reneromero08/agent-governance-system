@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`b595323ba6d175f347c00fa6a6725ff0027ff913`. The registry assigns one
+`3b6469210f533fffe58bb17a5113fcc10c545ded`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 186-milestone lane is active by user direction. Continue from the
+The current 187-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,27 +53,28 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-FOURTEEN_DECLARED_Q5_THROUGH_Q53_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_TRANSACTIONS_WITH_QMINUS1_SIMULTANEOUS_MODES_LINEAR_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE
+FOUR_DECLARED_WIDTH_DEPTH_PAIRS_8_8_THROUGH64_64_COMPLEX128_DIRECT_PROCESS_LOCAL_BRICKWORK_COUPLER_AND_INTENSITY_FEEDBACK_TRANSACTIONS_WITH_N_MODES_N_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `INDEPENDENT_ORACLE_REEXECUTION` with
 `NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to virtual complex phase
-coordinates. A standalone dense-DFT oracle matches all 14 final and reuse
-boundaries. Dephasing changes every tested boundary, but the apparent
-one-event wave primitive requires `q-1` complex modes, linear simultaneous
-bandwidth, 128 bits per mode, and the identical software FFT recurrence used
-by the strongest compact classical path. Snapshot sham is only
-`SNAPSHOT_RELOAD`; the fresh baseline has `NO_RESTORATION_CLAIM`. The result
-is direct-process virtual software, not CATVM custody, physical waveform
-execution, a distinct phase resource, computational advantage, Small Wall
-crossing, replacement of physical bits with pi, or unbounded computation.
+coordinates. Public brickwork unitary couplers and local intensity-dependent
+feedback remove M186's free global DFT and discriminate under feedback,
+dephasing, order, and inverse controls. The accepted path uses n modes, n
+bandwidth units, n+2 complex cells, and `n*d` couplers plus `n*d` feedbacks per
+forward. Verification peaks and commitment traffic are counted separately.
+The strongest compact classical path remains the identical n-complex
+full-state recurrence. The result is direct-process virtual software, not
+CATVM custody, physical waveform execution, a distinct phase resource,
+computational advantage, Small Wall crossing, replacement of physical bits
+with pi, or unbounded computation.
 
 The accumulated bounded architecture includes:
 
@@ -267,7 +268,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M186_VIRTUAL_PHASE_WAVE_SMALL_WALL_NO_CROSSING
+ACTIVE_AFTER_M187_LOCAL_NONLINEAR_PHASE_FULL_STATE_COLLAPSE
 ```
 
 The named
@@ -276,17 +277,17 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING
+COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE
 ```
 
-M186 shows that coherence affects every tested boundary, but the virtual
-one-event superposition abstraction merely hides `q-1` complex modes, linear
-bandwidth, complex128 precision, and an identical compact FFT recurrence. Do
-not add another free global-transform fixture. Test the smallest reversible
-local interference-dependent phase feedback that changes the phase update law
-while exposing mode, coupling, bandwidth, precision, inverse, and strongest
-classical-state costs. Preserve final-only projection and precisely classified
-restoration; do not treat virtual execution as physical waveform evidence.
+M187 removes the free global transform and makes nonlinear local phase
+feedback causally active, but the executed path still collapses to the
+identical n-complex full-state recurrence. Do not add more widths or another
+coupling fixture. Test whether public continuation boundaries close on a
+smaller regular phase message, or establish full local observability rank at
+the declared charts with an analytic tangent and independent finite-difference
+oracle. Preserve the bounded ceiling; local full rank is not a universal
+nonlinear representation lower bound.
 
 ## 7. Native No-Smuggle Law
 

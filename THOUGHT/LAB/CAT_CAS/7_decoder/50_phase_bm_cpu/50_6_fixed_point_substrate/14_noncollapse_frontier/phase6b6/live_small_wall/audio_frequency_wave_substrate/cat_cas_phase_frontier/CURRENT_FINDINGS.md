@@ -10348,3 +10348,44 @@ Next:
 ```text
 CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING
 ```
+
+## M187: local nonlinear phase coupling remains classically full-state
+
+The completed strict claim is:
+
+```text
+BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+```
+
+At width/depth 8/8 through 64/64, two periodic brickwork unitary-coupler
+sublayers and one local intensity-dependent feedback sublayer replace M186's
+global DFT. Feedback is causally active and noncommuting with the couplers.
+Missing, wrong, and reordered inverses, dephasing, zero feedback, swapped
+coupler order, and null carrier discriminate.
+
+One forward uses `n*d` couplers and `n*d` feedback operations. The complete
+primary-plus-unrelated-reuse lifecycle with both inverses uses `4*n*d` of each,
+n complex128 modes, n bandwidth units, 128 bits per mode, and n+2 accepted
+logical complex cells. Verification and controls peak at 4n+2 cells and
+serialize `3*16*n` commitment bytes. Snapshot sham and fresh paths retain
+their distinct restoration and resource laws.
+
+Same-backing numerical inverse restoration remains below `6.91e-16` per
+accepted transaction and below `2.54e-14` over 128 alternating reuse cycles.
+The standalone explicit public-word oracle imports neither production nor
+NumPy and matches all final boundaries within `2.24e-16`. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to virtual complex state.
+
+The global transform collapse is removed, but the strongest compact classical
+path is the identical n-complex local-coupler and feedback recurrence. No
+distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+physical execution, physical-bit replacement, or unbounded computation is
+established.
+
+Next:
+
+```text
+COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE
+```
