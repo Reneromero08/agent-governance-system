@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: b70d17232fe5caf3fc191bf026ea04e38cda32943a3b7893c9adbae721ef464a -->
+<!-- CONTENT_HASH: 7b5e7fc782edbc053130ac4b19d424328385b4103ae484acb1e08f6f00038eda -->
 
 # AGENTS.md
 
@@ -11,6 +11,11 @@ Lab sessions are mechanically rooted at `THOUGHT/LAB/.agent-root` and follow
 `THOUGHT/LAB/LAB_CONTRACT.md`; this root contract is not part of their
 instruction chain. If this file appears in a Lab prompt, stop and run the Lab
 doctor because the isolation boundary is ineffective.
+
+An agent that starts in main and later creates or selects a worktree for Lab
+work must resume or relaunch the task with that worktree's `THOUGHT/LAB` as the
+Codex working root. A shell `cd` alone does not rebuild the task's instruction
+chain. Continue only after the Lab doctor confirms the new root.
 
 ## 0. Initial Connection & Cortex Access
 

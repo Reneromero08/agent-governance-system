@@ -1,7 +1,5 @@
-# The profile is defined with machine-specific absolute paths in the trusted
-# user config. Do not add legacy sandbox_mode settings here: the two permission
-# systems do not compose.
-default_permissions = "ags-lab"
+# Lab isolation is an instruction and Git-routing boundary, not a filesystem
+# sandbox. Keep the user's normal Codex permissions when entering the Lab.
 
 [shell_environment_policy.set]
 PYTHONDONTWRITEBYTECODE = "1"

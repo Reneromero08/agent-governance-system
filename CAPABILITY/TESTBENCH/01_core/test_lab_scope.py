@@ -5,7 +5,6 @@ import pytest
 from CAPABILITY.TOOLS.utilities.ags_lab import opencode_inline_policy
 from CAPABILITY.TOOLS.utilities import lab_scope
 from CAPABILITY.TOOLS.utilities.lab_scope import (
-    LAB_ROOT,
     ZERO_SHA,
     PathClass,
     PushRef,
@@ -132,15 +131,12 @@ def test_runtime_paths_reject_symlink_or_parent_escape(tmp_path: Path):
         canonical_runtime_path(lab / ".." / "main", beneath=lab)
 
 
-def test_opencode_denies_direct_outside_edits_and_boundary_controls():
+def test_opencode_keeps_normal_file_access_and_blocks_git_bypasses():
     policy = opencode_inline_policy()
     permission = policy["permission"]
-    assert permission["edit"]["*"] == "deny"
-    assert permission["edit"][f"{LAB_ROOT}/**"] == "allow"
-    for relative in (".agent-root", "AGENTS.md", "LAB_CONTRACT.md", "opencode.json"):
-        assert permission["edit"][f"{LAB_ROOT}/{relative}"] == "deny"
-    assert permission["edit"][f"{LAB_ROOT}/.codex/**"] == "deny"
-    assert permission["read"][str(lab_scope.REPO_ROOT / "AGENTS.md")] == "deny"
+    assert permission["external_directory"] == {"*": "allow"}
+    assert permission["read"] == {"*": "allow"}
+    assert permission["edit"] == {"*": "allow"}
     assert permission["bash"]["git *--no-verify*"] == "deny"
 
 

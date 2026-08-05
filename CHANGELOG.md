@@ -2,6 +2,21 @@
 
 # Changelog
 
+## 2026-08-05: Portable, non-restrictive Lab sessions
+
+- Remove the hard-coded `ags-lab` filesystem sandbox. Lab agents retain their
+  normal filesystem capability while `.agent-root` controls prompt discovery
+  and Git hooks keep Lab payload separate from main and boundary changes.
+
+- Remove the OpenCode Git shim that blocked ordinary Git commands whenever a
+  worktree contained mixed unfinished changes. Normal Git inspection and
+  staging remain available; pre-commit and pre-push hooks enforce final scope.
+
+- Document the one explicit transition required when an agent starts in main:
+  after creating or selecting a Lab worktree, resume or relaunch the task with
+  that worktree's `THOUGHT/LAB` as its working root. A shell `cd` alone does not
+  rebuild an existing task's instruction chain.
+
 ## 2026-08-05: Cross-agent Lab isolation boundary
 
 - Root normal Lab sessions at `THOUGHT/LAB/.agent-root`, provide one compact

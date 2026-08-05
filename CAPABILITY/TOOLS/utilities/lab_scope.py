@@ -7,7 +7,6 @@ agent instruction discovery only; it never grants commit or push authority.
 from __future__ import annotations
 
 import argparse
-import errno
 import json
 import os
 import re
@@ -292,18 +291,6 @@ def _load_toml(path: Path) -> dict:
         raise ScopeViolation(f"cannot load required config {path}: {exc}") from exc
 
 
-def _assert_open_denied(path: Path, flags: int, label: str, errors: list[str]) -> None:
-    try:
-        descriptor = os.open(path, flags)
-    except OSError as exc:
-        if exc.errno in {errno.EACCES, errno.EPERM, errno.EROFS}:
-            return
-        errors.append(f"{label} could not be tested: {exc}")
-        return
-    os.close(descriptor)
-    errors.append(f"{label} is accessible when it must be denied: {path}")
-
-
 def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> tuple[str, ...]:
     errors: list[str] = []
     try:
@@ -339,22 +326,10 @@ def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> t
 
     if agent == "codex":
         project_config = _load_toml(LAB_ROOT / ".codex" / "config.toml")
-        if project_config.get("default_permissions") != "ags-lab":
-            errors.append("Lab project config does not select the ags-lab permission profile")
+        if "default_permissions" in project_config:
+            errors.append("Lab project config must not replace the session's normal permissions")
         if "sandbox_mode" in project_config or "sandbox_workspace_write" in project_config:
-            errors.append("Lab project config mixes legacy sandbox settings with permission profiles")
-
-        codex_home = Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
-        user_config_path = codex_home / "config.toml"
-        user_config = _load_toml(user_config_path)
-        if "sandbox_mode" in user_config or "sandbox_workspace_write" in user_config:
-            errors.append("User config contains legacy sandbox settings; ags-lab would not be authoritative")
-        trusted = user_config.get("projects", {}).get(str(LAB_ROOT), {}).get("trust_level")
-        if trusted != "trusted":
-            errors.append("Lab project is not explicitly trusted; project-local config may be ignored")
-        profile = user_config.get("permissions", {}).get("ags-lab")
-        if not isinstance(profile, dict):
-            errors.append("User config does not define the ags-lab permission profile")
+            errors.append("Lab project config must not replace the session's normal sandbox settings")
 
         if prompt_json is None:
             codex = shutil.which("codex")
@@ -396,28 +371,6 @@ def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> t
             errors.append("repository-root governance appears in the exact Codex prompt input")
         if LAB_CONTRACT_SENTINEL not in prompt_text:
             errors.append("Lab contract is absent from the exact Codex prompt input")
-        if (
-            'permission_profile type="managed"' not in prompt_text
-            or 'permission_profile type="disabled"' in prompt_text
-            or "danger-full-access" in prompt_text
-        ):
-            errors.append("active Codex permission mode is unrestricted or the ags-lab profile is ineffective")
-        if f'<path>{LAB_ROOT}</path>' not in prompt_text or 'access="write"' not in prompt_text:
-            errors.append("effective Codex workspace roots do not grant the complete Lab write scope")
-
-        # A real lab Codex session must enforce these denials at the OS sandbox.
-        _assert_open_denied(REPO_ROOT / "AGENTS.md", os.O_RDONLY, "root AGENTS.md read", errors)
-        _assert_open_denied(REPO_ROOT / "CHANGELOG.md", os.O_WRONLY, "main write", errors)
-        _assert_open_denied(marker, os.O_WRONLY, "boundary-control write", errors)
-
-        payload_probe = LAB_ROOT / "CAT_CAS" / "AGENTS.md"
-        try:
-            descriptor = os.open(payload_probe, os.O_WRONLY)
-        except OSError as exc:
-            errors.append(f"Lab payload is not writable under the active profile: {exc}")
-        else:
-            os.close(descriptor)
-
     elif agent == "opencode":
         try:
             inline = json.loads(os.environ.get("OPENCODE_CONFIG_CONTENT", ""))
@@ -426,23 +379,14 @@ def doctor(cwd: Path, agent: str, *, prompt_json: Path | str | None = None) -> t
         permission = inline.get("permission") if isinstance(inline, dict) else None
         edit_rules = permission.get("edit") if isinstance(permission, dict) else None
         read_rules = permission.get("read") if isinstance(permission, dict) else None
-        boundary_rules = (
-            f"{LAB_ROOT}/.agent-root",
-            f"{LAB_ROOT}/AGENTS.md",
-            f"{LAB_ROOT}/LAB_CONTRACT.md",
-            f"{LAB_ROOT}/opencode.json",
-            f"{LAB_ROOT}/.codex/**",
-        )
         if (
             os.environ.get("AGS_LAB_BOUNDARY") != "v1"
             or not isinstance(edit_rules, dict)
-            or edit_rules.get("*") != "deny"
-            or edit_rules.get(f"{LAB_ROOT}/**") != "allow"
-            or any(edit_rules.get(path) != "deny" for path in boundary_rules)
+            or edit_rules.get("*") != "allow"
             or not isinstance(read_rules, dict)
-            or read_rules.get(str(REPO_ROOT / "AGENTS.md")) != "deny"
+            or read_rules.get("*") != "allow"
         ):
-            errors.append("OpenCode inline Lab policy is absent or was appended/replaced incorrectly")
+            errors.append("OpenCode inline Lab policy is absent or restricts normal file access")
         checked = json.loads((LAB_ROOT / "opencode.json").read_text(encoding="utf-8"))
         if "LAB_CONTRACT.md" not in checked.get("instructions", []):
             errors.append("OpenCode checked-in config does not include the Lab contract")

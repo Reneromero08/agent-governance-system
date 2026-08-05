@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shlex
 import shutil
 import subprocess
 import sys
@@ -90,44 +89,7 @@ def runtime_environment(scratch: Path) -> dict[str, str]:
     return env
 
 
-def install_git_guard(scratch: Path, env: dict[str, str]) -> None:
-    """Put a fail-closed Git audit shim first in an OpenCode launch PATH."""
-    real_git = shutil.which("git", path=env.get("PATH"))
-    if not real_git:
-        raise RuntimeError("git is unavailable for the OpenCode Lab guard")
-    guard_dir = scratch / "bin"
-    guard_dir.mkdir(parents=True, exist_ok=True)
-    guard = guard_dir / "git"
-    scope_tool = REPO_ROOT / "CAPABILITY" / "TOOLS" / "utilities" / "lab_scope.py"
-    script = f"""#!/bin/sh
-set -eu
-if [ "${{AGS_LAB_GIT_GUARD_BYPASS:-}}" = "1" ]; then
-    exec {shlex.quote(real_git)} "$@"
-fi
-if ! AGS_LAB_GIT_GUARD_BYPASS=1 python3 {shlex.quote(str(scope_tool))} audit --lab-session >/dev/null; then
-    echo "LAB SCOPE VIOLATION: Git is blocked until out-of-scope mutations are handed off." >&2
-    exit 1
-fi
-exec {shlex.quote(real_git)} "$@"
-"""
-    guard.write_text(script, encoding="utf-8")
-    guard.chmod(0o700)
-    env["PATH"] = f"{guard_dir}{os.pathsep}{env.get('PATH', '')}"
-
-
 def opencode_inline_policy() -> dict:
-    repo = str(REPO_ROOT)
-    lab = str(LAB_ROOT)
-    boundaries = [
-        f"{lab}/.agent-root",
-        f"{lab}/AGENTS.md",
-        f"{lab}/LAB_CONTRACT.md",
-        f"{lab}/opencode.json",
-        f"{lab}/.codex/**",
-    ]
-    edit: dict[str, str] = {"*": "deny", f"{lab}/**": "allow"}
-    for path in boundaries:
-        edit[path] = "deny"
     bash: dict[str, str] = {
         "*": "allow",
         # Keep only explicit attempts to bypass the repository's mechanical
@@ -138,9 +100,9 @@ def opencode_inline_policy() -> dict:
     }
     return {
         "permission": {
-            "external_directory": {"*": "deny", f"{repo}/**": "allow"},
-            "read": {"*": "allow", f"{repo}/AGENTS.md": "deny"},
-            "edit": edit,
+            "external_directory": {"*": "allow"},
+            "read": {"*": "allow"},
+            "edit": {"*": "allow"},
             "bash": bash,
         }
     }
@@ -155,13 +117,10 @@ def launch(agent: str, cwd: Path, scratch: Path | None, arguments: Sequence[str]
         executable = shutil.which("codex")
         if not executable:
             raise RuntimeError("codex executable is unavailable")
-        scratch_key = str(payload).replace("\\", "\\\\").replace('"', '\\"')
         command = [
             executable,
             "-C",
             str(resolved_cwd),
-            "-c",
-            f'permissions.ags-lab.filesystem."{scratch_key}"="write"',
             *arguments,
         ]
     else:
@@ -170,7 +129,6 @@ def launch(agent: str, cwd: Path, scratch: Path | None, arguments: Sequence[str]
         # Overwrite inherited inline content. Checked-in instructions stay in
         # opencode.json; this layer contains only dynamic absolute permissions.
         env["OPENCODE_CONFIG_CONTENT"] = json.dumps(opencode_inline_policy(), separators=(",", ":"))
-        install_git_guard(payload, env)
         command = [str(REAL_OPENCODE), str(resolved_cwd), *arguments]
     return subprocess.call(command, cwd=resolved_cwd, env=env)
 

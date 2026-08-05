@@ -15,15 +15,16 @@ Paths have three classes:
   `AGENTS.md`, `opencode.json`, and everything below `.codex/`.
 - `MAIN`: every other repository path.
 
-During normal Lab work, edit only `LAB_PAYLOAD`. Boundary-control files are
-read-only. Main source may be read when needed, except the repository-root
+During normal Lab work, commit only `LAB_PAYLOAD`. Boundary-control files require
+an explicit boundary-maintenance task. Agents retain their normal filesystem
+capability and may inspect main source when needed, except the repository-root
 `AGENTS.md`, which is outside the Lab instruction boundary and must not be
 opened or searched.
 
-Never edit the root `CHANGELOG.md`, LAW, CANON, CAPABILITY, root hooks, or CI to
-finish a Lab task. If a main-system fix is genuinely required, stop and hand it
-off as a separate main-maintenance task. Do not repair or revert unrelated main
-changes automatically.
+Never update the root `CHANGELOG.md` merely to finish Lab payload. If a task
+intentionally changes LAW, CANON, CAPABILITY, root hooks, CI, or another main
+path, keep that work in a separate main-scope commit. Do not repair or revert
+unrelated main changes automatically.
 
 ## Git behavior
 
@@ -44,15 +45,14 @@ python <repo>/CAPABILITY/TOOLS/utilities/lab_scope.py doctor --agent <agent> --c
 python <repo>/CAPABILITY/TOOLS/utilities/lab_scope.py audit --lab-session
 ```
 
-## Runtime writes
+## Runtime access
 
-Direct agent edit/write/patch operations outside the Lab must be denied by the
-agent adapter. Codex additionally enforces the filesystem split with the
-`ags-lab` permission profile. OpenCode's shell is not an OS sandbox: its
-managed-Scratch Git shim runs the scope audit before every Git command, so a
-shell mutation outside the Lab blocks Git; do not describe the original shell
-write as physically impossible. Do not blanket-deny ordinary OpenCode shell
-mutators: Lab agents retain normal Bash capability for experiments.
+Lab isolation does not reduce the agent's ordinary filesystem capability.
+Codex and OpenCode may read or write paths allowed by their normal session
+permissions. The boundary is enforced when changes are classified for commit
+or push: Lab payload cannot be mixed with main or boundary-control changes.
+Ordinary Git inspection and staging remain available. Repository pre-commit and
+pre-push hooks enforce the separation when changes leave the working tree.
 
 Route `TMPDIR`, `TEMP`, `TMP`, `XDG_CACHE_HOME`, `PYTHONPYCACHEPREFIX`, and
 `COVERAGE_FILE` to the managed, disk-backed Scratch payload supplied by the Lab
@@ -65,5 +65,5 @@ Do not create worktrees, clones, checkout copies, or RAM-backed scratch. Never
 permanently delete files; removal requires the user's exact approval and a
 recoverable trash operation.
 
-If the Lab marker, permission profile, project trust, exact prompt boundary, or
-Git root cannot be verified, fail closed and do not begin work.
+If the Lab marker, exact prompt boundary, or Git root cannot be verified, fail
+closed and do not begin work.

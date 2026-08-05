@@ -149,13 +149,6 @@ def check_codex() -> None:
     doctor = REPO_ROOT / "CAPABILITY" / "TOOLS" / "utilities" / "lab_scope.py"
     _run(
         [
-            "codex",
-            "sandbox",
-            "-P",
-            "ags-lab",
-            "-C",
-            str(ACTIVE_PROBE_CWD),
-            "--",
             "python3",
             str(doctor),
             "doctor",
@@ -181,9 +174,9 @@ def check_opencode() -> None:
     )
     if "LAB_CONTRACT.md" not in effective.get("instructions", []):
         raise RuntimeError("effective OpenCode config lost checked-in Lab instructions")
-    edit = effective.get("permission", {}).get("edit", {})
-    if edit.get("*") != "deny" or edit.get(f"{LAB_ROOT}/**") != "allow":
-        raise RuntimeError("effective OpenCode edit boundary is missing")
+    permission = effective.get("permission", {})
+    if permission.get("edit", {}).get("*") != "allow":
+        raise RuntimeError("effective OpenCode policy restricts normal edits")
     with mock.patch.dict(
         os.environ,
         {
@@ -217,8 +210,8 @@ def main() -> int:
         )
         return 1
     print("LAB ISOLATION ACCEPTANCE OK")
-    print("  Codex prompt/root/profile: isolated")
-    print("  OpenCode direct edits: isolated; shell mutations are Git-shim detected")
+    print("  Codex prompt/root: isolated without replacing normal permissions")
+    print("  OpenCode file and Git access: normal; commit/push scope is hook-enforced")
     print("  Main and boundary before/after snapshots: identical")
     return 0
 
