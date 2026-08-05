@@ -1,0 +1,61 @@
+{
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_ROTOR6_F103_ROOT72_REPEATED_STEP0_TAG0_SOURCE_FAMILY0_PUBLIC_BOUNDARY_DIRECT_PROCESS_DIAGNOSTIC_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "distinct_phase_resource_established": false,
+  "exact_boundary_recurrence": {
+    "first_public_word_boundary": 83,
+    "first_public_word_state_commitment": "834956d4d03066d651390a4e2d4b8c0b0940e8169f0b1fb7dfb62d201679c05e",
+    "holdout_terms": 64,
+    "k0_connection_commitment": "b1159d17886fad51c77513a7fac9a0e86eb556291ae0d9f12a404d0735ca9bfe",
+    "k0_connection_slots": 2262,
+    "k0_degree": 2261,
+    "k0_holdout_violations": 0,
+    "k0_last_coefficient": 0,
+    "k0_nonzero_coefficients": 2244,
+    "k0_training_violations": 0,
+    "k1_connection_commitment": "71e237cef40d674577a8454af013fcc915b448690afbf8d809d5eca1230e29ac",
+    "k1_connection_slots": 2261,
+    "k1_degree": 2260,
+    "k1_dynamic_cell_saving": 17,
+    "k1_holdout_violations": 0,
+    "k1_last_coefficient": 73,
+    "k1_nonzero_coefficients": 2244,
+    "k1_training_violations": 0,
+    "sequence_commitment": "0a67c170553d8e2d8e48868ea900fae5fd1a2851f6eda829aca358333928b77f",
+    "sequence_prefix": [
+      88,
+      83,
+      82,
+      29,
+      41,
+      37,
+      74,
+      37
+    ],
+    "training_terms": 4554
+  },
+  "fixed_rank_or_depth_independent_recurrence_established": false,
+  "operator": {
+    "aggregated_csr_commitment": "f0bd33e9c12f643de539796c0f3a889ee744593539dd6dc537bd1a2a8754b781",
+    "aggregated_csr_nonzeros": 172838,
+    "raw_transition_commitment": "1774f44283dde49154d3aec11bb0dd22179a061290e44448c795402fa2ca0465",
+    "raw_transition_terms": 684624
+  },
+  "oracle_sparse_operator_is_verification_only": true,
+  "production_bm_called": false,
+  "production_projection_called": false,
+  "production_source_imported": false,
+  "recurrence_does_not_reconstruct_internal_phase_state": true,
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "result": "PASS_DIAGNOSTIC_NO_COMPACT_RECURRENCE",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "topology": {
+    "bracelet_and_refined_signature_cells": 2277,
+    "necklace_cells": 4389,
+    "occupation_histograms": 74613,
+    "topology_commitment": "428bc0759dde5bfa3d6e69e96e398a4e7fbe51c4574be687b7618a6c00761dc2"
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
