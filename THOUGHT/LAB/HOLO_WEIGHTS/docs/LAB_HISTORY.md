@@ -1504,3 +1504,23 @@ NEXT ACTIONS (Sol): 1) repair all dump reshaping; 2) key inputs by
 layer; 3) token columns explicit; 4) require raw-router max error < 1e-5;
 5) validate one routed 8-expert MLP vs captured routed output; 6) then
 the functional k-curve. Clean upstream build NOT needed.
+
+## 2026-08-05 — TRACE UNBLOCKED: full replay chain VALIDATED
+
+Fixes after Sol's layout diagnosis (ne0 contiguous):
+1. Universal dump decode: logical = flat.reshape(reversed-header-dims).
+2. Q8_0 dequant: SIGNED int8 (no 128 offset) - fixed.
+3. 3D fused-expert read: flat.reshape(90, 512, 2048) DIRECTLY (the flat
+   data is already in logical order; the earlier reshape+hdr+transpose
+   reordered it wrongly - caught by comparing against llama.cpp's own
+   dequantized weights captured via a graph cast: max diff 0.0 after fix).
+4. The prefill (n>=2) MoE intermediates are CORRUPTED by a memory-pool
+   issue in the fork (the swiglu slots 1-7 match nothing; slot 0 clean);
+   the n=1 generation computes are CLEAN (the sgemm n<2 path).
+
+VALIDATION (n=1 compute, Qwen3.6-14B-A3B Q8):
+  router: logits == W^T@x, max err 2.86e-6 (Sol's gate < 1e-5 PASS)
+  expert weights: my dequant == llama.cpp's dequant, max diff 0.0
+  routed 8-expert MLP replay vs captured out: cos 0.999975, rel 7.05e-3
+  (L1: 0.999945 / 1.06e-2 - Q8 accumulation noise)
+  -> the exact-input functional replay is VALIDATED; the k-curve can run.
