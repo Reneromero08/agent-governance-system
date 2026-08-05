@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_STREAMED_JACOBI_MOMENT_VECTOR_REMOVAL_WITH_NONABELIAN_SU2_RELATION_SUCCESSOR_SELECTED`
-**Roadmap version:** `14.77`
+**Status:** `STRICT_CONTINUOUS_SU2_NONABELIAN_RELATION_CLOSURE_WITH_LINEAR_SUPPORT_AND_WIDTH_GROWTH_AND_ROOT_OF_UNITY_FUSION_QUOTIENT_SUCCESSOR_SELECTED`
+**Roadmap version:** `14.78`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3edd2f2b7d37fbfee06916f3586e18175018edd8`
+**Reconciled source head:** `93fec0c0c4b1040b04a5a19365ff276bf074fb86`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM`
-**Current claim ceiling:** `FORMAL_CONTINUOUS_S1_WRAPPED_GAUSSIAN_Q_GENERIC_GAUSSIAN_RATIONAL_UNIT_CENTER_FAMILIES0_1_PRIMARY_CENTER_COUNT24_REUSE_CENTER_COUNT17_FIRST_HARMONIC_QJET_ORDER24_STREAMED_MOMENT_REMATERIALIZATION_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_FINITE_CHARACTER_POLYNOMIAL_CONTINUOUS_SU2_CENTRAL_TRANSLATION_INVARIANT_KERNELS_TWO_GAUSSIAN_RATIONAL_CASIMIR_PHASES_TWO_FUNDAMENTAL_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_PRIMARY32_REUSE19_IDENTITY_BOUNDARY_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M211_STREAMED_JACOBI_REMATERIALIZATION_REMOVES_THE_RETAINED_MOMENT_VECTOR_BUT_LEAVES_SOURCE_SCAN_AND_LARGE_EXACT_PROJECTION_STATE_WITH_AN_IDENTICAL_CLASSICAL_STREAM`
+**New mechanism development:** `ACTIVE_AFTER_M212_CONTINUOUS_SU2_ESTABLISHES_NONABELIAN_CHARACTER_RELATION_COMPOSITION_BUT_SUPPORT_AND_EXACT_WIDTH_GROW_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_CHARACTER_CARRIER_WITH_NATIVE_HAAR_COMPOSITION_AND_CLEBSCH_GORDAN_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_REPRESENTATION_SUPPORT_CLOSURE_OR_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CHARACTER_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_ROOT_OF_UNITY_SU2_LEVEL8_MODULAR_FUSION_PHASE_RELATION_QUOTIENT_WITH_JONES_WENZL_TRUNCATED_FUNDAMENTAL_FUSION_AND_NONCOMMUTING_CASIMIR_TWIST_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED9_SUPPORT_OR_COEFFICIENT_HEIGHT_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_FUSION_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`bdd918ee0f4431db34c820850ff6b7733ad3cef7`. The current 207-milestone
+`93fec0c0c4b1040b04a5a19365ff276bf074fb86`. The current 212-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM
+EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -10008,17 +10008,74 @@ physical-bit replacement, catalytic inference or unbounded computation.
 Selected successor:
 
 ```text
-EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_CHARACTER_CARRIER_WITH_NATIVE_HAAR_COMPOSITION_AND_CLEBSCH_GORDAN_INTERSECTION_ON_ONE_SHARED_UNRESOLVED_PORT_REPRESENTATION_SUPPORT_CLOSURE_OR_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CHARACTER_CLASSICAL_RECURRENCE
+EXACT_ROOT_OF_UNITY_SU2_LEVEL8_MODULAR_FUSION_PHASE_RELATION_QUOTIENT_WITH_JONES_WENZL_TRUNCATED_FUNDAMENTAL_FUSION_AND_NONCOMMUTING_CASIMIR_TWIST_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED9_SUPPORT_OR_COEFFICIENT_HEIGHT_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_FUSION_RECURRENCE
 ```
 
-The S1 theta route has now exposed both precision-state growth and a
-state/work tradeoff without classical separation. The successor changes the
-relation geometry rather than adding jet orders: it tests continuous
-non-Abelian `SU(2)` class-function relations, where Haar composition is
-diagonal in character space and intersection follows the Clebsch-Gordan
-fusion law. It must keep the shared relation port unresolved, count all
-representation support and exact payload growth, restore and reuse the actual
-carrier, and compare with the identical strongest character recurrence.
+M212 establishes the non-Abelian character law but proves support `D+2` for
+the declared growing family. The selected repair replaces the unbounded
+highest-weight representation ring with the lawful root-of-unity `SU(2)_8`
+Jones-Wenzl fusion quotient. It must test whether fixed nine-object support
+survives exact accounting or merely moves growth into coefficient height,
+public inverse plans, or another hidden representation, while preserving the
+unresolved port, restoration, reuse and identical compact fusion baseline.
+
+## M212: continuous SU(2) character geometry grows in support and width
+
+Claim:
+
+```text
+EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M212 changes the relation geometry from continuous Abelian `S1` to central,
+translation-invariant continuous `SU(2)`. Normalized-Haar composition is a
+public Casimir spectral phase in the irreducible-character basis. Pointwise
+intersection with `1+a chi_1` uses the Clebsch-Gordan law
+`chi_r chi_1=chi_(r-1)+chi_(r+1)`. These modules are noncommuting and consume
+one owner-typed unresolved character port without group-element sampling,
+finite-group reduction, relation-table expansion or intermediate projection.
+
+The primary depth-32 family has 34 nonzero character cells carrying 3,728,007
+exact payload bits, and its final identity boundary alone carries 156,592
+bits. Every nonzero fundamental fusion factor propagates the nonzero top
+coefficient to the next highest weight, proving highest weight `D+1` and
+`D+2` cells at depth `D` for the declared family.
+
+An independent no-production-import ordinary-polynomial oracle reconstructs
+`chi_r=U_r(x/2)`, triangular character conversion, exact linear multiplication
+and long division, and the identity boundary at `x=2`. It reproduces all
+declared state and boundary commitments, support and payload tuples,
+restoration and unrelated depth-19 reuse. The oracle's primary polynomial
+also has 34 cells and carries 5,323,677 bits, so it is not a favorable straw
+baseline. The strongest matched baseline is the identical exact compact
+character recurrence.
+
+The actual carrier list backing restores algebraically, restored reuse agrees
+with fresh reuse at generation two, and no snapshot or inverse history is
+used. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_FINITE_CHARACTER_POLYNOMIAL_CONTINUOUS_SU2_CENTRAL_TRANSLATION_INVARIANT_KERNELS_TWO_GAUSSIAN_RATIONAL_CASIMIR_PHASES_TWO_FUNDAMENTAL_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_PRIMARY32_REUSE19_IDENTITY_BOUNDARY_DIRECT_PROCESS_ONLY
+```
+
+This direct-process package does not establish CATVM custody, a distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_ROOT_OF_UNITY_SU2_LEVEL8_MODULAR_FUSION_PHASE_RELATION_QUOTIENT_WITH_JONES_WENZL_TRUNCATED_FUNDAMENTAL_FUSION_AND_NONCOMMUTING_CASIMIR_TWIST_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED9_SUPPORT_OR_COEFFICIENT_HEIGHT_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_FUSION_RECURRENCE
+```
+
+This is the smallest phase-owned repair of the measured support law: replace
+the unbounded highest-weight representation ring by the lawful root-of-unity
+`SU(2)_8` fusion quotient, then test whether fixed nine-object support survives
+in exact material accounting or merely transfers growth into coefficient
+height and inverse work.
 
 ## 10. Roadmap Maintenance
 

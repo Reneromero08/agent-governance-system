@@ -1,0 +1,88 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS",
+  "scientific_source_commit": "93fec0c0c4b1040b04a5a19365ff276bf074fb86",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_FINITE_CHARACTER_POLYNOMIAL_CONTINUOUS_SU2_CENTRAL_TRANSLATION_INVARIANT_KERNELS_TWO_GAUSSIAN_RATIONAL_CASIMIR_PHASES_TWO_FUNDAMENTAL_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_PRIMARY32_REUSE19_IDENTITY_BOUNDARY_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {
+      "path": "continuous_su2_character_phase_relation_closure.py",
+      "sha256": "abecd13947f99e53d6f93b09aec024138e89807b3fa4259378506eb2f591e4b4"
+    },
+    "independent_oracle": {
+      "path": "continuous_su2_character_phase_relation_independent_oracle.py",
+      "sha256": "4bba90098872d78c5f098f662274469967721c73353be99765d4109237c0eb44"
+    },
+    "results": {
+      "path": "CONTINUOUS_SU2_CHARACTER_PHASE_RELATION_RESULTS.json",
+      "sha256": "b1c914dda639905d2eb3eea6c7c74affba6c724376e1db3f31fb77c0d3b8cf05"
+    },
+    "independent_oracle_results": {
+      "path": "CONTINUOUS_SU2_CHARACTER_PHASE_RELATION_INDEPENDENT_ORACLE.json",
+      "sha256": "1df79ddf890476656442ac11ad512b8e0ee96ad0cd297f24cd422ccab6acd59b"
+    },
+    "review": {
+      "path": "CONTINUOUS_SU2_CHARACTER_PHASE_RELATION_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "c9ff7e9ec9a0182c88f5d94f656ac1baecaad49c47f33ad6b49cf8a0f5c9a69e"
+    },
+    "qualifier": {
+      "path": "qualify_continuous_su2_character_phase_relation.sh",
+      "sha256": "0fdbcdc68181eb148294c2ab4f9fa6cbbfa4afb8a95f668f53adc07b6c88d9ad"
+    }
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "algorithms": [
+      "ORDINARY_POLYNOMIAL_REPRESENTATION_RING_EXECUTION",
+      "TRIANGULAR_CHEBYSHEV_CHARACTER_BASIS_CONVERSION",
+      "EXACT_LINEAR_POLYNOMIAL_MULTIPLY_AND_LONG_DIVISION",
+      "IDENTITY_BOUNDARY_AS_ORDINARY_POLYNOMIAL_EVALUATION_AT_X2"
+    ],
+    "all_declared_state_and_boundary_commitments_match": true,
+    "all_declared_character_and_boundary_payloads_match": true,
+    "module_order_state_and_boundary_discriminate": true,
+    "same_backing_restoration": true,
+    "fresh_restored_reuse_agreement": true
+  },
+  "controls": [
+    "WRONG_OWNER",
+    "WRONG_OPERATION_TYPE",
+    "PREMATURE_PROJECTION",
+    "MISSING_INVERSE",
+    "REORDERED_INVERSE",
+    "NULL_CARRIER",
+    "SEMANTIC_FUSION_PERTURBATION"
+  ],
+  "resource_law": {
+    "primary_depth": 32,
+    "primary_character_cells": 34,
+    "primary_character_payload_bits": 3728007,
+    "primary_boundary_payload_bits": 156592,
+    "independent_polynomial_cells": 34,
+    "independent_polynomial_payload_bits": 5323677,
+    "primary_public_operation_records": 64,
+    "primary_public_descriptor_slots": 128,
+    "primary_program_commitment_hashes": 131,
+    "primary_program_operation_records_hashed": 8384,
+    "retained_inverse_history": 0,
+    "additional_retained_plan": 0,
+    "analytic_character_cells_at_depth_d": "D_PLUS_2",
+    "matched_compact_baseline": "IDENTICAL_EXACT_GAUSSIAN_RATIONAL_SU2_CHARACTER_COEFFICIENT_RECURRENCE",
+    "excluded_not_zero": "PYTHON_FRACTION_SCALAR_SUBOPERATIONS_TRANSIENT_OBJECTS_ALLOCATOR_INTERPRETER_HASH_BYTE_TRAFFIC_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS"
+  },
+  "claim_limits": {
+    "continuous_su2_group_element_enumeration_used": false,
+    "finite_group_reduction_used": false,
+    "fixed_support_across_growing_depth": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}

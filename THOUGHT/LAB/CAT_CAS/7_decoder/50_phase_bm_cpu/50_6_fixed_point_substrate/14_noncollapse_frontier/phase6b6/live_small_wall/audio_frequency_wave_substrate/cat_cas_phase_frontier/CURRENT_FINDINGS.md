@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`3edd2f2b7d37fbfee06916f3586e18175018edd8`. The canonical per-milestone
+`93fec0c0c4b1040b04a5a19365ff276bf074fb86`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11320,3 +11320,50 @@ fixtures. It will test continuous non-Abelian SU(2) character composition and
 Clebsch-Gordan intersection on an unresolved shared relation port, with exact
 support/payload accounting, restoration/reuse and the strongest identical
 classical character recurrence.
+
+## M212 continuous SU(2) character relation and support-growth obstruction
+
+The independently reexecuted claim is:
+
+```text
+EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS
+```
+
+Central translation-invariant continuous-`SU(2)` kernels are held as finite
+irreducible-character polynomials. Normalized-Haar composition applies the
+public Casimir phase `u^(r(r+2))` to coefficient `r`; pointwise intersection
+uses `chi_r chi_1=chi_(r-1)+chi_(r+1)`. The two module types do not commute and
+consume one typed unresolved port without group-element sampling, finite-group
+reduction, relation-table expansion or intermediate projection.
+
+The primary depth-32 family contains 34 nonzero character cells carrying
+3,728,007 payload bits; its final identity boundary carries 156,592 bits.
+Because every nonzero fusion factor propagates the nonzero top coefficient to
+`chi_(r+1)`, the declared family has exact cell law `D+2`. An independent
+ordinary-polynomial/Chebyshev oracle reproduces every state and boundary
+commitment, support and payload tuple, exact restoration and unrelated
+depth-19 reuse. Its primary ordinary-polynomial state is also 34 cells and is
+larger at 5,323,677 payload bits.
+
+The same carrier-list backing restores exactly, restored reuse agrees with
+fresh reuse at generation two, and no snapshot or retained inverse history is
+used. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+This is bounded direct-process non-Abelian relation geometry. The strongest
+matched compact classical implementation is the identical exact character
+recurrence. It does not establish CATVM custody, fixed support across growing
+depth, a distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference
+or unbounded computation.
+
+Next:
+
+```text
+EXACT_ROOT_OF_UNITY_SU2_LEVEL8_MODULAR_FUSION_PHASE_RELATION_QUOTIENT_WITH_JONES_WENZL_TRUNCATED_FUNDAMENTAL_FUSION_AND_NONCOMMUTING_CASIMIR_TWIST_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED9_SUPPORT_OR_COEFFICIENT_HEIGHT_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_FUSION_RECURRENCE
+```
+
+This tests the lawful root-of-unity fusion quotient as a direct repair of the
+measured continuous-`SU(2)` support law. It must count exact coefficient
+height and inverse material rather than treating nine logical simple objects
+as sufficient evidence of compact state.
