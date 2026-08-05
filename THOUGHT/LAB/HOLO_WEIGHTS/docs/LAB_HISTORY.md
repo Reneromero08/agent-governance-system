@@ -1154,3 +1154,55 @@ The shared-V structure is itself a compression surface: if expert U
 subspaces overlap in a low-dimensional manifold, the expert set is
 compressible even though each channel is full-rank - the coupled-mode
 direction at the EXPERT level (unmeasured).
+
+## 2026-08-04 — MOE test bed + Sol's REDESIGN of the expert manifold test
+
+Test bed: Qwen3.6-14B-A3B-FableVibes (Qwen3_5MoeForCausalLM), Q8_0 GGUF
+14.7GB downloading to LM Studio folder. Architecture: 40 layers (LLLF),
+90 experts, 8 active/token, hidden 2048, moe_intermediate 512, head_dim
+256, GDN. Provenance: REAP-pruned from 35B-A3B + QLoRA-recovered -
+report results as "post-REAP Qwen expert geometry", NOT natural-MoE
+claims. Same class as DeepSeek V4 Flash (endgame), same family as our 4B.
+
+Sol's REDESIGN verdict on my proposed measurement:
+1. MY UNION-RANK TEST WAS DIMENSIONALLY DEGENERATE: for 2048x512
+   matrices the union of full subspaces can never exceed the 2048
+   ambient dimension, so "union rank << 90*512" is trivially true and
+   cannot demonstrate a manifold. Correct test: the NORMALIZED HIDDEN-
+   INTERFACE PROJECTOR P = (1/90) sum_e B_e B_e^T in R^{2048x2048},
+   where for gate/up (512x2048) B_e = RIGHT singular vectors (the
+   expert's INPUT interface) and for down (2048x512) B_e = LEFT
+   singular vectors (OUTPUT interface). Compare P's eigenvalue spectrum
+   against the random-subspace null (90 random 2048x512 bases).
+   THRESHOLDS: spectrum dominated by ~512 large eigenvalues = manifold
+   near one expert width; decays like the random null = no manifold;
+   between = partial structure.
+2. Q8_0 acceptable for dominant shape/large gaps/strong alignment/gross
+   flat-vs-decaying; NOT for tail effective rank, small principal
+   angles, weak eigengaps. F16 confirmation REQUIRED on layers
+   {0,19,39} before any tail/manifold claim.
+3. GGUF naming: fused tensors blk.N.ffn_gate_exps/up_exps/down_exps/
+   gate_inp (+ffn_*_shexp for the shared expert), NOT individual expert
+   names. Verify the 90-axis, orientation (gate/up 512x2048, down
+   2048x512), dequantization, and a manual matmul BEFORE any SVD.
+4. k-curve: per-expert max rank 512; k = 16,32,64,128,256,384,512;
+   report singular-energy retention, stable rank, entropy effective
+   rank, condition profile. FUNCTIONAL k-curve needs routed activation
+   traces (llama.cpp instrumentation hook recording post-norm MoE
+   inputs + selected expert IDs + router weights, replayed offline);
+   without the trace it is a weight-space k-curve only.
+5. MINIMAL ORDERED EXPERIMENT:
+   1. Integrity gate: dump GGUF metadata, confirm expert axis/
+      orientation/dequant; exclude shared experts from routed stats.
+   2. Q8 geometry pilot: layers {0,7,15,23,31,39}, all 90 experts, 3
+      projection families separately; spectra (stable rank, D_eff,
+      D_95, D_99, condition), P spectrum, random-subspace null.
+   3. F16 confirmation: layers {0,19,39} (Q8 vs F16 singular values,
+      projector spectra, principal angles) - abort tail claims if
+      conclusions change.
+   4. Functional trace: routed inputs -> expert MLP k-curves
+      (active vs inactive vs shared expert).
+6. Shared expert = dense baseline, analyzed separately.
+
+Status: script moe1_geometry.py built (integrity gate + geometry pilot);
+Q8_0 download in progress (5.9GB/14.7GB).
