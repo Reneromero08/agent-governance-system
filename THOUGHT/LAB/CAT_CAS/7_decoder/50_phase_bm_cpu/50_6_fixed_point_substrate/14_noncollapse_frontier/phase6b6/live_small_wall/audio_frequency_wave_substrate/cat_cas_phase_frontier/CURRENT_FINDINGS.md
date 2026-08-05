@@ -11146,3 +11146,34 @@ Next:
 ```text
 EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_PHASE_FRAME_CARRIER_OR_POSITION_DIAGONAL_ACTION_NO_GO_WITH_FIXED2277_COEFFICIENTS_COMPACT17_MODE_FRAME_DESCRIPTOR_NO74613_OCCUPATION_EXPANSION_DENSE_QUOTIENT_KERNEL_PERMANENTS_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_FRAME_RECURRENCE
 ```
+
+## M207 moving phase frame reduces exactly to the M204 conjugate
+
+The four-integer public basis-frame descriptor traverses all 577 Fourier
+endpoint steps while leaving the 2,277 resident coefficients unchanged. No
+frame matrix, occupation vector, dense quotient kernel, permanent work, or
+transition plan is retained.
+
+The physical position-phase diagonal is not coefficientwise in that frame. Its
+exact conjugate is the M204 eight-channel scattering stream, retaining
+5,697,720 sorted searches and 5,534,928 fanout candidates. The naive
+coefficientwise alternative disagrees on 2,255 cells.
+
+Primary boundary 83, unrelated restored reuse boundary 70, and fresh reuse
+boundary 70 match M204. Exact same-backing restoration reaches generation two
+with zero error and no reload. The separate no-production-import Rotor-2
+oracle proves the conjugation identity on all 81 cells and rejects the naive
+diagonal on 79; Rotor-6 remains source-local parity against the independent
+M204 seal.
+
+Classification is `INDEPENDENTLY_VERIFIED_SOURCE_LOCAL` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. No CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, catalytic inference, or unbounded
+computation is established. The rotor route is closed at this tested ceiling.
+
+Next:
+
+```text
+EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_WITH_NATIVE_COMPOSITION_BY_HARMONIC_HADAMARD_AND_INTERSECTION_BY_HARMONIC_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED_RATIONAL_CHART_CLOSURE_OR_SUPPORT_RANK_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_BASELINE
+```

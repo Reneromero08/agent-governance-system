@@ -1,0 +1,73 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE",
+  "scientific_source_commit": "bdd918ee0f4431db34c820850ff6b7733ad3cef7",
+  "classification": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY",
+  "files": {
+    "production": {
+      "path": "growing_rotor_dynamic_dihedral_phase_frame_closure.py",
+      "sha256": "c3e3f5f2f2471fb322654ce44d4bba6ff329367bc198850b8afa0343512ed249"
+    },
+    "independent_oracle": {
+      "path": "growing_rotor_dynamic_dihedral_phase_frame_independent_oracle.py",
+      "sha256": "f437982c1b0bb7cc3f45ce73dfa3aef47137bd75aa39fcfc2f6a932cb16ab20d"
+    },
+    "results": {
+      "path": "GROWING_ROTOR_DYNAMIC_DIHEDRAL_PHASE_FRAME_RESULTS.json",
+      "sha256": "18e8a79f13b66a340a6d93e3ee31517af8cb9a5c7a2e600c4658ffe0aa13d675"
+    },
+    "independent_oracle_results": {
+      "path": "GROWING_ROTOR_DYNAMIC_DIHEDRAL_PHASE_FRAME_INDEPENDENT_ORACLE.json",
+      "sha256": "23b4521ab0022329478f4500cbea639ab4ded9e126a48f85f5d3b098e3a24188"
+    },
+    "review": {
+      "path": "GROWING_ROTOR_DYNAMIC_DIHEDRAL_PHASE_FRAME_SEPARATE_REFERENCE_REVIEW.md",
+      "sha256": "d1e4467c30efd4545c2ce6ea229e0cc118084309222eedb9c2b91cab41f224be"
+    },
+    "qualifier": {
+      "path": "qualify_growing_rotor_dynamic_dihedral_phase_frame.sh",
+      "sha256": "5b65559a9fde39e9625b53893ef04a031022b4772c86cbba123cc559165b1c68"
+    }
+  },
+  "predecessor_evidence": {
+    "m204_coherent_wave_results": {
+      "path": "GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_RESULTS.json",
+      "sha256": "20a869f62e26fd7801540adc057a0454f8ccfc6e698011f477e2991023597e61"
+    }
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "transferable_rotor_count": 2,
+    "occupation_cells": 153,
+    "momentum_bracelet_cells": 9,
+    "reflection_closed_position_cells": 9,
+    "forward_inverse_identity": true,
+    "conjugated_direct_scattering_mismatch_cells": 0,
+    "naive_coefficientwise_diagonal_mismatch_cells": 79,
+    "rotor6_execution_independently_reexecuted": false
+  },
+  "controls": [
+    "WRONG_FRAME_OWNER",
+    "WRONG_PUBLIC_FRAME_STAGE",
+    "PREMATURE_LIVE_FRAME_PROJECTION",
+    "MISSING_FRAME_INVERSE",
+    "MISSING_WORD_INVERSE",
+    "NAIVE_COEFFICIENTWISE_POSITION_DIAGONAL"
+  ],
+  "claim_limits": {
+    "basis_label_transport_changes_coefficient_values": false,
+    "position_diagonal_closes_without_m204_conjugate": false,
+    "m204_search_and_fanout_removed": false,
+    "rotor_route_remains_selected": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "unbounded_catalytic_computation": false
+  }
+}

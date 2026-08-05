@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`ea64f51f93f0a84897865756f41e2a7decc08a4a`. The registry assigns one
+`bdd918ee0f4431db34c820850ff6b7733ad3cef7`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 206-milestone lane is active by user direction. Continue from the
+The current 207-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,27 +53,28 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK
+EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY
 ```
 
-This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. The source
-momentum-bracelet basis and target zero-total, reflection-closed position basis
-each have 2,277 coordinates. The existing 577-gate Fourier factorization exits
-the fixed quotient at its first shear, while the direct kernel exposes a full
-2,277-entry row and column and a generic `6 x 6` bosonic permanent. The
-diagnostic does not execute the full direct transform and does not establish a
-universal transform lower bound. M204 exact restoration and reuse and M200
-atomic CATVM custody remain separately valid predecessor results. The
-identical classical transform and vector streams remain. No distinct phase
-resource, advantage, Small Wall crossing, physical execution, physical-bit
-replacement, or unbounded computation is established.
+This current result is `INDEPENDENTLY_VERIFIED_SOURCE_LOCAL` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. A
+four-integer basis-frame descriptor traverses the public 577-step Fourier
+endpoint while the 2,277 coefficient values remain unchanged. The physical
+position-phase diagonal is not coefficientwise in that frame; its exact
+conjugate is M204 and retains 5,697,720 sorted searches and 5,534,928 fanout
+candidates. A separate no-production-import Rotor-2 oracle proves the complete
+conjugation identity, while Rotor-6 parity remains source-local against M204.
+Exact same-backing restoration and unrelated reuse pass. M200 atomic CATVM
+custody remains a separate predecessor result. The rotor route is closed at
+this tested ceiling. No distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, or unbounded
+computation is established.
 
 The accumulated bounded architecture includes:
 

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FIXED_QUOTIENT_FOURIER_ROUTE_NO_GO_WITH_MOVING_SYMMETRY_FRAME_SELECTED`
-**Roadmap version:** `14.72`
+**Status:** `SOURCE_LOCAL_MOVING_FRAME_REDUCTION_WITH_CONTINUOUS_S1_RELATION_PHASE_COUPLING_SELECTED`
+**Roadmap version:** `14.73`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ea64f51f93f0a84897865756f41e2a7decc08a4a`
+**Reconciled source head:** `bdd918ee0f4431db34c820850ff6b7733ad3cef7`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY`
-**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M206_TESTED_FIXED_QUOTIENT_FOURIER_ROUTES_RETAIN_OCCUPATION_DENSE_KERNEL_OR_PERMANENT_WORK_WITH_IDENTICAL_CLASSICAL_ALGEBRA`
+**Current highest milestone:** `EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY`
+**Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
+**New mechanism development:** `ACTIVE_AFTER_M207_MOVING_FRAME_CLOSES_ONLY_BY_REUSING_M204_CONJUGATE_AND_ROTOR_ROUTE_IS_CLOSED`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_PHASE_FRAME_CARRIER_OR_POSITION_DIAGONAL_ACTION_NO_GO_WITH_FIXED2277_COEFFICIENTS_COMPACT17_MODE_FRAME_DESCRIPTOR_NO74613_OCCUPATION_EXPANSION_DENSE_QUOTIENT_KERNEL_PERMANENTS_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_FRAME_RECURRENCE`
+**Active primary successor:** `EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_WITH_NATIVE_COMPOSITION_BY_HARMONIC_HADAMARD_AND_INTERSECTION_BY_HARMONIC_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED_RATIONAL_CHART_CLOSURE_OR_SUPPORT_RANK_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ea64f51f93f0a84897865756f41e2a7decc08a4a`. The current 206-milestone
+`bdd918ee0f4431db34c820850ff6b7733ad3cef7`. The current 207-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -9689,6 +9689,74 @@ then make the public position-diagonal action close without reintroducing the
 or a retained basis plan. If the diagonal action still requires that basis
 change, preserve the negative result and leave this rotor route for a
 different phase coupling law.
+
+## M207: moving basis labels close only through the existing M204 conjugate
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE
+```
+
+A four-integer descriptor traverses the public 288-gate forward and 289-gate
+inverse Fourier endpoints while retaining exactly 2,277
+momentum-bracelet coefficients. This is basis-label transport only: coefficient
+values do not change, and the accepted path retains no frame matrix, 74,613
+occupation scratch, dense quotient kernel, permanent evaluation, or transition
+plan.
+
+The physical position-phase diagonal is not coefficientwise in the transported
+basis. Its exact conjugate is the M204 reflection-paired eight-channel
+scattering stream. The primary output retains all 5,697,720 sorted searches
+and 5,534,928 fanout candidates. A naive coefficientwise diagonal disagrees
+on 2,255 of 2,277 cells. Thus the frame descriptor closes only by compiling
+back to the already-measured M204 recurrence, with the identical classical
+frame-plus-vector stream as the strongest baseline.
+
+The primary boundary is 83; unrelated restored reuse and fresh reuse both give
+70 and identical state commitments. Source, target, wave-port, and frame
+backings retain identity, restoration error is zero, the frame and wave port
+are cleared, and generation advances to two without snapshot reload.
+Wrong-owner, wrong-stage, premature-frame-projection, missing-frame-inverse,
+missing-word-inverse, and naive-diagonal controls discriminate.
+
+The separate oracle imports no CAT_CAS module and proves the complete Rotor-2
+conjugation identity on all `9 x 9` cells by independent quotient Fourier,
+inverse, position-diagonal, and direct-scattering construction. It does not
+independently execute Rotor-6. Rotor-6 parity is source-local and is checked
+against the separately sealed M204 boundary and signature-order commitment.
+
+Classification is `INDEPENDENTLY_VERIFIED_SOURCE_LOCAL` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY
+```
+
+No CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation is established. This completes the declared final
+structural repair attempt for the Rotor-6 route. More rotor counts, frame
+variants, or channel fixtures are not responsive to the obstruction.
+
+Selected successor:
+
+```text
+EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_WITH_NATIVE_COMPOSITION_BY_HARMONIC_HADAMARD_AND_INTERSECTION_BY_HARMONIC_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED_RATIONAL_CHART_CLOSURE_OR_SUPPORT_RANK_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_BASELINE
+```
+
+The successor leaves the rotor family and changes the phase relation primitive
+to exact translation-invariant relations on the continuous circle. It must
+keep one shared angle port unresolved, implement relation composition as
+Hadamard multiplication of harmonic coefficients and relation intersection as
+Laurent convolution, and test whether a fixed rational phase chart closes both
+noncommuting products or whether exact support/rank must grow. It must preserve
+final-only projection, exact restoration and reuse, count coefficient width
+and rematerialization, and retain the strongest sparse Laurent classical
+recurrence. Finite angular sampling, hidden truth tables, and another finite
+cyclic-group fixture do not qualify.
 
 ## 10. Roadmap Maintenance
 
