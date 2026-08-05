@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ATOMIC_OPEN_MOMENTUM_CATVM_CUSTODY`
-**Roadmap version:** `14.66`
+**Status:** `STRICT_SCOPE_POSITION_DUAL_FULL_OCCUPATION_NO_GO`
+**Roadmap version:** `14.67`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4ad9956a5d709686ac5199a0adec50f5e5411846`
+**Reconciled source head:** `95cbf466e2e27b63a2f3b96d1d5b97786d3e4429`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS`
-**Current claim ceiling:** `LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_POSITION_DUAL_PHASE_DIAGONALIZATION_REPRODUCES_THE2277_CELL_REFLECTION_PAIRED_SCATTERING_WITHOUT_A4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_BUT_THE_STANDARD_EXACT_BOSONIC_TRANSFORM_MATERIALIZES_ALL74613_OCCUPATION_CELLS_AND_IS_STRICTLY_WORSE_THAN_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EXACT_BOSONIC_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M200_ATOMIC_OPEN_MOMENTUM_CATVM_CUSTODY`
+**New mechanism development:** `ACTIVE_AFTER_M201_POSITION_DUAL_FULL_OCCUPATION_NO_GO`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_F103_ROTOR6_ONE_CELL_OWNER_TYPED_OPEN_MOMENTUM_FACTOR_STREAMING_CLOSURE_OR_SCATTER_FANOUT_NO_GO_WITHOUT4389_CELL_PORT_74613_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`4ad9956a5d709686ac5199a0adec50f5e5411846`. The current 200-milestone
+`95cbf466e2e27b63a2f3b96d1d5b97786d3e4429`. The current 201-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS
+EXACT_F103_ROTOR6_POSITION_DUAL_PHASE_DIAGONALIZATION_REPRODUCES_THE2277_CELL_REFLECTION_PAIRED_SCATTERING_WITHOUT_A4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_BUT_THE_STANDARD_EXACT_BOSONIC_TRANSFORM_MATERIALIZES_ALL74613_OCCUPATION_CELLS_AND_IS_STRICTLY_WORSE_THAN_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM
 ```
 
 Not established:
@@ -9263,6 +9263,70 @@ Selected successor:
 ```text
 EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE
 ```
+
+## M201: exact position-dual transform exposes a larger occupation workspace
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_POSITION_DUAL_PHASE_DIAGONALIZATION_REPRODUCES_THE2277_CELL_REFLECTION_PAIRED_SCATTERING_WITHOUT_A4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_BUT_THE_STANDARD_EXACT_BOSONIC_TRANSFORM_MATERIALIZES_ALL74613_OCCUPATION_CELLS_AND_IS_STRICTLY_WORSE_THAN_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM
+```
+
+M201 compiles the exact F103 order-17 Fourier transform and normalized inverse
+to 288 and 289 elementary single-particle operations, then lifts them to the
+degree-six exchange-symmetric polynomial. The position-basis scattering
+diagonal is the exact character law
+`sum_q w_q (S_q S_-q - 6)`. The primary full state, commitment, and boundary
+83 agree with M199; unrelated reuse boundary 70 agrees fresh versus restored.
+The same source/target backing returns exactly under topology rematerialize and
+subtract restoration and reaches generation two without baseline reload.
+
+The route constructs no 4,389-cell open-momentum port, dense `2,277 x 2,277`
+operator, or permanent assignment terms. It nevertheless leaves the rotation
+quotient during its elementary transforms and explicitly allocates all 74,613
+occupation cells. Its algorithm boundary uses 81,444 active numeric cells,
+1,343,034 occupation-topology descriptor integers, 96,723 predecessor-topology
+descriptor integers, and 2,308 transform-network descriptor integers, for
+1,523,509 named field-and-descriptor slots. One scattering executes 8,434,176
+shear blocks, 33,829,728 shear-polynomial terms, and 40,589,472 character
+terms.
+
+The independent oracle imports and calls no production position-dual module.
+It reconstructs both Fourier networks, exhaustively proves the spectral pair
+identity on all 74,613 occupations and both programs, reconstructs the final
+state with the separate 684,624-term direct and compact factor references,
+and independently derives the resource law. Only per-network-boundary
+nonzero checkpoint counts remain package-local; they are not used for the
+allocation no-go.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical method remains M199's identical factor stream at
+11,220 named field cells and 331,704 one-body terms per scattering. The
+phase-dual implementation is therefore strictly worse on explicit state and
+work. No CATVM custody, fixed-rank transfer, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+or unbounded computation is established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EXACT_BOSONIC_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_ONLY
+```
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_ONE_CELL_OWNER_TYPED_OPEN_MOMENTUM_FACTOR_STREAMING_CLOSURE_OR_SCATTER_FANOUT_NO_GO_WITHOUT4389_CELL_PORT_74613_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_BASELINE
+```
+
+The successor returns to M199's native factor identity and tests whether each
+necklace intermediate can be computed, consumed by every closure fanout, and
+released through one owner-typed unresolved field cell. It must retain no
+4,389-cell port, 74,613-cell occupation scratch, dense operator, permanent
+enumeration, or transition plan. It must count topology rematerialization and
+compare against the identical compact factor stream; CATVM wrapping is not the
+next mechanism change.
 
 ## 10. Roadmap Maintenance
 

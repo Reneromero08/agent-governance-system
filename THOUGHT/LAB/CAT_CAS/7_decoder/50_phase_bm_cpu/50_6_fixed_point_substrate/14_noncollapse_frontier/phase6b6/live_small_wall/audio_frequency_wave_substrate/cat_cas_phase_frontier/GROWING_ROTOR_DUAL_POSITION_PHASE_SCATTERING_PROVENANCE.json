@@ -1,0 +1,37 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_PROVENANCE_V1",
+  "scientific_source_head": "95cbf466e2e27b63a2f3b96d1d5b97786d3e4429",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_F103_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_dual_position_phase_scattering.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_dual_position_phase_scattering.py": "17ef84814b2a03d864b67e7e5943d1690a683b95d77be20b5a16820dbde8d854",
+    "growing_rotor_dual_position_phase_scattering_independent_oracle.py": "69d430f5ca762abb00253e4d3f7ca967e99d9a1ea48ca32d4abc95a73e919ab3",
+    "GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_RESULTS.json": "816759e790ab59b466d14667fb93f21344e1da5f7b6d9823844cbf528073c74d",
+    "GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_INDEPENDENT_ORACLE.json": "4611a7bcc97d978f5eada4639b5a7db1de6855e83f994298e890f51e4fdd84e4",
+    "GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_INDEPENDENT_REEXECUTION_REVIEW.md": "73538c65ccac8fd26429262c7abd7d9a35950c614d8a3a3b052a6c5b6f8d2761",
+    "qualify_growing_rotor_dual_position_phase_scattering.sh": "8ac95ce013e8b4e22423132a611b915084a59e6187b54800461637fda376b0c0"
+  },
+  "dependencies": {
+    "growing_rotor_open_momentum_factor_closure.py": "3d21f7e576bd4fc64d7c15fd9c0a4df5aa2d831bd000de3bc5d077d523965396",
+    "growing_rotor_open_momentum_factor_independent_oracle.py": "25911e8186095265b1d6ab55a5d26c56dc984bc6ece113234fd3d1c2771cec18",
+    "growing_rotor_pair_signature_streamed_quotient.py": "c60a3de2c314d73b72a5e4edc05e971838652cb290969120134901ec44685901",
+    "independent_oracle_imports_production_position_dual_module": false,
+    "independent_oracle_reuses_prior_independent_factor_reference": true
+  },
+  "package_local_fields": [
+    "NETWORK_BOUNDARY_NONZERO_COUNTS_NOT_INDEPENDENTLY_REEXECUTED",
+    "PYTHON_CONTAINER_HASH_MAP_BIGINT_EXPRESSION_TEMPORARY_NATIVE_LIBRARY_TIMING_AND_WHOLE_PROCESS_PEAKS_EXCLUDED_NOT_ZERO"
+  ],
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EXACT_BOSONIC_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_ONLY"
+}
