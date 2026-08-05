@@ -1,0 +1,25 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_BOUNDARY_COMPILER_PROVENANCE_V1",
+  "scientific_source_head": "fc475ef8acfef61be7d4f69cf0e058b121394172",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_prime_one_segment_streamed_kernel_bluestein_boundary_compiler.sh",
+    "status": "QUALIFIED_GROWING_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_BOUNDARY_COMPILER_STRICT_SCOPE",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_prime_one_segment_streamed_kernel_bluestein_boundary_compiler.py": "2886452fad1f1e8af960960c9d86027c3e32974858f44e80edc4a4d3dcef6730",
+    "GROWING_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_BOUNDARY_COMPILER_RESULTS.json": "26f2291efbf09eecafea8c860858a4f4972c5fa0651602392034f24073e710ed",
+    "growing_prime_one_segment_streamed_kernel_bluestein_boundary_compiler_independent_oracle.py": "ff96553814e11620c605589cd55c992c91453a8035098e63a0dfea3362d775c9",
+    "GROWING_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_BOUNDARY_COMPILER_INDEPENDENT_ORACLE.json": "6faf7a6c640e6583e3857a6c400a82ed5bbbc73dcfc824bd47277bc824bf6456",
+    "GROWING_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_BOUNDARY_COMPILER_INDEPENDENT_REEXECUTION_REVIEW.md": "3e7f246120c71fb4aec2f96f35c91540b162c26d3c4f3f27a6116bbfc7b8c402",
+    "qualify_growing_prime_one_segment_streamed_kernel_bluestein_boundary_compiler.sh": "951500cf729d9004f46f59ea902a6779ce170947d92e8e56bab55314d53354f6"
+  },
+  "claim_ceiling": "FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM"
+}

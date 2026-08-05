@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_FUSED_TWO_SEGMENT_BLUESTEIN_LINEAR_TRANSFORM_FRONTIER`
-**Roadmap version:** `14.50`
+**Status:** `STRICT_SCOPE_ONE_SEGMENT_BLUESTEIN_STATE_WORK_PARETO_CEILING`
+**Roadmap version:** `14.51`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `42d9015d2726d95aa429ec81d747c9eab80d26f3`
+**Reconciled source head:** `fc475ef8acfef61be7d4f69cf0e058b121394172`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS`
-**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS`
+**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_FINAL_BOUNDARY_COMPILER_REDUCES_THE_ACCEPTED_BACKING_TO_ONE_RESIDENT_SCALAR_PLUS_ONE_M_CELL_REVERSIBLY_CLEARED_TRANSFORM_SEGMENT_WITHOUT_RETAINING_THE_PUBLIC_KERNEL_SPECTRUM_WITH_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_STREAMING_TWO_M_SPECTRUM_VALUES_COSTS_2M_TIMES_2QMINUS3_KERNEL_TERMS_M_REMAINS_LINEAR_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_REMAINS_AND_THE_IDENTICAL_CLASSICAL_ONE_SEGMENT_COMPILER_HAS_THE_SAME_LAW`
+**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M184_FUSED_COMPILER_LINEAR_TRANSFORM_FRONTIER`
+**New mechanism development:** `ACTIVE_AFTER_M185_BLUESTEIN_STATE_WORK_PARETO_CEILING`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE`
+**Active primary successor:** `CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SHAM_AUGMENTED_SMALL_WALL_TRIAD_WITH_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_ACCOUNTING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -135,6 +135,17 @@ forward, but its two transform segments and exact width still grow linearly,
 and the identical classical fused compiler has the same law. The next repair
 must remove a transform segment without relocating it into retained public
 kernel data or else establish the corresponding state/work Pareto obstruction.
+M185 removes that segment by rematerializing every public kernel-spectrum
+coefficient. The accepted backing falls to `1+M` cells, but each compiler now
+streams `2M(2q-3)` kernel terms and loses subquadratic work. M remains linear,
+M181 retains a fixed ten-cell quadratic stream, and the identical classical
+one-segment recurrence remains. The exact Bluestein route is therefore closed
+at this state/work Pareto ceiling. The selected successor changes the machine
+model: a controlled virtual phase-wave superposition primitive is compared
+against sham and strongest compact-classical paths with modes, bandwidth,
+precision, restoration, and controller traffic counted. It is a diagnostic
+for a distinct phase resource, not evidence that physical waveform hardware
+or a Small Wall crossing already exists.
 
 Every successor must answer:
 
@@ -160,7 +171,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`42d9015d2726d95aa429ec81d747c9eab80d26f3`. The current 184-milestone
+`fc475ef8acfef61be7d4f69cf0e058b121394172`. The current 185-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8347,6 +8358,62 @@ Selected successor:
 
 ```text
 EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
+```
+
+## M185: one-segment execution closes the Bluestein state/work Pareto
+
+Claim:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_FINAL_BOUNDARY_COMPILER_REDUCES_THE_ACCEPTED_BACKING_TO_ONE_RESIDENT_SCALAR_PLUS_ONE_M_CELL_REVERSIBLY_CLEARED_TRANSFORM_SEGMENT_WITHOUT_RETAINING_THE_PUBLIC_KERNEL_SPECTRUM_WITH_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_STREAMING_TWO_M_SPECTRUM_VALUES_COSTS_2M_TIMES_2QMINUS3_KERNEL_TERMS_M_REMAINS_LINEAR_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_REMAINS_AND_THE_IDENTICAL_CLASSICAL_ONE_SEGMENT_COMPILER_HAS_THE_SAME_LAW
+```
+
+The same 14 final boundaries execute with one scalar plus one M-cell exact
+transform segment. Every public kernel-spectrum coefficient is regenerated
+from the `2q-3` nonzero zero-padded chirp-kernel terms and immediately
+consumed; no spectrum vector or Gauss descriptor is retained. Carrier size is
+9 through 129 cells, and only the final scalar remains after forward cleanup.
+
+Each forward or inverse compiler performs four NTTs, `2M log2(M)`
+butterflies, streams `2M` spectrum values, and evaluates exactly
+`2M(2q-3)` kernel terms. Thus one-segment execution changes the accepted work
+law to theta-Mq plus M-log-M plus q. M184 retains `1+2M` cells with
+subquadratic transform work; M181 retains ten cells with theta-q-squared work.
+From q=7 onward M185's 17--129 cells exceed M181's fixed ten-cell workspace.
+M185 is not a new asymptotic state/work Pareto point.
+
+The final scalar survives exact inverse rematerialization. The same list
+backing restores to zero, and an unrelated program reuses it with fresh
+boundary and resource-signature parity. Missing inverse, wrong program,
+frequency-zero omission, null carrier, and forced singular spectrum controls
+discriminate. No snapshot, atomic singular rollback, generation lease, or
+machine-enforced custody is claimed.
+
+The separate oracle imports only frozen M184 oracle field/boundary primitives,
+not successor production code. It uses recursive out-of-place source NTTs and
+direct per-frequency kernel DFT sums, reconstructs all direct Gauss values,
+and directly evaluates the original q=5/q=7 relation. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `INDEPENDENT_ORACLE_REEXECUTION` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+Verification tables and oracle buffers are excluded explicitly from accepted
+production state. Python containers, allocator/native-library memory,
+modular-power bit complexity, and whole-process memory remain outside the
+logical-cell law. The strongest compact classical path is identical, so no
+distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+physical execution, physical-bit replacement, or unbounded computation is
+established.
+
+Exact ceiling:
+
+```text
+FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM
+```
+
+Selected successor:
+
+```text
+CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SHAM_AUGMENTED_SMALL_WALL_TRIAD_WITH_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_ACCOUNTING
 ```
 
 ## 10. Roadmap Maintenance

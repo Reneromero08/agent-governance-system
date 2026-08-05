@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`42d9015d2726d95aa429ec81d747c9eab80d26f3`. The registry assigns one
+`fc475ef8acfef61be7d4f69cf0e058b121394172`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 184-milestone lane is active by user direction. Continue from the
+The current 185-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,23 +53,24 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_FINAL_BOUNDARY_COMPILER_REDUCES_THE_ACCEPTED_BACKING_TO_ONE_RESIDENT_SCALAR_PLUS_ONE_M_CELL_REVERSIBLY_CLEARED_TRANSFORM_SEGMENT_WITHOUT_RETAINING_THE_PUBLIC_KERNEL_SPECTRUM_WITH_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_STREAMING_TWO_M_SPECTRUM_VALUES_COSTS_2M_TIMES_2QMINUS3_KERNEL_TERMS_M_REMAINS_LINEAR_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_REMAINS_AND_THE_IDENTICAL_CLASSICAL_ONE_SEGMENT_COMPILER_HAS_THE_SAME_LAW
 ```
 
 Claim ceiling:
 
 ```text
-FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS
+FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. Fusing
-the final boundary into the exact Bluestein transform removes the resident
-q-minus-one Gauss descriptor and one M-cell product segment. One scalar plus
-two M-cell reversible transform segments remain, ranging from 17 to 257 exact
-field cells over the 14 declared cases. The strongest classical baseline is
-the identical fused compiler. The result is direct-process exact residue
-software, not CATVM custody, a distinct phase resource, computational
+the final boundary into a one-segment exact Bluestein path removes all retained
+Gauss and public-kernel spectrum state. One scalar plus one M-cell reversible
+transform segment remains, ranging from 9 to 129 exact field cells. Streaming
+`2M` spectrum coefficients costs `2M(2q-3)` kernel terms per compiler, loses
+subquadratic work, and adds no asymptotic state/work Pareto point beyond M181
+and M184. The strongest classical baseline is the identical path. The result
+is direct-process exact residue software, not CATVM custody, a distinct phase resource, computational
 advantage, Small Wall crossing, physical waveform execution, replacement of
 physical bits with pi, or unbounded computation.
 
@@ -265,7 +266,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M184_FUSED_COMPILER_LINEAR_TRANSFORM_FRONTIER
+ACTIVE_AFTER_M185_BLUESTEIN_STATE_WORK_PARETO_CEILING
 ```
 
 The named
@@ -274,18 +275,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
+CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SHAM_AUGMENTED_SMALL_WALL_TRIAD_WITH_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_ACCOUNTING
 ```
 
-M184 fuses final-boundary contraction into the exact Bluestein compiler and
-reduces the accepted backing from M183's `q-1+3M` cells to `1+2M`, but both
-transform segments remain linear in q and the identical classical compiler
-has the same law. Test whether one segment can be removed without moving a
-linear public kernel spectrum, inverse history, or answer-bearing table
-outside the carrier. If not, measure the exact state/work Pareto and leave
-this transform route rather than adding more prime fixtures. Preserve
-final-only projection, exact restoration/reuse, and the strongest compact
-classical transform baseline.
+M185 reduces the accepted Bluestein backing to `1+M` without retaining the
+public kernel spectrum, but only by returning to theta-Mq work. M remains
+linear, M181 retains a fixed ten-cell quadratic stream, and the identical
+classical recurrence remains. Do not add another Bluestein variant. Test the
+smallest controlled virtual phase-wave superposition primitive against a sham
+and the strongest compact classical path while counting modes, bandwidth,
+precision, restoration, controller traffic, and software simulation cost.
+Preserve final-only projection and exact or precisely classified restoration;
+do not treat the virtual augmented primitive as physical execution.
 
 ## 7. Native No-Smuggle Law
 
