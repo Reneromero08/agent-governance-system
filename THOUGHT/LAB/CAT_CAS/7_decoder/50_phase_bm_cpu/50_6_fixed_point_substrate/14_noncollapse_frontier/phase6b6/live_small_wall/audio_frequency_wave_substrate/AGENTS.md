@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`4ad9956a5d709686ac5199a0adec50f5e5411846`. The registry assigns one
+`ea64f51f93f0a84897865756f41e2a7decc08a4a`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 200-milestone lane is active by user direction. Continue from the
+The current 206-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,28 +53,25 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS
+EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK
 ```
 
 Claim ceiling:
 
 ```text
-LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M200
-places the actual M199 source, target, and one persistent 4,389-cell typed
-necklace port inside a non-dumpable no-new-privileges Linux process. Fixed
-binary responses expose only the final boundary after rematerialized inverse,
-same-backing verification, and generation advance. Primary and unrelated
-reuse return 83 and 70 at generation two; a fresh service agrees. Projection,
-early response, wrong type/owner, inverse mutations, mode confusion, null,
-disconnect, and `/proc` inspection controls discriminate. Snapshot parity is
-kept separate as `SNAPSHOT_RELOAD`. This is same-UID process custody, not
-cryptographic, kernel, different-UID, or hardware isolation. The carrier and
-topology still grow, process and verification state add cost, and the
-identical compact classical factor stream remains. No distinct phase
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. The source
+momentum-bracelet basis and target zero-total, reflection-closed position basis
+each have 2,277 coordinates. The existing 577-gate Fourier factorization exits
+the fixed quotient at its first shear, while the direct kernel exposes a full
+2,277-entry row and column and a generic `6 x 6` bosonic permanent. The
+diagnostic does not execute the full direct transform and does not establish a
+universal transform lower bound. M204 exact restoration and reuse and M200
+atomic CATVM custody remain separately valid predecessor results. The
+identical classical transform and vector streams remain. No distinct phase
 resource, advantage, Small Wall crossing, physical execution, physical-bit
 replacement, or unbounded computation is established.
 

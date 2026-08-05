@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_RANK8_PORT_AND_OPERATOR_NO_GO_WITH_DIRECT_QUOTIENT_TRANSFORM_SELECTED`
-**Roadmap version:** `14.71`
+**Status:** `STRICT_SCOPE_FIXED_QUOTIENT_FOURIER_ROUTE_NO_GO_WITH_MOVING_SYMMETRY_FRAME_SELECTED`
+**Roadmap version:** `14.72`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c1f56149596c6f587074500a08f4da2200fc7268`
+**Reconciled source head:** `ea64f51f93f0a84897865756f41e2a7decc08a4a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_PORT_MAP_CHANNEL_OPERATORS_AND_DECLARED_PUBLIC_WEIGHT_FAMILY_EACH_HAVE_RANK8_WITH_NONZERO8X8_STREAMED_WITNESS_MINORS_SO_NO_EXACT_F103_PORT_ENCODING_BELOW8_CELLS_OR_UNIFORM_LINEAR_OPERATOR_QUOTIENT_BELOW8_PRESERVES_THE_DECLARED_FAMILIES_BUT_THE_CERTIFICATES_ARE_IDENTICAL_CLASSICAL_LINEAR_ALGEBRA`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_CHANNELS1_TO8_PUBLIC_FAMILY0_STEPS0_TO7_DIRECT_PROCESS_STREAMED_LINEAR_WITNESS_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M205_RANK8_PORT_AND_OPERATOR_NO_GO_REJECTS_SAME_ALPHABET_PORT_COMPACTION_WHILE_SEARCH_FANOUT_AND_IDENTICAL_CLASSICAL_ALGEBRA_REMAIN`
+**New mechanism development:** `ACTIVE_AFTER_M206_TESTED_FIXED_QUOTIENT_FOURIER_ROUTES_RETAIN_OCCUPATION_DENSE_KERNEL_OR_PERMANENT_WORK_WITH_IDENTICAL_CLASSICAL_ALGEBRA`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_PHASE_BUTTERFLY_CLOSURE_OR_DIRECT2277_CELL_TRANSFORM_NO_GO_WITHOUT74613_OCCUPATION_SCRATCH_DENSE2277_SQUARED_MATRIX_PERMANENT_ENUMERATION_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_TRANSFORM`
+**Active primary successor:** `EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_PHASE_FRAME_CARRIER_OR_POSITION_DIAGONAL_ACTION_NO_GO_WITH_FIXED2277_COEFFICIENTS_COMPACT17_MODE_FRAME_DESCRIPTOR_NO74613_OCCUPATION_EXPANSION_DENSE_QUOTIENT_KERNEL_PERMANENTS_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_FRAME_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c1f56149596c6f587074500a08f4da2200fc7268`. The current 205-milestone
+`ea64f51f93f0a84897865756f41e2a7decc08a4a`. The current 206-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -9611,6 +9611,84 @@ removing per-channel canonical search and fanout without moving material cost
 into the full occupation sector, a dense quotient transform, permanent
 enumeration, or a retained plan. It must retain the identical classical
 transform as the matched baseline and preserve M204 restoration separately.
+
+## M206: equal quotient dimensions do not close either tested Fourier route
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK
+```
+
+The momentum bracelet carrier and the zero-total-coordinate,
+reflection-closed position sector each contain exactly 2,277 F103
+coordinates. The equality is exact: the full exchange-symmetric occupation
+space has 74,613 cells, its zero-total position sector has 4,389 cells, and
+reflection closure leaves 2,277.
+
+The existing M201 Gaussian-elimination Fourier network has 288 forward and
+289 inverse elementary gates. Its first forward gate is the nonzero shear
+`(15,16,10)`. On the degree-six rotation orbit sum that gate creates a
+coefficient mismatch `6 * 10 = 60 mod 103`; its single-particle rotation
+commutator has two nonzero entries. The existing gate sequence therefore
+cannot execute gate by gate in the fixed canonical 2,277-coordinate quotient.
+This is not a claim against every possible structured transform.
+
+The direct quotient kernel is also exact but not sparse in the coordinate
+basis. The all-six-at-position-zero target gives one row with all 2,277
+entries nonzero. The all-six-at-momentum-zero source gives one column whose
+2,277 entries all equal 17. A generic entry is a repeated `6 x 6` Fourier
+minor permanent; the production 64-state subset DP and an independent
+720-assignment formula both return 65.
+
+Retaining the full direct kernel would require 5,184,729 field cells.
+Streaming every entry would require 5,184,729 kernel evaluations and has a
+declared maximum of 331,822,656 subset states. The accepted diagnostic
+executes the full row, full column, and generic-entry certificates only. It
+does not execute the complete transform or represent those route costs as a
+universal lower bound.
+
+The independent oracle imports no CAT_CAS module. It separately rebuilds the
+74,613/4,389/2,277 topology, evaluates the kernel through Ryser's formula,
+reconstructs both full-vector commitments, derives the first gate from the
+public order-17 Fourier matrix, and confirms the generic permanent by all 720
+assignments. A wrong-total-coordinate target cancels exactly under the source
+rotation orbit; dropping the orbit factor changes the dense-column value from
+17 to 1.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M204 execution,
+exact restoration, and reuse remain separately valid. The matched baselines
+are the identical direct bosonic-kernel recurrence, M201's identical
+74,613-cell elementary transform, and M204's identical eight-channel vector
+stream.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY
+```
+
+No full direct quotient transform, universal structured-transform no-go,
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_PHASE_FRAME_CARRIER_OR_POSITION_DIAGONAL_ACTION_NO_GO_WITH_FIXED2277_COEFFICIENTS_COMPACT17_MODE_FRAME_DESCRIPTOR_NO74613_OCCUPATION_EXPANSION_DENSE_QUOTIENT_KERNEL_PERMANENTS_OR_RETAINED_PLAN_AND_WITH_IDENTICAL_CLASSICAL_FRAME_RECURRENCE
+```
+
+This is a final structural repair attempt for the current Rotor-6 transform
+obstruction, not authorization for more rotor counts, channels, or fixture
+sizes. It must let the symmetry frame follow the public Fourier gates while
+retaining exactly 2,277 coefficients and a compact 17-mode frame descriptor,
+then make the public position-diagonal action close without reintroducing the
+74,613-cell occupation sector, dense quotient kernel, permanent evaluation,
+or a retained basis plan. If the diagonal action still requires that basis
+change, preserve the negative result and leave this rotor route for a
+different phase coupling law.
 
 ## 10. Roadmap Maintenance
 

@@ -1,0 +1,81 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_F103_ROTOR6_MOMENTUM_BRACELET_AND_ZERO_TOTAL_REFLECTION_CLOSED_POSITION_SECTORS_BOTH_HAVE2277_CELLS_BUT_THE_STANDARD577_GATE_BOSONIC_FOURIER_NETWORK_EXITS_THE_FIXED_QUOTIENT_AT_ITS_FIRST_SHEAR_AND_THE_DIRECT_QUOTIENT_KERNEL_HAS_A_FULL2277_ENTRY_ROW_AND_COLUMN_WITH_GENERIC_ENTRIES_EQUAL_TO6X6_FOURIER_PERMANENTS_SO_THE_TESTED_ROUTES_DO_NOT_REMOVE_M204_SEARCH_AND_FANOUT_WITHOUT_OCCUPATION_SCRATCH_DENSE_KERNEL_RETENTION_OR_STREAMED_PERMANENT_WORK",
+  "scientific_source_commit": "ea64f51f93f0a84897865756f41e2a7decc08a4a",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_STATIC_FORWARD_KERNEL_AND_COMPILED_GAUSSIAN_ELIMINATION_FOURIER_NETWORK_DIAGNOSTIC_ONLY",
+  "files": {
+    "production": {
+      "path": "growing_rotor_dihedral_quotient_bosonic_fourier_diagnostic.py",
+      "sha256": "579d95562c92393ca250857aaa022d6f79cd9294cfed8a0b22137c2528c4a2e6"
+    },
+    "independent_oracle": {
+      "path": "growing_rotor_dihedral_quotient_bosonic_fourier_independent_oracle.py",
+      "sha256": "27ca4e6e6a82fd20e59d8047352bc80fbd5c0c9d98e77602279d03dba36b9673"
+    },
+    "results": {
+      "path": "GROWING_ROTOR_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_RESULTS.json",
+      "sha256": "26f4cb9724bf993742a28b8b15dbc0b652dadeb425636632c2ca414e9ddd3bcb"
+    },
+    "independent_oracle_results": {
+      "path": "GROWING_ROTOR_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_INDEPENDENT_ORACLE.json",
+      "sha256": "f2de540681a7c5cc621cc04f34898cdc8f7f7644f8119555c40398ab85e5c912"
+    },
+    "review": {
+      "path": "GROWING_ROTOR_DIHEDRAL_QUOTIENT_BOSONIC_FOURIER_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "5c9be311deca16c5d7eab4b50ce1f9eb41b620dea436df1e066751ec977013a2"
+    },
+    "qualifier": {
+      "path": "qualify_growing_rotor_dihedral_quotient_bosonic_fourier.sh",
+      "sha256": "3b44c0d92806693e053aefc94b7f1a6338a89490cad54491eb190c410e396f87"
+    }
+  },
+  "predecessor_evidence": {
+    "m201_position_dual_results": {
+      "path": "GROWING_ROTOR_DUAL_POSITION_PHASE_SCATTERING_RESULTS.json",
+      "sha256": "816759e790ab59b466d14667fb93f21344e1da5f7b6d9823844cbf528073c74d"
+    },
+    "m204_coherent_wave_results": {
+      "path": "GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_RESULTS.json",
+      "sha256": "20a869f62e26fd7801540adc057a0454f8ccfc6e698011f477e2991023597e61"
+    },
+    "m205_rank_results": {
+      "path": "GROWING_ROTOR_MOMENTUM_CHANNEL_RANK_RESULTS.json",
+      "sha256": "545c2e45305bbc015c366c0d717683c24a354021c374d2ab5f3d69cbf5f06bd7"
+    }
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "occupation_histograms_enumerated": 74613,
+    "momentum_bracelets_enumerated": 2277,
+    "zero_total_position_occupations_enumerated": 4389,
+    "reflection_closed_position_cells_enumerated": 2277,
+    "permanent_formula": "RYSER_WITH_SEPARATE720_ASSIGNMENT_PARITY",
+    "first_fourier_gate": [
+      "SHEAR",
+      15,
+      16,
+      10
+    ]
+  },
+  "controls": [
+    "WRONG_TOTAL_COORDINATE_ORBIT_CANCELLATION",
+    "DROPPED_SOURCE_ORBIT_FACTOR",
+    "ZERO_FIRST_SHEAR_FACTOR",
+    "SUBSET_DP_RYSER_AND720_ASSIGNMENT_PERMANENT_PARITY"
+  ],
+  "claim_limits": {
+    "complete_2277_by_2277_transform_executed": false,
+    "universal_structured_transform_lower_bound_established": false,
+    "m204_restoration_and_reuse_are_separate_predecessor_evidence": true,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "unbounded_catalytic_computation": false
+  }
+}
