@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `SOURCE_LOCAL_MOVING_FRAME_REDUCTION_WITH_CONTINUOUS_S1_RELATION_PHASE_COUPLING_SELECTED`
-**Roadmap version:** `14.73`
+**Status:** `STRICT_CONTINUOUS_S1_OPEN_RELATION_CLOSURE_WITH_GROWING_HANKEL_RANK_AND_THETA_PHASE_CHART_SELECTED`
+**Roadmap version:** `14.74`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `bdd918ee0f4431db34c820850ff6b7733ad3cef7`
+**Reconciled source head:** `0c5979379369e571227e87806b360be228eb7887`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY`
-**Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M207_MOVING_FRAME_CLOSES_ONLY_BY_REUSING_M204_CONJUGATE_AND_ROTOR_ROUTE_IS_CLOSED`
+**Current highest milestone:** `EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_COMPOSES_BY_HARMONIC_HADAMARD_ROTATION_AND_INTERSECTS_BY_LAURENT_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_THE_DECLARED_DEPTH_D_FAMILY_HAS_REDUCED_NUMERATOR_DEGREE_AND_FINITE_SUPPORT_HANKEL_RANK_DPLUS2_WHILE_A_MATCHED_PUBLIC_WORD_FINAL_BOUNDARY_STREAM_USES_TWO_RESIDENT_AND_FOUR_WARM_NAMED_GAUSSIAN_RATIONAL_CELLS`
+**Current claim ceiling:** `ANALYTIC_NONNEGATIVE_HARMONIC_TRANSLATION_INVARIANT_S1_KERNELS_WITH_ONE_PUBLIC_GAUSSIAN_RATIONAL_SOURCE_FACTOR_TWO_ROTATIONS_TWO_LINEAR_INTERSECTION_FACTORS_DECLARED_PROGRAM_FAMILIES_DEPTHS1_TO64_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY`
+**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
+**New mechanism development:** `ACTIVE_AFTER_M208_CONTINUOUS_S1_RELATION_CARRIER_CLOSES_EXACTLY_BUT_FULL_RELATION_HANKEL_RANK_GROWS_WHILE_FINAL_BOUNDARY_STREAMS_IN_CONSTANT_LOGICAL_CELLS`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_WITH_NATIVE_COMPOSITION_BY_HARMONIC_HADAMARD_AND_INTERSECTION_BY_HARMONIC_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED_RATIONAL_CHART_CLOSURE_OR_SUPPORT_RANK_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -9757,6 +9757,77 @@ final-only projection, exact restoration and reuse, count coefficient width
 and rematerialization, and retain the strongest sparse Laurent classical
 recurrence. Finite angular sampling, hidden truth tables, and another finite
 cyclic-group fixture do not qualify.
+
+## M208: exact continuous-circle relations close, but the full relation grows
+
+Claim:
+
+```text
+EXACT_CONTINUOUS_S1_TRANSLATION_INVARIANT_OPEN_PHASE_RELATION_LAURENT_CARRIER_COMPOSES_BY_HARMONIC_HADAMARD_ROTATION_AND_INTERSECTS_BY_LAURENT_CONVOLUTION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_PROJECTION_EXACT_RESTORATION_REUSE_BUT_THE_DECLARED_DEPTH_D_FAMILY_HAS_REDUCED_NUMERATOR_DEGREE_AND_FINITE_SUPPORT_HANKEL_RANK_DPLUS2_WHILE_A_MATCHED_PUBLIC_WORD_FINAL_BOUNDARY_STREAM_USES_TWO_RESIDENT_AND_FOUR_WARM_NAMED_GAUSSIAN_RATIONAL_CELLS
+```
+
+M208 leaves finite cyclic fixtures. It represents analytic
+translation-invariant relations on the continuous circle by exact Gaussian-
+rational Laurent coefficients. Composition with a public Dirac rotation is
+harmonic Hadamard multiplication; intersection with a public linear kernel is
+Laurent convolution. One owner-typed angle port remains unresolved across
+multiple noncommuting consumers and is projected only at the final scalar
+boundary.
+
+The public inverse word exactly restores the same coefficient-list backing,
+clears the live port, advances restoration generation to two, and permits an
+unrelated program to reuse the actual restored carrier. No snapshot or
+retained inverse history is used. Wrong owner, wrong operation type, premature
+projection, missing inverse, reordered inverse, null carrier, module-order,
+and semantic-perturbation controls discriminate.
+
+The declared family does not close at fixed rank. A depth-`d` word has reduced
+numerator degree `d+1`, `d+2` retained coefficients, and finite-support Hankel
+rank `d+2`. At depth 64, family zero retains 66 exact coefficients with
+1,121,831 payload bits, maximum numerator width 6,334 bits, and maximum
+denominator width 6,332 bits. The public program has 128 operation records and
+256 descriptor slots, with no additional retained plan.
+
+The strongest full-relation classical baseline is the identical sparse
+Laurent recurrence. More decisively, the declared final boundary streams from
+the public word using two resident and four warm named Gaussian-rational cells.
+Thus full-relation retention is the measured defect; the boundary does not
+require the growing carrier.
+
+A no-production-import oracle independently reconstructs both program
+families at depths 1, 2, 4, 8, 16, 32, and 64 using generic polynomial
+convolution, direct power sums, leading-coefficient long division, and a
+factored suffix formula. It reproduces every coefficient commitment, boundary
+commitment, rank, payload tuple, restoration, and reuse result.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+ANALYTIC_NONNEGATIVE_HARMONIC_TRANSLATION_INVARIANT_S1_KERNELS_WITH_ONE_PUBLIC_GAUSSIAN_RATIONAL_SOURCE_FACTOR_TWO_ROTATIONS_TWO_LINEAR_INTERSECTION_FACTORS_DECLARED_PROGRAM_FAMILIES_DEPTHS1_TO64_PRIMARY64_REUSE37_DIRECT_PROCESS_ONLY
+```
+
+This does not establish general continuous-S1 relation closure, fixed-rank
+unbounded-depth closure, CATVM custody, a distinct phase resource,
+computational advantage, Small Wall crossing, physical execution, physical-
+bit replacement, catalytic inference, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE
+```
+
+The successor changes the relation family rather than retaining a larger
+Laurent polynomial. Wrapped-Gaussian heat kernels have Fourier coefficients
+of the form `q^(n^2) u^n`, so composition closes by parameter multiplication
+or exponent addition. The experiment must determine whether intersection
+closes in a fixed number of theta parity fibers or merely moves growth into
+fiber count, parameters, coefficient height, or rematerialization. It must
+remain on continuous `S1`, preserve the unresolved shared port and exact
+restoration/reuse, and compare against the strongest matched theta recurrence.
 
 ## 10. Roadmap Maintenance
 

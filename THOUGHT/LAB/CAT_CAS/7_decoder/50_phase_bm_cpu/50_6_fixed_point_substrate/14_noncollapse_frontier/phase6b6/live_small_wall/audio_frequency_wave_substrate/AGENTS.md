@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`bdd918ee0f4431db34c820850ff6b7733ad3cef7`. The registry assigns one
+`0c5979379369e571227e87806b360be228eb7887`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 207-milestone lane is active by user direction. Continue from the
+The current 208-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -268,7 +268,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M200_ATOMIC_OPEN_MOMENTUM_CATVM_CUSTODY
+ACTIVE_AFTER_M208_CONTINUOUS_S1_RELATION_CARRIER_CLOSES_EXACTLY_BUT_FULL_RELATION_HANKEL_RANK_GROWS_WHILE_FINAL_BOUNDARY_STREAMS_IN_CONSTANT_LOGICAL_CELLS
 ```
 
 The named
@@ -277,17 +277,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_F103_ROTOR6_DUAL_POSITION_PHASE_DIAGONAL_SCATTERING_CLOSURE_OR_FULL_SECTOR_TRANSFORM_NO_GO_WITHOUT_4389_CELL_OPEN_PORT_DENSE2277_SQUARED_OPERATOR_OR_PERMANENT_ENUMERATION_AND_WITH_IDENTICAL_CLASSICAL_BASELINE
+EXACT_CONTINUOUS_S1_WRAPPED_GAUSSIAN_THETA_PHASE_RELATION_CHART_WITH_COMPOSITION_PARAMETER_ADDITION_AND_INTERSECTION_PARITY_FIBER_CLOSURE_OR_GROWTH_ON_ONE_SHARED_UNRESOLVED_PORT_EXACT_RESTORATION_REUSE_AND_MATCHED_THETA_CLASSICAL_RECURRENCE
 ```
 
-M200 closes the immediate machine-custody defect. Do not add another CATVM
-wrapper or rotor fixture. The remaining obstruction is phase-owned: the
-4,389-cell open port and its topology grow, while the identical classical
-factor stream has the same law. Test the exact position-dual identity that
-diagonalizes translation-paired scattering, but accept it only if the
-2,277-cell sector transform avoids a dense 2,277-squared operator, permanent
-enumeration, or relocation into the 74,613-cell occupation space. Preserve
-exact restoration/reuse and the strongest identical classical transform.
+M208 establishes exact analytic continuous-S1 open-relation composition and
+intersection on one unresolved port, but its full Laurent relation has degree
+and finite-support Hankel rank `d+2`. The same declared final boundary streams
+with two resident and four warm Gaussian-rational cells. Do not add Laurent
+depth fixtures or return to rotor variants. Test whether a wrapped-Gaussian
+theta relation family closes composition by parameter addition and
+intersection in a fixed number of parity fibers, or whether rank, fiber count,
+coefficient width, or rematerialization still grows. Preserve continuous-S1
+semantics, exact restoration/reuse, and the strongest matched theta recurrence.
 
 ## 7. Native No-Smuggle Law
 
