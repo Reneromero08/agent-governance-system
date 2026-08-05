@@ -1305,3 +1305,50 @@ STATUS:
     way - program-level conclusion unchanged.
   - The selective-BF16 confirmation path is closed unless the true
     source revision can be identified (diminishing returns).
+
+## 2026-08-05 — Sol's MOE-2/3 review: VALID, next = expert-axis centroid/Gram test
+
+Sol verdict: findings VALID for the published Q8 artifact. Accept the
+shared-subspace verdict; DO NOT chase the mismatched BF16 revision.
+Defensible experimental object: "the exact, hashed
+Qwen3.6-14B-A3B-FableVibes-Q8_0.gguf artifact as published" - preserve
+filename/size/hash/metadata as the experimental identity. Dominant
+conclusion not Q8-noise-sensitive (D95 1900 -> 768 would need a radical
+transformation). L0-down wording: "contains a strong shared DC mode in
+the published Q8 weights; its source is unresolved" (mean subtraction
+shows WHERE not WHO; 50x zero-count supports outlier/scale interaction;
+0.19% mass - negligible either way).
+
+SUPPORTED CLAIMS (1-5): near-full-rank experts; no common basis; median
+affinity 0.266 ~ random 0.25; weakly spiked random-like bulk; negligible
+L0 DC mass. OVERREACH: "weight-level compression is exhausted" - TWO
+weight-level surfaces unmeasured:
+
+A. EXPERT-AXIS TENSOR RANK: X = [vec(W_1); ...; vec(W_90)] (90 x N),
+   90x90 Gram WITHOUT materializing NxN; raw AND centered
+   (W_bar = (1/90)sum W_e, delta W_e = W_e - W_bar). Report: centroid
+   energy share, centered-Gram effective rank, expert-axis
+   D_50/90/95/99, pairwise Frobenius correlations, cluster structure,
+   residual spectra after centroid subtraction.
+   PREDECLARED THRESHOLDS: strong D95<=16; partial 16<D95<=32; none
+   D95>=72. Per family (gate/up/down) THEN the concatenated
+   gate/up/down triplet (intermediate neurons permutable jointly).
+B. DISCRETE CLUSTERS: single global basis can fail while compact expert
+   families exist - within-cluster projector affinity vs 0.266,
+   cluster-specific D95. Run only if Gram/pairwise shows structure.
+
+C. FUNCTIONAL TRACE: still worthwhile - weight flatness != functional
+   rank under routed activations; router may send narrow anisotropic
+   input distributions. Truncation ranks 16..512 on ACTUAL routed
+   inputs; per-expert + routing-frequency-weighted output cos/rel
+   error/worst-decile. Synthetic inputs insufficient (isotropic
+   restates SVD energy). Cleanest: instrument llama.cpp for the exact
+   GGUF (layer-normalized MoE input, selected expert IDs, router
+   weights, token/layer indices) then offline replay.
+
+ORDERED NEXT STEPS: 1) accept+document Q8 verdict; 2) drop BF16
+revision; 3) expert-axis centroid/Gram test (NOW); 4) cluster test
+only if Gram shows structure; 5) instrument GGUF + routed k-curve.
+STATUS: 'one shared expert subspace' FALSIFIED; individual expert
+low-rank compression strongly disfavored; expert-axis templates,
+clusters, activation-conditioned routing remain OPEN.
