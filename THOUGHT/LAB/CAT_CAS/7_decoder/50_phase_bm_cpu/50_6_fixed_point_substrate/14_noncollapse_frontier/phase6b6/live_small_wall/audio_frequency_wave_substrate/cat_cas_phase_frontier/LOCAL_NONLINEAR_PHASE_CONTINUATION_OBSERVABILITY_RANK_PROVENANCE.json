@@ -1,0 +1,29 @@
+{
+  "schema": "CAT_CAS_LOCAL_NONLINEAR_PHASE_CONTINUATION_OBSERVABILITY_RANK_PROVENANCE_V1",
+  "scientific_source_head": "5bf58e581bcb92d2404ed3f454041e83553abfe9",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_COMPLEX128_VIRTUAL_PHASE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "restoration_scope": "UNDERLYING_IN_PLACE_VIRTUAL_COMPLEX_PHASE_TRANSACTION_ONLY",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_local_nonlinear_phase_continuation_observability_rank.sh",
+    "status": "QUALIFIED_LOCAL_NONLINEAR_PHASE_CONTINUATION_OBSERVABILITY_RANK_STRICT_SCOPE",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "dependencies": {
+    "controlled_local_interference_feedback_phase_coupling.py": "5852480a86abdf9b11874741ec05366ced0dbac8a87c6685cc680d96ff7093f5"
+  },
+  "files": {
+    "local_nonlinear_phase_continuation_observability_rank.py": "721109d49a52765336c27db98d1854c81893cced89c8d50cc5be04584646dd53",
+    "local_nonlinear_phase_continuation_observability_rank_independent_oracle.py": "6f98a237a40c488f2fcbee5129cce09149a9126d19e296f4b00462ab1a321e6e",
+    "LOCAL_NONLINEAR_PHASE_CONTINUATION_OBSERVABILITY_RANK_RESULTS.json": "264bcdd88a7d8e01fee6d422f6a090e7d28b7e3b36307d1b615fd485042b0de6",
+    "LOCAL_NONLINEAR_PHASE_CONTINUATION_OBSERVABILITY_RANK_INDEPENDENT_ORACLE.json": "04e2426d96e95b9ba80464c45b0029d058ca6169b8cabbfb632201519470d70f",
+    "LOCAL_NONLINEAR_PHASE_CONTINUATION_OBSERVABILITY_RANK_INDEPENDENT_REEXECUTION_REVIEW.md": "577490db245d55bc7b332a416dbcefffef53320f3a9199e6c7bb4b835207e400",
+    "qualify_local_nonlinear_phase_continuation_observability_rank.sh": "0980423738a666b2f5824390445cc30febeadf5fb57532b2f1e860c60897a4ac"
+  },
+  "claim_ceiling": "N4_N8_N16_ONE_DECLARED_NORM_ONE_RESIDENT_CHART_PER_WIDTH_N_PUBLIC_ONE_LAYER_SUFFIXES_FIXED_FINAL_WEIGHT_RELATIVE_RANK_TOLERANCE1E_MINUS9_DIRECT_PROCESS_COMPLEX128_LOCAL_DIFFERENTIABLE_OBSERVABILITY_ONLY"
+}

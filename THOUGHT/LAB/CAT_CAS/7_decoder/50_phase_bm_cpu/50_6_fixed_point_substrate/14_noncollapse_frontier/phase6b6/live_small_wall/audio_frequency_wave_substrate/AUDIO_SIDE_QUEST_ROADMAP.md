@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_LOCAL_NONLINEAR_PHASE_FULL_STATE_COLLAPSE`
-**Roadmap version:** `14.53`
+**Status:** `STRICT_SCOPE_LOCAL_NONLINEAR_PHASE_FULL_OBSERVABILITY`
+**Roadmap version:** `14.54`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3b6469210f533fffe58bb17a5113fcc10c545ded`
+**Reconciled source head:** `5bf58e581bcb92d2404ed3f454041e83553abfe9`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
-**Current claim ceiling:** `FOUR_DECLARED_WIDTH_DEPTH_PAIRS_8_8_THROUGH64_64_COMPLEX128_DIRECT_PROCESS_LOCAL_BRICKWORK_COUPLER_AND_INTENSITY_FEEDBACK_TRANSACTIONS_WITH_N_MODES_N_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE`
+**Current highest milestone:** `BOUNDED_ANALYTIC_LOCAL_CONTINUATION_OBSERVABILITY_DIAGNOSTIC_FOR_THE_REVERSIBLE_INTERFERENCE_FEEDBACK_PHASE_LAW_REACHES_FULL_TANGENT_RANK_2NMINUS1_ON_THE_DECLARED_N4_N8_N16_NORM_ONE_RESIDENT_CHARTS_UNDER_N_PUBLIC_ONE_LAYER_SUFFIX_BOUNDARIES_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_REJECTING_ONLY_SMALLER_REGULAR_DIFFERENTIABLE_LOCAL_QUOTIENTS_FOR_THOSE_CONTINUATIONS_WHILE_QUADRATIC_VERIFICATION_STATE_AND_THE_IDENTICAL_CLASSICAL_FULL_STATE_RECURRENCE_REMAIN`
+**Current claim ceiling:** `N4_N8_N16_ONE_DECLARED_NORM_ONE_RESIDENT_CHART_PER_WIDTH_N_PUBLIC_ONE_LAYER_SUFFIXES_FIXED_FINAL_WEIGHT_RELATIVE_RANK_TOLERANCE1E_MINUS9_DIRECT_PROCESS_COMPLEX128_LOCAL_DIFFERENTIABLE_OBSERVABILITY_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M187_LOCAL_NONLINEAR_PHASE_FULL_STATE_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M188_LOCAL_NONLINEAR_PHASE_FULL_OBSERVABILITY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE`
+**Active primary successor:** `COMPACT_EXCHANGE_SYMMETRIC_TWO_BODY_PHASE_INTERACTION_CLOSURE_ON_NECKLACE_CARRIER_WITH_NONCOMMUTING_OCCUPATION_PHASE_AND_GIVENS_MODULES_AND_MATCHED_BOSONIC_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3b6469210f533fffe58bb17a5113fcc10c545ded`. The current 187-milestone
+`5bf58e581bcb92d2404ed3f454041e83553abfe9`. The current 188-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS
+BOUNDED_ANALYTIC_LOCAL_CONTINUATION_OBSERVABILITY_DIAGNOSTIC_FOR_THE_REVERSIBLE_INTERFERENCE_FEEDBACK_PHASE_LAW_REACHES_FULL_TANGENT_RANK_2NMINUS1_ON_THE_DECLARED_N4_N8_N16_NORM_ONE_RESIDENT_CHARTS_UNDER_N_PUBLIC_ONE_LAYER_SUFFIX_BOUNDARIES_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_REJECTING_ONLY_SMALLER_REGULAR_DIFFERENTIABLE_LOCAL_QUOTIENTS_FOR_THOSE_CONTINUATIONS_WHILE_QUADRATIC_VERIFICATION_STATE_AND_THE_IDENTICAL_CLASSICAL_FULL_STATE_RECURRENCE_REMAIN
 ```
 
 Not established:
@@ -8540,6 +8540,72 @@ Selected successor:
 
 ```text
 COMPACT_LOCAL_NONLINEAR_PHASE_CONTINUATION_MESSAGE_CLOSURE_OR_FULL_REGULAR_OBSERVABILITY_RANK_NO_GO_WITH_ANALYTIC_TANGENT_AND_INDEPENDENT_FINITE_DIFFERENCE_ORACLE
+```
+
+## M188: local continuation observability reaches the full norm-one tangent
+
+Claim:
+
+```text
+BOUNDED_ANALYTIC_LOCAL_CONTINUATION_OBSERVABILITY_DIAGNOSTIC_FOR_THE_REVERSIBLE_INTERFERENCE_FEEDBACK_PHASE_LAW_REACHES_FULL_TANGENT_RANK_2NMINUS1_ON_THE_DECLARED_N4_N8_N16_NORM_ONE_RESIDENT_CHARTS_UNDER_N_PUBLIC_ONE_LAYER_SUFFIX_BOUNDARIES_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_REJECTING_ONLY_SMALLER_REGULAR_DIFFERENTIABLE_LOCAL_QUOTIENTS_FOR_THOSE_CONTINUATIONS_WHILE_QUADRATIC_VERIFICATION_STATE_AND_THE_IDENTICAL_CLASSICAL_FULL_STATE_RECURRENCE_REMAIN
+```
+
+For n=4, 8, and 16, the depth-n M187 prefix produces one declared norm-one
+resident chart. Exactly n public one-layer suffix programs are compiled
+without inspecting ranks, singular values, or expected boundaries. Streaming
+the complex final boundary and its tangent supplies a `2n x (2n-1)` real
+observability matrix. At the predeclared relative rank tolerance `1e-9`, the
+analytic ranks are 7/7, 15/15, and 31/31. Minimum retained singular values are
+approximately `4.87e-3`, `4.25e-5`, and `9.26e-8`; the n=16 threshold is
+approximately `4.02e-9`. Condition numbers rise to approximately `4.34e7`, so
+the certificate remains numerical and chart-local.
+
+Removing the final suffix gives ranks 6, 14, and 30; duplicating one suffix
+gives rank 2; and zero feedback changes every analytic matrix. A standalone
+oracle imports neither the M187 engine nor the analytic diagnostic. It
+reconstructs the public recurrence and uses centered normalized perturbations
+at epsilon `1e-6`, independently reproducing ranks 7, 15, and 31. Its worst
+relative singular-value deviation is `6.30e-4` at n=16, and selected final
+boundaries agree within `1.25e-16`.
+
+The underlying accepted transaction retains n+2 logical complex cells and
+uses `4(n^2+n)` couplers plus the same number of feedback operations across
+the primary and unrelated-reuse forward/inverse lifecycles. The verification
+certificate separately retains `6n(2n-1)+10n-1` named real scalars, or 207,
+799, and 3,135, plus public descriptors. Finite-difference execution uses 56,
+240, and 992 forward evaluations for the primary matrices plus equal
+zero-feedback controls. SVD/native-library workspace, Python containers,
+allocator details, arithmetic temporaries, and whole-process memory are
+excluded and disclosed.
+
+The actual prefix and suffix are reversed on the same backing. Primary
+restoration error remains below `6.34e-16`, unrelated-reuse restoration below
+`8.53e-16`, and 64-cycle drift below `1.10e-14`. This is
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` only for virtual complex coordinates,
+not exact algebraic restoration and not CATVM-enforced custody.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+Full local tangent observability rejects only lower-dimensional regular
+differentiable local quotients that preserve all declared continuation
+boundaries near these exact resident charts. It is not an algorithmic memory
+lower bound and does not reject singular, discontinuous, program-restricted,
+approximate, global, or nonlocal representations. The identical n-complex
+classical full-state recurrence remains. No distinct phase resource,
+computational advantage, Small Wall crossing, CATVM custody, physical
+waveform execution, replacement of physical bits with pi, or unbounded
+catalytic computation is established.
+
+Exact ceiling:
+
+```text
+N4_N8_N16_ONE_DECLARED_NORM_ONE_RESIDENT_CHART_PER_WIDTH_N_PUBLIC_ONE_LAYER_SUFFIXES_FIXED_FINAL_WEIGHT_RELATIVE_RANK_TOLERANCE1E_MINUS9_DIRECT_PROCESS_COMPLEX128_LOCAL_DIFFERENTIABLE_OBSERVABILITY_ONLY
+```
+
+Selected successor:
+
+```text
+COMPACT_EXCHANGE_SYMMETRIC_TWO_BODY_PHASE_INTERACTION_CLOSURE_ON_NECKLACE_CARRIER_WITH_NONCOMMUTING_OCCUPATION_PHASE_AND_GIVENS_MODULES_AND_MATCHED_BOSONIC_CLASSICAL_BASELINE
 ```
 
 ## 10. Roadmap Maintenance
