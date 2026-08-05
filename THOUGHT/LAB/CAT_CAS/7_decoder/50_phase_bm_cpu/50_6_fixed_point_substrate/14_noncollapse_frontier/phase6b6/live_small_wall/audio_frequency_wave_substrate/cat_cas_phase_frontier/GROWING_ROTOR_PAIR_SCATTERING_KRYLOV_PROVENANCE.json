@@ -1,0 +1,28 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_PAIR_SCATTERING_KRYLOV_PROVENANCE_V1",
+  "scientific_source_head": "62a8b2c30b8363939f9e8af6ce9ac2803bf63c66",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_COMPLEX128_AND_EXACT_FINITE_FIELD_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "restoration_scope": "IN_PLACE_VIRTUAL_COMPLEX_NECKLACE_CARRIERS_AT_ROTOR_COUNTS2_TO5",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_pair_scattering_krylov_diagnostic.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_PAIR_SCATTERING_KRYLOV_DIAGNOSTIC_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false,
+    "undefined_behavior_sanitizer": "PASS"
+  },
+  "files": {
+    "growing_rotor_pair_scattering_krylov_diagnostic.cpp": "8965045055af2014ab9a2025e164e81b8509397f8ad6998bc5de20ff6909e05d",
+    "growing_rotor_pair_scattering_krylov_independent_oracle.py": "36ed14361c4c3f00da7e38fe13e4d493b02e4a60f9272230d87d9938712c8a3a",
+    "GROWING_ROTOR_PAIR_SCATTERING_KRYLOV_RESULTS.json": "ef317059c953bf274ba5f9b393c8a3d25699c916ccf9f6995514ec5cec557018",
+    "GROWING_ROTOR_PAIR_SCATTERING_KRYLOV_INDEPENDENT_ORACLE.json": "200351894e7e9778a255a811576785f3c18c9ec3f16bad6a96e6a00a8835e12e",
+    "GROWING_ROTOR_PAIR_SCATTERING_KRYLOV_INDEPENDENT_REEXECUTION_REVIEW.md": "1bb1edd5be2e28914110e354c82b418bbe57b7faaec3a692d03f51a0ddee77b7",
+    "qualify_growing_rotor_pair_scattering_krylov_diagnostic.sh": "d7a6a57cdef8255184ee129ee95d21efe1a044588f0f0097ae3c07fa51a129b2"
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

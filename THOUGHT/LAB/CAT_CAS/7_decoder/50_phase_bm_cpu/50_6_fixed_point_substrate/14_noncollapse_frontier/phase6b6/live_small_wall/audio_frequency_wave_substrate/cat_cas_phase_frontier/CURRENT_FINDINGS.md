@@ -10526,3 +10526,48 @@ Next:
 ```text
 GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
 ```
+
+## M191 growing necklace recurrence has no stable observed linear quotient
+
+The completed strict claim is:
+
+```text
+BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
+```
+
+The M190 off-diagonal scattering plus diagonal pair-phase machine now runs at
+rotor counts two through five. Exact free global-rotation orbits give necklace
+dimensions `9`, `57`, `285`, and `1197`; the free-orbit division applies only
+for rotor count strictly below seventeen.
+
+Exact scalar Berlekamp--Massey degrees for the public `K*D` word are
+`9/9`, `57/57`, `284/284`, and `1182/1190` over F103/F137. The last deficit
+is prime-dependent and therefore does not define a stable transferable
+recurrence quotient. These scalar sequences do not exclude nonlinear,
+singular, approximate, or program-restricted charts.
+
+A no-production Python oracle separately reconstructs all occupation and
+necklace topology, exact weighted Hermiticity, sparse exponential evolution,
+and exact finite-field recurrence degrees. Primary boundaries agree within
+`5.8e-16`. Missing, wrong, and reordered inverse controls reproduce within
+`1.2e-15`. Production primary and reuse restoration stay below `1.92e-15`,
+and sixteen-cycle drift is `8.50e-15`.
+
+The accepted production carrier grows with the necklace law; at five rotors
+it holds 1197 complex cells and 3591 temporary Chebyshev cells plus public
+topology and at most one 68,997-entry scattering plan. Inverse plans are
+rematerialized and no forward plan history is retained. The strongest compact
+classical path is the identical growing necklace recurrence. Allocator,
+container, native-library, timing, and whole-process peaks are excluded.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION`. No CATVM custody, stable exact complex
+quotient, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES
+```

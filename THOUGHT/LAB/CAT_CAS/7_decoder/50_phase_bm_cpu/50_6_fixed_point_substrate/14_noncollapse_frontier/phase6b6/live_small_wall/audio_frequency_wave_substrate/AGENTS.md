@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`. The registry assigns one
+`62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 190-milestone lane is active by user direction. Continue from the
+The current 191-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,31 +53,31 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
+BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `INDEPENDENT_ORACLE_REEXECUTION` with
-`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to the 285 virtual complex
-necklace coordinates. A quartic matrix-free generator streams all 16 nonzero
-momentum-conserving signed pair shifts and contains genuine two-mode occupation
-changes. It interleaves noncommutatively with the nine-channel diagonal phase,
-restores the same backing, and supports unrelated reuse. A separate 4,845-cell
-occupation-space oracle reconstructs eight sparse shift-distance bases, proves
-the full weighted Hermiticity identity numerically, and independently matches
-boundaries and controls. The accepted path retains 285 carrier cells and 855
-temporary necklace-complex work cells, with no occupation vector, dense or
-sparse pair operator, transition table, weight table, or inverse history. The
-strongest compact classical path remains the identical 285-complex necklace
-pair-scattering and diagonal-phase recurrence. The result is direct-process
-virtual software, not CATVM custody, physical waveform execution, a distinct
-phase resource, computational advantage, Small Wall crossing, replacement of
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to the declared virtual complex
+necklace coordinates. The M190 off-diagonal phase law now executes at rotor
+counts two through five with exact necklace dimensions `9`, `57`, `285`, and
+`1197`. The public `K*D` scalar Krylov degrees are `9/9`, `57/57`, `284/284`,
+and `1182/1190` over F103/F137. The prime-dependent five-rotor deficits do not
+define a stable transferable quotient and do not lower-bound nonlinear,
+singular, approximate, or program-restricted representations. A separate
+Python sparse-exponential and exact recurrence oracle reconstructs topology,
+Hermiticity, boundaries, controls, restoration, and every degree tuple.
+Inverse scattering plans are rematerialized from public topology with no
+retained forward history. The strongest compact classical path remains the
+identical growing necklace recurrence. The result is direct-process virtual
+software, not CATVM custody, physical waveform execution, a distinct phase
+resource, computational advantage, Small Wall crossing, replacement of
 physical bits with pi, or unbounded computation.
 
 The accumulated bounded architecture includes:
@@ -272,7 +272,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M190_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE
+ACTIVE_AFTER_M191_GROWING_NECKLACE_QUOTIENT_OBSTRUCTION
 ```
 
 The named
@@ -281,17 +281,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
+EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES
 ```
 
-M190 establishes a genuinely off-diagonal quartic pair-scattering update on
-the 285-cell necklace carrier without accepted occupation or operator
-expansion, but it still collapses to the identical 285-coordinate classical
-recurrence. Do not add more shift schedules or fixed-four-rotor fixtures. The
-next diagnostic must address the concrete compact-growth obstruction by
-measuring the public continuation/Krylov quotient law as rotor count grows,
-using the strongest compact occupation and necklace classical baselines. It
-must not promote a bounded rank observation to a general lower bound.
+M191 establishes that the declared linear scalar continuation is full at two
+and three rotors, one short at four, and prime-dependently near full at five.
+Do not add rotor counts, scalar probes, or shift schedules unless they resolve
+a specific defect. The selected repair changes the candidate phase state to a
+nine-parameter nonlinear multiplicative pair-signature/Jastrow chart and must
+test exact closure or reject it at the first escape. Preserve the full growing
+necklace recurrence as the matched classical baseline. Do not promote chart
+closure for a restricted family to a general bosonic quotient, and do not
+treat chart failure as a reason to stop the lane.
 
 ## 7. Native No-Smuggle Law
 

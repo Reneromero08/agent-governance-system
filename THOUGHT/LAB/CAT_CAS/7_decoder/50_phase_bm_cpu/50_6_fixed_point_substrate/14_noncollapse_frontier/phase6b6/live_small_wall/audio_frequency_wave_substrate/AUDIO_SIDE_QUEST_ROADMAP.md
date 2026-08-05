@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE`
-**Roadmap version:** `14.56`
+**Status:** `STRICT_SCOPE_GROWING_NECKLACE_LINEAR_QUOTIENT_OBSTRUCTION`
+**Roadmap version:** `14.57`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`
+**Reconciled source head:** `62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M190_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M191_GROWING_NECKLACE_QUOTIENT_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES`
+**Active primary successor:** `EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`. The current 190-milestone
+`62a8b2c30b8363939f9e8af6ce9ac2803bf63c66`. The current 191-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
+BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
 ```
 
 Not established:
@@ -8721,6 +8721,71 @@ Selected successor:
 ```text
 GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
 ```
+
+## M191: growing necklace state exposes no stable linear quotient
+
+Claim:
+
+```text
+BOUNDED_GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_NECKLACE_CARRIERS_HAVE_EXACT_DIMENSIONS9_57_285_1197_WHILE_THE_DECLARED_PUBLIC_K_TIMES_D_SCALAR_KRYLOV_DEGREES_ARE_FULL_AT_ROTOR_COUNTS2_AND3_ONE_SHORT_AT4_AND_PRIME_DEPENDENT_NEAR_FULL_AT5_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_SO_NO_STABLE_TRANSFERABLE_QUOTIENT_OR_DISTINCT_PHASE_RESOURCE_IS_ESTABLISHED
+```
+
+The M190 phase law now executes at rotor counts two through five without
+adding a fixed-four-rotor fixture. Exact global-rotation necklace dimensions
+are `9`, `57`, `285`, and `1197`. The division-by-seventeen orbit law is
+limited to rotor counts strictly between zero and seventeen; no broader
+stabilizer formula is claimed.
+
+For the declared public `K*D` continuation and scalar source/probe, exact
+Berlekamp--Massey degrees are `9`, `57`, `284`, and `1182` over F103, and
+`9`, `57`, `284`, and `1190` over F137. The four-rotor deficit is one; the
+five-rotor deficits are prime-dependent. They therefore do not define a
+stable transferable quotient. The result does not lower-bound nonlinear,
+singular, approximate, or program-restricted phase representations.
+
+A standalone Python implementation independently streams all `153`, `969`,
+`4845`, and `20349` exchange-symmetric occupation histograms, reconstructs the
+necklace quotients, verifies exact weighted Hermiticity, recomputes all exact
+scalar degrees, and uses sparse `expm_multiply` instead of production
+Chebyshev evolution. It matches every primary boundary within `5.8e-16` and
+reproduces the missing, wrong, and reordered inverse controls.
+
+Production restoration remains below `1.92e-15`; unrelated reuse restoration
+is below `1.87e-15`; sixteen reuse cycles accumulate at most `8.50e-15` error.
+The same backing is reused. Inverse scattering plans are rematerialized from
+public topology, leaving zero retained forward history. At five rotors the
+accepted path retains 1197 complex carrier cells, 3591 temporary Chebyshev
+cells, the public necklace topology, and at most one 68,997-entry scattering
+plan. Allocator, row-vector and lookup overhead, native-library work, timing,
+and whole-process peaks remain excluded, so no performance claim follows.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to virtual complex coordinates.
+The strongest compact classical implementation is the identical growing
+necklace recurrence. CATVM custody, a stable complex quotient, a distinct
+phase resource, computational advantage, Small Wall crossing, physical
+execution, physical-bit replacement, and unbounded computation are not
+established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTOR_COUNTS2_3_4_5_PRIMARY_DEPTH2_REUSE_DEPTH1_PUBLIC_K_TIMES_D_WORD_F103_F137_BERLEKAMP_MASSEY_COMPLEX128_CHEBYSHEV64_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+EXACT_NONLINEAR_PAIR_SIGNATURE_JASTROW_PHASE_CHART_CLOSURE_OR_ESCAPE_UNDER_GROWING_ROTOR_OFFDIAGONAL_SCATTERING_WITH_MATCHED_PARAMETER_AND_FULL_NECKLACE_RECURRENCES
+```
+
+This successor changes the candidate carrier law rather than extending the
+linear diagnostic. It tests whether the nine public two-body signatures close
+as an exact nonlinear multiplicative phase chart under the off-diagonal
+scattering update. It must preserve the full necklace recurrence as the
+matched baseline and must reject the chart at the first exact escape rather
+than adding rotor counts to conceal failure.
 
 ## 10. Roadmap Maintenance
 
