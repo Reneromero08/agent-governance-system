@@ -1,0 +1,32 @@
+{
+  "schema": "CAT_CAS_NECKLACE_TWO_BODY_PHASE_INTERACTION_PROVENANCE_V1",
+  "scientific_source_head": "64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_COMPLEX128_VIRTUAL_PHASE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "restoration_scope": "IN_PLACE_285_CELL_VIRTUAL_COMPLEX_NECKLACE_CARRIER_ONLY",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_necklace_two_body_phase_interaction_closure.sh",
+    "status": "QUALIFIED_NECKLACE_TWO_BODY_PHASE_INTERACTION_CLOSURE_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "dependencies": {
+    "four_rotor_necklace_generator_phase.cpp": "b698112d66058d1c3cb3db6ca75be19363e2464181d6f1c5c0a564c21a31a894",
+    "four_rotor_bosonic_givens_phase.cpp": "4685e34c9207e6a36f479ad2063ab73ef2c785aecfeb08db78bac363599db6d5",
+    "four_rotor_necklace_orbit_phase.cpp": "f65ca7693bbf4064732c6e07bcb3e26fd407b6b39c7402d39c1a32e0cb78d871"
+  },
+  "files": {
+    "necklace_two_body_phase_interaction_closure.cpp": "9f566e21d4ca486f628cdf5fc9513031d9a477017f88188357c97251f9870a64",
+    "necklace_two_body_phase_interaction_independent_oracle.py": "e2f537b20eb3e2634e2ce201a5aaa85b6c6f245e8fbd36a7c58cbff1f01f3993",
+    "NECKLACE_TWO_BODY_PHASE_INTERACTION_CLOSURE_RESULTS.json": "d082b304a5828c0d01b5365818732d67289fab3c1bc8e517ab51b468c94dc15c",
+    "NECKLACE_TWO_BODY_PHASE_INTERACTION_INDEPENDENT_ORACLE.json": "1b7b5d56eddc952ef6aeb530169cab95a7e38b13ad4e02641540cca82a5b4384",
+    "NECKLACE_TWO_BODY_PHASE_INTERACTION_INDEPENDENT_REEXECUTION_REVIEW.md": "2dc98ab82901ce7b89986f42a7d6aa8d2c7b788b5dec34de142922bfc7225a25",
+    "qualify_necklace_two_body_phase_interaction_closure.sh": "2566ec3aee2a64cf19d940a2ef1db5350e8f9202df5edc842a12e194caf51071"
+  },
+  "claim_ceiling": "GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH4_PRIMARY_DEPTH2_REUSE_NINE_PUBLIC_CYCLIC_PAIR_DISTANCE_CHANNELS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

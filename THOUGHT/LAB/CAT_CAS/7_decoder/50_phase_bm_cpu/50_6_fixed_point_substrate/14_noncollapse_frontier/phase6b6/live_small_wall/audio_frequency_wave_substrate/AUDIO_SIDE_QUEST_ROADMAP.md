@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_LOCAL_NONLINEAR_PHASE_FULL_OBSERVABILITY`
-**Roadmap version:** `14.54`
+**Status:** `STRICT_SCOPE_NECKLACE_TWO_BODY_PHASE_CLASSICAL_COLLAPSE`
+**Roadmap version:** `14.55`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `5bf58e581bcb92d2404ed3f454041e83553abfe9`
+**Reconciled source head:** `64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_ANALYTIC_LOCAL_CONTINUATION_OBSERVABILITY_DIAGNOSTIC_FOR_THE_REVERSIBLE_INTERFERENCE_FEEDBACK_PHASE_LAW_REACHES_FULL_TANGENT_RANK_2NMINUS1_ON_THE_DECLARED_N4_N8_N16_NORM_ONE_RESIDENT_CHARTS_UNDER_N_PUBLIC_ONE_LAYER_SUFFIX_BOUNDARIES_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_REJECTING_ONLY_SMALLER_REGULAR_DIFFERENTIABLE_LOCAL_QUOTIENTS_FOR_THOSE_CONTINUATIONS_WHILE_QUADRATIC_VERIFICATION_STATE_AND_THE_IDENTICAL_CLASSICAL_FULL_STATE_RECURRENCE_REMAIN`
-**Current claim ceiling:** `N4_N8_N16_ONE_DECLARED_NORM_ONE_RESIDENT_CHART_PER_WIDTH_N_PUBLIC_ONE_LAYER_SUFFIXES_FIXED_FINAL_WEIGHT_RELATIVE_RANK_TOLERANCE1E_MINUS9_DIRECT_PROCESS_COMPLEX128_LOCAL_DIFFERENTIABLE_OBSERVABILITY_ONLY`
+**Current highest milestone:** `BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH4_PRIMARY_DEPTH2_REUSE_NINE_PUBLIC_CYCLIC_PAIR_DISTANCE_CHANNELS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M188_LOCAL_NONLINEAR_PHASE_FULL_OBSERVABILITY`
+**New mechanism development:** `ACTIVE_AFTER_M189_NECKLACE_TWO_BODY_PHASE_CLASSICAL_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `COMPACT_EXCHANGE_SYMMETRIC_TWO_BODY_PHASE_INTERACTION_CLOSURE_ON_NECKLACE_CARRIER_WITH_NONCOMMUTING_OCCUPATION_PHASE_AND_GIVENS_MODULES_AND_MATCHED_BOSONIC_CLASSICAL_BASELINE`
+**Active primary successor:** `MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`5bf58e581bcb92d2404ed3f454041e83553abfe9`. The current 188-milestone
+`64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d`. The current 189-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_ANALYTIC_LOCAL_CONTINUATION_OBSERVABILITY_DIAGNOSTIC_FOR_THE_REVERSIBLE_INTERFERENCE_FEEDBACK_PHASE_LAW_REACHES_FULL_TANGENT_RANK_2NMINUS1_ON_THE_DECLARED_N4_N8_N16_NORM_ONE_RESIDENT_CHARTS_UNDER_N_PUBLIC_ONE_LAYER_SUFFIX_BOUNDARIES_WITH_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_REJECTING_ONLY_SMALLER_REGULAR_DIFFERENTIABLE_LOCAL_QUOTIENTS_FOR_THOSE_CONTINUATIONS_WHILE_QUADRATIC_VERIFICATION_STATE_AND_THE_IDENTICAL_CLASSICAL_FULL_STATE_RECURRENCE_REMAIN
+BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -8606,6 +8606,64 @@ Selected successor:
 
 ```text
 COMPACT_EXCHANGE_SYMMETRIC_TWO_BODY_PHASE_INTERACTION_CLOSURE_ON_NECKLACE_CARRIER_WITH_NONCOMMUTING_OCCUPATION_PHASE_AND_GIVENS_MODULES_AND_MATCHED_BOSONIC_CLASSICAL_BASELINE
+```
+
+## M189: distance-resolved two-body phase closes but remains classically identical
+
+Claim:
+
+```text
+BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE
+```
+
+The successor leaves M187's single-particle local chart and returns to the
+established four-rotor necklace carrier. It replaces the predecessor's onsite
+collision scalar with all nine cyclic unordered-pair distance channels. Every
+histogram signature contains exactly six pairs; the 285 necklaces contain 165
+distinct signatures. Rotation invariance holds, and equal-collision states
+are separated by the full public interaction.
+
+The distance-resolved diagonal phase is interleaved with the matrix-free
+Hermitian lift of the topology-compiled bosonic Givens module. Swapping module
+order changes the final boundary by `2.86e-2`; reverting to collision-only
+phase changes it by `3.15e-2`. Depth-four parity agrees with the occupation
+Givens and streamed-permanent necklace paths within `4.97e-15` and `5.72e-15`.
+A separate 83,521-cell labelled-wave oracle reconstructs primary and reuse
+boundaries within `3.90e-14` and independently reproduces inverse controls.
+
+The accepted path retains 285 complex necklace cells, 855 temporary
+necklace-complex work cells, a 17 by 17 single-particle generator plan, and
+nine public pair-plan integers. It retains zero occupation-vector cells,
+dense 285-operator cells, pair-energy table cells, or inverse-history bytes.
+The maximum named engine total is 33,542 bytes; allocator state, expression
+temporaries, native-library workspace, compiler memory, and whole-process
+peaks are excluded and disclosed.
+
+Primary restoration error is `7.84e-15`; unrelated restored-carrier reuse is
+`1.13e-14`; and 32-cycle drift is `1.02e-13`. Missing, wrong, reordered,
+collision-only, swapped-module, and null-carrier controls discriminate. This
+is `NUMERICAL_PHYSICAL_STATE_RESTORATION` for virtual complex coordinates and
+is not CATVM-enforced custody. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+The result broadens the phase law beyond onsite collision, but it remains
+diagonal in a public occupation signature. The strongest compact classical
+path is the identical 285-complex necklace-generator plus pair-phase
+recurrence. No distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, or unbounded computation is
+established.
+
+Exact ceiling:
+
+```text
+GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH4_PRIMARY_DEPTH2_REUSE_NINE_PUBLIC_CYCLIC_PAIR_DISTANCE_CHANNELS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE
 ```
 
 ## 10. Roadmap Maintenance
