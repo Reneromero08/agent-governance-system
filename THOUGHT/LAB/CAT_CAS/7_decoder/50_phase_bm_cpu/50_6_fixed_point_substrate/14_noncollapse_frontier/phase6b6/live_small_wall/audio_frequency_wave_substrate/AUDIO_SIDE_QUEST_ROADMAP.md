@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_REFINED_BOUNDARY_KRYLOV_OBSTRUCTION`
-**Roadmap version:** `14.64`
+**Status:** `STRICT_SCOPE_OPEN_MOMENTUM_FACTOR_CLOSURE`
+**Roadmap version:** `14.65`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6eb605a986b414d59857eee9417c874cca1be5db`
+**Reconciled source head:** `7438a30ec885e13d92c00e156a57dea637964dbc`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_FINAL_BOUNDARY_SEQUENCE_HAS_DEGREE2261_FROM_K0_AND2260_AFTER_ONE_PUBLIC_WORD_ON_THE2277_CELL_PHASE_QUOTIENT_SO_THE_STRONGEST_SHIFTED_SCALAR_RECURRENCE_SAVES_ONLY17_DYNAMIC_CELLS_REQUIRES2244_NONZERO_COEFFICIENTS_AND_DOES_NOT_RESTORE_OR_REPLACE_THE_PHASE_CARRIER`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_ROTOR6_F103_ROOT72_REPEATED_STEP0_TAG0_SOURCE_FAMILY0_PUBLIC_BOUNDARY_DIRECT_PROCESS_DIAGNOSTIC_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_DIRECT_PROCESS_SOFTWARE_TYPED_OPEN_MOMENTUM_PORT_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M198_REFINED_BOUNDARY_KRYLOV_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M199_OPEN_MOMENTUM_FACTOR_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_ONE_BODY_FACTORIZATION_OF_TWO_BODY_SCATTERING_WITH_4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_FINAL_BRACELET_CLOSURE_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_FACTOR_STREAM`
+**Active primary successor:** `CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6eb605a986b414d59857eee9417c874cca1be5db`. The current 198-milestone
+`7438a30ec885e13d92c00e156a57dea637964dbc`. The current 199-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -9157,6 +9157,63 @@ silently return the eliminated shift plan to the accepted path. A compressed
 recurrence must become an actual restorable carrier; a full-rank result must be
 recorded as the exact lower-rank obstruction with its compiled verification
 work and identical classical baseline.
+
+## M198: refined Rotor-6 boundary recurrence is near full rank
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_FINAL_BOUNDARY_SEQUENCE_HAS_DEGREE2261_FROM_K0_AND2260_AFTER_ONE_PUBLIC_WORD_ON_THE2277_CELL_PHASE_QUOTIENT_SO_THE_STRONGEST_SHIFTED_SCALAR_RECURRENCE_SAVES_ONLY17_DYNAMIC_CELLS_REQUIRES2244_NONZERO_COEFFICIENTS_AND_DOES_NOT_RESTORE_OR_REPLACE_THE_PHASE_CARRIER
+```
+
+The exact boundary sequence has degree 2,261 from `k=0` and degree 2,260
+after one complete public word. The shifted recurrence saves 17 dynamic cells
+but retains 2,244 nonzero coefficients, needs 2,260 full-state initialization
+applications, and does not reconstruct the internal carrier. The diagnostic
+CSR is verification-only. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `INDEPENDENT_ORACLE_REEXECUTION` with
+`NO_RESTORATION_CLAIM`.
+
+## M199: reflection-paired open momentum port factors scattering
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN
+```
+
+M199 uses the exact identity `K_q = A_-q A_q - N I`. Equal public weights for
+`q` and `-q` permit eight reflection-paired leases of one 4,389-cell necklace
+port. Each port stays typed and unresolved, closes into the 2,277 bracelet
+cells, and is zero-released before the next lease. The accepted path retains
+no transition plan or inverse history.
+
+Each scattering performs 162,792 first-pass and 168,912 closure terms, or
+331,704 one-body terms total. Encoded cyclic indexing counts 5,638,968 code
+candidates, 5,307,264 rolling updates, 331,704 topology lookups, and 35,112
+port-clear writes. The conservative carrier, open port, and output-scratch
+total is 11,220 field cells. Explicit topology descriptors and hash-map/native
+container bytes remain counted only at their declared logical level; byte and
+whole-process peaks are excluded, not zero.
+
+Production matches M197's exact first state and boundary. An independent
+oracle compiles the direct 684,624-term two-body CSR and a distinct full
+sixteen-channel one-body factor plan; all primary and reuse states agree.
+Missing, wrong, reordered, wrong-reflection, omitted-correction, type, owner,
+projection, and null controls discriminate. The same backing restores and
+reuses exactly with generation two.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest classical method is the identical factor stream. No CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, or unbounded computation is established.
+
+Selected successor:
+
+```text
+CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND
+```
 
 ## 10. Roadmap Maintenance
 

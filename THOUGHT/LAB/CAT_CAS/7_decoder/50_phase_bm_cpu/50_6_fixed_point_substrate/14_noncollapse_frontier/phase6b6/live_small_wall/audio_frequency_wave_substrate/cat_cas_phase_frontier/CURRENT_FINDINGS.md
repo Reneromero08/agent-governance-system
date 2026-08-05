@@ -10864,3 +10864,47 @@ Next:
 ```text
 EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_ONE_BODY_FACTORIZATION_OF_TWO_BODY_SCATTERING_WITH_4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_FINAL_BRACELET_CLOSURE_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_FACTOR_STREAM
 ```
+
+## M199 reflection-paired open momentum port factors the two-body update
+
+The completed strict claim is:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN
+```
+
+For one-body momentum action `A_q`, direct expansion proves
+`K_q = A_-q A_q - N I`. The public scattering weight is equal for `q` and
+`-q`, so production closes eight reflection pairs. It leases one 4,389-cell
+necklace phase vector, consumes it through the declared pair, closes into the
+2,277-cell bracelet carrier, and zero-releases the same backing before the
+next lease. Wrong type, wrong generation owner, and premature projection are
+rejected.
+
+Each scattering uses 162,792 first-pass and 168,912 closure terms, or 331,704
+one-body terms. Exact base-seven cyclic indexing performs 5,638,968 code
+candidates, 5,307,264 rolling updates, and 331,704 lookups. Clearing the eight
+port leases writes 35,112 field cells. The accepted carrier, port, and output
+scratch conservatively total 11,220 named field cells. No transition plan,
+inverse history, relation table, or assignment expansion is retained.
+
+An independent oracle imports no production code. It reconstructs the full
+topology, compiles the direct 684,624-term two-body operator, and separately
+compiles all sixteen unpaired one-body channels. Direct and factorized states,
+the M197 signature-order commitment, primary/reuse boundaries, exact
+restoration, and fresh/restored reuse agree. Missing, wrong, reordered,
+wrong-reflection, omitted-correction, type, owner, projection, and null
+controls discriminate.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical method is the identical reflection-paired factor
+stream. The 4,389-cell port is direct-process state, not CATVM-enforced
+custody. No distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, or unbounded computation is established.
+
+Next:
+
+```text
+CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND
+```

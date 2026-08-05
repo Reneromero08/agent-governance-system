@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`6eb605a986b414d59857eee9417c874cca1be5db`. The registry assigns one
+`7438a30ec885e13d92c00e156a57dea637964dbc`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 198-milestone lane is active by user direction. Continue from the
+The current 199-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,29 +53,30 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_FINAL_BOUNDARY_SEQUENCE_HAS_DEGREE2261_FROM_K0_AND2260_AFTER_ONE_PUBLIC_WORD_ON_THE2277_CELL_PHASE_QUOTIENT_SO_THE_STRONGEST_SHIFTED_SCALAR_RECURRENCE_SAVES_ONLY17_DYNAMIC_CELLS_REQUIRES2244_NONZERO_COEFFICIENTS_AND_DOES_NOT_RESTORE_OR_REPLACE_THE_PHASE_CARRIER
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTORS_THE_TWO_BODY_SCATTERING_THROUGH_ONE4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_CLOSES_BACK_TO2277_BRACELET_CELLS_WITH331704_ONE_BODY_TERMS_PER_SCATTERING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_AND_GROWING_TOPOLOGY_REMAIN
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_ROTOR6_F103_ROOT72_REPEATED_STEP0_TAG0_SOURCE_FAMILY0_PUBLIC_BOUNDARY_DIRECT_PROCESS_DIAGNOSTIC_ONLY
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_DIRECT_PROCESS_SOFTWARE_TYPED_OPEN_MOMENTUM_PORT_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M198 preserves
-M197's separate exact restoration/reuse evidence but does not extend it. The
-declared repeated F103 boundary has scalar degree 2,261 from `k=0` and 2,260
-after one complete public word. The strongest shifted recurrence therefore
-saves only 17 dynamic cells, retains 2,244 nonzero coefficients, requires
-2,260 full-state initialization applications, and cannot reconstruct the
-internal phase state. The retained 652,048-entry plan and 172,838-nonzero CSR
-are verification-only. The result is not CATVM custody, physical waveform
-execution, a distinct phase resource, computational advantage, Small Wall
-crossing, replacement of physical bits with pi, or unbounded computation.
-Continue by changing the scattering law itself: factor the two-body update
-through typed one-body momentum channels and an unresolved necklace
-intermediate, without adding rotor fixtures or retaining a transition plan.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M199
+factors every two-body shift as `A_-q A_q - N I`, reflection-pairs the eight
+nonzero momentum types, leases one unresolved 4,389-cell necklace port at a
+time, and closes back to 2,277 bracelet cells. Each scattering uses 331,704
+one-body terms rather than M197's 684,624 two-body moves and removes the
+triangle-delta/signature-search update from the accepted path. The port is
+typed, owner-checked, never projected, and zero-released; the carrier restores
+and reuses exactly on the same backing. The explicit necklace topology and
+temporary port grow, and the identical compact classical factor stream
+remains. The result is not CATVM custody, physical waveform execution, a
+distinct phase resource, computational advantage, Small Wall crossing,
+replacement of physical bits with pi, or unbounded computation. Continue by
+enforcing custody and response-after-restoration for this actual new port at
+the CATVM process boundary.
 
 The accumulated bounded architecture includes:
 
@@ -269,7 +270,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M198_REFINED_BOUNDARY_KRYLOV_OBSTRUCTION
+ACTIVE_AFTER_M199_OPEN_MOMENTUM_FACTOR_CLOSURE
 ```
 
 The named
@@ -278,18 +279,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_ONE_BODY_FACTORIZATION_OF_TWO_BODY_SCATTERING_WITH_4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_FINAL_BRACELET_CLOSURE_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_FACTOR_STREAM
+CATVM_ATOMIC_ENFORCED_ROTOR6_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_WITH_HIDDEN4389_CELL_NECKLACE_INTERMEDIATE_RESPONSE_AFTER_EXACT_RESTORATION_AND_REUSE_NO_SMUGGLE_AND_IDENTICAL_CLASSICAL_BACKEND
 ```
 
-M198 establishes that the best declared shifted scalar boundary recurrence is
-degree 2,260 on the 2,277-cell carrier, has 2,244 nonzero coefficients, and
-does not reconstruct or restore internal phase state. Do not add another
-rotor or recurrence fixture. The selected repair must change the native phase
-operation by expressing each two-body shift as composition through a typed
-one-body momentum port. Its necklace intermediate must stay unresolved until
-reflection-paired bracelet closure, then be released. Count temporary state,
-topology maps, canonical-index work, restoration, reuse, and the identical
-classical factor stream.
+M199 changes the native operation and closes the typed port, but the work is
+still direct process: the controller boundary does not yet enforce hidden
+4,389-cell custody or response-after-restoration. Do not add another rotor or
+factor fixture. The selected successor must place the actual M199 carrier and
+open port inside the smallest isolated CATVM service, release only the final
+boundary after exact restoration verification, and reuse the same restored
+carrier. Count service traffic, topology, intermediate state, inverse work,
+and the identical classical backend; do not promote same-UID isolation into a
+physical or cryptographic claim.
 
 ## 7. Native No-Smuggle Law
 
