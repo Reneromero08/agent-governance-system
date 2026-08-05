@@ -309,7 +309,12 @@ def _active_thread_prompt(expected_cwd: Path) -> object | None:
         events: list[object] = []
         with Path(row[0]).open(encoding="utf-8") as stream:
             for raw in stream:
-                event = json.loads(raw)
+                try:
+                    event = json.loads(raw)
+                except ValueError:
+                    # A live rollout can expose a blank or not-yet-complete
+                    # trailing record while the active task is writing it.
+                    continue
                 if (
                     event.get("type") == "event_msg"
                     and event.get("payload", {}).get("type") == "task_started"

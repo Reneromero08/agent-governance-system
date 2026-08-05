@@ -15,7 +15,8 @@
 - Make the Lab audit classify the staged commit candidate instead of rejecting
   unrelated unfinished worktree changes, and let the doctor inspect the active
   task's persisted prompt without launching a nested Codex process that needs a
-  second Scratch allocation.
+  second Scratch allocation. Tolerate incomplete trailing records while the
+  active rollout is still being written.
 
 - Document the one explicit transition required when an agent starts in main:
   after creating or selecting a Lab worktree, resume or relaunch the task with
