@@ -1,0 +1,190 @@
+{
+  "burnside_law": "BRACELETS_EQUALS_HALF_OF_NECKLACES_PLUS_REFLECTION_FIXED_NECKLACES_FOR_ODD_GRID17_AND_ROTORS_BELOW17",
+  "cases": [
+    {
+      "all_sixteen_shift_bases_equitable": true,
+      "burnside_bracelet_cells": 9,
+      "fiber_size_histogram": {
+        "1": 9
+      },
+      "first_nonequitable_witness": null,
+      "necklace_cells": 9,
+      "non_dihedral_pair_signature_fibers": 0,
+      "nonequitable_pair_signature_fibers": 0,
+      "occupation_histograms": 153,
+      "pair_signature_cells": 9,
+      "pair_signature_minus_bracelet_cells": 0,
+      "pair_signatures_equal_dihedral_orbits": true,
+      "reflection_fixed_necklaces": 9,
+      "reflection_profile_checks": 144,
+      "rotors": 2
+    },
+    {
+      "all_sixteen_shift_bases_equitable": true,
+      "burnside_bracelet_cells": 33,
+      "fiber_size_histogram": {
+        "1": 9,
+        "2": 24
+      },
+      "first_nonequitable_witness": null,
+      "necklace_cells": 57,
+      "non_dihedral_pair_signature_fibers": 0,
+      "nonequitable_pair_signature_fibers": 0,
+      "occupation_histograms": 969,
+      "pair_signature_cells": 33,
+      "pair_signature_minus_bracelet_cells": 0,
+      "pair_signatures_equal_dihedral_orbits": true,
+      "reflection_fixed_necklaces": 9,
+      "reflection_profile_checks": 528,
+      "rotors": 3
+    },
+    {
+      "all_sixteen_shift_bases_equitable": true,
+      "burnside_bracelet_cells": 165,
+      "fiber_size_histogram": {
+        "1": 45,
+        "2": 120
+      },
+      "first_nonequitable_witness": null,
+      "necklace_cells": 285,
+      "non_dihedral_pair_signature_fibers": 0,
+      "nonequitable_pair_signature_fibers": 0,
+      "occupation_histograms": 4845,
+      "pair_signature_cells": 165,
+      "pair_signature_minus_bracelet_cells": 0,
+      "pair_signatures_equal_dihedral_orbits": true,
+      "reflection_fixed_necklaces": 45,
+      "reflection_profile_checks": 2640,
+      "rotors": 4
+    },
+    {
+      "all_sixteen_shift_bases_equitable": true,
+      "burnside_bracelet_cells": 621,
+      "fiber_size_histogram": {
+        "1": 45,
+        "2": 576
+      },
+      "first_nonequitable_witness": null,
+      "necklace_cells": 1197,
+      "non_dihedral_pair_signature_fibers": 0,
+      "nonequitable_pair_signature_fibers": 0,
+      "occupation_histograms": 20349,
+      "pair_signature_cells": 621,
+      "pair_signature_minus_bracelet_cells": 0,
+      "pair_signatures_equal_dihedral_orbits": true,
+      "reflection_fixed_necklaces": 45,
+      "reflection_profile_checks": 9936,
+      "rotors": 5
+    },
+    {
+      "all_sixteen_shift_bases_equitable": false,
+      "burnside_bracelet_cells": 2277,
+      "fiber_size_histogram": {
+        "1": 157,
+        "2": 2072,
+        "3": 8,
+        "4": 16
+      },
+      "first_nonequitable_witness": {
+        "differing_destination_count": 39,
+        "first_difference": {
+          "destination_signature": [
+            0,
+            1,
+            4,
+            2,
+            2,
+            2,
+            1,
+            2,
+            1
+          ],
+          "left_coefficient": 2,
+          "right_coefficient": 0
+        },
+        "left_row_commitment": "424538f6a4aa375d4e53db90563cb93b793ac24b281a7abdf178f264d8c506a6",
+        "left_row_sum": 30,
+        "right_row_commitment": "a5afa6c08e384313c56df867a3a464076d55ad5af2dcb5e89fa4e0bbaf32875b",
+        "right_row_sum": 30,
+        "signed_shift": 1,
+        "target_left": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          2,
+          1
+        ],
+        "target_right": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          1
+        ],
+        "target_signature": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          2,
+          1
+        ],
+        "targets_are_dihedrally_related": false
+      },
+      "necklace_cells": 4389,
+      "non_dihedral_pair_signature_fibers": 24,
+      "nonequitable_pair_signature_fibers": 24,
+      "occupation_histograms": 74613,
+      "pair_signature_cells": 2253,
+      "pair_signature_minus_bracelet_cells": -24,
+      "pair_signatures_equal_dihedral_orbits": false,
+      "reflection_fixed_necklaces": 165,
+      "reflection_profile_checks": 36048,
+      "rotors": 6
+    }
+  ],
+  "claim_candidate": "BOUNDED_EXACT_PAIR_SIGNATURE_FIBERS_EQUAL_DIHEDRAL_BRACELET_ORBITS_FOR_GRID17_ROTORS2_TO5_BUT_AT_ROTOR6_24_HOMOMETRIC_NONDIHEDRAL_FIBERS_MERGE_2277_BRACELETS_INTO2253_SIGNATURES_AND_AT_LEAST_ONE_SHARED_SIGNATURE_HAS39_DIFFERENT_SHIFT1_DESTINATION_COEFFICIENTS_SO_PAIR_SIGNATURE_ONLY_SCATTERING_CLOSURE_FAILS_AT_THE_TRANSFER_CEILING",
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACES_ROTORS2_TO6_ALL16_SIGNED_PAIR_SHIFTS_EXACT_INTEGER_TOPOLOGY_DIAGNOSTIC_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "computational_advantage": false,
+  "distinct_phase_resource_established": false,
+  "higher_order_signature_repair_required": true,
+  "matched_classical_diagnostic": "IDENTICAL_HOMOMETRY_AND_SIGNED_SHIFT_PROFILE_COMPARISON",
+  "ordered_particle_shift_used": true,
+  "pair_signature_only_analytic_kernel_transferable_through_rotor6": false,
+  "production_source_imported": false,
+  "production_transition_called": false,
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "result": "PASS_TRANSFER_NO_GO",
+  "small_wall_crossed": false,
+  "terminal": false,
+  "unordered_particle_signature_used": true,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
