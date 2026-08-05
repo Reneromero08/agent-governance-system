@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`02219766be4f38bf400fbc0585ef45d1362a58c1`. The registry assigns one
+`6eb605a986b414d59857eee9417c874cca1be5db`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 197-milestone lane is active by user direction. Continue from the
+The current 198-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,29 +53,29 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_FINAL_BOUNDARY_SEQUENCE_HAS_DEGREE2261_FROM_K0_AND2260_AFTER_ONE_PUBLIC_WORD_ON_THE2277_CELL_PHASE_QUOTIENT_SO_THE_STRONGEST_SHIFTED_SCALAR_RECURRENCE_SAVES_ONLY17_DYNAMIC_CELLS_REQUIRES2244_NONZERO_COEFFICIENTS_AND_DOES_NOT_RESTORE_OR_REPLACE_THE_PHASE_CARRIER
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_ROTOR6_PRIMARY_DEPTH1_REUSE_DEPTH1_DIRECT_PROCESS_SOFTWARE_ONLY
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_ROTOR6_F103_ROOT72_REPEATED_STEP0_TAG0_SOURCE_FAMILY0_PUBLIC_BOUNDARY_DIRECT_PROCESS_DIAGNOSTIC_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M197
-preserves M196's 2,277-cell two-triangle refined quotient while replacing all
-sixteen retained shift plans and 652,048 nonzeros with a fixed eight-integer
-cyclic-monomial delta stencil. Its F103 carrier restores and reuses exactly on
-the same backing. The plan state is not hidden elsewhere: each scattering
-rematerializes 684,624 moves, evaluates 24,767,280 affected triangle
-monomials, and performs 7,669,494 signature comparisons. The quotient still
-equals bracelet dimension and the identical compact classical stream remains.
-The result is not CATVM custody, physical waveform execution, a distinct
-phase resource, computational advantage, Small Wall crossing, replacement of
-physical bits with pi, or unbounded computation. Continue by testing whether
-the declared final boundary has an exact recurrence below the 2,277-cell
-carrier, without adding rotor fixtures.
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M198 preserves
+M197's separate exact restoration/reuse evidence but does not extend it. The
+declared repeated F103 boundary has scalar degree 2,261 from `k=0` and 2,260
+after one complete public word. The strongest shifted recurrence therefore
+saves only 17 dynamic cells, retains 2,244 nonzero coefficients, requires
+2,260 full-state initialization applications, and cannot reconstruct the
+internal phase state. The retained 652,048-entry plan and 172,838-nonzero CSR
+are verification-only. The result is not CATVM custody, physical waveform
+execution, a distinct phase resource, computational advantage, Small Wall
+crossing, replacement of physical bits with pi, or unbounded computation.
+Continue by changing the scattering law itself: factor the two-body update
+through typed one-body momentum channels and an unresolved necklace
+intermediate, without adding rotor fixtures or retaining a transition plan.
 
 The accumulated bounded architecture includes:
 
@@ -269,7 +269,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M197_STREAMED_THIRD_ORDER_SIGNATURE_CLOSURE
+ACTIVE_AFTER_M198_REFINED_BOUNDARY_KRYLOV_OBSTRUCTION
 ```
 
 The named
@@ -278,18 +278,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_ONE_BODY_FACTORIZATION_OF_TWO_BODY_SCATTERING_WITH_4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_FINAL_BRACELET_CLOSURE_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_FACTOR_STREAM
 ```
 
-M197 removes all retained shift plans at the same R6 ceiling, but the logical
-carrier still equals all 2,277 bracelets and each scattering rematerializes
-684,624 moves and 24,767,280 triangle-monomial deltas. Do not add another rotor
-fixture or restore the eliminated plan to the accepted path. The selected
-diagnostic must determine the exact minimal scalar recurrence seen by the
-declared public source and final boundary. A low rank must become a real
-carrier reduction; a full or near-full rank is a strict final-boundary
-compaction obstruction. Retain the identical classical recurrence and count
-any verification-only compiled plan separately.
+M198 establishes that the best declared shifted scalar boundary recurrence is
+degree 2,260 on the 2,277-cell carrier, has 2,244 nonzero coefficients, and
+does not reconstruct or restore internal phase state. Do not add another
+rotor or recurrence fixture. The selected repair must change the native phase
+operation by expressing each two-body shift as composition through a typed
+one-body momentum port. Its necklace intermediate must stay unresolved until
+reflection-paired bracelet closure, then be released. Count temporary state,
+topology maps, canonical-index work, restoration, reuse, and the identical
+classical factor stream.
 
 ## 7. Native No-Smuggle Law
 

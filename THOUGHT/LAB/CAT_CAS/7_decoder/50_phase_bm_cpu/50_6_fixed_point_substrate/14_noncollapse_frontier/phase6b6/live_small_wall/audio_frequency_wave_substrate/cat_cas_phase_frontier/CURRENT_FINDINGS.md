@@ -10824,3 +10824,43 @@ Next:
 ```text
 EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE
 ```
+
+## M198 refined Rotor-6 final boundary is near-full scalar Krylov rank
+
+The completed strict claim is:
+
+```text
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_FINAL_BOUNDARY_SEQUENCE_HAS_DEGREE2261_FROM_K0_AND2260_AFTER_ONE_PUBLIC_WORD_ON_THE2277_CELL_PHASE_QUOTIENT_SO_THE_STRONGEST_SHIFTED_SCALAR_RECURRENCE_SAVES_ONLY17_DYNAMIC_CELLS_REQUIRES2244_NONZERO_COEFFICIENTS_AND_DOES_NOT_RESTORE_OR_REPLACE_THE_PHASE_CARRIER
+```
+
+For the exact M197 F103 root-72 source family 0, final boundary, and repeated
+`step=0, tag=0` word, 4,554 training samples plus held-out continuation give
+scalar degree 2,261 from `k=0`. The last connection coefficient is zero,
+exposing one nilpotent initial transient. Starting after the first complete
+public word gives exact degree 2,260 with nonzero last coefficient 73. That
+strongest shifted scalar recurrence saves only 17 dynamic field cells from
+the 2,277-cell carrier and retains 2,244 nonzero public coefficients.
+
+The production diagnostic uses M196's 652,048-entry plan only to construct a
+verification-only 172,838-nonzero CSR. The independent oracle imports no
+production code, reconstructs all 74,613 occupations and 684,624 raw
+transitions, and agrees on topology, CSR, first-state, sequence, and both
+connection-polynomial commitments. Reordered operation, inverse-root, null,
+and deliberately undersampled controls discriminate; the 512-term apparent
+degree 256 fails 4,069 later samples.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `NO_RESTORATION_CLAIM`. M198 does not
+execute or replace the M197 carrier and preserves M197's separate exact
+same-backing restoration/reuse evidence. The strongest matched classical path
+is one full-state initial word followed by the identical 2,260-scalar
+companion recurrence, with all 2,260 initialization applications counted. No
+fixed-rank phase quotient, CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.
+
+Next:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_ONE_BODY_FACTORIZATION_OF_TWO_BODY_SCATTERING_WITH_4389_CELL_UNRESOLVED_NECKLACE_INTERMEDIATE_FINAL_BRACELET_CLOSURE_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_FACTOR_STREAM
+```

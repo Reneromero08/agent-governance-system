@@ -1,0 +1,32 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_REFINED_BOUNDARY_KRYLOV_PROVENANCE_V1",
+  "scientific_source_head": "6eb605a986b414d59857eee9417c874cca1be5db",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_F103_SOFTWARE_DIAGNOSTIC",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_refined_boundary_krylov_diagnostic.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_REFINED_BOUNDARY_KRYLOV_DIAGNOSTIC_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_refined_boundary_krylov_diagnostic.py": "a006f73cc7a4571a7d21f8f4680ba074ea8757df98a9b6531e1585462aafd588",
+    "growing_rotor_refined_boundary_krylov_independent_oracle.py": "4cd435105b4a3d1bd970b8500f043ae382333e380e5721f802c2daab4fd5a2d2",
+    "GROWING_ROTOR_REFINED_BOUNDARY_KRYLOV_RESULTS.json": "ddd62f88f585f6c7642911944112ace83e59f354c64568a44d907fa4bb80a5dd",
+    "GROWING_ROTOR_REFINED_BOUNDARY_KRYLOV_INDEPENDENT_ORACLE.json": "cd778fbe9f757551ad0926f2c87e462cb7761793cd919c4c53cd2eea9457cddc",
+    "GROWING_ROTOR_REFINED_BOUNDARY_KRYLOV_INDEPENDENT_REEXECUTION_REVIEW.md": "401d853b3c74ba89650d59a6e053c8ab787864518a08af726fb4a83c8b3bd27e",
+    "qualify_growing_rotor_refined_boundary_krylov_diagnostic.sh": "53229dab316ee7bf72cfd031306b7c912a3d280e7737f5cee2d236023be2475e"
+  },
+  "production_dependencies": {
+    "growing_rotor_dihedral_third_order_signature_closure.py": "fcb266341ca7daf22f9a89a6928736eec98741e69e76cd31755c26eee8cb31d3",
+    "growing_rotor_dihedral_third_order_signature_streamed_closure.py": "8227642bcdfb4044d0f9ce220bfa6898aac3666c4c58f35c08305e1149c6ed77",
+    "scope": "VERIFICATION_ONLY_RETAINED_PLAN_AND_M197_PUBLIC_SOURCE_STATE_COMMITMENT",
+    "independent_oracle_uses_dependencies": false
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_ROTOR6_F103_ROOT72_REPEATED_STEP0_TAG0_SOURCE_FAMILY0_PUBLIC_BOUNDARY_DIRECT_PROCESS_DIAGNOSTIC_ONLY"
+}
