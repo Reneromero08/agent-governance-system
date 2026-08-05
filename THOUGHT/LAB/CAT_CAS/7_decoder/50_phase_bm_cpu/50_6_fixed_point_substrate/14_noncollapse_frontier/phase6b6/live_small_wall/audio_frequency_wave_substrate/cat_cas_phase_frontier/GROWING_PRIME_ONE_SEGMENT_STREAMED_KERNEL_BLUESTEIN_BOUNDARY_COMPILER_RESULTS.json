@@ -1,0 +1,1992 @@
+{
+  "claim": "BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_FINAL_BOUNDARY_COMPILER_REDUCES_THE_ACCEPTED_BACKING_TO_ONE_RESIDENT_SCALAR_PLUS_ONE_M_CELL_REVERSIBLY_CLEARED_TRANSFORM_SEGMENT_WITHOUT_RETAINING_THE_PUBLIC_KERNEL_SPECTRUM_WITH_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_STREAMING_TWO_M_SPECTRUM_VALUES_COSTS_2M_TIMES_2QMINUS3_KERNEL_TERMS_M_REMAINS_LINEAR_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_REMAINS_AND_THE_IDENTICAL_CLASSICAL_ONE_SEGMENT_COMPILER_HAS_THE_SAME_LAW",
+  "claim_ceiling": "FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_boundaries_match_descriptor_reference": true,
+    "all_forced_singular_kernel_spectra_rejected": true,
+    "all_missing_inverses_fail": true,
+    "all_null_carriers_rejected": true,
+    "all_one_segment_workspaces_clear": true,
+    "all_same_backing_restorations_pass": true,
+    "all_streamed_kernel_spectra_nonzero": true,
+    "all_unrelated_reuses_match_fresh": true,
+    "all_wrong_program_inverses_fail": true,
+    "frequency_zero_omission_changes_all_declared_boundaries": true
+  },
+  "matched_baselines": {
+    "m181_single_scalar_stream": "10_CARRIER_CELLS_AND_THETA_Q2_PER_BOUNDARY",
+    "m184_fused_two_segment": "ONE_PLUS2M_CELLS_AND_THETA_M_LOG_M_PLUS_Q_WORK",
+    "new_asymptotic_pareto_point": false,
+    "state_advantage": false,
+    "strongest_compact_classical": "IDENTICAL_ONE_PLUSM_STREAMED_KERNEL_BLUESTEIN_COMPILER_WITH_M181_RETAINED_AS_A_SMALLER_STATE_QUADRATIC_WORK_POINT",
+    "work_advantage": false
+  },
+  "next_obstruction": "ONE_SEGMENT_EXECUTION_IS_EXACT_BUT_RECOVERS_LINEAR_STATE_ONLY_BY_STREAMING_2M_PUBLIC_SPECTRUM_VALUES_AT_2M_TIMES_2QMINUS3_KERNEL_TERMS_THE_CARRIER_STILL_GROWS_AS_M_AND_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_AND_IDENTICAL_CLASSICAL_PATH_REMAIN_SO_THIS_BLUESTEIN_ROUTE_HAS_NO_DISTINCT_PHASE_RESOURCE",
+  "observed_resource_law": {
+    "accepted_forward_compiler_plus_projection_work": "THETA_MQ_PLUS_M_LOG_M_PLUS_Q",
+    "butterflies_per_compiler": "2M_LOG2_M",
+    "convolution_width": "LEAST_POWER_OF_TWO_AT_LEAST_2Q_MINUS3",
+    "exact_bit_width_independent_of_q": false,
+    "logical_carrier_field_cells": "ONE_PLUS_M",
+    "ntt_calls_per_forward_or_inverse_compiler": 4,
+    "python_integer_allocator_and_native_library_memory_included": false,
+    "resident_after_forward_field_cells": 1,
+    "retained_gauss_descriptor_cells": 0,
+    "retained_inverse_history_cells": 0,
+    "retained_public_kernel_spectrum_cells": 0,
+    "streamed_kernel_nonzero_terms_per_compiler": "2M_TIMES_2Q_MINUS3",
+    "streamed_kernel_spectrum_values_per_compiler": "2M",
+    "verification_runs_before_carrier_allocation": true,
+    "whole_process_memory_claimed": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "strict_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "fixed_exact_bit_width": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "sublinear_allocated_state": false,
+    "subquadratic_work": false,
+    "unbounded_computation": false
+  },
+  "transaction_cases": [
+    {
+      "auxiliary_prime": 41,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 54,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 9,
+        "transform_offset": 1,
+        "transform_segment_cells": 8
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 28,
+      "m184_carrier_field_cells": 17,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 16,
+          "public_kernel_spectrum_inversions": 8,
+          "streamed_kernel_chirp_exponentiations": 48,
+          "streamed_kernel_field_additions": 112,
+          "streamed_kernel_field_multiplications": 96,
+          "streamed_kernel_nonzero_terms": 112,
+          "streamed_kernel_spectrum_values": 16,
+          "streamed_kernel_twiddle_exponentiations": 96,
+          "transform": {
+            "chirp_exponentiations": 8,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 8,
+            "initialization_multiplications": 8,
+            "ntt_butterflies": 48,
+            "ntt_calls": 4,
+            "ntt_field_additions": 96,
+            "ntt_field_multiplications": 96,
+            "ntt_inverse_scalings": 16,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 8
+          },
+          "transient_gauss_chirp_multiplications": 20,
+          "transient_gauss_reads": 20
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 16,
+          "public_kernel_spectrum_inversions": 8,
+          "streamed_kernel_chirp_exponentiations": 48,
+          "streamed_kernel_field_additions": 112,
+          "streamed_kernel_field_multiplications": 96,
+          "streamed_kernel_nonzero_terms": 112,
+          "streamed_kernel_spectrum_values": 16,
+          "streamed_kernel_twiddle_exponentiations": 96,
+          "transform": {
+            "chirp_exponentiations": 8,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 8,
+            "initialization_multiplications": 8,
+            "ntt_butterflies": 48,
+            "ntt_calls": 4,
+            "ntt_field_additions": 96,
+            "ntt_field_multiplications": 96,
+            "ntt_inverse_scalings": 16,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 8
+          },
+          "transient_gauss_chirp_multiplications": 20,
+          "transient_gauss_reads": 20
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 4,
+          "channel_field_multiplications": 48,
+          "channels": 4,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+        "pre_state_commitment": "b07fb9f94b78d89c9574ad101242012cf02aacf66ba555577efda7a366d17537",
+        "projected_final_boundary_scalar": 25,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 4,
+          "channel_field_multiplications": 48,
+          "channels": 4,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "27030c84c12433524f317b6b462bb975f630a547870ab94e3162cb94047600b0",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "b5b97ac89e7b66c9291c89db9eda48e31034a0fd828346085ff92bd374225e14"
+      },
+      "program": {
+        "determinant_character": 1,
+        "scale_character": 2
+      },
+      "q": 5,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 2,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 2,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 8,
+        "direct_gauss_generation_field_terms": 16,
+        "direct_gauss_table_peak_field_cells": 4,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 337,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 153,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 17,
+        "transform_offset": 1,
+        "transform_segment_cells": 16
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 54,
+      "m184_carrier_field_cells": 33,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 32,
+          "public_kernel_spectrum_inversions": 16,
+          "streamed_kernel_chirp_exponentiations": 160,
+          "streamed_kernel_field_additions": 352,
+          "streamed_kernel_field_multiplications": 320,
+          "streamed_kernel_nonzero_terms": 352,
+          "streamed_kernel_spectrum_values": 32,
+          "streamed_kernel_twiddle_exponentiations": 320,
+          "transform": {
+            "chirp_exponentiations": 12,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 12,
+            "initialization_multiplications": 12,
+            "ntt_butterflies": 128,
+            "ntt_calls": 4,
+            "ntt_field_additions": 256,
+            "ntt_field_multiplications": 256,
+            "ntt_inverse_scalings": 32,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 12
+          },
+          "transient_gauss_chirp_multiplications": 30,
+          "transient_gauss_reads": 30
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 32,
+          "public_kernel_spectrum_inversions": 16,
+          "streamed_kernel_chirp_exponentiations": 160,
+          "streamed_kernel_field_additions": 352,
+          "streamed_kernel_field_multiplications": 320,
+          "streamed_kernel_nonzero_terms": 352,
+          "streamed_kernel_spectrum_values": 32,
+          "streamed_kernel_twiddle_exponentiations": 320,
+          "transform": {
+            "chirp_exponentiations": 12,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 12,
+            "initialization_multiplications": 12,
+            "ntt_butterflies": 128,
+            "ntt_calls": 4,
+            "ntt_field_additions": 256,
+            "ntt_field_multiplications": 256,
+            "ntt_inverse_scalings": 32,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 12
+          },
+          "transient_gauss_chirp_multiplications": 30,
+          "transient_gauss_reads": 30
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 6,
+          "channel_field_multiplications": 72,
+          "channels": 6,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "post_state_commitment": "bd329a527480427f38261b3172c6adf58b55921685cef785bc42f9a4600cc9d7",
+        "pre_state_commitment": "bd329a527480427f38261b3172c6adf58b55921685cef785bc42f9a4600cc9d7",
+        "projected_final_boundary_scalar": 323,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 6,
+          "channel_field_multiplications": 72,
+          "channels": 6,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "resident_scalar_commitment": "1485a3f5aa30648fb01bace32a32d4754eb8e8e52ac24445409ddcedbdbb0553",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "b70444921d3c3a4c5ed3414707028a8d9abe5bf7183ee9916e65fcba8a7ceef6"
+      },
+      "program": {
+        "determinant_character": 3,
+        "scale_character": 5
+      },
+      "q": 7,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 100,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 100,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 12,
+        "direct_gauss_generation_field_terms": 36,
+        "direct_gauss_table_peak_field_cells": 6,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 5281,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 429,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 33,
+        "transform_offset": 1,
+        "transform_segment_cells": 32
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 106,
+      "m184_carrier_field_cells": 65,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 576,
+          "streamed_kernel_field_additions": 1216,
+          "streamed_kernel_field_multiplications": 1152,
+          "streamed_kernel_nonzero_terms": 1216,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1152,
+          "transform": {
+            "chirp_exponentiations": 20,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 20,
+            "initialization_multiplications": 20,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 20
+          },
+          "transient_gauss_chirp_multiplications": 50,
+          "transient_gauss_reads": 50
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 576,
+          "streamed_kernel_field_additions": 1216,
+          "streamed_kernel_field_multiplications": 1152,
+          "streamed_kernel_nonzero_terms": 1216,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1152,
+          "transform": {
+            "chirp_exponentiations": 20,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 20,
+            "initialization_multiplications": 20,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 20
+          },
+          "transient_gauss_chirp_multiplications": 50,
+          "transient_gauss_reads": 50
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 10,
+          "channel_field_multiplications": 120,
+          "channels": 10,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "pre_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "projected_final_boundary_scalar": 904,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 10,
+          "channel_field_multiplications": 120,
+          "channels": 10,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "f42d250c1c4e885aa429a372a61f57d9b821ad0fb3941646187ab2ff65b96fcc",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "ac26447223ece9fce2680a4533ad1acff38b55823f7efc357cc684c9443c25a6"
+      },
+      "program": {
+        "determinant_character": 5,
+        "scale_character": 8
+      },
+      "q": 11,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 4344,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 4344,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 20,
+        "direct_gauss_generation_field_terms": 100,
+        "direct_gauss_table_peak_field_cells": 10,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 1249,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 363,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 33,
+        "transform_offset": 1,
+        "transform_segment_cells": 32
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 108,
+      "m184_carrier_field_cells": 65,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 704,
+          "streamed_kernel_field_additions": 1472,
+          "streamed_kernel_field_multiplications": 1408,
+          "streamed_kernel_nonzero_terms": 1472,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1408,
+          "transform": {
+            "chirp_exponentiations": 24,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 24,
+            "initialization_multiplications": 24,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 24
+          },
+          "transient_gauss_chirp_multiplications": 60,
+          "transient_gauss_reads": 60
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 704,
+          "streamed_kernel_field_additions": 1472,
+          "streamed_kernel_field_multiplications": 1408,
+          "streamed_kernel_nonzero_terms": 1472,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1408,
+          "transform": {
+            "chirp_exponentiations": 24,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 24,
+            "initialization_multiplications": 24,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 24
+          },
+          "transient_gauss_chirp_multiplications": 60,
+          "transient_gauss_reads": 60
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 12,
+          "channel_field_multiplications": 144,
+          "channels": 12,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "pre_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "projected_final_boundary_scalar": 1141,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 12,
+          "channel_field_multiplications": 144,
+          "channels": 12,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "c31530692101fddda380f9f4079a58ecc7602bb703513a799c15cb7339f38d33",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "ee1495ae3771dbfd3c2124cfe04761e577778222ea2df5c50858353562fe442a"
+      },
+      "program": {
+        "determinant_character": 7,
+        "scale_character": 11
+      },
+      "q": 13,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 1133,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 1133,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 24,
+        "direct_gauss_generation_field_terms": 144,
+        "direct_gauss_table_peak_field_cells": 12,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 5441,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 429,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 33,
+        "transform_offset": 1,
+        "transform_segment_cells": 32
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 112,
+      "m184_carrier_field_cells": 65,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 960,
+          "streamed_kernel_field_additions": 1984,
+          "streamed_kernel_field_multiplications": 1920,
+          "streamed_kernel_nonzero_terms": 1984,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1920,
+          "transform": {
+            "chirp_exponentiations": 32,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 32,
+            "initialization_multiplications": 32,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 32
+          },
+          "transient_gauss_chirp_multiplications": 80,
+          "transient_gauss_reads": 80
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 64,
+          "public_kernel_spectrum_inversions": 32,
+          "streamed_kernel_chirp_exponentiations": 960,
+          "streamed_kernel_field_additions": 1984,
+          "streamed_kernel_field_multiplications": 1920,
+          "streamed_kernel_nonzero_terms": 1984,
+          "streamed_kernel_spectrum_values": 64,
+          "streamed_kernel_twiddle_exponentiations": 1920,
+          "transform": {
+            "chirp_exponentiations": 32,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 32,
+            "initialization_multiplications": 32,
+            "ntt_butterflies": 320,
+            "ntt_calls": 4,
+            "ntt_field_additions": 640,
+            "ntt_field_multiplications": 640,
+            "ntt_inverse_scalings": 64,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 32
+          },
+          "transient_gauss_chirp_multiplications": 80,
+          "transient_gauss_reads": 80
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 16,
+          "channel_field_multiplications": 192,
+          "channels": 16,
+          "character_calls": 3,
+          "character_orbit_visits": 45
+        },
+        "post_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "pre_state_commitment": "0c68539baa7a1cf867ad72d905fe2a9f75dda7d4ab21b97e980768d3735a71b1",
+        "projected_final_boundary_scalar": 2092,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 16,
+          "channel_field_multiplications": 192,
+          "channels": 16,
+          "character_calls": 3,
+          "character_orbit_visits": 45
+        },
+        "resident_scalar_commitment": "e4632ab79190b12b1318a6af379c4c2f14d077b55970f499e93dff2d454a5cdb",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "8f5bf2d3b07a47530291a32e28a01ed8ac1b471050cac721f6ddf4a1c8d7b0b1"
+      },
+      "program": {
+        "determinant_character": 9,
+        "scale_character": 14
+      },
+      "q": 17,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 4505,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 4505,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 32,
+        "direct_gauss_generation_field_terms": 256,
+        "direct_gauss_table_peak_field_cells": 16,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 32833,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 1040,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 65,
+        "transform_offset": 1,
+        "transform_segment_cells": 64
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 210,
+      "m184_carrier_field_cells": 129,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 2176,
+          "streamed_kernel_field_additions": 4480,
+          "streamed_kernel_field_multiplications": 4352,
+          "streamed_kernel_nonzero_terms": 4480,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 4352,
+          "transform": {
+            "chirp_exponentiations": 36,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 36,
+            "initialization_multiplications": 36,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 36
+          },
+          "transient_gauss_chirp_multiplications": 90,
+          "transient_gauss_reads": 90
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 2176,
+          "streamed_kernel_field_additions": 4480,
+          "streamed_kernel_field_multiplications": 4352,
+          "streamed_kernel_nonzero_terms": 4480,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 4352,
+          "transform": {
+            "chirp_exponentiations": 36,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 36,
+            "initialization_multiplications": 36,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 36
+          },
+          "transient_gauss_chirp_multiplications": 90,
+          "transient_gauss_reads": 90
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 18,
+          "channel_field_multiplications": 216,
+          "channels": 18,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "pre_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "projected_final_boundary_scalar": 20160,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 18,
+          "channel_field_multiplications": 216,
+          "channels": 18,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "a4ab27321b4ade10badc826ce65e38391bd3abfe002d62ab4168ef908c1397da",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "5e83a97b1a5009665803da87a2cfefa30b4c01a47897c7c6a2b6b4b89ce71772"
+      },
+      "program": {
+        "determinant_character": 11,
+        "scale_character": 17
+      },
+      "q": 19,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 17702,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 17702,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 36,
+        "direct_gauss_generation_field_terms": 324,
+        "direct_gauss_table_peak_field_cells": 18,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 16193,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 910,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 65,
+        "transform_offset": 1,
+        "transform_segment_cells": 64
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 214,
+      "m184_carrier_field_cells": 129,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 2688,
+          "streamed_kernel_field_additions": 5504,
+          "streamed_kernel_field_multiplications": 5376,
+          "streamed_kernel_nonzero_terms": 5504,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 5376,
+          "transform": {
+            "chirp_exponentiations": 44,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 44,
+            "initialization_multiplications": 44,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 44
+          },
+          "transient_gauss_chirp_multiplications": 110,
+          "transient_gauss_reads": 110
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 2688,
+          "streamed_kernel_field_additions": 5504,
+          "streamed_kernel_field_multiplications": 5376,
+          "streamed_kernel_nonzero_terms": 5504,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 5376,
+          "transform": {
+            "chirp_exponentiations": 44,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 44,
+            "initialization_multiplications": 44,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 44
+          },
+          "transient_gauss_chirp_multiplications": 110,
+          "transient_gauss_reads": 110
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 22,
+          "channel_field_multiplications": 264,
+          "channels": 22,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "post_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "pre_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "projected_final_boundary_scalar": 139,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 22,
+          "channel_field_multiplications": 264,
+          "channels": 22,
+          "character_calls": 3,
+          "character_orbit_visits": 9
+        },
+        "resident_scalar_commitment": "1b16fd99f1c40bd48147fdc29808ceb910133dc14a72d2f12398e5e6ee0ae8e6",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "5d2ff81f927043b0494f71e085ddee3f00261c83a90a2f8fbab8bda0d9602ca4"
+      },
+      "program": {
+        "determinant_character": 13,
+        "scale_character": 20
+      },
+      "q": 23,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 2367,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 2367,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 44,
+        "direct_gauss_generation_field_terms": 484,
+        "direct_gauss_table_peak_field_cells": 22,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 38977,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 1040,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 65,
+        "transform_offset": 1,
+        "transform_segment_cells": 64
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 220,
+      "m184_carrier_field_cells": 129,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 3456,
+          "streamed_kernel_field_additions": 7040,
+          "streamed_kernel_field_multiplications": 6912,
+          "streamed_kernel_nonzero_terms": 7040,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 6912,
+          "transform": {
+            "chirp_exponentiations": 56,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 56,
+            "initialization_multiplications": 56,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 56
+          },
+          "transient_gauss_chirp_multiplications": 140,
+          "transient_gauss_reads": 140
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 3456,
+          "streamed_kernel_field_additions": 7040,
+          "streamed_kernel_field_multiplications": 6912,
+          "streamed_kernel_nonzero_terms": 7040,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 6912,
+          "transform": {
+            "chirp_exponentiations": 56,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 56,
+            "initialization_multiplications": 56,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 56
+          },
+          "transient_gauss_chirp_multiplications": 140,
+          "transient_gauss_reads": 140
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 28,
+          "channel_field_multiplications": 336,
+          "channels": 28,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "pre_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "projected_final_boundary_scalar": 23937,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 28,
+          "channel_field_multiplications": 336,
+          "channels": 28,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "05e65034c60f97631a454d2741dfb5c46de0e5d3c5cf4c7200b2c7b4f726106c",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "6fc8cda86813a65200717f5fd1b9ad3c59ea275af11a1fad9e4cd098adb87107"
+      },
+      "program": {
+        "determinant_character": 15,
+        "scale_character": 23
+      },
+      "q": 29,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 10806,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 10806,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 56,
+        "direct_gauss_generation_field_terms": 784,
+        "direct_gauss_table_peak_field_cells": 28,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 29761,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 975,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 65,
+        "transform_offset": 1,
+        "transform_segment_cells": 64
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 222,
+      "m184_carrier_field_cells": 129,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 3712,
+          "streamed_kernel_field_additions": 7552,
+          "streamed_kernel_field_multiplications": 7424,
+          "streamed_kernel_nonzero_terms": 7552,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 7424,
+          "transform": {
+            "chirp_exponentiations": 60,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 60,
+            "initialization_multiplications": 60,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 60
+          },
+          "transient_gauss_chirp_multiplications": 150,
+          "transient_gauss_reads": 150
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 128,
+          "public_kernel_spectrum_inversions": 64,
+          "streamed_kernel_chirp_exponentiations": 3712,
+          "streamed_kernel_field_additions": 7552,
+          "streamed_kernel_field_multiplications": 7424,
+          "streamed_kernel_nonzero_terms": 7552,
+          "streamed_kernel_spectrum_values": 128,
+          "streamed_kernel_twiddle_exponentiations": 7424,
+          "transform": {
+            "chirp_exponentiations": 60,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 60,
+            "initialization_multiplications": 60,
+            "ntt_butterflies": 768,
+            "ntt_calls": 4,
+            "ntt_field_additions": 1536,
+            "ntt_field_multiplications": 1536,
+            "ntt_inverse_scalings": 128,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 60
+          },
+          "transient_gauss_chirp_multiplications": 150,
+          "transient_gauss_reads": 150
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 30,
+          "channel_field_multiplications": 360,
+          "channels": 30,
+          "character_calls": 3,
+          "character_orbit_visits": 75
+        },
+        "post_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "pre_state_commitment": "ecf4e96ac64cb1ec30754ecb4614af0e447f20916c721855dde06dba5231930b",
+        "projected_final_boundary_scalar": 25935,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 30,
+          "channel_field_multiplications": 360,
+          "channels": 30,
+          "character_calls": 3,
+          "character_orbit_visits": 75
+        },
+        "resident_scalar_commitment": "f1101c470aab1b2bdcd1e3584113a15af351f313840bd79fa82819fadb50d2e2",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "2edaa262ee8892135b81798b23aa687b886961e7b20bb997366aabe00aab6df7"
+      },
+      "program": {
+        "determinant_character": 17,
+        "scale_character": 26
+      },
+      "q": 31,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 13450,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 13450,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 60,
+        "direct_gauss_generation_field_terms": 900,
+        "direct_gauss_table_peak_field_cells": 30,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 127873,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2193,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 129,
+        "transform_offset": 1,
+        "transform_segment_cells": 128
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 420,
+      "m184_carrier_field_cells": 257,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 8960,
+          "streamed_kernel_field_additions": 18176,
+          "streamed_kernel_field_multiplications": 17920,
+          "streamed_kernel_nonzero_terms": 18176,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 17920,
+          "transform": {
+            "chirp_exponentiations": 72,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 72,
+            "initialization_multiplications": 72,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 72
+          },
+          "transient_gauss_chirp_multiplications": 180,
+          "transient_gauss_reads": 180
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 8960,
+          "streamed_kernel_field_additions": 18176,
+          "streamed_kernel_field_multiplications": 17920,
+          "streamed_kernel_nonzero_terms": 18176,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 17920,
+          "transform": {
+            "chirp_exponentiations": 72,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 72,
+            "initialization_multiplications": 72,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 72
+          },
+          "transient_gauss_chirp_multiplications": 180,
+          "transient_gauss_reads": 180
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 36,
+          "channel_field_multiplications": 432,
+          "channels": 36,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "pre_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "projected_final_boundary_scalar": 50474,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 36,
+          "channel_field_multiplications": 432,
+          "channels": 36,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "b3a18400807d82ef63454be27465022d501f877988a507c9f9329061b0fff2c1",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "1bcfd85b21b8342ffbf35812f98c167f472991c21ae8fbb7bc85a0a6f32b93a2"
+      },
+      "program": {
+        "determinant_character": 19,
+        "scale_character": 29
+      },
+      "q": 37,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 66553,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 66553,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 72,
+        "direct_gauss_generation_field_terms": 1296,
+        "direct_gauss_table_peak_field_cells": 36,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 78721,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2193,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 129,
+        "transform_offset": 1,
+        "transform_segment_cells": 128
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 424,
+      "m184_carrier_field_cells": 257,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 9984,
+          "streamed_kernel_field_additions": 20224,
+          "streamed_kernel_field_multiplications": 19968,
+          "streamed_kernel_nonzero_terms": 20224,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 19968,
+          "transform": {
+            "chirp_exponentiations": 80,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 80,
+            "initialization_multiplications": 80,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 80
+          },
+          "transient_gauss_chirp_multiplications": 200,
+          "transient_gauss_reads": 200
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 9984,
+          "streamed_kernel_field_additions": 20224,
+          "streamed_kernel_field_multiplications": 19968,
+          "streamed_kernel_nonzero_terms": 20224,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 19968,
+          "transform": {
+            "chirp_exponentiations": 80,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 80,
+            "initialization_multiplications": 80,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 80
+          },
+          "transient_gauss_chirp_multiplications": 200,
+          "transient_gauss_reads": 200
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 40,
+          "channel_field_multiplications": 480,
+          "channels": 40,
+          "character_calls": 3,
+          "character_orbit_visits": 81
+        },
+        "post_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "pre_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "projected_final_boundary_scalar": 12106,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 40,
+          "channel_field_multiplications": 480,
+          "channels": 40,
+          "character_calls": 3,
+          "character_orbit_visits": 81
+        },
+        "resident_scalar_commitment": "5289af5bfde66f960308b8f28abf8a9d67e4c7bd15bedc0fbd619ec4e3c9eed5",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "14ae0769e5c8ced53ee2a3acc1476f46e74e88ce38bde39175a9f5a315bbf22f"
+      },
+      "program": {
+        "determinant_character": 21,
+        "scale_character": 32
+      },
+      "q": 41,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 65427,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 65427,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 80,
+        "direct_gauss_generation_field_terms": 1600,
+        "direct_gauss_table_peak_field_cells": 40,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 231169,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2322,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 129,
+        "transform_offset": 1,
+        "transform_segment_cells": 128
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 426,
+      "m184_carrier_field_cells": 257,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 10496,
+          "streamed_kernel_field_additions": 21248,
+          "streamed_kernel_field_multiplications": 20992,
+          "streamed_kernel_nonzero_terms": 21248,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 20992,
+          "transform": {
+            "chirp_exponentiations": 84,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 84,
+            "initialization_multiplications": 84,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 84
+          },
+          "transient_gauss_chirp_multiplications": 210,
+          "transient_gauss_reads": 210
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 10496,
+          "streamed_kernel_field_additions": 21248,
+          "streamed_kernel_field_multiplications": 20992,
+          "streamed_kernel_nonzero_terms": 21248,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 20992,
+          "transform": {
+            "chirp_exponentiations": 84,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 84,
+            "initialization_multiplications": 84,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 84
+          },
+          "transient_gauss_chirp_multiplications": 210,
+          "transient_gauss_reads": 210
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 42,
+          "channel_field_multiplications": 504,
+          "channels": 42,
+          "character_calls": 3,
+          "character_orbit_visits": 84
+        },
+        "post_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "pre_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "projected_final_boundary_scalar": 24400,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 42,
+          "channel_field_multiplications": 504,
+          "channels": 42,
+          "character_calls": 3,
+          "character_orbit_visits": 84
+        },
+        "resident_scalar_commitment": "3413933dfe48c5e594150f2c462c1db045691195ba34eb66e00941c461cf95ca",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "6009ee8f058ba9c70da9cdbe92e4e90b36cc1c178d87a3a241d1fdbe087d427b"
+      },
+      "program": {
+        "determinant_character": 23,
+        "scale_character": 35
+      },
+      "q": 43,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 92992,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 92992,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 84,
+        "direct_gauss_generation_field_terms": 1764,
+        "direct_gauss_table_peak_field_cells": 42,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 691841,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2580,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 129,
+        "transform_offset": 1,
+        "transform_segment_cells": 128
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 430,
+      "m184_carrier_field_cells": 257,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 11520,
+          "streamed_kernel_field_additions": 23296,
+          "streamed_kernel_field_multiplications": 23040,
+          "streamed_kernel_nonzero_terms": 23296,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 23040,
+          "transform": {
+            "chirp_exponentiations": 92,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 92,
+            "initialization_multiplications": 92,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 92
+          },
+          "transient_gauss_chirp_multiplications": 230,
+          "transient_gauss_reads": 230
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 11520,
+          "streamed_kernel_field_additions": 23296,
+          "streamed_kernel_field_multiplications": 23040,
+          "streamed_kernel_nonzero_terms": 23296,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 23040,
+          "transform": {
+            "chirp_exponentiations": 92,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 92,
+            "initialization_multiplications": 92,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 92
+          },
+          "transient_gauss_chirp_multiplications": 230,
+          "transient_gauss_reads": 230
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 46,
+          "channel_field_multiplications": 552,
+          "channels": 46,
+          "character_calls": 3,
+          "character_orbit_visits": 57
+        },
+        "post_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "pre_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "projected_final_boundary_scalar": 201332,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 46,
+          "channel_field_multiplications": 552,
+          "channels": 46,
+          "character_calls": 3,
+          "character_orbit_visits": 57
+        },
+        "resident_scalar_commitment": "def6e1abe11f326708cf29bdab5da2ccf476ea5ea6fab26a4f649584cd56e2d7",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "45007fc808132016354ce37220f679d3d571caa7078cecc806946b51dbb5a815"
+      },
+      "program": {
+        "determinant_character": 25,
+        "scale_character": 38
+      },
+      "q": 47,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 239436,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 239436,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 92,
+        "direct_gauss_generation_field_terms": 2116,
+        "direct_gauss_table_peak_field_cells": 46,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    },
+    {
+      "auxiliary_prime": 264577,
+      "boundary": {
+        "coordinates": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "rank_and_square_class": [
+          3,
+          -1
+        ],
+        "scale": 2
+      },
+      "carrier_capacity_bits": 2451,
+      "controls": {
+        "frequency_zero_omission_changes_boundary": true,
+        "generation_or_lease_metadata_enforced": false,
+        "missing_inverse_fails": true,
+        "null_carrier_rejected": true,
+        "singular_kernel_spectrum_rejected": true,
+        "singular_rejection_atomic_rollback_claimed": false,
+        "snapshot_used": false,
+        "wrong_program_inverse_fails": true
+      },
+      "layout": {
+        "resident_scalar_cells": 1,
+        "scalar_offset": 0,
+        "total_carrier_field_cells": 129,
+        "transform_offset": 1,
+        "transform_segment_cells": 128
+      },
+      "m181_stream_workspace_field_cells": 10,
+      "m183_carrier_field_cells": 436,
+      "m184_carrier_field_cells": 257,
+      "primary": {
+        "exactly_restored": true,
+        "forward_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 13056,
+          "streamed_kernel_field_additions": 26368,
+          "streamed_kernel_field_multiplications": 26112,
+          "streamed_kernel_nonzero_terms": 26368,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 26112,
+          "transform": {
+            "chirp_exponentiations": 104,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 104,
+            "initialization_multiplications": 104,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 104
+          },
+          "transient_gauss_chirp_multiplications": 260,
+          "transient_gauss_reads": 260
+        },
+        "inverse_counts": {
+          "in_place_spectral_multiplications": 256,
+          "public_kernel_spectrum_inversions": 128,
+          "streamed_kernel_chirp_exponentiations": 13056,
+          "streamed_kernel_field_additions": 26368,
+          "streamed_kernel_field_multiplications": 26112,
+          "streamed_kernel_nonzero_terms": 26368,
+          "streamed_kernel_spectrum_values": 256,
+          "streamed_kernel_twiddle_exponentiations": 26112,
+          "transform": {
+            "chirp_exponentiations": 104,
+            "descriptor_shear_additions": 0,
+            "descriptor_shear_multiplications": 0,
+            "initialization_additions": 104,
+            "initialization_multiplications": 104,
+            "ntt_butterflies": 1792,
+            "ntt_calls": 4,
+            "ntt_field_additions": 3584,
+            "ntt_field_multiplications": 3584,
+            "ntt_inverse_scalings": 256,
+            "pointwise_shear_additions": 0,
+            "pointwise_shear_multiplications": 0,
+            "source_phase_exponentiations": 104
+          },
+          "transient_gauss_chirp_multiplications": 260,
+          "transient_gauss_reads": 260
+        },
+        "inverse_projection_counts": {
+          "channel_field_additions": 52,
+          "channel_field_multiplications": 624,
+          "channels": 52,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "post_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "pre_state_commitment": "0b83fa986e87c6498dfc529c277e46c5099590ff962db0669f793d4f444fdc19",
+        "projected_final_boundary_scalar": 154883,
+        "projected_result_survives_inverse": true,
+        "projection_counts": {
+          "channel_field_additions": 52,
+          "channel_field_multiplications": 624,
+          "channels": 52,
+          "character_calls": 3,
+          "character_orbit_visits": 6
+        },
+        "resident_scalar_commitment": "feaeeaa80e3f9f86aa5d73da42c9e093391f68bfe4da688d9805b20840daeb77",
+        "same_backing": true,
+        "streamed_kernel_spectrum_commitment": "68a2cf752d2ef3f525a8a914e974f4ef0d17bc0dfad158f38c77044a952eab33"
+      },
+      "program": {
+        "determinant_character": 27,
+        "scale_character": 41
+      },
+      "q": 53,
+      "unrelated_reuse": {
+        "actual_restored_backing_consumed": true,
+        "exactly_restored_again": true,
+        "fresh_boundary": 201889,
+        "fresh_restored_boundary_agrees": true,
+        "fresh_restored_resource_signature_agrees": true,
+        "restored_boundary": 201889,
+        "same_backing_after_reuse": true
+      },
+      "verification_only": {
+        "descriptor_boundary_projection_channels": 104,
+        "direct_gauss_generation_field_terms": 2704,
+        "direct_gauss_table_peak_field_cells": 52,
+        "executed_before_carrier_allocation": true,
+        "included_in_accepted_transaction_carrier": false
+      }
+    }
+  ],
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
