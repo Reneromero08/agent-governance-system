@@ -1,0 +1,122 @@
+{
+  "all_controls_discriminate": true,
+  "all_restorations_within_tolerance": true,
+  "cases": [
+    {
+      "boundary": [
+        -0.0004617406509858091,
+        -0.4942070615094466
+      ],
+      "compiled_public_operation_count": 128,
+      "controls": {
+        "dephasing_changes_boundary": true,
+        "missing_inverse_fails": true,
+        "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+        "swapped_coupler_order_changes_boundary": true,
+        "wrong_inverse_fails": true,
+        "zero_feedback_changes_boundary": true
+      },
+      "depth": 8,
+      "local_couplers_per_forward": 64,
+      "local_feedback_operations_per_forward": 64,
+      "norm_error_after_forward": 2.220446049250313e-16,
+      "repeated_reuse_cycles": 128,
+      "repeated_reuse_max_error": 6.3768886013389845e-15,
+      "restoration_error": 3.11864493316497e-16,
+      "reuse_boundary": [
+        -0.16726564478381997,
+        -0.434350788956415
+      ],
+      "reuse_restoration_error": 5.598332326081323e-16,
+      "width": 8
+    },
+    {
+      "boundary": [
+        0.23110897959293072,
+        -0.28602857360762335
+      ],
+      "compiled_public_operation_count": 512,
+      "controls": {
+        "dephasing_changes_boundary": true,
+        "missing_inverse_fails": true,
+        "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+        "swapped_coupler_order_changes_boundary": true,
+        "wrong_inverse_fails": true,
+        "zero_feedback_changes_boundary": true
+      },
+      "depth": 16,
+      "local_couplers_per_forward": 256,
+      "local_feedback_operations_per_forward": 256,
+      "norm_error_after_forward": 1.1102230246251565e-16,
+      "repeated_reuse_cycles": 128,
+      "repeated_reuse_max_error": 4.943376326597339e-15,
+      "restoration_error": 3.203936111033422e-16,
+      "reuse_boundary": [
+        0.09658665268471717,
+        -0.02287472370805267
+      ],
+      "reuse_restoration_error": 4.654751537338637e-16,
+      "width": 16
+    },
+    {
+      "boundary": [
+        -0.05920753098514564,
+        0.13368444634157828
+      ],
+      "compiled_public_operation_count": 2048,
+      "controls": {
+        "dephasing_changes_boundary": true,
+        "missing_inverse_fails": true,
+        "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+        "swapped_coupler_order_changes_boundary": true,
+        "wrong_inverse_fails": true,
+        "zero_feedback_changes_boundary": true
+      },
+      "depth": 32,
+      "local_couplers_per_forward": 1024,
+      "local_feedback_operations_per_forward": 1024,
+      "norm_error_after_forward": 2.220446049250313e-16,
+      "repeated_reuse_cycles": 128,
+      "repeated_reuse_max_error": 1.9387712866873094e-14,
+      "restoration_error": 3.480531475248531e-16,
+      "reuse_boundary": [
+        -0.08233540807674719,
+        -0.043647457027370176
+      ],
+      "reuse_restoration_error": 7.28550816809042e-16,
+      "width": 32
+    },
+    {
+      "boundary": [
+        0.09420893140635078,
+        -0.07519959978468019
+      ],
+      "compiled_public_operation_count": 8192,
+      "controls": {
+        "dephasing_changes_boundary": true,
+        "missing_inverse_fails": true,
+        "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+        "swapped_coupler_order_changes_boundary": true,
+        "wrong_inverse_fails": true,
+        "zero_feedback_changes_boundary": true
+      },
+      "depth": 64,
+      "local_couplers_per_forward": 4096,
+      "local_feedback_operations_per_forward": 4096,
+      "norm_error_after_forward": 5.551115123125783e-16,
+      "repeated_reuse_cycles": 128,
+      "repeated_reuse_max_error": 2.432693893487971e-14,
+      "restoration_error": 5.405215745588179e-16,
+      "reuse_boundary": [
+        -0.04225704038950859,
+        0.012300901028590727
+      ],
+      "reuse_restoration_error": 9.384709710844992e-16,
+      "width": 64
+    }
+  ],
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "oracle": "STANDALONE_PYTHON_COMPLEX_PUBLIC_WORD_NO_PRODUCTION_IMPORT_NO_NUMPY",
+  "schema": "CAT_CAS_CONTROLLED_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_INDEPENDENT_ORACLE_V1",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

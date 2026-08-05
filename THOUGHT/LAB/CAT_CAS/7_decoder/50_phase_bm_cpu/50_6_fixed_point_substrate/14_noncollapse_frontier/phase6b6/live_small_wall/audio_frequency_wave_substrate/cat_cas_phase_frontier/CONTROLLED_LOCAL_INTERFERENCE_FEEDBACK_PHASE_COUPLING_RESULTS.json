@@ -1,0 +1,590 @@
+{
+  "cases": [
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.00046174065098569805,
+          -0.4942070615094467
+        ],
+        "local_couplers": 64,
+        "local_feedback_operations": 64,
+        "logical_complex_cells": 10,
+        "projection_terms": 8,
+        "request_bytes": 115,
+        "response": {
+          "final_boundary": [
+            -0.00046174065098569805,
+            -0.4942070615094467
+          ]
+        },
+        "response_bytes": 64,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0
+      },
+      "depth": 8,
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_parallel_sublayer_depth_primary_and_reuse": 96,
+        "accepted_transaction_logical_complex_cells": 10,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.00046174065098569805,
+          -0.4942070615094467
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_complex_cells": 8,
+        "commitment_serialization_bytes": 384,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+          "swapped_coupler_order_changes_boundary": true,
+          "wrong_inverse_fails": true,
+          "zero_feedback_changes_boundary": true
+        },
+        "declared_pair_temporary_complex_cells": 2,
+        "local_couplers_primary_and_reuse": 256,
+        "local_feedback_operations_primary_and_reuse": 256,
+        "logical_complex_cells": 10,
+        "mode_count": 8,
+        "post_state_commitment": "03245d6f4fa8329a1720eb3c26814bec8ed575a19f272f756a3d868d6bcda833",
+        "pre_state_commitment": "d7387c93833902fc816e77d90ab4f4158c81fa3c5fb2e19b2392b361307fa8df",
+        "precision_bits_per_mode": 128,
+        "projection_terms_primary_and_reuse": 16,
+        "repeated_reuse_cycles": 128,
+        "repeated_reuse_max_error": 4.850242167634644e-15,
+        "request_bytes": 115,
+        "resident_intermediate_commitment": "630353096ada7bd8216d685a344f1b3095a06c1be72a51f9e0dbb1d51a3ea31b",
+        "response": {
+          "final_boundary": [
+            -0.00046174065098569805,
+            -0.4942070615094467
+          ]
+        },
+        "response_bytes": 64,
+        "response_order_machine_enforced": false,
+        "response_release_order": "FORWARD_FINAL_RETENTION_INVERSE_RESTORATION_CHECK_THEN_LOCAL_RETURN",
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 6.199616394108062e-16,
+        "restoration_scope": "VIRTUAL_COMPLEX128_PHASE_COORDINATES_ONLY",
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 3.3840816716829187e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 8,
+        "snapshot_bytes": 0,
+        "verification_and_controls_local_couplers": 16704,
+        "verification_and_controls_local_feedback_operations": 16704,
+        "verification_and_controls_peak_logical_complex_cells": 34,
+        "verification_and_controls_projection_terms": 32
+      },
+      "predeclared_boundary_tolerance": 2e-11,
+      "predeclared_state_tolerance": 2e-10,
+      "request": {
+        "depth": 8,
+        "even_angle": 0.173,
+        "feedback_strength": 0.71,
+        "odd_angle": 0.287,
+        "phase_seed": 3,
+        "weight_shift": 3,
+        "width": 8
+      },
+      "second_program": {
+        "depth": 8,
+        "even_angle": 0.19199999999999998,
+        "feedback_strength": 0.82,
+        "odd_angle": 0.27399999999999997,
+        "phase_seed": 5,
+        "weight_shift": 4,
+        "width": 8
+      },
+      "snapshot_sham": {
+        "accepted_transaction_logical_complex_cells": 18,
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.00046174065098569805,
+          -0.4942070615094467
+        ],
+        "local_couplers_primary_and_reuse": 128,
+        "local_feedback_operations_primary_and_reuse": 128,
+        "logical_complex_cells": 18,
+        "projection_terms_primary_and_reuse": 16,
+        "request_bytes": 115,
+        "response": {
+          "final_boundary": [
+            -0.00046174065098569805,
+            -0.4942070615094467
+          ]
+        },
+        "response_bytes": 64,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 384,
+        "verification_fresh_projection_terms": 8,
+        "verification_peak_logical_complex_cells": 26
+      },
+      "warm_timing": {
+        "repetitions": 9,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_fresh_median_ns": 189112,
+        "warm_identical_classical_full_state_median_ns": 304393,
+        "warm_in_place_phase_median_ns": 369878,
+        "warm_snapshot_sham_median_ns": 272842
+      },
+      "width": 8
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.23110897959293084,
+          -0.28602857360762324
+        ],
+        "local_couplers": 256,
+        "local_feedback_operations": 256,
+        "logical_complex_cells": 18,
+        "projection_terms": 16,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            0.23110897959293084,
+            -0.28602857360762324
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0
+      },
+      "depth": 16,
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_parallel_sublayer_depth_primary_and_reuse": 192,
+        "accepted_transaction_logical_complex_cells": 18,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.23110897959293084,
+          -0.28602857360762324
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_complex_cells": 16,
+        "commitment_serialization_bytes": 768,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+          "swapped_coupler_order_changes_boundary": true,
+          "wrong_inverse_fails": true,
+          "zero_feedback_changes_boundary": true
+        },
+        "declared_pair_temporary_complex_cells": 2,
+        "local_couplers_primary_and_reuse": 1024,
+        "local_feedback_operations_primary_and_reuse": 1024,
+        "logical_complex_cells": 18,
+        "mode_count": 16,
+        "post_state_commitment": "18ad08a7ac3b2f4263f6049fa04ecd456c204244c44b901c65eef85e6ac1c3ea",
+        "pre_state_commitment": "9639fe823e2f732f73eba0a9d6bb61dca91bd37d99aef1368d5ed7c338a90c63",
+        "precision_bits_per_mode": 128,
+        "projection_terms_primary_and_reuse": 32,
+        "repeated_reuse_cycles": 128,
+        "repeated_reuse_max_error": 4.373530478689862e-15,
+        "request_bytes": 117,
+        "resident_intermediate_commitment": "597b7040b6b30f99ead75ae3dc8e1a0681e2c592bee05f14af67a242ad318f67",
+        "response": {
+          "final_boundary": [
+            0.23110897959293084,
+            -0.28602857360762324
+          ]
+        },
+        "response_bytes": 61,
+        "response_order_machine_enforced": false,
+        "response_release_order": "FORWARD_FINAL_RETENTION_INVERSE_RESTORATION_CHECK_THEN_LOCAL_RETURN",
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 3.387999773988765e-16,
+        "restoration_scope": "VIRTUAL_COMPLEX128_PHASE_COORDINATES_ONLY",
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 5.27766632335736e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 16,
+        "snapshot_bytes": 0,
+        "verification_and_controls_local_couplers": 66816,
+        "verification_and_controls_local_feedback_operations": 66816,
+        "verification_and_controls_peak_logical_complex_cells": 66,
+        "verification_and_controls_projection_terms": 64
+      },
+      "predeclared_boundary_tolerance": 2e-11,
+      "predeclared_state_tolerance": 2e-10,
+      "request": {
+        "depth": 16,
+        "even_angle": 0.173,
+        "feedback_strength": 0.71,
+        "odd_angle": 0.287,
+        "phase_seed": 3,
+        "weight_shift": 3,
+        "width": 16
+      },
+      "second_program": {
+        "depth": 16,
+        "even_angle": 0.19199999999999998,
+        "feedback_strength": 0.82,
+        "odd_angle": 0.27399999999999997,
+        "phase_seed": 5,
+        "weight_shift": 4,
+        "width": 16
+      },
+      "snapshot_sham": {
+        "accepted_transaction_logical_complex_cells": 34,
+        "baseline_reload_used": true,
+        "boundary": [
+          0.23110897959293084,
+          -0.28602857360762324
+        ],
+        "local_couplers_primary_and_reuse": 512,
+        "local_feedback_operations_primary_and_reuse": 512,
+        "logical_complex_cells": 34,
+        "projection_terms_primary_and_reuse": 32,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            0.23110897959293084,
+            -0.28602857360762324
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 768,
+        "verification_fresh_projection_terms": 16,
+        "verification_peak_logical_complex_cells": 50
+      },
+      "warm_timing": {
+        "repetitions": 9,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_fresh_median_ns": 596120,
+        "warm_identical_classical_full_state_median_ns": 1104383,
+        "warm_in_place_phase_median_ns": 1108200,
+        "warm_snapshot_sham_median_ns": 878801
+      },
+      "width": 16
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          -0.059207530985145605,
+          0.13368444634157806
+        ],
+        "local_couplers": 1024,
+        "local_feedback_operations": 1024,
+        "logical_complex_cells": 34,
+        "projection_terms": 32,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            -0.059207530985145605,
+            0.13368444634157806
+          ]
+        },
+        "response_bytes": 62,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0
+      },
+      "depth": 32,
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_parallel_sublayer_depth_primary_and_reuse": 384,
+        "accepted_transaction_logical_complex_cells": 34,
+        "baseline_reload_used": false,
+        "boundary": [
+          -0.059207530985145605,
+          0.13368444634157806
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_complex_cells": 32,
+        "commitment_serialization_bytes": 1536,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+          "swapped_coupler_order_changes_boundary": true,
+          "wrong_inverse_fails": true,
+          "zero_feedback_changes_boundary": true
+        },
+        "declared_pair_temporary_complex_cells": 2,
+        "local_couplers_primary_and_reuse": 4096,
+        "local_feedback_operations_primary_and_reuse": 4096,
+        "logical_complex_cells": 34,
+        "mode_count": 32,
+        "post_state_commitment": "a3cfa494a668d1ac257b51401d70392c70774b6874dc9db63b20a409cafcfd22",
+        "pre_state_commitment": "908f39da34f070f27ed7b43b59c162511a472263c8a3d2ee68ad890db1707800",
+        "precision_bits_per_mode": 128,
+        "projection_terms_primary_and_reuse": 64,
+        "repeated_reuse_cycles": 128,
+        "repeated_reuse_max_error": 1.543314832878576e-14,
+        "request_bytes": 117,
+        "resident_intermediate_commitment": "31d829cb1d98bef18f0ea444f2087622446a137e4b74ee1fab973167081a7e95",
+        "response": {
+          "final_boundary": [
+            -0.059207530985145605,
+            0.13368444634157806
+          ]
+        },
+        "response_bytes": 62,
+        "response_order_machine_enforced": false,
+        "response_release_order": "FORWARD_FINAL_RETENTION_INVERSE_RESTORATION_CHECK_THEN_LOCAL_RETURN",
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 3.7553457920377367e-16,
+        "restoration_scope": "VIRTUAL_COMPLEX128_PHASE_COORDINATES_ONLY",
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 6.059128614320849e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 32,
+        "snapshot_bytes": 0,
+        "verification_and_controls_local_couplers": 267264,
+        "verification_and_controls_local_feedback_operations": 267264,
+        "verification_and_controls_peak_logical_complex_cells": 130,
+        "verification_and_controls_projection_terms": 128
+      },
+      "predeclared_boundary_tolerance": 2e-11,
+      "predeclared_state_tolerance": 2e-10,
+      "request": {
+        "depth": 32,
+        "even_angle": 0.173,
+        "feedback_strength": 0.71,
+        "odd_angle": 0.287,
+        "phase_seed": 3,
+        "weight_shift": 3,
+        "width": 32
+      },
+      "second_program": {
+        "depth": 32,
+        "even_angle": 0.19199999999999998,
+        "feedback_strength": 0.82,
+        "odd_angle": 0.27399999999999997,
+        "phase_seed": 5,
+        "weight_shift": 4,
+        "width": 32
+      },
+      "snapshot_sham": {
+        "accepted_transaction_logical_complex_cells": 66,
+        "baseline_reload_used": true,
+        "boundary": [
+          -0.059207530985145605,
+          0.13368444634157806
+        ],
+        "local_couplers_primary_and_reuse": 2048,
+        "local_feedback_operations_primary_and_reuse": 2048,
+        "logical_complex_cells": 66,
+        "projection_terms_primary_and_reuse": 64,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            -0.059207530985145605,
+            0.13368444634157806
+          ]
+        },
+        "response_bytes": 62,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 1536,
+        "verification_fresh_projection_terms": 32,
+        "verification_peak_logical_complex_cells": 98
+      },
+      "warm_timing": {
+        "repetitions": 9,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_fresh_median_ns": 2170353,
+        "warm_identical_classical_full_state_median_ns": 4262907,
+        "warm_in_place_phase_median_ns": 4262486,
+        "warm_snapshot_sham_median_ns": 3239559
+      },
+      "width": 32
+    },
+    {
+      "compact_direct": {
+        "boundary": [
+          0.09420893140635095,
+          -0.07519959978468016
+        ],
+        "local_couplers": 4096,
+        "local_feedback_operations": 4096,
+        "logical_complex_cells": 66,
+        "projection_terms": 64,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            0.09420893140635095,
+            -0.07519959978468016
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "NO_RESTORATION_CLAIM",
+        "snapshot_bytes": 0
+      },
+      "depth": 64,
+      "identical_public_boundary": true,
+      "identical_request_response_traffic": true,
+      "in_place_virtual_phase": {
+        "abstract_parallel_sublayer_depth_primary_and_reuse": 768,
+        "accepted_transaction_logical_complex_cells": 66,
+        "baseline_reload_used": false,
+        "boundary": [
+          0.09420893140635095,
+          -0.07519959978468016
+        ],
+        "boundary_survives_inverse": true,
+        "carrier_complex_cells": 64,
+        "commitment_serialization_bytes": 3072,
+        "controls": {
+          "dephasing_changes_boundary": true,
+          "missing_inverse_fails": true,
+          "null_carrier_rejected": true,
+          "premature_projection_machine_enforced": false,
+          "reordered_inverse_fails_for_noncommuting_feedback_and_couplers": true,
+          "swapped_coupler_order_changes_boundary": true,
+          "wrong_inverse_fails": true,
+          "zero_feedback_changes_boundary": true
+        },
+        "declared_pair_temporary_complex_cells": 2,
+        "local_couplers_primary_and_reuse": 16384,
+        "local_feedback_operations_primary_and_reuse": 16384,
+        "logical_complex_cells": 66,
+        "mode_count": 64,
+        "post_state_commitment": "7a1c75eae026138821c91dd538e58a7ee6a7e75b4e8f1f935287b3b87182544f",
+        "pre_state_commitment": "85f0ca797bc4ff26ac70979f5f0a6d2115a2585a00aee4c11bcb45bd196c2d78",
+        "precision_bits_per_mode": 128,
+        "projection_terms_primary_and_reuse": 128,
+        "repeated_reuse_cycles": 128,
+        "repeated_reuse_max_error": 2.5387750553454995e-14,
+        "request_bytes": 117,
+        "resident_intermediate_commitment": "49cdab77c428ac7cdea15164e27b1ced3bfb417b0f80d33e77a70b7eaf931889",
+        "response": {
+          "final_boundary": [
+            0.09420893140635095,
+            -0.07519959978468016
+          ]
+        },
+        "response_bytes": 61,
+        "response_order_machine_enforced": false,
+        "response_release_order": "FORWARD_FINAL_RETENTION_INVERSE_RESTORATION_CHECK_THEN_LOCAL_RETURN",
+        "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+        "restoration_error": 4.544313350627588e-16,
+        "restoration_scope": "VIRTUAL_COMPLEX128_PHASE_COORDINATES_ONLY",
+        "reuse_matches_fresh": true,
+        "reuse_restoration_error": 6.906901238795285e-16,
+        "same_backing": true,
+        "simultaneous_mode_bandwidth_units": 64,
+        "snapshot_bytes": 0,
+        "verification_and_controls_local_couplers": 1069056,
+        "verification_and_controls_local_feedback_operations": 1069056,
+        "verification_and_controls_peak_logical_complex_cells": 258,
+        "verification_and_controls_projection_terms": 256
+      },
+      "predeclared_boundary_tolerance": 2e-11,
+      "predeclared_state_tolerance": 2e-10,
+      "request": {
+        "depth": 64,
+        "even_angle": 0.173,
+        "feedback_strength": 0.71,
+        "odd_angle": 0.287,
+        "phase_seed": 3,
+        "weight_shift": 3,
+        "width": 64
+      },
+      "second_program": {
+        "depth": 64,
+        "even_angle": 0.19199999999999998,
+        "feedback_strength": 0.82,
+        "odd_angle": 0.27399999999999997,
+        "phase_seed": 5,
+        "weight_shift": 4,
+        "width": 64
+      },
+      "snapshot_sham": {
+        "accepted_transaction_logical_complex_cells": 130,
+        "baseline_reload_used": true,
+        "boundary": [
+          0.09420893140635095,
+          -0.07519959978468016
+        ],
+        "local_couplers_primary_and_reuse": 8192,
+        "local_feedback_operations_primary_and_reuse": 8192,
+        "logical_complex_cells": 130,
+        "projection_terms_primary_and_reuse": 128,
+        "request_bytes": 117,
+        "response": {
+          "final_boundary": [
+            0.09420893140635095,
+            -0.07519959978468016
+          ]
+        },
+        "response_bytes": 61,
+        "restoration_classification": "SNAPSHOT_RELOAD",
+        "restored_error": 0.0,
+        "reuse_matches_fresh": true,
+        "same_backing": true,
+        "snapshot_bytes_primary_and_reuse": 3072,
+        "verification_fresh_projection_terms": 64,
+        "verification_peak_logical_complex_cells": 194
+      },
+      "warm_timing": {
+        "repetitions": 9,
+        "timing_is_environment_specific_not_claim_authority": true,
+        "warm_compact_direct_fresh_median_ns": 8413138,
+        "warm_identical_classical_full_state_median_ns": 16825946,
+        "warm_in_place_phase_median_ns": 16629069,
+        "warm_snapshot_sham_median_ns": 12531639
+      },
+      "width": 64
+    }
+  ],
+  "claim": "BOUNDED_CONTROLLED_FOUR_CASE_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_REPLACES_THE_FREE_GLOBAL_DFT_WITH_PUBLIC_BRICKWORK_UNITARY_COUPLERS_AND_LOCAL_INTENSITY_DEPENDENT_PHASE_FEEDBACK_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_REQUIRES_N_COMPLEX128_MODES_N_LOCAL_COUPLERS_AND_N_FEEDBACK_OPERATIONS_PER_LAYER_AND_COLLAPSES_TO_THE_IDENTICAL_COMPACT_CLASSICAL_FULL_STATE_RECURRENCE_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED",
+  "claim_boundaries": {
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "machine_enforced_hidden_intermediate": false,
+    "physical_audio_execution": false,
+    "physical_bit_replacement": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossing": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_boundaries_match": true,
+    "all_controls_discriminate": true,
+    "all_public_traffic_matches": true,
+    "all_restorations_within_tolerance": true
+  },
+  "direct_restoration_classification": "NO_RESTORATION_CLAIM",
+  "execution_scope": "LINUX_DIRECT_PROCESS_COMPLEX128_VIRTUAL_PHASE_SOFTWARE",
+  "in_place_restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "predeclared_boundary_tolerance": 2e-11,
+  "predeclared_state_tolerance": 2e-10,
+  "resource_conclusion": {
+    "coupler_count_per_layer_law": "N",
+    "distinct_phase_resource_established": false,
+    "feedback_count_per_layer_law": "N",
+    "free_global_dft_removed": true,
+    "local_nonlinear_feedback_present": true,
+    "mode_and_bandwidth_law": "N",
+    "precision_bits_per_mode": 128,
+    "small_wall_crossing_established": false,
+    "strongest_compact_classical_path": "IDENTICAL_N_COMPLEX_FULL_STATE_LOCAL_COUPLER_AND_FEEDBACK_RECURRENCE"
+  },
+  "schema": "CAT_CAS_CONTROLLED_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_V1",
+  "sham_restoration_classification": "SNAPSHOT_RELOAD",
+  "state_equality": "MAX_ABSOLUTE_COMPLEX_COORDINATE_ERROR",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
