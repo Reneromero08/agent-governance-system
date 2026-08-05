@@ -1,0 +1,97 @@
+{
+  "accepted_protocol": {
+    "carrier_field_cells": 8943,
+    "generation": 2,
+    "hidden_port_lease_release_pairs": 32,
+    "one_body_terms_per_forward_inverse_transaction": 663408,
+    "primary_boundary": 83,
+    "process_memory_open_denied": true,
+    "response_order_verified": true,
+    "reuse_boundary": 70,
+    "same_service_reused": true
+  },
+  "algebra": {
+    "bracelet_cells": 2277,
+    "direct_primary_mismatch_cells": 0,
+    "direct_two_body_csr_nonzeros": 172838,
+    "direct_two_body_terms": 684624,
+    "full_unpaired_factor_terms": 494496,
+    "necklace_cells": 4389,
+    "occupation_histograms": 74613,
+    "primary_boundary": 83,
+    "reflection_paired_factor_terms": 331704,
+    "reuse_boundary": 70,
+    "topology_commitment": "780aca13cc2d1ec2bc333fca42534252f60938ade69d225ecc85413e2e1c84f8"
+  },
+  "claim_ceiling": "LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_controls_restored_before_denial_response": true,
+    "missing_inverse_discriminated": true,
+    "null_carrier_command_denied": true,
+    "premature_projection_denied_while_port_resident": true,
+    "reordered_noncommuting_inverse_discriminated": true,
+    "snapshot_command_on_inplace_denied": true,
+    "wrong_inverse_discriminated": true,
+    "wrong_reflection_inverse_discriminated": true
+  },
+  "disconnect": {
+    "process_memory_open_denied": true,
+    "response_bytes": 0,
+    "restoration_precedes_disconnected_write_attempt": true,
+    "stderr_bytes": 0
+  },
+  "fresh_and_snapshot": {
+    "fresh_matches_restored_reuse": true,
+    "fresh_reuse_boundary": 70,
+    "inplace_command_on_snapshot_denied": true,
+    "snapshot_boundary": 83,
+    "snapshot_matches_primary": true,
+    "snapshot_restoration_classification": "SNAPSHOT_RELOAD"
+  },
+  "independence": {
+    "catvm_controller_imported": false,
+    "catvm_protocol_imported": false,
+    "catvm_service_imported": false,
+    "production_factor_module_imported": false,
+    "separate_m199_mathematical_oracle_reused": true
+  },
+  "no_smuggle": {
+    "audit_bytes": 7385,
+    "audit_event_vocabulary_only": true,
+    "audit_files": 5,
+    "intermediate_cells_in_fixed_response": false,
+    "intermediate_field_values_in_audit": false,
+    "response_size_bytes": 44
+  },
+  "observed_resource_law": {
+    "accepted_carrier_field_cells": 8943,
+    "accepted_one_body_terms_per_forward_inverse_transaction": 663408,
+    "python_object_allocator_interpreter_native_library_timing_and_whole_process_peaks_excluded": true,
+    "request_bytes": 24,
+    "response_bytes": 44,
+    "retained_inverse_history_bytes": 0,
+    "retained_transition_plan_entries": 0,
+    "service_launches": 5,
+    "snapshot_saved_field_cells": 8943
+  },
+  "rejected_interpretations": [
+    "DIFFERENT_UID_CONTAINER_OR_HARDWARE_ISOLATION",
+    "ARBITRARY_ROTOR_COUNT_OR_FIXED_RANK_GROWTH",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_AUDIO_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS",
+  "schema": "CATVM_GROWING_ROTOR_OPEN_MOMENTUM_INDEPENDENT_ORACLE_V1",
+  "source_boundary_audit": {
+    "controller_dynamically_loads_backend_or_service": false,
+    "controller_imports_backend_or_service": false,
+    "service_protocol_write_sites_are_fixed_binary": true,
+    "service_response_constructed_after_restoration_verification": true
+  },
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}

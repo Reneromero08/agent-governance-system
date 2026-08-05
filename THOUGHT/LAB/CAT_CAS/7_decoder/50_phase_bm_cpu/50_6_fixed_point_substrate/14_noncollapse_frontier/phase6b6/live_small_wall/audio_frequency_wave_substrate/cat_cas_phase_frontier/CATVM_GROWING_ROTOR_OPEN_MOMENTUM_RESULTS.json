@@ -1,0 +1,182 @@
+{
+  "claim_candidate": "CATVM_ATOMIC_ENFORCED_EXACT_F103_ROTOR6_REFLECTION_PAIRED_OPEN_MOMENTUM_PORT_FACTOR_CLOSURE_RETAINS_ONE4389_CELL_NECKLACE_INTERMEDIATE_INSIDE_A_NON_DUMPABLE_PROCESS_AND_RELEASES_ONLY_THE2277_CELL_FINAL_BOUNDARY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_CLASSICAL_FACTOR_STREAM_REMAINS",
+  "claim_ceiling": "LINUX_SAME_UID_NON_DUMPABLE_NO_NEW_PRIVS_FIXED_BINARY_PIPE_SERVICE_GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_AND_REUSE_ONLY",
+  "classification": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "controller_computes_boundary": false,
+  "controller_imports_or_loads_backend": false,
+  "controls": {
+    "inverse": {
+      "missing": {
+        "boundary_released": false,
+        "mutation_discriminated": true,
+        "repair_restored_before_denial_response": true
+      },
+      "reordered_noncommuting": {
+        "boundary_released": false,
+        "mutation_discriminated": true,
+        "repair_restored_before_denial_response": true
+      },
+      "wrong": {
+        "boundary_released": false,
+        "mutation_discriminated": true,
+        "repair_restored_before_denial_response": true
+      },
+      "wrong_reflection": {
+        "boundary_released": false,
+        "mutation_discriminated": true,
+        "repair_restored_before_denial_response": true
+      }
+    },
+    "null_command_on_live_service_denied": true,
+    "process_memory_open_denied": true,
+    "resident": {
+      "early_response": {
+        "denied_without_boundary": true,
+        "port_released_before_restoration": true,
+        "port_resident_before_denial": true,
+        "restored_before_response": true
+      },
+      "premature_projection": {
+        "denied_without_boundary": true,
+        "port_released_before_restoration": true,
+        "port_resident_before_denial": true,
+        "restored_before_response": true
+      },
+      "wrong_owner": {
+        "denied_without_boundary": true,
+        "port_released_before_restoration": true,
+        "port_resident_before_denial": true,
+        "restored_before_response": true
+      },
+      "wrong_type": {
+        "denied_without_boundary": true,
+        "port_released_before_restoration": true,
+        "port_resident_before_denial": true,
+        "restored_before_response": true
+      }
+    },
+    "snapshot_command_on_inplace_service_denied": true,
+    "wrong_generation_denied": true
+  },
+  "disconnect": {
+    "boundary_response_bytes": 0,
+    "exit_code": 0,
+    "process_memory_open_denied": true,
+    "restoration_precedes_disconnected_write_attempt": true,
+    "stderr_bytes": 0
+  },
+  "inplace": {
+    "baseline_reload_used": false,
+    "carrier_field_cells": 8943,
+    "fresh_restored_reuse_boundary_parity": true,
+    "fresh_restored_reuse_receipt_parity": true,
+    "fresh_reuse_boundary": 70,
+    "one_body_terms": 663408,
+    "persistent_port_lease_events": 32,
+    "persistent_port_release_events": 32,
+    "primary_boundary": 83,
+    "primary_receipt": 15734966050203659246,
+    "process_memory_open_denied": true,
+    "response_write_after_boundary_retention_and_restoration": true,
+    "restoration_generation_after_reuse": 2,
+    "reuse_boundary": 70,
+    "reuse_receipt": 9347084744598424720,
+    "same_service_process_reused": true
+  },
+  "machine_boundary": "SEPARATE_NON_DUMPABLE_NO_NEW_PRIVS_SAME_UID_LINUX_FIXED_BINARY_PIPE_SERVICE",
+  "matched_baseline": {
+    "controller_computes_baseline": false,
+    "distinct_phase_resource_observed": false,
+    "name": "IDENTICAL_REFLECTION_PAIRED_OPEN_MOMENTUM_FACTOR_STREAM_ON2277_BRACELET_AND4389_TEMPORARY_NECKLACE_CELLS",
+    "same_exact_forward_inverse_term_law": true
+  },
+  "no_smuggle": {
+    "audit_bytes": 7798,
+    "audit_contains_intermediate_field_values": false,
+    "audit_event_vocabulary_only": true,
+    "audit_file_count": 6,
+    "controller_computes_boundary": false,
+    "controller_imports_or_loads_backend": false,
+    "fixed_response_bytes": 44,
+    "receipt_commits_only_public_topology_family_and_final_boundary": true,
+    "response_contains_intermediate_cells": false,
+    "stderr_bytes": 0
+  },
+  "not_established": [
+    "DIFFERENT_UID_CONTAINER_OR_HARDWARE_ISOLATION",
+    "ARBITRARY_ROTOR_COUNT_OR_FIXED_RANK_GROWTH",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING",
+    "PHYSICAL_WAVEFORM_AUDIO_OR_SILICON_EXECUTION",
+    "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+    "UNBOUNDED_CATALYTIC_COMPUTATION"
+  ],
+  "null_carrier": {
+    "carrier_field_cells": 0,
+    "inplace_command_denied": true,
+    "null_command_denied": true,
+    "process_memory_open_denied": true
+  },
+  "resource_accounting": {
+    "accepted_carrier_field_cells": 8943,
+    "accepted_cyclic_code_candidates_per_transaction": 11277936,
+    "accepted_forward_plus_inverse_one_body_terms_per_transaction": 663408,
+    "accepted_persistent_hidden_port_field_cells": 4389,
+    "accepted_port_clear_field_cells_per_transaction": 70224,
+    "accepted_retained_inverse_history_bytes": 0,
+    "accepted_retained_transition_plan_entries": 0,
+    "accepted_snapshot_cells": 0,
+    "accepted_source_field_cells": 2277,
+    "accepted_target_field_cells": 2277,
+    "audit_bytes": 7798,
+    "backend_response_bytes_each": 44,
+    "conservative_accepted_named_field_cells_peak": 15774,
+    "controller_backend_request_bytes_all_controls": 768,
+    "controller_backend_response_bytes_all_controls": 1364,
+    "controller_request_bytes_each": 24,
+    "maximum_two_bracelet_operation_buffers_field_cells": 4554,
+    "public_topology_boundary_weight_field_cells": 2277,
+    "public_topology_bracelet_cells": 2277,
+    "public_topology_bracelet_encoded_keys": 2277,
+    "public_topology_necklace_cells": 4389,
+    "public_topology_necklace_descriptor_integers": 74613,
+    "public_topology_necklace_encoded_keys": 4389,
+    "public_topology_necklace_lookup_indices": 4389,
+    "public_topology_necklace_to_bracelet_indices": 4389,
+    "public_topology_occupation_histograms": 74613,
+    "public_topology_reflected_necklace_indices": 4389,
+    "python_objects_hash_maps_allocator_interpreter_native_library_timing_and_whole_process_peaks_excluded": true,
+    "restoration_verification_expected_source_field_cells": 2277,
+    "service_process_launches": 6,
+    "snapshot_sham_conservative_named_field_cells_peak": 24717,
+    "snapshot_sham_saved_field_cells": 8943,
+    "warm_direct_m199_controller_backend_traffic_bytes": 0,
+    "warm_direct_m199_declared_named_field_cells": 11220,
+    "warm_direct_m199_forward_plus_inverse_one_body_terms": 663408,
+    "warm_inplace_reuse_uses_one_prior_service_and_topology_compile": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "CATVM_GROWING_ROTOR_OPEN_MOMENTUM_RESULTS_V1",
+  "snapshot_sham": {
+    "boundary": 83,
+    "carrier_field_cells": 8943,
+    "classification": "SNAPSHOT_RELOAD",
+    "inplace_command_on_snapshot_service_denied": true,
+    "matches_inplace_boundary": true,
+    "matches_inplace_receipt": true,
+    "one_body_terms": 331704,
+    "process_memory_open_denied": true,
+    "receipt": 15734966050203659246,
+    "snapshot_field_cells": 8943,
+    "snapshot_reload_precedes_response": true
+  },
+  "terminal": false,
+  "verification_level": "PACKAGE_SELF_REVIEW",
+  "warm_isolated_noop": {
+    "boundary_valid": false,
+    "generation_advanced": false,
+    "request_bytes": 24,
+    "response_bytes": 44,
+    "status": "OK"
+  }
+}
