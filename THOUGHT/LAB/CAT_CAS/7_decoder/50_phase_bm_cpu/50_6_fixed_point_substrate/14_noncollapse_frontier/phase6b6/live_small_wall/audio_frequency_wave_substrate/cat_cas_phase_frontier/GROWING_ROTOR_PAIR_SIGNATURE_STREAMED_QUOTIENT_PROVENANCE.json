@@ -1,0 +1,27 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_PAIR_SIGNATURE_STREAMED_QUOTIENT_PROVENANCE_V1",
+  "scientific_source_head": "16eb8061a7746c20c2fa6767598fa9be98ebd8c8",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_FINITE_FIELD_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "IN_PLACE_TWO_REGISTER_F103_AND_F239_STREAMED_PAIR_SIGNATURE_FIBER_CARRIERS_AT_ROTOR_COUNTS2_TO5",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_pair_signature_streamed_quotient.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_PAIR_SIGNATURE_STREAMED_QUOTIENT_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_pair_signature_streamed_quotient.py": "c60a3de2c314d73b72a5e4edc05e971838652cb290969120134901ec44685901",
+    "growing_rotor_pair_signature_streamed_quotient_independent_oracle.py": "e474a9f018a4996dcf59feb41f1f85b7b9f8a6c47e7c8d0517cb597847ca8224",
+    "GROWING_ROTOR_PAIR_SIGNATURE_STREAMED_QUOTIENT_RESULTS.json": "3b7843d3764a1bc18e6fa1e98899834346329138f46376e87db240ba5d4a7bd1",
+    "GROWING_ROTOR_PAIR_SIGNATURE_STREAMED_QUOTIENT_INDEPENDENT_ORACLE.json": "4699a2f6246b75704e95c88333f66751b1811714c92d6e2c6a56682e8a551c9d",
+    "GROWING_ROTOR_PAIR_SIGNATURE_STREAMED_QUOTIENT_INDEPENDENT_REEXECUTION_REVIEW.md": "d8c9266ce0f5071443ace3e1e81ca5ad5328454199f410ee7854c09513f9188a",
+    "qualify_growing_rotor_pair_signature_streamed_quotient.sh": "959cc22ab51ca84cf419e729e0faeddb7316e0481db4ab576641f0604b400280"
+  },
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_PAIR_SIGNATURE_FIBER_CONSTANT_INPUTS_ROTORS2_TO5_F103_F239_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

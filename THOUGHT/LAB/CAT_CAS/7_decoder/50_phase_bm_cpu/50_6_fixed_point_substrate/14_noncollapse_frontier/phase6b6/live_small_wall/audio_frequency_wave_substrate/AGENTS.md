@@ -272,7 +272,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M193_PAIR_SIGNATURE_FIBER_QUOTIENT
+ACTIVE_AFTER_M194_STREAMED_PAIR_SIGNATURE_QUOTIENT
 ```
 
 The named
@@ -281,20 +281,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM
+PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
-M193 establishes that arbitrary values on pair-signature fibers close exactly
-under all sixteen signed shift bases and the diagonal pair phase, reducing
-necklace dimensions 9, 57, 285, 1197 to quotient dimensions 9, 33, 165, 621.
-The result applies only to fiber-constant inputs and retains a 16-basis public
-plan with up to 131168 nonzeros. Do not add depths, fields, or rotor counts
-unless they resolve a specific defect. The selected repair must remove that
-retained plan without re-expanding the resident fiber state or hiding public
-topology rematerialization and per-update scratch. Preserve exact full-state
-parity and the identical compact classical stream. Do not promote carrier
-reduction to whole-path advantage, and do not treat a failed streaming repair
-as a reason to stop the lane.
+M194 removes all sixteen retained shift bases while preserving exact M193
+outputs, final-only projection, same-backing restoration, and reuse on the 9,
+33, 165, and 621 cell quotient. The accepted path instead retains 26S public
+integer descriptors and rematerializes up to 137232 mode-pair-shift terms per
+scattering. It remains limited to fiber-constant inputs and has the identical
+classical stream. Do not add depths, fields, or rotor counts. The selected
+repair must derive scattering from pair-signature coordinates without the 17S
+representative descriptor, or establish a strict reconstruction obstruction.
+Count all replacement work and do not promote plan elimination to whole-path
+advantage or a distinct phase resource.
 
 ## 7. Native No-Smuggle Law
 

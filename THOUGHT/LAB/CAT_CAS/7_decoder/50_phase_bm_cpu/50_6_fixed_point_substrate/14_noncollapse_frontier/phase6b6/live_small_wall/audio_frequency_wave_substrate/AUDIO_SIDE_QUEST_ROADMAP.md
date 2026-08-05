@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_PAIR_SIGNATURE_FIBER_QUOTIENT`
-**Roadmap version:** `14.59`
+**Status:** `STRICT_SCOPE_STREAMED_PAIR_SIGNATURE_FIBER_QUOTIENT`
+**Roadmap version:** `14.60`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `20298777522d3a47f5e0d5741d94a1c05e1c43cd`
+**Reconciled source head:** `16eb8061a7746c20c2fa6767598fa9be98ebd8c8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_PAIR_SIGNATURE_FIBER_EQUITABLE_QUOTIENT_CLOSES_ALL16_OFFDIAGONAL_SHIFT_BASES_AND_DIAGONAL_TWO_BODY_PHASE_ON9_33_165_621_CELLS_FOR_ROTORS2_TO5_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_IDENTICAL_CLASSICAL_QUOTIENT_RECURRENCE_REMAINS`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS2_TO5_F103_F239_ALL16_SIGNED_PAIR_SHIFT_BASES_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_TOPOLOGY_STREAMED_PAIR_SIGNATURE_FIBER_QUOTIENT_ELIMINATES_ALL16_RETAINED_SHIFT_BASES_WHILE_CLOSING_THE9_33_165_621_CELL_ROTORS2_TO5_CARRIER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS26S_PUBLIC_INTEGER_DESCRIPTORS_AND_REMATERIALIZES_EACH_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_PAIR_SIGNATURE_FIBER_CONSTANT_INPUTS_ROTORS2_TO5_F103_F239_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M193_PAIR_SIGNATURE_FIBER_QUOTIENT`
+**New mechanism development:** `ACTIVE_AFTER_M194_STREAMED_PAIR_SIGNATURE_QUOTIENT`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_STREAMED_MATRIX_FREE_PAIR_SIGNATURE_FIBER_SCATTERING_WITH_ZERO_RETAINED_SHIFT_PLAN_AND_MATCHED_IDENTICAL_CLASSICAL_STREAM`
+**Active primary successor:** `PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -8911,6 +8911,71 @@ The successor must remove the retained 16-basis plan without re-expanding the
 retain exact final-boundary parity, restoration, reuse, and the identical
 classical stream. It must report if zero resident plan merely moves the same
 material burden into larger compiler or per-update scratch.
+
+## M194: streamed fiber scattering removes retained shift bases
+
+Claim:
+
+```text
+BOUNDED_EXACT_TOPOLOGY_STREAMED_PAIR_SIGNATURE_FIBER_QUOTIENT_ELIMINATES_ALL16_RETAINED_SHIFT_BASES_WHILE_CLOSING_THE9_33_165_621_CELL_ROTORS2_TO5_CARRIER_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS26S_PUBLIC_INTEGER_DESCRIPTORS_AND_REMATERIALIZES_EACH_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+M194 replaces every retained quotient row with a public row-local stream.  It
+keeps the nine pair counts and one 17-bin necklace representative per fiber,
+derives each four-site population delta during scattering, maps the resulting
+signature by exact binary search, and immediately accumulates one output
+cell. No shift row or basis survives the update.
+
+The accepted carrier remains 9, 33, 165, and 621 cells across rotor counts two
+through five. Retained shift plans and plan nonzeros fall from sixteen bases
+and up to 131168 entries to zero. The replacement is not free: public integer
+descriptors count 26S cells, reaching 16146 at five rotors, with another S
+boundary field weights. Each five-rotor scattering rematerializes 137232
+mode-pair-shift terms, or 198720 ordered-particle terms. The compiler visits
+20349 occupations while retaining one live histogram. Verification-only
+sparse rows peak at 632 entries and are excluded from the accepted path.
+
+The independent oracle imports no production source. It sorts independently
+generated multiset occupations into the declared public order, enumerates
+ordered particles, derives verification-only sparse rows, and checks those
+rows against a row-local ordered-particle stream. It exactly reproduces every
+sealed case field. M194 also reproduces every M193 primary commitment and
+boundary exactly over F103 and F239.
+
+The two-register shear performs final-only scalar projection, recomputes the
+public word, subtracts it from the same target backing, restores every exact
+field cell, and reuses the same source and target under a different program.
+Missing, wrong, reordered, and null controls discriminate. This is exact
+algebraic restoration of the shear, not inversion of the generally
+noninvertible scattering word.
+
+Classification is INDEPENDENTLY_VERIFIED_STRICT_SCOPE at
+INDEPENDENT_ORACLE_REEXECUTION with EXACT_ALGEBRAIC_RESTORATION. The strongest
+compact classical baseline is the identical topology-streamed quotient
+recurrence. Python containers, allocator state, bigint representation,
+expression temporaries, compiler byte memory, and whole-process peaks remain
+excluded. No CATVM custody, distinct phase resource, computational advantage,
+Small Wall crossing, physical execution, physical-bit replacement, or
+unbounded computation is established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_PAIR_SIGNATURE_FIBER_CONSTANT_INPUTS_ROTORS2_TO5_F103_F239_PRIMARY_DEPTH8_REUSE_DEPTH5_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+PAIR_SIGNATURE_ONLY_ANALYTIC_SCATTERING_KERNEL_CLOSURE_OR_REPRESENTATIVE_DESCRIPTOR_NO_GO_WITH_MATCHED_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The successor must attack the remaining 17S representative descriptor and
+the growing rematerialized stream directly. It should derive transition rows
+from pair-signature coordinates without stored necklace representatives, or
+produce a strict obstruction showing why that public reconstruction remains
+necessary. It must not add depths, fields, or rotor fixtures, and it must
+retain the identical classical recurrence.
 
 ## 10. Roadmap Maintenance
 
