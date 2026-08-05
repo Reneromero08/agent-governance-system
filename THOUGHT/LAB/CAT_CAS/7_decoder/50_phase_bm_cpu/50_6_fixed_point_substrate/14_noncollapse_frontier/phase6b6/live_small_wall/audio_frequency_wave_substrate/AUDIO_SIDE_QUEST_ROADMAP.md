@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_ONE_SEGMENT_BLUESTEIN_STATE_WORK_PARETO_CEILING`
-**Roadmap version:** `14.51`
+**Status:** `STRICT_SCOPE_VIRTUAL_PHASE_WAVE_SMALL_WALL_NO_CROSSING`
+**Roadmap version:** `14.52`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `fc475ef8acfef61be7d4f69cf0e058b121394172`
+**Reconciled source head:** `b595323ba6d175f347c00fa6a6725ff0027ff913`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_ONE_SEGMENT_STREAMED_KERNEL_BLUESTEIN_FINAL_BOUNDARY_COMPILER_REDUCES_THE_ACCEPTED_BACKING_TO_ONE_RESIDENT_SCALAR_PLUS_ONE_M_CELL_REVERSIBLY_CLEARED_TRANSFORM_SEGMENT_WITHOUT_RETAINING_THE_PUBLIC_KERNEL_SPECTRUM_WITH_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_STREAMING_TWO_M_SPECTRUM_VALUES_COSTS_2M_TIMES_2QMINUS3_KERNEL_TERMS_M_REMAINS_LINEAR_THE_M181_FIXED10_CELL_QUADRATIC_STREAM_REMAINS_AND_THE_IDENTICAL_CLASSICAL_ONE_SEGMENT_COMPILER_HAS_THE_SAME_LAW`
-**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_ONE_M_CELL_TRANSFORM_SEGMENT_AND_STREAMED_PUBLIC_KERNEL_SPECTRUM`
+**Current highest milestone:** `BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
+**Current claim ceiling:** `FOURTEEN_DECLARED_Q5_THROUGH_Q53_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_TRANSACTIONS_WITH_QMINUS1_SIMULTANEOUS_MODES_LINEAR_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M185_BLUESTEIN_STATE_WORK_PARETO_CEILING`
+**New mechanism development:** `ACTIVE_AFTER_M186_VIRTUAL_PHASE_WAVE_SMALL_WALL_NO_CROSSING`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SHAM_AUGMENTED_SMALL_WALL_TRIAD_WITH_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_ACCOUNTING`
+**Active primary successor:** `CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -145,7 +145,15 @@ model: a controlled virtual phase-wave superposition primitive is compared
 against sham and strongest compact-classical paths with modes, bandwidth,
 precision, restoration, and controller traffic counted. It is a diagnostic
 for a distinct phase resource, not evidence that physical waveform hardware
-or a Small Wall crossing already exists.
+or a Small Wall crossing already exists. M186 executes that triad and rejects
+the crossing: coherence changes every tested boundary, but the virtual wave
+path requires `q-1` complex modes, linear simultaneous bandwidth, 128 bits per
+mode, and the identical software FFT used by the strongest compact classical
+path. The next mechanism must therefore change the phase update law rather
+than relabel the same linear transform. It tests reversible local
+interference-dependent phase feedback with all modal, precision, inverse, and
+classical-state costs exposed; another free global-transform fixture would
+not answer the obstruction.
 
 Every successor must answer:
 
@@ -171,7 +179,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`fc475ef8acfef61be7d4f69cf0e058b121394172`. The current 185-milestone
+`b595323ba6d175f347c00fa6a6725ff0027ff913`. The current 186-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8414,6 +8422,58 @@ Selected successor:
 
 ```text
 CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SHAM_AUGMENTED_SMALL_WALL_TRIAD_WITH_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_ACCOUNTING
+```
+
+## M186: controlled virtual phase-wave Small Wall triad rejects a crossing
+
+Claim:
+
+```text
+BOUNDED_CONTROLLED_FOURTEEN_CASE_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_MATCHES_COMPACT_FFT_SNAPSHOT_SHAM_AND_IN_PLACE_COHERENT_PHASE_BOUNDARIES_WITH_FINAL_ONLY_RESPONSE_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE_BUT_THE_DECLARED_ONE_EVENT_WAVE_ABSTRACTION_REQUIRES_QMINUS1_COMPLEX_MODES_LINEAR_BANDWIDTH_128_BITS_PER_MODE_AND_AN_IDENTICAL_SOFTWARE_FFT_SO_NO_DISTINCT_PHASE_RESOURCE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+```
+
+For q=5 through q=53, one public quadratic chirp followed by one unitary DFT
+and a public phase-weight functional is evaluated under identical request,
+response, boundary, and instance semantics across a compact fresh FFT path, a
+snapshot-backed sham, and an in-place coherent virtual phase carrier. Chirp
+and DFT do not commute. Only the final scalar crosses the direct-process
+boundary, and the in-place result remains retained until inverse DFT and
+inverse chirp restore the borrowed carrier.
+
+The in-place path restores the same `numpy.ndarray` backing within the
+predeclared `2e-12` state tolerance, matches fresh unrelated reuse, and stays
+within `1.01e-13` over 256 alternating reuse cycles. Missing, wrong, and
+applicable reordered inverses, null carrier, and dephasing discriminate. The
+primary restoration class is `NUMERICAL_PHYSICAL_STATE_RESTORATION`, limited
+to virtual complex phase coordinates; the sham is `SNAPSHOT_RELOAD`, and the
+fresh direct baseline has `NO_RESTORATION_CLAIM`. No physical waveform state
+is claimed.
+
+A standalone oracle imports neither production nor NumPy and reconstructs
+every orbit, chirp, weight, boundary, inverse, and control with explicit dense
+unitary DFT sums. All 14 production and unrelated-reuse boundaries agree
+within `2e-12`. The result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION`.
+
+Coherence is causally relevant because dephasing changes every tested final
+boundary. It is not a distinct resource here. The accepted virtual path needs
+`h=q-1` simultaneous complex modes, h bandwidth units, 128 bits per mode, and
+conservatively 3h live logical complex cells. Its software realization and
+strongest compact classical comparator are the identical in-place NumPy FFT
+recurrence with the same four primary-plus-reuse transform calls. NumPy
+allocator and internal FFT workspace and whole-process peaks remain outside
+the logical-cell count, so no memory or runtime crossing is permitted.
+
+Exact ceiling:
+
+```text
+FOURTEEN_DECLARED_Q5_THROUGH_Q53_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_TRANSACTIONS_WITH_QMINUS1_SIMULTANEOUS_MODES_LINEAR_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE
+```
+
+Selected successor:
+
+```text
+CONTROLLED_REVERSIBLE_LOCAL_INTERFERENCE_FEEDBACK_PHASE_COUPLING_WITH_EXPLICIT_MODE_BANDWIDTH_PRECISION_AND_MATCHED_COMPACT_CLASSICAL_STATE_ACCOUNTING
 ```
 
 ## 10. Roadmap Maintenance

@@ -1,0 +1,31 @@
+{
+  "schema": "CAT_CAS_CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_PROVENANCE_V1",
+  "scientific_source_head": "b595323ba6d175f347c00fa6a6725ff0027ff913",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_COMPLEX128_VIRTUAL_PHASE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "restoration_scope": "IN_PLACE_VIRTUAL_COMPLEX_PHASE_COORDINATES_ONLY",
+  "comparison_restoration_classes": {
+    "compact_direct_fresh": "NO_RESTORATION_CLAIM",
+    "snapshot_backed_sham": "SNAPSHOT_RELOAD",
+    "in_place_virtual_phase": "NUMERICAL_PHYSICAL_STATE_RESTORATION"
+  },
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_controlled_virtual_phase_wave_superposition_small_wall_triad.sh",
+    "status": "QUALIFIED_CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_STRICT_SCOPE",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "controlled_virtual_phase_wave_superposition_small_wall_triad.py": "c067e8336b3d3a99ec78f1d3cea291076540f4dc6120770fef2273bff32ed494",
+    "controlled_virtual_phase_wave_superposition_small_wall_triad_independent_oracle.py": "eaadba72b1131d0c827725b94007895d905ca1dc39b7a396610fc78ccf0833d2",
+    "CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_RESULTS.json": "c9d591966e73d459b0d57ed614f4835bc3efe9a2b56593441123c5caaae82204",
+    "CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_INDEPENDENT_ORACLE.json": "9fe6e86f52e8a5a733801c7ee3dc2f8fbc2a73ab14a4ae6233255525fb5a470c",
+    "CONTROLLED_VIRTUAL_PHASE_WAVE_SUPERPOSITION_SMALL_WALL_TRIAD_INDEPENDENT_REEXECUTION_REVIEW.md": "2473bd23335491ff317c26170e6a96703fb3c3930ddd2d80232faf64c8268653",
+    "qualify_controlled_virtual_phase_wave_superposition_small_wall_triad.sh": "0eea2e7b62924e50d4d6aebff82c5ccc80a7c863aecb261be4d5bf858bc3b85c"
+  },
+  "claim_ceiling": "FOURTEEN_DECLARED_Q5_THROUGH_Q53_COMPLEX128_DIRECT_PROCESS_VIRTUAL_PHASE_TRANSACTIONS_WITH_QMINUS1_SIMULTANEOUS_MODES_LINEAR_BANDWIDTH_FINAL_ONLY_SCALAR_BOUNDARY_NUMERICAL_INVERSE_RESTORATION_AND_SAME_BACKING_REUSE"
+}
