@@ -1254,3 +1254,54 @@ structure: a few shared directions per layer, strongest at L0-down
 (2 shared output directions, eigenvalue ~1.0) and the L0-down
 concentration anomaly (stable-rank 4.5). L0-down warrants F16
 confirmation FIRST.
+
+## 2026-08-05 — MOE anomaly audit + BF16 confirmation attempt: REVISION MISMATCH
+
+MOE-2 anomaly audit (Q8, Sol's 5 checks):
+  1. Expert-axis audit: PASS - lane scales across experts differ
+     (interleaved read confirmed; not a repeated lane).
+  2. Quant diagnostics: L0-down has 1,094,155 exact-zero int8 values vs
+     L7-down's 21,654 (~50x more); zero-scale blocks: none in either;
+     scale-periodicity corr: L0 0.086 vs L7 0.206 (no strong pattern).
+  3. DC/scale test: THE L0-down SPIKE IS A DC COMPONENT - cos(u0,
+     all-ones) = 0.9913, cos(u0, row-mean) = 0.9990. After row/col mean
+     subtraction: s0 8.64 -> 1.75, stable-rank 4.5 -> 85.6. Per Sol's
+     criteria: 'if the spike disappears after mean subtraction, it is a
+     DC or dequantization-scale artifact rather than a learned channel'.
+  4. Shared-spike removal: projector mass top-1 = 0.0019 (0.19% of the
+     union mass) - even the shared spike is a tiny compression surface;
+     residual projector after rank-1 removal: D95 1888 (null 1903).
+  5. Pairwise affinity (fixed .sum() bug): median 0.266 vs random
+     expectation 0.25 - NULL, no expert clustering.
+
+MOE-3 BF16 selective confirmation: INVALIDATED BY REVISION MISMATCH.
+  - Fetched L0-down (90 experts) + L7-down (10) + L0-gate (10) from the
+    base repo safetensors via byte-range (230MB total; safetensors
+    header parse + offsets verified via lm_head anchor at offset 0).
+  - BUG 1 (mine): safetensors are BF16; I decoded as np.float16 (wrong
+    bit layout) - produced 70-100x scale garbage. Fixed with
+    torch.bfloat16 decode.
+  - BUG 2 (found by checking): even with correct BF16 decode, the
+    matrices are DIFFERENT: L0 gate e0 elementwise mean abs diff 0.0115
+    vs weight std 0.0078 (diff > weight itself); max rel dev top-50
+    singulars 0.317; cos(u0_q8, u0_bf16) = 0.015 (orthogonal leading
+    vectors). Singular value SCALES now match (BF16 s0 0.945 vs Q8
+    0.868) but the matrices differ well beyond Q8 noise.
+  - Revision archaeology: base repo commits show model.safetensors
+    uploaded once (401a006c6602, 2026-06-14, same day as the GGUF
+    upload); no branches/tags; GGUF metadata lacks a source revision
+    hash. The GGUF's source checkpoint is NOT the current safetensors
+    (likely a local re-export/merge variant). The exact source is
+    unrecoverable from HF metadata.
+
+STATUS:
+  - EXPERT MANIFOLD VERDICT STANDS (Q8-safe dominant-structure measures):
+    no manifold (D95 ~= null ~1903), affinity ~= 0.25 null, per-expert
+    near-flat spectra (D_eff ~450/512). The Q8 GGUF is a genuine
+    post-REAP 90-expert MoE; the verdict describes THOSE weights.
+  - L0-down DC spike: confirmed as a DC/row-mean component IN THE Q8
+    WEIGHTS; its existence in the 'true' model is now UNCONFIRMED (the
+    BF16 check is invalidated). Its compression mass is ~0.2% either
+    way - program-level conclusion unchanged.
+  - The selective-BF16 confirmation path is closed unless the true
+    source revision can be identified (diminishing returns).
