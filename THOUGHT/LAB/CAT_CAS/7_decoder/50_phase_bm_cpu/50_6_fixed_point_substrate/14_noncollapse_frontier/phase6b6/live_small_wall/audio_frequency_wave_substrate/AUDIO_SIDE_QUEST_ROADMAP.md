@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE`
-**Roadmap version:** `14.62`
+**Status:** `STRICT_SCOPE_STREAMED_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE`
+**Roadmap version:** `14.63`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `25da72941fea2e2d04481a87f050a4e9393fee32`
+**Reconciled source head:** `02219766be4f38bf400fbc0585ef45d1362a58c1`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_ROTOR6_PRIMARY_DEPTH1_REUSE_DEPTH1_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M196_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE`
+**New mechanism development:** `ACTIVE_AFTER_M197_STREAMED_THIRD_ORDER_SIGNATURE_CLOSURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM`
+**Active primary successor:** `EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -9095,6 +9095,68 @@ The successor must recover M194's zero-plan residency for the repaired R6
 signature using an exact analytic triangle-coordinate delta, or establish a
 strict work/descriptor obstruction. It must use the same rotor ceiling and
 retain the identical classical stream.
+
+## M197: fixed analytic stencil removes the retained R6 shift plans
+
+Claim:
+
+```text
+BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+M197 evaluates the two M196 triangle coordinates as four cyclic cubic
+monomial sums with the public eight-integer stencil
+`((1,3),(2,3),(1,5),(4,5))`. A four-site population move updates only
+affected anchors. Exhaustive production and independent particle/bracelet
+oracles agree on all 684,624 R6 transition records and the raw transition
+commitment.
+
+The logical cell law remains `9, 33, 165, 621, 2277` for rotors two through
+six and still equals exact bracelet dimension. The accepted R6 path retains
+zero shift plans and zero plan nonzeros rather than M196's 16 plans and
+652,048 nonzeros. It retains 25,047 signature integers, 38,709 representative
+integers, 2,277 boundary weights, and the fixed eight-integer stencil.
+
+The eliminated residency becomes measured arithmetic. One scattering
+rematerializes 684,624 distinct moves, 1,092,960 multiplicity-weighted particle
+terms, 24,767,280 affected triangle-monomial evaluations, and 7,669,494 exact
+binary signature comparisons. Python containers, allocator state, big
+integers, expression temporaries, and whole-process peak memory are excluded,
+not zero.
+
+The F103 depth-one transaction projects one scalar, recomputes the public word,
+restores every field cell on the same backing, and reuses that backing for an
+unrelated program. Fresh/restored reuse agrees; missing, wrong, reordered, and
+null controls discriminate. The independent oracle uses explicit particle
+pairs and triples, a full-anchor stencil-incidence count, and a
+verification-only 652,048-nonzero bracelet plan. It reproduces the transition
+hash, boundaries, commitments, controls, restoration, and reuse.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical method is the identical topology-streamed
+eleven-coordinate recurrence. No CATVM custody, quotient below bracelet
+identity, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, or unbounded computation is established.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_ROTOR6_PRIMARY_DEPTH1_REUSE_DEPTH1_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE
+```
+
+This successor must test whether final-only projection permits an exact scalar
+recurrence below the full 2,277-cell state. It must not add rotor fixtures or
+silently return the eliminated shift plan to the accepted path. A compressed
+recurrence must become an actual restorable carrier; a full-rank result must be
+recorded as the exact lower-rank obstruction with its compiled verification
+work and identical classical baseline.
 
 ## 10. Roadmap Maintenance
 

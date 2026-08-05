@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`25da72941fea2e2d04481a87f050a4e9393fee32`. The registry assigns one
+`02219766be4f38bf400fbc0585ef45d1362a58c1`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 196-milestone lane is active by user direction. Continue from the
+The current 197-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,27 +53,29 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_MINIMAL_WITHIN33_TRIANGLE_COORDINATES_TWO_COORDINATE_DIHEDRAL_THIRD_ORDER_PHASE_SIGNATURE_REFINEMENT_SEPARATES_ALL24_ROTOR6_HOMOMETRIC_PAIR_FIBERS_AND_CLOSES_ALL16_SIGNED_SCATTERING_BASES_ON2277_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS28S_PUBLIC_INTEGER_DESCRIPTORS_16_SHIFT_PLANS_AND_AN_IDENTICAL_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_F239_ROTOR6_PRIMARY_DEPTH3_REUSE_DEPTH2_DIRECT_PROCESS_SOFTWARE_ONLY
+GRID17_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_AND_REFLECTION_INVARIANT_TWO_TRIANGLE_REFINED_SIGNATURE_INPUTS_ROTORS2_TO6_TOPOLOGY_F103_ROTOR6_PRIMARY_DEPTH1_REUSE_DEPTH1_DIRECT_PROCESS_SOFTWARE_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M196 adds
-the triangle counts `(1,2,3)` and `(1,4,5)` to the pair signature. No one of
-the 33 observed triangle coordinates separates all 24 R6 homometric bracelet
-pairs, while the selected pair does. The repaired 2,277-cell signature equals
-bracelet dimension and closes all sixteen shifts. Its F103/F239 carrier
-restores and reuses exactly, but retains sixteen public shift plans with
-652,048 nonzeros and has the identical classical recurrence. The result is
-not CATVM custody, physical waveform execution, a distinct phase resource,
-computational advantage, Small Wall crossing, replacement of physical bits
-with pi, or unbounded computation. Continue by recovering zero-plan residency
-with an exact analytic two-triangle delta at the same R6 ceiling.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. M197
+preserves M196's 2,277-cell two-triangle refined quotient while replacing all
+sixteen retained shift plans and 652,048 nonzeros with a fixed eight-integer
+cyclic-monomial delta stencil. Its F103 carrier restores and reuses exactly on
+the same backing. The plan state is not hidden elsewhere: each scattering
+rematerializes 684,624 moves, evaluates 24,767,280 affected triangle
+monomials, and performs 7,669,494 signature comparisons. The quotient still
+equals bracelet dimension and the identical compact classical stream remains.
+The result is not CATVM custody, physical waveform execution, a distinct
+phase resource, computational advantage, Small Wall crossing, replacement of
+physical bits with pi, or unbounded computation. Continue by testing whether
+the declared final boundary has an exact recurrence below the 2,277-cell
+carrier, without adding rotor fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -267,7 +269,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M196_DIHEDRAL_THIRD_ORDER_SIGNATURE_CLOSURE
+ACTIVE_AFTER_M197_STREAMED_THIRD_ORDER_SIGNATURE_CLOSURE
 ```
 
 The named
@@ -276,16 +278,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE
 ```
 
-M196 repairs all 24 R6 homometric collisions with two triangle counts but
-equals bracelet dimension and retains sixteen plans with 652,048 nonzeros.
-Do not add another rotor fixture. The selected repair must compute both
-triangle-coordinate deltas analytically during row-local scattering, remove
-retained plan residency, and count all rematerialized work and descriptors.
-If zero-plan execution merely moves the same burden into repeated arithmetic,
-record that tradeoff and retain the identical classical stream.
+M197 removes all retained shift plans at the same R6 ceiling, but the logical
+carrier still equals all 2,277 bracelets and each scattering rematerializes
+684,624 moves and 24,767,280 triangle-monomial deltas. Do not add another rotor
+fixture or restore the eliminated plan to the accepted path. The selected
+diagnostic must determine the exact minimal scalar recurrence seen by the
+declared public source and final boundary. A low rank must become a real
+carrier reduction; a full or near-full rank is a strict final-boundary
+compaction obstruction. Retain the identical classical recurrence and count
+any verification-only compiled plan separately.
 
 ## 7. Native No-Smuggle Law
 

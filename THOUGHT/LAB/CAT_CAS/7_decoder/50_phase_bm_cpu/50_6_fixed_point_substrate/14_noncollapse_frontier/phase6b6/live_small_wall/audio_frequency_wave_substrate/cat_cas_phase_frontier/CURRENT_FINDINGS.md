@@ -10781,3 +10781,46 @@ Next:
 ```text
 TOPOLOGY_STREAMED_TWO_TRIANGLE_SIGNATURE_DELTA_CLOSURE_WITH_ZERO_RETAINED_SHIFT_PLAN_OR_EXACT_WORK_DESCRIPTOR_NO_GO_AT_ROTOR6_WITH_IDENTICAL_CLASSICAL_STREAM
 ```
+
+## M197 fixed analytic stencil removes all retained R6 shift plans
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_FIXED_EIGHT_INTEGER_TRIANGLE_DELTA_STENCIL_ELIMINATES_ALL16_RETAINED_SHIFT_PLANS_WHILE_PRESERVING_THE2277_CELL_ROTOR6_REFINED_PHASE_QUOTIENT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_REMATERIALIZES684624_MOVES_AND24767280_TRIANGLE_MONOMIAL_DELTAS_PER_SCATTERING_WITH_AN_IDENTICAL_CLASSICAL_STREAM
+```
+
+The two M196 triangle coordinates admit an exact local update. Written as
+four cyclic cubic monomial sums, their public stencil needs eight integer
+offsets. For every legal four-site scattering move, M197 touches only monomial
+anchors incident on a changed mode and then updates the nine pair coordinates
+with M194's analytic delta.
+
+The accepted R6 recurrence retains no shift basis and no shift-plan nonzero;
+the prior 652048 entries are eliminated. The logical signature remains 2277
+cells, exactly bracelet dimension, with 25047 signature integers, 38709
+representative integers, 2277 boundary weights, and the eight stencil
+integers. One scattering rematerializes 684624 moves, 1092960 weighted
+particle terms, 24767280 affected triangle-monomial evaluations, and 7669494
+binary signature comparisons.
+
+An independent oracle imports neither production nor M194. It counts explicit
+particle pairs and triples, constructs bracelets, scans all 17 anchors to
+measure affected monomials, and builds a verification-only bracelet plan. Its
+complete transition commitment and all transaction outputs equal production.
+The F103 carrier projects one scalar, restores exactly on the same backing,
+advances to generation two after unrelated reuse, and uses no baseline reload.
+Missing, wrong, reordered, and null controls discriminate.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. This is a
+retained-plan repair, not a rank reduction. The strongest compact classical
+method is the identical streamed eleven-coordinate recurrence. No CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_F103_ROTOR6_TWO_TRIANGLE_REFINED_QUOTIENT_FINAL_BOUNDARY_KRYLOV_MINIMAL_RECURRENCE_OR_FULL2277_RANK_NO_GO_WITH_TOPOLOGY_STREAMED_MATVEC_AND_IDENTICAL_CLASSICAL_BASELINE
+```
