@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_REVERSIBLE_BLUESTEIN_NTT_LINEAR_STATE_FRONTIER`
-**Roadmap version:** `14.49`
+**Status:** `STRICT_SCOPE_FUSED_TWO_SEGMENT_BLUESTEIN_LINEAR_TRANSFORM_FRONTIER`
+**Roadmap version:** `14.50`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f6b4cc46fb4a271d01a0c60e6cbf47668ac8bfb3`
+**Reconciled source head:** `42d9015d2726d95aa429ec81d747c9eab80d26f3`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_BLUESTEIN_POWER_OF_TWO_NTT_GAUSS_PHASE_COMPILER_REPLACES_QUADRATIC_ALL_GAUSS_CHARACTER_SUM_COMPILATION_WITH_SUBQUADRATIC_M_LOG_M_EXACT_FIELD_WORK_ON_ONE_QMINUS1_RESIDENT_DESCRIPTOR_PLUS_THREE_M_CELL_REVERSIBLY_CLEARED_SCRATCH_SEGMENTS_WITH_FINAL_BOUNDARY_PROJECTION_TOPOLOGY_REMATERIALIZED_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_M_IS_LINEAR_IN_Q_EXACT_BIT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_BLUESTEIN_NTT_COMPILER_REMAINS`
-**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_LINEAR_DESCRIPTOR_AND_LINEAR_TRANSFORM_SCRATCH`
+**Current highest milestone:** `BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS`
+**Current claim ceiling:** `FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M183_SUBQUADRATIC_COMPILER_LINEAR_STATE_FRONTIER`
+**New mechanism development:** `ACTIVE_AFTER_M184_FUSED_COMPILER_LINEAR_TRANSFORM_FRONTIER`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE`
+**Active primary successor:** `EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -127,7 +127,14 @@ carrier allocates `q-1+3M` field cells. The strongest classical method is the
 identical Bluestein/NTT compiler. The next repair therefore tests whether the
 declared final scalar can be contracted through an adjoint or multilinear
 transform without first materializing the q-minus-one descriptor; merely
-adding larger primes is not responsive to the obstruction.
+adding larger primes is not responsive to the obstruction. M184 performs that
+fusion: the public nonzero kernel spectrum lets the final scalar be accumulated
+directly while the Gauss descriptor and one product segment disappear. The
+accepted carrier falls to `1+2M` cells and retains only the final scalar after
+forward, but its two transform segments and exact width still grow linearly,
+and the identical classical fused compiler has the same law. The next repair
+must remove a transform segment without relocating it into retained public
+kernel data or else establish the corresponding state/work Pareto obstruction.
 
 Every successor must answer:
 
@@ -153,7 +160,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f6b4cc46fb4a271d01a0c60e6cbf47668ac8bfb3`. The current 183-milestone
+`42d9015d2726d95aa429ec81d747c9eab80d26f3`. The current 184-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -8283,6 +8290,63 @@ Selected successor:
 
 ```text
 EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
+```
+
+## M184: fused boundary contraction removes the descriptor, not linear transform state
+
+Claim:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS
+```
+
+For the same 14 declared q/p field pairs, the final relation functional is
+fused into Bluestein frequency space. Because every accepted public kernel
+spectrum entry is nonzero, the compiler divides the public dual weights by
+that spectrum, accumulates the final scalar directly from the transformed
+source, and never materializes the q-minus-one Gauss descriptor. The accepted
+backing is one scalar plus two M-cell transform segments: 17 through 257 field
+cells instead of M183's 28 through 436. Forward retains only the final scalar;
+both segments clear reversibly.
+
+Each forward or inverse compiler uses six NTT calls, `3M log2(M)` butterflies,
+`2M` spectral multiplications, and `M` public-spectrum inversions. The final
+scalar survives topology-rematerialized inverse execution. The exact same
+backing restores to zero and runs an unrelated same-field program with fresh
+boundary and resource-signature parity. Missing inverse, wrong program,
+frequency-zero omission, null carrier, and forced singular-spectrum controls
+discriminate. Singular rejection is not claimed as an atomic rollback, and
+direct-process generation or lease metadata is not enforced.
+
+A no-import oracle reconstructs field roots, direct Gauss sums, a separate
+recursive out-of-place NTT, the fused schedule, and direct original relation
+boundaries at q=5 and q=7. It matches all 14 cases. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `INDEPENDENT_ORACLE_REEXECUTION` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+Verification-only direct Gauss tables, direct relation sums, and two O(q)
+boundary vectors execute and release before carrier allocation; they are not
+accepted transaction state. Production commitments stream without retaining
+a full spectrum copy or joined O(M) digest buffer. Python containers,
+allocator/native-library memory, modular-power internals, and whole-process
+memory remain outside the logical-cell claim.
+
+The strongest compact classical implementation is the identical fused
+compiler. Two M-cell transform segments remain linear in q, exact capacity
+grows, and no distinct phase resource, advantage, Small Wall crossing, CATVM
+custody, physical execution, physical-bit replacement, or unbounded
+computation is established.
+
+Exact ceiling:
+
+```text
+FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS
+```
+
+Selected successor:
+
+```text
+EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
 ```
 
 ## 10. Roadmap Maintenance

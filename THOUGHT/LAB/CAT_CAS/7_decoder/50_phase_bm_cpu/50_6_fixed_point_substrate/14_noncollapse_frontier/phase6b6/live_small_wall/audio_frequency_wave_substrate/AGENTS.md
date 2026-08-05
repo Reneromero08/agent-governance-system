@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`880ab5d9eab465da2c8ffe87be8432f10ec23790`. The registry assigns one
+`42d9015d2726d95aa429ec81d747c9eab80d26f3`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 171-milestone lane is active by user direction. Continue from the
+The current 184-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,25 +53,25 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_FIXED12_NONCOMMUTATIVE_F103_PHASE_RELATION_ALGEBRA_CLOSES_NATIVE_COMPOSITION_AND_HADAMARD_INTERSECTION_ON_VERTEX_COUNTS10_26_34_58_74_106_146_194_THROUGH_DEPTH1024_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL12_COORDINATE_CLASSICAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE
+FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. A
-two-by-two fiber matrix over the three Paley difference classes gives twelve
-relation coefficients closed under noncommutative composition and Hadamard
-intersection. The same twelve cells represent each port as the public vertex
-count grows from 10 to 194 and depth reaches 1024. The strongest classical
-baseline is the identical twelve-coordinate recurrence. The result is a
-restricted coherent-configuration closure, not CATVM custody, a distinct
-phase resource, computational advantage, Small Wall crossing, physical
-waveform execution, or replacement of physical bits with pi.
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. Fusing
+the final boundary into the exact Bluestein transform removes the resident
+q-minus-one Gauss descriptor and one M-cell product segment. One scalar plus
+two M-cell reversible transform segments remain, ranging from 17 to 257 exact
+field cells over the 14 declared cases. The strongest classical baseline is
+the identical fused compiler. The result is direct-process exact residue
+software, not CATVM custody, a distinct phase resource, computational
+advantage, Small Wall crossing, physical waveform execution, replacement of
+physical bits with pi, or unbounded computation.
 
 The accumulated bounded architecture includes:
 
@@ -265,7 +265,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M171_GROWING_PRIME_WEIL_GAUSSIAN_STABILIZER_LIKE_CLOSURE
+ACTIVE_AFTER_M184_FUSED_COMPILER_LINEAR_TRANSFORM_FRONTIER
 ```
 
 The named
@@ -274,16 +274,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_SAFE_PRIME_TWO_FIBER_CUBIC_DEFORMED_WEIL_PHASE_KERNEL_COMPONENT_RANK_GROWTH_OR_COMPACT_NON_GAUSSIAN_CLOSURE_WITH_MATCHED_CLASSICAL_CHARACTER_SUM_RECURRENCE
+EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
 ```
 
-M171 closes the declared growing-safe-prime quadratic Weil-Gaussian family in
-sixteen logical two-port field cells through depth 1024, but the payload width
-still grows with q and the identical classical chart evaluates the same
-cocycle with lower warm work. Test the smallest cubic-deformed Weil kernel
-that can distinguish genuine non-Gaussian closure from growth in Gaussian
-components, field width, or retained history. Preserve final-only projection,
-exact restoration/reuse, and the strongest compact character-sum recurrence.
+M184 fuses final-boundary contraction into the exact Bluestein compiler and
+reduces the accepted backing from M183's `q-1+3M` cells to `1+2M`, but both
+transform segments remain linear in q and the identical classical compiler
+has the same law. Test whether one segment can be removed without moving a
+linear public kernel spectrum, inverse history, or answer-bearing table
+outside the carrier. If not, measure the exact state/work Pareto and leave
+this transform route rather than adding more prime fixtures. Preserve
+final-only projection, exact restoration/reuse, and the strongest compact
+classical transform baseline.
 
 ## 7. Native No-Smuggle Law
 

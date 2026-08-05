@@ -10220,3 +10220,49 @@ Next:
 ```text
 EXACT_ADJOINT_FUSED_BLUESTEIN_FINAL_BOUNDARY_CONTRACTION_WITHOUT_QMINUS1_RESIDENT_DESCRIPTOR_OR_MULTILINEAR_DUAL_WEIGHT_RANK_GROWTH_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
 ```
+
+## M184: exact fused two-segment Bluestein boundary compilation
+
+The completed strict claim is:
+
+```text
+BOUNDED_EXACT_FOURTEEN_DECLARED_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_FINAL_BOUNDARY_COMPILER_USES_THE_NONZERO_PUBLIC_KERNEL_SPECTRUM_TO_REPLACE_THE_QMINUS1_RESIDENT_GAUSS_DESCRIPTOR_AND_THREE_M_SCRATCH_SEGMENTS_WITH_ONE_RESIDENT_SCALAR_AND_TWO_M_REVERSIBLY_CLEARED_TRANSFORM_SEGMENTS_WITH_THETA_M_LOG_M_PLUS_Q_WORK_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_REUSE_BUT_ALLOCATED_STATE_REMAINS_LINEAR_EXACT_WIDTH_GROWS_AND_THE_IDENTICAL_CLASSICAL_FUSED_BLUESTEIN_COMPILER_REMAINS
+```
+
+The exact final relation functional is pulled through Bluestein frequency
+space on all 14 declared q/p pairs. Every accepted public kernel spectrum is
+nonzero. Dividing the public dual weights by that spectrum permits direct
+scalar accumulation, so no q-minus-one Gauss descriptor or separate M-cell
+product segment is retained. One backing now contains one scalar and two
+M-cell transform segments: 17 through 257 exact field cells rather than
+M183's 28 through 436. Both segments clear after forward and only the scalar
+remains resident.
+
+Forward or inverse uses six NTT calls, `3M log2(M)` butterflies, `2M`
+spectral multiplications, and `M` public-spectrum inversions. The final scalar
+survives the inverse. Exact same-backing restoration and unrelated reuse match
+fresh execution. Missing inverse, wrong program, omitted frequency zero,
+null carrier, and forced singular spectra discriminate; singular rejection is
+not claimed as atomic rollback.
+
+The no-import oracle reconstructs direct Gauss sums, a separate recursive
+out-of-place NTT, fused transactions, and q=5/q=7 original relation sums. It
+matches every declared boundary, commitment, restoration, and reuse. The
+result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Verification-only direct Gauss tables and boundary vectors are released
+before carrier allocation. Production commitments stream without a retained
+full spectrum copy. Python containers, allocator/native-library memory,
+modular-power internals, and whole-process memory are excluded from the
+logical-cell law. The strongest compact classical baseline is the identical
+fused compiler. Linear transform state and growing exact width remain, so no
+distinct phase resource, advantage, Small Wall crossing, CATVM custody,
+physical execution, physical-bit replacement, or unbounded computation is
+established.
+
+Next:
+
+```text
+EXACT_ONE_SEGMENT_REVERSIBLE_BLUESTEIN_WORKSPACE_OR_TOTAL_LINEAR_PUBLIC_KERNEL_STATE_TIME_SPACE_NO_GO_WITH_IDENTICAL_CLASSICAL_TRANSFORM_BASELINE
+```

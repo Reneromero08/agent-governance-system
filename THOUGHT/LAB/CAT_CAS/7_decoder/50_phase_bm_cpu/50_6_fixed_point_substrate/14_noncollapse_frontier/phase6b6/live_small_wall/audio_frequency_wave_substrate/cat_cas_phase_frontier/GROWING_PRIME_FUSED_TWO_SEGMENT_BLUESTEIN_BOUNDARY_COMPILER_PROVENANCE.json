@@ -1,0 +1,25 @@
+{
+  "schema": "CAT_CAS_GROWING_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_BOUNDARY_COMPILER_PROVENANCE_V1",
+  "scientific_source_head": "42d9015d2726d95aa429ec81d747c9eab80d26f3",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_prime_fused_two_segment_bluestein_boundary_compiler.sh",
+    "status": "QUALIFIED_GROWING_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_BOUNDARY_COMPILER_STRICT_SCOPE",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_prime_fused_two_segment_bluestein_boundary_compiler.py": "4fdf8fb8f1f77d353554dc982dd9f6311adc5f7116acd647a6ce50c8575f7098",
+    "GROWING_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_BOUNDARY_COMPILER_RESULTS.json": "208a4731c0f0db0218970b6e030f858e739fcafa3502963ac5a6ac951d959691",
+    "growing_prime_fused_two_segment_bluestein_boundary_compiler_independent_oracle.py": "2a803ffe3a8e477286da453854a02511bd5cfee22f83613dba2ca66a6c7e569a",
+    "GROWING_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_BOUNDARY_COMPILER_INDEPENDENT_ORACLE.json": "8671f50cc89e248018908d42022278e96a1d296bf97ee7fd5ff8d40adb4704e7",
+    "GROWING_PRIME_FUSED_TWO_SEGMENT_BLUESTEIN_BOUNDARY_COMPILER_INDEPENDENT_REEXECUTION_REVIEW.md": "56430e2fcca441b01122ddae6d5da17d865c24ff5b3328177a43e2e0512f806f",
+    "qualify_growing_prime_fused_two_segment_bluestein_boundary_compiler.sh": "d25fb7e6cc257c1debdff14e61c7361876bc6b22ca6b99cc29deb913f094ad33"
+  },
+  "claim_ceiling": "FOURTEEN_DECLARED_PRIME_AND_AUXILIARY_FIELD_PAIRS_Q5_THROUGH_Q53_ONE_RANK3_NONZERO_SCALE_TRANSACTION_PER_FIELD_UNRELATED_SAME_FIELD_REUSE_DIRECT_PROCESS_EXACT_RESIDUE_SOFTWARE_WITH_ONE_SCALAR_PLUS_TWO_M_ALLOCATED_CARRIER_CELLS"
+}
