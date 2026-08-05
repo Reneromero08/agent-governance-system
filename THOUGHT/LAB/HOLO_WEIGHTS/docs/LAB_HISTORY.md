@@ -1473,3 +1473,34 @@ OPTIONS (pending Sol): (a) rebuild the capture on a CLEAN llama.cpp
 reproduces the mismatch, my capture machinery is broken; if not, the
 fork is the variable; (b) accept the weight-level verdict and drop the
 functional trace; (c) other diagnosis.
+
+## 2026-08-05 — SOL UNBLOCKS THE TRACE: parser layout bug, fork exonerated
+
+Sol's verdict: OTHER - the contradiction was a DUMP-LAYOUT/PARSER bug.
+Directly recomputed the captured layer-0 router operation with the
+CORRECT GGML interpretation (ne0 = contiguous dim):
+  W = flat.reshape(90, 2048); X = flat.reshape(4, 2048);
+  Y = flat.reshape(4, 90); Y_calc = X @ W.T
+  -> cos(Y_calc, captured_logits) = 1.0000001, max abs err 2.86e-6,
+     mean/std identical (-6.488383 / 1.265357).
+The fork's raw router multiplication is MATHEMATICALLY CORRECT.
+- My parser read [ne0, ne1] backwards; the universal decoder is
+  a = flat.reshape(ne3, ne2, ne1, ne0), then select dims; 2D: (ne1, ne0).
+- The "bias vector" was the transposed read; the common offset (-6.5) is
+  real router structure reproduced exactly by the correct product; the
+  logit norm is offset-dominated (sqrt(90)*6.49 ~ 61.6), NOT a 10x
+  input gain.
+- sgemm: NOT an overflow bug. GGML naming: ne01 = src0->ne[1] = 90
+  (output rows), ne10 = src1->ne[0] = 2048 (contraction) - llamafile
+  receives m=90, n=4, k=2048, ldc=90 - consistent, no overflow. Both
+  kernels compute the same correct op (why llamafile on/off matched).
+- Attribution defects: (1) moe5_replay_validate stores input at
+  rec["x"] - layers overwrite each other; key by layer. (2) dump seq =
+  graph evaluation, not token; address by (eval_seq, layer, token_col).
+- Minor C++ bug: debug logger reads v[2047] beyond the 360-float logits
+  buffer (ggml_nelements guard) - remove.
+
+NEXT ACTIONS (Sol): 1) repair all dump reshaping; 2) key inputs by
+layer; 3) token columns explicit; 4) require raw-router max error < 1e-5;
+5) validate one routed 8-expert MLP vs captured routed output; 6) then
+the functional k-curve. Clean upstream build NOT needed.
