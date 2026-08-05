@@ -1,0 +1,32 @@
+{
+  "schema": "CAT_CAS_NECKLACE_OFFDIAGONAL_PAIR_SCATTERING_PROVENANCE_V1",
+  "scientific_source_head": "3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_COMPLEX128_VIRTUAL_PHASE_SOFTWARE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "restoration_scope": "IN_PLACE_285_CELL_VIRTUAL_COMPLEX_NECKLACE_CARRIER_ONLY",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_necklace_offdiagonal_pair_scattering_closure.sh",
+    "status": "QUALIFIED_NECKLACE_OFFDIAGONAL_PAIR_SCATTERING_CLOSURE_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false,
+    "undefined_behavior_sanitizer": "PASS"
+  },
+  "dependencies": {
+    "necklace_two_body_phase_interaction_closure.cpp": "9f566e21d4ca486f628cdf5fc9513031d9a477017f88188357c97251f9870a64",
+    "four_rotor_necklace_generator_phase.cpp": "b698112d66058d1c3cb3db6ca75be19363e2464181d6f1c5c0a564c21a31a894"
+  },
+  "files": {
+    "necklace_offdiagonal_pair_scattering_closure.cpp": "3c46f5854aa3cf97b507979bca2d73228e29de1a93c997d530b3767c451ee8b6",
+    "necklace_offdiagonal_pair_scattering_independent_oracle.py": "ea770efb5f7939f4ebf96f258e27519c0c236aee8bcd2a8ef74576c0bcb26ab3",
+    "NECKLACE_OFFDIAGONAL_PAIR_SCATTERING_CLOSURE_RESULTS.json": "321e930bbe5f30a4949900c198a5c11711b99bb12546f3c9725c3954e8ba2b94",
+    "NECKLACE_OFFDIAGONAL_PAIR_SCATTERING_INDEPENDENT_ORACLE.json": "cbee11e410525929cf04c212ec2083f4c842903cbc861d3b37a4d42c886db4fa",
+    "NECKLACE_OFFDIAGONAL_PAIR_SCATTERING_INDEPENDENT_REEXECUTION_REVIEW.md": "2a00e4e6e7cc99cd6fa7801371e0f1f9799d5a162e6885ceade3fee5af0d0048",
+    "qualify_necklace_offdiagonal_pair_scattering_closure.sh": "f78458c432cc5c2381f39af254ae0b363a9e9f3af87321f849ed5bc1b6bc01e9"
+  },
+  "claim_ceiling": "GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY"
+}

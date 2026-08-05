@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d`. The registry assigns one
+`3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 189-milestone lane is active by user direction. Continue from the
+The current 190-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,29 +53,29 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE
+BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH4_PRIMARY_DEPTH2_REUSE_NINE_PUBLIC_CYCLIC_PAIR_DISTANCE_CHANNELS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY
+GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `INDEPENDENT_ORACLE_REEXECUTION` with
 `NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to the 285 virtual complex
-necklace coordinates. All nine public cyclic pair-distance channels contribute
-to a rotation-invariant, exchange-symmetric two-body diagonal phase; the 285
-necklaces contain 165 distinct pair signatures. Interleaving this phase with a
-matrix-free Hermitian bosonic Givens lift is noncommuting, restores the same
-backing, and supports unrelated reuse. A separate 83,521-cell labelled-wave
-oracle independently reconstructs the topology, public law, boundaries,
-inverse controls, and reuse. The accepted path retains 285 carrier cells and
-855 temporary necklace-complex work cells, with no occupation-vector, dense
-285-by-285 operator, pair-energy table, or inverse history retained. The
+necklace coordinates. A quartic matrix-free generator streams all 16 nonzero
+momentum-conserving signed pair shifts and contains genuine two-mode occupation
+changes. It interleaves noncommutatively with the nine-channel diagonal phase,
+restores the same backing, and supports unrelated reuse. A separate 4,845-cell
+occupation-space oracle reconstructs eight sparse shift-distance bases, proves
+the full weighted Hermiticity identity numerically, and independently matches
+boundaries and controls. The accepted path retains 285 carrier cells and 855
+temporary necklace-complex work cells, with no occupation vector, dense or
+sparse pair operator, transition table, weight table, or inverse history. The
 strongest compact classical path remains the identical 285-complex necklace
-generator plus diagonal pair-phase recurrence. The result is direct-process
+pair-scattering and diagonal-phase recurrence. The result is direct-process
 virtual software, not CATVM custody, physical waveform execution, a distinct
 phase resource, computational advantage, Small Wall crossing, replacement of
 physical bits with pi, or unbounded computation.
@@ -272,7 +272,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M189_NECKLACE_TWO_BODY_PHASE_CLASSICAL_COLLAPSE
+ACTIVE_AFTER_M190_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE
 ```
 
 The named
@@ -281,18 +281,17 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE
+GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
 ```
 
-M189 broadens the established 285-cell necklace phase law from one onsite
-collision scalar to nine distance-resolved pair channels, but the interaction
-is still diagonal in a public occupation signature. Do not add more diagonal
-pair channels or larger fixtures. The strongest compact classical method is
-the identical 285-coordinate recurrence. The next phase-owned change must test
-an off-diagonal quartic pair-scattering generator directly on the necklace
-carrier, without materializing the 4,845-cell occupation vector or a dense
-285-by-285 operator, and must retain the matched 285-coordinate classical
-baseline.
+M190 establishes a genuinely off-diagonal quartic pair-scattering update on
+the 285-cell necklace carrier without accepted occupation or operator
+expansion, but it still collapses to the identical 285-coordinate classical
+recurrence. Do not add more shift schedules or fixed-four-rotor fixtures. The
+next diagnostic must address the concrete compact-growth obstruction by
+measuring the public continuation/Krylov quotient law as rotor count grows,
+using the strongest compact occupation and necklace classical baselines. It
+must not promote a bounded rank observation to a general lower bound.
 
 ## 7. Native No-Smuggle Law
 

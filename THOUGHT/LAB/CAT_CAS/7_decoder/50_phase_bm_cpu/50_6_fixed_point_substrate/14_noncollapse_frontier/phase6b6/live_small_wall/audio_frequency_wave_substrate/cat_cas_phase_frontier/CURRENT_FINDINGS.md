@@ -10481,3 +10481,48 @@ Next:
 ```text
 MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE
 ```
+
+## M190 off-diagonal pair scattering changes the machine but not the baseline
+
+The completed strict claim is:
+
+```text
+BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
+```
+
+The phase machine now streams a quartic, momentum-conserving pair-scattering
+generator over all 16 nonzero signed shifts. Reverse shifts share one real
+public weight, preserving exchange symmetry, global rotation, and weighted
+Hermiticity. Genuine double occupation moves are present. A matrix-free probe
+has Hermitian error `2.24e-17`.
+
+The degree-64 Chebyshev exponential acts directly on 285 necklace cells and
+interleaves noncommutatively with the nine-channel diagonal two-body phase.
+Zero scattering changes the boundary by `4.73e-2`; swapping module order
+changes it by `5.78e-3`. Missing, wrong, reordered, and null controls fail.
+
+A standalone no-production oracle reconstructs all 4,845 occupation states,
+eight sparse shift-distance bases totaling 350,608 nonzeros, and sparse
+exponential action. It checks the full weighted Hermiticity identity to
+`1.11e-16`, preserves rotation symmetry to `3.71e-18`, matches primary and
+reuse boundaries within `4.8e-15`, and reproduces every numeric control.
+
+Primary same-backing restoration is `1.76e-15`, unrelated reuse restoration is
+`3.46e-15`, and 32-cycle drift is `1.97e-14`. The accepted path counts 285
+resident complex cells, 855 temporary necklace-complex cells, and 28,830
+maximum named engine bytes. It retains no occupation vector, dense or sparse
+pair operator, transition table, scattering-weight table, or inverse history.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to virtual complex coordinates.
+The strongest compact classical implementation is the identical 285-complex
+pair-scattering and diagonal-phase recurrence. CATVM custody, a distinct phase
+resource, computational advantage, Small Wall crossing, physical execution,
+physical-bit replacement, and unbounded computation are not established.
+
+Next:
+
+```text
+GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
+```

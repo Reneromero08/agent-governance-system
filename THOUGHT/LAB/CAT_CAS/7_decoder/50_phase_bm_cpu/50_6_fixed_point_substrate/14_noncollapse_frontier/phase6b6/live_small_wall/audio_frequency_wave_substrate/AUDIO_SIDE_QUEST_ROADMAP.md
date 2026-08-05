@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_NECKLACE_TWO_BODY_PHASE_CLASSICAL_COLLAPSE`
-**Roadmap version:** `14.55`
+**Status:** `STRICT_SCOPE_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE`
+**Roadmap version:** `14.56`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d`
+**Reconciled source head:** `3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH4_PRIMARY_DEPTH2_REUSE_NINE_PUBLIC_CYCLIC_PAIR_DISTANCE_CHANNELS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY`
+**Current highest milestone:** `BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M189_NECKLACE_TWO_BODY_PHASE_CLASSICAL_COLLAPSE`
+**New mechanism development:** `ACTIVE_AFTER_M190_OFFDIAGONAL_PAIR_SCATTERING_CLASSICAL_COLLAPSE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE`
+**Active primary successor:** `GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`64f061ac6e1e02f0fbd7acbe7ef2a299f655be6d`. The current 189-milestone
+`3ac17e0e06a86c0f96b7caaa91dcea0ca2bff246`. The current 190-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_DISTANCE_RESOLVED_TWO_BODY_OCCUPATION_PHASE_INTERACTION_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NONCOMMUTING_MATRIX_FREE_HERMITIAN_GIVENS_CLOSURE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RETAINS_THE_IDENTICAL_285_COMPLEX_BOSONIC_CLASSICAL_RECURRENCE
+BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -8664,6 +8664,62 @@ Selected successor:
 
 ```text
 MATRIX_FREE_EXCHANGE_SYMMETRIC_OFF_DIAGONAL_TWO_BODY_PAIR_SCATTERING_CLOSURE_ON_NECKLACE_CARRIER_WITH_QUARTIC_BOSONIC_GENERATOR_AND_MATCHED_285_COORDINATE_CLASSICAL_BASELINE
+```
+
+## M190: off-diagonal quartic pair scattering closes but remains classically identical
+
+Claim:
+
+```text
+BOUNDED_MATRIX_FREE_OFF_DIAGONAL_QUARTIC_BOSONIC_PAIR_SCATTERING_ON_THE_285_CELL_EXCHANGE_SYMMETRIC_NECKLACE_CARRIER_INTERLEAVES_WITH_NINE_CHANNEL_TWO_BODY_PHASE_WITH_FINAL_ONLY_BOUNDARY_NUMERICAL_SAME_BACKING_RESTORATION_AND_REUSE_BUT_COLLAPSES_TO_THE_IDENTICAL_285_COMPLEX_CLASSICAL_RECURRENCE
+```
+
+The successor changes the phase machine rather than adding another diagonal
+occupation channel. A matrix-free quartic generator streams all 16 nonzero
+signed pair shifts `(a,b) <- (a-s,b+s)`, conserves total momentum, and has
+equal real weights on reverse shifts. Genuine two-mode occupation changes are
+present. The weighted Hermitian probe error is `2.24e-17`, and the independent
+full occupation-space Hermiticity error is `1.11e-16`.
+
+The generator is exponentiated by a degree-64 Chebyshev recurrence directly
+on the 285 necklace cells and interleaved with M189's nine-channel diagonal
+two-body phase. Removing scattering changes the boundary by `4.73e-2`; swapping
+module order changes it by `5.78e-3`. Missing, wrong, reordered, and null
+controls discriminate.
+
+A separate no-production oracle reconstructs all 4,845 exchange-symmetric
+occupation states, eight sparse shift-distance bases with 350,608 total
+nonzeros, the public diagonal law, and sparse exponential action. It matches
+primary and unrelated-reuse boundaries within `4.8e-15` and independently
+reproduces every numeric control. Primary restoration is `1.76e-15`, reuse is
+`3.46e-15`, and 32-cycle drift is `1.97e-14`.
+
+The accepted path retains 285 complex carrier cells and 855 temporary
+necklace-complex cells. It retains no occupation vector, dense or sparse
+pair-transition operator, pair table, scattering-weight table, or inverse
+history. The maximum named engine total is 28,830 bytes. Allocator state,
+expression temporaries, standard-library Bessel work, compiler memory, and
+whole-process peaks are excluded and disclosed.
+
+This is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` limited to virtual complex coordinates.
+It establishes an off-diagonal phase-owned update, but the strongest compact
+classical implementation is the identical 285-complex recurrence. CATVM
+custody, a distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, and unbounded
+computation remain unestablished.
+
+Exact ceiling:
+
+```text
+GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_DEPTH3_PRIMARY_DEPTH2_REUSE_SIXTEEN_SIGNED_MOMENTUM_CONSERVING_PAIR_SHIFTS_CHEBYSHEV_DEGREE64_COMPLEX128_DIRECT_PROCESS_SOFTWARE_ONLY
+```
+
+Selected successor:
+
+```text
+GROWING_ROTOR_OFFDIAGONAL_PAIR_SCATTERING_KRYLOV_OBSERVABILITY_QUOTIENT_DIAGNOSTIC_WITH_MATCHED_COMPACT_OCCUPATION_AND_NECKLACE_CLASSICAL_BASELINES
 ```
 
 ## 10. Roadmap Maintenance
