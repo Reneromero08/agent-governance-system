@@ -1,0 +1,21 @@
+{
+  "classification": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL",
+  "distinct_phase_resource_established": false,
+  "oracle_imports_cat_cas_modules": false,
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "rotor6_execution_independently_reexecuted": false,
+  "rotor6_parity_uses_prior_independently_verified_m204_boundary_and_commitment": true,
+  "terminal": false,
+  "transferable_rotor2_certificate": {
+    "conjugated_direct_scattering_mismatch_cells": 0,
+    "conjugated_nonzero_cells": 78,
+    "forward_inverse_identity": true,
+    "forward_nonzero_cells": 81,
+    "momentum_bracelet_cells": 9,
+    "naive_coefficientwise_diagonal_mismatch_cells": 79,
+    "occupation_cells": 153,
+    "reflection_closed_position_cells": 9,
+    "zero_total_position_cells": 9
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
