@@ -1,0 +1,260 @@
+{
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "composition_parameter_addition_exact": true,
+  "distinct_phase_resource_established": false,
+  "factor_cases": [
+    {
+      "boundary_commitment": "6d9bc596ec1bbf2e50e157821bf301b28022625b6fa807a64937bfe2fa1ec631",
+      "discriminant_fibers": 2,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "family": 0,
+      "lattice_rank": 1,
+      "reduced_gram_determinant": 2,
+      "smith_final_invariant": 2,
+      "total_factors": 2
+    },
+    {
+      "boundary_commitment": "6d9bc596ec1bbf2e50e157821bf301b28022625b6fa807a64937bfe2fa1ec631",
+      "discriminant_fibers": 2,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "family": 1,
+      "lattice_rank": 1,
+      "reduced_gram_determinant": 2,
+      "smith_final_invariant": 2,
+      "total_factors": 2
+    },
+    {
+      "boundary_commitment": "9c04a7af7ad5fcc67842c1e7c2901850aded539ca17fd4d396b9f7014ee4a6b1",
+      "discriminant_fibers": 3,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "family": 0,
+      "lattice_rank": 2,
+      "reduced_gram_determinant": 3,
+      "smith_final_invariant": 3,
+      "total_factors": 3
+    },
+    {
+      "boundary_commitment": "1aefa44f72831a6811049b791f80cc5bb7afa3a386b43146437cd11799ea946d",
+      "discriminant_fibers": 3,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "family": 1,
+      "lattice_rank": 2,
+      "reduced_gram_determinant": 3,
+      "smith_final_invariant": 3,
+      "total_factors": 3
+    },
+    {
+      "boundary_commitment": "2f9edcb5d63ff6890163bfc78829f4d89bdda7ace30b23af6b8ad30c802528c3",
+      "discriminant_fibers": 4,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "family": 0,
+      "lattice_rank": 3,
+      "reduced_gram_determinant": 4,
+      "smith_final_invariant": 4,
+      "total_factors": 4
+    },
+    {
+      "boundary_commitment": "c87c3660b131baf88037e6ddf55fe0073597ff5f241420273a2b80d936453a8e",
+      "discriminant_fibers": 4,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "family": 1,
+      "lattice_rank": 3,
+      "reduced_gram_determinant": 4,
+      "smith_final_invariant": 4,
+      "total_factors": 4
+    },
+    {
+      "boundary_commitment": "95e7c62a7af65a0fa99a6ac23878e128dc17cdd0809d001021ef2e926daa9c62",
+      "discriminant_fibers": 8,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        1,
+        4,
+        2,
+        1
+      ],
+      "family": 0,
+      "lattice_rank": 7,
+      "reduced_gram_determinant": 8,
+      "smith_final_invariant": 8,
+      "total_factors": 8
+    },
+    {
+      "boundary_commitment": "276a77575c8c1fae9cd8d83408c079e84b4ce621c070c68ca55d7c6df5545c73",
+      "discriminant_fibers": 8,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        3,
+        2,
+        2,
+        1
+      ],
+      "family": 1,
+      "lattice_rank": 7,
+      "reduced_gram_determinant": 8,
+      "smith_final_invariant": 8,
+      "total_factors": 8
+    },
+    {
+      "boundary_commitment": "b1089333a16106d95d28ed6520fc299801a00f3d5ae04b973b948a6eddd4ebdb",
+      "discriminant_fibers": 16,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        2,
+        6,
+        3,
+        5
+      ],
+      "family": 0,
+      "lattice_rank": 15,
+      "reduced_gram_determinant": 16,
+      "smith_final_invariant": 16,
+      "total_factors": 16
+    },
+    {
+      "boundary_commitment": "6c7e315f6ddae841a9938e4ef822700586c5b290e23dbc6b02d47463406cea7f",
+      "discriminant_fibers": 16,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        5,
+        3,
+        5,
+        3
+      ],
+      "family": 1,
+      "lattice_rank": 15,
+      "reduced_gram_determinant": 16,
+      "smith_final_invariant": 16,
+      "total_factors": 16
+    },
+    {
+      "boundary_commitment": "a39de655790a756119531929eb711900b9d4f1731c03ba03ebdfe57b9ffa245b",
+      "discriminant_fibers": 32,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        5,
+        12,
+        6,
+        9
+      ],
+      "family": 0,
+      "lattice_rank": 31,
+      "reduced_gram_determinant": 32,
+      "smith_final_invariant": 32,
+      "total_factors": 32
+    },
+    {
+      "boundary_commitment": "5496ea4458c23b4b2d20459466f6d0c05c9b9589b1cc56f6f734327c4740727c",
+      "discriminant_fibers": 32,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        11,
+        6,
+        10,
+        5
+      ],
+      "family": 1,
+      "lattice_rank": 31,
+      "reduced_gram_determinant": 32,
+      "smith_final_invariant": 32,
+      "total_factors": 32
+    },
+    {
+      "boundary_commitment": "1fe0d9b39369b452c7a04f291a886b27aedf124e82d05d9efde75bc750f50fad",
+      "discriminant_fibers": 64,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        10,
+        22,
+        11,
+        21
+      ],
+      "family": 0,
+      "lattice_rank": 63,
+      "reduced_gram_determinant": 64,
+      "smith_final_invariant": 64,
+      "total_factors": 64
+    },
+    {
+      "boundary_commitment": "975269e0b2a122db811a3c39af2156a7d55dd22686e42cb9c898384a20976d44",
+      "discriminant_fibers": 64,
+      "eigenvalue_product_certificate": true,
+      "exact_reverse_restored": true,
+      "factor_counts": [
+        21,
+        11,
+        21,
+        11
+      ],
+      "family": 1,
+      "lattice_rank": 63,
+      "reduced_gram_determinant": 64,
+      "smith_final_invariant": 64,
+      "total_factors": 64
+    }
+  ],
+  "finite_angle_sampling_used": false,
+  "full_infinite_theta_scalar_evaluated": false,
+  "independent_algorithms": [
+    "PLAIN_TUPLE_PUBLIC_PROGRAM_RECONSTRUCTION",
+    "PHASE_TYPE_SPARSE_POLYNOMIAL_BINARY_EXPONENTIATION",
+    "I_PLUS_J_EIGENVALUE_AND_UNIMODULAR_DIFFERENCE_SMITH_CERTIFICATE"
+  ],
+  "module_order_boundary_changes": true,
+  "module_order_counts_differ": true,
+  "oracle_imports_cat_cas_modules": false,
+  "primary_boundary_commitment": "1fe0d9b39369b452c7a04f291a886b27aedf124e82d05d9efde75bc750f50fad",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "reuse_boundary_commitment": "cbb7c7fa1dc2c72371607e8ec9dfde8ca111e1dd72f4f32fddd196eb47bb2429",
+  "terminal": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
