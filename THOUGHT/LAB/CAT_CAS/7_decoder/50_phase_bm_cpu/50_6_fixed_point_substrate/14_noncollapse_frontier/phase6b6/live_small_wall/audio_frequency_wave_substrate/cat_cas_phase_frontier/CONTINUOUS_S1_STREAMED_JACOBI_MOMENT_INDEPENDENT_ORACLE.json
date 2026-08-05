@@ -12,6 +12,7 @@
   "oracle_imports_cat_cas_modules": false,
   "primary": {
     "boundary_commitment": "9f89424531b038f72b07b278e2f61e8f2716d49080d8e768e89e4928f243c5ca",
+    "boundary_payload_bits": 22609,
     "count": 24,
     "direct_factor_boundary_commitment": "9f89424531b038f72b07b278e2f61e8f2716d49080d8e768e89e4928f243c5ca",
     "family": 0,
@@ -39,9 +40,11 @@
     "source_unchanged": true
   },
   "primary_expected_resource_tuple_reproduced": true,
+  "primary_projected_boundary_payload_bits_reproduced": true,
   "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
   "reuse": {
     "boundary_commitment": "d66f614f650a9390b9ec2a6bf9dd503043d3f0f4b99a7a353a28890bd9004de7",
+    "boundary_payload_bits": 16427,
     "count": 17,
     "direct_factor_boundary_commitment": "d66f614f650a9390b9ec2a6bf9dd503043d3f0f4b99a7a353a28890bd9004de7",
     "family": 1,

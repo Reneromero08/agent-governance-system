@@ -51,7 +51,8 @@ jq -e '
   .classification == "INDEPENDENTLY_VERIFIED_STRICT_SCOPE" and
   .verification_level == "INDEPENDENT_ORACLE_REEXECUTION" and
   .restoration_classification == "EXACT_ALGEBRAIC_RESTORATION" and
-  .result == "PASS_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION" and
+  .result == "PASS_RESOURCE_ACCOUNTING_REPAIRED_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION" and
+  .resource_accounting_repair_of_scientific_source_commit == "18213589522aa72aa3e58817f2fdd604e6cd4662" and
   .phase_relation_law.domain == "CONTINUOUS_S1_NO_FINITE_ANGLE_SAMPLING" and
   .phase_relation_law.runtime_center_type == "GAUSSIAN_RATIONAL_UNIT_PHASE" and
   .phase_relation_law.boundary == "EXACT_FIRST_HARMONIC_QJET_ORDER24" and
@@ -60,8 +61,11 @@ jq -e '
   .phase_relation_law.moment_scratch_cells == 1 and
   (.phase_relation_law.intermediate_moment_projection | not) and
   .transaction.primary_boundary_commitment == "9f89424531b038f72b07b278e2f61e8f2716d49080d8e768e89e4928f243c5ca" and
+  .transaction.primary_boundary_payload_bits == 22609 and
   .transaction.reuse_boundary_commitment == "d66f614f650a9390b9ec2a6bf9dd503043d3f0f4b99a7a353a28890bd9004de7" and
+  .transaction.reuse_boundary_payload_bits == 16427 and
   .transaction.reuse_boundary_commitment == .transaction.fresh_reuse_boundary_commitment and
+  .transaction.reuse_boundary_payload_bits == .transaction.fresh_reuse_boundary_payload_bits and
   .transaction.source_backing_identity_preserved_across_reuse and
   .transaction.scratch_backing_identity_preserved_across_reuse and
   .transaction.primary_source_restoration_error_cells == 0 and
@@ -76,6 +80,8 @@ jq -e '
   .controls.semantic_center_perturbation_changes_boundary and
   .resource_law.runtime_source_center_cells == 24 and
   .resource_law.runtime_source_payload_bits == 763 and
+  .resource_law.projected_boundary_cells == 25 and
+  .resource_law.projected_boundary_payload_bits == 22609 and
   .resource_law.public_operation_scans == 26 and
   .resource_law.public_operation_records_visited == 884 and
   .resource_law.source_center_visits == 624 and
@@ -118,12 +124,15 @@ jq -e '
   .primary.source_unchanged and
   .reuse.source_unchanged and
   .primary.source_payload_bits == 763 and
+  .primary.boundary_payload_bits == 22609 and
+  .reuse.boundary_payload_bits == 16427 and
   .primary.metrics.scratch_restored and
   .primary.metrics.retained_moment_vector_cells == 0 and
   .primary.metrics.source_center_visits == 624 and
   .primary.metrics.weighted_log_payload_bits == 172243 and
   .primary.metrics.peak_exponential_payload_bits == 2480635 and
   .primary_expected_resource_tuple_reproduced and
+  .primary_projected_boundary_payload_bits_reproduced and
   .streamed_and_direct_boundaries_match and
   (.finite_angle_sampling_used | not) and
   (.full_infinite_theta_scalar_evaluated | not) and

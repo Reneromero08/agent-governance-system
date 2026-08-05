@@ -29,6 +29,7 @@ REUSE_COUNT = 17
 PREDECESSOR_SOURCE_SHA256 = (
     "8d258127d31d9b83591a0cac58837809e46497207c0329d0d1f94d1793f00093"
 )
+UNREPAIRED_SOURCE_COMMIT = "18213589522aa72aa3e58817f2fdd604e6cd4662"
 
 
 def series_payload_bits(series: base.Series) -> int:
@@ -274,11 +275,12 @@ def main() -> None:
 
     result = {
         "schema": "cat_cas.continuous_s1_streamed_jacobi_moment.v1",
-        "claim": "EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM",
+        "claim": "RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM",
         "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
         "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
         "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
-        "result": "PASS_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION",
+        "result": "PASS_RESOURCE_ACCOUNTING_REPAIRED_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION",
+        "resource_accounting_repair_of_scientific_source_commit": UNREPAIRED_SOURCE_COMMIT,
         "phase_relation_law": {
             "domain": "CONTINUOUS_S1_NO_FINITE_ANGLE_SAMPLING",
             "runtime_center_type": "GAUSSIAN_RATIONAL_UNIT_PHASE",
@@ -290,8 +292,13 @@ def main() -> None:
         },
         "transaction": {
             "primary_boundary_commitment": primary["boundary_commitment"],
+            "primary_boundary_payload_bits": primary["boundary_payload_bits"],
             "reuse_boundary_commitment": reuse["boundary_commitment"],
+            "reuse_boundary_payload_bits": reuse["boundary_payload_bits"],
             "fresh_reuse_boundary_commitment": fresh["boundary_commitment"],
+            "fresh_reuse_boundary_payload_bits": fresh[
+                "boundary_payload_bits"
+            ],
             "source_backing_identity_preserved_across_reuse": id(carrier.source) == source_backing,
             "scratch_backing_identity_preserved_across_reuse": id(carrier.scratch) == scratch_backing,
             "primary_source_restoration_error_cells": primary[
@@ -313,6 +320,10 @@ def main() -> None:
         "resource_law": {
             "runtime_source_center_cells": PRIMARY_COUNT,
             "runtime_source_payload_bits": primary_source_payload_bits,
+            "projected_boundary_cells": ORDER + 1,
+            "projected_boundary_payload_bits": primary[
+                "boundary_payload_bits"
+            ],
             **primary["work"],
             "public_program_operation_records": len(
                 base.program(PRIMARY_COUNT, 0)

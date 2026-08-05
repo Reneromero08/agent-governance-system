@@ -17,9 +17,15 @@ materializes the effective power sum in one Gaussian-rational scratch cell,
 consumes it into the universal Jacobi-log series, repeats the scan, and
 subtracts the value exactly.  The scratch cell is zero before the next moment.
 
-Only the final 25-coefficient first-harmonic jet is projected.  This is a
+Only the final 25-coefficient, 22,609-payload-bit first-harmonic jet is
+projected.  This is a
 direct-process exact formal-series experiment.  It does not establish an
 enforced hidden-intermediate or no-smuggle boundary.
+
+The initial pushed draft at
+`18213589522aa72aa3e58817f2fdd604e6cd4662` computed but omitted that projected
+boundary payload from its sealed accounting.  The repaired source and seal add
+it explicitly; the earlier Git object remains unchanged.
 
 ## Independent execution
 
@@ -29,7 +35,8 @@ It computes each boundary twice: once by forward effective-center
 reconstruction and direct factor-by-factor sparse convolution, and again by
 an independently written reverse-scan Jacobi-log recurrence with an explicit
 add/subtract scratch value.  Both exact algorithms reproduce the production
-primary and unrelated-reuse commitments.
+primary and unrelated-reuse commitments and their 22,609-bit and 16,427-bit
+projected boundary payloads.
 
 The oracle also independently reproduces the full primary resource tuple:
 26 public-word scans, 884 operation-record visits, 624 source-center visits,

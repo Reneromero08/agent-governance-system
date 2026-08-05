@@ -338,6 +338,7 @@ def verify_case(count: int, family: int) -> dict[str, object]:
         "source_payload_bits": payload_bits(source),
         "source_unchanged": source == original,
         "boundary_commitment": commitment(streamed),
+        "boundary_payload_bits": payload_bits(streamed),
         "direct_factor_boundary_commitment": commitment(direct),
         "metrics": metrics,
     }
@@ -382,6 +383,9 @@ def main() -> None:
         "primary": primary,
         "reuse": reuse,
         "primary_expected_resource_tuple_reproduced": True,
+        "primary_projected_boundary_payload_bits_reproduced": (
+            primary["boundary_payload_bits"] == 22609
+        ),
         "streamed_and_direct_boundaries_match": True,
         "finite_angle_sampling_used": False,
         "full_infinite_theta_scalar_evaluated": False,

@@ -1,7 +1,7 @@
 {
   "catalytic_inference_established": false,
   "catvm_custody": false,
-  "claim": "EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM",
+  "claim": "RESOURCE_ACCOUNTING_REPAIRED_EXACT_CONTINUOUS_S1_GENERIC_CENTER_FIRST_HARMONIC_Q24_JACOBI_PROJECTION_REMATERIALIZES_AND_EXACTLY_UNCOMPUTES_EACH_REQUIRED_MOMENT_IN_ONE_SCRATCH_CELL_WITH_ZERO_RETAINED_MOMENT_VECTOR_25CELL22609BIT_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_BUT_RETAINS24_SOURCE_CENTERS_MATERIALIZES86_WEIGHTED_LOG_CELLS_AND325_PEAK_EXPONENTIAL_CELLS_REQUIRES624_SOURCE_CENTER_VISITS_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM",
   "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
   "computational_advantage": false,
   "controls": {
@@ -28,6 +28,7 @@
   "physical_bit_replacement": false,
   "physical_waveform_execution": false,
   "predecessor_source_sha256": "8d258127d31d9b83591a0cac58837809e46497207c0329d0d1f94d1793f00093",
+  "resource_accounting_repair_of_scientific_source_commit": "18213589522aa72aa3e58817f2fdd604e6cd4662",
   "resource_law": {
     "additional_retained_plan_entries": 0,
     "center_power_evaluations": 576,
@@ -35,6 +36,8 @@
     "peak_exponential_cells": 325,
     "peak_exponential_key_bits": 3143,
     "peak_exponential_payload_bits": 2480635,
+    "projected_boundary_cells": 25,
+    "projected_boundary_payload_bits": 22609,
     "public_operation_records_visited": 884,
     "public_operation_scans": 26,
     "public_program_descriptor_slots": 68,
@@ -54,18 +57,21 @@
     "weighted_log_payload_bits": 172243
   },
   "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
-  "result": "PASS_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION",
+  "result": "PASS_RESOURCE_ACCOUNTING_REPAIRED_STREAMED_MOMENT_VECTOR_REMOVAL_WITH_SERIES_AND_SOURCE_WORK_OBSTRUCTION",
   "schema": "cat_cas.continuous_s1_streamed_jacobi_moment.v1",
   "small_wall_crossed": false,
   "terminal": false,
   "transaction": {
     "baseline_reload_used": false,
     "fresh_reuse_boundary_commitment": "d66f614f650a9390b9ec2a6bf9dd503043d3f0f4b99a7a353a28890bd9004de7",
+    "fresh_reuse_boundary_payload_bits": 16427,
     "primary_boundary_commitment": "9f89424531b038f72b07b278e2f61e8f2716d49080d8e768e89e4928f243c5ca",
+    "primary_boundary_payload_bits": 22609,
     "primary_scratch_restoration_error_cells": 0,
     "primary_source_restoration_error_cells": 0,
     "restoration_generation_after_reuse": 2,
     "reuse_boundary_commitment": "d66f614f650a9390b9ec2a6bf9dd503043d3f0f4b99a7a353a28890bd9004de7",
+    "reuse_boundary_payload_bits": 16427,
     "reuse_scratch_restoration_error_cells": 0,
     "reuse_source_restoration_error_cells": 0,
     "scratch_backing_identity_preserved_across_reuse": true,
