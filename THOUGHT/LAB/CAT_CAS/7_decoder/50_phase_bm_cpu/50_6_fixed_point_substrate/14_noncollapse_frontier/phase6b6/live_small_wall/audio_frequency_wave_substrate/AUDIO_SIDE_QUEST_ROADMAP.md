@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCOPE_IMPLICIT_DIHEDRAL_STATE_REDUCTION_WITH_SEARCH_WORK_TRADEOFF`
-**Roadmap version:** `14.69`
+**Status:** `STRICT_SCOPE_COHERENT_CHANNEL_FUSION_WITH_FULL_SEARCH_AND_CLASSICAL_EQUIVALENCE_OBSTRUCTION`
+**Roadmap version:** `14.70`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d992307a8dc5cc3df82e697b175f3b3824c0784e`
+**Reconciled source head:** `3419e28f019c1b9421389f2d01aa97dd6444df11`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_F103_ROTOR6_IMPLICIT_DIHEDRAL_CODED_ONE_CELL_OPEN_MOMENTUM_STREAMING_RETAINS_ONLY8943_PUBLIC_TOPOLOGY_INTEGERS_WITHOUT_NECKLACE_HISTOGRAMS_HASH_MAPS_REFLECTION_MAPS_OR_TRANSITION_PLANS_WITH_EXACT_RESTORATION_AND_REUSE_BUT_PERFORMS5697720_SORTED_SEARCHES_WITH68372640_COMPARISON_UPPER_BOUND_PER_SCATTERING_AND_HAS_AN_IDENTICAL_CLASSICAL_STREAM`
-**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_IMPLICIT_DIHEDRAL_CODE_ONE_CELL_STREAM_ONLY`
+**Current highest milestone:** `EXACT_F103_ROTOR6_OWNER_TYPED_EIGHT_CHANNEL_COHERENT_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_FACTORS_WITH4389_LEASES_AND149226_SHARED_SOURCE_ORBIT_ROTATIONS_WITHOUT_WIDE_PORT_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENTS_OR_RETAINED_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS5697720_SORTED_SEARCHES5534928_FANOUT_CANDIDATES_AND_AN_IDENTICAL_CLASSICAL_VECTOR_STREAM`
+**Current claim ceiling:** `GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EIGHT_CHANNEL_IMPLICIT_DIHEDRAL_MOMENTUM_WAVE_STREAM_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M203_IMPLICIT_DIHEDRAL_STATE_REDUCTION_WITH_IDENTICAL_CLASSICAL_STREAM_AND_SEARCH_WORK_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M204_COHERENT_CHANNEL_FUSION_REDUCES_ORBIT_DECODE_AND_REFLECTION_WORK_BUT_RETAINS_FULL_SEARCH_FANOUT_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_F103_ROTOR6_COHERENT_EIGHT_CHANNEL_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_ONE_BODY_FACTORS_OR_ESTABLISHES_NO_WORK_REDUCTION_WITH_SHARED_DIHEDRAL_REMATERIALIZATION_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM`
+**Active primary successor:** `EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_CHANNEL_OPERATOR_AND_PUBLIC_WEIGHT_SPAN_RANK8_CERTIFICATE_OR_UNIFORM_LINEAR_COHERENT_PORT_QUOTIENT_BELOW8_NO_GO_WITH_STREAMED_WITNESS_AND_IDENTICAL_CLASSICAL_ALGEBRA`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d992307a8dc5cc3df82e697b175f3b3824c0784e`. The current 203-milestone
+`3419e28f019c1b9421389f2d01aa97dd6444df11`. The current 204-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -9475,6 +9475,70 @@ only projection, exact restoration, unrelated restored reuse, and the
 strongest identical classical eight-channel vector stream. A software vector
 implementation is not itself evidence of physical simultaneous
 superposition.
+
+## M204: coherent channel fusion shares orbit traversal but retains full search
+
+Claim:
+
+```text
+EXACT_F103_ROTOR6_OWNER_TYPED_EIGHT_CHANNEL_COHERENT_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_FACTORS_WITH4389_LEASES_AND149226_SHARED_SOURCE_ORBIT_ROTATIONS_WITHOUT_WIDE_PORT_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENTS_OR_RETAINED_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS5697720_SORTED_SEARCHES5534928_FANOUT_CANDIDATES_AND_AN_IDENTICAL_CLASSICAL_VECTOR_STREAM
+```
+
+M204 replaces eight sequential scalar-channel traversals with one owner-typed
+eight-cell F103 momentum-wave port. For each of 4,389 necklace sources, all
+channels 1 through 8 share one original orbit traversal and one reflected
+orbit construction. Individual live channels are never projected; all 35,112
+channel values are consumed and cleared on the same backing.
+
+The fused traversal reduces source-orbit rotations from 1,193,808 to 149,226
+per forward scattering and reduces histogram digit decodes and reflection
+cell operations by 522,291 each against M203. It does not reduce the
+5,534,928 fanout candidates, 5,697,720 sorted searches, or 68,372,640
+conservative comparison upper bound. Accepted active numeric state increases
+from 6,832 to 6,839 field cells and warm named state from 15,775 to 15,782
+slots. The retained public topology remains 8,943 integers, the lifecycle
+logical peak remains 31,878 slots, and fixed-width logical payload is 244,641
+bits.
+
+The independent oracle imports no production wave or implicit-dihedral
+module. It reconstructs the topology, direct 684,624-term and compact-factor
+references, the eight-channel vector stream, lease and projection controls,
+state commitments, boundary 83, unrelated reuse boundary 70, exact same-
+backing restoration, and generation two. Forward output is committed and
+released before inverse rematerialization. No snapshot reload is used.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`. Logical
+operation reductions are not runtime advantage. Full reference paths are
+verification-only. Python containers, tuples, bisect, arbitrary-width
+integers, allocator/interpreter/native-library memory, timing, and whole-
+process peaks are excluded, not zero. The strongest matched baseline is the
+identical eight-coordinate classical vector stream.
+
+Exact ceiling:
+
+```text
+GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EIGHT_CHANNEL_IMPLICIT_DIHEDRAL_MOMENTUM_WAVE_STREAM_ONLY
+```
+
+No physical simultaneous superposition, CATVM custody, general open-port
+algebra, arbitrary-rotor transfer, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_CHANNEL_OPERATOR_AND_PUBLIC_WEIGHT_SPAN_RANK8_CERTIFICATE_OR_UNIFORM_LINEAR_COHERENT_PORT_QUOTIENT_BELOW8_NO_GO_WITH_STREAMED_WITNESS_AND_IDENTICAL_CLASSICAL_ALGEBRA
+```
+
+The successor tests the concrete remaining state obstruction rather than
+adding channels or rotor fixtures. It will stream exact F103 channel-operator
+and public-boundary coordinates until it either certifies rank eight with a
+small nonzero witness minor or constructs a valid uniform quotient below
+eight. Any witness path must exclude dense 2,277-squared operator retention,
+occupation expansion, answer-bearing tables, and retained transition plans;
+the matched classical path is the identical streamed linear algebra.
 
 ## 10. Roadmap Maintenance
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`d992307a8dc5cc3df82e697b175f3b3824c0784e`. The canonical per-milestone
+`3419e28f019c1b9421389f2d01aa97dd6444df11`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11026,4 +11026,46 @@ Next:
 
 ```text
 EXACT_F103_ROTOR6_COHERENT_EIGHT_CHANNEL_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_ONE_BODY_FACTORS_OR_ESTABLISHES_NO_WORK_REDUCTION_WITH_SHARED_DIHEDRAL_REMATERIALIZATION_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_VECTOR_STREAM
+```
+
+## M204 coherent eight-channel wave stream shares orbit traversal
+
+The completed strict claim is:
+
+```text
+EXACT_F103_ROTOR6_OWNER_TYPED_EIGHT_CHANNEL_COHERENT_MOMENTUM_WAVE_PORT_FUSES_REFLECTION_PAIRED_FACTORS_WITH4389_LEASES_AND149226_SHARED_SOURCE_ORBIT_ROTATIONS_WITHOUT_WIDE_PORT_OCCUPATION_SCRATCH_DENSE_OPERATOR_PERMANENTS_OR_RETAINED_PLAN_WITH_EXACT_RESTORATION_AND_REUSE_BUT_RETAINS5697720_SORTED_SEARCHES5534928_FANOUT_CANDIDATES_AND_AN_IDENTICAL_CLASSICAL_VECTOR_STREAM
+```
+
+M204 leases one owner-typed eight-cell F103 momentum-wave port per necklace,
+computes channels 1 through 8 from one shared source and reflected orbit
+traversal, consumes them without individual projection, and clears the same
+port backing. The accepted path retains no wide port, occupation scratch,
+dense operator, permanent expansion, transition plan, or inverse history.
+
+Against eight sequential M203 scalar traversals, a forward scattering reduces
+source-orbit rotations from 1,193,808 to 149,226 and reduces histogram digit
+decodes and reflection-cell operations by 522,291 each. It retains all
+5,534,928 fanout candidates, 5,697,720 sorted searches, and the 68,372,640
+conservative comparison upper bound. Active numeric state is 6,839 field
+cells; retained public topology is 8,943 integers; warm named state is 15,782
+slots; lifecycle peak is 31,878 slots; fixed-width payload is 244,641 bits.
+
+Production and a separate oracle agree with direct 684,624-term, compact
+factor, and M203 scalar references on the full state, commitment, boundary 83,
+unrelated reuse boundary 70, same-backing restoration, generation two, and
+resource counts. Forward output is committed and released before inverse
+rematerialization. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest matched baseline is the identical eight-coordinate classical
+vector stream. Logical operation reductions are not runtime advantage, and
+the software vector does not establish physical simultaneous superposition.
+No distinct phase resource, computational advantage, Small Wall crossing,
+CATVM custody, physical execution, physical-bit replacement, catalytic
+inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_F103_ROTOR6_REFLECTION_PAIRED_MOMENTUM_CHANNEL_OPERATOR_AND_PUBLIC_WEIGHT_SPAN_RANK8_CERTIFICATE_OR_UNIFORM_LINEAR_COHERENT_PORT_QUOTIENT_BELOW8_NO_GO_WITH_STREAMED_WITNESS_AND_IDENTICAL_CLASSICAL_ALGEBRA
 ```

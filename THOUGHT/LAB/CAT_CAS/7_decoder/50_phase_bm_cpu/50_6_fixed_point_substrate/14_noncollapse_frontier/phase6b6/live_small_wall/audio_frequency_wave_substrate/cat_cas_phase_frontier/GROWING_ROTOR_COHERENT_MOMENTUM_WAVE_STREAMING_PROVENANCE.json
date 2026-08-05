@@ -1,0 +1,41 @@
+{
+  "schema": "CAT_CAS_GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_PROVENANCE_V1",
+  "scientific_source_head": "3419e28f019c1b9421389f2d01aa97dd6444df11",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "execution_environment": "LINUX_DIRECT_PROCESS_EXACT_F103_SOFTWARE_VECTOR_SUPERPOSITION",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "hosted_execution_confirmation": false,
+  "qualifier": {
+    "script": "qualify_growing_rotor_coherent_momentum_wave_streaming.sh",
+    "status": "QUALIFIED_GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_STRICT_SCOPE",
+    "build_location": "MANAGED_DISK_BACKED_CODEX_SCRATCH",
+    "evidence_location": "TRACKED_IN_PLACE_ASSIGNED_LAB_WORKTREE",
+    "temporary_or_ram_backed_evidence": false
+  },
+  "files": {
+    "growing_rotor_coherent_momentum_wave_streaming_closure.py": "32879c8ed220a3d49fca1e06e7d113aa7958d9291d74b3f5b7b5f61a6faf4a56",
+    "growing_rotor_coherent_momentum_wave_streaming_independent_oracle.py": "bb95a1fc1c60a3afe2dab8b1517ca8e3d76e19278467e33869cbcc0b9af2c99f",
+    "GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_RESULTS.json": "20a869f62e26fd7801540adc057a0454f8ccfc6e698011f477e2991023597e61",
+    "GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_INDEPENDENT_ORACLE.json": "5eaa2c770132423a4f22398a255632bc93017b6ed75c42ceb22c3fc6d21789db",
+    "GROWING_ROTOR_COHERENT_MOMENTUM_WAVE_STREAMING_INDEPENDENT_REEXECUTION_REVIEW.md": "e155848cd4262b7eab6a3891f4c23028b5ec712c1d89712c6b9f6820bfc4d0e9",
+    "qualify_growing_rotor_coherent_momentum_wave_streaming.sh": "8a2c8b8dccc3ba743b8a9fc868742a84c15a21ee2c92949ce66516cafbe58016"
+  },
+  "dependencies": {
+    "growing_rotor_implicit_dihedral_scalar_streaming_closure.py": "ef0d13ff5db652f712fa7dbd02ac24db8ab1f0c39535b03867b0d37363a2d50a",
+    "growing_rotor_implicit_dihedral_scalar_streaming_independent_oracle.py": "10dbad1a12fca8986dad342867eec606faa57631083a1f13618d43fcf2b6fd5a",
+    "growing_rotor_open_momentum_factor_independent_oracle.py": "25911e8186095265b1d6ab55a5d26c56dc984bc6ece113234fd3d1c2771cec18",
+    "independent_oracle_imports_production_wave_module": false,
+    "independent_oracle_imports_production_implicit_dihedral_module": false,
+    "independent_oracle_imports_m199_production_module": false,
+    "independent_oracle_reuses_prior_independent_implicit_dihedral_reference": true
+  },
+  "package_local_fields": [
+    "SOURCE_ORBIT_DECODE_AND_REFLECTION_REDUCTIONS_ARE_LOGICAL_OPERATION_COUNTS_NOT_RUNTIME_ADVANTAGE",
+    "SORTED_CODE_COMPARISON_COUNT_IS_A_CONSERVATIVE_UPPER_BOUND_NOT_AN_INSTRUMENTED_EXACT_COUNT",
+    "PRODUCTION_AND_ORACLE_REFERENCE_PATHS_ARE_VERIFICATION_ONLY_AND_EXCLUDED_FROM_THE_ACCEPTED_PATH",
+    "PYTHON_CONTAINER_TUPLE_BISECT_BIGINT_ALLOCATOR_INTERPRETER_NATIVE_LIBRARY_TIMING_AND_WHOLE_PROCESS_PEAKS_EXCLUDED_NOT_ZERO"
+  ],
+  "claim_ceiling": "GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_EIGHT_CHANNEL_IMPLICIT_DIHEDRAL_MOMENTUM_WAVE_STREAM_ONLY"
+}
