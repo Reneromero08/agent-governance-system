@@ -168,6 +168,21 @@ def _git(args: Sequence[str], *, cwd: Path = REPO_ROOT, text: bool = False) -> b
     return result.stdout.strip() if text else result.stdout
 
 
+def _git_is_ancestor(ancestor: str, descendant: str) -> bool:
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ancestor, descendant],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode in {0, 1}:
+        return result.returncode == 0
+    raise ScopeViolation(
+        "git merge-base --is-ancestor failed: "
+        + result.stderr.decode("utf-8", "replace").strip()
+    )
+
+
 def staged_paths() -> tuple[str, ...]:
     output = _git(["diff", "--cached", "--name-status", "-z", "--find-renames", "--"])
     assert isinstance(output, bytes)
@@ -194,11 +209,12 @@ def introduced_commits(refs: Sequence[PushRef], remote_name: str) -> tuple[str, 
     for ref in refs:
         if ref.is_deletion:
             continue
-        if ref.remote_sha != ZERO_SHA:
+        if ref.remote_sha != ZERO_SHA and _git_is_ancestor(ref.remote_sha, ref.local_sha):
             args = ["rev-list", "--reverse", f"{ref.remote_sha}..{ref.local_sha}"]
         else:
             # Exclude every commit already reachable from this remote so a new
-            # lab branch does not inherit and reclassify the remote main history.
+            # or rebased lab branch does not inherit and reclassify remote main
+            # history. Fast-forward pushes retain the narrower exact range.
             args = ["rev-list", "--reverse", ref.local_sha, "--not", f"--remotes={remote_name}"]
         output = _git(args, text=True)
         assert isinstance(output, str)

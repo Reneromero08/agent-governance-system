@@ -12,7 +12,9 @@
 - Add a tool-agnostic three-class scope engine for Lab payload, Lab boundary
   control, and main paths. Route commits, pushes, and CI through that engine;
   reject mixed payload/governance changes, rename escapes, unsafe paths, and
-  Lab merge history; exclude inherited remote history for new Lab branches.
+  Lab merge history; exclude inherited remote history for new and rebased Lab
+  branches while retaining the exact remote-to-local range for ordinary
+  fast-forward pushes.
 
 - Add an OpenCode adapter that denies direct out-of-Lab edit/write/patch tools,
   overwrites inherited inline configuration, preserves checked-in Lab

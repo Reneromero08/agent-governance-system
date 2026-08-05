@@ -91,9 +91,24 @@ def test_existing_branch_uses_remote_to_local_range(monkeypatch):
         return ""
 
     monkeypatch.setattr(lab_scope, "_git", fake_git)
+    monkeypatch.setattr(lab_scope, "_git_is_ancestor", lambda _remote, _local: True)
     refs = (PushRef("refs/heads/lab", "a" * 40, "refs/heads/lab", "b" * 40),)
     assert introduced_commits(refs, "origin") == ()
     assert calls == [["rev-list", "--reverse", f"{'b' * 40}..{'a' * 40}"]]
+
+
+def test_rebased_existing_branch_excludes_remote_baselines(monkeypatch):
+    calls: list[list[str]] = []
+
+    def fake_git(args, **_kwargs):
+        calls.append(list(args))
+        return "c" * 40
+
+    monkeypatch.setattr(lab_scope, "_git", fake_git)
+    monkeypatch.setattr(lab_scope, "_git_is_ancestor", lambda _remote, _local: False)
+    refs = (PushRef("refs/heads/lab", "a" * 40, "refs/heads/lab", "b" * 40),)
+    assert introduced_commits(refs, "origin") == ("c" * 40,)
+    assert calls == [["rev-list", "--reverse", "a" * 40, "--not", "--remotes=origin"]]
 
 
 def test_merge_commit_is_rejected_before_path_classification(monkeypatch):
