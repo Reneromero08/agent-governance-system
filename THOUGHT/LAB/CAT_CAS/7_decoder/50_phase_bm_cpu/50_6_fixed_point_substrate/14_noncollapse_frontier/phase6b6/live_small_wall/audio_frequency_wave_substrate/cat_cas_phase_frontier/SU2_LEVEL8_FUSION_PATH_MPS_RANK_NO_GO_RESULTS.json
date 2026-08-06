@@ -1,0 +1,4078 @@
+{
+  "cases": [
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 6,
+      "canonical_mps_over_direct_cell_ratio": "6/2",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 2,
+        "modular_elimination_row_scales": 8,
+        "modular_elimination_row_updates": 2,
+        "modular_field_evaluations": 12,
+        "modular_fraction_coordinates": 192,
+        "peak_modular_matrix_cells": 2,
+        "peak_retained_verification_path_label_cells": 10,
+        "peak_retained_verification_path_records": 2,
+        "sector_matrices": 8
+      },
+      "direct_fusion_path_field_cells": 2,
+      "direct_fusion_path_payload_bits": 98,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 2
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 40,
+        "field_multiplications": 136,
+        "forward_operations": 24,
+        "inverse_operations": 0,
+        "paired_local_blocks": 8,
+        "path_labels_rematerialized": 280,
+        "path_rank_calls": 8,
+        "path_unrank_calls": 48,
+        "peak_carrier_field_cells": 2,
+        "peak_carrier_payload_bits": 98,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 2,
+        "peak_streamed_path_label_cells": 10,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 16,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 224,
+        "zero_temperley_lieb_blocks": 16
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 2,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "399309bf3c58413f88efb87869607f22dfdb41ec0f98ad3cf3fdfe468099d914"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "82a7f22a2cdacec4559133f3e4942ba503ea759fc99db466b138c4fe463c7464"
+        }
+      },
+      "program_steps": 24,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "816aacbd7f35e3efda46aaaa420dcdb49548d3343316630334baf668659d7268",
+      "strands": 4
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 16,
+      "canonical_mps_over_direct_cell_ratio": "16/5",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 22,
+        "modular_elimination_row_scales": 18,
+        "modular_elimination_row_updates": 18,
+        "modular_field_evaluations": 50,
+        "modular_fraction_coordinates": 800,
+        "peak_modular_matrix_cells": 5,
+        "peak_retained_verification_path_label_cells": 35,
+        "peak_retained_verification_path_records": 5,
+        "sector_matrices": 16
+      },
+      "direct_fusion_path_field_cells": 5,
+      "direct_fusion_path_payload_bits": 311,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 3
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 160,
+        "field_multiplications": 520,
+        "forward_operations": 40,
+        "inverse_operations": 0,
+        "paired_local_blocks": 40,
+        "path_labels_rematerialized": 1680,
+        "path_rank_calls": 40,
+        "path_unrank_calls": 200,
+        "peak_carrier_field_cells": 5,
+        "peak_carrier_payload_bits": 311,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 5,
+        "peak_streamed_path_label_cells": 14,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 40,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 1504,
+        "zero_temperley_lieb_blocks": 80
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 3,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "b0ed78af8805ec9ab91ec064808f23125aa80b961e2872b977ca37c47c96541e"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "79b21db17570385ec5fff533079c668f312d2b16a64560a4f67df6acc30c99e6"
+        }
+      },
+      "program_steps": 40,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "56d6265e2c796032b5b94311e507c8bbcbea7556a17ca91c05dc6a4b8b76bb03",
+      "strands": 6
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 44,
+      "canonical_mps_over_direct_cell_ratio": "44/14",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 152,
+        "modular_elimination_row_scales": 36,
+        "modular_elimination_row_updates": 92,
+        "modular_field_evaluations": 196,
+        "modular_fraction_coordinates": 3136,
+        "peak_modular_matrix_cells": 14,
+        "peak_retained_verification_path_label_cells": 126,
+        "peak_retained_verification_path_records": 14,
+        "sector_matrices": 26
+      },
+      "direct_fusion_path_field_cells": 14,
+      "direct_fusion_path_payload_bits": 1104,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 9
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 4
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 616,
+        "field_multiplications": 1960,
+        "forward_operations": 56,
+        "inverse_operations": 0,
+        "paired_local_blocks": 168,
+        "path_labels_rematerialized": 8568,
+        "path_rank_calls": 168,
+        "path_unrank_calls": 784,
+        "peak_carrier_field_cells": 14,
+        "peak_carrier_payload_bits": 1109,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 14,
+        "peak_streamed_path_label_cells": 18,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 112,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 8232,
+        "zero_temperley_lieb_blocks": 336
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 6,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "493f712fc13c84f9ae975dd9db9b0c0f066c9338b7861487a7065f703228660b"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "57998e8c524a616814693e9aa3c821b29a1bdda85560413d3b6209f1da30aa23"
+        }
+      },
+      "program_steps": 56,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "cdf60b412047aa393f26523e4240247407fd63d43b25bb5fe882ea68260620eb",
+      "strands": 8
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 128,
+      "canonical_mps_over_direct_cell_ratio": "128/42",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 956,
+        "modular_elimination_row_scales": 68,
+        "modular_elimination_row_updates": 396,
+        "modular_field_evaluations": 756,
+        "modular_fraction_coordinates": 12096,
+        "peak_modular_matrix_cells": 42,
+        "peak_retained_verification_path_label_cells": 462,
+        "peak_retained_verification_path_records": 42,
+        "sector_matrices": 38
+      },
+      "direct_fusion_path_field_cells": 42,
+      "direct_fusion_path_payload_bits": 4142,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 42
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 28
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 2352,
+        "field_multiplications": 7392,
+        "forward_operations": 72,
+        "inverse_operations": 0,
+        "paired_local_blocks": 672,
+        "path_labels_rematerialized": 40656,
+        "path_rank_calls": 672,
+        "path_unrank_calls": 3024,
+        "peak_carrier_field_cells": 42,
+        "peak_carrier_payload_bits": 4167,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 42,
+        "peak_streamed_path_label_cells": 22,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 336,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 40992,
+        "zero_temperley_lieb_blocks": 1344
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 10,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "e3d28e39731b61002c61b49b60fd9b33c9b78c360c2da2753386e23aed7464e1"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "cdf9667f91b5c516ef8e0838af69f0b7f781734d49ca180bb21dcb218e31b347"
+        }
+      },
+      "program_steps": 72,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "179c3129c68c9d0bdef4b621aade85b029b5eac6f02685021a9b5340c11da40c",
+      "strands": 10
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 392,
+      "canonical_mps_over_direct_cell_ratio": "392/132",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 5790,
+        "modular_elimination_row_scales": 128,
+        "modular_elimination_row_updates": 1579,
+        "modular_field_evaluations": 2904,
+        "modular_fraction_coordinates": 46464,
+        "peak_modular_matrix_cells": 132,
+        "peak_retained_verification_path_label_cells": 1716,
+        "peak_retained_verification_path_records": 132,
+        "sector_matrices": 52
+      },
+      "direct_fusion_path_field_cells": 132,
+      "direct_fusion_path_payload_bits": 15568,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 132
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 90
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 48
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 20
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 6
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 8976,
+        "field_multiplications": 27984,
+        "forward_operations": 88,
+        "inverse_operations": 0,
+        "paired_local_blocks": 2640,
+        "path_labels_rematerialized": 185328,
+        "path_rank_calls": 2640,
+        "path_unrank_calls": 11616,
+        "peak_carrier_field_cells": 132,
+        "peak_carrier_payload_bits": 15573,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 132,
+        "peak_streamed_path_label_cells": 26,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 1056,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 193512,
+        "zero_temperley_lieb_blocks": 5280
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 20,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "1084730f29c2aeb32d1b2a94a5c007ff59bcc060b8bfa5533e5fb8d486246f67"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "9cb24ce5c9ff9914441ef3bffaeb0faa7ef66c1307c701ed5417f9d9a04f61fd"
+        }
+      },
+      "program_steps": 88,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "4e41d6d4bf2a35c7519713b7a0ada24c5272c94da6597611683e04985828db51",
+      "strands": 12
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "canonical_mps_over_direct_cell_ratio": "1250/429",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 35166,
+        "modular_elimination_row_scales": 238,
+        "modular_elimination_row_updates": 6140,
+        "modular_field_evaluations": 11154,
+        "modular_fraction_coordinates": 178464,
+        "peak_modular_matrix_cells": 429,
+        "peak_retained_verification_path_label_cells": 6435,
+        "peak_retained_verification_path_records": 429,
+        "sector_matrices": 68
+      },
+      "direct_fusion_path_field_cells": 429,
+      "direct_fusion_path_payload_bits": 65463,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 429
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 297
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 165
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 90
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 75
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 48
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 27
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 20
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 7
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 6
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 7,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 27,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 75,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 165,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 12,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 132,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 297,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 13,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 429,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 34320,
+        "field_multiplications": 106392,
+        "forward_operations": 104,
+        "inverse_operations": 0,
+        "paired_local_blocks": 10296,
+        "path_labels_rematerialized": 823680,
+        "path_rank_calls": 10296,
+        "path_unrank_calls": 44616,
+        "peak_carrier_field_cells": 429,
+        "peak_carrier_payload_bits": 65979,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 429,
+        "peak_streamed_path_label_cells": 30,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 3432,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 883168,
+        "zero_temperley_lieb_blocks": 20592
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 35,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "db5f7014d5d09d133e7cf3559d24722fea9b0a87eff7bee075c6a175f637b669"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "f362275f0d2ebf9c4aace93d8a042cc3b68b6165ffb0854c095791f153c91d52"
+        }
+      },
+      "program_steps": 104,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "c8e01496074266965a01fcc500761fd91c433f0317d085cab568ff16b1908ea5",
+      "strands": 14
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "canonical_mps_over_direct_cell_ratio": "4110/1430",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 215699,
+        "modular_elimination_row_scales": 448,
+        "modular_elimination_row_updates": 23630,
+        "modular_field_evaluations": 42900,
+        "modular_fraction_coordinates": 686400,
+        "peak_modular_matrix_cells": 1430,
+        "peak_retained_verification_path_label_cells": 24310,
+        "peak_retained_verification_path_records": 1430,
+        "sector_matrices": 86
+      },
+      "direct_fusion_path_field_cells": 1430,
+      "direct_fusion_path_payload_bits": 256269,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 1430
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 429
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 1001
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 429
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 572
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 297
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 275
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 165
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 110
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 90
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 75
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 35
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 48
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 27
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 1,
+              "suffix_columns": 8
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 28,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 20,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 20
+            },
+            {
+              "exact_rank": 7,
+              "label": 6,
+              "prefix_rows": 7,
+              "suffix_columns": 7
+            },
+            {
+              "exact_rank": 1,
+              "label": 8,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 27,
+              "suffix_columns": 6
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 8,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 75,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 35,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 165,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 110,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 12,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 132,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 297,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 275,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 13,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 429,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 572,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 14,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 429,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1001,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 15,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1430,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 0,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 131560,
+        "field_multiplications": 406120,
+        "forward_operations": 120,
+        "inverse_operations": 0,
+        "paired_local_blocks": 40040,
+        "path_labels_rematerialized": 3597880,
+        "path_rank_calls": 40040,
+        "path_unrank_calls": 171600,
+        "peak_carrier_field_cells": 1430,
+        "peak_carrier_payload_bits": 256269,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 1430,
+        "peak_streamed_path_label_cells": 34,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 11440,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 3938792,
+        "zero_temperley_lieb_blocks": 80080
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 70,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "9a627a7f302b987aa4d5c4d75878fa0e55f3e408976836622fff798212907d71"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "2a010c25248423ec806bf36bd924ffe9fb5d8227e6e1d2f1743fda06105891b8"
+        }
+      },
+      "program_steps": 120,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "6f228996bd6885bbf4b9bc1719e5168d48cb1ba2a8d686bd38d607e8d7b4127a",
+      "strands": 16
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 6,
+      "canonical_mps_over_direct_cell_ratio": "6/2",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 2,
+        "modular_elimination_row_scales": 8,
+        "modular_elimination_row_updates": 2,
+        "modular_field_evaluations": 12,
+        "modular_fraction_coordinates": 192,
+        "peak_modular_matrix_cells": 2,
+        "peak_retained_verification_path_label_cells": 10,
+        "peak_retained_verification_path_records": 2,
+        "sector_matrices": 8
+      },
+      "direct_fusion_path_field_cells": 2,
+      "direct_fusion_path_payload_bits": 96,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 2
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 40,
+        "field_multiplications": 136,
+        "forward_operations": 24,
+        "inverse_operations": 0,
+        "paired_local_blocks": 8,
+        "path_labels_rematerialized": 280,
+        "path_rank_calls": 8,
+        "path_unrank_calls": 48,
+        "peak_carrier_field_cells": 2,
+        "peak_carrier_payload_bits": 96,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 2,
+        "peak_streamed_path_label_cells": 10,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 16,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 224,
+        "zero_temperley_lieb_blocks": 16
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 2,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "1b8bb6b5704927177d8f030c1d6e1bd451f0d14e000c3e66140c933bcd7662f9"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "ebd1d61e5f44a6bea19af2b327cd921ff7948629326b94151e2d6869eb9ddf3d"
+        }
+      },
+      "program_steps": 24,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "db12cbfbc855d1f9e0b9ed93b85d42c87ceef01a9cae8c9610b16ce8f922b66a",
+      "strands": 4
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 16,
+      "canonical_mps_over_direct_cell_ratio": "16/5",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 22,
+        "modular_elimination_row_scales": 18,
+        "modular_elimination_row_updates": 18,
+        "modular_field_evaluations": 50,
+        "modular_fraction_coordinates": 800,
+        "peak_modular_matrix_cells": 5,
+        "peak_retained_verification_path_label_cells": 35,
+        "peak_retained_verification_path_records": 5,
+        "sector_matrices": 16
+      },
+      "direct_fusion_path_field_cells": 5,
+      "direct_fusion_path_payload_bits": 271,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 3
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 160,
+        "field_multiplications": 520,
+        "forward_operations": 40,
+        "inverse_operations": 0,
+        "paired_local_blocks": 40,
+        "path_labels_rematerialized": 1680,
+        "path_rank_calls": 40,
+        "path_unrank_calls": 200,
+        "peak_carrier_field_cells": 5,
+        "peak_carrier_payload_bits": 278,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 5,
+        "peak_streamed_path_label_cells": 14,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 40,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 1504,
+        "zero_temperley_lieb_blocks": 80
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 3,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "9384e3450bc52fb7fdf2debd23fa6ddf9e2073c78673985de10dc4ccd68d6b8a"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "0276cf53c4bf506890d9bcfb93a53f909be936539e9f2fdbfa5f2c3a4745466f"
+        }
+      },
+      "program_steps": 40,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "fea81b9e14c261be5eb840733d75588d50285ab4582661896024b9a3520a8d0d",
+      "strands": 6
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 44,
+      "canonical_mps_over_direct_cell_ratio": "44/14",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 152,
+        "modular_elimination_row_scales": 36,
+        "modular_elimination_row_updates": 92,
+        "modular_field_evaluations": 196,
+        "modular_fraction_coordinates": 3136,
+        "peak_modular_matrix_cells": 14,
+        "peak_retained_verification_path_label_cells": 126,
+        "peak_retained_verification_path_records": 14,
+        "sector_matrices": 26
+      },
+      "direct_fusion_path_field_cells": 14,
+      "direct_fusion_path_payload_bits": 1086,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 9
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 4
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 616,
+        "field_multiplications": 1960,
+        "forward_operations": 56,
+        "inverse_operations": 0,
+        "paired_local_blocks": 168,
+        "path_labels_rematerialized": 8568,
+        "path_rank_calls": 168,
+        "path_unrank_calls": 784,
+        "peak_carrier_field_cells": 14,
+        "peak_carrier_payload_bits": 1090,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 14,
+        "peak_streamed_path_label_cells": 18,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 112,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 8232,
+        "zero_temperley_lieb_blocks": 336
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 6,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "0e4e19d9fa1029aa73a72512d5e302d51066d538156dac512c951ed1d38b0e46"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "160c5f2d3d9a2c875964df845c285c1e3a8150b5aea5290f84eea2240a42c21c"
+        }
+      },
+      "program_steps": 56,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "1e9adc1e1428b92cc09372bb8c45cabf576aef40b2cb0da36a668908509aaf5a",
+      "strands": 8
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 128,
+      "canonical_mps_over_direct_cell_ratio": "128/42",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 953,
+        "modular_elimination_row_scales": 68,
+        "modular_elimination_row_updates": 393,
+        "modular_field_evaluations": 756,
+        "modular_fraction_coordinates": 12096,
+        "peak_modular_matrix_cells": 42,
+        "peak_retained_verification_path_label_cells": 462,
+        "peak_retained_verification_path_records": 42,
+        "sector_matrices": 38
+      },
+      "direct_fusion_path_field_cells": 42,
+      "direct_fusion_path_payload_bits": 4138,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 42
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 28
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 14
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 5
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 2352,
+        "field_multiplications": 7392,
+        "forward_operations": 72,
+        "inverse_operations": 0,
+        "paired_local_blocks": 672,
+        "path_labels_rematerialized": 40656,
+        "path_rank_calls": 672,
+        "path_unrank_calls": 3024,
+        "peak_carrier_field_cells": 42,
+        "peak_carrier_payload_bits": 4138,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 42,
+        "peak_streamed_path_label_cells": 22,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 336,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 40992,
+        "zero_temperley_lieb_blocks": 1344
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 10,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "d2e7a925ee598b898bfb5810f4b3d820934e3d32c9ef8bbbb6ead85bda95a4f6"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "5da3e1adcbd98403ef02b5bc804a0bac693b5940bdde57a002e91aa5985a2fea"
+        }
+      },
+      "program_steps": 72,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "bdd9e766ae8cd8808d250c4587236679d84fdfa988ccd345569f01ecf3f90659",
+      "strands": 10
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 392,
+      "canonical_mps_over_direct_cell_ratio": "392/132",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 5788,
+        "modular_elimination_row_scales": 128,
+        "modular_elimination_row_updates": 1582,
+        "modular_field_evaluations": 2904,
+        "modular_fraction_coordinates": 46464,
+        "peak_modular_matrix_cells": 132,
+        "peak_retained_verification_path_label_cells": 1716,
+        "peak_retained_verification_path_records": 132,
+        "sector_matrices": 52
+      },
+      "direct_fusion_path_field_cells": 132,
+      "direct_fusion_path_payload_bits": 16660,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 132
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 90
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 48
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 20
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 6
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 8976,
+        "field_multiplications": 27984,
+        "forward_operations": 88,
+        "inverse_operations": 0,
+        "paired_local_blocks": 2640,
+        "path_labels_rematerialized": 185328,
+        "path_rank_calls": 2640,
+        "path_unrank_calls": 11616,
+        "peak_carrier_field_cells": 132,
+        "peak_carrier_payload_bits": 16660,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 132,
+        "peak_streamed_path_label_cells": 26,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 1056,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 193512,
+        "zero_temperley_lieb_blocks": 5280
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 20,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "b30ffc5131fe71debf5a63444c32b143f96d05205da9703e16cf243108e78f7c"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "8198a544fb29ed167f25c05dc1087ff119898eca70a9408b521d2414be0eb553"
+        }
+      },
+      "program_steps": 88,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "0f0af78f0896ac8d2ef79a95fc691725d785eda3f0f5a14909fc4ed296752c47",
+      "strands": 12
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "canonical_mps_over_direct_cell_ratio": "1250/429",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 35181,
+        "modular_elimination_row_scales": 238,
+        "modular_elimination_row_updates": 6131,
+        "modular_field_evaluations": 11154,
+        "modular_fraction_coordinates": 178464,
+        "peak_modular_matrix_cells": 429,
+        "peak_retained_verification_path_label_cells": 6435,
+        "peak_retained_verification_path_records": 429,
+        "sector_matrices": 68
+      },
+      "direct_fusion_path_field_cells": 429,
+      "direct_fusion_path_payload_bits": 63894,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 429
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 297
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 165
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 90
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 75
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 48
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 27
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 20
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 7
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 6
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 7,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 27,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 75,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 165,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 12,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 132,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 297,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 13,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 429,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 34320,
+        "field_multiplications": 106392,
+        "forward_operations": 104,
+        "inverse_operations": 0,
+        "paired_local_blocks": 10296,
+        "path_labels_rematerialized": 823680,
+        "path_rank_calls": 10296,
+        "path_unrank_calls": 44616,
+        "peak_carrier_field_cells": 429,
+        "peak_carrier_payload_bits": 63989,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 429,
+        "peak_streamed_path_label_cells": 30,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 3432,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 883168,
+        "zero_temperley_lieb_blocks": 20592
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 35,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "3edc5e7780190637b66003d4e3c3c98eb4445570d84278131df073f421653b12"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "83b05ea08875c6ffcec5433e3d771420032ceca9fb6fd05ab75e7ca1d3686eb0"
+        }
+      },
+      "program_steps": 104,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "2102eaeb5a63f1be0eeef32cc313d1549fa3746b875481470ef842b98a53da9e",
+      "strands": 14
+    },
+    {
+      "all_sector_ranks_maximal": true,
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "canonical_mps_over_direct_cell_ratio": "4110/1430",
+      "cross_prime_rank_agreement": true,
+      "diagnostic_work": {
+        "modular_elimination_cell_updates": 215535,
+        "modular_elimination_row_scales": 448,
+        "modular_elimination_row_updates": 23619,
+        "modular_field_evaluations": 42900,
+        "modular_fraction_coordinates": 686400,
+        "peak_modular_matrix_cells": 1430,
+        "peak_retained_verification_path_label_cells": 24310,
+        "peak_retained_verification_path_records": 1430,
+        "sector_matrices": 86
+      },
+      "direct_fusion_path_field_cells": 1430,
+      "direct_fusion_path_payload_bits": 254680,
+      "exact_sector_shapes": [
+        {
+          "cut": 1,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1,
+              "suffix_columns": 1430
+            }
+          ]
+        },
+        {
+          "cut": 2,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 1,
+              "suffix_columns": 429
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1,
+              "suffix_columns": 1001
+            }
+          ]
+        },
+        {
+          "cut": 3,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 2,
+              "suffix_columns": 429
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 1,
+              "suffix_columns": 572
+            }
+          ]
+        },
+        {
+          "cut": 4,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 2,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 3,
+              "suffix_columns": 297
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 1,
+              "suffix_columns": 275
+            }
+          ]
+        },
+        {
+          "cut": 5,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 5,
+              "suffix_columns": 132
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 4,
+              "suffix_columns": 165
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 1,
+              "suffix_columns": 110
+            }
+          ]
+        },
+        {
+          "cut": 6,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 5,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 9,
+              "suffix_columns": 90
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 5,
+              "suffix_columns": 75
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 1,
+              "suffix_columns": 35
+            }
+          ]
+        },
+        {
+          "cut": 7,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 14,
+              "suffix_columns": 42
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 14,
+              "suffix_columns": 48
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 6,
+              "suffix_columns": 27
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 1,
+              "suffix_columns": 8
+            }
+          ]
+        },
+        {
+          "cut": 8,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 0,
+              "prefix_rows": 14,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 28,
+              "label": 2,
+              "prefix_rows": 28,
+              "suffix_columns": 28
+            },
+            {
+              "exact_rank": 20,
+              "label": 4,
+              "prefix_rows": 20,
+              "suffix_columns": 20
+            },
+            {
+              "exact_rank": 7,
+              "label": 6,
+              "prefix_rows": 7,
+              "suffix_columns": 7
+            },
+            {
+              "exact_rank": 1,
+              "label": 8,
+              "prefix_rows": 1,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 9,
+          "sectors": [
+            {
+              "exact_rank": 14,
+              "label": 1,
+              "prefix_rows": 42,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 14,
+              "label": 3,
+              "prefix_rows": 48,
+              "suffix_columns": 14
+            },
+            {
+              "exact_rank": 6,
+              "label": 5,
+              "prefix_rows": 27,
+              "suffix_columns": 6
+            },
+            {
+              "exact_rank": 1,
+              "label": 7,
+              "prefix_rows": 8,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 10,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 0,
+              "prefix_rows": 42,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 9,
+              "label": 2,
+              "prefix_rows": 90,
+              "suffix_columns": 9
+            },
+            {
+              "exact_rank": 5,
+              "label": 4,
+              "prefix_rows": 75,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 1,
+              "label": 6,
+              "prefix_rows": 35,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 11,
+          "sectors": [
+            {
+              "exact_rank": 5,
+              "label": 1,
+              "prefix_rows": 132,
+              "suffix_columns": 5
+            },
+            {
+              "exact_rank": 4,
+              "label": 3,
+              "prefix_rows": 165,
+              "suffix_columns": 4
+            },
+            {
+              "exact_rank": 1,
+              "label": 5,
+              "prefix_rows": 110,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 12,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 0,
+              "prefix_rows": 132,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 3,
+              "label": 2,
+              "prefix_rows": 297,
+              "suffix_columns": 3
+            },
+            {
+              "exact_rank": 1,
+              "label": 4,
+              "prefix_rows": 275,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 13,
+          "sectors": [
+            {
+              "exact_rank": 2,
+              "label": 1,
+              "prefix_rows": 429,
+              "suffix_columns": 2
+            },
+            {
+              "exact_rank": 1,
+              "label": 3,
+              "prefix_rows": 572,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 14,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 0,
+              "prefix_rows": 429,
+              "suffix_columns": 1
+            },
+            {
+              "exact_rank": 1,
+              "label": 2,
+              "prefix_rows": 1001,
+              "suffix_columns": 1
+            }
+          ]
+        },
+        {
+          "cut": 15,
+          "sectors": [
+            {
+              "exact_rank": 1,
+              "label": 1,
+              "prefix_rows": 1430,
+              "suffix_columns": 1
+            }
+          ]
+        }
+      ],
+      "family": 1,
+      "forward_work": {
+        "boundary_commitment_hashes": 0,
+        "field_additions": 131560,
+        "field_multiplications": 406120,
+        "forward_operations": 120,
+        "inverse_operations": 0,
+        "paired_local_blocks": 40040,
+        "path_labels_rematerialized": 3597880,
+        "path_rank_calls": 40040,
+        "path_unrank_calls": 171600,
+        "peak_carrier_field_cells": 1430,
+        "peak_carrier_payload_bits": 255069,
+        "peak_local_field_scratch_cells": 8,
+        "peak_nonzero_carrier_field_cells": 1430,
+        "peak_streamed_path_label_cells": 34,
+        "port_leases": 0,
+        "port_releases": 0,
+        "public_descriptor_hashes": 0,
+        "public_descriptor_integers_hashed": 0,
+        "scalar_local_blocks": 11440,
+        "state_commitment_field_cells_hashed": 0,
+        "state_commitment_hashes": 0,
+        "topology_count_reads": 3938792,
+        "zero_temperley_lieb_blocks": 80080
+      },
+      "maximum_exact_sector_schmidt_bond_rank": 70,
+      "prime_certificates": {
+        "241": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "a8981fc2e57e09e0608d858adfc9223159e21c526d30b009a56fe317721002d9"
+        },
+        "401": {
+          "all_sector_ranks_maximal": true,
+          "cut_maximum_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "cut_total_ranks": [
+            1,
+            2,
+            3,
+            6,
+            10,
+            20,
+            35,
+            70,
+            35,
+            20,
+            10,
+            6,
+            3,
+            2,
+            1
+          ],
+          "pivot_trace_aggregate_commitment": "9227651d0184a7e1b2c33dd7c70ff9c21b68943186d4a8f7e3e8c8a5f972bf13"
+        }
+      },
+      "program_steps": 120,
+      "rounds": 8,
+      "split_primes": [
+        241,
+        401
+      ],
+      "state_commitment": "d7f3218e040d23ee8f4817426ab6ede56be7fbda1db3615d0dacbe39632dc909",
+      "strands": 16
+    }
+  ],
+  "claim": "EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS",
+  "claim_ceiling": "FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY",
+  "claim_limits": {
+    "catalytic_inference_established": false,
+    "catvm_custody": false,
+    "distinct_phase_resource_established": false,
+    "native_compact_mps_transaction_established": false,
+    "physical_bit_replacement": false,
+    "physical_waveform_execution": false,
+    "rank_certificates_are_runtime_outputs": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false,
+    "uniform_fixed_bond_exact_mps": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "both_split_roots_have_exact_order40": true,
+    "invalid_composite_modulus_rejected": true,
+    "invalid_nonsplit_prime_rejected": true,
+    "modular_nonzero_minor_implies_exact_nonzero_minor": true
+  },
+  "exact_rank_law": {
+    "analytic_dimensional_upper_bound": "SUM_OVER_SECTORS_MIN_PREFIX_PATHS_SUFFIX_PATHS",
+    "both_family_maximum_bond_ranks": [
+      2,
+      3,
+      6,
+      10,
+      20,
+      35,
+      70
+    ],
+    "every_declared_sector_reaches_upper_bound_at_both_split_primes": true,
+    "strands": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16
+    ],
+    "therefore_exact_qzeta40_rank_is_maximal": true,
+    "uniform_fixed_bond_exact_mps_rejected_for_declared_growing_family": true
+  },
+  "matched_classical_baselines": {
+    "computational_advantage": false,
+    "phase_specific_rank_reduction": false,
+    "strongest_compact": "IDENTICAL_EXACT_SECTOR_RANK_ANYON_MPS_AND_SMALLER_DIRECT_FUSION_PATH_RECURRENCE"
+  },
+  "resource_law": {
+    "accepted_transaction_retained_inverse_history": 0,
+    "excluded_not_zero": "MODULAR_VERIFICATION_PATH_LIST_PREFIX_SUFFIX_SETS_HASH_BYTE_TRAFFIC_TRANSIENT_PYTHON_OBJECTS_ALLOCATOR_INTERPRETER_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS",
+    "matched_compact_baseline": "IDENTICAL_EXACT_SECTOR_RANK_ANYON_MPS_AND_DIRECT_FUSION_PATH_RECURRENCES",
+    "primary_canonical_dense_sector_mps_field_cells": 4110,
+    "primary_canonical_mps_over_direct_cell_ratio": "4110/1430",
+    "primary_direct_fusion_path_field_cells": 1430,
+    "primary_direct_fusion_path_payload_bits": 256269,
+    "primary_maximum_exact_bond_rank": 70,
+    "primary_peak_modular_matrix_cells": 1430,
+    "primary_verification_path_label_cells": 24310,
+    "primary_verification_path_records": 1430,
+    "rank_certification_is_verification_instrument_not_accepted_runtime_output": true
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_EXACT_SU2_LEVEL8_FUSION_PATH_MAXIMAL_SECTOR_SCHMIDT_RANK_NO_FIXED_BOND_MPS",
+  "schema": "cat_cas.su2_level8_fusion_path_mps_rank_no_go.v1",
+  "source_dependencies": {
+    "m214_production_sha256": "bc54076303fd12d57d9b57974832d451da603e123ea550f2312f81ad67bd9b11"
+  },
+  "terminal": false,
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restored_reuse_boundary_agreement": true,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse_boundary_commitment": "f6c6550355cbc0b11afcd99fe869153e487aac37dc136255f57185f82891e199",
+    "fresh_reuse_state_commitment": "d7f3218e040d23ee8f4817426ab6ede56be7fbda1db3615d0dacbe39632dc909",
+    "primary_boundary_commitment": "ff38debbe990ce551d2292914c8be41afec921757e521742fdbd5b6bdca63447",
+    "primary_canonical_post_restoration_state_exact": true,
+    "primary_forward_state_commitment": "6f228996bd6885bbf4b9bc1719e5168d48cb1ba2a8d686bd38d607e8d7b4127a",
+    "primary_full_transaction_work": {
+      "boundary_commitment_hashes": 1,
+      "field_additions": 263120,
+      "field_multiplications": 812240,
+      "forward_operations": 120,
+      "inverse_operations": 120,
+      "paired_local_blocks": 80080,
+      "path_labels_rematerialized": 7195777,
+      "path_rank_calls": 80081,
+      "path_unrank_calls": 343200,
+      "peak_carrier_field_cells": 1430,
+      "peak_carrier_payload_bits": 256269,
+      "peak_local_field_scratch_cells": 8,
+      "peak_nonzero_carrier_field_cells": 1430,
+      "peak_streamed_path_label_cells": 34,
+      "port_leases": 1,
+      "port_releases": 1,
+      "public_descriptor_hashes": 486,
+      "public_descriptor_integers_hashed": 37908,
+      "scalar_local_blocks": 22880,
+      "state_commitment_field_cells_hashed": 1430,
+      "state_commitment_hashes": 1,
+      "topology_count_reads": 7877584,
+      "zero_temperley_lieb_blocks": 160160
+    },
+    "primary_restoration_error_field_cells": 0,
+    "primary_same_coefficient_backing": true,
+    "restoration_generation_after_reuse": 2,
+    "reuse_boundary_commitment": "f6c6550355cbc0b11afcd99fe869153e487aac37dc136255f57185f82891e199",
+    "reuse_canonical_post_restoration_state_exact": true,
+    "reuse_forward_state_commitment": "d7f3218e040d23ee8f4817426ab6ede56be7fbda1db3615d0dacbe39632dc909",
+    "reuse_full_transaction_work": {
+      "boundary_commitment_hashes": 1,
+      "field_additions": 263120,
+      "field_multiplications": 812240,
+      "forward_operations": 120,
+      "inverse_operations": 120,
+      "paired_local_blocks": 80080,
+      "path_labels_rematerialized": 7195777,
+      "path_rank_calls": 80081,
+      "path_unrank_calls": 343200,
+      "peak_carrier_field_cells": 1430,
+      "peak_carrier_payload_bits": 255069,
+      "peak_local_field_scratch_cells": 8,
+      "peak_nonzero_carrier_field_cells": 1430,
+      "peak_streamed_path_label_cells": 34,
+      "port_leases": 1,
+      "port_releases": 1,
+      "public_descriptor_hashes": 486,
+      "public_descriptor_integers_hashed": 37908,
+      "scalar_local_blocks": 22880,
+      "state_commitment_field_cells_hashed": 1430,
+      "state_commitment_hashes": 1,
+      "topology_count_reads": 7877584,
+      "zero_temperley_lieb_blocks": 160160
+    },
+    "reuse_restoration_error_field_cells": 0,
+    "reuse_same_coefficient_backing": true
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

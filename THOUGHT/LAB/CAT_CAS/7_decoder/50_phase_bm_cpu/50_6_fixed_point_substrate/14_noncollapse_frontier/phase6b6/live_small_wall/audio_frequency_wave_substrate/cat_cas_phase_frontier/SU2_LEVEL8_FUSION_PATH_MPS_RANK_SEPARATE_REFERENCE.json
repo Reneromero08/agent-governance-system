@@ -1,0 +1,585 @@
+{
+  "all_case_maximum_bond_ranks": [
+    2,
+    3,
+    6,
+    10,
+    20,
+    35,
+    70
+  ],
+  "both_reference_primes_exact_order40": true,
+  "cases": [
+    {
+      "canonical_dense_sector_mps_field_cells": 6,
+      "certificate_commitment": "87434eef9569b4b0ad0eeeddaa1862a1514d8c62bede022af6e6033a50393a98",
+      "cut_ranks": [
+        1,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 2,
+      "family": 0,
+      "maximum_bond_rank": 2,
+      "prime": 641,
+      "strands": 4
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 16,
+      "certificate_commitment": "8e7cd6dc55bfc92160266fc6c5d606cba83dba086e8f83473e6af6f121936ebd",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 5,
+      "family": 0,
+      "maximum_bond_rank": 3,
+      "prime": 641,
+      "strands": 6
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 44,
+      "certificate_commitment": "435a56f6a4e2804efbba2166ba7587a0b0a463977c0b32c3328554af5539cc90",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 14,
+      "family": 0,
+      "maximum_bond_rank": 6,
+      "prime": 641,
+      "strands": 8
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 128,
+      "certificate_commitment": "f8079e2d4a921611f32d370b3d30240fa934b3599b6708ed3020d278fee3ce83",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 42,
+      "family": 0,
+      "maximum_bond_rank": 10,
+      "prime": 641,
+      "strands": 10
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 392,
+      "certificate_commitment": "1a39281e8f99cc28a138debadc1ce7e389aa7c13f6bb33d45dd1c12dd7378aed",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 132,
+      "family": 0,
+      "maximum_bond_rank": 20,
+      "prime": 641,
+      "strands": 12
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "certificate_commitment": "1a830d8b1d414b09fd1372947d8a5292a4bce4e8f013d0958dc6c9b7c6ae625a",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 429,
+      "family": 0,
+      "maximum_bond_rank": 35,
+      "prime": 641,
+      "strands": 14
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "certificate_commitment": "6e65d5d6765ad232b18da58e202021042c499e9247096d31ebf3f76d965680c6",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        70,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 1430,
+      "family": 0,
+      "maximum_bond_rank": 70,
+      "prime": 641,
+      "strands": 16
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 6,
+      "certificate_commitment": "87434eef9569b4b0ad0eeeddaa1862a1514d8c62bede022af6e6033a50393a98",
+      "cut_ranks": [
+        1,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 2,
+      "family": 1,
+      "maximum_bond_rank": 2,
+      "prime": 641,
+      "strands": 4
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 16,
+      "certificate_commitment": "8e7cd6dc55bfc92160266fc6c5d606cba83dba086e8f83473e6af6f121936ebd",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 5,
+      "family": 1,
+      "maximum_bond_rank": 3,
+      "prime": 641,
+      "strands": 6
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 44,
+      "certificate_commitment": "435a56f6a4e2804efbba2166ba7587a0b0a463977c0b32c3328554af5539cc90",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 14,
+      "family": 1,
+      "maximum_bond_rank": 6,
+      "prime": 641,
+      "strands": 8
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 128,
+      "certificate_commitment": "f8079e2d4a921611f32d370b3d30240fa934b3599b6708ed3020d278fee3ce83",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 42,
+      "family": 1,
+      "maximum_bond_rank": 10,
+      "prime": 641,
+      "strands": 10
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 392,
+      "certificate_commitment": "1a39281e8f99cc28a138debadc1ce7e389aa7c13f6bb33d45dd1c12dd7378aed",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 132,
+      "family": 1,
+      "maximum_bond_rank": 20,
+      "prime": 641,
+      "strands": 12
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "certificate_commitment": "1a830d8b1d414b09fd1372947d8a5292a4bce4e8f013d0958dc6c9b7c6ae625a",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 429,
+      "family": 1,
+      "maximum_bond_rank": 35,
+      "prime": 641,
+      "strands": 14
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "certificate_commitment": "c23d2fbb31604d20b234131019265370f7a01196851fa4fda34c47d49f04772c",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        70,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 1430,
+      "family": 1,
+      "maximum_bond_rank": 70,
+      "prime": 641,
+      "strands": 16
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 6,
+      "certificate_commitment": "87434eef9569b4b0ad0eeeddaa1862a1514d8c62bede022af6e6033a50393a98",
+      "cut_ranks": [
+        1,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 2,
+      "family": 0,
+      "maximum_bond_rank": 2,
+      "prime": 881,
+      "strands": 4
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 16,
+      "certificate_commitment": "8e7cd6dc55bfc92160266fc6c5d606cba83dba086e8f83473e6af6f121936ebd",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 5,
+      "family": 0,
+      "maximum_bond_rank": 3,
+      "prime": 881,
+      "strands": 6
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 44,
+      "certificate_commitment": "435a56f6a4e2804efbba2166ba7587a0b0a463977c0b32c3328554af5539cc90",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 14,
+      "family": 0,
+      "maximum_bond_rank": 6,
+      "prime": 881,
+      "strands": 8
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 128,
+      "certificate_commitment": "f8079e2d4a921611f32d370b3d30240fa934b3599b6708ed3020d278fee3ce83",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 42,
+      "family": 0,
+      "maximum_bond_rank": 10,
+      "prime": 881,
+      "strands": 10
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 392,
+      "certificate_commitment": "1a39281e8f99cc28a138debadc1ce7e389aa7c13f6bb33d45dd1c12dd7378aed",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 132,
+      "family": 0,
+      "maximum_bond_rank": 20,
+      "prime": 881,
+      "strands": 12
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "certificate_commitment": "1a830d8b1d414b09fd1372947d8a5292a4bce4e8f013d0958dc6c9b7c6ae625a",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 429,
+      "family": 0,
+      "maximum_bond_rank": 35,
+      "prime": 881,
+      "strands": 14
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "certificate_commitment": "41dace87f40217b1b3680ee622659499f2af4a47d2e660f5dd40dbb798a30998",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        70,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 1430,
+      "family": 0,
+      "maximum_bond_rank": 70,
+      "prime": 881,
+      "strands": 16
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 6,
+      "certificate_commitment": "87434eef9569b4b0ad0eeeddaa1862a1514d8c62bede022af6e6033a50393a98",
+      "cut_ranks": [
+        1,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 2,
+      "family": 1,
+      "maximum_bond_rank": 2,
+      "prime": 881,
+      "strands": 4
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 16,
+      "certificate_commitment": "8e7cd6dc55bfc92160266fc6c5d606cba83dba086e8f83473e6af6f121936ebd",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 5,
+      "family": 1,
+      "maximum_bond_rank": 3,
+      "prime": 881,
+      "strands": 6
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 44,
+      "certificate_commitment": "435a56f6a4e2804efbba2166ba7587a0b0a463977c0b32c3328554af5539cc90",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 14,
+      "family": 1,
+      "maximum_bond_rank": 6,
+      "prime": 881,
+      "strands": 8
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 128,
+      "certificate_commitment": "f8079e2d4a921611f32d370b3d30240fa934b3599b6708ed3020d278fee3ce83",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 42,
+      "family": 1,
+      "maximum_bond_rank": 10,
+      "prime": 881,
+      "strands": 10
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 392,
+      "certificate_commitment": "1a39281e8f99cc28a138debadc1ce7e389aa7c13f6bb33d45dd1c12dd7378aed",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 132,
+      "family": 1,
+      "maximum_bond_rank": 20,
+      "prime": 881,
+      "strands": 12
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 1250,
+      "certificate_commitment": "1a830d8b1d414b09fd1372947d8a5292a4bce4e8f013d0958dc6c9b7c6ae625a",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 429,
+      "family": 1,
+      "maximum_bond_rank": 35,
+      "prime": 881,
+      "strands": 14
+    },
+    {
+      "canonical_dense_sector_mps_field_cells": 4110,
+      "certificate_commitment": "c23d2fbb31604d20b234131019265370f7a01196851fa4fda34c47d49f04772c",
+      "cut_ranks": [
+        1,
+        2,
+        3,
+        6,
+        10,
+        20,
+        35,
+        70,
+        35,
+        20,
+        10,
+        6,
+        3,
+        2,
+        1
+      ],
+      "direct_fusion_path_field_cells": 1430,
+      "family": 1,
+      "maximum_bond_rank": 70,
+      "prime": 881,
+      "strands": 16
+    }
+  ],
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "distinct_phase_resource_established": false,
+  "primary_canonical_dense_sector_mps_field_cells": 4110,
+  "primary_direct_fusion_path_field_cells": 1430,
+  "reference_algorithm": "INCREMENTAL_MODULAR_COLUMN_BASIS_AT_DISTINCT_SPLIT_PRIMES641_881",
+  "reference_imports_m215_production": false,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "cat_cas.su2_level8_fusion_path_mps_rank_separate_reference.v1",
+  "terminal": false,
+  "uniform_fixed_bond_exact_mps_rejected": true,
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
