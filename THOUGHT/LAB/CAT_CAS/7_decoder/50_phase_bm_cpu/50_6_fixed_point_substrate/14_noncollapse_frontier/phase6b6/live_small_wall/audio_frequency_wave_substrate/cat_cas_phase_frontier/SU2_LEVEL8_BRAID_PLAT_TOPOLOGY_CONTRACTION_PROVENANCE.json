@@ -1,0 +1,75 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS",
+  "scientific_source_commit": "a48ef23e654b5753b0a462c6c58f86f41322bda8",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_FIXED_EIGHT_SWEEP_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_PLAT_BOUNDARY_MIN_FILL_PUBLIC_TOPOLOGY_CONTRACTION_PRIMARY16_REUSE_STRANDS12_ROUNDS5_FAMILY1_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {
+      "path": "su2_level8_braid_plat_topology_contraction.py",
+      "sha256": "df6f2e834a5bc9017038d0421c910c287abb2c47ef74d72b805d262225a61ea7"
+    },
+    "separate_reference": {
+      "path": "su2_level8_braid_plat_topology_contraction_separate_reference.py",
+      "sha256": "9f095ece88ac4ab1f825724c3b404e21d2597bb5473e9008c4928d4149c3981f"
+    },
+    "results": {
+      "path": "SU2_LEVEL8_BRAID_PLAT_TOPOLOGY_CONTRACTION_RESULTS.json",
+      "sha256": "b85e0727acbefb29eb4d02e97c5a948fafe24c8962a64e24903e690890377e01"
+    },
+    "separate_reference_results": {
+      "path": "SU2_LEVEL8_BRAID_PLAT_TOPOLOGY_CONTRACTION_SEPARATE_REFERENCE.json",
+      "sha256": "624145b4cfc87ccd91ec4c1771b4815e8c3b1b4012dbd6fd491ea1a3724bb805"
+    },
+    "review": {
+      "path": "SU2_LEVEL8_BRAID_PLAT_TOPOLOGY_CONTRACTION_SEPARATE_REFERENCE_REVIEW.md",
+      "sha256": "5fbf4a16ff034feaf2a66abfa24ff26cb090ad2fad0273da2382c9ace19c1145"
+    },
+    "qualifier": {
+      "path": "qualify_su2_level8_braid_plat_topology_contraction.sh",
+      "sha256": "38d47ad44a6dbc674611d04be2e517010b23221cfcf850dbbed1f44b47a1280d"
+    }
+  },
+  "separate_reconstruction": {
+    "imports_m216_production": false,
+    "production_schedule": "PUBLIC_TOPOLOGY_COMPILED_MIN_FILL",
+    "reference_schedule": "INDEPENDENT_FIXED_COLUMN_MAJOR_VARIABLE_ELIMINATION",
+    "underlying_m214_exact_field_and_public_braid_program_reused": true,
+    "all_14_case_exact_boundary_commitments_match": true
+  },
+  "resource_law": {
+    "executed_strands": [4, 6, 8, 10, 12, 14, 16],
+    "declared_families": [0, 1],
+    "fixed_eight_sweep_production_induced_widths": [3, 5, 9, 11, 11, 11, 11],
+    "primary_peak_live_exact_factor_cells": 771,
+    "primary_peak_live_exact_factor_payload_bits": 39127,
+    "primary_direct_fusion_path_field_cells": 1430,
+    "primary_direct_fusion_path_payload_bits": 256269,
+    "primary_retained_public_leaf_descriptors": 120,
+    "primary_retained_public_leaf_descriptor_integer_cells": 1292,
+    "primary_retained_public_support_assignment_records": 1114,
+    "primary_retained_public_support_label_integer_cells": 4314,
+    "primary_public_plan_records": 224,
+    "primary_public_plan_integer_cells": 1106,
+    "depth_profile_rounds": [1, 2, 4, 6, 8, 10, 12, 14, 16],
+    "depth_profile_induced_widths": [0, 1, 4, 8, 11, 15, 18, 21, 23],
+    "depth_profile_peak_support_factor_cells": [1, 2, 22, 24, 245, 934, 5716, 30138, 99390],
+    "accepted_retained_inverse_history": 0,
+    "matched_compact_baseline": "IDENTICAL_EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION"
+  },
+  "claim_limits": {
+    "asymptotic_fixed_width_at_eight_sweeps": false,
+    "fixed_separator_across_growing_sweep_depth": false,
+    "full_state_compaction": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`332cee1437201c9e88975ca70498fffb8e196f1e`. The registry assigns one
+`a48ef23e654b5753b0a462c6c58f86f41322bda8`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 215-milestone lane is active by user direction. Continue from the
+The current 216-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,28 +53,30 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS
+EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_FIXED_EIGHT_SWEEP_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_PLAT_BOUNDARY_MIN_FILL_PUBLIC_TOPOLOGY_CONTRACTION_PRIMARY16_REUSE_STRANDS12_ROUNDS5_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Two public
-eight-sweep `SU(2)_8` braid families have exact maximal sector Schmidt bond
-ranks `2,3,6,10,20,35,70` from four through sixteen strands. Production uses
-split primes 241 and 401; a separate algorithm at split primes 641 and 881
-reproduces every cut rank and canonical sector-MPS allocation. At sixteen
-strands that canonical MPS uses 4,110 exact field cells versus 1,430 for the
-direct path carrier. This rejects uniform fixed-bond exact MPS only for the
-declared growing families and is not a lower bound against every exact
-representation. Exact same-backing restoration and unrelated reuse pass. No
-CATVM custody, distinct phase resource, advantage, Small Wall crossing,
-physical execution, physical-bit replacement, catalytic inference, or
-unbounded computation is established.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Public-topology
+sparse factor elimination reproduces all 14 exact vacuum plat boundaries for
+two eight-sweep `SU(2)_8` braid families across four through sixteen strands.
+The primary exact-factor peak is 771 cells versus 1,430 for the direct path
+vector, but retained public support and plan costs are material and the
+identical classical factor elimination has the same law. At sixteen strands,
+induced width grows from 0 to 23 across sweep depths one through sixteen, so
+the fixed-depth result is not a growing-depth compactness result. Exact
+same-backing restoration and unrelated reuse pass. No CATVM custody, distinct
+phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference, or unbounded computation is
+established. Resume only from the selected public period-10 sweep-monodromy
+boundary-recurrence experiment in the roadmap; do not add larger fixed-depth
+factor-grid fixtures.
 
 The accumulated bounded architecture includes:
 

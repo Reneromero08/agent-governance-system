@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`93fec0c0c4b1040b04a5a19365ff276bf074fb86`. The canonical per-milestone
+`a48ef23e654b5753b0a462c6c58f86f41322bda8`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11513,3 +11513,50 @@ for the selected final boundary, and whether any fixed-width result survives
 growth in sweep depth. It must count live separator state, exact coefficient
 width, rematerialization, restoration and reuse against the identical
 classical tensor-network contraction.
+
+## M216 exact SU(2)_8 braid-plat boundary topology contraction
+
+The separately reconstructed strict-scope claim is:
+
+```text
+EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS
+```
+
+Production compiles sparse local braid factors and a min-fill schedule using
+only public spacetime topology and structural admissibility. It reproduces the
+M214 exact vacuum boundary for both public families at every even strand count
+from 4 through 16 without materializing the complete final path vector. A
+separate implementation imports no M216 production code, reconstructs the
+factors independently, and uses a fixed column-major schedule. All 14 exact
+boundary commitments agree.
+
+At the 16-strand family-0 primary, production peaks at 771 live exact factor
+cells and 39,127 exact payload bits, versus 1,430 cells and 256,269 bits for
+the full-vector reference. This is not a total-memory advantage. The public
+plan retains 120 leaf descriptors, 1,292 descriptor integers, 1,114 support
+assignments containing 4,314 labels, and 224 operation records containing
+1,106 integers. The identical classical sparse elimination remains the
+strongest compact comparator.
+
+Only the completed scalar crosses the boundary. The inverse rematerializes
+the public contraction, restores the actual one-cell accumulator exactly, and
+the same backing runs an unrelated 12-strand, five-sweep program at generation
+two without reload. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
+at `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The bounded fixed-eight-sweep induced widths are `3,5,9,11,11,11,11` from
+four through sixteen strands. At sixteen strands, increasing sweep depth from
+1 to 16 raises width from 0 to 23 and the largest structural support from 1 to
+99,390 assignments. No asymptotic fixed-width result, full-state compaction,
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation is established.
+
+Next:
+
+```text
+EXACT_SU2_LEVEL8_PERIOD10_PUBLIC_SWEEP_MONODROMY_FINAL_BOUNDARY_KRYLOV_RECURRENCE_WITH_TOPOLOGY_REMATERIALIZED_COMPILATION_OR_GROWING_MINIMAL_DEGREE_ACROSS_STRANDS_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TRANSFER
+```
+
+This targets the measured sweep-depth obstruction using the public period-10
+word law and must not become another larger fixed-depth factor-grid fixture.

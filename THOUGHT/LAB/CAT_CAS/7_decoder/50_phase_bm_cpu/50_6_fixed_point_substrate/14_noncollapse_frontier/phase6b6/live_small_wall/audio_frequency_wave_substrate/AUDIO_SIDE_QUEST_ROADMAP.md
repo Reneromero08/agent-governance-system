@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_FUSION_PATH_MAXIMAL_SECTOR_SCHMIDT_RANK_NO_FIXED_BOND_MPS_AND_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_SUCCESSOR_SELECTED`
-**Roadmap version:** `14.81`
+**Status:** `STRICT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_SWEEP_DEPTH_SEPARATOR_GROWTH_OBSTRUCTION`
+**Roadmap version:** `14.82`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `332cee1437201c9e88975ca70498fffb8e196f1e`
+**Reconciled source head:** `a48ef23e654b5753b0a462c6c58f86f41322bda8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS`
-**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS`
+**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_FIXED_EIGHT_SWEEP_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_PLAT_BOUNDARY_MIN_FILL_PUBLIC_TOPOLOGY_CONTRACTION_PRIMARY16_REUSE_STRANDS12_ROUNDS5_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M215_EXACT_SECTOR_SCHMIDT_RANKS_REJECT_UNIFORM_FIXED_BOND_MPS_FOR_THE_DECLARED_SU2_LEVEL8_BRAID_FAMILIES`
+**New mechanism development:** `ACTIVE_AFTER_M216_EXACT_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_SUCCEEDS_AT_FIXED_EIGHT_SWEEPS_BUT_SEPARATOR_WIDTH_GROWS_WITH_SWEEP_DEPTH`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_BRAID_PLAT_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_REVERSIBLE_CUT_REMATERIALIZATION_OR_SEPARATOR_WIDTH_GROWTH_ACROSS_STRANDS_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TENSOR_NETWORK`
+**Active primary successor:** `EXACT_SU2_LEVEL8_PERIOD10_PUBLIC_SWEEP_MONODROMY_FINAL_BOUNDARY_KRYLOV_RECURRENCE_WITH_TOPOLOGY_REMATERIALIZED_COMPILATION_OR_GROWING_MINIMAL_DEGREE_ACROSS_STRANDS_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TRANSFER`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS
+EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS
 ```
 
 Not established:
@@ -10268,6 +10268,76 @@ braid topology, count exact live cut state and rematerialization, preserve
 restoration and reuse, and compare against the identical best classical tensor
 network. Fixed eight-sweep structure is a declared ceiling; growth in sweep
 depth must be measured before any compactness wording is promoted.
+
+## M216: exact braid-plat boundary contraction exposes sweep-depth width
+
+Claim:
+
+```text
+EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS
+```
+
+M216 attacks only the declared vacuum plat boundary. Each local braid gate is
+compiled into a sparse spacetime factor over unresolved `A_9` fusion labels.
+Production derives a min-fill elimination order and all structural supports
+from public topology and admissibility without inspecting exact coefficients
+or the answer. Across both public eight-sweep families and strand counts
+`4,6,8,10,12,14,16`, every exact `Q(zeta_40)` boundary agrees with the M214
+full fusion-path recurrence.
+
+A separate no-M216-import implementation independently reconstructs the local
+factors and uses fixed column-major elimination. It reproduces all 14 exact
+boundary commitments. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
+at `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The primary 16-strand family-0 contraction peaks at 771 live exact factor
+cells carrying 39,127 payload bits, versus 1,430 field cells and 256,269 bits
+for the full-vector verification recurrence. Those numbers are not a total
+memory advantage: the accepted path also retains 120 public leaf descriptors,
+1,292 descriptor integers, 1,114 structural-support assignment records with
+4,314 label integers, and 224 plan records with 1,106 integers. Compilation
+peaks at 1,114 live support assignments with 5,416 label integers. Python
+container, hash-table, allocator, interpreter, serialization, timing and
+whole-process peaks remain excluded, not zero.
+
+Forward execution adds the rematerialized exact boundary to the actual
+one-cell accumulator and projects only that completed boundary. Inverse
+execution rematerializes the same public contraction and subtracts it exactly.
+The same backing reaches canonical zero and is reused for a different
+12-strand, five-sweep family-1 program at restoration generation two without
+a snapshot.
+
+The fixed-eight-sweep bounded sequence has induced widths
+`3,5,9,11,11,11,11`; this is not an asymptotic fixed-width theorem. At 16
+strands, depths `1,2,4,6,8,10,12,14,16` have induced widths
+`0,1,4,8,11,15,18,21,23`, while the largest structural support grows from 1
+to 99,390 assignments. Fixed-depth compactness therefore does not transfer to
+growing sweep depth.
+
+Exact ceiling:
+
+```text
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_FIXED_EIGHT_SWEEP_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_PLAT_BOUNDARY_MIN_FILL_PUBLIC_TOPOLOGY_CONTRACTION_PRIMARY16_REUSE_STRANDS12_ROUNDS5_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+The strongest compact classical comparator is the identical sparse factor
+elimination, with the direct fusion-path recurrence as a second exact
+reference. No asymptotic fixed-width result, full-state compaction, CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, catalytic inference, or unbounded
+computation is established.
+
+Selected successor:
+
+```text
+EXACT_SU2_LEVEL8_PERIOD10_PUBLIC_SWEEP_MONODROMY_FINAL_BOUNDARY_KRYLOV_RECURRENCE_WITH_TOPOLOGY_REMATERIALIZED_COMPILATION_OR_GROWING_MINIMAL_DEGREE_ACROSS_STRANDS_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TRANSFER
+```
+
+This attacks M216's sweep-depth separator growth rather than adding a larger
+fixed-depth factor grid. It must exploit only the public period-10 braid-word
+law, count recurrence compilation and exact coefficient height, test whether
+minimal boundary degree grows across strands, preserve exact restoration and
+reuse, and retain the identical classical transfer/Krylov baseline.
 
 ## 10. Roadmap Maintenance
 
