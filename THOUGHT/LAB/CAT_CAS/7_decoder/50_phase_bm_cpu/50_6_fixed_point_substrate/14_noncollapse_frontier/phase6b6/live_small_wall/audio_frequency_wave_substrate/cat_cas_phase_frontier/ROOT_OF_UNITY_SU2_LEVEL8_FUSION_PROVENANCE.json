@@ -1,0 +1,96 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_ROOT_OF_UNITY_SU2_LEVEL8_JONES_WENZL_FUSION_PHASE_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_CASIMIR_TWIST_AND_TRUNCATED_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_IN_FIXED9_QZETA40_CELLS_WITH_FINAL_ONLY_QUANTUM_DIMENSION_BOUNDARY_EXACT_PIVOT_REMATERIALIZED_RESTORATION_REUSE_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_FUSION_CLASSICAL_RECURRENCE_REMAINS",
+  "scientific_source_commit": "d3f86603c1b01c4d179732404752bc658f0f9436",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_SU2_LEVEL8_VERLINDE_FUSION_ALGEBRA_QZETA40_JONES_WENZL_X9_ZERO_TWO_TWIST_POWERS_TWO_UNIT_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_64_128_PRIMARY128_REUSE73_QUANTUM_DIMENSION_BOUNDARY_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {
+      "path": "root_of_unity_su2_level8_fusion_phase_relation.py",
+      "sha256": "313516690299f770e4294d0b144396fcfb9ccdefdabd4215cc7ab5916e905acc"
+    },
+    "independent_oracle": {
+      "path": "root_of_unity_su2_level8_fusion_independent_oracle.py",
+      "sha256": "3f18c1e3df31b7a3eb6e4240cb4c407d707206a361d156002c2cad3e32e2eaf3"
+    },
+    "results": {
+      "path": "ROOT_OF_UNITY_SU2_LEVEL8_FUSION_PHASE_RELATION_RESULTS.json",
+      "sha256": "d297bcc80696668f8361acd19916d4d2182feb0f7a613e795503b10b3a814bd5"
+    },
+    "independent_oracle_results": {
+      "path": "ROOT_OF_UNITY_SU2_LEVEL8_FUSION_INDEPENDENT_ORACLE.json",
+      "sha256": "4432568c7e63c42a50c60a38c5d1a1043efac50f4fdb9e425648b4253b2f0b49"
+    },
+    "review": {
+      "path": "ROOT_OF_UNITY_SU2_LEVEL8_FUSION_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "df96874e6a65420abbbd9bae9d75268b53f94d7a6a8cbaf1ae9b8bff7ee6447d"
+    },
+    "qualifier": {
+      "path": "qualify_root_of_unity_su2_level8_fusion.sh",
+      "sha256": "e71bca141198c864901a4a0e9d5562bba59fcaaee8d17c28beb1c23b522ed589"
+    }
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "algorithms": [
+      "ORDINARY_POLYNOMIAL_QUOTIENT_MODULO_U9_X_OVER_2",
+      "FUSION_FACTOR_INVERSION_BY_POLYNOMIAL_EXTENDED_EUCLID",
+      "QZETA40_FIELD_INVERSION_BY_INDEPENDENT_16_BY_16_RATIONAL_SOLVE",
+      "QUANTUM_DIMENSION_BOUNDARY_BY_POLYNOMIAL_EVALUATION_AT_ZETA40_SQUARED_PLUS_INVERSE"
+    ],
+    "all_declared_state_boundary_support_and_payload_commitments_match": true,
+    "jones_wenzl_u9_relation_verified": true,
+    "both_fusion_inverses_verified": true,
+    "same_backing_restoration": true,
+    "fresh_restored_reuse_agreement": true
+  },
+  "controls": [
+    "WRONG_OWNER",
+    "WRONG_OPERATION_TYPE",
+    "PREMATURE_PROJECTION",
+    "MISSING_INVERSE",
+    "REORDERED_INVERSE",
+    "NULL_CARRIER",
+    "WRONG_INVERSE_FUSION_FACTOR",
+    "MODULE_NONCOMMUTATION",
+    "SEMANTIC_FUSION_PERTURBATION",
+    "SNAPSHOT_COMMAND_UNAVAILABLE"
+  ],
+  "resource_law": {
+    "primary_depth": 128,
+    "logical_carrier_cells": 9,
+    "pivot_scratch_cells": 9,
+    "initial_carrier_payload_bits": 290,
+    "primary_forward_carrier_payload_bits": 15330,
+    "primary_forward_max_numerator_bits": 108,
+    "primary_boundary_payload_bits": 1761,
+    "primary_peak_carrier_payload_bits": 18083,
+    "primary_peak_pivot_scratch_payload_bits": 1593,
+    "primary_combined_peak_payload_bits": 19674,
+    "primary_inverse_pivot_cells_materialized": 1152,
+    "primary_inverse_pivot_cells_uncomputed": 1152,
+    "primary_high_level_field_inversions": 4224,
+    "primary_public_descriptor_integers": 2,
+    "primary_materialized_operation_records": 0,
+    "primary_generated_operation_visits": 512,
+    "retained_inverse_history": 0,
+    "additional_retained_plan": 0,
+    "matched_compact_baseline": "IDENTICAL_EXACT_NINE_COORDINATE_QZETA40_FUSION_TWIST_RECURRENCE",
+    "excluded_not_zero": "PUBLIC_INDEX_ARITHMETIC_RATIONAL_SCALAR_SUBOPERATIONS_TRANSIENT_PYTHON_OBJECTS_ALLOCATOR_INTERPRETER_HASH_BYTE_TRAFFIC_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS"
+  },
+  "claim_limits": {
+    "lossless_encoding_of_general_continuous_su2": false,
+    "fixed_logical_support_for_declared_su2_level8_category": true,
+    "bounded_exact_coefficient_width": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}

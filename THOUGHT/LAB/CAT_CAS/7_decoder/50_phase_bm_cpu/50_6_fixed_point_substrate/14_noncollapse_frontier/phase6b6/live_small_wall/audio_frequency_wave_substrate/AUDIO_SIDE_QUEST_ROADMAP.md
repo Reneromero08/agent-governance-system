@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CONTINUOUS_SU2_NONABELIAN_RELATION_CLOSURE_WITH_LINEAR_SUPPORT_AND_WIDTH_GROWTH_AND_ROOT_OF_UNITY_FUSION_QUOTIENT_SUCCESSOR_SELECTED`
-**Roadmap version:** `14.78`
+**Status:** `STRICT_SU2_LEVEL8_FIXED_LOCAL_FUSION_SUPPORT_WITH_GROWING_EXACT_WIDTH_AND_FUSION_PATH_BRAID_SUCCESSOR_SELECTED`
+**Roadmap version:** `14.79`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `93fec0c0c4b1040b04a5a19365ff276bf074fb86`
+**Reconciled source head:** `d3f86603c1b01c4d179732404752bc658f0f9436`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_CONTINUOUS_SU2_TRANSLATION_INVARIANT_CENTRAL_OPEN_PHASE_RELATION_CHARACTER_CARRIER_COMPOSES_BY_CASIMIR_SPECTRAL_PHASE_AND_INTERSECTS_BY_CLEBSCH_GORDAN_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_HIGHEST_WEIGHT_SUPPORT_GROWS_FROM3TO34_CELLS_ACROSS_DEPTH1TO32_AND_THE_IDENTICAL_CHARACTER_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_FINITE_CHARACTER_POLYNOMIAL_CONTINUOUS_SU2_CENTRAL_TRANSLATION_INVARIANT_KERNELS_TWO_GAUSSIAN_RATIONAL_CASIMIR_PHASES_TWO_FUNDAMENTAL_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_PRIMARY32_REUSE19_IDENTITY_BOUNDARY_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_ROOT_OF_UNITY_SU2_LEVEL8_JONES_WENZL_FUSION_PHASE_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_CASIMIR_TWIST_AND_TRUNCATED_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_IN_FIXED9_QZETA40_CELLS_WITH_FINAL_ONLY_QUANTUM_DIMENSION_BOUNDARY_EXACT_PIVOT_REMATERIALIZED_RESTORATION_REUSE_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_FUSION_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_SU2_LEVEL8_VERLINDE_FUSION_ALGEBRA_QZETA40_JONES_WENZL_X9_ZERO_TWO_TWIST_POWERS_TWO_UNIT_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_64_128_PRIMARY128_REUSE73_QUANTUM_DIMENSION_BOUNDARY_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M212_CONTINUOUS_SU2_ESTABLISHES_NONABELIAN_CHARACTER_RELATION_COMPOSITION_BUT_SUPPORT_AND_EXACT_WIDTH_GROW_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
+**New mechanism development:** `ACTIVE_AFTER_M213_SU2_LEVEL8_FIXES_LOCAL_FUSION_SUPPORT_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ROOT_OF_UNITY_SU2_LEVEL8_MODULAR_FUSION_PHASE_RELATION_QUOTIENT_WITH_JONES_WENZL_TRUNCATED_FUNDAMENTAL_FUSION_AND_NONCOMMUTING_CASIMIR_TWIST_ON_ONE_SHARED_UNRESOLVED_PORT_FIXED9_SUPPORT_OR_COEFFICIENT_HEIGHT_GROWTH_EXACT_RESTORATION_REUSE_AND_MATCHED_FUSION_RECURRENCE`
+**Active primary successor:** `EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_FUSION_PATH_SHARED_INTERNAL_CHANNEL_PHASE_CARRIER_WITH_NONCOMMUTING_BRAID_GENERATORS_FIXED_LOCAL_NINE_OBJECT_ALPHABET_OR_GLOBAL_PATH_WIDTH_GROWTH_FINAL_ONLY_JONES_TRACE_EXACT_RESTORATION_REUSE_AND_MATCHED_PATH_TENSOR_NETWORK_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -10076,6 +10076,72 @@ the unbounded highest-weight representation ring by the lawful root-of-unity
 `SU(2)_8` fusion quotient, then test whether fixed nine-object support survives
 in exact material accounting or merely transfers growth into coefficient
 height and inverse work.
+
+## M213: root-of-unity SU(2)_8 fusion quotient fixes local support, not exact width
+
+Claim:
+
+```text
+EXACT_ROOT_OF_UNITY_SU2_LEVEL8_JONES_WENZL_FUSION_PHASE_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_CASIMIR_TWIST_AND_TRUNCATED_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_IN_FIXED9_QZETA40_CELLS_WITH_FINAL_ONLY_QUANTUM_DIMENSION_BOUNDARY_EXACT_PIVOT_REMATERIALIZED_RESTORATION_REUSE_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_FUSION_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M213 replaces the unbounded continuous-`SU(2)` representation ring with the
+lawful root-of-unity `SU(2)_8` Verlinde algebra over exact
+`Q(zeta_40)`. The Jones-Wenzl relation `X_9=0` closes the fundamental fusion
+law on nine simple-object coordinates. Public Casimir twists and truncated
+fundamental fusion are noncommuting and consume one owner-typed unresolved
+port. A two-integer public descriptor generates the word by index, so no
+depth-sized operation list or inverse history is retained.
+
+The production carrier uses nine field cells and a nine-cell inverse pivot
+scratch. Reverse fusion rematerializes the tridiagonal pivots on the actual
+scratch, solves on the actual carrier, and reverse-uncomputes every pivot to
+zero. Only the final quantum-dimension scalar is projected. The same carrier
+and scratch backings restore algebraically, and unrelated depth-73 reuse
+agrees with fresh execution at generation two without a snapshot.
+
+Logical support is fixed at nine cells for the declared category, but exact
+material width is not. The depth-128 primary forward carrier holds 15,330
+payload bits with 108-bit maximum numerators; the final scalar holds 1,761
+bits, and the carrier-plus-pivot lifecycle peak is 19,674 bits. The inverse
+materializes and uncomputes 1,152 pivot cells and performs 4,224 high-level
+field inversions.
+
+An independent no-production-import ordinary-polynomial oracle works modulo
+`U_9(x/2)`, constructs fusion inverses with polynomial extended Euclid,
+performs field inversion through an independent 16-by-16 rational solve, and
+evaluates the final boundary at `zeta_40^2+zeta_40^-2`. It verifies the
+Jones-Wenzl relation, both fusion inverses, every declared state, boundary,
+support and payload tuple, restoration, and reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_SU2_LEVEL8_VERLINDE_FUSION_ALGEBRA_QZETA40_JONES_WENZL_X9_ZERO_TWO_TWIST_POWERS_TWO_UNIT_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_64_128_PRIMARY128_REUSE73_QUANTUM_DIMENSION_BOUNDARY_DIRECT_PROCESS_ONLY
+```
+
+This is a changed fusion algebra, not a lossless nine-cell encoding of general
+continuous `SU(2)`. Its strongest compact classical baseline is the identical
+nine-coordinate exact fusion/twist recurrence. It does not establish CATVM
+custody, bounded coefficient width, a distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_FUSION_PATH_SHARED_INTERNAL_CHANNEL_PHASE_CARRIER_WITH_NONCOMMUTING_BRAID_GENERATORS_FIXED_LOCAL_NINE_OBJECT_ALPHABET_OR_GLOBAL_PATH_WIDTH_GROWTH_FINAL_ONLY_JONES_TRACE_EXACT_RESTORATION_REUSE_AND_MATCHED_PATH_TENSOR_NETWORK_RECURRENCE
+```
+
+This changes the phase machine from one fixed nine-coordinate fusion vector
+to growing non-Abelian fusion-tree geometry. It tests whether the fixed local
+simple-object alphabet survives multiple noncommuting braid consumers on
+unresolved internal channels or merely moves growth into global fusion-path
+width and exact coefficient height. The comparison must retain the strongest
+matched anyon path/tensor-network recurrence and must not treat a fixed local
+alphabet as fixed global machine state.
 
 ## 10. Roadmap Maintenance
 

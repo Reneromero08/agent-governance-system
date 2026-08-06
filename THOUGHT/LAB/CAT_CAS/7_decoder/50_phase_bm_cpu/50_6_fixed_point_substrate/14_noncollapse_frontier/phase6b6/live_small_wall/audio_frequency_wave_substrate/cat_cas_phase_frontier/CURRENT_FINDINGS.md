@@ -11367,3 +11367,51 @@ This tests the lawful root-of-unity fusion quotient as a direct repair of the
 measured continuous-`SU(2)` support law. It must count exact coefficient
 height and inverse material rather than treating nine logical simple objects
 as sufficient evidence of compact state.
+
+## M213 root-of-unity SU(2)_8 fusion quotient and exact-width obstruction
+
+The independently reexecuted claim is:
+
+```text
+EXACT_ROOT_OF_UNITY_SU2_LEVEL8_JONES_WENZL_FUSION_PHASE_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_CASIMIR_TWIST_AND_TRUNCATED_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_IN_FIXED9_QZETA40_CELLS_WITH_FINAL_ONLY_QUANTUM_DIMENSION_BOUNDARY_EXACT_PIVOT_REMATERIALIZED_RESTORATION_REUSE_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_FUSION_CLASSICAL_RECURRENCE_REMAINS
+```
+
+The exact `SU(2)_8` Verlinde algebra over `Q(zeta_40)` imposes the
+Jones-Wenzl relation `X_9=0`. Truncated fundamental fusion and public Casimir
+twist therefore close on nine simple-object coordinates and do not commute.
+One owner-typed port remains unresolved until the final quantum-dimension
+scalar projection. A two-integer public descriptor generates both the
+forward and reverse word by index without a retained operation list.
+
+The actual nine-cell carrier and nine-cell pivot scratch restore exactly.
+Inverse fusion rematerializes 1,152 tridiagonal pivot cells at primary depth
+128 and reverse-uncomputes all 1,152. Restored depth-73 reuse agrees with a
+fresh carrier at generation two with identical backing identities and no
+snapshot or retained inverse history.
+
+The local logical alphabet is fixed, but exact width grows. At depth 128 the
+forward carrier carries 15,330 payload bits with 108-bit maximum numerators;
+the final boundary carries 1,761 bits, and the carrier-plus-pivot lifecycle
+peak is 19,674 bits. An independent ordinary-polynomial quotient oracle uses
+`U_9(x/2)`, polynomial extended Euclid, an independent rational linear solve
+for `Q(zeta_40)` inverses, and direct quantum-dimension evaluation. It matches
+all declared states, boundaries, support and payload tuples, restoration and
+reuse.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+`SU(2)_8` is a changed algebra rather than a lossless encoding of continuous
+`SU(2)`, and its identical nine-coordinate classical fusion/twist recurrence
+remains. No CATVM custody, bounded exact width, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_FUSION_PATH_SHARED_INTERNAL_CHANNEL_PHASE_CARRIER_WITH_NONCOMMUTING_BRAID_GENERATORS_FIXED_LOCAL_NINE_OBJECT_ALPHABET_OR_GLOBAL_PATH_WIDTH_GROWTH_FINAL_ONLY_JONES_TRACE_EXACT_RESTORATION_REUSE_AND_MATCHED_PATH_TENSOR_NETWORK_RECURRENCE
+```
+
+This tests whether fixed local fusion support remains globally compact under
+noncommuting braid/associator geometry, or whether the obstruction becomes
+growing fusion-path width with an identical classical tensor-network path.
