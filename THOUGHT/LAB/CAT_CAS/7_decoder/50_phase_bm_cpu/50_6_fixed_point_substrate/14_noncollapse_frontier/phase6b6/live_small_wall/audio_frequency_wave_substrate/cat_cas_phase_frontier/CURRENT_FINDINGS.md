@@ -11468,3 +11468,48 @@ EXACT_SU2_LEVEL8_FUSION_PATH_SECTOR_SCHMIDT_RANK_AND_NATIVE_MPS_BRAID_CLOSURE_DI
 This tests exact sector-resolved tensor factorization as the smallest repair
 of the measured global path width, with bond state and reversible
 factorization costs counted against the identical classical anyon MPS path.
+
+## M215 exact SU(2)_8 fusion-sector MPS rank obstruction
+
+The separately reconstructed strict-scope claim is:
+
+```text
+EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS
+```
+
+For both declared public eight-sweep families, exact fusion-sector
+flattenings reach maximal bond ranks `2,3,6,10,20,35,70` at strand counts
+`4,6,8,10,12,14,16`. Production certifies the ranks at split primes
+`241,401`; a separate incremental column-basis implementation at split primes
+`641,881` reproduces every cut rank and canonical allocation. Nonzero reduced
+minors with invertible denominators prove the corresponding exact
+`Q(zeta_40)` minors are nonzero, while the sector dimensions provide the
+matching upper bounds.
+
+The canonical dense sector-block MPS uses 4,110 exact field cells at 16
+strands, versus 1,430 for the direct fusion-path carrier. This rejects a
+uniform fixed-bond exact MPS for these two growing families. It is not a lower
+bound against every exact representation. The verification-only path list,
+prefix/suffix sets and modular matrices are counted but do not enter the
+accepted final-boundary transaction.
+
+The actual M214 carrier backing restores exactly and runs the unrelated second
+family at restoration generation two without reload. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The identical exact anyon MPS analysis and the
+smaller direct path recurrence remain the strongest classical baselines. No
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation is established.
+
+Next:
+
+```text
+EXACT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_BRAID_PLAT_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_REVERSIBLE_CUT_REMATERIALIZATION_OR_SEPARATOR_WIDTH_GROWTH_ACROSS_STRANDS_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TENSOR_NETWORK
+```
+
+This tests whether public-topology contraction can avoid the complete carrier
+for the selected final boundary, and whether any fixed-width result survives
+growth in sweep depth. It must count live separator state, exact coefficient
+width, rematerialization, restoration and reuse against the identical
+classical tensor-network contraction.

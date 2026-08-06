@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`3e93bda7ca071d27e0541b9dbb974eea7698a1ca`. The registry assigns one
+`332cee1437201c9e88975ca70498fffb8e196f1e`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 210-milestone lane is active by user direction. Continue from the
+The current 215-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,28 +53,28 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_F103_ROTOR6_DYNAMIC_CONJUGATED_DIHEDRAL_FRAME_CARRIES2277_COEFFICIENTS_THROUGH577_PUBLIC_FOURIER_BASIS_STEPS_WITH_FOUR_DESCRIPTOR_INTEGERS_NO_OCCUPATION_DENSE_KERNEL_PERMANENT_OR_RETAINED_PLAN_AND_EXACT_RESTORATION_REUSE_BUT_THE_POSITION_DIAGONAL_CONJUGATE_IS_EXACTLY_M204_RETAINS5697720_SEARCHES_5534928_FANOUT_AND_AN_IDENTICAL_CLASSICAL_FRAME_RECURRENCE
+EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS
 ```
 
 Claim ceiling:
 
 ```text
-GRID17_EXCHANGE_SYMMETRIC_ROTATION_REFLECTION_INVARIANT_ROTOR6_F103_ROOT72_DEPTH1_PRIMARY_REUSE_DIRECT_PROCESS_PUBLIC_ENDPOINT_FRAME_DESCRIPTOR_AND_M204_CONJUGATE_ONLY
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
-This current result is `INDEPENDENTLY_VERIFIED_SOURCE_LOCAL` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. A
-four-integer basis-frame descriptor traverses the public 577-step Fourier
-endpoint while the 2,277 coefficient values remain unchanged. The physical
-position-phase diagonal is not coefficientwise in that frame; its exact
-conjugate is M204 and retains 5,697,720 sorted searches and 5,534,928 fanout
-candidates. A separate no-production-import Rotor-2 oracle proves the complete
-conjugation identity, while Rotor-6 parity remains source-local against M204.
-Exact same-backing restoration and unrelated reuse pass. M200 atomic CATVM
-custody remains a separate predecessor result. The rotor route is closed at
-this tested ceiling. No distinct phase resource, advantage, Small Wall
-crossing, physical execution, physical-bit replacement, or unbounded
-computation is established.
+This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Two public
+eight-sweep `SU(2)_8` braid families have exact maximal sector Schmidt bond
+ranks `2,3,6,10,20,35,70` from four through sixteen strands. Production uses
+split primes 241 and 401; a separate algorithm at split primes 641 and 881
+reproduces every cut rank and canonical sector-MPS allocation. At sixteen
+strands that canonical MPS uses 4,110 exact field cells versus 1,430 for the
+direct path carrier. This rejects uniform fixed-bond exact MPS only for the
+declared growing families and is not a lower bound against every exact
+representation. Exact same-backing restoration and unrelated reuse pass. No
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation is established.
 
 The accumulated bounded architecture includes:
 
@@ -268,7 +268,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M210_GENERIC_CENTER_MOMENT_CHART_CLOSES_BOUNDED_QJETS_BUT_MOMENT_ORDER_PAYLOAD_AND_RUNTIME_SOURCE_RETENTION_REMAIN
+ACTIVE_AFTER_M215_EXACT_SECTOR_SCHMIDT_RANKS_REJECT_UNIFORM_FIXED_BOND_MPS_FOR_THE_DECLARED_SU2_LEVEL8_BRAID_FAMILIES
 ```
 
 The named
@@ -277,18 +277,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_CONTINUOUS_S1_STREAMED_JACOBI_LOG_MOMENT_REMATERIALIZATION_WITH_ZERO_RETAINED_MOMENT_VECTOR_FINAL_QJET_PROJECTION_EXACT_RESTORATION_REUSE_AND_MATCHED_DIRECT_FACTOR_CLASSICAL_FRONTIER
+EXACT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_BRAID_PLAT_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_REVERSIBLE_CUT_REMATERIALIZATION_OR_SEPARATOR_WIDTH_GROWTH_ACROSS_STRANDS_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TENSOR_NETWORK
 ```
 
-M210 removes the finite phase alphabet and closes bounded first-harmonic jets
-on runtime power moments, but moment cells grow as `floor((J+1)/2)+1`, their
-payload reaches 47,209 bits at order 24, and all 24 exact source centers remain
-resident. The identical classical moment and direct-factor recurrences remain.
-Do not add jet-order fixtures. Stream and immediately release each required
-moment from the actual source into the Jacobi log recurrence, counting source
-rescans, power work, series state, and width against the direct-factor
-baseline. Preserve exact restoration/reuse; if the repair merely trades state
-for work, change the phase law.
+M215 shows that generic exact MPS compression does not repair M214's growing
+global path carrier for either declared family: the certified bond rank rises
+to 70 and the canonical sector MPS is already larger than the direct carrier
+at sixteen strands. Do not add MPS-rank or larger full-path fixtures. Contract
+the selected plat boundary from public braid topology, derive the live cut
+state and reversible rematerialization law, and test both strand growth and
+sweep-depth growth. Count exact width, restoration, reuse, and the identical
+best classical tensor-network contraction. If compactness exists only because
+the public sweep depth is fixed at eight, retain that explicit ceiling.
 
 ## 7. Native No-Smuggle Law
 

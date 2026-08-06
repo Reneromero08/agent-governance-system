@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_FUSION_PATH_BRAID_CLOSURE_WITH_GROWING_GLOBAL_WIDTH_AND_EXACT_MPS_RANK_SUCCESSOR_SELECTED`
-**Roadmap version:** `14.80`
+**Status:** `STRICT_SU2_LEVEL8_FUSION_PATH_MAXIMAL_SECTOR_SCHMIDT_RANK_NO_FIXED_BOND_MPS_AND_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_SUCCESSOR_SELECTED`
+**Roadmap version:** `14.81`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `0c5457be195ee4c652aff66671f470d649af3463`
+**Reconciled source head:** `332cee1437201c9e88975ca70498fffb8e196f1e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_VACUUM_FUSION_PATH_PHASE_CARRIER_EXECUTES_NONCOMMUTING_BRAID_GENERATORS_ON_OVERLAPPING_UNRESOLVED_INTERNAL_CHANNELS_WITH_FINAL_ONLY_PLAT_CLOSURE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_GLOBAL_PATH_CELLS_GROW_FROM2TO1430_ACROSS_STRANDS4TO16_AND_FIRST_JONES_WENZL_TRUNCATION_STILL_LEAVES4861_CELLS_AT18_WHILE_THE_IDENTICAL_CLASSICAL_PATH_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_A9_VACUUM_FUSION_PATH_REPRESENTATION_QZETA40_EVEN_STRANDS4_6_8_10_12_14_16_EIGHT_SWEEP_FAMILY_PRIMARY16_FIVE_SWEEP_FAMILY_REUSE16_VACUUM_PLAT_BOUNDARY_DIRECT_PROCESS_ONLY`
-**Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M214_SU2_LEVEL8_BRAID_GEOMETRY_ESTABLISHES_EXACT_UNRESOLVED_CHANNEL_ACTION_BUT_GLOBAL_FUSION_PATH_WIDTH_GROWS_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
+**Current highest milestone:** `EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS`
+**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
+**New mechanism development:** `ACTIVE_AFTER_M215_EXACT_SECTOR_SCHMIDT_RANKS_REJECT_UNIFORM_FIXED_BOND_MPS_FOR_THE_DECLARED_SU2_LEVEL8_BRAID_FAMILIES`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SU2_LEVEL8_FUSION_PATH_SECTOR_SCHMIDT_RANK_AND_NATIVE_MPS_BRAID_CLOSURE_DIAGNOSTIC_WITH_FIXED_LOCAL_ALPHABET_OR_GROWING_BOND_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_ANYON_MPS_RECURRENCE`
+**Active primary successor:** `EXACT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_BRAID_PLAT_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_REVERSIBLE_CUT_REMATERIALIZATION_OR_SEPARATOR_WIDTH_GROWTH_ACROSS_STRANDS_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TENSOR_NETWORK`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -10209,6 +10209,65 @@ native matrix-product carrier before any larger full-path fixture. Any saved
 cells must include bond dimensions, exact coefficient width, reversible
 factorization work, restoration, reuse, and the identical classical anyon
 MPS recurrence.
+
+## M215: exact sector Schmidt ranks reject uniform fixed-bond MPS
+
+Claim:
+
+```text
+EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS
+```
+
+M215 tests the exact tensor-factor repair selected after M214 without adding
+larger full-path fixtures. For two public eight-sweep braid families at even
+strand counts `4,6,8,10,12,14,16`, it forms each fusion-sector
+prefix/suffix flattening. Reductions at split primes `241,401` reach every
+sector's analytic dimensional upper bound, proving exact `Q(zeta_40)` maximum
+sector-summed Schmidt bond ranks `2,3,6,10,20,35,70`.
+
+A separate M215 implementation uses distinct split primes `641,881` and an
+incremental modular column-basis algorithm. It reproduces every cut rank,
+maximum bond rank, and canonical dense sector-MPS allocation. Classification
+is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The primary 16-strand direct carrier uses 1,430 exact field cells and 256,269
+payload bits. The canonical dense sector-block MPS induced by the certified
+ranks allocates 4,110 field cells. This allocation is not asserted as a
+universal lower bound for every exact representation, but the growing exact
+bond ranks do reject a uniform fixed-bond MPS for the declared family.
+
+Rank certification is research instrumentation, not accepted runtime state.
+The primary verification retains 1,430 paths and 24,310 path-label cells and
+peaks at 1,430 modular matrix cells; these are counted and excluded from the
+computational transaction. The underlying M214 final-only transaction still
+restores the actual 1,430-cell backing exactly, reaches generation two under
+unrelated reuse, and uses no snapshot or retained inverse history.
+
+Exact ceiling:
+
+```text
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+The strongest compact classical baselines are the identical exact anyon MPS
+analysis and the smaller direct fusion-path recurrence. No native compact MPS
+transaction, all-representation lower bound, CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, catalytic inference, or unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_BRAID_PLAT_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_REVERSIBLE_CUT_REMATERIALIZATION_OR_SEPARATOR_WIDTH_GROWTH_ACROSS_STRANDS_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TENSOR_NETWORK
+```
+
+This attacks the requested final boundary directly rather than factorizing
+the complete state. It must derive contraction separators from the public
+braid topology, count exact live cut state and rematerialization, preserve
+restoration and reuse, and compare against the identical best classical tensor
+network. Fixed eight-sweep structure is a declared ceiling; growth in sweep
+depth must be measured before any compactness wording is promoted.
 
 ## 10. Roadmap Maintenance
 

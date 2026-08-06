@@ -1,0 +1,71 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_DUAL_SPLIT_PRIME_CERTIFICATES_PROVE_TWO_SU2_LEVEL8_EIGHT_SWEEP_FUSION_PATH_FAMILIES_HAVE_MAXIMAL_SECTOR_SCHMIDT_BOND_RANKS2_3_6_10_20_35_70_ACROSS_STRANDS4TO16_SO_NO_UNIFORM_FIXED_BOND_EXACT_MPS_CARRIER_EXISTS_AND_THE_PRIMARY_CANONICAL_DENSE_SECTOR_MPS_USES4110_FIELD_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_ANYON_MPS",
+  "scientific_source_commit": "332cee1437201c9e88975ca70498fffb8e196f1e",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_TWO_EIGHT_SWEEP_PUBLIC_FAMILIES_EVEN_STRANDS4_6_8_10_12_14_16_SECTOR_FLATTENING_RANK_CERTIFICATES_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_FAMILY1_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {
+      "path": "su2_level8_fusion_path_mps_rank_no_go.py",
+      "sha256": "68bd59b1fc1fcbc2b48412b04fcb7fa2b0a1c01ac12971952d3d6abedc1b514f"
+    },
+    "separate_reference": {
+      "path": "su2_level8_fusion_path_mps_rank_separate_reference.py",
+      "sha256": "143a5f88094315878ff2f3189f96104647295ae7e9944fd8268f67303308293f"
+    },
+    "results": {
+      "path": "SU2_LEVEL8_FUSION_PATH_MPS_RANK_NO_GO_RESULTS.json",
+      "sha256": "731405830372afb8f19325982311ad4484dc2d032691c462f3352b7dca5d4608"
+    },
+    "separate_reference_results": {
+      "path": "SU2_LEVEL8_FUSION_PATH_MPS_RANK_SEPARATE_REFERENCE.json",
+      "sha256": "0112ed4702e68499dbbecea93ca6100d3a478b4a957e3a8d58bdbd07bc1b91ab"
+    },
+    "review": {
+      "path": "SU2_LEVEL8_FUSION_PATH_MPS_RANK_SEPARATE_REFERENCE_REVIEW.md",
+      "sha256": "bb650cf00ad6258bfcf2d8081f514a6204a9d813002462799f6cf99d0c90274b"
+    },
+    "qualifier": {
+      "path": "qualify_su2_level8_fusion_path_mps_rank.sh",
+      "sha256": "29c2845509c0f7ebb8f4910d3eadc180ca96e587932599b152152137122541ec"
+    }
+  },
+  "separate_reconstruction": {
+    "imports_m215_production": false,
+    "production_primes": [241, 401],
+    "reference_primes": [641, 881],
+    "production_algorithm": "COMPLETE_MODULAR_ROW_REDUCTION",
+    "reference_algorithm": "INCREMENTAL_MODULAR_COLUMN_BASIS",
+    "all_case_cut_rank_maximum_bond_and_canonical_allocation_parity": true,
+    "underlying_m214_braid_substrate_reused": true
+  },
+  "resource_law": {
+    "executed_strands": [4, 6, 8, 10, 12, 14, 16],
+    "declared_families": [0, 1],
+    "maximum_exact_sector_schmidt_bond_ranks": [2, 3, 6, 10, 20, 35, 70],
+    "primary_direct_fusion_path_field_cells": 1430,
+    "primary_canonical_dense_sector_mps_field_cells": 4110,
+    "primary_direct_fusion_path_payload_bits": 256269,
+    "primary_verification_path_records": 1430,
+    "primary_verification_path_label_cells": 24310,
+    "primary_peak_modular_matrix_cells": 1430,
+    "rank_certification_is_verification_instrument_not_accepted_runtime_output": true,
+    "accepted_transaction_retained_inverse_history": 0,
+    "matched_compact_baseline": "IDENTICAL_EXACT_SECTOR_RANK_ANYON_MPS_AND_SMALLER_DIRECT_FUSION_PATH_RECURRENCES"
+  },
+  "claim_limits": {
+    "uniform_fixed_bond_exact_mps_for_declared_family": false,
+    "universal_all_representation_lower_bound": false,
+    "native_compact_mps_transaction": false,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}
