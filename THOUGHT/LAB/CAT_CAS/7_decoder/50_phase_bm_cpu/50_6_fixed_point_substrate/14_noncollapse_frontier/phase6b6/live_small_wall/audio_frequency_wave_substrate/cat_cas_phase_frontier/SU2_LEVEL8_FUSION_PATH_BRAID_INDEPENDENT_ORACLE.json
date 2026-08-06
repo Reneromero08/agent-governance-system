@@ -1,0 +1,219 @@
+{
+  "cases": [
+    {
+      "boundary_commitment": "131055bfe278fd8605facec7d1acfbf5212b0963ed94ad97871e9c4ca50132a2",
+      "boundary_payload_bits": 48,
+      "carrier_payload_bits": 98,
+      "family": 0,
+      "fusion_path_field_cells": 2,
+      "maximum_denominator_bits": 3,
+      "maximum_signed_numerator_bits": 4,
+      "nonzero_fusion_path_field_cells": 2,
+      "program_steps": 24,
+      "public_topology_integer_cells": 45,
+      "public_topology_payload_bits": 57,
+      "rounds": 8,
+      "state_commitment": "816aacbd7f35e3efda46aaaa420dcdb49548d3343316630334baf668659d7268",
+      "strands": 4,
+      "topology_commitment": "38a2c4897bc12e628a9cded33151608fa5957ae7198d4d27f73fda72813acefe"
+    },
+    {
+      "boundary_commitment": "0ef7dda5569dfa471226673bad1a43efaa75f0d720a9570cee0ce7d1b8a76db7",
+      "boundary_payload_bits": 53,
+      "carrier_payload_bits": 311,
+      "family": 0,
+      "fusion_path_field_cells": 5,
+      "maximum_denominator_bits": 3,
+      "maximum_signed_numerator_bits": 10,
+      "nonzero_fusion_path_field_cells": 5,
+      "program_steps": 40,
+      "public_topology_integer_cells": 63,
+      "public_topology_payload_bits": 93,
+      "rounds": 8,
+      "state_commitment": "56d6265e2c796032b5b94311e507c8bbcbea7556a17ca91c05dc6a4b8b76bb03",
+      "strands": 6,
+      "topology_commitment": "e6cf886eeb250689706b7255209ef0f555cd2cc1e09d29feff56297690a6b6e6"
+    },
+    {
+      "boundary_commitment": "325a0eee695df054d4681ef770ae49724f6e5d34ee38243ae5eec81e1c1c7165",
+      "boundary_payload_bits": 62,
+      "carrier_payload_bits": 1104,
+      "family": 0,
+      "fusion_path_field_cells": 14,
+      "maximum_denominator_bits": 3,
+      "maximum_signed_numerator_bits": 16,
+      "nonzero_fusion_path_field_cells": 14,
+      "program_steps": 56,
+      "public_topology_integer_cells": 81,
+      "public_topology_payload_bits": 141,
+      "rounds": 8,
+      "state_commitment": "cdf60b412047aa393f26523e4240247407fd63d43b25bb5fe882ea68260620eb",
+      "strands": 8,
+      "topology_commitment": "1d69c40fa333e967d7587f2746244943d69dc4912a30868825296a70973ee040"
+    },
+    {
+      "boundary_commitment": "917f0f908fb79a55c9b92e2077e69fe08cbfbf59993a77d16ad238ae33ef2241",
+      "boundary_payload_bits": 77,
+      "carrier_payload_bits": 4142,
+      "family": 0,
+      "fusion_path_field_cells": 42,
+      "maximum_denominator_bits": 4,
+      "maximum_signed_numerator_bits": 22,
+      "nonzero_fusion_path_field_cells": 42,
+      "program_steps": 72,
+      "public_topology_integer_cells": 99,
+      "public_topology_payload_bits": 210,
+      "rounds": 8,
+      "state_commitment": "179c3129c68c9d0bdef4b621aade85b029b5eac6f02685021a9b5340c11da40c",
+      "strands": 10,
+      "topology_commitment": "2e2273b4a34b28276189509669007bf5b5ae1e62b5846fa31a26868743936e15"
+    },
+    {
+      "boundary_commitment": "8fb3fe0c985f3091d5c9eba34f732975bbd572cc9e02fd689d79c5e90375b75f",
+      "boundary_payload_bits": 88,
+      "carrier_payload_bits": 15568,
+      "family": 0,
+      "fusion_path_field_cells": 132,
+      "maximum_denominator_bits": 5,
+      "maximum_signed_numerator_bits": 28,
+      "nonzero_fusion_path_field_cells": 132,
+      "program_steps": 88,
+      "public_topology_integer_cells": 117,
+      "public_topology_payload_bits": 297,
+      "rounds": 8,
+      "state_commitment": "4e41d6d4bf2a35c7519713b7a0ada24c5272c94da6597611683e04985828db51",
+      "strands": 12,
+      "topology_commitment": "bdc11bc790db4bc5dcb283067744a1095ebb5cecd32460699cb18ef3a157615d"
+    },
+    {
+      "boundary_commitment": "84e2ae238a0edae66289b251f8b3320b7aa6187d63ea823d3596a039aaecebb6",
+      "boundary_payload_bits": 113,
+      "carrier_payload_bits": 65463,
+      "family": 0,
+      "fusion_path_field_cells": 429,
+      "maximum_denominator_bits": 8,
+      "maximum_signed_numerator_bits": 37,
+      "nonzero_fusion_path_field_cells": 429,
+      "program_steps": 104,
+      "public_topology_integer_cells": 135,
+      "public_topology_payload_bits": 398,
+      "rounds": 8,
+      "state_commitment": "c8e01496074266965a01fcc500761fd91c433f0317d085cab568ff16b1908ea5",
+      "strands": 14,
+      "topology_commitment": "5c944394b6d4f5d1cddcb308b7f48a0cc3db07ab622440b664cea157cfa7db49"
+    },
+    {
+      "boundary_commitment": "ff38debbe990ce551d2292914c8be41afec921757e521742fdbd5b6bdca63447",
+      "boundary_payload_bits": 129,
+      "carrier_payload_bits": 256269,
+      "family": 0,
+      "fusion_path_field_cells": 1430,
+      "maximum_denominator_bits": 9,
+      "maximum_signed_numerator_bits": 44,
+      "nonzero_fusion_path_field_cells": 1430,
+      "program_steps": 120,
+      "public_topology_integer_cells": 153,
+      "public_topology_payload_bits": 516,
+      "rounds": 8,
+      "state_commitment": "6f228996bd6885bbf4b9bc1719e5168d48cb1ba2a8d686bd38d607e8d7b4127a",
+      "strands": 16,
+      "topology_commitment": "5ed691435dd239a2139fefea1d4f74ccd17a390e4527f9fe34397b76de1966c4"
+    }
+  ],
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "adjacent_generators_do_not_commute": true,
+    "far_generators_commute_exactly": true,
+    "single_generator_inverse_exact": true,
+    "yang_baxter_relation_exact": true
+  },
+  "dimension_law": [
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 2,
+      "su2_level8_vacuum_path_cells": 1,
+      "untruncated_catalan_cells": 1
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 4,
+      "su2_level8_vacuum_path_cells": 2,
+      "untruncated_catalan_cells": 2
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 6,
+      "su2_level8_vacuum_path_cells": 5,
+      "untruncated_catalan_cells": 5
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 8,
+      "su2_level8_vacuum_path_cells": 14,
+      "untruncated_catalan_cells": 14
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 10,
+      "su2_level8_vacuum_path_cells": 42,
+      "untruncated_catalan_cells": 42
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 12,
+      "su2_level8_vacuum_path_cells": 132,
+      "untruncated_catalan_cells": 132
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 14,
+      "su2_level8_vacuum_path_cells": 429,
+      "untruncated_catalan_cells": 429
+    },
+    {
+      "jones_wenzl_removed_cells": 0,
+      "strands": 16,
+      "su2_level8_vacuum_path_cells": 1430,
+      "untruncated_catalan_cells": 1430
+    },
+    {
+      "jones_wenzl_removed_cells": 1,
+      "strands": 18,
+      "su2_level8_vacuum_path_cells": 4861,
+      "untruncated_catalan_cells": 4862
+    },
+    {
+      "jones_wenzl_removed_cells": 18,
+      "strands": 20,
+      "su2_level8_vacuum_path_cells": 16778,
+      "untruncated_catalan_cells": 16796
+    }
+  ],
+  "distinct_phase_resource_established": false,
+  "first_truncation_at_strands18_reproduced": true,
+  "jones_wenzl_relation_exact": true,
+  "matched_classical_baseline": "IDENTICAL_EXACT_QZETA40_TEMPERLEY_LIEB_FUSION_PATH_RECURRENCE",
+  "oracle_algorithm": "EXPLICIT_A9_VACUUM_PATH_ENUMERATION_TARGET_WEIGHT_TEMPERLEY_LIEB_GAUGE_WITH_DIAGONAL_SIMILARITY_BACK_TO_PRODUCTION_GAUGE",
+  "oracle_explicit_path_list_and_index_map_is_a_VERIFICATION_BASELINE": true,
+  "oracle_imports_cat_cas_modules": false,
+  "oracle_uses_distinct_target_weight_gauge": true,
+  "primary": {
+    "baseline_reload_used": false,
+    "boundary_commitment": "ff38debbe990ce551d2292914c8be41afec921757e521742fdbd5b6bdca63447",
+    "forward_state_commitment": "6f228996bd6885bbf4b9bc1719e5168d48cb1ba2a8d686bd38d607e8d7b4127a",
+    "same_backing": true,
+    "source_restored": true
+  },
+  "production_uses_source_weight_gauge": true,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "reuse": {
+    "baseline_reload_used": false,
+    "boundary_commitment": "4ca9e758933ad3f984878b7a96e9ab9991b92a8c3f9e65975974c3862ef15634",
+    "forward_state_commitment": "66bdc666c1c5b0436544656787cd2214aa573da916f9740a2ee5e9c84b80c411",
+    "same_backing": true,
+    "source_restored": true
+  },
+  "schema": "cat_cas.su2_level8_fusion_path_braid_independent_oracle.v1",
+  "terminal": false,
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION"
+}
