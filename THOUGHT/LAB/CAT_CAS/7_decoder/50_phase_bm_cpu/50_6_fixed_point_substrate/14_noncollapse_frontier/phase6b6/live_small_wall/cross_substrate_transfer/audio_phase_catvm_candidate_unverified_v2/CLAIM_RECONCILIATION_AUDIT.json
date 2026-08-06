@@ -1,0 +1,1726 @@
+{
+  "canonical": false,
+  "checks": [
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 13,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"original_catvm_atomic_transaction\": \"REJECTED_SOURCE_DEFECT_ATOMICITY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 106,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"original_catvm_open_intermediate_atomic_transaction\": \"REJECTED_SOURCE_DEFECT_ATOMICITY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 564,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_phase_atomic_transaction_status\": \"REJECTED_SOURCE_DEFECT_ATOMICITY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2240,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"status\": \"REJECTED_SOURCE_DEFECT_ATOMICITY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 218,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"atomic_transaction_status\": \"REJECTED_SOURCE_DEFECT_ATOMICITY\","
+        }
+      ],
+      "evidence_files": [
+        "AUTONOMOUS_LANE_STATE.json",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "CATVM_PHASE_RESULTS.json"
+      ],
+      "expected": "original CATVM atomic transaction rejected for atomicity",
+      "id": "original_atomic_rejected",
+      "patterns": [
+        "original_catvm_atomic_transaction",
+        "catvm_phase_atomic_transaction_status",
+        "REJECTED_SOURCE_DEFECT_ATOMICITY"
+      ],
+      "status": "RECORDED"
+    },
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 11,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"restoration\": \"ACTUAL_INVERSE_G_THEN_ACTUAL_INVERSE_F\","
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 12,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"reuse\": \"DIFFERENT_PROGRAM_ON_SAME_ACTUAL_RESTORED_CARRIER\""
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 16,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"reuse_boundary_coefficients\": [1, 2, 0, 2],"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 17,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"reuse_boundary_fnv1a64\": \"08ff5c9dbe7d30c7\","
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 25,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"restoration\": {"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 51,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"wrong_g_restoration_error\": 1.73205080757,"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 52,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"missing_g_restoration_error\": 1.73205080757,"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 53,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"reordered_noncommuting_restoration_error\": 1.73205080757,"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 68,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"restoration_cell_checks\": 24048,"
+        },
+        {
+          "file": "source_snapshot/CATVM_PHASE_RESULTS.json",
+          "line": 75,
+          "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+          "snippet": "\"claim\": \"CATVM_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 18,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"restoration_partition_must_cover_each_milestone_once\": true"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 35,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_CATVM_TOPOLOGY_COMPILED_SHARED_NONLINEAR_UNIT_PHASE_GRAPH_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 37,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"CATVM_ENFORCED_NONLINEAR_KERR_INTERFERENCE_WAVE_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 38,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"CATVM_ENFORCED_CYCLOTOMIC_CUBIC_TT_HIDDEN_BOND_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 39,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_NUMERICAL_CONTINUOUS_IRRATIONAL_KICKED_PHASE_COHERENT_FOURIER_LOCALIZATION_CONTRAST_WITH_EFFECTIVE_BANDWIDTH_PLATEAU_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 40,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_FOUR_ROTOR_NONSEPARABLE_CONTINUOUS_KICKED_PHASE_FOURIER_TT_CENTRAL_INTERFACE_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 41,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_MATRIX_FREE_STREAMED_BESSEL_SCHMIDT_CLOSURE_WITHOUT_EXPANDED_MPO_OR_DENSE_INTERFACE_CORE_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 42,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 43,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_PHASE_CLOSURE_BELOW_DENSE_EQUIVALENT_MEMORY_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 44,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_CATVM_ENFORCED_PROBE_FREE_INCREMENTAL_BESSEL_SCHMIDT_HIDDEN_TT_COMPOSITION_WITH_ACTUAL_INVERSE_CANONICAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 45,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_DERIVED_TOTAL_MOMENTUM_SECTOR_INVERSE_PHASE_CLOSURE_UPDATE_REDUCTION_WITH_GRAM_REMATERIALIZATION_OBSTRUCTION_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 46,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_DENSE_FINITE_TORUS_CYCLIC_PHASE_UPDATE_LAW_WITH_DEPTH_INDEPENDENT_EXPLICIT_NUMPY_ARRAY_PAYLOAD_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 47,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_CYCLIC_PHASE_TT_NATIVE_PAIR_CLOSURE_SATURATES_GRID17_CENTRAL_INTERFACE_AT_DEPTH5_WITH_ACTUAL_RESTORATION_AND_REUSE\""
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 71,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_NONLINEAR_UNIT_PHASE_TORUS_SHEAR_COMPOSITION_WITH_ACTUAL_RESTORATION_AND_INTERFERENCE_PROJECTION\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 72,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_COMPILED_SHARED_NONLINEAR_PHASE_GRAPH_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 73,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_F5_MONIC_AFFINE_CONIC_TWO_HIDDEN_PORT_FIXED_RANK_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 74,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_F5_QUADRATIC_PHASE_KERNEL_COHERENT_SHARED_PORT_GAUSS_CLOSURE_WITH_FIXED_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 75,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_GENERIC_5X5_UNITARY_PAIRED_UNIT_PHASOR_COHERENT_COMPOSITION_WITH_TWO_BLOCK_CUSTODY_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 76,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_FIXED_RANK_NONLINEAR_KERR_INTERFERENCE_WAVE_CARRIER_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 77,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 78,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_STOKES_SPHERE_REDUCED_DUAL_PRIME_PHASE_RESIDENT_NONLINEAR_SYMPLECTIC_LIE_SIGNATURE_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 79,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_PARITY_ADMISSIBLE_STOKES_HARMONIC_SECTOR_DUAL_PRIME_PHASE_SIGNATURE_REDUCTION_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 80,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"FIXED_RANK_FACTORIZED_HIGHEST_STOKES_HARMONIC_SHELL_PHASE_RECURRENCE_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 81,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_NONCOMMUTING_ALTERNATING_AXIS_STOKES_CHARACTER_PHASE_HARMONIC_CATALECTICANT_RANK_GROWTH_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 82,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_CLOSURE_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 83,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 84,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_EXACT_CYCLOTOMIC_CUBIC_PHASE_FOURIER_TENSOR_TRAIN_SEQUENTIAL_RANK_GROWTH_WITH_ACTUAL_RESTORATION_AND_REUSE\""
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 99,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 100,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_STREAMED_TOTAL_MOMENTUM_COORDINATE_PHASE_CLOSURE_ELIMINATES_DENSE_QUOTIENT_FREE_PLAN_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 101,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_EXCHANGE_SYMMETRIC_GLOBAL_ROTATION_NECKLACE_PHASE_CARRIER_CHANGES_FIXED_GRID_ROTOR_GROWTH_FROM_EXPONENTIAL_TO_POLYNOMIAL_WITH_STREAMED_EXACT_CYCLOTOMIC_FREE_CLOSURE_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 18,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"LATER_ACTUAL_INVERSE_G_THEN_F_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 19,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"SAME_CARRIER_UNRELATED_PROGRAM_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 32,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"restoration_classifications\": ["
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 33,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"EXACT_ALGEBRAIC_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 34,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"NUMERICAL_PHYSICAL_STATE_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 37,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"NO_RESTORATION_CLAIM\""
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 39,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"post_inverse_canonical_closure_unqualified_exact_restoration\": false"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 51,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_atomic_dispatch_revision_defect\": \"LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 63,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ACTUAL_INVERSE_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 64,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ACTUAL_RESTORED_CARRIER_REUSE\""
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 75,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 97,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"current_claim_ceiling\": \"LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 107,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"original_catvm_open_intermediate_preserved_evidence\": \"BOUNDED_F_TO_G_ALGEBRA_HIDDEN_Y_CUSTODY_LATER_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 137,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"nonlinear_unit_phase_torus_shear\": \"ESTABLISHED_RANK2_DEPTH4096_NATIVE_MULTIPLY_CELL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 147,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_four_rotor_incremental_custody\": \"SOURCE_AUDITED_PACKAGE_LOCAL_SAME_UID_LINUX_FIXED_PRIMARY_REUSE_INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 149,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_dense_cyclic_phase_law\": \"ESTABLISHED_GRID17_DEPTHS1_TO64_FIXED_EXPLICIT_ARRAY_PAYLOAD_ACTUAL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 153,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_streamed_momentum_coordinate\": \"ESTABLISHED_RETAINED_PLAN408_BYTES_ENGINE118592_WRAPPER197200_ACTUAL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 154,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_necklace_orbit_phase\": \"ESTABLISHED_EXCHANGE_SYMMETRIC_GRID17_CARRIER285_FIXED_GRID_O_R16_ACTUAL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 155,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_bosonic_givens_phase\": \"ESTABLISHED_RESIDENT285_TEMPORARY_OCCUPATION4845_ZERO_ACCEPTED_PERMANENT_TERMS_ACTUAL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 157,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_bosonic_givens_atomic_disconnect_repair\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE_NUMERICAL_PHYSICAL_STATE_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 160,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"coherent_shared_latent_predecessor\": \"REJECTED_SOURCE_DEFECT_UNBOUND_NONZERO_MODULE_OWNER_WITH_CARRIER_NONCOMMUTATION_AND_RESTORATION_SUBCLAIMS_PRESERVED\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 162,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"topology_rematerialized_shared_latent_depth_direct\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE_DEPTHS1_2_4_8_16_32_FIXED_570_COMPLEX_CARRIER_ZERO_RETAINED_MODULE_TAPE_ZERO_RETAINED_INVERSE_HISTORY_REUSE_DEPTH11\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 165,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"topology_rematerialized_shared_latent_depth_accounting_successor\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE_FIXED_570_COMPLEX_CARRIER_PRIMARY_DEPTH32_REUSE_DEPTH11_FINAL_RESPONSE_AFTER_NUMERICAL_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 213,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 214,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"REUSE\""
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 233,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"CATVM_WIDTH2_ACTUAL_INVERSE_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 260,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"SECCOMP_CONFINED_SINGLE_CARRIER_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 270,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ACTUAL_INVERSE_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 271,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ACTUAL_RESTORED_CARRIER_REUSE\""
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 287,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"restoration_verified\": true,"
+        }
+      ],
+      "evidence_files": [
+        "CATVM_PHASE_RESULTS.json",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "AUTONOMOUS_LANE_STATE.json"
+      ],
+      "expected": "F-to-G algebra, hidden resident Y, actual Y consumption, later inverse restoration, same-carrier reuse preserved only as subclaims",
+      "id": "original_subclaims_preserved",
+      "patterns": [
+        "F-to-G",
+        "hidden resident",
+        "actual Y",
+        "same-carrier",
+        "reuse",
+        "restoration"
+      ],
+      "status": "RECORDED"
+    },
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/CATVM_RANK2_RESULTS.json",
+          "line": 4,
+          "sha256": "2469542b2c01d63619a5e2134938dff472b1bcc71bde736adbcad0c20e7bb8e4",
+          "snippet": "\"claim\": \"CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND\","
+        },
+        {
+          "file": "source_snapshot/CATVM_RANK2_RESULTS.json",
+          "line": 6,
+          "sha256": "2469542b2c01d63619a5e2134938dff472b1bcc71bde736adbcad0c20e7bb8e4",
+          "snippet": "\"evidence_directory\": \"/tmp/catvm-rank2-full-fifth\","
+        },
+        {
+          "file": "source_snapshot/CATVM_RANK2_RESULTS.json",
+          "line": 24,
+          "sha256": "2469542b2c01d63619a5e2134938dff472b1bcc71bde736adbcad0c20e7bb8e4",
+          "snippet": "\"automatic_rank2_schedule\": true,"
+        },
+        {
+          "file": "source_snapshot/CATVM_RANK2_RESULTS.json",
+          "line": 25,
+          "sha256": "2469542b2c01d63619a5e2134938dff472b1bcc71bde736adbcad0c20e7bb8e4",
+          "snippet": "\"selected_rank2_public_id\": 813,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 31,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 95,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 96,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 142,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_WIDTH3_RANK2_LAZY_TT_RELATION_COMPOSITION_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 155,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 156,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 238,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"exact_15_node_rank2_scheduler\": {"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 239,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"status\": \"FIXTURE_SCOPED_VALID\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 251,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"cat_cas_phase_frontier/CATVM_RANK2_RESULTS.json\""
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 255,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"cleanroom_result\": \"EXACT_FIXTURE_SCHEDULE_EXISTS_BUT_GENERIC_TRANSFER_REJECTED\""
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 22,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"exact_15_node_scheduler\": \"FIXTURE_SCOPED_VALID_NO_GENERIC_SCHEDULER_CLAIM\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 79,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"finish_current_scheduler\": \"ESTABLISHED_RANK2_RECURSIVE_CUSTODY_FOR_AUTOMATIC_COMPACT_AFFINE_DAG\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 86,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"affine_fixture_expansion_without_concrete_main_goal_blocker\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 89,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"DOES_THIS_GENERALIZE_THE_CARRIER_LAW_NOT_MERELY_ENLARGE_A_FIXTURE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 114,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"factorized_width3_relation_inputs\": \"ESTABLISHED_GENUINE_RANK2_32_PHASE_CELLS_VERSUS_64_DENSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 126,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rank2_recursive_operator_rematerialization\": \"FIXTURE_SCOPED_VALID_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_MAX_ACTIVATION_ORDINAL3_WIDTHS3_4_8_12_16_NO_GENERIC_SCHEDULER\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 127,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_automatic_rank2_shared_dag_enforcement\": \"FIXTURE_SCOPED_VALID_EXACT_WIDTH3_15_NODE_ATOMIC_28_FORWARD_28_REVERSE_9_SLOTS_258_TRANSACTIONS_NO_GENERIC_SCHEDULER\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 131,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"width_parametric_boolean_tt_non_affine_composition\": \"ESTABLISHED_WIDTHS4_5_8_12_16_RANK2_TO_RANK4_TO_RANK8\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 137,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"nonlinear_unit_phase_torus_shear\": \"ESTABLISHED_RANK2_DEPTH4096_NATIVE_MULTIPLY_CELL_RESTORATION_REUSE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 151,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_compact_cyclic_tt\": \"OBSTRUCTION_CENTRAL_RANK289_OF289_DEPTH5_LOGICAL_TT167620_VS_DENSE83521\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 181,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"GENUINE_RANK2_WIDTH3_RELATION_INPUTS\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 230,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"WIDTH3_RANK2_TENSOR_TRAIN_RELATION_INPUTS\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 253,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"TOPOLOGY_DERIVED_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 257,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"NINE_WORKING_SLOT_RANK2_RECURSIVE_SCHEDULE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 258,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"ENFORCED_CATVM_AUTOMATIC_RANK2_SHARED_DAG_CUSTODY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 668,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_lazy_tt_claim\": \"BOUNDED_WIDTH3_RANK2_PHASE_RESIDENT_LAZY_TT_RELATION_COMPOSITION_WITH_SPARSE_BOUNDARY_INVARIANT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1167,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"recursive_rematerializing_general_multi_dag_affine_claim\": \"BOUNDED_15_NODE_RANK2_RECURSIVE_OPERATOR_REMATERIALIZATION_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1168,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"recursive_rematerializing_general_multi_dag_affine_claim_ceiling\": \"BOUNDED_WIDTH16_SOFTWARE_GF2_EXACT_15_NODE_SINGLE_RANK2_BORROWER_28_FORWARD_28_REVERSE_ACTIONS_9_WORKING_SLOTS_10_PHYSICAL_BLOCKS_MAX_ACTIVATION_ORDINAL3_REFERENCE_ONLY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1174,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"recursive_rematerializing_general_multi_dag_affine_selected_rank2_public_id\": 813,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1177,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"recursive_rematerializing_general_multi_dag_affine_reconstructed_rank2_public_ids\": [813],"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1221,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_phase\": \"MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1222,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_reviewer_id\": \"CATVM-RANK2-ENFORCEMENT-01\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1223,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_remaining_review_findings\": 0,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1224,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_claim\": \"CATVM_ENFORCED_15_NODE_RANK2_AUTOMATIC_SCHEDULED_SHARED_RELATIONAL_DAG_ESTABLISHED_ON_PHASE_BACKEND\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1225,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_claim_ceiling\": \"BOUNDED_LINUX_SAME_UID_SOFTWARE_GF2_WIDTH3_EXACT_15_NODE_ATOMIC_RUN_28_FORWARD_28_REVERSE_9_WORKING_SLOTS_REFERENCE_ONLY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1226,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_protocol\": \"AF_UNIX_SOCK_SEQPACKET_ATOMIC_RUN\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1227,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_same_uid_service\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1228,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_controller_phase_core_linked\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1229,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_production_restore_or_fault_selector\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1230,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_rank2_shared_dag_public_topology_nodes\": 15,"
+        }
+      ],
+      "evidence_files": [
+        "CATVM_RANK2_RESULTS.json",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "AUTONOMOUS_LANE_STATE.json"
+      ],
+      "expected": "15-node rank-2 scheduler limited to fixture scope",
+      "id": "rank2_fixture_scoped",
+      "patterns": [
+        "rank2",
+        "fixture",
+        "fixture-scoped",
+        "fixture scoped",
+        "CATVM_RANK2"
+      ],
+      "status": "RECORDED"
+    },
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 4,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"claim\": \"BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE\","
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 5,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"claim_ceiling\": \"BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY\","
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 6,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"evidence_directory\": \"/tmp/boolean-tt-quotient-fourth\","
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 13,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"homogeneous_repeated_neighbor_and\": true,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 14,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"homogeneous_repeated_neighbor_or\": true,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 15,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"arbitrary_mixed_and_or_layers\": false,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 16,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"family_scoped_analytic_quotient\": true,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 36,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 3,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 37,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 80,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 46,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 4,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 47,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 120,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 56,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 5,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 57,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 140,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 66,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 6,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 67,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 264,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 76,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 9,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 77,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 956,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 86,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 9,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 87,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 2252,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 96,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"maximum_quotient_rank\": 9,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 97,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"final_quotient_cells\": 3548,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 133,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"width16_depth8_quotient_edge_checks\": 27000,"
+        },
+        {
+          "file": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+          "line": 153,
+          "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+          "snippet": "\"strongest_fixture_specialized\": \"DIRECT_PUBLIC_SUFFIX_QUOTIENT_CORE_GENERATOR_O_FINAL_CELLS\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 42,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 59,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 69,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 70,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 83,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 98,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 99,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 100,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_STREAMED_TOTAL_MOMENTUM_COORDINATE_PHASE_CLOSURE_ELIMINATES_DENSE_QUOTIENT_FREE_PLAN_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 147,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"ALGEBRAIC_WIDTH_PARAMETRIC_AFFINE_MIXED_MODULE_CLOSURE_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 162,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_BOOLEAN_TT_SUFFIX_BISIMULATION_QUOTIENT_REDUCES_PRODUCT_RANK_GROWTH_FROM_EXPONENTIAL_TO_LINEAR_WITH_PHASE_RESIDENT_CLOSURE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 163,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"GROWING_NONAFFINE_BOOLEAN_TT_SUFFIX_QUOTIENT_SMALL_WALL_TRIAD_CONFIRMS_COMPACT_RECURRENCE_AND_RETAINED_HISTORY_OBSTRUCTION\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 164,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"TOPOLOGY_DERIVED_REVERSIBLE_BOOLEAN_TT_QUOTIENT_STAGE_PEBBLING_REDUCES_RETAINED_PHASE_HISTORY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 178,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_REFLECTION_GRADED_TOPOLOGY_REMATERIALIZED_NONCOMMUTING_STOKES_BCH_CHARACTER_PHASE_QUOTIENT_WITH_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 184,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_EXACT_GLOBAL_ROTATION_QUOTIENT_CYCLIC_PHASE_CARRIER_REDUCES_FOUR_ROTOR_STATE_BY_GRID_FACTOR_WITH_DEPTH_INDEPENDENT_MEMORY_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 185,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_TOPOLOGY_STREAMED_TOTAL_MOMENTUM_COORDINATE_PHASE_CLOSURE_ELIMINATES_DENSE_QUOTIENT_FREE_PLAN_WITH_ACTUAL_RESTORATION_AND_REUSE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 202,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\": ["
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 203,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 257,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"homogeneous_boolean_suffix_quotient\": {"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 259,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"claim_ceiling\": \"BOUNDED_LINUX_SOFTWARE_WIDTHS4_5_8_12_16_DEPTHS2_3_4_5_8_NEIGHBOR_AND_OR_FAMILY_SCOPED_QUOTIENT_REFERENCE_ONLY\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 260,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"homogeneous_formula_cases_cleanroom\": 112,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 261,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"homogeneous_formula_cases_matched\": 112,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 262,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"mixed_nonperiodic_generalization\": \"FAILED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 264,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"nonperiodic_depth6_ranks\": [2, 7, 14, 14, 14, 14],"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 265,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"homogeneous_maximum_rank\": 7,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 266,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"general_boolean_tt_quotient_claim\": false,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 268,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"cat_cas_phase_frontier/algebraic_boolean_tt_suffix_quotient_phase.c\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 269,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"cat_cas_phase_frontier/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 270,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"cat_cas_phase_frontier/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_REVIEW.json\""
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 277,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"status\": \"VALID_TOLERANCE_DEFINED_CANONICAL_QUOTIENT_NOT_EXACT_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 278,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"restoration_classification\": \"INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 23,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"homogeneous_boolean_suffix_quotient\": \"FAMILY_SCOPED_VALID_MIXED_NONPERIODIC_GENERALIZATION_FAILED\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 35,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 133,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"boolean_tt_suffix_bisimulation_quotient\": \"FAMILY_SCOPED_VALID_HOMOGENEOUS_NEIGHBOR_AND_OR_DEPTHS2_3_4_5_8_LINEAR_RANK_MIXED_NONPERIODIC_FAILED\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 134,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"boolean_tt_suffix_quotient_small_wall_triad\": \"ESTABLISHED_COMPACT_PUBLIC_RECURRENCE_PRIMARY_OBSTRUCTION_RETAINED_HISTORY_SECONDARY_DEFECT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 135,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"boolean_tt_suffix_quotient_reversible_pebbling\": \"ESTABLISHED_WIDTH16_DEPTH8_17288_TO_12152_CELLS_AT_1_356_PHASE_UPDATE_MULTIPLIER\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 136,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"boolean_tt_quotient_fixed_rank_unbounded_depth_closure\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 147,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"catvm_four_rotor_incremental_custody\": \"SOURCE_AUDITED_PACKAGE_LOCAL_SAME_UID_LINUX_FIXED_PRIMARY_REUSE_INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 152,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_global_rotation_quotient\": \"ESTABLISHED_THREE_RELATIVE_ANGLES_TOTAL_MOMENTUM_ZERO_MOD17_FACTOR17_STATE_REDUCTION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 242,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"MIXED_COMPOSITION_INTERSECTION_COMPOSITION_PHASE_GEOMETRY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 365,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"parallel_mixed_program_regression\": \"PASS_20_OF_20\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 389,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"open_relation_quotient_representation\": \"COMPLETE_TWO_SLOT_Z2_CHARACTERISTIC_VECTOR\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 720,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_phase\": \"MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_AFTER_TRACEABILITY_REPAIR\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 721,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_reviewer_id\": \"PROJECTED-AFFINE-COMPACT-FULL-RELATION-01\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 722,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_repaired_findings\": ["
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 726,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_remaining_review_findings\": 0,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 727,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_claim\": \"BOUNDED_PROJECTED_AFFINE_PHASE_RELATION_COMPOSITION_WITH_COMPACT_FULL_BOUNDARY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 728,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_claim_ceiling\": \"BOUNDED_PROJECTED_AFFINE_F2_RELATION_SUBCATEGORY_REFERENCE_ONLY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 729,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_accepted_quotient_bits\": 8,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 730,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_accepted_fibre_bits\": 4,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 731,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_accepted_port_bits\": 12,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 732,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_factor_coefficients\": 72,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 733,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_dense_pair_table_exponent\": 24,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 734,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_targets_per_source\": 16,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 735,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_sources_per_target\": 16,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 736,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_genuinely_many_to_many\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 737,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_complete_boundary_materialized\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 738,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_sparse_boundary_query\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 739,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_primary_boundary_fnv1a64\": \"33f962d84bbdd8db\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 740,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_reuse_boundary_fnv1a64\": \"1b6d1f9d91bbe788\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 741,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"algebraic_quotient_affine_same_carrier_transactions\": 130,"
+        }
+      ],
+      "evidence_files": [
+        "ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "AUTONOMOUS_LANE_STATE.json"
+      ],
+      "expected": "Boolean suffix quotient limited to homogeneous family; mixed/nonperiodic failed",
+      "id": "suffix_quotient_homogeneous_only",
+      "patterns": [
+        "homogeneous",
+        "mixed",
+        "nonperiodic",
+        "suffix",
+        "quotient"
+      ],
+      "status": "RECORDED"
+    },
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/FOUR_ROTOR_POST_INVERSE_CANONICAL_CLOSURE_RESULTS.md",
+          "line": 1,
+          "sha256": "3d6a5e6840990c21c09abeef6eccefe2d0f521ddb365337146b0807859db7ba4",
+          "snippet": "# Four-Rotor Post-Inverse Canonical Closure Results"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 39,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"post_inverse_canonical_closure_unqualified_exact_restoration\": false"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1844,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure\": \"MUTABLE_DEVELOPMENT_PASS_FOCUSED_REVIEW_PASS_STRICT_CEILING\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1845,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_reviewer_id\": \"FOUR-ROTOR-POST-INVERSE-CANONICAL-CLOSURE-01\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1846,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_remaining_review_findings\": 0,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1847,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_claim\": \"BOUNDED_ACTUAL_POST_INVERSE_TT_CANONICAL_QUOTIENT_CLOSURE_WITH_FRESH_RESTORED_MATRIX_FREE_REUSE_RANK_AND_RESOURCE_PARITY\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1848,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_claim_ceiling\": \"FOUR_OPEN_CHAIN_ROTORS_MODE_RADIUS14_STRICT_PRIMARY_DEPTH3_POST_INVERSE_L2_1E_MINUS7_MATRIX_FREE_REUSE_DEPTH2_L2_1E_MINUS6_SOFTWARE_FLOAT64\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1849,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_pre_ranks\": [29, 166, 29],"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1850,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_post_ranks\": [1, 1, 1],"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1851,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_pre_cells\": 280894,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1852,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_post_cells\": 116,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1853,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_payload_bytes\": 1856,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1854,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_inverse_error\": 5.235118195044748e-08,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1855,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_physical_delta\": 5.108285219854224e-08,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1856,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_restoration_error\": 1.1472669425192214e-08,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1857,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_maximum_simultaneous_bytes\": 11636288,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1858,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_maximum_workspace_array_cells\": 139606,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1859,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_fresh_restored_rank_history\": [9, 27],"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1860,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_fresh_restored_boundary_error\": 6.680656028379417e-12,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1861,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_fresh_restored_resource_signature_exact\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1862,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_restoration_generations\": [1, 2],"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1863,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_snapshot_loaded\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1864,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_retained_inverse_history_bytes\": 0,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1865,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_stable_compact_reuse\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1866,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_exact_restoration\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1867,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_restoration_classification\": \"INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1868,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_unqualified_exact_restoration\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1869,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_matched_classical_tt_identical\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1870,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_distinct_phase_resource\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1871,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_computational_advantage\": false,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 1872,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"four_rotor_post_inverse_canonical_closure_small_wall_crossing\": false,"
+        }
+      ],
+      "evidence_files": [
+        "FOUR_ROTOR_POST_INVERSE_CANONICAL_CLOSURE_RESULTS.md",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "AUTONOMOUS_LANE_STATE.json"
+      ],
+      "expected": "post-inverse closure means inverse plus canonical numerical quotient, not unqualified exact restoration",
+      "id": "post_inverse_canonical_closure_scoped",
+      "patterns": [
+        "post_inverse_canonical",
+        "canonical closure",
+        "unqualified exact",
+        "post-inverse",
+        "canonical quotient"
+      ],
+      "status": "RECORDED"
+    },
+    {
+      "evidence": [
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 44,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_successor\": \"CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 45,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_successor_defect\": \"MODULE_OWNER_NONZERO_CHECK_DID_NOT_BIND_CONSUMERS_TO_DECLARED_SHARED_PORT_OWNER\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 46,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"completed_repaired_successor\": \"CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 48,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_depth_catvm_predecessor\": \"CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 49,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_depth_catvm_predecessor_defect\": \"RESIDENT_ERROR_AND_STOP_RESPONSE_ORDERING_DID_NOT_UNIFORMLY_PRESERVE_OR_RESTORE_RESIDENT_STATE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 50,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_atomic_dispatch_revision\": \"CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 51,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"rejected_atomic_dispatch_revision_defect\": \"LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 165,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"topology_rematerialized_shared_latent_depth_accounting_successor\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE_FIXED_570_COMPLEX_CARRIER_PRIMARY_DEPTH32_REUSE_DEPTH11_FINAL_RESPONSE_AFTER_NUMERICAL_RESTORATION\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2123,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_classification\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE\","
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2124,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_primary_depth\": 32,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2125,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_reuse_depth\": 11,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2126,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_primary_restoration_error\": 4.951942189030858e-14,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2127,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_reuse_restoration_error\": 6.545926890278212e-14,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2128,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_fresh_restored_reuse_boundary_error\": 4.829470157119431e-14,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2129,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_carrier_backing_preserved\": true,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2130,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"shared_latent_depth_accounting_successor_baseline_reload_bytes\": 0,"
+        },
+        {
+          "file": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+          "line": 2371,
+          "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+          "snippet": "\"CATVM_SHARED_LATENT_DEPTH_ATOMIC_DISPATCH_AND_ACCOUNTING_SUCCESSOR_ESTABLISHED\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 384,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_milestone\": \"CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 385,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_status\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 386,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_claim_ceiling\": \"LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_P"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 387,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_primary_restoration_error\": 4.951942189030858e-14,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 388,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_reuse_restoration_error\": 6.545926890278212e-14,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 389,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_fresh_restored_reuse_boundary_error\": 4.829470157119431e-14,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 390,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_baseline_reload_bytes\": 0,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 391,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"accounting_successor_carrier_backing_preserved\": true,"
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 415,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rematerialized_shared_latent_depth_atomic_dispatch_and_accounting_successor\": \"INDEPENDENTLY_VERIFIED_STRICT_SCOPE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 516,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rejected_successor\": \"CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 517,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"completed_repaired_successor\": \"CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 518,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rejected_depth_catvm_predecessor\": \"CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 519,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rejected_depth_catvm_predecessor_defect\": \"RESIDENT_ERROR_AND_STOP_RESPONSE_ORDERING_DID_NOT_UNIFORMLY_PRESERVE_OR_RESTORE_RESIDENT_STATE\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 520,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rejected_atomic_dispatch_revision\": \"CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32\","
+        },
+        {
+          "file": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+          "line": 521,
+          "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+          "snippet": "\"rejected_atomic_dispatch_revision_defect\": \"LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS\","
+        },
+        {
+          "file": "source_snapshot/CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json",
+          "line": 176,
+          "sha256": "ae424586979feaba4d7b0028e784e8079d2c6f72b51d75c4842b2d0c1ed97713",
+          "snippet": "\"accounting_successor_result.json\": \"e015de40092cd43d75f08f19ef1e57fbda92e7df0a2a02dff2eb14df48ef4921\","
+        }
+      ],
+      "evidence_files": [
+        "AUTONOMOUS_LANE_STATE.json",
+        "CLAIM_AUTHORITY_REGISTRY.json",
+        "CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json"
+      ],
+      "expected": "updated branch preserves failed predecessors and names successor repairs",
+      "id": "successor_chain_records_failed_predecessors",
+      "patterns": [
+        "rejected_successor",
+        "rejected_depth_catvm_predecessor",
+        "rejected_atomic_dispatch_revision",
+        "accounting_successor",
+        "completed_repaired_successor"
+      ],
+      "status": "RECORDED"
+    }
+  ],
+  "counts": {
+    "checks": 6,
+    "mismatches": 0,
+    "missing": 0,
+    "recorded": 6
+  },
+  "created_utc": "2026-07-29T08:39:27.472095Z",
+  "epistemic_note": "Narrative reconciliation is useful source hygiene but is not counted as independent mechanism verification.",
+  "mismatches": [],
+  "result_sha256": "bbc6f18c6a82ad95cf896387d99281656b93bf6d6834a97228db8098fee708b8",
+  "schema_version": "audio_catvm_claim_reconciliation_audit.v2",
+  "source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d"
+}

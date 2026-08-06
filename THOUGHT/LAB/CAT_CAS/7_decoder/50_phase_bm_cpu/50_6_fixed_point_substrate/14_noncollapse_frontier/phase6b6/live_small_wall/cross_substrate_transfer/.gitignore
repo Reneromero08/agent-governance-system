@@ -1,0 +1,12 @@
+# Bulk preserved execution evidence.
+#
+# These directories may exist locally after importing verification branches, but
+# they are not committed into the tomography branch. The committed reports,
+# receipts, manifests, source snapshots, and verifier code identify the source
+# task branch heads where the complete raw evidence remains recoverable.
+audio_phase_catvm_candidate_unverified_v1/raw_logs/
+audio_phase_catvm_candidate_unverified_v1/raw_outputs/
+audio_phase_catvm_candidate_unverified_v2/raw_logs/
+audio_phase_catvm_candidate_unverified_v2/raw_outputs/
+audio_phase_noncollapse_candidate_unverified_v3/raw_logs/
+audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/

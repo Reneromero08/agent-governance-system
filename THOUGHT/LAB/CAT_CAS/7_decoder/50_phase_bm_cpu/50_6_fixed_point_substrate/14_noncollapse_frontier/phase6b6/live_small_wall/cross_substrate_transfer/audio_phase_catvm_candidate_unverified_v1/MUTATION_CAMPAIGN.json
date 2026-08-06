@@ -1,0 +1,193 @@
+{
+  "deterministic": true,
+  "ledger": {
+    "attempted": 1149,
+    "failed": 0,
+    "failures": [],
+    "passed": 1149
+  },
+  "plan_sha256": "48234de9fcd00ea58a464fdd87740c544332ca349e329464e00703c2b72b7778",
+  "result_sha256": "65693973b3bbda9f63d873deb5e1dc948c881240ba8175f63dabcf68910bfb77",
+  "results": {
+    "A": {
+      "alternating_cycles": 128,
+      "case_hash": "693af79ad050bb8bc350b931d731e6a83ae2cd274c6e517aa0317584d5973619",
+      "coefficient_cases": 256,
+      "stale_factor_changes_between_programs": true,
+      "targeted_zero_sets": {
+        "contradictory_intersection": [],
+        "empty": [],
+        "rank_deficient": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "universal": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ]
+        ]
+      },
+      "zero_set_categories": {
+        "empty": 197,
+        "partial": 59
+      }
+    },
+    "B": {
+      "invalid_topologies_rejected": [
+        "cycle",
+        "disconnected_cycle"
+      ],
+      "novel_topologies": {
+        "balanced": {
+          "fanout": 1,
+          "minimum_capacity": 4,
+          "nodes": 7
+        },
+        "chain": {
+          "fanout": 2,
+          "minimum_capacity": 3,
+          "nodes": 4
+        },
+        "diamond": {
+          "fanout": 2,
+          "minimum_capacity": 4,
+          "nodes": 6
+        }
+      },
+      "renumbered_case_hash": "fc48da34fe48e58a44f0f6e137a918e4b00f30a921299b97a8b38eaf20328082",
+      "renumbered_cases": 32,
+      "schedule_corruptions_detected": {
+        "dependency_reorder": true,
+        "duplicate": true,
+        "missing": true,
+        "wrong_node": true
+      }
+    },
+    "C": {
+      "boundary_map_sha256": "b0f14038b537b404b22a0ec18bd1b813f293661c0a7ac468b0f01f20f9886051",
+      "equivalent_program_collision_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        5,
+        5,
+        21,
+        21
+      ],
+      "maximum_programs_per_boundary": 21,
+      "programs": 64,
+      "unique_boundaries": 16
+    },
+    "D": {
+      "homogeneous_case_hash": "1af9dd3fda06d8970cfd8f809e3cea46d8b95508c1b84a6f55f9bc5a2a305c04",
+      "homogeneous_cases": 224,
+      "mixed_layer_challenges": [
+        {
+          "homogeneous_max_rank": 7,
+          "name": "alternating",
+          "operations": [
+            "and",
+            "or",
+            "and",
+            "or",
+            "and",
+            "or"
+          ],
+          "outside_homogeneous_law": true,
+          "ranks": [
+            2,
+            7,
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "homogeneous_max_rank": 7,
+          "name": "nonperiodic",
+          "operations": [
+            "and",
+            "and",
+            "or",
+            "and",
+            "or",
+            "or"
+          ],
+          "outside_homogeneous_law": true,
+          "ranks": [
+            2,
+            7,
+            14,
+            14,
+            14,
+            14
+          ]
+        },
+        {
+          "homogeneous_max_rank": 7,
+          "name": "reverse_nonperiodic",
+          "operations": [
+            "or",
+            "or",
+            "and",
+            "or",
+            "and",
+            "and"
+          ],
+          "outside_homogeneous_law": true,
+          "ranks": [
+            2,
+            7,
+            14,
+            14,
+            14,
+            14
+          ]
+        }
+      ],
+      "state_relabel_checks": 112,
+      "wrong_horizon_detected_cases": 21
+    },
+    "input": {
+      "deterministic_replay": true,
+      "malformed_inputs_rejected": [
+        "empty",
+        "truncated",
+        "unknown",
+        "duplicate_relation",
+        "oversized_integer"
+      ]
+    }
+  },
+  "schema_version": "1.0.0",
+  "seed": 104729
+}

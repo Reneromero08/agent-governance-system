@@ -1,0 +1,65 @@
+{
+  "branch": "task/audio-noncollapse-independent-verification-v3",
+  "canonical": false,
+  "classification_reasons": {
+    "I": "independent exact HT,e0 infinite-projective-orbit theorem survived; only fixed finite exact lossless quotients are rejected",
+    "J": "independent Q3 symbolic implementation exercised canonical, legal-placement, permutation, and inverse controls",
+    "K": "source/oracle rank pattern and storage arithmetic are consistent, but V3 did not independently reconstruct tensors/SVD/rank controls",
+    "L": "source package and marker stale control reproduced; V3 did not independently reconstruct recurrence certificate or cycle data",
+    "M": "source WZ package reproduced at matrix level; branch-local noncommuting toy is separate and does not verify WZ geometry",
+    "N": "oversized, concatenated, cross-record-spliced packets accepted and rejected initialize mutates nonce state",
+    "O": "source/oracle exact family closure reproduced, but V3 did not independently implement the exact transfer DP and two-message baseline dominates"
+  },
+  "classifications": {
+    "I": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_FINITE_QUOTIENT_OBSTRUCTION",
+    "J": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_FINITE_SOFTWARE_BISIMULATION_OBSTRUCTION",
+    "K": "SOURCE_REPRODUCED_SOURCE_LOCAL_MULTI_PORT_TT_OBSTRUCTION",
+    "L": "SOURCE_REPRODUCED_TRANSFERABLE_BOUNDARY_HEIGHT_OBSTRUCTION_CANDIDATE",
+    "M": "SOURCE_WILCZEK_ZEE_PACKAGE_REPRODUCED_STRICT_SCOPE",
+    "N": "REJECTED_SOURCE_DEFECT",
+    "O": "SOURCE_REPRODUCED_FAMILY_SCOPED_TRANSFER_CLOSURE"
+  },
+  "closure_generated_at_head": "8646f0878d9db1a578cca28955dd3b4ccdc7d6bb",
+  "corrective_closure_manifest": "CORRECTIVE_CLOSURE_MANIFEST_V3.json",
+  "corrective_closure_manifest_sha256": "70882f74d495d84ca4ad2073ba628aed67998db36ce562ef52b57ea7dd2171f3",
+  "corrective_controls": {
+    "candidate_l_marker_stale_control_passed": true,
+    "candidate_n_fail_open_cases": [
+      "oversize_initialize_plus_one",
+      "oversize_initialize_plus_16",
+      "concatenated_initialize_stop",
+      "cross_record_splice_31_plus_1",
+      "rejected_initialize_mutates_nonce_state"
+    ],
+    "mechanism_output_classification": "BRANCH_LOCAL_EXACT_NONCOMMUTING_REVERSIBLE_FRAME_TRANSACTION_ESTABLISHED",
+    "obstruction_output_classification": "BRANCH_LOCAL_OBSTRUCTION_CHECKLIST_ESTABLISHED"
+  },
+  "evidence_root": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3",
+  "fail_closed_adjudication": true,
+  "moving_audio_branch_head_recorded": "9165ef74d9750dec63f5ed2a3a1c69f156f23135",
+  "original_v3_completed_closure_accepted": false,
+  "review_ledger_counted_as_independent_evidence": false,
+  "schema_version": "audio_noncollapse_v3_corrective_closure",
+  "scientific_source_head": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+  "small_wall_crossed": false,
+  "source_reproduction": {
+    "I": "SOURCE_REPRODUCED",
+    "J": "SOURCE_REPRODUCED",
+    "K": "SOURCE_REPRODUCED",
+    "L": "SOURCE_REPRODUCED",
+    "M": "SOURCE_REPRODUCED",
+    "N": "SOURCE_NOT_REPRODUCED",
+    "O": "SOURCE_REPRODUCED"
+  },
+  "stash_state_when_generated": "stash@{0}: On main: preserve superseded pmu first-light work before micro_equal_1 closure\nstash@{1}: On phase6/combined-observability-executor: codex-stale-pr10-hardening-before-0c4244d9-verification",
+  "transfer_results": {
+    "counterfactual_twin_component_identified": true,
+    "full_two_port_machine_law_established": false,
+    "mechanism_transfer_complete": false,
+    "noncommuting_reversible_frame_toy_established": true,
+    "obstruction_checklist_established": true,
+    "obstruction_harness_complete": false,
+    "physical_family10h_claim_changed": false
+  },
+  "worktree_status_when_generated": "M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/BOUNDARY_HEIGHT_LOWER_BOUND_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/BRANCH_LOCAL_MECHANISM_TRANSFER_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/BRANCH_LOCAL_OBSTRUCTION_HARNESS_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/CUBIC_CHAIN_TRANSFER_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/FAMILY10H_RELEVANCE_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/FINAL_PROVISIONAL_DECISION_V3.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/INDEPENDENT_REVIEW_LEDGER_V3.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/MULTI_PORT_RANK_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/NONABELIAN_HOLONOMY_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/SOURCE_REPRODUCTION_DATA_V3.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/SOURCE_REPRODUCTION_REPORT_V3.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/TWO_PORT_CATVM_RUNTIME_ATTACK_REPORT.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/TWO_PORT_CUSTODY_REPORT.md\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/VERIFICATION_CLOSURE_V3.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/attack_n_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/branch_local_transfer_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/finalize_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/source_reproduction_v3_reconcile_controls.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/verify_kl_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/verify_m_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/independent_verifier/verify_o_v3.py\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/branch_local_transfer_v3/branch_local_mechanism_transfer.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/branch_local_transfer_v3/branch_local_obstruction_harness.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_kl_v3/kl_independent_data.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_m_v3/m_independent_data.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_n_v3/n_packet_attack_data.json\n M THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_o_v3/o_independent_data.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/CORRECTIVE_AUDIT_REPORT_V3.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/CORRECTIVE_CLOSURE_MANIFEST_V3.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_n_v3/cross_record_splice_31_plus_1/\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_n_v3/rejected_initialize_mutates_nonce_state/\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/independent_n_v3/valid_stop_after_initialize_control/\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_noncollapse_candidate_unverified_v3/raw_outputs/source_reproduction_v3_primary_stale_controls/candidate_l_result_full_marker_control/"
+}

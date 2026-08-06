@@ -1,0 +1,43 @@
+{
+  "candidates": {
+    "I": {
+      "decision": "INVESTIGATE_HIGH",
+      "reason": "A correct exact infinite projective orbit theorem would be a transferable review gate against fixed finite exact phase quotients."
+    },
+    "J": {
+      "decision": "INVESTIGATE_HIGH",
+      "reason": "A complete finite transition-system bisimulation is a strong obstruction against treating root-locked finite software phase state as a distinct resource."
+    },
+    "K": {
+      "decision": "INVESTIGATE_MEDIUM",
+      "reason": "Full-rank tensor-train failure may be a useful anti-compaction warning, but it is numerical and family/order dependent."
+    },
+    "L": {
+      "decision": "INVESTIGATE_HIGH",
+      "reason": "A valid period-17 valuation/cycle lower bound would be a transferable exact boundary-alphabet obstruction, with careful scope limits."
+    },
+    "M": {
+      "decision": "INVESTIGATE_MEDIUM",
+      "reason": "Order-sensitive non-Abelian frame transport is a plausible counterfactual carrier mechanism, but compact 2x2 matrix baselines likely dominate resource claims."
+    },
+    "N": {
+      "decision": "INVESTIGATE_HIGH",
+      "reason": "Two-port full-tuple custody directly extends the Candidate E machine-boundary law and must be attacked with malformed packet controls."
+    },
+    "O": {
+      "decision": "INVESTIGATE_MEDIUM",
+      "reason": "Topology-factorized exact transfer may be useful as a relational closure mechanism, but the source already reports a stronger two-message classical dynamic-program baseline."
+    }
+  },
+  "canonical": false,
+  "created_utc": "2026-07-29T21:25:54.255874Z",
+  "discovered_post_1251_scientific_side_delta": {
+    "decision": "DEFER",
+    "package": "F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE",
+    "reason": "It is a real later scientific commit after the prompt's 1251 head, so it is frozen and recorded, but it is not one of Candidates I-O and will be used only if needed to scope Candidate L."
+  },
+  "evidence_policy": "Hashes and source labels are provenance only; investment is based on potential independent scientific value.",
+  "scientific_source_freeze": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+  "sha256": "cd2e75a774c1079f13c291e46914fcd326c2180d103bb04c0192563c311a51e5",
+  "small_wall_crossed": false
+}

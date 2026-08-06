@@ -1,0 +1,367 @@
+{
+  "candidate_bindings": {
+    "E": [
+      "CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json",
+      "catvm_necklace_shared_latent_depth_atomic_repair_service.cpp",
+      "catvm_necklace_shared_latent_depth_atomic_repair_controller.py",
+      "catvm_necklace_shared_latent_depth_accounting_repair_controller.py"
+    ],
+    "F": [
+      "four_rotor_necklace_shared_latent_depth_compiler.cpp",
+      "qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+      "CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json"
+    ],
+    "G": [
+      "EXACT_PHASE_PRECISION_RESULTS.json",
+      "four_rotor_necklace_exact_phase_precision.cpp",
+      "four_rotor_necklace_exact_phase_precision_oracle.py",
+      "qualify_four_rotor_necklace_exact_phase_precision.sh"
+    ],
+    "H": [
+      "NECKLACE_COHERENCE_TRIAD_RESULTS.md",
+      "NECKLACE_COHERENCE_TRIAD_REVIEW.json",
+      "four_rotor_necklace_coherence_triad.cpp",
+      "qualify_four_rotor_necklace_coherence_triad.sh"
+    ]
+  },
+  "copy_policy": "minimum files for candidates E F G H plus reconciliation navigation files",
+  "created_utc": "2026-07-29T08:36:03.237180Z",
+  "files": [
+    {
+      "bytes": 96090,
+      "copied_path": "source_snapshot/AUDIO_SIDE_QUEST_ROADMAP.md",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "3a7107e4c819a9f14ca69f38ab522b8732eb3eec8c57ef58cf89105a9cd7d113",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md"
+    },
+    {
+      "bytes": 171999,
+      "copied_path": "source_snapshot/AUTONOMOUS_LANE_STATE.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "9d336f15fca3ac6220c5111ab4aa1f10505d35dd2c252554769a21c4d71368c6",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUTONOMOUS_LANE_STATE.json"
+    },
+    {
+      "bytes": 41154,
+      "copied_path": "source_snapshot/CLAIM_AUTHORITY_REGISTRY.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "58bf9212b5074cca429decdd8c3582a90b57e69d0eaa3fb26252a1af94412113",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/CLAIM_AUTHORITY_REGISTRY.json"
+    },
+    {
+      "bytes": 11435,
+      "copied_path": "source_snapshot/CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "ae424586979feaba4d7b0028e784e8079d2c6f72b51d75c4842b2d0c1ed97713",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CATVM_NECKLACE_SHARED_LATENT_DEPTH_RESULTS.json"
+    },
+    {
+      "bytes": 7198,
+      "copied_path": "source_snapshot/EXACT_PHASE_PRECISION_RESULTS.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "ca76e7ae2325983e5a690f83301300298e8a7ddcf3497e321fe0475fcf9878be",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/EXACT_PHASE_PRECISION_RESULTS.json"
+    },
+    {
+      "bytes": 4312,
+      "copied_path": "source_snapshot/NECKLACE_COHERENCE_TRIAD_RESULTS.md",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "dbdb7749033649f413f8531842811ad01ea92b763c99339a99352694959f0fd7",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/NECKLACE_COHERENCE_TRIAD_RESULTS.md"
+    },
+    {
+      "bytes": 2444,
+      "copied_path": "source_snapshot/NECKLACE_COHERENCE_TRIAD_REVIEW.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "9f174a558608ccb3e355dfdbe98e10a134ee78e67f3bd405e2f159378e35bbc1",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/NECKLACE_COHERENCE_TRIAD_REVIEW.json"
+    },
+    {
+      "bytes": 3718,
+      "copied_path": "source_snapshot/CATVM_PHASE_RESULTS.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "105212549a13662bd92fde7d511b833d9228fb535fd24eaf0ba1d8fcade0646f",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CATVM_PHASE_RESULTS.json"
+    },
+    {
+      "bytes": 5022,
+      "copied_path": "source_snapshot/CATVM_RANK2_RESULTS.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "2469542b2c01d63619a5e2134938dff472b1bcc71bde736adbcad0c20e7bb8e4",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CATVM_RANK2_RESULTS.json"
+    },
+    {
+      "bytes": 6642,
+      "copied_path": "source_snapshot/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "c98137c4a733f06e54a7c54de67d63d3b82a7843df37e1d3858d1654df75bae2",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json"
+    },
+    {
+      "bytes": 3010,
+      "copied_path": "source_snapshot/FOUR_ROTOR_POST_INVERSE_CANONICAL_CLOSURE_RESULTS.md",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "3d6a5e6840990c21c09abeef6eccefe2d0f521ddb365337146b0807859db7ba4",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/FOUR_ROTOR_POST_INVERSE_CANONICAL_CLOSURE_RESULTS.md"
+    },
+    {
+      "bytes": 13998,
+      "copied_path": "source_snapshot/four_rotor_necklace_shared_latent_depth_compiler.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "7f1315d41be53056bfd715984564205714047a27f8115c8bb5123d5d7d53aade",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_shared_latent_depth_compiler.cpp"
+    },
+    {
+      "bytes": 19927,
+      "copied_path": "source_snapshot/four_rotor_necklace_shared_latent_phase.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "c4e2e678cf8379a04d7a00fbf3d5a142aa100ba03ce6aa9ae5573e3b47447ca2",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_shared_latent_phase.cpp"
+    },
+    {
+      "bytes": 5083,
+      "copied_path": "source_snapshot/four_rotor_necklace_shared_latent_owner_repair.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "9f46924eb042124049fee56642bee4de43585b5d73161a30fffabee9cb7b545c",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_shared_latent_owner_repair.cpp"
+    },
+    {
+      "bytes": 1396,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_protocol.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "10665fa0cc917f088b4d62774fe8e40c8e3914d1ae99832c2d397a77fc3f433d",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_protocol.py"
+    },
+    {
+      "bytes": 13582,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_controller.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "415feb643797fc36c820ad5b12fa33fce631b66dccb0aea778a9dd1ea651c1a4",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_controller.py"
+    },
+    {
+      "bytes": 16788,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_service.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "ab4c00478d0c5b9cd7be1a34e9729127d9f6dd64cf4b0c26b5f7fbf262733ec0",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_service.cpp"
+    },
+    {
+      "bytes": 1675,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_protocol.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "8eb6dd08a0592331c58c660ddae4feb23fdd3b1884d7baec8344bbf6e442367e",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_protocol.py"
+    },
+    {
+      "bytes": 18458,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_service.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "fcd38556a70d14bad6cd603dff26b69b1926589cdd556362b8190f1155dba206",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_service.cpp"
+    },
+    {
+      "bytes": 15658,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_controller.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "bec4c2f244f99f59841803160ef3795ec7de35b5c2a7290fb38a16793d7f81ce",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_controller.py"
+    },
+    {
+      "bytes": 4636,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_service.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "0e655fed07dbae69dae546100c4ca566ce5cdf9963d8014c577405ac1d3cb7f9",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_atomic_repair_service.cpp"
+    },
+    {
+      "bytes": 13721,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_controller.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "31399e756f61ccbc77d84f7ce1dd18f4700f9d95eb23d1ede10ea8d014e213ce",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_atomic_repair_controller.py"
+    },
+    {
+      "bytes": 4226,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "9cac4471040a483f22f2560550632d6f7523bd5f5fde96475a451524fdd35091",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_depth_accounting_repair_controller.py"
+    },
+    {
+      "bytes": 4793,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_owner_repair_service.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "683f7f5732731d5f15d451964b4bdbb4508f32a11c4aeabc1c658bdb847e0bba",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_owner_repair_service.cpp"
+    },
+    {
+      "bytes": 4013,
+      "copied_path": "source_snapshot/catvm_necklace_shared_latent_owner_repair_controller.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "b9017667b87f1b1225557955c09aee4a8d0930ae3ff49c71d571e413986a8263",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/catvm_necklace_shared_latent_owner_repair_controller.py"
+    },
+    {
+      "bytes": 36260,
+      "copied_path": "source_snapshot/four_rotor_necklace_exact_phase_precision.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "ae461c6bb5a59a33312998ef04a64e4d6524fc2ce7ff5ec5a7352ebe9e1cadce",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision.cpp"
+    },
+    {
+      "bytes": 12440,
+      "copied_path": "source_snapshot/four_rotor_necklace_exact_phase_precision_oracle.py",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "a2660805741580da40731487120b88cb4c0f6f81e7da8a592d31a369a3758d87",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_oracle.py"
+    },
+    {
+      "bytes": 16493,
+      "copied_path": "source_snapshot/four_rotor_necklace_coherence_triad.cpp",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "e1b8afd0b65a4099199a9c9d7978eb84caf314815903840defbb5b881015184c",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_coherence_triad.cpp"
+    },
+    {
+      "bytes": 4159,
+      "copied_path": "source_snapshot/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "6d183b7d8d7615319a9363bb66aa34fa0eb076deeb203e49d26d7164492e6a5c",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh"
+    },
+    {
+      "bytes": 4960,
+      "copied_path": "source_snapshot/qualify_catvm_necklace_shared_latent_depth.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "e24b552102f8994a763ad78de89dafedb57272b409548f5c3c313188e50e21e3",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth.sh"
+    },
+    {
+      "bytes": 7518,
+      "copied_path": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_atomic_repair.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "196cbb3fbd10f516b37781b878705e32b52d8781a4e12a6d7de9b61d0c73fb7a",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_atomic_repair.sh"
+    },
+    {
+      "bytes": 8722,
+      "copied_path": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "426468cd3d1425d5ee4bc92043377f4df8b2e21f5a432d47e5becfd26e7f2edc",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh"
+    },
+    {
+      "bytes": 3992,
+      "copied_path": "source_snapshot/qualify_catvm_necklace_shared_latent_owner_repair.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "218707996db7ad66fcadcdcbce76574a1d3ac81b64477e9f2f4e459e4bc9c3ed",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_owner_repair.sh"
+    },
+    {
+      "bytes": 6180,
+      "copied_path": "source_snapshot/qualify_catvm_necklace_shared_latent.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "22978f1a5461a535e145ac44879aff60e7d1a5701a8de24c507bd1d6fc8f8a84",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent.sh"
+    },
+    {
+      "bytes": 8400,
+      "copied_path": "source_snapshot/qualify_four_rotor_necklace_exact_phase_precision.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "f6a0c3e3c4b63336e663e9ab644ab281da74bcd31d5561db58b53e9fc00c9d50",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh"
+    },
+    {
+      "bytes": 4778,
+      "copied_path": "source_snapshot/qualify_four_rotor_necklace_coherence_triad.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "dbcba12184547d97710856d2ca2bd9216de1663e7b13e88d155e170b3b7e1e41",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh"
+    },
+    {
+      "bytes": 1745,
+      "copied_path": "source_snapshot/qualify_four_rotor_post_inverse_canonical_closure.sh",
+      "executable": false,
+      "git_tracked_at_frozen_sha": true,
+      "mode_octal": "0o664",
+      "sha256": "43161b4e8a6280303834362d90f3de122b8ae621f2842957a83553bf06e74d8b",
+      "source_path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_post_inverse_canonical_closure.sh"
+    }
+  ],
+  "not_copied": "full audio branch, autonomous package state outside listed files, unrelated milestones",
+  "schema_version": "audio_catvm_delta_transfer_manifest.v2",
+  "source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d"
+}

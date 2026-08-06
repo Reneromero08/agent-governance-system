@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0.0",
+  "status": "PREDECLARED_BEFORE_CAMPAIGN_EXECUTION",
+  "seed": 104729,
+  "canonical": false,
+  "small_wall_promotion": false,
+  "families": [
+    {
+      "candidate": "A",
+      "name": "f3_relation_coefficients",
+      "cases": 256,
+      "mutations": [
+        "uniform_seeded_F3_coefficients",
+        "empty_zero_set",
+        "universal_zero_set",
+        "rank_deficient",
+        "contradictory_intersection",
+        "constraint_swap",
+        "relation_presentation_reorder"
+      ],
+      "oracles": [
+        "complete_boolean_enumeration",
+        "F3_multilinear_interpolation",
+        "zero_set_equivalence"
+      ]
+    },
+    {
+      "candidate": "A",
+      "name": "inverse_and_reuse",
+      "cases": 128,
+      "mutations": [
+        "wrong_G_inverse",
+        "missing_G_inverse",
+        "F_before_G_inverse",
+        "alternating_distinct_programs",
+        "stale_G_factor_reuse"
+      ],
+      "oracles": [
+        "exact_mod3_carrier_restoration",
+        "nonzero_residual_detection"
+      ]
+    },
+    {
+      "candidate": "B",
+      "name": "dag_structure_and_numbering",
+      "cases": 96,
+      "mutations": [
+        "line_permutation",
+        "public_id_bijection",
+        "producer_numbering_permutation",
+        "consumer_numbering_permutation",
+        "chain",
+        "balanced_tree",
+        "diamond",
+        "nested_fanout",
+        "disconnected_node",
+        "cycle",
+        "unknown_child"
+      ],
+      "oracles": [
+        "generic_Kahn_topology_check",
+        "generic_fanout_derivation",
+        "exhaustive_reversible_pebble_search"
+      ]
+    },
+    {
+      "candidate": "B",
+      "name": "schedule_corruption",
+      "cases": 96,
+      "mutations": [
+        "missing_action",
+        "duplicated_action",
+        "dependency_reorder",
+        "wrong_node",
+        "capacity_reduction",
+        "literal_reverse_corruption"
+      ],
+      "oracles": [
+        "dependency_precondition_replay",
+        "capacity_bound",
+        "empty_restoration_state"
+      ]
+    },
+    {
+      "candidate": "C",
+      "name": "complete_public_schema",
+      "cases": 64,
+      "mutations": [
+        "all_public_coefficient_assignments",
+        "affine",
+        "non_affine",
+        "constant",
+        "equivalent_boundary_programs"
+      ],
+      "oracles": [
+        "symbolic_GF2_substitution",
+        "complete_assignment_evaluation",
+        "direct_four_AND_baseline"
+      ]
+    },
+    {
+      "candidate": "D",
+      "name": "quotient_horizon_and_relabeling",
+      "cases": 256,
+      "mutations": [
+        "wrong_horizon",
+        "deliberate_overmerge",
+        "deliberate_undermerge",
+        "state_relabeling",
+        "depth_greater_than_width",
+        "width_greater_than_depth",
+        "boundary_perturbation"
+      ],
+      "oracles": [
+        "raw_local_transducer",
+        "suffix_bisimulation_refinement",
+        "class_language_equality"
+      ]
+    },
+    {
+      "candidate": "D",
+      "name": "generalization_challenge",
+      "cases": 96,
+      "mutations": [
+        "homogeneous_AND",
+        "homogeneous_OR",
+        "alternating_AND_OR",
+        "seeded_nonperiodic_AND_OR",
+        "different_local_neighborhood_marker"
+      ],
+      "oracles": [
+        "reachable_raw_state_enumeration",
+        "finite_horizon_signature_partition",
+        "homogeneous_rank_law_comparison"
+      ]
+    },
+    {
+      "candidate": "ALL",
+      "name": "input_and_replay",
+      "cases": 64,
+      "mutations": [
+        "empty_input",
+        "truncated_input",
+        "oversized_integer",
+        "unknown_record",
+        "duplicate_record",
+        "deterministic_replay"
+      ],
+      "oracles": [
+        "strict_parser_rejection",
+        "byte_identical_seeded_replay"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "source_commit": "c0cee6a9475d35bc64c90ec30567826bcf3c9e9a",
+  "decisions": [
+    {
+      "candidate": "A",
+      "decision": "INVESTIGATE",
+      "reason": "Potentially reusable hidden-intermediate custody, inverse restoration, and same-carrier reuse boundary.",
+      "known_risk": "Source protocol sends the final boundary before RESTORE, contrary to the requested atomic response-after-restoration law."
+    },
+    {
+      "candidate": "B",
+      "decision": "INVESTIGATE",
+      "reason": "Potentially reusable reversible scheduler, generation/edge custody, and fail-closed final-only response mechanism.",
+      "known_risk": "The accepted scheduler is statically specialized to one 15-node topology, public ID 813, and exact 28/28/9 counters."
+    },
+    {
+      "candidate": "C",
+      "decision": "INVESTIGATE",
+      "reason": "A matched compact-baseline obstruction can prevent false non-collapse promotion even if no positive advantage survives.",
+      "known_risk": "Only four fixtures cover a 64-program public schema and important resource laws rely on self-reported counters."
+    },
+    {
+      "candidate": "D",
+      "decision": "INVESTIGATE",
+      "reason": "Continuation-equivalence quotienting is relevant to growing relation interfaces and may transfer as a family-scoped mechanism.",
+      "known_risk": "Tracked result is not hash-bound to the frozen source; production and reference share the same class formula, and snapshot memory appears omitted from reported carrier accounting."
+    }
+  ],
+  "deep_port_authorized_by_gate": true,
+  "canonical": false,
+  "claim_promotion": false
+}

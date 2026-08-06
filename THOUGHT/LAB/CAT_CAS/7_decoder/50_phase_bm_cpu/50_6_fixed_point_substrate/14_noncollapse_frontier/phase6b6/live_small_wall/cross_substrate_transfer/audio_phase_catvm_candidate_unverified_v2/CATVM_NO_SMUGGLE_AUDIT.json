@@ -1,0 +1,263 @@
+{
+  "candidate": "E",
+  "canonical": false,
+  "created_utc": "2026-07-29T09:13:36.415152Z",
+  "independent_disposition": "No copied source line shows the accounting controller computing the phase boundary. The active runtime probe did not observe hidden-value output on tested failure paths, but it did observe an oversized packet accepted as a valid request, so the concrete machine boundary is not fail-closed.",
+  "schema_version": "catvm_no_smuggle_audit.v2",
+  "sha256": "cf5c75e1fdd6b14d25f6a62110565d6d179378a54d4c45701dd8701c2c7d7fb4",
+  "small_wall_crossed": false,
+  "source_no_smuggle_claim": {
+    "content_derived_receipts": 0,
+    "controller_imports_backend_source": false,
+    "latent_values_in_response": 0,
+    "service_stderr_bytes": 0,
+    "service_stdout_bytes": 0,
+    "stage_boundary_values": 0
+  },
+  "source_reproduction": "SOURCE_NOT_REPRODUCED",
+  "static_findings": [
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 41,
+      "pattern": "historical_result",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "05b247bc0a6765a674f55790a3606c55a4604835243d449b820467f23cdcfa2d"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 42,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "3ffda1fefec178640643a922b6e886c9c7b4f506309ded9c1b3a79be2a3f205b"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 44,
+      "pattern": "historical_result",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "6bd6791d9d973cfd5d8af559dd0a9ce48df5fb47b327025dda929b438fa539f6"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 44,
+      "pattern": "stdout",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "6bd6791d9d973cfd5d8af559dd0a9ce48df5fb47b327025dda929b438fa539f6"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 45,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "3c1d579b6d68d8a2d8f8aece760de98b5de7272bfca418147977cf5dde56ce1f"
+    },
+    {
+      "disposition": "Accounting successor controller runs the historical controller and patches resource totals; this is not answer-bearing boundary computation, but it is not independent resource measurement.",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 46,
+      "pattern": "subprocess\\.run",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "HIGH",
+      "snippet_sha256": "dbef69df4b6c3a92d3f1d60a5f6b568c04c602474e747404006d5f53baa476dd"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 53,
+      "pattern": "stdout",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "c9301770147aac51780bbe26f95c8f245c679902d449a3b6d0db8e33320d0e3d"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 54,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "da6823ac98ad1af5746b48f903c73bd3dc3e6a2e823aa885ff7582ccf3803930"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 59,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "7b01a81e76c27bceb7227d9b8c489039139f16c4db48a711769330a550e589a9"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 60,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "28809956a932076d1da9c45d8239e64105d9c8aadc96dc3c258bfdc970a5d5d3"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 62,
+      "pattern": "historical_result",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "5dbb2c12ba9d17b0d7f8150df4f64312dc3d4c666f546934210354f4754aa784"
+    },
+    {
+      "disposition": "Accounting successor controller runs the historical controller and patches resource totals; this is not answer-bearing boundary computation, but it is not independent resource measurement.",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_accounting_repair_controller.py",
+      "line": 94,
+      "pattern": "resource\\.update",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "HIGH",
+      "snippet_sha256": "e783770f4def0ba437930188fb5fefa22a8f5dabc61fefda3ef9b73febb2e772"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_controller.py",
+      "line": 10,
+      "pattern": "import\\s+catvm_necklace_shared_latent_depth_controller",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "e0d0eae24624d8d9eddf4d945e541f612fc3a106627d62e3595977bfe2118fba"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_controller.py",
+      "line": 370,
+      "pattern": "stdout",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "475bd2a446722db12d78aed60b65540f52eed37bf5e50760597af5ca0d5de84d"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_controller.py",
+      "line": 371,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "eeea237eee2326b2a42fa393d064794db5e103125b8def61ab846a55b352e5ac"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/catvm_necklace_shared_latent_depth_atomic_repair_service.cpp",
+      "line": 3,
+      "pattern": "service\\.cpp",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "4c5179a2d72113f69abaedaf48e9835bd4003a66a1885cb858ed20adc6083f99"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 16,
+      "pattern": "service\\.cpp",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "4d9debdde6ee2c153f1e684e40c7c77e528aa622ee3c62974f51595e34198af7"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 20,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "650e18025436b0c1d6d504a71ae6434a8b0fd6c21fd32ddab19063ef7d202367"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 24,
+      "pattern": "four_rotor_necklace_shared_latent_depth_compiler",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "1542a093cadd6d65cc35137e737bbb7443523c91b4cff3c2e64f089e83c51d1c"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 41,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "5f98c95fb1de2890d58dbb627d0d8abc3c4885ef066e2b337bdaf7ac26ecb7ca"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 42,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "e84a7a3dcd5fbbf39a038ed5e957093f0a112ac3f37bdbb987fe952b0d4c3eb2"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 133,
+      "pattern": "stdout",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "e769dc4f1392839c42541f8088f978aedf93dd35f59e56e8da2f7c0b9b77fc08"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 134,
+      "pattern": "stderr",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "e065ef63b23096ee5485e9d1dd1b2bbe5bfe070f60094791e94670e237cf3db7"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 179,
+      "pattern": "four_rotor_necklace_shared_latent_depth_compiler",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "fc00444fe48eea78a7ee14b714927105326053f73321875d7f16459a441e35df"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 186,
+      "pattern": "four_rotor_necklace_shared_latent_depth_compiler",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "8ea71ec6dce311c75cf7f4b03645d97af0df72060eeb76ed451a927c1d8eda82"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 187,
+      "pattern": "service\\.cpp",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "09fadffd7ef0af5ef30684375f92a59b47e93cecdb95fe4b5dde17d955192ca3"
+    },
+    {
+      "disposition": "recorded",
+      "file": "source_snapshot/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "line": 193,
+      "pattern": "four_rotor_necklace_shared_latent_depth_compiler",
+      "reachability": "accepted_qualification_path_or_static_audit_path",
+      "severity": "INFO",
+      "snippet_sha256": "1542a093cadd6d65cc35137e737bbb7443523c91b4cff3c2e64f089e83c51d1c"
+    }
+  ]
+}

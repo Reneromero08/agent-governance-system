@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0.0",
+  "result": "PASS",
+  "claim": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+  "scope": "BOUNDED_LINUX_USERSPACE_SOFTWARE_PHASE_BACKEND",
+  "transaction": {
+    "F": "NATIVE_BOOLEAN_F3_EXISTENTIAL_COMPOSITION",
+    "intermediate": "Y_PHASE_RESIDENT_UNDECODED",
+    "G": "NATIVE_BOOLEAN_F3_INTERSECTION_CONSUMING_ACTUAL_Y",
+    "projected_boundary": "Z_ONLY",
+    "restoration": "ACTUAL_INVERSE_G_THEN_ACTUAL_INVERSE_F",
+    "reuse": "DIFFERENT_PROGRAM_ON_SAME_ACTUAL_RESTORED_CARRIER"
+  },
+  "primary_boundary_coefficients": [0, 2, 1, 1],
+  "primary_boundary_fnv1a64": "46622b9554aa5e66",
+  "reuse_boundary_coefficients": [1, 2, 0, 2],
+  "reuse_boundary_fnv1a64": "08ff5c9dbe7d30c7",
+  "carrier": {
+    "logical_complex_cells": 24,
+    "physical_complex_values": 48,
+    "logical_bytes": 768,
+    "mapped_locked_bytes": 4096,
+    "creation_count": 1
+  },
+  "restoration": {
+    "generations": 1002,
+    "alternating_repeat_cycles": 1000,
+    "maximum_abs_error": 4.99600361081e-16,
+    "predeclared_tolerance": 2e-12,
+    "invariant_state_exact": true,
+    "generation_transition_exact": true,
+    "transient_state_exact": true,
+    "snapshot_reload": false
+  },
+  "no_smuggle": {
+    "intermediate_decodes": 0,
+    "intermediate_projection_denied": true,
+    "service_stdout_bytes": 0,
+    "service_stderr_bytes": 0,
+    "strict_protocol": true,
+    "seccomp_allowlist_active": true,
+    "proc_mem_denied": true,
+    "proc_maps_denied": true,
+    "proc_fd_denied": true,
+    "process_vm_readv_denied": true,
+    "ptrace_denied": true,
+    "pidfd_getfd_denied": true,
+    "controller_not_linked_to_phase_core": true
+  },
+  "inverse_controls": {
+    "wrong_g_restoration_error": 1.73205080757,
+    "missing_g_restoration_error": 1.73205080757,
+    "reordered_noncommuting_restoration_error": 1.73205080757,
+    "all_discriminated": true
+  },
+  "resources": {
+    "compiled_program_bytes": 48,
+    "compiled_morphisms": 2,
+    "maximum_temporary_complex_values": 52,
+    "native_compose_calls": 2004,
+    "native_intersection_calls": 2004,
+    "native_symbol_products": 224448,
+    "phase_cell_updates": 48096,
+    "inverse_factor_recomputations": 2004,
+    "snapshot_bytes_written": 0,
+    "snapshot_bytes_reloaded": 0,
+    "boundary_decodes": 4008,
+    "restoration_cell_checks": 24048,
+    "request_bytes": 55938,
+    "response_bytes": 1199833,
+    "request_packets": 6021,
+    "response_packets": 6021
+  },
+  "snapshot_comparison": {
+    "claim": "CATVM_SNAPSHOT_BACKED_TRANSACTIONAL_REUSE_ESTABLISHED",
+    "actual_inverse": false,
+    "snapshot_reload": true,
+    "mapped_locked_bytes": 8192,
+    "snapshot_bytes_written": 25344,
+    "snapshot_bytes_reloaded": 25344
+  },
+  "warm_average_transaction_ns": {
+    "direct_process_phase": 14853.235,
+    "isolated_inert_boundary": 58018.604,
+    "snapshot_catvm": 72610.276,
+    "in_place_catvm": 76614.666
+  },
+  "performance_advantage_claim": false,
+  "qualifier": {
+    "result": "PASS",
+    "compiler_builds": 8,
+    "sanitizers": "PASS_IN_PLACE_AND_SNAPSHOT",
+    "evidence_directory_at_run": "/tmp/catvm-qual.H79vc8",
+    "accepted_result_sha256": "7d78cab114e8f5a44084f649716d418bad596ef52f36b5a1b769398792e0acbc",
+    "snapshot_result_sha256": "1c30830a8c161e46f70969006cea343657e29d9d19e384f107fbeb90875dbb9e"
+  },
+  "not_established": [
+    "ROOT_OR_KERNEL_SECRECY",
+    "MICROARCHITECTURAL_SECRECY",
+    "ARBITRARY_RELATIONAL_GRAPH_TOPOLOGY",
+    "COMPACT_WIDE_INTERFACE_RELATIONS",
+    "GENERAL_HOLOGRAPHIC_RELATIONAL_COMPUTATION",
+    "COMPUTATIONAL_ADVANTAGE",
+    "PHYSICAL_WAVEFORM_OR_SILICON_COMPUTATION",
+    "SMALL_WALL_CROSSING",
+    "UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "terminal": false
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "CATVM_TWO_SHARED_LATENT_PUBLIC_PROGRAMS_V1",
+  "programs": [
+    {
+      "name": "primary_six",
+      "modules": [
+        {"feature": "collision", "scope": "port_a", "axis": "x", "separation": 0, "strength": 3, "chirp": 1},
+        {"feature": "cyclic_separation", "scope": "joint", "axis": "controlled_phase", "separation": 1, "strength": 5, "chirp": 4},
+        {"feature": "cyclic_separation", "scope": "port_b", "axis": "y", "separation": 3, "strength": 7, "chirp": 6},
+        {"feature": "collision", "scope": "port_a", "axis": "z", "separation": 0, "strength": 11, "chirp": 9},
+        {"feature": "cyclic_separation", "scope": "joint", "axis": "controlled_phase", "separation": 2, "strength": 4, "chirp": 8},
+        {"feature": "cyclic_separation", "scope": "port_b", "axis": "x", "separation": 7, "strength": 14, "chirp": 13}
+      ]
+    },
+    {
+      "name": "reuse_five",
+      "modules": [
+        {"feature": "cyclic_separation", "scope": "port_b", "axis": "z", "separation": 2, "strength": 4, "chirp": 3},
+        {"feature": "collision", "scope": "joint", "axis": "controlled_phase", "separation": 0, "strength": 9, "chirp": 7},
+        {"feature": "cyclic_separation", "scope": "port_a", "axis": "y", "separation": 5, "strength": 12, "chirp": 11},
+        {"feature": "cyclic_separation", "scope": "joint", "axis": "controlled_phase", "separation": 4, "strength": 6, "chirp": 2},
+        {"feature": "collision", "scope": "port_b", "axis": "x", "separation": 0, "strength": 6, "chirp": 14}
+      ]
+    },
+    {
+      "name": "alternate_seven",
+      "modules": [
+        {"feature": "collision", "scope": "port_b", "axis": "y", "separation": 0, "strength": 2, "chirp": 5},
+        {"feature": "cyclic_separation", "scope": "port_a", "axis": "x", "separation": 4, "strength": 6, "chirp": 3},
+        {"feature": "cyclic_separation", "scope": "joint", "axis": "controlled_phase", "separation": 5, "strength": 8, "chirp": 7},
+        {"feature": "cyclic_separation", "scope": "port_b", "axis": "z", "separation": 1, "strength": 3, "chirp": 11},
+        {"feature": "collision", "scope": "joint", "axis": "controlled_phase", "separation": 0, "strength": 13, "chirp": 12},
+        {"feature": "cyclic_separation", "scope": "port_a", "axis": "y", "separation": 8, "strength": 9, "chirp": 2},
+        {"feature": "cyclic_separation", "scope": "port_b", "axis": "x", "separation": 6, "strength": 10, "chirp": 14}
+      ]
+    }
+  ]
+}

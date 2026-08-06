@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-07-29T08:36:03.237180Z",
+  "environment": {
+    "bash": {
+      "ok": true,
+      "output": "GNU bash, version 5.3.9(1)-release (x86_64-pc-linux-gnu)\nCopyright (C) 2025 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>\n\nThis is free software; you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law."
+    },
+    "clang": {
+      "error": "[Errno 2] No such file or directory: 'clang'",
+      "ok": false
+    },
+    "g++": {
+      "ok": true,
+      "output": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "gcc": {
+      "ok": true,
+      "output": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    "git": {
+      "ok": true,
+      "output": "git version 2.53.0"
+    },
+    "platform": "Linux-7.0.0-28-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4",
+    "repo_venv_python": {
+      "ok": true,
+      "output": "Python 3.14.4"
+    },
+    "uname": {
+      "ok": true,
+      "output": "Linux reneshizzle-B550-GAMING-X-V2 7.0.0-28-generic #28-Ubuntu SMP PREEMPT_DYNAMIC Sun Jun 21 01:01:36 UTC 2026 x86_64 GNU/Linux"
+    }
+  },
+  "epistemic_status": [
+    "UPDATED_SOURCE_CLAIM",
+    "NOT_YET_BRANCH_INDEPENDENTLY_VERIFIED",
+    "NOT_CANONICAL",
+    "NO_PHYSICAL_TRANSFER"
+  ],
+  "frozen_source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "generation": "generation_two",
+  "moving_branch_head_observed": "04bf8b0016470539b228b5998517bf6d1fb6c7dd",
+  "moving_branch_matches_requested_freeze": false,
+  "physical_family10h_evidence_modified": false,
+  "predecessor_directory": "audio_phase_catvm_candidate_unverified_v1",
+  "predecessor_verification_head": "74c331fe1434628ca1f502da6ca63b5cc75188c5",
+  "repository": "Reneromero08/agent-governance-system",
+  "requested_frozen_source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "schema_version": "audio_catvm_delta_source_receipt.v2",
+  "small_wall_changed": false,
+  "source_parent_commit": "7d53e458cade9d28cc2a39e8a80ddbb8c49a21b0",
+  "source_tree": "e46c801e464655423529a752f07df9d877698bcf",
+  "source_worktree": "/tmp/ags-audio-source-6f39766-v2",
+  "source_worktree_status_short": "",
+  "target_branch": "task/audio-catvm-independent-verification",
+  "target_integration_branch": "codex/family10h-tomography-repair",
+  "updated_source_branch": "codex/audio-frequency-wave-substrate"
+}

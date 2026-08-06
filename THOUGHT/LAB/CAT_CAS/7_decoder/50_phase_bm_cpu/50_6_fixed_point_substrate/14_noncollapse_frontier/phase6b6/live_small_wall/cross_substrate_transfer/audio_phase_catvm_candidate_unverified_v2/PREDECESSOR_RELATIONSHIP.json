@@ -1,0 +1,72 @@
+{
+  "predecessor_classifications": {
+    "A": "REJECTED_SOURCE_DEFECT",
+    "B": "REJECTED_FIXTURE_SPECIALIZATION",
+    "C": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_OBSTRUCTION",
+    "D": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL"
+  },
+  "predecessor_generation": "v1",
+  "schema_version": "audio_catvm_predecessor_relationship.v2",
+  "source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "successor_candidates": {
+    "E": {
+      "defects_claimed_repaired": [
+        "final response before restoration",
+        "missing owner binding",
+        "resource total omission of live generator matrix"
+      ],
+      "distinct_source_identity": true,
+      "final_claimed_successor": "CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "intermediate_repairs": [
+        "owner repair",
+        "atomic response ordering repair",
+        "resource accounting repair"
+      ],
+      "rejected_predecessor": "A original CATVM open intermediate composition",
+      "shares_code_with_predecessor": "shares necklace latent components, distinct repair service/controller paths",
+      "subclaims_preserved": [
+        "hidden resident state",
+        "actual forward-to-next-stage consumption",
+        "inverse restoration",
+        "same-carrier reuse"
+      ]
+    },
+    "F": {
+      "defects_claimed_repaired": [
+        "limits to public topology law instead of general scheduler"
+      ],
+      "distinct_source_identity": true,
+      "final_claimed_successor": "TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_ACROSS_INCREASING_DEPTH",
+      "rejected_predecessor": "B scheduler fixture generality claim",
+      "shares_code_with_predecessor": "new necklace public topology compiler; not rank-2 DAG source",
+      "subclaims_preserved": [
+        "fixed carrier reuse",
+        "reverse rematerialization"
+      ]
+    },
+    "G": {
+      "defects_claimed_repaired": [
+        "separates fixed logical cells from material exact precision growth"
+      ],
+      "distinct_source_identity": true,
+      "final_claimed_successor": "BOUNDED_EXACT_DYADIC_CYCLOTOMIC_PHASE_PRECISION_GROWTH_ON_FIXED_570_CELL_NECKLACE_LATENT_CARRIER_WITH_EXACT_RESTORATION_AND_REUSE",
+      "rejected_predecessor": "none direct; obstruction successor to fixed-cell positive readings",
+      "shares_code_with_predecessor": "uses necklace topology concept but separate exact arithmetic implementation",
+      "subclaims_preserved": [
+        "same carrier reuse under exact arithmetic"
+      ]
+    },
+    "H": {
+      "defects_claimed_repaired": [
+        "separates coherence sensitivity from positive resource claim"
+      ],
+      "distinct_source_identity": true,
+      "final_claimed_successor": "BOUNDED_MATCHED_COHERENT_INITIAL_AND_EACH_STEP_NECKLACE_DEPHASED_CLASSICAL_GENERATOR_SMALL_WALL_RESOURCE_DIAGNOSTIC",
+      "rejected_predecessor": "none direct; coherence diagnostic/obstruction successor",
+      "shares_code_with_predecessor": "uses necklace recurrence family",
+      "subclaims_preserved": [
+        "compact recurrence baseline as matched comparator"
+      ]
+    }
+  }
+}

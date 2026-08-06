@@ -1,0 +1,146 @@
+{
+  "candidates": {
+    "I": {
+      "fixed_object_count": "two analytic cells in declared HT theorem",
+      "growing_or_unbounded_quantity": "exact projective orbit cardinality is infinite",
+      "not_counted_as": [
+        "physical_memory_lower_bound",
+        "continuous_precision_claim"
+      ],
+      "strongest_baseline": "identical indexed two-cell exact recurrence or controlled approximation with explicit error law"
+    },
+    "J": {
+      "information_lower_bound_bits_per_register": 1.584962500721156,
+      "native_complex_payload_dominated": true,
+      "semantic_state": "Q3 symbol per register",
+      "strongest_baseline": "packed Q3 symbolic simulator / possible program-specialized transition table",
+      "two_bit_packing_available": true
+    },
+    "K": {
+      "dense_cells": [
+        1140,
+        2280,
+        4560,
+        9120,
+        18240
+      ],
+      "dense_smaller_all_tested": true,
+      "scope": "complex cell accounting, not whole-process RSS",
+      "temporary_complex_cells": [
+        6840,
+        13680,
+        27360,
+        54720,
+        109440
+      ],
+      "tt_cells": [
+        1160,
+        2364,
+        4900,
+        10484,
+        23700
+      ]
+    },
+    "L": {
+      "compact_exponent_ledger_upper_bound": "O_LOG_N_BITS_FOR_THE_PI_EXPONENT_ALONE",
+      "cycle_nonzero_densities": {
+        "primary": {
+          "denominator": 1632,
+          "numerator": 1555
+        },
+        "reuse": {
+          "denominator": 7344,
+          "numerator": 6913
+        }
+      },
+      "height_formula": "CEIL((272*N+16)/3)",
+      "not_established": [
+        "LINEAR_BIT_LOWER_BOUND",
+        "NO_COMPACT_VARIABLE_LENGTH_EXACT_ENCODING",
+        "GENERIC_MACHINE_STATE_MEMORY_LOWER_BOUND",
+        "ONLINE_SPACE_LOWER_BOUND",
+        "POINTWISE_OMEGA_LOG_N_BITS_AT_EVERY_PERIOD",
+        "LOWER_BOUND_WITH_PERIOD_INDEX_OR_EXTERNAL_COUNTER_FREE",
+        "NO_COMPACT_INDEXED_GENERATOR",
+        "FULL_CARRIER_OBJECT_STATE_EQUALITY_AFTER_RESTORATION",
+        "BOUNDED_REPEATED_USE_GENERATION_AND_LEASE_METADATA",
+        "DISTINCT_PHASE_RESOURCE",
+        "COMPUTATIONAL_ADVANTAGE",
+        "SMALL_WALL_CROSSING",
+        "CATVM_CUSTODY",
+        "CATALYTIC_INFERENCE",
+        "PHYSICAL_WAVEFORM_EXECUTION",
+        "REPLACEMENT_OF_PHYSICAL_BITS_WITH_PI",
+        "UNBOUNDED_COMPUTATION"
+      ]
+    },
+    "M": {
+      "closed_form_modules_available": true,
+      "matched_compact_matrix_recurrence_identical": true,
+      "resident_frame": "2x2 complex128 matrix/frame",
+      "runtime_advantage_claimed": false
+    },
+    "N": {
+      "classification": "REJECTED_SOURCE_DEFECT",
+      "long_evidence_root_source_reproduction_failed": true,
+      "packet_fail_open_cases": [
+        "oversize_initialize_plus_one",
+        "oversize_initialize_plus_16",
+        "concatenated_initialize_stop"
+      ],
+      "short_path_source_reproduction_passed_twice": true,
+      "transfer_resource_claim_accepted": false
+    },
+    "O": {
+      "maximum_message_integer_payload_bits": [
+        869,
+        1837,
+        4653,
+        13432,
+        35191,
+        88872,
+        216589
+      ],
+      "maximum_single_coefficient_signed_bits": [
+        3,
+        6,
+        10,
+        18,
+        34,
+        68,
+        136
+      ],
+      "reversible_pebble_integer_cells": [
+        544,
+        816,
+        1088,
+        1360,
+        1632,
+        1904,
+        2176
+      ],
+      "reversible_pebble_slots": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "two_message_baseline_dominates": true,
+      "two_message_streaming_cells": [
+        544,
+        544,
+        544,
+        544,
+        544,
+        544,
+        544
+      ]
+    }
+  },
+  "canonical": false,
+  "schema_version": "audio_noncollapse_v3_resource_accounting",
+  "small_wall_crossed": false
+}

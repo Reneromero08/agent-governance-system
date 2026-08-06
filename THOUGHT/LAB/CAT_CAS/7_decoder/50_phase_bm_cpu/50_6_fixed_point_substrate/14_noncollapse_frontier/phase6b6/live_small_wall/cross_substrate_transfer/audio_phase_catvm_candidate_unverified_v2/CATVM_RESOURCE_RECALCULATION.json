@@ -1,0 +1,37 @@
+{
+  "candidate": "E",
+  "canonical": false,
+  "classification": "RESOURCE_ACCOUNTING_REPRODUCED_WITH_DECLARED_SCOPE",
+  "counted_scope": [
+    "570 carrier complex cells",
+    "570 restoration baseline complex cells",
+    "285 per-module fiber cells",
+    "289 live generator matrix cells",
+    "855 generator work cells",
+    "570 reuse reference cells on reuse path",
+    "17 persistent plan-root complex-cell equivalent"
+  ],
+  "created_utc": "2026-07-29T09:13:36.416030Z",
+  "matches_declared_scope": true,
+  "omitted_or_explicitly_unbounded": {
+    "allocator_native_library_os_socket_and_controller_memory_bounded": false,
+    "controller_buffers_counted_as_physical_peak": false,
+    "executable_size_counted": false,
+    "whole_process_rss_claimed": false
+  },
+  "recalculation": {
+    "primary_peak_excluding_persistent_roots_recalculated": 2569,
+    "primary_peak_excluding_persistent_roots_source": 2569,
+    "primary_peak_including_persistent_roots_recalculated": 2586,
+    "primary_peak_including_persistent_roots_source": 2586,
+    "reuse_peak_excluding_persistent_roots_recalculated": 3139,
+    "reuse_peak_excluding_persistent_roots_source": 3139,
+    "reuse_peak_including_persistent_roots_recalculated": 3156,
+    "reuse_peak_including_persistent_roots_source": 3156
+  },
+  "schema_version": "catvm_resource_recalculation.v2",
+  "scientific_disposition": "Declared arithmetic-cell totals reproduce after adding the omitted 289-cell generator matrix, but the scope remains too narrow for a complete physical memory claim and E's exact source qualifier fails.",
+  "sha256": "e9c323e74673bcfa888c9b9486fceb1efce9888e1012deefdedf2f4eeef0acda",
+  "small_wall_crossed": false,
+  "source_reproduction": "SOURCE_NOT_REPRODUCED"
+}

@@ -1,0 +1,310 @@
+{
+  "canonical": false,
+  "continuation_note": "No additional helper agent was used for this consolidation; review roles are grounded in branch-local evidence files.",
+  "disagreements": [
+    {
+      "issue": "Candidate D transfer scope",
+      "resolution": "Restricted-family quotient is independently reproduced, but mixed/nonperiodic challenges prevent transfer classification."
+    },
+    {
+      "issue": "Candidate B scheduler value",
+      "resolution": "Mathematical schedule for the public graph is real, but source implementation remains fixed-topology and is classified as fixture specialization."
+    }
+  ],
+  "evidence": {
+    "BASELINE_CHALLENGE_REPORT.md": {
+      "bytes": 1339,
+      "path": "BASELINE_CHALLENGE_REPORT.md",
+      "sha256": "7f42c1f728ab1307661c00cabfd2eda6fbe476c918dd0c0e5b391e5bd0679171"
+    },
+    "FINAL_PROVISIONAL_DECISION.md": {
+      "bytes": 5795,
+      "path": "FINAL_PROVISIONAL_DECISION.md",
+      "sha256": "00367b1a4cf3dbde892267f35820eed626ebbc9e902eacf5cd35b0167a4e7a59"
+    },
+    "INDEPENDENT_RECONSTRUCTION_REPORT.md": {
+      "bytes": 6976,
+      "path": "INDEPENDENT_RECONSTRUCTION_REPORT.md",
+      "sha256": "f1994845af9fb4e064d2cda31b7305a03c8bffe314c26cb2a028979af4c58639"
+    },
+    "LOCAL_VERIFICATION_COMMANDS.json": {
+      "bytes": 2442,
+      "path": "LOCAL_VERIFICATION_COMMANDS.json",
+      "sha256": "3c317f24fe3d4bbc8b1af98bdb91b727ad4a064829828896ad1baa8ff99f153a"
+    },
+    "MACHINE_BOUNDARY_ATTACK_REPORT.md": {
+      "bytes": 2195,
+      "path": "MACHINE_BOUNDARY_ATTACK_REPORT.md",
+      "sha256": "05e8fbff2a6fae06e20fcc136ac430dc21860a996650fa28cae4e91412269b56"
+    },
+    "MUTATION_CAMPAIGN.json": {
+      "bytes": 4094,
+      "path": "MUTATION_CAMPAIGN.json",
+      "sha256": "1a3ff99bb66af5c59c6f0531a6dec24f5cfddea78b541450793fa8746aa5bc88"
+    },
+    "MUTATION_PLAN.json": {
+      "bytes": 3809,
+      "path": "MUTATION_PLAN.json",
+      "sha256": "48234de9fcd00ea58a464fdd87740c544332ca349e329464e00703c2b72b7778"
+    },
+    "QUOTIENT_GENERALIZATION_REPORT.md": {
+      "bytes": 1258,
+      "path": "QUOTIENT_GENERALIZATION_REPORT.md",
+      "sha256": "7bbdcda59ad5ebc0f4fedca76d86394d08829c9c9c3ed65e33c7a23e28b7e24f"
+    },
+    "RESTORATION_REUSE_STRESS.json": {
+      "bytes": 23271,
+      "path": "RESTORATION_REUSE_STRESS.json",
+      "sha256": "271604609c40cbe1d455623a68856571671d8f4d1e117455eb14b32681e67aad"
+    },
+    "SOURCE_RECEIPT.json": {
+      "bytes": 2698,
+      "path": "SOURCE_RECEIPT.json",
+      "sha256": "ed1ce0eb440244950b5f2b7b17d8907bc72fa83f263fa1a0caa885e44924c7bb"
+    },
+    "SOURCE_REPRODUCTION_REPORT.md": {
+      "bytes": 6608,
+      "path": "SOURCE_REPRODUCTION_REPORT.md",
+      "sha256": "2d2e0cfdd75233f876d51a4b4e32d07540ce2f1b64fbeb2df6c763c680812d86"
+    },
+    "STATIC_ANTI_SMUGGLE_AUDIT.json": {
+      "bytes": 11041,
+      "path": "STATIC_ANTI_SMUGGLE_AUDIT.json",
+      "sha256": "a7998846b25c2dc23f80af0db6d128d8678ebdbd35671e073456e3e6204a483c"
+    },
+    "TRANSFER_MANIFEST.json": {
+      "bytes": 2547,
+      "path": "TRANSFER_MANIFEST.json",
+      "sha256": "dedd47d98f1792378a39d01472a5882e14c08399486a93e46c73efdb1ee23d66"
+    },
+    "TRANSFER_RELEVANCE_REPORT.md": {
+      "bytes": 1570,
+      "path": "TRANSFER_RELEVANCE_REPORT.md",
+      "sha256": "ae5692ecaf449f118c534a6da589f009181dba33463ac1a6b6ed0c08d72642f0"
+    }
+  },
+  "generated_utc": "2026-07-28T05:39:53.220972Z",
+  "result_sha256": "17c34e88d808687ad1a2b0e1bcffd0685bb39f07a5153805d34856629be4ab07",
+  "reviewers": [
+    {
+      "assumptions": [
+        "Frozen source SHA is an untrusted input.",
+        "A source result JSON is not proof."
+      ],
+      "attacks_attempted": [
+        "Exact source qualifier execution",
+        "Deleted required result artifact",
+        "Corrupted required result artifact",
+        "Accepted-path source scan"
+      ],
+      "decision": "REJECT A SOURCE PROTOCOL; DO NOT TRANSFER B IMPLEMENTATION AS GENERAL",
+      "evidence_inspected": [
+        {
+          "bytes": 2698,
+          "path": "SOURCE_RECEIPT.json",
+          "sha256": "ed1ce0eb440244950b5f2b7b17d8907bc72fa83f263fa1a0caa885e44924c7bb"
+        },
+        {
+          "bytes": 6608,
+          "path": "SOURCE_REPRODUCTION_REPORT.md",
+          "sha256": "2d2e0cfdd75233f876d51a4b4e32d07540ce2f1b64fbeb2df6c763c680812d86"
+        },
+        {
+          "bytes": 11041,
+          "path": "STATIC_ANTI_SMUGGLE_AUDIT.json",
+          "sha256": "a7998846b25c2dc23f80af0db6d128d8678ebdbd35671e073456e3e6204a483c"
+        }
+      ],
+      "findings": [
+        "A and B did not reproduce exactly as declared.",
+        "A source protocol returns final boundary before restoration.",
+        "B scheduler remains fixed to the copied public graph."
+      ],
+      "methods": [
+        "Fresh detached source checkout",
+        "Exact qualifier runs",
+        "Generated artifact deletion and corruption controls",
+        "Static source and script ledger"
+      ],
+      "role": "Reviewer A: source and qualifier audit",
+      "unresolved_risks": [
+        "A repaired source-side wrapper was not implemented in this branch.",
+        "B needs a generic public-topology scheduler test."
+      ]
+    },
+    {
+      "assumptions": [
+        "Public formats are the only mathematical authority.",
+        "Independent enumeration can be used for bounded public cases."
+      ],
+      "attacks_attempted": [
+        "Wrong inverse controls",
+        "Bad graph replay",
+        "Compact baseline search",
+        "Overmerge and undermerge quotient controls"
+      ],
+      "decision": "CLEAN-ROOM SUPPORTS C; A/B/D ARE LIMITED BY TRANSFER SCOPE",
+      "evidence_inspected": [
+        {
+          "bytes": 6976,
+          "path": "INDEPENDENT_RECONSTRUCTION_REPORT.md",
+          "sha256": "f1994845af9fb4e064d2cda31b7305a03c8bffe314c26cb2a028979af4c58639"
+        },
+        {
+          "bytes": 4094,
+          "path": "MUTATION_CAMPAIGN.json",
+          "sha256": "1a3ff99bb66af5c59c6f0531a6dec24f5cfddea78b541450793fa8746aa5bc88"
+        }
+      ],
+      "findings": [
+        "A algebra and restoration controls reconstruct for bounded cases.",
+        "B 15-node schedule reconstructs for the declared graph.",
+        "C compact baseline dominates the fixed schema.",
+        "D quotient reconstructs for homogeneous restricted families."
+      ],
+      "methods": [
+        "Scalar relation enumeration",
+        "Independent DAG dependency analysis",
+        "Symbolic GF(2) public-schema derivation",
+        "Continuation-equivalence partitioning"
+      ],
+      "role": "Reviewer B: clean-room mathematical reconstruction",
+      "unresolved_risks": [
+        "D is not demonstrated for mixed/nonperiodic families.",
+        "B reconstruction does not prove the source scheduler is general."
+      ]
+    },
+    {
+      "assumptions": [
+        "Mutation families must be predeclared.",
+        "A final response ordering failure invalidates the source machine-boundary claim."
+      ],
+      "attacks_attempted": [
+        "Relation coefficient variation",
+        "Topology and numbering variation",
+        "Wrong, missing, and reordered restoration",
+        "Final response before restoration check"
+      ],
+      "decision": "A SOURCE IMPLEMENTATION REJECTED; REPAIRED MACHINE LAW REMAINS WORTH TESTING",
+      "evidence_inspected": [
+        {
+          "bytes": 3809,
+          "path": "MUTATION_PLAN.json",
+          "sha256": "48234de9fcd00ea58a464fdd87740c544332ca349e329464e00703c2b72b7778"
+        },
+        {
+          "bytes": 4094,
+          "path": "MUTATION_CAMPAIGN.json",
+          "sha256": "1a3ff99bb66af5c59c6f0531a6dec24f5cfddea78b541450793fa8746aa5bc88"
+        },
+        {
+          "bytes": 23271,
+          "path": "RESTORATION_REUSE_STRESS.json",
+          "sha256": "271604609c40cbe1d455623a68856571671d8f4d1e117455eb14b32681e67aad"
+        },
+        {
+          "bytes": 2195,
+          "path": "MACHINE_BOUNDARY_ATTACK_REPORT.md",
+          "sha256": "05e8fbff2a6fae06e20fcc136ac430dc21860a996650fa28cae4e91412269b56"
+        }
+      ],
+      "findings": [
+        "Seed 104729 campaign passed its 5 result families.",
+        "A final boundary appears before RESTORE in the source protocol.",
+        "The repaired reference wrapper fails closed on restoration variants."
+      ],
+      "methods": [
+        "Seeded mutation campaign",
+        "Malformed input controls",
+        "Source service packet probes",
+        "Branch-local repaired reference transaction"
+      ],
+      "role": "Reviewer C: mutation and boundary-order campaign",
+      "unresolved_risks": [
+        "No source-side A repair was ported.",
+        "No broad B topology generator was ported into production service form."
+      ]
+    },
+    {
+      "assumptions": [
+        "Problem-size scaling must not be replaced by repetition.",
+        "Compact public baselines must be matched against the same boundary."
+      ],
+      "attacks_attempted": [
+        "Fixed-schema formula challenge",
+        "Equivalent public program collisions",
+        "Table compression comparison"
+      ],
+      "decision": "C IS A TRANSFERABLE OBSTRUCTION, NOT A POSITIVE CLAIM",
+      "evidence_inspected": [
+        {
+          "bytes": 1339,
+          "path": "BASELINE_CHALLENGE_REPORT.md",
+          "sha256": "7f42c1f728ab1307661c00cabfd2eda6fbe476c918dd0c0e5b391e5bd0679171"
+        },
+        {
+          "bytes": 6976,
+          "path": "INDEPENDENT_RECONSTRUCTION_REPORT.md",
+          "sha256": "f1994845af9fb4e064d2cda31b7305a03c8bffe314c26cb2a028979af4c58639"
+        }
+      ],
+      "findings": [
+        "C public programs checked: 64",
+        "C unique final boundaries: 16",
+        "The compact baseline remains stronger for the fixed schema."
+      ],
+      "methods": [
+        "Direct formula search",
+        "Public-program table enumeration",
+        "Resource-law comparison by declared schema"
+      ],
+      "role": "Reviewer D: baseline and resource-law challenge",
+      "unresolved_risks": [
+        "The obstruction should be retested on any larger or different public schema."
+      ]
+    },
+    {
+      "assumptions": [
+        "No phase arithmetic or software timing transfers to physical Family 10h.",
+        "Only abstract mechanisms can be carried forward."
+      ],
+      "attacks_attempted": [
+        "Transfer-scope narrowing",
+        "Positive-claim separation from obstruction evidence",
+        "Family-scope challenge for quotient mechanism"
+      ],
+      "decision": "CONTINUE ONLY BOUNDED TRANSFER EXPERIMENTS",
+      "evidence_inspected": [
+        {
+          "bytes": 1570,
+          "path": "TRANSFER_RELEVANCE_REPORT.md",
+          "sha256": "ae5692ecaf449f118c534a6da589f009181dba33463ac1a6b6ed0c08d72642f0"
+        },
+        {
+          "bytes": 5795,
+          "path": "FINAL_PROVISIONAL_DECISION.md",
+          "sha256": "00367b1a4cf3dbde892267f35820eed626ebbc9e902eacf5cd35b0167a4e7a59"
+        }
+      ],
+      "findings": [
+        "Invest further in abstract transaction law and obstruction harness.",
+        "Do not invest in source Candidate A protocol as implemented.",
+        "Do not promote B or D beyond their verified scope."
+      ],
+      "methods": [
+        "Mechanism extraction",
+        "Branch-local repaired reference transaction",
+        "Classification against declared decision classes"
+      ],
+      "role": "Reviewer E: transfer relevance to non-collapse frontier",
+      "unresolved_risks": [
+        "A future generic DAG scheduler may change B classification.",
+        "A future mixed-family quotient proof may change D classification."
+      ]
+    }
+  ],
+  "schema_version": "audio_catvm_independent_review_ledger.v1",
+  "small_wall_crossed": false,
+  "source_commit": "c0cee6a9475d35bc64c90ec30567826bcf3c9e9a",
+  "source_review_json_used_as_proof": false
+}

@@ -1,0 +1,2030 @@
+{
+  "canonical": false,
+  "classifications": {
+    "E": "SOURCE_NOT_REPRODUCED",
+    "F": "SOURCE_REPRODUCED",
+    "G": "SOURCE_REPRODUCED",
+    "H": "SOURCE_REPRODUCED"
+  },
+  "controls": [
+    {
+      "candidate": "E",
+      "control": "missing_evidence_dir_argument",
+      "return_code": 2,
+      "stderr_bytes": 84,
+      "stderr_path": "raw_logs/source_reproduction/candidate_e_missing_arg.stderr",
+      "stderr_sha256": "c220187ed21cdf2bad33f70eee0aa956e3456365eeaf09fc6a7441be14fa2572",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_e_missing_arg.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "candidate": "F",
+      "control": "missing_evidence_dir_argument",
+      "return_code": 2,
+      "stderr_bytes": 80,
+      "stderr_path": "raw_logs/source_reproduction/candidate_f_missing_arg.stderr",
+      "stderr_sha256": "2932cf8d5a616199e25c40666b9ede9e4a042c5f84482f650956f7eb6ba07888",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_f_missing_arg.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "candidate": "G",
+      "control": "missing_evidence_dir_argument",
+      "return_code": 2,
+      "stderr_bytes": 73,
+      "stderr_path": "raw_logs/source_reproduction/candidate_g_missing_arg.stderr",
+      "stderr_sha256": "05a595e5f32133e27f75545eba0f0bdf6ffc62089b9e67b0c9d97bfefd1a025c",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_g_missing_arg.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "candidate": "H",
+      "control": "missing_evidence_dir_argument",
+      "return_code": 2,
+      "stderr_bytes": 67,
+      "stderr_path": "raw_logs/source_reproduction/candidate_h_missing_arg.stderr",
+      "stderr_sha256": "4d42abf371cb7e767a3833682c948e10595a20b6c5fab9b1ec9c2d23ac1778cc",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_h_missing_arg.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "created_utc": "2026-07-29T08:52:41.598970Z",
+  "executable_state": {
+    "E": {
+      "executable": false,
+      "mode_octal": "0o664",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "sha256": "426468cd3d1425d5ee4bc92043377f4df8b2e21f5a432d47e5becfd26e7f2edc"
+    },
+    "F": {
+      "executable": false,
+      "mode_octal": "0o664",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+      "sha256": "6d183b7d8d7615319a9363bb66aa34fa0eb076deeb203e49d26d7164492e6a5c"
+    },
+    "G": {
+      "executable": false,
+      "mode_octal": "0o664",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh",
+      "sha256": "f6a0c3e3c4b63336e663e9ab644ab281da74bcd31d5561db58b53e9fc00c9d50"
+    },
+    "H": {
+      "executable": false,
+      "mode_octal": "0o664",
+      "path": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh",
+      "sha256": "dbcba12184547d97710856d2ca2bd9216de1663e7b13e88d155e170b3b7e1e41"
+    }
+  },
+  "normalized_comparison": {
+    "E": {
+      "ignored_generated_files": [],
+      "normalized_match": true,
+      "permitted_json_nondeterminism": [
+        "keys ending _elapsed_ms",
+        "keys ending _elapsed_ns"
+      ]
+    },
+    "F": {
+      "ignored_generated_files": [
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        },
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        }
+      ],
+      "normalized_match": true,
+      "permitted_json_nondeterminism": [
+        "keys ending _elapsed_ms",
+        "keys ending _elapsed_ns"
+      ]
+    },
+    "G": {
+      "ignored_generated_files": [
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        },
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        }
+      ],
+      "normalized_match": true,
+      "permitted_json_nondeterminism": [
+        "keys ending _elapsed_ms",
+        "keys ending _elapsed_ns"
+      ]
+    },
+    "H": {
+      "ignored_generated_files": [
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        },
+        {
+          "path": "SHA256SUMS",
+          "reason": "absolute evidence directory names are expected to differ"
+        }
+      ],
+      "normalized_match": true,
+      "permitted_json_nondeterminism": [
+        "keys ending _elapsed_ms",
+        "keys ending _elapsed_ns"
+      ]
+    }
+  },
+  "reanalyzed_utc": "2026-07-29T08:58:02.301969Z",
+  "result_sha256": "8fb69931793b54848116a6f3288819f0d46f12048c08f61dc1f58a627d37aacf",
+  "runs": [
+    {
+      "candidate": "E",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_e_run1_retry1"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 17175746,
+      "generated_files": [],
+      "normalized_generated_signature": {
+        "ignored": [],
+        "records": []
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_e_run1_retry1",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "return_code": 126,
+      "run_index": 1,
+      "stderr_bytes": 571,
+      "stderr_path": "raw_logs/source_reproduction/candidate_e_run1_retry1.stderr",
+      "stderr_sha256": "9157212899d8f3ec08ebe9934396f1f30c21e1ed961e6b65565a626bf0b24a23",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_e_run1_retry1.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "candidate": "E",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_e_run2"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 16205134,
+      "generated_files": [],
+      "normalized_generated_signature": {
+        "ignored": [],
+        "records": []
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_e_run2",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh",
+      "return_code": 126,
+      "run_index": 2,
+      "stderr_bytes": 571,
+      "stderr_path": "raw_logs/source_reproduction/candidate_e_run2.stderr",
+      "stderr_sha256": "9157212899d8f3ec08ebe9934396f1f30c21e1ed961e6b65565a626bf0b24a23",
+      "stdout_bytes": 0,
+      "stdout_path": "raw_logs/source_reproduction/candidate_e_run2.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "candidate": "F",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_f_run1"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 257302655592,
+      "generated_files": [
+        {
+          "bytes": 2452,
+          "path": "SHA256SUMS",
+          "sha256": "4ee0d9d4042e95f3fcf49a8403c756b55800dfff31da959831432d619a0abe35"
+        },
+        {
+          "bytes": 101632,
+          "path": "four_rotor_necklace_shared_latent_depth_compiler",
+          "sha256": "4a285fdb7045b514c6c814bbeba87b99f4660b677799258c67c99f24134d9d7f"
+        },
+        {
+          "bytes": 2592,
+          "path": "result.json",
+          "sha256": "bbbbf96dca71323affd3e23e012e2c57aa71347540c572c496ebd3c51f6e9c85"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 101632,
+            "path": "four_rotor_necklace_shared_latent_depth_compiler",
+            "sha256": "4a285fdb7045b514c6c814bbeba87b99f4660b677799258c67c99f24134d9d7f"
+          },
+          {
+            "normalized_json_bytes": 2589,
+            "normalized_json_sha256": "83f4fcb92772ddf485e523ece205ce183c26e8bb8ef0f3d0062aeb1c6eeb0815",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_f_run1",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+      "return_code": 0,
+      "run_index": 1,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_f_run1.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 60,
+      "stdout_path": "raw_logs/source_reproduction/candidate_f_run1.stdout",
+      "stdout_sha256": "1d9799986dfa68ce1b55cdeb800613ae5bb2ace353a32a373c2fc8031e7ed2f7"
+    },
+    {
+      "candidate": "F",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_f_run2"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 239770083768,
+      "generated_files": [
+        {
+          "bytes": 2452,
+          "path": "SHA256SUMS",
+          "sha256": "bba4a2e028692ec8c8661180dfb50164f76ab580f0fd5baea9f51c28841cfb2d"
+        },
+        {
+          "bytes": 101632,
+          "path": "four_rotor_necklace_shared_latent_depth_compiler",
+          "sha256": "4a285fdb7045b514c6c814bbeba87b99f4660b677799258c67c99f24134d9d7f"
+        },
+        {
+          "bytes": 2592,
+          "path": "result.json",
+          "sha256": "bbbbf96dca71323affd3e23e012e2c57aa71347540c572c496ebd3c51f6e9c85"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 101632,
+            "path": "four_rotor_necklace_shared_latent_depth_compiler",
+            "sha256": "4a285fdb7045b514c6c814bbeba87b99f4660b677799258c67c99f24134d9d7f"
+          },
+          {
+            "normalized_json_bytes": 2589,
+            "normalized_json_sha256": "83f4fcb92772ddf485e523ece205ce183c26e8bb8ef0f3d0062aeb1c6eeb0815",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_f_run2",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_shared_latent_depth_compiler.sh",
+      "return_code": 0,
+      "run_index": 2,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_f_run2.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 60,
+      "stdout_path": "raw_logs/source_reproduction/candidate_f_run2.stdout",
+      "stdout_sha256": "1d9799986dfa68ce1b55cdeb800613ae5bb2ace353a32a373c2fc8031e7ed2f7"
+    },
+    {
+      "candidate": "G",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_g_run1"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 6847561877,
+      "generated_files": [
+        {
+          "bytes": 3029,
+          "path": "SHA256SUMS",
+          "sha256": "c38f372ef6a9dbfbbc3b23e62c3c937137631c53de40ce551e4120e34147facc"
+        },
+        {
+          "bytes": 68704,
+          "path": "four_rotor_necklace_exact_phase_precision",
+          "sha256": "9cd5c3b8391d9d40ac79a175929ac655dd39f2166a91b1ed5af7db45f5218233"
+        },
+        {
+          "bytes": 838304,
+          "path": "four_rotor_necklace_exact_phase_precision_ubsan",
+          "sha256": "38e58d02687217de208f381b361ae55f83dbd09f6777b491c03659167e23bc54"
+        },
+        {
+          "bytes": 1729,
+          "path": "oracle.json",
+          "sha256": "fd65b260fdab5b0d6f333d846fd5d93e9001ccae21aa65ae130d5c135b2ac80c"
+        },
+        {
+          "bytes": 0,
+          "path": "oracle.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 11698,
+          "path": "pycache/tmp/ags-audio-source-6f39766-v2/.venv/lib/python3.14/site-packages/_distutils_hack/__init__.cpython-314.pyc",
+          "sha256": "6ef1c2923092f8e1fec64d93e38f08e83a98a6e58f3c5ec14350dba80c91ceb3"
+        },
+        {
+          "bytes": 17895,
+          "path": "pycache/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_oracle.cpython-314.pyc",
+          "sha256": "a2787bb3fc5d685b8f6eaf9e83e9e0d9eef890559bcaea2bfa5bd9694ad15a26"
+        },
+        {
+          "bytes": 4778,
+          "path": "pycache/usr/lib/python3.14/__future__.cpython-314.pyc",
+          "sha256": "f956aa1ec524dd0315a771718098df2af7602323ed8ca5bd190a9c7a83a05806"
+        },
+        {
+          "bytes": 18517,
+          "path": "pycache/usr/lib/python3.14/_colorize.cpython-314.pyc",
+          "sha256": "e7dc7b1f3e14b782bc673369b3264e3a952ec41aa1c919aee24ce52ca69fe21b"
+        },
+        {
+          "bytes": 10402,
+          "path": "pycache/usr/lib/python3.14/_opcode_metadata.cpython-314.pyc",
+          "sha256": "3494a3b29b2ef53cb9fbe06d9302e9c23229ca669cabe06e70148ef7516ce09c"
+        },
+        {
+          "bytes": 36980,
+          "path": "pycache/usr/lib/python3.14/_py_warnings.cpython-314.pyc",
+          "sha256": "89e0c279a29985cf9c23137d37f8aee25652d6f4c8a7c8c6c9dd0e59c89bb285"
+        },
+        {
+          "bytes": 9401,
+          "path": "pycache/usr/lib/python3.14/_weakrefset.cpython-314.pyc",
+          "sha256": "5a9d5c5fcc2bb9c112cfee7b24487b687739a55722692897eac210c27635ea5b"
+        },
+        {
+          "bytes": 47772,
+          "path": "pycache/usr/lib/python3.14/annotationlib.cpython-314.pyc",
+          "sha256": "580684afd5b8ec7eba05daa30a7732916185e8167e20ea6b9ca36422ae84f966"
+        },
+        {
+          "bytes": 113658,
+          "path": "pycache/usr/lib/python3.14/argparse.cpython-314.pyc",
+          "sha256": "6552bc3667d41cef1ad97378fb7a28e55171a21ad7f60f8088ec27e0873b7008"
+        },
+        {
+          "bytes": 31594,
+          "path": "pycache/usr/lib/python3.14/ast.cpython-314.pyc",
+          "sha256": "27de0d34a6b43977c288f469b1c41ae962443b92edb857283ddc76be889a209e"
+        },
+        {
+          "bytes": 15281,
+          "path": "pycache/usr/lib/python3.14/bz2.cpython-314.pyc",
+          "sha256": "4327bda6ee6923f92945e99916921e543daf592b67ec235f69f894b200d74c8a"
+        },
+        {
+          "bytes": 74759,
+          "path": "pycache/usr/lib/python3.14/collections/__init__.cpython-314.pyc",
+          "sha256": "dd30f6b7e1b3a569f163637cb5e92b72099b360cb8ffb51799e023060c4f9ca6"
+        },
+        {
+          "bytes": 142,
+          "path": "pycache/usr/lib/python3.14/compression/__init__.cpython-314.pyc",
+          "sha256": "dce6c35b716f9a67254a102f75f102bc8349271d3eb25aaf2693a5db323d69d7"
+        },
+        {
+          "bytes": 150,
+          "path": "pycache/usr/lib/python3.14/compression/_common/__init__.cpython-314.pyc",
+          "sha256": "4256e0f8d066c59f7af3f0a379339a4ca1965857f61508496541dafdc77bc8c5"
+        },
+        {
+          "bytes": 7803,
+          "path": "pycache/usr/lib/python3.14/compression/_common/_streams.cpython-314.pyc",
+          "sha256": "b07855aa51051e73617765c1d98383c5e035d181c4c2bae1151d56f12d845b43"
+        },
+        {
+          "bytes": 11721,
+          "path": "pycache/usr/lib/python3.14/compression/zstd/__init__.cpython-314.pyc",
+          "sha256": "c37ad6f0bffe9f9fcd720a289f059fa984bef2d516d8f462830a4b42cff1aeea"
+        },
+        {
+          "bytes": 15730,
+          "path": "pycache/usr/lib/python3.14/compression/zstd/_zstdfile.cpython-314.pyc",
+          "sha256": "42d1fb39b47ecafc0352ddbb2565771d1197607ced69170b688ff39e097246ba"
+        },
+        {
+          "bytes": 31136,
+          "path": "pycache/usr/lib/python3.14/contextlib.cpython-314.pyc",
+          "sha256": "f873e82aaa6de1f6f3c97704ad136372c0f14c28ced1892e511be49ea46d797f"
+        },
+        {
+          "bytes": 10112,
+          "path": "pycache/usr/lib/python3.14/copy.cpython-314.pyc",
+          "sha256": "b20f4c92e3aca4be04d5fef52e9865666b32c5af663a1a41610d9b786d673d44"
+        },
+        {
+          "bytes": 7916,
+          "path": "pycache/usr/lib/python3.14/copyreg.cpython-314.pyc",
+          "sha256": "c05b26e5cd996ecdf3591db3eaed42062d00010d146c59730fa0cac65f5cf3d1"
+        },
+        {
+          "bytes": 54776,
+          "path": "pycache/usr/lib/python3.14/dataclasses.cpython-314.pyc",
+          "sha256": "f11449f0b677f506dbb79a78bea4a77157ea01dba3270e3b299ffbba171e8903"
+        },
+        {
+          "bytes": 54224,
+          "path": "pycache/usr/lib/python3.14/dis.cpython-314.pyc",
+          "sha256": "a0b62279ff7031d0a107a56d9a196c50648b823f4530cbbeb8cdfa14ed1fdf8f"
+        },
+        {
+          "bytes": 6738,
+          "path": "pycache/usr/lib/python3.14/encodings/__init__.cpython-314.pyc",
+          "sha256": "9f2e4a77ac4da3f53ec191e01602438e6617eaa23f2657c9535d80c095ddce40"
+        },
+        {
+          "bytes": 12556,
+          "path": "pycache/usr/lib/python3.14/encodings/aliases.cpython-314.pyc",
+          "sha256": "22942a426c13e62710e7d64d4d094a375cbf7d79bbf5417a583c66f145087fb2"
+        },
+        {
+          "bytes": 2777,
+          "path": "pycache/usr/lib/python3.14/encodings/latin_1.cpython-314.pyc",
+          "sha256": "6f5ff4438a0435781da09a458c49ac725c6431bb6e04949f58ec8cc569ee2c21"
+        },
+        {
+          "bytes": 2330,
+          "path": "pycache/usr/lib/python3.14/encodings/utf_8.cpython-314.pyc",
+          "sha256": "044eb2784e4bb42afb18c170b1bf85f8ef6e66579d56d0941a249729c50891f4"
+        },
+        {
+          "bytes": 7200,
+          "path": "pycache/usr/lib/python3.14/encodings/utf_8_sig.cpython-314.pyc",
+          "sha256": "f08b4ef2ac258accc7fa64c0f5b5981697eb7df6a123f763d245f4e4f93d119e"
+        },
+        {
+          "bytes": 88026,
+          "path": "pycache/usr/lib/python3.14/enum.cpython-314.pyc",
+          "sha256": "600aab13baf3c93abeeb1087082348c40bb0cc862f6c2fa8d06437b4e85ae15e"
+        },
+        {
+          "bytes": 7862,
+          "path": "pycache/usr/lib/python3.14/fnmatch.cpython-314.pyc",
+          "sha256": "5731a5415cceee25b433a3867dd0f6b05d6977f46d5a85915c65732bdef26c29"
+        },
+        {
+          "bytes": 47989,
+          "path": "pycache/usr/lib/python3.14/functools.cpython-314.pyc",
+          "sha256": "1609d1ef6d6f2df09c3da0457800f7cf0e1916a1776cb92c824c4e2e90b19572"
+        },
+        {
+          "bytes": 23488,
+          "path": "pycache/usr/lib/python3.14/gettext.cpython-314.pyc",
+          "sha256": "5b56a1399ed75b08887006d619fd6336e674d8c1983adcf4eae7d78aa07b1ff6"
+        },
+        {
+          "bytes": 26106,
+          "path": "pycache/usr/lib/python3.14/glob.cpython-314.pyc",
+          "sha256": "f697b385f4debc0e65d6fddedb0f2f62f57ff1f72cbe3c2d0587104d863dd78b"
+        },
+        {
+          "bytes": 4615,
+          "path": "pycache/usr/lib/python3.14/importlib/__init__.cpython-314.pyc",
+          "sha256": "ea3168bf4d9d094afae222ffa3438810c54d6a6b78163f32e34c54cdbf4483dc"
+        },
+        {
+          "bytes": 1667,
+          "path": "pycache/usr/lib/python3.14/importlib/_abc.cpython-314.pyc",
+          "sha256": "e87d5dd6da76c0ed0b86ea608c8d0e5e4693d5aa87e7087d82b020e23c7fbbbb"
+        },
+        {
+          "bytes": 139561,
+          "path": "pycache/usr/lib/python3.14/inspect.cpython-314.pyc",
+          "sha256": "b6785e643a712650fbfe18b36872b289f3cd38251f86f3ce218828168da0f9c0"
+        },
+        {
+          "bytes": 14149,
+          "path": "pycache/usr/lib/python3.14/json/__init__.cpython-314.pyc",
+          "sha256": "fbb0197858bab0af6bd80c99a1603ee7773af770c9032e92072d724baaf923ac"
+        },
+        {
+          "bytes": 14453,
+          "path": "pycache/usr/lib/python3.14/json/decoder.cpython-314.pyc",
+          "sha256": "c658f48a1da3a1bf17b96403f923747654e57bb9dd86cbcd59765a4de1bb0f48"
+        },
+        {
+          "bytes": 17027,
+          "path": "pycache/usr/lib/python3.14/json/encoder.cpython-314.pyc",
+          "sha256": "4daa9684ac1a42ebbf8bcb7de8238b44bbbe68e4c9c49d03b157d439716605dc"
+        },
+        {
+          "bytes": 3542,
+          "path": "pycache/usr/lib/python3.14/json/scanner.cpython-314.pyc",
+          "sha256": "99d22e29c950a92fe119a918dd7b4270bd5bdf97a4c457c230cf13ae95eb6d7e"
+        },
+        {
+          "bytes": 1531,
+          "path": "pycache/usr/lib/python3.14/keyword.cpython-314.pyc",
+          "sha256": "693b0375cd6351978958b055ddf1e88ab2e2f793dbf70b771ef3b183e977721e"
+        },
+        {
+          "bytes": 9498,
+          "path": "pycache/usr/lib/python3.14/linecache.cpython-314.pyc",
+          "sha256": "908ebde2d7e52c3da69d0da7ef4cea70a60e38d30297aca56016c7ccf7c0d571"
+        },
+        {
+          "bytes": 59905,
+          "path": "pycache/usr/lib/python3.14/locale.cpython-314.pyc",
+          "sha256": "44aab074f00f7ebabc0673fcdccacd7c6c9dfba692ec89f4989bb3211c2651d6"
+        },
+        {
+          "bytes": 16461,
+          "path": "pycache/usr/lib/python3.14/lzma.cpython-314.pyc",
+          "sha256": "3769307b1524ae11d5f995a2f449101e2d49dae1f5c1beb1f3f81c0a65971173"
+        },
+        {
+          "bytes": 4488,
+          "path": "pycache/usr/lib/python3.14/opcode.cpython-314.pyc",
+          "sha256": "0cfc5efa64e1ab382f73bc75e3b3717ff6075d41ec86723267a9c4eaeb683713"
+        },
+        {
+          "bytes": 18996,
+          "path": "pycache/usr/lib/python3.14/operator.cpython-314.pyc",
+          "sha256": "85b7592cfeef4c79d656916e54bf0f5ced16882d0d9b8d4543c4e93121ae7a21"
+        },
+        {
+          "bytes": 61651,
+          "path": "pycache/usr/lib/python3.14/pathlib/__init__.cpython-314.pyc",
+          "sha256": "48acd6a15b8d28729909350ef29b66569c1a045cbe268f430e7e6511a3d5155d"
+        },
+        {
+          "bytes": 22439,
+          "path": "pycache/usr/lib/python3.14/pathlib/_os.cpython-314.pyc",
+          "sha256": "dbb45eac972a62489fc8667822b68af9a910a293dd36640b282f831395c35f75"
+        },
+        {
+          "bytes": 10230,
+          "path": "pycache/usr/lib/python3.14/py_compile.cpython-314.pyc",
+          "sha256": "350165aea5f2f8f9342730da668d71d7e942065acd2182bb2b88dc8ce99ceac2"
+        },
+        {
+          "bytes": 19965,
+          "path": "pycache/usr/lib/python3.14/re/__init__.cpython-314.pyc",
+          "sha256": "4dcf287fe2cc5225fd801162d523c2bc1150c1ce2ed3c285cca3879132414f20"
+        },
+        {
+          "bytes": 1808,
+          "path": "pycache/usr/lib/python3.14/re/_casefix.cpython-314.pyc",
+          "sha256": "9244d012c03610232a2acad2f27610cd3242974aba44db211a6df0613e7fc475"
+        },
+        {
+          "bytes": 29663,
+          "path": "pycache/usr/lib/python3.14/re/_compiler.cpython-314.pyc",
+          "sha256": "57a41863e089742d07f239b8608e0d06c2ee0f2d665a9f19331e7ecb38e670ad"
+        },
+        {
+          "bytes": 5623,
+          "path": "pycache/usr/lib/python3.14/re/_constants.cpython-314.pyc",
+          "sha256": "4cd73f99746dba2077553cf204335eeecca9a40b9f11a6fc3b75c44321a04d37"
+        },
+        {
+          "bytes": 45253,
+          "path": "pycache/usr/lib/python3.14/re/_parser.cpython-314.pyc",
+          "sha256": "4f7ebe97dbb30bbd0e25181ae544daa06427f4d730eec5d1a0d059e703ec61fe"
+        },
+        {
+          "bytes": 11680,
+          "path": "pycache/usr/lib/python3.14/reprlib.cpython-314.pyc",
+          "sha256": "11a584bd998da5a114e102cd012d49b08e9e85ff83f90334f0b87b1e5eec9680"
+        },
+        {
+          "bytes": 72204,
+          "path": "pycache/usr/lib/python3.14/shutil.cpython-314.pyc",
+          "sha256": "79dd13ed39ed2dace41f6529cc225a6aa9dfbc23724d3f3f2cd663c0d51ab687"
+        },
+        {
+          "bytes": 305,
+          "path": "pycache/usr/lib/python3.14/sitecustomize.cpython-314.pyc",
+          "sha256": "efd075dfeb7fa1ab263b1ea4cfdb456c5e0e53d46275ba515a6696d980befd72"
+        },
+        {
+          "bytes": 18434,
+          "path": "pycache/usr/lib/python3.14/textwrap.cpython-314.pyc",
+          "sha256": "48f8b8a2b85fb58aa3a509ab8c7e0c4761b0ca2339058596673a0261860c4af0"
+        },
+        {
+          "bytes": 3874,
+          "path": "pycache/usr/lib/python3.14/token.cpython-314.pyc",
+          "sha256": "a15f17f8b6efb9287d0b302698b0886eeeb832d99a860f9a89748d2d041b86ce"
+        },
+        {
+          "bytes": 26944,
+          "path": "pycache/usr/lib/python3.14/tokenize.cpython-314.pyc",
+          "sha256": "92713b394415e995ab6837846a0be2110953bde9b08248ca6adc878a59e451b4"
+        },
+        {
+          "bytes": 78649,
+          "path": "pycache/usr/lib/python3.14/traceback.cpython-314.pyc",
+          "sha256": "da88794c6c3c35fba6291915df7b187b99437c59e67e619861c145078d4ecbca"
+        },
+        {
+          "bytes": 15840,
+          "path": "pycache/usr/lib/python3.14/types.cpython-314.pyc",
+          "sha256": "4dd7b0471cebc2d8c148416ac95434fdf3fcb9ef9ef685b43ccf23ff4077534c"
+        },
+        {
+          "bytes": 2496,
+          "path": "pycache/usr/lib/python3.14/warnings.cpython-314.pyc",
+          "sha256": "bf67ca46c80ce0f0783961beb30488f14c9a938ee24d269c985d59567f407e60"
+        },
+        {
+          "bytes": 27619,
+          "path": "pycache/usr/lib/python3.14/weakref.cpython-314.pyc",
+          "sha256": "84acd26d4da27f292a8c780060c9b76b812ccf762cf9069e8de006552941b02e"
+        },
+        {
+          "bytes": 15211,
+          "path": "qualification.json",
+          "sha256": "ba119ce10d3c909e274bd6377deadad32e69f204a7469e3e58ed800810d0f693"
+        },
+        {
+          "bytes": 6122,
+          "path": "replay.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "replay.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 6122,
+          "path": "result.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "result.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 6122,
+          "path": "ubsan.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "ubsan.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 68704,
+            "path": "four_rotor_necklace_exact_phase_precision",
+            "sha256": "9cd5c3b8391d9d40ac79a175929ac655dd39f2166a91b1ed5af7db45f5218233"
+          },
+          {
+            "bytes": 838304,
+            "path": "four_rotor_necklace_exact_phase_precision_ubsan",
+            "sha256": "38e58d02687217de208f381b361ae55f83dbd09f6777b491c03659167e23bc54"
+          },
+          {
+            "normalized_json_bytes": 1728,
+            "normalized_json_sha256": "3d05d06a3b2f3af14c9cdbfd040f0640306ff1763d2d6fba976ac485c087a48e",
+            "path": "oracle.json"
+          },
+          {
+            "bytes": 0,
+            "path": "oracle.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 11698,
+            "path": "pycache/tmp/ags-audio-source-6f39766-v2/.venv/lib/python3.14/site-packages/_distutils_hack/__init__.cpython-314.pyc",
+            "sha256": "6ef1c2923092f8e1fec64d93e38f08e83a98a6e58f3c5ec14350dba80c91ceb3"
+          },
+          {
+            "bytes": 17895,
+            "path": "pycache/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_oracle.cpython-314.pyc",
+            "sha256": "a2787bb3fc5d685b8f6eaf9e83e9e0d9eef890559bcaea2bfa5bd9694ad15a26"
+          },
+          {
+            "bytes": 4778,
+            "path": "pycache/usr/lib/python3.14/__future__.cpython-314.pyc",
+            "sha256": "f956aa1ec524dd0315a771718098df2af7602323ed8ca5bd190a9c7a83a05806"
+          },
+          {
+            "bytes": 18517,
+            "path": "pycache/usr/lib/python3.14/_colorize.cpython-314.pyc",
+            "sha256": "e7dc7b1f3e14b782bc673369b3264e3a952ec41aa1c919aee24ce52ca69fe21b"
+          },
+          {
+            "bytes": 10402,
+            "path": "pycache/usr/lib/python3.14/_opcode_metadata.cpython-314.pyc",
+            "sha256": "3494a3b29b2ef53cb9fbe06d9302e9c23229ca669cabe06e70148ef7516ce09c"
+          },
+          {
+            "bytes": 36980,
+            "path": "pycache/usr/lib/python3.14/_py_warnings.cpython-314.pyc",
+            "sha256": "89e0c279a29985cf9c23137d37f8aee25652d6f4c8a7c8c6c9dd0e59c89bb285"
+          },
+          {
+            "bytes": 9401,
+            "path": "pycache/usr/lib/python3.14/_weakrefset.cpython-314.pyc",
+            "sha256": "5a9d5c5fcc2bb9c112cfee7b24487b687739a55722692897eac210c27635ea5b"
+          },
+          {
+            "bytes": 47772,
+            "path": "pycache/usr/lib/python3.14/annotationlib.cpython-314.pyc",
+            "sha256": "580684afd5b8ec7eba05daa30a7732916185e8167e20ea6b9ca36422ae84f966"
+          },
+          {
+            "bytes": 113658,
+            "path": "pycache/usr/lib/python3.14/argparse.cpython-314.pyc",
+            "sha256": "6552bc3667d41cef1ad97378fb7a28e55171a21ad7f60f8088ec27e0873b7008"
+          },
+          {
+            "bytes": 31594,
+            "path": "pycache/usr/lib/python3.14/ast.cpython-314.pyc",
+            "sha256": "27de0d34a6b43977c288f469b1c41ae962443b92edb857283ddc76be889a209e"
+          },
+          {
+            "bytes": 15281,
+            "path": "pycache/usr/lib/python3.14/bz2.cpython-314.pyc",
+            "sha256": "4327bda6ee6923f92945e99916921e543daf592b67ec235f69f894b200d74c8a"
+          },
+          {
+            "bytes": 74759,
+            "path": "pycache/usr/lib/python3.14/collections/__init__.cpython-314.pyc",
+            "sha256": "dd30f6b7e1b3a569f163637cb5e92b72099b360cb8ffb51799e023060c4f9ca6"
+          },
+          {
+            "bytes": 142,
+            "path": "pycache/usr/lib/python3.14/compression/__init__.cpython-314.pyc",
+            "sha256": "dce6c35b716f9a67254a102f75f102bc8349271d3eb25aaf2693a5db323d69d7"
+          },
+          {
+            "bytes": 150,
+            "path": "pycache/usr/lib/python3.14/compression/_common/__init__.cpython-314.pyc",
+            "sha256": "4256e0f8d066c59f7af3f0a379339a4ca1965857f61508496541dafdc77bc8c5"
+          },
+          {
+            "bytes": 7803,
+            "path": "pycache/usr/lib/python3.14/compression/_common/_streams.cpython-314.pyc",
+            "sha256": "b07855aa51051e73617765c1d98383c5e035d181c4c2bae1151d56f12d845b43"
+          },
+          {
+            "bytes": 11721,
+            "path": "pycache/usr/lib/python3.14/compression/zstd/__init__.cpython-314.pyc",
+            "sha256": "c37ad6f0bffe9f9fcd720a289f059fa984bef2d516d8f462830a4b42cff1aeea"
+          },
+          {
+            "bytes": 15730,
+            "path": "pycache/usr/lib/python3.14/compression/zstd/_zstdfile.cpython-314.pyc",
+            "sha256": "42d1fb39b47ecafc0352ddbb2565771d1197607ced69170b688ff39e097246ba"
+          },
+          {
+            "bytes": 31136,
+            "path": "pycache/usr/lib/python3.14/contextlib.cpython-314.pyc",
+            "sha256": "f873e82aaa6de1f6f3c97704ad136372c0f14c28ced1892e511be49ea46d797f"
+          },
+          {
+            "bytes": 10112,
+            "path": "pycache/usr/lib/python3.14/copy.cpython-314.pyc",
+            "sha256": "b20f4c92e3aca4be04d5fef52e9865666b32c5af663a1a41610d9b786d673d44"
+          },
+          {
+            "bytes": 7916,
+            "path": "pycache/usr/lib/python3.14/copyreg.cpython-314.pyc",
+            "sha256": "c05b26e5cd996ecdf3591db3eaed42062d00010d146c59730fa0cac65f5cf3d1"
+          },
+          {
+            "bytes": 54776,
+            "path": "pycache/usr/lib/python3.14/dataclasses.cpython-314.pyc",
+            "sha256": "f11449f0b677f506dbb79a78bea4a77157ea01dba3270e3b299ffbba171e8903"
+          },
+          {
+            "bytes": 54224,
+            "path": "pycache/usr/lib/python3.14/dis.cpython-314.pyc",
+            "sha256": "a0b62279ff7031d0a107a56d9a196c50648b823f4530cbbeb8cdfa14ed1fdf8f"
+          },
+          {
+            "bytes": 6738,
+            "path": "pycache/usr/lib/python3.14/encodings/__init__.cpython-314.pyc",
+            "sha256": "9f2e4a77ac4da3f53ec191e01602438e6617eaa23f2657c9535d80c095ddce40"
+          },
+          {
+            "bytes": 12556,
+            "path": "pycache/usr/lib/python3.14/encodings/aliases.cpython-314.pyc",
+            "sha256": "22942a426c13e62710e7d64d4d094a375cbf7d79bbf5417a583c66f145087fb2"
+          },
+          {
+            "bytes": 2777,
+            "path": "pycache/usr/lib/python3.14/encodings/latin_1.cpython-314.pyc",
+            "sha256": "6f5ff4438a0435781da09a458c49ac725c6431bb6e04949f58ec8cc569ee2c21"
+          },
+          {
+            "bytes": 2330,
+            "path": "pycache/usr/lib/python3.14/encodings/utf_8.cpython-314.pyc",
+            "sha256": "044eb2784e4bb42afb18c170b1bf85f8ef6e66579d56d0941a249729c50891f4"
+          },
+          {
+            "bytes": 7200,
+            "path": "pycache/usr/lib/python3.14/encodings/utf_8_sig.cpython-314.pyc",
+            "sha256": "f08b4ef2ac258accc7fa64c0f5b5981697eb7df6a123f763d245f4e4f93d119e"
+          },
+          {
+            "bytes": 88026,
+            "path": "pycache/usr/lib/python3.14/enum.cpython-314.pyc",
+            "sha256": "600aab13baf3c93abeeb1087082348c40bb0cc862f6c2fa8d06437b4e85ae15e"
+          },
+          {
+            "bytes": 7862,
+            "path": "pycache/usr/lib/python3.14/fnmatch.cpython-314.pyc",
+            "sha256": "5731a5415cceee25b433a3867dd0f6b05d6977f46d5a85915c65732bdef26c29"
+          },
+          {
+            "bytes": 47989,
+            "path": "pycache/usr/lib/python3.14/functools.cpython-314.pyc",
+            "sha256": "1609d1ef6d6f2df09c3da0457800f7cf0e1916a1776cb92c824c4e2e90b19572"
+          },
+          {
+            "bytes": 23488,
+            "path": "pycache/usr/lib/python3.14/gettext.cpython-314.pyc",
+            "sha256": "5b56a1399ed75b08887006d619fd6336e674d8c1983adcf4eae7d78aa07b1ff6"
+          },
+          {
+            "bytes": 26106,
+            "path": "pycache/usr/lib/python3.14/glob.cpython-314.pyc",
+            "sha256": "f697b385f4debc0e65d6fddedb0f2f62f57ff1f72cbe3c2d0587104d863dd78b"
+          },
+          {
+            "bytes": 4615,
+            "path": "pycache/usr/lib/python3.14/importlib/__init__.cpython-314.pyc",
+            "sha256": "ea3168bf4d9d094afae222ffa3438810c54d6a6b78163f32e34c54cdbf4483dc"
+          },
+          {
+            "bytes": 1667,
+            "path": "pycache/usr/lib/python3.14/importlib/_abc.cpython-314.pyc",
+            "sha256": "e87d5dd6da76c0ed0b86ea608c8d0e5e4693d5aa87e7087d82b020e23c7fbbbb"
+          },
+          {
+            "bytes": 139561,
+            "path": "pycache/usr/lib/python3.14/inspect.cpython-314.pyc",
+            "sha256": "b6785e643a712650fbfe18b36872b289f3cd38251f86f3ce218828168da0f9c0"
+          },
+          {
+            "bytes": 14149,
+            "path": "pycache/usr/lib/python3.14/json/__init__.cpython-314.pyc",
+            "sha256": "fbb0197858bab0af6bd80c99a1603ee7773af770c9032e92072d724baaf923ac"
+          },
+          {
+            "bytes": 14453,
+            "path": "pycache/usr/lib/python3.14/json/decoder.cpython-314.pyc",
+            "sha256": "c658f48a1da3a1bf17b96403f923747654e57bb9dd86cbcd59765a4de1bb0f48"
+          },
+          {
+            "bytes": 17027,
+            "path": "pycache/usr/lib/python3.14/json/encoder.cpython-314.pyc",
+            "sha256": "4daa9684ac1a42ebbf8bcb7de8238b44bbbe68e4c9c49d03b157d439716605dc"
+          },
+          {
+            "bytes": 3542,
+            "path": "pycache/usr/lib/python3.14/json/scanner.cpython-314.pyc",
+            "sha256": "99d22e29c950a92fe119a918dd7b4270bd5bdf97a4c457c230cf13ae95eb6d7e"
+          },
+          {
+            "bytes": 1531,
+            "path": "pycache/usr/lib/python3.14/keyword.cpython-314.pyc",
+            "sha256": "693b0375cd6351978958b055ddf1e88ab2e2f793dbf70b771ef3b183e977721e"
+          },
+          {
+            "bytes": 9498,
+            "path": "pycache/usr/lib/python3.14/linecache.cpython-314.pyc",
+            "sha256": "908ebde2d7e52c3da69d0da7ef4cea70a60e38d30297aca56016c7ccf7c0d571"
+          },
+          {
+            "bytes": 59905,
+            "path": "pycache/usr/lib/python3.14/locale.cpython-314.pyc",
+            "sha256": "44aab074f00f7ebabc0673fcdccacd7c6c9dfba692ec89f4989bb3211c2651d6"
+          },
+          {
+            "bytes": 16461,
+            "path": "pycache/usr/lib/python3.14/lzma.cpython-314.pyc",
+            "sha256": "3769307b1524ae11d5f995a2f449101e2d49dae1f5c1beb1f3f81c0a65971173"
+          },
+          {
+            "bytes": 4488,
+            "path": "pycache/usr/lib/python3.14/opcode.cpython-314.pyc",
+            "sha256": "0cfc5efa64e1ab382f73bc75e3b3717ff6075d41ec86723267a9c4eaeb683713"
+          },
+          {
+            "bytes": 18996,
+            "path": "pycache/usr/lib/python3.14/operator.cpython-314.pyc",
+            "sha256": "85b7592cfeef4c79d656916e54bf0f5ced16882d0d9b8d4543c4e93121ae7a21"
+          },
+          {
+            "bytes": 61651,
+            "path": "pycache/usr/lib/python3.14/pathlib/__init__.cpython-314.pyc",
+            "sha256": "48acd6a15b8d28729909350ef29b66569c1a045cbe268f430e7e6511a3d5155d"
+          },
+          {
+            "bytes": 22439,
+            "path": "pycache/usr/lib/python3.14/pathlib/_os.cpython-314.pyc",
+            "sha256": "dbb45eac972a62489fc8667822b68af9a910a293dd36640b282f831395c35f75"
+          },
+          {
+            "bytes": 10230,
+            "path": "pycache/usr/lib/python3.14/py_compile.cpython-314.pyc",
+            "sha256": "350165aea5f2f8f9342730da668d71d7e942065acd2182bb2b88dc8ce99ceac2"
+          },
+          {
+            "bytes": 19965,
+            "path": "pycache/usr/lib/python3.14/re/__init__.cpython-314.pyc",
+            "sha256": "4dcf287fe2cc5225fd801162d523c2bc1150c1ce2ed3c285cca3879132414f20"
+          },
+          {
+            "bytes": 1808,
+            "path": "pycache/usr/lib/python3.14/re/_casefix.cpython-314.pyc",
+            "sha256": "9244d012c03610232a2acad2f27610cd3242974aba44db211a6df0613e7fc475"
+          },
+          {
+            "bytes": 29663,
+            "path": "pycache/usr/lib/python3.14/re/_compiler.cpython-314.pyc",
+            "sha256": "57a41863e089742d07f239b8608e0d06c2ee0f2d665a9f19331e7ecb38e670ad"
+          },
+          {
+            "bytes": 5623,
+            "path": "pycache/usr/lib/python3.14/re/_constants.cpython-314.pyc",
+            "sha256": "4cd73f99746dba2077553cf204335eeecca9a40b9f11a6fc3b75c44321a04d37"
+          },
+          {
+            "bytes": 45253,
+            "path": "pycache/usr/lib/python3.14/re/_parser.cpython-314.pyc",
+            "sha256": "4f7ebe97dbb30bbd0e25181ae544daa06427f4d730eec5d1a0d059e703ec61fe"
+          },
+          {
+            "bytes": 11680,
+            "path": "pycache/usr/lib/python3.14/reprlib.cpython-314.pyc",
+            "sha256": "11a584bd998da5a114e102cd012d49b08e9e85ff83f90334f0b87b1e5eec9680"
+          },
+          {
+            "bytes": 72204,
+            "path": "pycache/usr/lib/python3.14/shutil.cpython-314.pyc",
+            "sha256": "79dd13ed39ed2dace41f6529cc225a6aa9dfbc23724d3f3f2cd663c0d51ab687"
+          },
+          {
+            "bytes": 305,
+            "path": "pycache/usr/lib/python3.14/sitecustomize.cpython-314.pyc",
+            "sha256": "efd075dfeb7fa1ab263b1ea4cfdb456c5e0e53d46275ba515a6696d980befd72"
+          },
+          {
+            "bytes": 18434,
+            "path": "pycache/usr/lib/python3.14/textwrap.cpython-314.pyc",
+            "sha256": "48f8b8a2b85fb58aa3a509ab8c7e0c4761b0ca2339058596673a0261860c4af0"
+          },
+          {
+            "bytes": 3874,
+            "path": "pycache/usr/lib/python3.14/token.cpython-314.pyc",
+            "sha256": "a15f17f8b6efb9287d0b302698b0886eeeb832d99a860f9a89748d2d041b86ce"
+          },
+          {
+            "bytes": 26944,
+            "path": "pycache/usr/lib/python3.14/tokenize.cpython-314.pyc",
+            "sha256": "92713b394415e995ab6837846a0be2110953bde9b08248ca6adc878a59e451b4"
+          },
+          {
+            "bytes": 78649,
+            "path": "pycache/usr/lib/python3.14/traceback.cpython-314.pyc",
+            "sha256": "da88794c6c3c35fba6291915df7b187b99437c59e67e619861c145078d4ecbca"
+          },
+          {
+            "bytes": 15840,
+            "path": "pycache/usr/lib/python3.14/types.cpython-314.pyc",
+            "sha256": "4dd7b0471cebc2d8c148416ac95434fdf3fcb9ef9ef685b43ccf23ff4077534c"
+          },
+          {
+            "bytes": 2496,
+            "path": "pycache/usr/lib/python3.14/warnings.cpython-314.pyc",
+            "sha256": "bf67ca46c80ce0f0783961beb30488f14c9a938ee24d269c985d59567f407e60"
+          },
+          {
+            "bytes": 27619,
+            "path": "pycache/usr/lib/python3.14/weakref.cpython-314.pyc",
+            "sha256": "84acd26d4da27f292a8c780060c9b76b812ccf762cf9069e8de006552941b02e"
+          },
+          {
+            "normalized_json_bytes": 8631,
+            "normalized_json_sha256": "333579899794e4e429baf1ac0414daecebf2d07cd063e5807cf25fb5e38b8346",
+            "path": "qualification.json"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "replay.json"
+          },
+          {
+            "bytes": 0,
+            "path": "replay.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "result.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "ubsan.json"
+          },
+          {
+            "bytes": 0,
+            "path": "ubsan.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_g_run1",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh",
+      "return_code": 0,
+      "run_index": 1,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_g_run1.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 62,
+      "stdout_path": "raw_logs/source_reproduction/candidate_g_run1.stdout",
+      "stdout_sha256": "de5f8c42f2347c64e15b018c16b79b8de182c301750c49b797460285db694d52"
+    },
+    {
+      "candidate": "G",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_g_run2"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 6874366196,
+      "generated_files": [
+        {
+          "bytes": 3029,
+          "path": "SHA256SUMS",
+          "sha256": "1d8613f59a00a47130f8c2b494124e3772e54c660c0f66a2cc817def9ccbec44"
+        },
+        {
+          "bytes": 68704,
+          "path": "four_rotor_necklace_exact_phase_precision",
+          "sha256": "9cd5c3b8391d9d40ac79a175929ac655dd39f2166a91b1ed5af7db45f5218233"
+        },
+        {
+          "bytes": 838304,
+          "path": "four_rotor_necklace_exact_phase_precision_ubsan",
+          "sha256": "38e58d02687217de208f381b361ae55f83dbd09f6777b491c03659167e23bc54"
+        },
+        {
+          "bytes": 1729,
+          "path": "oracle.json",
+          "sha256": "fd65b260fdab5b0d6f333d846fd5d93e9001ccae21aa65ae130d5c135b2ac80c"
+        },
+        {
+          "bytes": 0,
+          "path": "oracle.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 11698,
+          "path": "pycache/tmp/ags-audio-source-6f39766-v2/.venv/lib/python3.14/site-packages/_distutils_hack/__init__.cpython-314.pyc",
+          "sha256": "6ef1c2923092f8e1fec64d93e38f08e83a98a6e58f3c5ec14350dba80c91ceb3"
+        },
+        {
+          "bytes": 17895,
+          "path": "pycache/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_oracle.cpython-314.pyc",
+          "sha256": "a2787bb3fc5d685b8f6eaf9e83e9e0d9eef890559bcaea2bfa5bd9694ad15a26"
+        },
+        {
+          "bytes": 4778,
+          "path": "pycache/usr/lib/python3.14/__future__.cpython-314.pyc",
+          "sha256": "f956aa1ec524dd0315a771718098df2af7602323ed8ca5bd190a9c7a83a05806"
+        },
+        {
+          "bytes": 18517,
+          "path": "pycache/usr/lib/python3.14/_colorize.cpython-314.pyc",
+          "sha256": "e7dc7b1f3e14b782bc673369b3264e3a952ec41aa1c919aee24ce52ca69fe21b"
+        },
+        {
+          "bytes": 10402,
+          "path": "pycache/usr/lib/python3.14/_opcode_metadata.cpython-314.pyc",
+          "sha256": "3494a3b29b2ef53cb9fbe06d9302e9c23229ca669cabe06e70148ef7516ce09c"
+        },
+        {
+          "bytes": 36980,
+          "path": "pycache/usr/lib/python3.14/_py_warnings.cpython-314.pyc",
+          "sha256": "89e0c279a29985cf9c23137d37f8aee25652d6f4c8a7c8c6c9dd0e59c89bb285"
+        },
+        {
+          "bytes": 9401,
+          "path": "pycache/usr/lib/python3.14/_weakrefset.cpython-314.pyc",
+          "sha256": "5a9d5c5fcc2bb9c112cfee7b24487b687739a55722692897eac210c27635ea5b"
+        },
+        {
+          "bytes": 47772,
+          "path": "pycache/usr/lib/python3.14/annotationlib.cpython-314.pyc",
+          "sha256": "580684afd5b8ec7eba05daa30a7732916185e8167e20ea6b9ca36422ae84f966"
+        },
+        {
+          "bytes": 113658,
+          "path": "pycache/usr/lib/python3.14/argparse.cpython-314.pyc",
+          "sha256": "6552bc3667d41cef1ad97378fb7a28e55171a21ad7f60f8088ec27e0873b7008"
+        },
+        {
+          "bytes": 31594,
+          "path": "pycache/usr/lib/python3.14/ast.cpython-314.pyc",
+          "sha256": "27de0d34a6b43977c288f469b1c41ae962443b92edb857283ddc76be889a209e"
+        },
+        {
+          "bytes": 15281,
+          "path": "pycache/usr/lib/python3.14/bz2.cpython-314.pyc",
+          "sha256": "4327bda6ee6923f92945e99916921e543daf592b67ec235f69f894b200d74c8a"
+        },
+        {
+          "bytes": 74759,
+          "path": "pycache/usr/lib/python3.14/collections/__init__.cpython-314.pyc",
+          "sha256": "dd30f6b7e1b3a569f163637cb5e92b72099b360cb8ffb51799e023060c4f9ca6"
+        },
+        {
+          "bytes": 142,
+          "path": "pycache/usr/lib/python3.14/compression/__init__.cpython-314.pyc",
+          "sha256": "dce6c35b716f9a67254a102f75f102bc8349271d3eb25aaf2693a5db323d69d7"
+        },
+        {
+          "bytes": 150,
+          "path": "pycache/usr/lib/python3.14/compression/_common/__init__.cpython-314.pyc",
+          "sha256": "4256e0f8d066c59f7af3f0a379339a4ca1965857f61508496541dafdc77bc8c5"
+        },
+        {
+          "bytes": 7803,
+          "path": "pycache/usr/lib/python3.14/compression/_common/_streams.cpython-314.pyc",
+          "sha256": "b07855aa51051e73617765c1d98383c5e035d181c4c2bae1151d56f12d845b43"
+        },
+        {
+          "bytes": 11721,
+          "path": "pycache/usr/lib/python3.14/compression/zstd/__init__.cpython-314.pyc",
+          "sha256": "c37ad6f0bffe9f9fcd720a289f059fa984bef2d516d8f462830a4b42cff1aeea"
+        },
+        {
+          "bytes": 15730,
+          "path": "pycache/usr/lib/python3.14/compression/zstd/_zstdfile.cpython-314.pyc",
+          "sha256": "42d1fb39b47ecafc0352ddbb2565771d1197607ced69170b688ff39e097246ba"
+        },
+        {
+          "bytes": 31136,
+          "path": "pycache/usr/lib/python3.14/contextlib.cpython-314.pyc",
+          "sha256": "f873e82aaa6de1f6f3c97704ad136372c0f14c28ced1892e511be49ea46d797f"
+        },
+        {
+          "bytes": 10112,
+          "path": "pycache/usr/lib/python3.14/copy.cpython-314.pyc",
+          "sha256": "b20f4c92e3aca4be04d5fef52e9865666b32c5af663a1a41610d9b786d673d44"
+        },
+        {
+          "bytes": 7916,
+          "path": "pycache/usr/lib/python3.14/copyreg.cpython-314.pyc",
+          "sha256": "c05b26e5cd996ecdf3591db3eaed42062d00010d146c59730fa0cac65f5cf3d1"
+        },
+        {
+          "bytes": 54776,
+          "path": "pycache/usr/lib/python3.14/dataclasses.cpython-314.pyc",
+          "sha256": "f11449f0b677f506dbb79a78bea4a77157ea01dba3270e3b299ffbba171e8903"
+        },
+        {
+          "bytes": 54224,
+          "path": "pycache/usr/lib/python3.14/dis.cpython-314.pyc",
+          "sha256": "a0b62279ff7031d0a107a56d9a196c50648b823f4530cbbeb8cdfa14ed1fdf8f"
+        },
+        {
+          "bytes": 6738,
+          "path": "pycache/usr/lib/python3.14/encodings/__init__.cpython-314.pyc",
+          "sha256": "9f2e4a77ac4da3f53ec191e01602438e6617eaa23f2657c9535d80c095ddce40"
+        },
+        {
+          "bytes": 12556,
+          "path": "pycache/usr/lib/python3.14/encodings/aliases.cpython-314.pyc",
+          "sha256": "22942a426c13e62710e7d64d4d094a375cbf7d79bbf5417a583c66f145087fb2"
+        },
+        {
+          "bytes": 2777,
+          "path": "pycache/usr/lib/python3.14/encodings/latin_1.cpython-314.pyc",
+          "sha256": "6f5ff4438a0435781da09a458c49ac725c6431bb6e04949f58ec8cc569ee2c21"
+        },
+        {
+          "bytes": 2330,
+          "path": "pycache/usr/lib/python3.14/encodings/utf_8.cpython-314.pyc",
+          "sha256": "044eb2784e4bb42afb18c170b1bf85f8ef6e66579d56d0941a249729c50891f4"
+        },
+        {
+          "bytes": 7200,
+          "path": "pycache/usr/lib/python3.14/encodings/utf_8_sig.cpython-314.pyc",
+          "sha256": "f08b4ef2ac258accc7fa64c0f5b5981697eb7df6a123f763d245f4e4f93d119e"
+        },
+        {
+          "bytes": 88026,
+          "path": "pycache/usr/lib/python3.14/enum.cpython-314.pyc",
+          "sha256": "600aab13baf3c93abeeb1087082348c40bb0cc862f6c2fa8d06437b4e85ae15e"
+        },
+        {
+          "bytes": 7862,
+          "path": "pycache/usr/lib/python3.14/fnmatch.cpython-314.pyc",
+          "sha256": "5731a5415cceee25b433a3867dd0f6b05d6977f46d5a85915c65732bdef26c29"
+        },
+        {
+          "bytes": 47989,
+          "path": "pycache/usr/lib/python3.14/functools.cpython-314.pyc",
+          "sha256": "1609d1ef6d6f2df09c3da0457800f7cf0e1916a1776cb92c824c4e2e90b19572"
+        },
+        {
+          "bytes": 23488,
+          "path": "pycache/usr/lib/python3.14/gettext.cpython-314.pyc",
+          "sha256": "5b56a1399ed75b08887006d619fd6336e674d8c1983adcf4eae7d78aa07b1ff6"
+        },
+        {
+          "bytes": 26106,
+          "path": "pycache/usr/lib/python3.14/glob.cpython-314.pyc",
+          "sha256": "f697b385f4debc0e65d6fddedb0f2f62f57ff1f72cbe3c2d0587104d863dd78b"
+        },
+        {
+          "bytes": 4615,
+          "path": "pycache/usr/lib/python3.14/importlib/__init__.cpython-314.pyc",
+          "sha256": "ea3168bf4d9d094afae222ffa3438810c54d6a6b78163f32e34c54cdbf4483dc"
+        },
+        {
+          "bytes": 1667,
+          "path": "pycache/usr/lib/python3.14/importlib/_abc.cpython-314.pyc",
+          "sha256": "e87d5dd6da76c0ed0b86ea608c8d0e5e4693d5aa87e7087d82b020e23c7fbbbb"
+        },
+        {
+          "bytes": 139561,
+          "path": "pycache/usr/lib/python3.14/inspect.cpython-314.pyc",
+          "sha256": "b6785e643a712650fbfe18b36872b289f3cd38251f86f3ce218828168da0f9c0"
+        },
+        {
+          "bytes": 14149,
+          "path": "pycache/usr/lib/python3.14/json/__init__.cpython-314.pyc",
+          "sha256": "fbb0197858bab0af6bd80c99a1603ee7773af770c9032e92072d724baaf923ac"
+        },
+        {
+          "bytes": 14453,
+          "path": "pycache/usr/lib/python3.14/json/decoder.cpython-314.pyc",
+          "sha256": "c658f48a1da3a1bf17b96403f923747654e57bb9dd86cbcd59765a4de1bb0f48"
+        },
+        {
+          "bytes": 17027,
+          "path": "pycache/usr/lib/python3.14/json/encoder.cpython-314.pyc",
+          "sha256": "4daa9684ac1a42ebbf8bcb7de8238b44bbbe68e4c9c49d03b157d439716605dc"
+        },
+        {
+          "bytes": 3542,
+          "path": "pycache/usr/lib/python3.14/json/scanner.cpython-314.pyc",
+          "sha256": "99d22e29c950a92fe119a918dd7b4270bd5bdf97a4c457c230cf13ae95eb6d7e"
+        },
+        {
+          "bytes": 1531,
+          "path": "pycache/usr/lib/python3.14/keyword.cpython-314.pyc",
+          "sha256": "693b0375cd6351978958b055ddf1e88ab2e2f793dbf70b771ef3b183e977721e"
+        },
+        {
+          "bytes": 9498,
+          "path": "pycache/usr/lib/python3.14/linecache.cpython-314.pyc",
+          "sha256": "908ebde2d7e52c3da69d0da7ef4cea70a60e38d30297aca56016c7ccf7c0d571"
+        },
+        {
+          "bytes": 59905,
+          "path": "pycache/usr/lib/python3.14/locale.cpython-314.pyc",
+          "sha256": "44aab074f00f7ebabc0673fcdccacd7c6c9dfba692ec89f4989bb3211c2651d6"
+        },
+        {
+          "bytes": 16461,
+          "path": "pycache/usr/lib/python3.14/lzma.cpython-314.pyc",
+          "sha256": "3769307b1524ae11d5f995a2f449101e2d49dae1f5c1beb1f3f81c0a65971173"
+        },
+        {
+          "bytes": 4488,
+          "path": "pycache/usr/lib/python3.14/opcode.cpython-314.pyc",
+          "sha256": "0cfc5efa64e1ab382f73bc75e3b3717ff6075d41ec86723267a9c4eaeb683713"
+        },
+        {
+          "bytes": 18996,
+          "path": "pycache/usr/lib/python3.14/operator.cpython-314.pyc",
+          "sha256": "85b7592cfeef4c79d656916e54bf0f5ced16882d0d9b8d4543c4e93121ae7a21"
+        },
+        {
+          "bytes": 61651,
+          "path": "pycache/usr/lib/python3.14/pathlib/__init__.cpython-314.pyc",
+          "sha256": "48acd6a15b8d28729909350ef29b66569c1a045cbe268f430e7e6511a3d5155d"
+        },
+        {
+          "bytes": 22439,
+          "path": "pycache/usr/lib/python3.14/pathlib/_os.cpython-314.pyc",
+          "sha256": "dbb45eac972a62489fc8667822b68af9a910a293dd36640b282f831395c35f75"
+        },
+        {
+          "bytes": 10230,
+          "path": "pycache/usr/lib/python3.14/py_compile.cpython-314.pyc",
+          "sha256": "350165aea5f2f8f9342730da668d71d7e942065acd2182bb2b88dc8ce99ceac2"
+        },
+        {
+          "bytes": 19965,
+          "path": "pycache/usr/lib/python3.14/re/__init__.cpython-314.pyc",
+          "sha256": "4dcf287fe2cc5225fd801162d523c2bc1150c1ce2ed3c285cca3879132414f20"
+        },
+        {
+          "bytes": 1808,
+          "path": "pycache/usr/lib/python3.14/re/_casefix.cpython-314.pyc",
+          "sha256": "9244d012c03610232a2acad2f27610cd3242974aba44db211a6df0613e7fc475"
+        },
+        {
+          "bytes": 29663,
+          "path": "pycache/usr/lib/python3.14/re/_compiler.cpython-314.pyc",
+          "sha256": "57a41863e089742d07f239b8608e0d06c2ee0f2d665a9f19331e7ecb38e670ad"
+        },
+        {
+          "bytes": 5623,
+          "path": "pycache/usr/lib/python3.14/re/_constants.cpython-314.pyc",
+          "sha256": "4cd73f99746dba2077553cf204335eeecca9a40b9f11a6fc3b75c44321a04d37"
+        },
+        {
+          "bytes": 45253,
+          "path": "pycache/usr/lib/python3.14/re/_parser.cpython-314.pyc",
+          "sha256": "4f7ebe97dbb30bbd0e25181ae544daa06427f4d730eec5d1a0d059e703ec61fe"
+        },
+        {
+          "bytes": 11680,
+          "path": "pycache/usr/lib/python3.14/reprlib.cpython-314.pyc",
+          "sha256": "11a584bd998da5a114e102cd012d49b08e9e85ff83f90334f0b87b1e5eec9680"
+        },
+        {
+          "bytes": 72204,
+          "path": "pycache/usr/lib/python3.14/shutil.cpython-314.pyc",
+          "sha256": "79dd13ed39ed2dace41f6529cc225a6aa9dfbc23724d3f3f2cd663c0d51ab687"
+        },
+        {
+          "bytes": 305,
+          "path": "pycache/usr/lib/python3.14/sitecustomize.cpython-314.pyc",
+          "sha256": "efd075dfeb7fa1ab263b1ea4cfdb456c5e0e53d46275ba515a6696d980befd72"
+        },
+        {
+          "bytes": 18434,
+          "path": "pycache/usr/lib/python3.14/textwrap.cpython-314.pyc",
+          "sha256": "48f8b8a2b85fb58aa3a509ab8c7e0c4761b0ca2339058596673a0261860c4af0"
+        },
+        {
+          "bytes": 3874,
+          "path": "pycache/usr/lib/python3.14/token.cpython-314.pyc",
+          "sha256": "a15f17f8b6efb9287d0b302698b0886eeeb832d99a860f9a89748d2d041b86ce"
+        },
+        {
+          "bytes": 26944,
+          "path": "pycache/usr/lib/python3.14/tokenize.cpython-314.pyc",
+          "sha256": "92713b394415e995ab6837846a0be2110953bde9b08248ca6adc878a59e451b4"
+        },
+        {
+          "bytes": 78649,
+          "path": "pycache/usr/lib/python3.14/traceback.cpython-314.pyc",
+          "sha256": "da88794c6c3c35fba6291915df7b187b99437c59e67e619861c145078d4ecbca"
+        },
+        {
+          "bytes": 15840,
+          "path": "pycache/usr/lib/python3.14/types.cpython-314.pyc",
+          "sha256": "4dd7b0471cebc2d8c148416ac95434fdf3fcb9ef9ef685b43ccf23ff4077534c"
+        },
+        {
+          "bytes": 2496,
+          "path": "pycache/usr/lib/python3.14/warnings.cpython-314.pyc",
+          "sha256": "bf67ca46c80ce0f0783961beb30488f14c9a938ee24d269c985d59567f407e60"
+        },
+        {
+          "bytes": 27619,
+          "path": "pycache/usr/lib/python3.14/weakref.cpython-314.pyc",
+          "sha256": "84acd26d4da27f292a8c780060c9b76b812ccf762cf9069e8de006552941b02e"
+        },
+        {
+          "bytes": 15211,
+          "path": "qualification.json",
+          "sha256": "ba119ce10d3c909e274bd6377deadad32e69f204a7469e3e58ed800810d0f693"
+        },
+        {
+          "bytes": 6122,
+          "path": "replay.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "replay.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 6122,
+          "path": "result.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "result.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 6122,
+          "path": "ubsan.json",
+          "sha256": "c76416ba767303cbee0e398a7fa11af325a1d9676f299d13e38a46fc6f844912"
+        },
+        {
+          "bytes": 0,
+          "path": "ubsan.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 68704,
+            "path": "four_rotor_necklace_exact_phase_precision",
+            "sha256": "9cd5c3b8391d9d40ac79a175929ac655dd39f2166a91b1ed5af7db45f5218233"
+          },
+          {
+            "bytes": 838304,
+            "path": "four_rotor_necklace_exact_phase_precision_ubsan",
+            "sha256": "38e58d02687217de208f381b361ae55f83dbd09f6777b491c03659167e23bc54"
+          },
+          {
+            "normalized_json_bytes": 1728,
+            "normalized_json_sha256": "3d05d06a3b2f3af14c9cdbfd040f0640306ff1763d2d6fba976ac485c087a48e",
+            "path": "oracle.json"
+          },
+          {
+            "bytes": 0,
+            "path": "oracle.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "bytes": 11698,
+            "path": "pycache/tmp/ags-audio-source-6f39766-v2/.venv/lib/python3.14/site-packages/_distutils_hack/__init__.cpython-314.pyc",
+            "sha256": "6ef1c2923092f8e1fec64d93e38f08e83a98a6e58f3c5ec14350dba80c91ceb3"
+          },
+          {
+            "bytes": 17895,
+            "path": "pycache/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/four_rotor_necklace_exact_phase_precision_oracle.cpython-314.pyc",
+            "sha256": "a2787bb3fc5d685b8f6eaf9e83e9e0d9eef890559bcaea2bfa5bd9694ad15a26"
+          },
+          {
+            "bytes": 4778,
+            "path": "pycache/usr/lib/python3.14/__future__.cpython-314.pyc",
+            "sha256": "f956aa1ec524dd0315a771718098df2af7602323ed8ca5bd190a9c7a83a05806"
+          },
+          {
+            "bytes": 18517,
+            "path": "pycache/usr/lib/python3.14/_colorize.cpython-314.pyc",
+            "sha256": "e7dc7b1f3e14b782bc673369b3264e3a952ec41aa1c919aee24ce52ca69fe21b"
+          },
+          {
+            "bytes": 10402,
+            "path": "pycache/usr/lib/python3.14/_opcode_metadata.cpython-314.pyc",
+            "sha256": "3494a3b29b2ef53cb9fbe06d9302e9c23229ca669cabe06e70148ef7516ce09c"
+          },
+          {
+            "bytes": 36980,
+            "path": "pycache/usr/lib/python3.14/_py_warnings.cpython-314.pyc",
+            "sha256": "89e0c279a29985cf9c23137d37f8aee25652d6f4c8a7c8c6c9dd0e59c89bb285"
+          },
+          {
+            "bytes": 9401,
+            "path": "pycache/usr/lib/python3.14/_weakrefset.cpython-314.pyc",
+            "sha256": "5a9d5c5fcc2bb9c112cfee7b24487b687739a55722692897eac210c27635ea5b"
+          },
+          {
+            "bytes": 47772,
+            "path": "pycache/usr/lib/python3.14/annotationlib.cpython-314.pyc",
+            "sha256": "580684afd5b8ec7eba05daa30a7732916185e8167e20ea6b9ca36422ae84f966"
+          },
+          {
+            "bytes": 113658,
+            "path": "pycache/usr/lib/python3.14/argparse.cpython-314.pyc",
+            "sha256": "6552bc3667d41cef1ad97378fb7a28e55171a21ad7f60f8088ec27e0873b7008"
+          },
+          {
+            "bytes": 31594,
+            "path": "pycache/usr/lib/python3.14/ast.cpython-314.pyc",
+            "sha256": "27de0d34a6b43977c288f469b1c41ae962443b92edb857283ddc76be889a209e"
+          },
+          {
+            "bytes": 15281,
+            "path": "pycache/usr/lib/python3.14/bz2.cpython-314.pyc",
+            "sha256": "4327bda6ee6923f92945e99916921e543daf592b67ec235f69f894b200d74c8a"
+          },
+          {
+            "bytes": 74759,
+            "path": "pycache/usr/lib/python3.14/collections/__init__.cpython-314.pyc",
+            "sha256": "dd30f6b7e1b3a569f163637cb5e92b72099b360cb8ffb51799e023060c4f9ca6"
+          },
+          {
+            "bytes": 142,
+            "path": "pycache/usr/lib/python3.14/compression/__init__.cpython-314.pyc",
+            "sha256": "dce6c35b716f9a67254a102f75f102bc8349271d3eb25aaf2693a5db323d69d7"
+          },
+          {
+            "bytes": 150,
+            "path": "pycache/usr/lib/python3.14/compression/_common/__init__.cpython-314.pyc",
+            "sha256": "4256e0f8d066c59f7af3f0a379339a4ca1965857f61508496541dafdc77bc8c5"
+          },
+          {
+            "bytes": 7803,
+            "path": "pycache/usr/lib/python3.14/compression/_common/_streams.cpython-314.pyc",
+            "sha256": "b07855aa51051e73617765c1d98383c5e035d181c4c2bae1151d56f12d845b43"
+          },
+          {
+            "bytes": 11721,
+            "path": "pycache/usr/lib/python3.14/compression/zstd/__init__.cpython-314.pyc",
+            "sha256": "c37ad6f0bffe9f9fcd720a289f059fa984bef2d516d8f462830a4b42cff1aeea"
+          },
+          {
+            "bytes": 15730,
+            "path": "pycache/usr/lib/python3.14/compression/zstd/_zstdfile.cpython-314.pyc",
+            "sha256": "42d1fb39b47ecafc0352ddbb2565771d1197607ced69170b688ff39e097246ba"
+          },
+          {
+            "bytes": 31136,
+            "path": "pycache/usr/lib/python3.14/contextlib.cpython-314.pyc",
+            "sha256": "f873e82aaa6de1f6f3c97704ad136372c0f14c28ced1892e511be49ea46d797f"
+          },
+          {
+            "bytes": 10112,
+            "path": "pycache/usr/lib/python3.14/copy.cpython-314.pyc",
+            "sha256": "b20f4c92e3aca4be04d5fef52e9865666b32c5af663a1a41610d9b786d673d44"
+          },
+          {
+            "bytes": 7916,
+            "path": "pycache/usr/lib/python3.14/copyreg.cpython-314.pyc",
+            "sha256": "c05b26e5cd996ecdf3591db3eaed42062d00010d146c59730fa0cac65f5cf3d1"
+          },
+          {
+            "bytes": 54776,
+            "path": "pycache/usr/lib/python3.14/dataclasses.cpython-314.pyc",
+            "sha256": "f11449f0b677f506dbb79a78bea4a77157ea01dba3270e3b299ffbba171e8903"
+          },
+          {
+            "bytes": 54224,
+            "path": "pycache/usr/lib/python3.14/dis.cpython-314.pyc",
+            "sha256": "a0b62279ff7031d0a107a56d9a196c50648b823f4530cbbeb8cdfa14ed1fdf8f"
+          },
+          {
+            "bytes": 6738,
+            "path": "pycache/usr/lib/python3.14/encodings/__init__.cpython-314.pyc",
+            "sha256": "9f2e4a77ac4da3f53ec191e01602438e6617eaa23f2657c9535d80c095ddce40"
+          },
+          {
+            "bytes": 12556,
+            "path": "pycache/usr/lib/python3.14/encodings/aliases.cpython-314.pyc",
+            "sha256": "22942a426c13e62710e7d64d4d094a375cbf7d79bbf5417a583c66f145087fb2"
+          },
+          {
+            "bytes": 2777,
+            "path": "pycache/usr/lib/python3.14/encodings/latin_1.cpython-314.pyc",
+            "sha256": "6f5ff4438a0435781da09a458c49ac725c6431bb6e04949f58ec8cc569ee2c21"
+          },
+          {
+            "bytes": 2330,
+            "path": "pycache/usr/lib/python3.14/encodings/utf_8.cpython-314.pyc",
+            "sha256": "044eb2784e4bb42afb18c170b1bf85f8ef6e66579d56d0941a249729c50891f4"
+          },
+          {
+            "bytes": 7200,
+            "path": "pycache/usr/lib/python3.14/encodings/utf_8_sig.cpython-314.pyc",
+            "sha256": "f08b4ef2ac258accc7fa64c0f5b5981697eb7df6a123f763d245f4e4f93d119e"
+          },
+          {
+            "bytes": 88026,
+            "path": "pycache/usr/lib/python3.14/enum.cpython-314.pyc",
+            "sha256": "600aab13baf3c93abeeb1087082348c40bb0cc862f6c2fa8d06437b4e85ae15e"
+          },
+          {
+            "bytes": 7862,
+            "path": "pycache/usr/lib/python3.14/fnmatch.cpython-314.pyc",
+            "sha256": "5731a5415cceee25b433a3867dd0f6b05d6977f46d5a85915c65732bdef26c29"
+          },
+          {
+            "bytes": 47989,
+            "path": "pycache/usr/lib/python3.14/functools.cpython-314.pyc",
+            "sha256": "1609d1ef6d6f2df09c3da0457800f7cf0e1916a1776cb92c824c4e2e90b19572"
+          },
+          {
+            "bytes": 23488,
+            "path": "pycache/usr/lib/python3.14/gettext.cpython-314.pyc",
+            "sha256": "5b56a1399ed75b08887006d619fd6336e674d8c1983adcf4eae7d78aa07b1ff6"
+          },
+          {
+            "bytes": 26106,
+            "path": "pycache/usr/lib/python3.14/glob.cpython-314.pyc",
+            "sha256": "f697b385f4debc0e65d6fddedb0f2f62f57ff1f72cbe3c2d0587104d863dd78b"
+          },
+          {
+            "bytes": 4615,
+            "path": "pycache/usr/lib/python3.14/importlib/__init__.cpython-314.pyc",
+            "sha256": "ea3168bf4d9d094afae222ffa3438810c54d6a6b78163f32e34c54cdbf4483dc"
+          },
+          {
+            "bytes": 1667,
+            "path": "pycache/usr/lib/python3.14/importlib/_abc.cpython-314.pyc",
+            "sha256": "e87d5dd6da76c0ed0b86ea608c8d0e5e4693d5aa87e7087d82b020e23c7fbbbb"
+          },
+          {
+            "bytes": 139561,
+            "path": "pycache/usr/lib/python3.14/inspect.cpython-314.pyc",
+            "sha256": "b6785e643a712650fbfe18b36872b289f3cd38251f86f3ce218828168da0f9c0"
+          },
+          {
+            "bytes": 14149,
+            "path": "pycache/usr/lib/python3.14/json/__init__.cpython-314.pyc",
+            "sha256": "fbb0197858bab0af6bd80c99a1603ee7773af770c9032e92072d724baaf923ac"
+          },
+          {
+            "bytes": 14453,
+            "path": "pycache/usr/lib/python3.14/json/decoder.cpython-314.pyc",
+            "sha256": "c658f48a1da3a1bf17b96403f923747654e57bb9dd86cbcd59765a4de1bb0f48"
+          },
+          {
+            "bytes": 17027,
+            "path": "pycache/usr/lib/python3.14/json/encoder.cpython-314.pyc",
+            "sha256": "4daa9684ac1a42ebbf8bcb7de8238b44bbbe68e4c9c49d03b157d439716605dc"
+          },
+          {
+            "bytes": 3542,
+            "path": "pycache/usr/lib/python3.14/json/scanner.cpython-314.pyc",
+            "sha256": "99d22e29c950a92fe119a918dd7b4270bd5bdf97a4c457c230cf13ae95eb6d7e"
+          },
+          {
+            "bytes": 1531,
+            "path": "pycache/usr/lib/python3.14/keyword.cpython-314.pyc",
+            "sha256": "693b0375cd6351978958b055ddf1e88ab2e2f793dbf70b771ef3b183e977721e"
+          },
+          {
+            "bytes": 9498,
+            "path": "pycache/usr/lib/python3.14/linecache.cpython-314.pyc",
+            "sha256": "908ebde2d7e52c3da69d0da7ef4cea70a60e38d30297aca56016c7ccf7c0d571"
+          },
+          {
+            "bytes": 59905,
+            "path": "pycache/usr/lib/python3.14/locale.cpython-314.pyc",
+            "sha256": "44aab074f00f7ebabc0673fcdccacd7c6c9dfba692ec89f4989bb3211c2651d6"
+          },
+          {
+            "bytes": 16461,
+            "path": "pycache/usr/lib/python3.14/lzma.cpython-314.pyc",
+            "sha256": "3769307b1524ae11d5f995a2f449101e2d49dae1f5c1beb1f3f81c0a65971173"
+          },
+          {
+            "bytes": 4488,
+            "path": "pycache/usr/lib/python3.14/opcode.cpython-314.pyc",
+            "sha256": "0cfc5efa64e1ab382f73bc75e3b3717ff6075d41ec86723267a9c4eaeb683713"
+          },
+          {
+            "bytes": 18996,
+            "path": "pycache/usr/lib/python3.14/operator.cpython-314.pyc",
+            "sha256": "85b7592cfeef4c79d656916e54bf0f5ced16882d0d9b8d4543c4e93121ae7a21"
+          },
+          {
+            "bytes": 61651,
+            "path": "pycache/usr/lib/python3.14/pathlib/__init__.cpython-314.pyc",
+            "sha256": "48acd6a15b8d28729909350ef29b66569c1a045cbe268f430e7e6511a3d5155d"
+          },
+          {
+            "bytes": 22439,
+            "path": "pycache/usr/lib/python3.14/pathlib/_os.cpython-314.pyc",
+            "sha256": "dbb45eac972a62489fc8667822b68af9a910a293dd36640b282f831395c35f75"
+          },
+          {
+            "bytes": 10230,
+            "path": "pycache/usr/lib/python3.14/py_compile.cpython-314.pyc",
+            "sha256": "350165aea5f2f8f9342730da668d71d7e942065acd2182bb2b88dc8ce99ceac2"
+          },
+          {
+            "bytes": 19965,
+            "path": "pycache/usr/lib/python3.14/re/__init__.cpython-314.pyc",
+            "sha256": "4dcf287fe2cc5225fd801162d523c2bc1150c1ce2ed3c285cca3879132414f20"
+          },
+          {
+            "bytes": 1808,
+            "path": "pycache/usr/lib/python3.14/re/_casefix.cpython-314.pyc",
+            "sha256": "9244d012c03610232a2acad2f27610cd3242974aba44db211a6df0613e7fc475"
+          },
+          {
+            "bytes": 29663,
+            "path": "pycache/usr/lib/python3.14/re/_compiler.cpython-314.pyc",
+            "sha256": "57a41863e089742d07f239b8608e0d06c2ee0f2d665a9f19331e7ecb38e670ad"
+          },
+          {
+            "bytes": 5623,
+            "path": "pycache/usr/lib/python3.14/re/_constants.cpython-314.pyc",
+            "sha256": "4cd73f99746dba2077553cf204335eeecca9a40b9f11a6fc3b75c44321a04d37"
+          },
+          {
+            "bytes": 45253,
+            "path": "pycache/usr/lib/python3.14/re/_parser.cpython-314.pyc",
+            "sha256": "4f7ebe97dbb30bbd0e25181ae544daa06427f4d730eec5d1a0d059e703ec61fe"
+          },
+          {
+            "bytes": 11680,
+            "path": "pycache/usr/lib/python3.14/reprlib.cpython-314.pyc",
+            "sha256": "11a584bd998da5a114e102cd012d49b08e9e85ff83f90334f0b87b1e5eec9680"
+          },
+          {
+            "bytes": 72204,
+            "path": "pycache/usr/lib/python3.14/shutil.cpython-314.pyc",
+            "sha256": "79dd13ed39ed2dace41f6529cc225a6aa9dfbc23724d3f3f2cd663c0d51ab687"
+          },
+          {
+            "bytes": 305,
+            "path": "pycache/usr/lib/python3.14/sitecustomize.cpython-314.pyc",
+            "sha256": "efd075dfeb7fa1ab263b1ea4cfdb456c5e0e53d46275ba515a6696d980befd72"
+          },
+          {
+            "bytes": 18434,
+            "path": "pycache/usr/lib/python3.14/textwrap.cpython-314.pyc",
+            "sha256": "48f8b8a2b85fb58aa3a509ab8c7e0c4761b0ca2339058596673a0261860c4af0"
+          },
+          {
+            "bytes": 3874,
+            "path": "pycache/usr/lib/python3.14/token.cpython-314.pyc",
+            "sha256": "a15f17f8b6efb9287d0b302698b0886eeeb832d99a860f9a89748d2d041b86ce"
+          },
+          {
+            "bytes": 26944,
+            "path": "pycache/usr/lib/python3.14/tokenize.cpython-314.pyc",
+            "sha256": "92713b394415e995ab6837846a0be2110953bde9b08248ca6adc878a59e451b4"
+          },
+          {
+            "bytes": 78649,
+            "path": "pycache/usr/lib/python3.14/traceback.cpython-314.pyc",
+            "sha256": "da88794c6c3c35fba6291915df7b187b99437c59e67e619861c145078d4ecbca"
+          },
+          {
+            "bytes": 15840,
+            "path": "pycache/usr/lib/python3.14/types.cpython-314.pyc",
+            "sha256": "4dd7b0471cebc2d8c148416ac95434fdf3fcb9ef9ef685b43ccf23ff4077534c"
+          },
+          {
+            "bytes": 2496,
+            "path": "pycache/usr/lib/python3.14/warnings.cpython-314.pyc",
+            "sha256": "bf67ca46c80ce0f0783961beb30488f14c9a938ee24d269c985d59567f407e60"
+          },
+          {
+            "bytes": 27619,
+            "path": "pycache/usr/lib/python3.14/weakref.cpython-314.pyc",
+            "sha256": "84acd26d4da27f292a8c780060c9b76b812ccf762cf9069e8de006552941b02e"
+          },
+          {
+            "normalized_json_bytes": 8631,
+            "normalized_json_sha256": "333579899794e4e429baf1ac0414daecebf2d07cd063e5807cf25fb5e38b8346",
+            "path": "qualification.json"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "replay.json"
+          },
+          {
+            "bytes": 0,
+            "path": "replay.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "result.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "normalized_json_bytes": 6121,
+            "normalized_json_sha256": "3922ae1ecb2d9fe5aa547fcd8a49970e0e104e5ba8c440b94f4e490c1063817e",
+            "path": "ubsan.json"
+          },
+          {
+            "bytes": 0,
+            "path": "ubsan.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_g_run2",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_exact_phase_precision.sh",
+      "return_code": 0,
+      "run_index": 2,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_g_run2.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 62,
+      "stdout_path": "raw_logs/source_reproduction/candidate_g_run2.stdout",
+      "stdout_sha256": "de5f8c42f2347c64e15b018c16b79b8de182c301750c49b797460285db694d52"
+    },
+    {
+      "candidate": "H",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_h_run1"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 23461475228,
+      "generated_files": [
+        {
+          "bytes": 2390,
+          "path": "SHA256SUMS",
+          "sha256": "d4e165ca1bca91102f95703d371cae4eff4570c16f74bdd0b96a19517bbe4e81"
+        },
+        {
+          "bytes": 83752,
+          "path": "four_rotor_necklace_coherence_triad",
+          "sha256": "942325289bb35199c2f09c2fce544d4fd0c654834f82e4b4e693b517e5b79785"
+        },
+        {
+          "bytes": 3169,
+          "path": "result.json",
+          "sha256": "224af7caaded8eac0c23a9415093eea18b19f50a7bf5e8a6b4f87e744ddc7425"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 83752,
+            "path": "four_rotor_necklace_coherence_triad",
+            "sha256": "942325289bb35199c2f09c2fce544d4fd0c654834f82e4b4e693b517e5b79785"
+          },
+          {
+            "normalized_json_bytes": 3005,
+            "normalized_json_sha256": "45bcc5cede267d4127456cb25d169862ef39e43b8dc5d2c20d69b4d114e3dfe3",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_h_run1",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh",
+      "return_code": 0,
+      "run_index": 1,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_h_run1.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 56,
+      "stdout_path": "raw_logs/source_reproduction/candidate_h_run1.stdout",
+      "stdout_sha256": "08800f4676c6df975a765dcdcd01b9e41ab1e5d5e6526f3c653a611af6caf8ab"
+    },
+    {
+      "candidate": "H",
+      "command": [
+        "bash",
+        "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh",
+        "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v2/raw_outputs/source_reproduction/candidate_h_run2"
+      ],
+      "cwd": "/tmp/ags-audio-source-6f39766-v2/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier",
+      "elapsed_ns": 24160517709,
+      "generated_files": [
+        {
+          "bytes": 2390,
+          "path": "SHA256SUMS",
+          "sha256": "fb3741d3aca986df635ca7c852e1037b387e39f383d1631750b1c9f1a85dfb8a"
+        },
+        {
+          "bytes": 83752,
+          "path": "four_rotor_necklace_coherence_triad",
+          "sha256": "942325289bb35199c2f09c2fce544d4fd0c654834f82e4b4e693b517e5b79785"
+        },
+        {
+          "bytes": 3176,
+          "path": "result.json",
+          "sha256": "657e2caeb01c3f2f41b74cb0bc204b2d6a74246fd391b772c9f9a38057929862"
+        },
+        {
+          "bytes": 0,
+          "path": "stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized_generated_signature": {
+        "ignored": [
+          {
+            "path": "SHA256SUMS",
+            "reason": "absolute evidence directory names are expected to differ"
+          }
+        ],
+        "records": [
+          {
+            "bytes": 83752,
+            "path": "four_rotor_necklace_coherence_triad",
+            "sha256": "942325289bb35199c2f09c2fce544d4fd0c654834f82e4b4e693b517e5b79785"
+          },
+          {
+            "normalized_json_bytes": 3005,
+            "normalized_json_sha256": "45bcc5cede267d4127456cb25d169862ef39e43b8dc5d2c20d69b4d114e3dfe3",
+            "path": "result.json"
+          },
+          {
+            "bytes": 0,
+            "path": "stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      },
+      "output_dir": "raw_outputs/source_reproduction/candidate_h_run2",
+      "qualifier": "THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_four_rotor_necklace_coherence_triad.sh",
+      "return_code": 0,
+      "run_index": 2,
+      "stderr_bytes": 0,
+      "stderr_path": "raw_logs/source_reproduction/candidate_h_run2.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 56,
+      "stdout_path": "raw_logs/source_reproduction/candidate_h_run2.stdout",
+      "stdout_sha256": "08800f4676c6df975a765dcdcd01b9e41ab1e5d5e6526f3c653a611af6caf8ab"
+    }
+  ],
+  "schema_version": "audio_catvm_source_reproduction_v2",
+  "small_wall_crossed": false,
+  "source_commit": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "source_parent": "7d53e458cade9d28cc2a39e8a80ddbb8c49a21b0",
+  "source_status_after": "",
+  "source_status_before": "",
+  "source_tree": "e46c801e464655423529a752f07df9d877698bcf",
+  "source_worktree": "/tmp/ags-audio-source-6f39766-v2",
+  "stale_tmp_dependency_detected": false,
+  "tracked_result_json_used_as_proof": false,
+  "venv_link": "/run/media/reneshizzle/860_1/CCC 2.0/AI/agent-governance-system/.venv-linux"
+}

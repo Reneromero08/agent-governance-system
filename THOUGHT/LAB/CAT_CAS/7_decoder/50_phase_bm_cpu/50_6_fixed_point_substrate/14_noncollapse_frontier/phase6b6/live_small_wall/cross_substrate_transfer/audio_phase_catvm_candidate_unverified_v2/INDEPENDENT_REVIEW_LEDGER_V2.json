@@ -1,0 +1,123 @@
+{
+  "canonical": false,
+  "created_utc": "2026-07-29T09:13:40.298496Z",
+  "disagreements": [],
+  "external_read_only_reviewer_returns": [
+    {
+      "agent": "review_e_protocol",
+      "decision": "REJECTED_SOURCE_DEFECT",
+      "findings": [
+        "Candidate E is not source-reproduced; both declared-source runs returned rc=126.",
+        "The frozen source tracks relevant qualifiers mode 0664 while E invokes a nested qualifier by pathname.",
+        "A later active science probe found the concrete service accepts an oversized seqpacket as a valid request.",
+        "Static state-machine repair is plausible in strict scope but the concrete protocol is not fail-closed.",
+        "Receipt-preservation wording needs clarification beyond stage flag plus zero boundary."
+      ],
+      "methods": [
+        "static protocol/controller/service/qualifier/result inspection",
+        "source reproduction log review",
+        "snapshot versus frozen source spot checks"
+      ],
+      "roles": [
+        "E1",
+        "E2"
+      ]
+    },
+    {
+      "agent": "review_g_precision",
+      "decision": "STRICT_SCOPE_OBSTRUCTION_ONLY",
+      "findings": [
+        "Candidate G is internally consistent as strict-scope exact precision-growth obstruction.",
+        "Fixed 570 logical cells hide growing exact coefficient and payload width.",
+        "Outer carrier backing preservation excludes BigInt limb allocation, allocator overhead, and temporary lifetime peaks."
+      ],
+      "methods": [
+        "exact source/result/qualifier/oracle inspection",
+        "raw source reproduction artifact inspection",
+        "precision-growth tuple and scope review"
+      ],
+      "roles": [
+        "G1"
+      ]
+    },
+    {
+      "agent": "review_fh_transfer",
+      "decision": "TRANSFER_ONLY_AS_REVIEW_GATES_AND_OBSTRUCTION_DISCIPLINE",
+      "findings": [
+        "F is source-reproduced and coherent under finite necklace-family scope, not a general topology law.",
+        "H supports a causal coherence diagnostic but the compact classical arm is the identical recurrence.",
+        "Transfer relevance is methodological and negative; no positive non-collapse claim follows."
+      ],
+      "methods": [
+        "F/H source/result/qualifier/reproduction inspection",
+        "transfer relevance review against v1/v2 context"
+      ],
+      "roles": [
+        "F1",
+        "H1",
+        "T1"
+      ]
+    }
+  ],
+  "resolved_decision": {
+    "E": "REJECTED_SOURCE_DEFECT",
+    "F": "INDEPENDENTLY_VERIFIED_FAMILY_SCOPED_REMATERIALIZATION",
+    "G": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_PRECISION_OBSTRUCTION",
+    "H": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_COHERENCE_OBSTRUCTION"
+  },
+  "reviewers": [
+    {
+      "decision": "REJECTED_SOURCE_DEFECT",
+      "method": "State-machine model, source reproduction logs, protocol/static custody audit.",
+      "role": "Reviewer E1/E2",
+      "unresolved_risks": [
+        "Runtime probe did not repair or rerun the protocol after the oversized-packet defect.",
+        "Receipt-preservation wording remains narrower than source narrative."
+      ]
+    },
+    {
+      "decision": "RESOURCE_ACCOUNTING_REPRODUCED_WITH_DECLARED_SCOPE",
+      "method": "Arithmetic-cell resource formula recalculation.",
+      "role": "Reviewer E3",
+      "unresolved_risks": [
+        "Whole process RSS, allocator, controller, executable, and library overhead remain outside declared scope."
+      ]
+    },
+    {
+      "decision": "INDEPENDENTLY_VERIFIED_FAMILY_SCOPED_REMATERIALIZATION",
+      "method": "Clean-room public descriptor compiler over fixture and non-fixture variant/depth cases.",
+      "role": "Reviewer F1",
+      "unresolved_risks": [
+        "Not a generic DAG scheduler."
+      ]
+    },
+    {
+      "decision": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_PRECISION_OBSTRUCTION",
+      "method": "Independent exact dyadic cyclotomic implementation and finite-field residue checks.",
+      "role": "Reviewer G1",
+      "unresolved_risks": [
+        "Physical memory/RSS and allocator lifetime not bounded by source or branch-local verifier."
+      ]
+    },
+    {
+      "decision": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_COHERENCE_OBSTRUCTION",
+      "method": "Reproduced H result, structural matched-baseline audit, resource/timing reconciliation.",
+      "role": "Reviewer H1",
+      "unresolved_risks": [
+        "The branch-local pass did not independently reimplement the full Chebyshev generator recurrence.",
+        "The source itself states collision-phase contribution is not isolated from input and interstep coherence."
+      ]
+    },
+    {
+      "decision": "TRANSFER_ONLY_AS_ABSTRACT_DISCIPLINE_AND_OBSTRUCTION_LAWS",
+      "method": "Transfer relevance synthesis.",
+      "role": "Reviewer T1",
+      "unresolved_risks": [
+        "No physical Family 10h transfer and no Small Wall promotion."
+      ]
+    }
+  ],
+  "schema_version": "independent_review_ledger_v2",
+  "sha256": "36dc4184cbd7962b2eae6756ab54d3a760b4848cf0de253d542332e50807c4b2",
+  "small_wall_crossed": false
+}

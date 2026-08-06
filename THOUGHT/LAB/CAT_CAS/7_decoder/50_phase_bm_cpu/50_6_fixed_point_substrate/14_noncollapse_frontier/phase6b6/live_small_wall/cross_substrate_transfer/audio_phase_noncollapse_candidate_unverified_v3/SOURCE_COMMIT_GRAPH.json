@@ -1,0 +1,52 @@
+{
+  "canonical": false,
+  "created_utc": "2026-07-29T21:24:57.433202Z",
+  "last_v2_source": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "moving_branch_head": "9165ef74d9750dec63f5ed2a3a1c69f156f23135",
+  "post_1251_delta": [
+    {
+      "commit": "a362df897ec10065126e6e4a74b19de89706ceac",
+      "files": [
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUTONOMOUS_LANE_STATE.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/CLAIM_AUTHORITY_REGISTRY.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CURRENT_FINDINGS.md"
+      ],
+      "scientific_code_or_result_added": false,
+      "subject": "cat-cas: record exact boundary height obstruction"
+    },
+    {
+      "commit": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+      "files": [
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_INDEPENDENT_REVIEW.md",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_ORACLE_RESULTS.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_PROVENANCE.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_RESULTS.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/f17_cubic_chain_period17_pi_content_recurrence.py",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/f17_cubic_chain_period17_pi_content_recurrence_oracle.py",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_f17_cubic_chain_period17_pi_content_recurrence.sh"
+      ],
+      "scientific_code_or_result_added": true,
+      "subject": "cat-cas: diagnose pi-content residual growth"
+    },
+    {
+      "commit": "9165ef74d9750dec63f5ed2a3a1c69f156f23135",
+      "files": [
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUTONOMOUS_LANE_STATE.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/CLAIM_AUTHORITY_REGISTRY.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CURRENT_FINDINGS.md"
+      ],
+      "scientific_code_or_result_added": false,
+      "subject": "cat-cas: record pi-content residual obstruction"
+    }
+  ],
+  "post_scientific_head_commits": [
+    "9165ef74d9750dec63f5ed2a3a1c69f156f23135"
+  ],
+  "prompt_reconciled_head": "1251cb3a34669fa6b00eddcd66a2228b8f7f9731",
+  "schema_version": "audio_noncollapse_v3_commit_graph",
+  "scientific_freeze": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+  "sha256": "1d5a4ece52a809fe74a77341590401b3bc58e92f9b8f5a2bc94dbf550e1a3929",
+  "small_wall_crossed": false
+}

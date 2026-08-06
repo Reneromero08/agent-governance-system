@@ -1,0 +1,202 @@
+{
+  "schema_version": "catvm_necklace_shared_latent_depth.v1",
+  "source_base_head": "4f3982f090a08c57f7dfd72abfd4e37e94536100",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "verification_level": "CLEANROOM_ADVERSARIAL_VERIFICATION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "claims": {
+    "direct_topology_rematerialization": {
+      "milestone": "TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_ACROSS_INCREASING_DEPTH",
+      "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+      "claim_ceiling": "DIRECT_PROCESS_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_ONE_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT_ORDINAL_COMPILER_DEPTHS1_2_4_8_16_32_REUSE_DEPTH11_STATIC_OWNER_COMPLEX128_SOFTWARE_ONLY",
+      "tested_depths": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32
+      ],
+      "maximum_restoration_error": 9.351601280794374e-14,
+      "reuse_depth": 11,
+      "reuse_restoration_error": 1.0927586480356206e-13,
+      "fresh_restored_reuse_boundary_error": 9.009459844833145e-14,
+      "retained_module_tape_bytes": 0,
+      "retained_inverse_history_bytes": 0,
+      "public_topology_inspects_final_answer": false,
+      "matched_compact_classical_boundary_error": 0.0
+    },
+    "catvm_depth_predecessor": {
+      "milestone": "CATVM_ENFORCED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "classification": "REJECTED_SOURCE_DEFECT",
+      "source_defects": [
+        "RESIDENT_DESCRIPTOR_MISMATCH_RESPONSE_OMITTED_STAGE_RESIDENT_FLAG",
+        "REJECTED_REPEAT_INITIALIZE_REWOUND_LAST_ACCEPTED_NONCE",
+        "RESIDENT_STOP_RESPONSE_PRECEDED_NUMERICAL_INVERSE_CLEANUP"
+      ],
+      "preserved_subclaims": [
+        "VALID_CONTINUE_RESTORES_BEFORE_FINAL_BOUNDARY_RESPONSE",
+        "DISCONNECT_PATH_RESTORES_BEFORE_PROCESS_EXIT",
+        "HIDDEN_STAGE_PROJECTION_AND_OWNER_DENIALS",
+        "FRESH_VERSUS_RESTORED_REUSE_ON_SAME_BACKING",
+        "ZERO_INTERMEDIATE_VALUES_IN_RESPONSE_STDOUT_AND_STDERR"
+      ]
+    },
+    "atomic_dispatch_repair_with_incomplete_accounting": {
+      "milestone": "CATVM_ATOMIC_DISPATCH_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "classification": "REJECTED_SOURCE_DEFECT",
+      "source_defect": "LIVE_289_COMPLEX_GENERATOR_MATRIX_OMITTED_FROM_PRIMARY_AND_REUSE_PEAK_TOTALS",
+      "preserved_subclaim": "ATOMIC_DISPATCH_INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+      "historical_reported_primary_peak_excluding_plan": 2280,
+      "historical_reported_reuse_peak_excluding_plan": 2850
+    },
+    "atomic_dispatch_and_accounting_repair": {
+      "milestone": "CATVM_ATOMIC_DISPATCH_AND_RESOURCE_ACCOUNTING_REPAIRED_TOPOLOGY_REMATERIALIZED_OWNER_BOUND_SHARED_LATENT_PHASE_PROGRAM_FIXED_570_CARRIER_AT_DEPTH32",
+      "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+      "claim_ceiling": "LINUX_X86_64_SAME_UID_ONE_UNIX_SEQPACKET_CONNECTION_NONCE_DERIVED_LEASE_EXACT_GENERATION_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_570_COMPLEX_CELLS_TWO_CELL_LATENT_FIBER_PUBLIC_VARIANT_ORDINAL_COMPILER_PRIMARY_DEPTH32_REUSE_DEPTH11_STATIC_OWNER_SEVEN_BIN_BOUNDARY_COMPLEX128_SOFTWARE_ONLY",
+      "primary_depth": 32,
+      "stage_applied_modules": 16,
+      "primary_restoration_error": 4.951942189030858e-14,
+      "reuse_depth": 11,
+      "reuse_restoration_error": 6.545926890278212e-14,
+      "fresh_restored_reuse_boundary_error": 4.829470157119431e-14,
+      "restoration_generations": [
+        1,
+        2
+      ],
+      "carrier_backing_preserved": true,
+      "baseline_reload_bytes": 0,
+      "final_boundary_after_restoration": true,
+      "disconnect_inverse_cleanup": true,
+      "typed_resident_stage_receipt": true,
+      "final_boundary_only": true
+    }
+  },
+  "edge_case_controls": {
+    "repeat_initialize_leaves_accepted_nonce_unchanged": true,
+    "accepted_nonce_repeat_denied_by_owner_gate": true,
+    "resident_depth_mismatch_status": "ERROR_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_variant_mismatch_status": "ERROR_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_repeat_initialize_status": "DENIED_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_stop_status": "DENIED_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "service_remains_live_after_denied_resident_stop": true,
+    "later_correct_continue_restores": true,
+    "later_same_backing_reuse_restores": true,
+    "zero_depth": "ERROR_BEFORE_STAGE",
+    "zero_variant": "ERROR_BEFORE_STAGE",
+    "depth_above_ceiling": "ERROR_BEFORE_STAGE",
+    "missing_inverse_error": 1.4138133039130538,
+    "reordered_inverse_error": 1.4388157010252134,
+    "wrong_inverse_variant_error": 1.4027925543635036,
+    "wrong_owner": "DENIED",
+    "wrong_lease": "DENIED",
+    "wrong_generation": "DENIED",
+    "premature_projection": "DENIED",
+    "snapshot_command": "DENIED",
+    "null_carrier": "ERROR_BEFORE_ACCESS"
+  },
+  "no_smuggle": {
+    "controller_imports_backend_source": false,
+    "stage_boundary_values": 0,
+    "latent_values_in_response": 0,
+    "content_derived_receipts": 0,
+    "service_stdout_bytes": 0,
+    "service_stderr_bytes": 0
+  },
+  "resource_law": {
+    "catalytic_carrier_complex_cells": 570,
+    "permanent_restoration_baseline_complex_cells": 570,
+    "per_module_fiber_complex_cells": 285,
+    "generator_matrix_complex_cells": 289,
+    "generator_plan_object_bytes": 4664,
+    "generator_plan_nonmatrix_scalar_bytes": 40,
+    "generator_work_complex_cells": 855,
+    "reuse_reference_complex_cells": 570,
+    "primary_peak_counted_complex_cells_excluding_persistent_plan": 2569,
+    "reuse_peak_counted_complex_cells_excluding_persistent_plan": 3139,
+    "persistent_plan_root_complex_cells": 17,
+    "primary_peak_counted_complex_cells_including_plan_roots": 2586,
+    "reuse_peak_counted_complex_cells_including_plan_roots": 3156,
+    "plan_object_bytes": 296,
+    "plan_necklace_count": 285,
+    "plan_necklace_capacity": 285,
+    "plan_necklace_element_bytes": 36,
+    "plan_necklace_capacity_bytes": 10260,
+    "public_topology_descriptor_bytes": 8,
+    "pending_applied_counter_bytes": 8,
+    "retained_module_tape_bytes": 0,
+    "retained_inverse_history_bytes": 0,
+    "relation_table_cells": 0,
+    "assignment_cells": 0,
+    "temporary_occupation_cells": 0,
+    "dense_285_operator_cells": 0,
+    "primary_begin_native_generator_terms": 33736704,
+    "primary_continue_and_inverse_native_generator_terms": 101210112,
+    "primary_total_native_generator_terms": 134946816,
+    "request_packet_bytes": 32,
+    "response_packet_bytes": 116,
+    "accepted_primary_reuse_requests": 5,
+    "accepted_primary_reuse_request_bytes": 160,
+    "accepted_primary_reuse_response_bytes": 580,
+    "accepted_primary_reuse_protocol_bytes": 740,
+    "depth_growth": "NATIVE_TERMS_LINEAR_CATALYTIC_CARRIER_AND_ENUMERATED_WORK_BUFFERS_CONSTANT",
+    "whole_process_rss_claimed": false,
+    "allocator_native_library_os_socket_and_controller_memory_bounded": false,
+    "direct_self_review_harness_peak_claimed": false
+  },
+  "matched_baseline": {
+    "strongest_compact_classical": "IDENTICAL_570_COMPLEX_RECURRENCE",
+    "boundary_error": 0.0,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossed": false
+  },
+  "source_sha256": {
+    "four_rotor_necklace_shared_latent_depth_compiler.cpp": "7f1315d41be53056bfd715984564205714047a27f8115c8bb5123d5d7d53aade",
+    "catvm_necklace_shared_latent_depth_protocol.py": "8eb6dd08a0592331c58c660ddae4feb23fdd3b1884d7baec8344bbf6e442367e",
+    "catvm_necklace_shared_latent_depth_service.cpp": "fcd38556a70d14bad6cd603dff26b69b1926589cdd556362b8190f1155dba206",
+    "catvm_necklace_shared_latent_depth_controller.py": "bec4c2f244f99f59841803160ef3795ec7de35b5c2a7290fb38a16793d7f81ce",
+    "catvm_necklace_shared_latent_depth_atomic_repair_service.cpp": "0e655fed07dbae69dae546100c4ca566ce5cdf9963d8014c577405ac1d3cb7f9",
+    "catvm_necklace_shared_latent_depth_atomic_repair_controller.py": "31399e756f61ccbc77d84f7ce1dd18f4700f9d95eb23d1ede10ea8d014e213ce",
+    "catvm_necklace_shared_latent_depth_accounting_repair_controller.py": "9cac4471040a483f22f2560550632d6f7523bd5f5fde96475a451524fdd35091",
+    "qualify_four_rotor_necklace_shared_latent_depth_compiler.sh": "6d183b7d8d7615319a9363bb66aa34fa0eb076deeb203e49d26d7164492e6a5c",
+    "qualify_catvm_necklace_shared_latent_depth.sh": "e24b552102f8994a763ad78de89dafedb57272b409548f5c3c313188e50e21e3",
+    "qualify_catvm_necklace_shared_latent_depth_atomic_repair.sh": "196cbb3fbd10f516b37781b878705e32b52d8781a4e12a6d7de9b61d0c73fb7a",
+    "qualify_catvm_necklace_shared_latent_depth_accounting_repair.sh": "426468cd3d1425d5ee4bc92043377f4df8b2e21f5a432d47e5becfd26e7f2edc"
+  },
+  "historical_source_sha256": {
+    "predecessor_service_before_entrypoint_seam": "f34f48361b11cefcac6c42d8013290aa92ba6343ad7263ae5d3688a3393bed7d",
+    "predecessor_direct_compiler_before_accounting_extension": "f82bfe7a037caa709437f2f07aa38febd68c57a6c8f3d10ee673f720415d3995",
+    "atomic_repair_controller_with_false_totals_preserved": "31399e756f61ccbc77d84f7ce1dd18f4700f9d95eb23d1ede10ea8d014e213ce",
+    "atomic_repair_qualifier_with_false_totals_preserved": "196cbb3fbd10f516b37781b878705e32b52d8781a4e12a6d7de9b61d0c73fb7a"
+  },
+  "qualification_sha256": {
+    "direct_result.json": "bbbbf96dca71323affd3e23e012e2c57aa71347540c572c496ebd3c51f6e9c85",
+    "historical_atomic_result.json": "1f1006dbae7a25e5d2281e21fcbb8b0eaf927e591a3faed19f75f29fb4ba6c3e",
+    "accounting_successor_result.json": "e015de40092cd43d75f08f19ef1e57fbda92e7df0a2a02dff2eb14df48ef4921",
+    "qualification_manifest": "eb0bcfa8c1ebb7744e99ea485391d3be6abe495702799fc4bd8cc90996d99004"
+  },
+  "independent_evidence": {
+    "predecessor_manifest": "28f7191bf5044ed94f257e9de8cc4870f5944a842467a3c40590fec638e36c00",
+    "predecessor_descriptor_formula": "bd4506fffa193bb2ab20aea647e34058cf061b4e2d917d928a37bfe67ea496b3",
+    "predecessor_state_transition_record": "56d5fc569344f88fb7ebec751ba678f9e38843bc5a46ba68d70a5b3b2c028f21",
+    "predecessor_wire_record": "5ddf7a2cc41083913e7d40aa87413b916cf510614da2f63d3c91e0d6e568f3e1",
+    "predecessor_stop_order_record": "6dc24795be8c9917ad5b892e57002ce538b98ab5cb7d55967029c87a7f32f3b1",
+    "atomic_repair_incomplete_accounting_manifest": "da148a2dd3b0cee36f49b4682d78bfde4dfd51b6aedf4ff4aba3db67759cb063",
+    "accounting_formula_and_wire_manifest": "e5f856db76e981c799635f55da466a578a9228c3ca4310caed18a7cab410bd97",
+    "separated_successor_static_conformance": "18ddd05c9cdcbf525dcc45b5dd63c0c3e20239604a6fed4867008bdf01f226d1",
+    "separated_successor_source_manifest": "149230e25c3ef0fbdce7fbdc9e3fa661f192959e8c6f4f24d102832fdf5dff05",
+    "separated_successor_evidence_manifest": "3d6913f87c9048ebd7ad0cb1f80b0503f91901b0b8d5d9c7a7e05607613a5a98"
+  },
+  "not_established": [
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "GENERAL_CATALYTIC_INFERENCE",
+    "GENERAL_HOLOGRAPHIC_RELATIONAL_COMPUTATION",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT_WITH_PI",
+    "UNBOUNDED_OR_UNLIMITED_CATALYTIC_COMPUTATION"
+  ],
+  "next_obstruction": "IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE_REMAINS_THE_STRONGEST_MATCHED_IMPLEMENTATION"
+}

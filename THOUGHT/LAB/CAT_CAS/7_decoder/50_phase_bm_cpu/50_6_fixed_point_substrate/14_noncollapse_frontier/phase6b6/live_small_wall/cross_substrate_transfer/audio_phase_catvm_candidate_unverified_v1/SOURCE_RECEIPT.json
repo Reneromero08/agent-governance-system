@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "receipt_created_utc": "2026-07-28T02:29:29Z",
+  "epistemic_status": [
+    "CLAIMED_BY_SOURCE_BRANCH",
+    "NOT_YET_REPRODUCED",
+    "NOT_YET_TRANSFER_VERIFIED",
+    "NOT_CANONICAL"
+  ],
+  "repository": "Reneromero08/agent-governance-system",
+  "source_branch": "origin/codex/audio-frequency-wave-substrate",
+  "source_commit": "c0cee6a9475d35bc64c90ec30567826bcf3c9e9a",
+  "source_parent_commit": "46dda91fadf58f27aca741a18e2adfcac515c6d5",
+  "source_tree": "d49c88674d6ae7cb42910f378160860db7f0fa03",
+  "source_subject": "feat(phase): pebble nonlinear quotient history",
+  "source_author_date": "2026-07-27T16:39:01-07:00",
+  "source_committer_date": "2026-07-27T16:39:01-07:00",
+  "source_worktree": {
+    "path_at_receipt": "/tmp/ags-audio-source-c0cee6a",
+    "detached": true,
+    "clean": true
+  },
+  "target": {
+    "branch": "task/audio-catvm-independent-verification",
+    "head_before_transfer": "cf6d49b0a46d25520a9ce61a06b1f90533058186",
+    "intended_destination_branch": "codex/family10h-tomography-repair",
+    "destination_head_before_transfer": "cf6d49b0a46d25520a9ce61a06b1f90533058186"
+  },
+  "environment": {
+    "kernel": "Linux 7.0.0-28-generic x86_64",
+    "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "clang": null,
+    "bash": "GNU bash 5.3.9(1)-release",
+    "jq": "jq-1.8.1",
+    "sha256sum": "uutils coreutils 0.8.0",
+    "libc": "glibc 2.43"
+  },
+  "tracked_source_claim_artifacts": [
+    "CATVM_PHASE_RESULTS.json",
+    "CATVM_PHASE_REVIEW.json",
+    "CATVM_RANK2_RESULTS.json",
+    "CATVM_RANK2_REVIEW.json",
+    "SMALL_WALL_QANF_OBSTRUCTION_RESULTS.json",
+    "SMALL_WALL_QANF_OBSTRUCTION_REVIEW.json",
+    "ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_RESULTS.json",
+    "ALGEBRAIC_BOOLEAN_TT_SUFFIX_QUOTIENT_REVIEW.json"
+  ],
+  "unavailable_source_run_artifacts": [
+    "/tmp/catvm-qual.H79vc8",
+    "/tmp/catvm-rank2-full-fifth",
+    "/tmp/qanf-small-wall-fourth",
+    "/tmp/boolean-tt-quotient-fourth"
+  ],
+  "source_binding_findings": [
+    {
+      "candidate": "D",
+      "severity": "BLOCKING_FOR_TRACKED_RESULT_BINDING",
+      "finding": "TRACKED_RESULT_PHASE_SOURCE_HASH_DOES_NOT_MATCH_FROZEN_SOURCE",
+      "tracked_result_hash": "1a8678d11df0be641a5c035d2e117eccb7086d23a4046362818a64ef4cb3a655",
+      "frozen_source_hash": "281e1d1eb455cfdd0abaa77943459d7dbb0df340025023e6ee1cb6d91f3e2520",
+      "known_change": "QTT_EMBEDDED_MAIN wrapper added at frozen commit",
+      "disposition": "TRACKED_RESULT_NOT_PROOF_FOR_FROZEN_GENERATION; REQUIRE_FRESH_REBUILD"
+    }
+  ],
+  "source_tests_executed_before_receipt": false,
+  "canonical": false,
+  "small_wall_crossed": false,
+  "physical_family10h_evidence_modified": false
+}

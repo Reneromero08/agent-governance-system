@@ -1,0 +1,3174 @@
+{
+  "candidate_a": {
+    "primary": {
+      "f_coefficients": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "f_zero_set": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "witnesses": {
+        "00": [
+          0
+        ],
+        "01": [],
+        "10": [],
+        "11": [
+          1
+        ]
+      },
+      "z_coefficients": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "z_zero_set": [
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "restoration_controls": {
+      "missing_g_detected": true,
+      "nominal_restored": true,
+      "reordered_inverse_detected": true,
+      "residuals": {
+        "missing_g_z": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "reordered_z": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "wrong_g_z": [
+          1,
+          1,
+          0,
+          1
+        ]
+      },
+      "wrong_g_detected": true
+    },
+    "reuse": {
+      "f_coefficients": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "f_zero_set": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "witnesses": {
+        "00": [],
+        "01": [
+          1
+        ],
+        "10": [
+          0
+        ],
+        "11": []
+      },
+      "z_coefficients": [
+        1,
+        2,
+        0,
+        2
+      ],
+      "z_zero_set": [
+        [
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "candidate_b": {
+    "dag": {
+      "fanout": {
+        "801": 1,
+        "802": 1,
+        "803": 1,
+        "804": 1,
+        "805": 4,
+        "806": 3,
+        "807": 3,
+        "808": 2,
+        "809": 1,
+        "810": 1,
+        "811": 1,
+        "812": 1,
+        "813": 1,
+        "814": 1,
+        "815": 0
+      },
+      "maximum_fanout": 4,
+      "node_count": 15,
+      "root": 815,
+      "shared_fanout": {
+        "805": 4,
+        "806": 3,
+        "807": 3,
+        "808": 2
+      },
+      "topological_order": [
+        801,
+        802,
+        803,
+        804,
+        805,
+        806,
+        807,
+        808,
+        809,
+        810,
+        811,
+        812,
+        813,
+        814,
+        815
+      ]
+    },
+    "reversible_schedule": {
+      "capacity_action_tradeoff": {
+        "5": null,
+        "6": 40,
+        "7": 28,
+        "8": 26,
+        "9": 24
+      },
+      "fixed_projection_live": 6,
+      "fixed_projection_state": [
+        805,
+        807,
+        810,
+        813,
+        814,
+        815
+      ],
+      "minimum_capacity_peak": 6,
+      "minimum_capacity_root_actions": 40,
+      "minimum_reversible_capacity": 6,
+      "mutation_controls_detected": {
+        "duplicated": true,
+        "missing": true,
+        "wrong_first": true
+      },
+      "selected_witness": {
+        "forward_actions": 28,
+        "forward_public_nodes": [
+          801,
+          802,
+          803,
+          804,
+          805,
+          801,
+          802,
+          806,
+          803,
+          804,
+          807,
+          808,
+          811,
+          812,
+          814,
+          811,
+          803,
+          812,
+          804,
+          808,
+          810,
+          806,
+          803,
+          804,
+          809,
+          813,
+          809,
+          815
+        ],
+        "logical_capacity": 7,
+        "peak": 7,
+        "projection_state_matches": true,
+        "restored_empty": true,
+        "reverse_actions": 28,
+        "reverse_is_literal_forward_reverse": true
+      }
+    }
+  },
+  "candidate_c": {
+    "capacity_obstruction": true,
+    "direct_formula_and_count": 4,
+    "fixture_boundaries": {
+      "quadratic_anf_chain_affine_sham.qanf": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "quadratic_anf_chain_degree2_nonaffine.qanf": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "quadratic_anf_chain_primary.qanf": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "quadratic_anf_chain_reuse.qanf": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "packed_nonconstant_output_table_bits": 256,
+    "public_programs": 64,
+    "raw_five_bit_table_bits": 320,
+    "table_sha256": "7850283fbf9568610123887cff9b5a8d9f0b106e827f7bcaec88d4f178c770b3",
+    "unique_boundaries": 16
+  },
+  "candidate_d": {
+    "all_formula_cases_match": true,
+    "and_or_duality": true,
+    "case_sha256": "c63d57af80e9fa7d78401eccd88fe4b8d07abf308360c0a4d3139ae417beb2b1",
+    "cases": [
+      {
+        "depth": 2,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 2,
+        "formula_rank": 3,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "rank": 3
+      },
+      {
+        "depth": 3,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 3,
+        "formula_rank": 4,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 4,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3,
+            4
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 4,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 4,
+        "formula_rank": 5,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 5,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 5,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 5,
+        "formula_rank": 5,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 5,
+        "formula_rank": 6,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 6,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 6,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 6,
+        "formula_rank": 5,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 6,
+        "formula_rank": 6,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 6,
+        "formula_rank": 7,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 7,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 7,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 7,
+        "formula_rank": 5,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 7,
+        "formula_rank": 6,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 7,
+        "formula_rank": 7,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 7,
+        "formula_rank": 8,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 8,
+        "formula_rank": 2,
+        "horizon": 1,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        ],
+        "rank": 2
+      },
+      {
+        "depth": 8,
+        "formula_rank": 4,
+        "horizon": 2,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 4
+      },
+      {
+        "depth": 8,
+        "formula_rank": 5,
+        "horizon": 3,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 5
+      },
+      {
+        "depth": 8,
+        "formula_rank": 6,
+        "horizon": 4,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 6
+      },
+      {
+        "depth": 8,
+        "formula_rank": 7,
+        "horizon": 5,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5,
+            6,
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 7
+      },
+      {
+        "depth": 8,
+        "formula_rank": 8,
+        "horizon": 6,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 8
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 7,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 8,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 9,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 10,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 11,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 12,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 13,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 14,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 15,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      },
+      {
+        "depth": 8,
+        "formula_rank": 9,
+        "horizon": 16,
+        "match": true,
+        "partition": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ],
+          [
+            7
+          ],
+          [
+            8
+          ]
+        ],
+        "rank": 9
+      }
+    ],
+    "cases_checked": 112,
+    "deliberate_overmerge_detected": true,
+    "deliberate_undermerge_detected": true,
+    "depth_greater_than_width_abstract_cases_checked": 28
+  },
+  "method": "CLEAN_ROOM_ENUMERATION_SYMBOLIC_ALGEBRA_GRAPH_SEARCH",
+  "result_sha256": "c5e3849847ff630ec416b867035c22df61e4cd98b27db08173cbe6b6fc0df97b",
+  "schema_version": "1.0.0",
+  "source_results_used_as_oracle": false
+}

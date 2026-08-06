@@ -1,0 +1,176 @@
+{
+  "evidence_parent_commit": "9f7e75bb",
+  "result": "PASS",
+  "claim": "FIXED_SCHEMA_QANF_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED_UNDER_MATCHED_CATVM_BOUNDARY",
+  "claim_ceiling": "BOUNDED_LINUX_WARM_FIXED_SCHEMA_QANF_BASELINE_SNAPSHOT_IN_PLACE_RESOURCE_COMPARISON_REFERENCE_ONLY",
+  "evidence_directory": "/tmp/qanf-small-wall-fourth",
+  "adjudication": "FIXED_SCHEMA_COMPACT_BASELINE_OBSTRUCTION_CONFIRMED",
+  "protocol": "MATCHED_PERSISTENT_AF_UNIX_SOCK_SEQPACKET",
+  "benchmark": {
+    "cpu": 0,
+    "nice": 5,
+    "warm_transactions_per_run": 1024,
+    "timed_batches": [1024, 4096, 16384],
+    "arm_order_per_batch": [
+      "baseline",
+      "snapshot",
+      "in_place",
+      "in_place",
+      "snapshot",
+      "baseline"
+    ],
+    "public_palindrome_schedule": [0, 3, 2, 1, 1, 2, 3, 0],
+    "raw_runs": 18,
+    "matched_final_boundaries": true,
+    "matched_timed_request_response_bytes": true,
+    "wall_ns_means": [
+      {
+        "batch": 1024,
+        "baseline": 10277323,
+        "snapshot": 13390417,
+        "in_place": 12963641,
+        "snapshot_over_in_place": 1.0329209980436824,
+        "compact_over_in_place": 0.792780593044809
+      },
+      {
+        "batch": 4096,
+        "baseline": 37551061,
+        "snapshot": 47359900,
+        "in_place": 53619430.5,
+        "snapshot_over_in_place": 0.8832600338789499,
+        "compact_over_in_place": 0.7003256216979029
+      },
+      {
+        "batch": 16384,
+        "baseline": 156882340.5,
+        "snapshot": 200183066,
+        "in_place": 212788896,
+        "snapshot_over_in_place": 0.9407589858448253,
+        "compact_over_in_place": 0.7372675146545241
+      }
+    ]
+  },
+  "exact_work_laws": {
+    "compact_baseline": {
+      "boolean_ands_per_transaction": 4,
+      "result_cache": false,
+      "lookup_table": false,
+      "carrier": false
+    },
+    "snapshot_sham": {
+      "phase_products_per_transaction": 9,
+      "carrier_reads_per_transaction": 51,
+      "phase_cell_updates_per_transaction": 23,
+      "final_decodes_per_transaction": 5,
+      "snapshot_loads_per_transaction": 1,
+      "working_reload_bytes_per_transaction": 368,
+      "actual_inverse": false
+    },
+    "in_place_catvm": {
+      "phase_products_per_transaction": 18,
+      "carrier_reads_per_transaction": 97,
+      "phase_cell_updates_per_transaction": 46,
+      "final_decodes_per_transaction": 5,
+      "snapshot_loads_per_transaction": 0,
+      "actual_inverse": true,
+      "actual_restored_carrier_reuse": true
+    }
+  },
+  "analytic_fixed_schema_capacity": {
+    "public_coefficient_bits": 6,
+    "possible_public_programs": 64,
+    "final_boundary_bits_per_program": 5,
+    "raw_answer_vector_upper_bound_bits_not_materialized": 320,
+    "constant_size_compact_formula_exists": true
+  },
+  "resources": {
+    "baseline": {
+      "context_bytes": 320,
+      "mapped_context_bytes": 4096,
+      "program_table_bytes": 96,
+      "sealed_program_table_bytes": 96,
+      "live_carrier_bytes": 0,
+      "sealed_carrier_bytes": 0,
+      "execution_snapshot_bytes": 0,
+      "working_reload_bytes": 0,
+      "service_loop_frame_bytes": 896,
+      "service_binary_bytes": 26104
+    },
+    "snapshot": {
+      "context_bytes": 1792,
+      "mapped_context_bytes": 4096,
+      "program_table_bytes": 96,
+      "sealed_program_table_bytes": 96,
+      "live_carrier_bytes": 736,
+      "sealed_carrier_bytes": 736,
+      "execution_snapshot_bytes": 736,
+      "working_reload_bytes": 368,
+      "service_loop_frame_bytes": 1088,
+      "phase_execute_frame_bytes": 1152,
+      "service_binary_bytes": 35024
+    },
+    "in_place": {
+      "context_bytes": 1792,
+      "mapped_context_bytes": 4096,
+      "program_table_bytes": 96,
+      "sealed_program_table_bytes": 96,
+      "live_carrier_bytes": 736,
+      "sealed_carrier_bytes": 736,
+      "execution_snapshot_bytes": 736,
+      "working_reload_bytes": 0,
+      "service_loop_frame_bytes": 1088,
+      "phase_execute_frame_bytes": 1152,
+      "service_binary_bytes": 35024
+    },
+    "public_program_parser_frame_bytes_all_arms": 4496,
+    "controller_binary_bytes": 21072
+  },
+  "controls": {
+    "all_four_fixture_boundaries_match_reference": "PASS",
+    "affine_and_degree2_applicability": "PASS",
+    "same_protocol_and_timed_execution_traffic": "PASS",
+    "attempted_intermediate_projection": "PASS_REJECTED_ALL_ARMS",
+    "embedded_nul_oversize_unknown": "PASS_ALL_ARMS",
+    "null_carrier": "PASS_REJECTED_ALL_ARMS",
+    "compact_build_phase_symbols": 0,
+    "phase_build_compact_fallback_symbols": 0,
+    "analyzer": "PASS_ALL_ARMS",
+    "asan_ubsan": "PASS_ALL_ARMS",
+    "post_custody_no_smuggle_trace": "PASS_ALL_ARMS",
+    "catvm_qanf_predecessor_regression": "PASS"
+  },
+  "no_smuggle": {
+    "service_stdout_bytes_all_arms": 0,
+    "service_stderr_bytes_all_arms": 0,
+    "post_custody_trace_bytes_each_arm": 2858,
+    "post_custody_forbidden_channels_all_arms": 0,
+    "unresolved_intermediate_serialized": false
+  },
+  "sha256": {
+    "service_source": "b0800fe77acea936553936d2d7d0543405f411dcea8f0efcd4784806ec1ebb34",
+    "controller_source": "96cbcdbae705559c15310dd465a0586daa2407c194e75a86b59e8db0d0fcedb8",
+    "probe_source": "eb768c078228101d923f6f182cb5b63b91be0f97c9b6c1e7230ed71d1eb2e08c",
+    "qualifier": "eb6b36ea1715d7abccd4c2c5d2d73118956b82ef1dd9344ff194c3197178d3fd",
+    "baseline_service_binary": "d4a06e4b6f3ff402ccb1ba770fadff2f95e374697cab7cc5d2df31cb51b9d3f9",
+    "snapshot_service_binary": "3f06dc0cefc54d70bc1a0b58c2e8f0c3aaa4741692b52988604c9324f1d86eb4",
+    "in_place_service_binary": "b56c95c8ffe48ad6ee7fb093546d7348e49a9408834cf160ad63b588e63b99c6",
+    "controller_binary": "158a1602143eac99a20b382354d8189c208b97a47f9f683932cb2bc15ccd53f9",
+    "raw_runs": "9eef4bb12bb588fa8c4d426c8e12e43d6f134b61627614c9068fac9103e57249",
+    "baseline_trace": "c930c669d9b7372cf226b4ed80a12683786ae3c26e284e85b303f63ebcaa77aa",
+    "snapshot_trace": "a7a4d17c3f07d35a362272489286bf5bef634648dcc369129226aaa96ccd3f67",
+    "in_place_trace": "301f0343feaad7254bdf4426a010a126eb1905a99c5cb707a5afcfee7ea9d2b8",
+    "result": "412a063488c699e4463332a64ef576bf613cb85be06e749a8a34bf9591e32796"
+  },
+  "batch_repetition_is_problem_scaling": false,
+  "mission_gamma_measured": false,
+  "capacity_separation": false,
+  "bounded_constant_factor_catvm_advantage": false,
+  "performance_advantage": false,
+  "total_memory_advantage": false,
+  "c5_fixed_point_advantage": false,
+  "small_wall_crossed": false,
+  "arbitrary_non_affine_closure": false,
+  "physical_execution": false,
+  "unlimited_catalytic_computation": false,
+  "terminal": false
+}

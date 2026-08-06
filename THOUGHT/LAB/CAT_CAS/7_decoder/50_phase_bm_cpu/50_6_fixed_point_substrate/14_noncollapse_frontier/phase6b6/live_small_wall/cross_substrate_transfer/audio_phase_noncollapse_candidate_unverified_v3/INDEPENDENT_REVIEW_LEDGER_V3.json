@@ -1,0 +1,23 @@
+{
+  "canonical": false,
+  "decision": "REVIEW_LEDGER_NOT_COUNTED_AS_INDEPENDENT_EVIDENCE",
+  "file_backed_independent_review_artifacts_available": false,
+  "missing_required_review_artifacts": [
+    "reviews/reviewer_i.json",
+    "reviews/reviewer_j.json",
+    "reviews/reviewer_k.json",
+    "reviews/reviewer_l.json",
+    "reviews/reviewer_m.json",
+    "reviews/reviewer_n1.json",
+    "reviews/reviewer_n2.json",
+    "reviews/reviewer_n3.json",
+    "reviews/reviewer_o.json",
+    "reviews/reviewer_r.json",
+    "reviews/reviewer_t.json"
+  ],
+  "original_static_ledger_counted_as_evidence": false,
+  "original_static_ledger_retracted": true,
+  "repair_status": "no synthetic reviewer decisions generated; future review pass must write separate reviewer artifacts before consolidation",
+  "schema_version": "audio_noncollapse_v3_corrective_review_ledger",
+  "small_wall_crossed": false
+}

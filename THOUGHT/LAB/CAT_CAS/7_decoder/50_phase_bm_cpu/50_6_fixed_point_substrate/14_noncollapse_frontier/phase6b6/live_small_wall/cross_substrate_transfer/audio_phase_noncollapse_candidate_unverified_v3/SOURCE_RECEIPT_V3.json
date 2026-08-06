@@ -1,0 +1,68 @@
+{
+  "canonical": false,
+  "completed_v2_branch_head": "25e58a26395549c703d430f0e37410db2b7f54a0",
+  "copied_file_count": 68,
+  "created_utc": "2026-07-29T21:24:57.431441Z",
+  "environment": {
+    "g++": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "numpy": "2.5.1",
+    "python": "Python 3.14.4",
+    "scipy": "1.18.0",
+    "sympy": "1.14.0",
+    "worktree_python": "Python 3.14.4"
+  },
+  "freeze_decision": "Frozen at 7c79414f because inspection found a post-1251 scientific code/result commit; current moving branch 9165ef74 is documentation/reconciliation after that scientific commit.",
+  "last_independently_verified_audio_source_head": "6f39766e9cf622e2e41d178f8131bd8777b6cd1d",
+  "moving_audio_branch_head_at_freeze": "9165ef74d9750dec63f5ed2a3a1c69f156f23135",
+  "post_1251_delta": [
+    {
+      "commit": "a362df897ec10065126e6e4a74b19de89706ceac",
+      "files": [
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUTONOMOUS_LANE_STATE.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/CLAIM_AUTHORITY_REGISTRY.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CURRENT_FINDINGS.md"
+      ],
+      "scientific_code_or_result_added": false,
+      "subject": "cat-cas: record exact boundary height obstruction"
+    },
+    {
+      "commit": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+      "files": [
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_INDEPENDENT_REVIEW.md",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_ORACLE_RESULTS.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_PROVENANCE.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/F17_CUBIC_CHAIN_PERIOD17_PI_CONTENT_RECURRENCE_RESULTS.json",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/f17_cubic_chain_period17_pi_content_recurrence.py",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/f17_cubic_chain_period17_pi_content_recurrence_oracle.py",
+        "A\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/qualify_f17_cubic_chain_period17_pi_content_recurrence.sh"
+      ],
+      "scientific_code_or_result_added": true,
+      "subject": "cat-cas: diagnose pi-content residual growth"
+    },
+    {
+      "commit": "9165ef74d9750dec63f5ed2a3a1c69f156f23135",
+      "files": [
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUDIO_SIDE_QUEST_ROADMAP.md",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/AUTONOMOUS_LANE_STATE.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/CLAIM_AUTHORITY_REGISTRY.json",
+        "M\tTHOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/audio_frequency_wave_substrate/cat_cas_phase_frontier/CURRENT_FINDINGS.md"
+      ],
+      "scientific_code_or_result_added": false,
+      "subject": "cat-cas: record pi-content residual obstruction"
+    }
+  ],
+  "post_scientific_head_commits": [
+    "9165ef74d9750dec63f5ed2a3a1c69f156f23135"
+  ],
+  "prompt_reconciled_source_head": "1251cb3a34669fa6b00eddcd66a2228b8f7f9731",
+  "schema_version": "audio_noncollapse_v3_source_receipt",
+  "scientific_source_commit": "7c79414f2beb34c29bf0d63783a6effea26c65ed",
+  "scientific_source_parent": "a362df897ec10065126e6e4a74b19de89706ceac",
+  "scientific_source_tree": "762282c064bc151d615d7ae7ae75c5a77e8665da",
+  "sha256": "6337de717163e6f9a092ee15cc95cd2f69d6f49934841a90b24eed0bd101a858",
+  "small_wall_crossed": false,
+  "source_status": "",
+  "source_worktree": "/tmp/ags-audio-source-7c79414-v3"
+}

@@ -1,0 +1,18 @@
+# Scrambled 15-node retain-all DAG with four compiler-derived shared owners.
+# Shared degrees are S(805)=4, T(806)=3, U(807)=3, V(808)=2.
+root 815
+compose 812 807 808
+leaf 803 A A 2
+intersect 815 813 814
+compose 807 805 806
+compose 811 805 808
+leaf 801 A A 0
+intersect 813 809 810
+compose 805 801 802
+compose 808 806 805
+compose 809 805 807
+leaf 804 A A 3
+intersect 814 811 812
+compose 810 806 807
+leaf 802 A A 1
+compose 806 803 804

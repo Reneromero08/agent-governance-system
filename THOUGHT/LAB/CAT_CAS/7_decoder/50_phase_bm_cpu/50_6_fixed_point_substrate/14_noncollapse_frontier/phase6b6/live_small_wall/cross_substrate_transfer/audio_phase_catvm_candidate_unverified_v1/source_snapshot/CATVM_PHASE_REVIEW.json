@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "review_id": "CATVM-OPEN-INTERMEDIATE-COMPOSITION-01",
+  "review_scope": "MECHANISM_CLAIM_AND_NO_SMUGGLE_BOUNDARY",
+  "verdict": "PASS",
+  "accepted_claim": "CATVM_OPEN_INTERMEDIATE_COMPOSITION_ESTABLISHED_ON_PHASE_BACKEND",
+  "claim_blocking_findings": 0,
+  "reviewed_evidence": "/tmp/catvm-qual.r9Kwma",
+  "reviewed_accepted_result_sha256": "65280baff4fa831e399a3ce0d65b551146a5a285bde395e1b989c6ee36366524",
+  "findings": [
+    {
+      "id": "CATVM-REVIEW-001",
+      "severity": "MEDIUM",
+      "finding": "SNAPSHOT_MODE_REPORTED_ONLY_MACHINE_MAPPING_NOT_SEPARATE_SNAPSHOT_MAPPING",
+      "resolution": "CLOSED",
+      "repair": "HELLO_AND_CONTROLLER_RESULTS_NOW_REPORT_8192_TOTAL_MAPPED_LOCKED_BYTES_FOR_SNAPSHOT_MODE",
+      "repair_qualification": "/tmp/catvm-qual.H79vc8"
+    },
+    {
+      "id": "CATVM-REVIEW-002",
+      "severity": "LOW",
+      "finding": "CARRIER_CREATION_AND_PROTOCOL_QUEUE_FACTS_WERE_RESPONSE_CONSTANTS",
+      "resolution": "CLOSED",
+      "repair": "CARRIER_CREATION_COUNT_NOW_COMES_FROM_MACHINE_STATE_AND_RX_BUFFER_AND_SOCKET_QUEUE_ARE_MECHANICALLY_CHECKED_BEFORE_ACCEPTANCE",
+      "repair_qualification": "/tmp/catvm-qual.H79vc8"
+    }
+  ],
+  "repair_qualification": {
+    "result": "PASS",
+    "accepted_result_sha256": "7d78cab114e8f5a44084f649716d418bad596ef52f36b5a1b769398792e0acbc",
+    "snapshot_result_sha256": "1c30830a8c161e46f70969006cea343657e29d9d19e384f107fbeb90875dbb9e",
+    "snapshot_mapped_locked_bytes": 8192,
+    "carrier_creation_count_measured": true,
+    "protocol_rx_cleared_measured": true,
+    "backend_queue_empty_measured": true
+  },
+  "remaining_findings": 0,
+  "terminal": false
+}

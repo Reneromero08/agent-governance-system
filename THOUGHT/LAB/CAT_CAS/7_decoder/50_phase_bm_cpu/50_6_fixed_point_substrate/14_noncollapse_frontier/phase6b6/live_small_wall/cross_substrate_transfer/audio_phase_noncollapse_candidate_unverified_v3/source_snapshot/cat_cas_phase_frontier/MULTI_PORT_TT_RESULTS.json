@@ -1,0 +1,141 @@
+{
+  "catalytic_inference_established": false,
+  "catvm_custody_established": false,
+  "claim_candidate": "BOUNDED_TENSOR_FACTORIZED_MULTI_PORT_NECKLACE_PHASE_DIAGNOSTIC_FINDS_FULL_TOLERANCE_DEFINED_CANONICAL_MATRICIZATION_RANK_AND_NO_TT_COMPACTION_WITH_RESTORATION_AND_LOGICAL_REUSE",
+  "claim_ceiling": "LINUX_X86_64_PYTHON_NUMPY_SCIPY_COMPLEX128_GRID17_FOUR_EXCHANGE_SYMMETRIC_ROTATION_INVARIANT_ROTORS_285_NECKLACES_BINARY_PORT_COUNTS2_TO6_PUBLIC_ALGORITHMIC_LOCAL_CHAIN_AND_RING_JOINT_PROGRAMS_SVD_RELATIVE_2E_MINUS12_SOFTWARE_ONLY_NO_FIXED_BUFFER_OR_PROCESS_RSS_CLAIM",
+  "compact_multi_port_carrier_established": false,
+  "computational_advantage": false,
+  "controls": {
+    "missing_inverse_restoration_upper_bound": 1.4290126530984566,
+    "reordered_inverse_restoration_upper_bound": 1.4144899485674451,
+    "wrong_inverse_restoration_upper_bound": 0.18778020453603914
+  },
+  "distinct_phase_resource_established": false,
+  "fixed_rank_multi_port_closure_established": false,
+  "fresh_restored_reuse_boundary_errors": [
+    2.55351295663786e-15,
+    6.217248937900877e-15,
+    3.2751579226442118e-15,
+    9.936496070395151e-15,
+    3.608224830031759e-15
+  ],
+  "matched_classical_references": {
+    "dense_reference_smaller_in_complex_cells_for_all_cases": true,
+    "identical_tensor_train_recurrence_exists": true,
+    "separate_direct_dense_recurrence_executed": true,
+    "separate_reference_parity": true,
+    "verification_level": "SEPARATE_REFERENCE_PARITY"
+  },
+  "matched_explicit_dense_assignment_complex_cells": [
+    1140,
+    2280,
+    4560,
+    9120,
+    18240
+  ],
+  "maximum_accounted_primary_resident_carrier_complex_cells": [
+    1449,
+    2655,
+    5193,
+    10779,
+    23997
+  ],
+  "maximum_accounted_reuse_parity_resident_carrier_complex_cells": [
+    1738,
+    2946,
+    5486,
+    11074,
+    24294
+  ],
+  "maximum_temporary_component_complex_cells": [
+    6840,
+    13680,
+    27360,
+    54720,
+    109440
+  ],
+  "observed_obstruction": "FINAL_CANONICAL_NUMERICAL_MATRICIZATION_RANKS_ARE_FULL_AT_EVERY_CUT_FIRST_RANK_EQUALS_2_TO_THE_PORT_COUNT_AND_TT_STORAGE_EXCEEDS_THE_MATCHED_EXPLICIT_DENSE_ASSIGNMENT_CELL_COUNT_AT_PORTS2_TO6",
+  "physical_waveform_execution": false,
+  "primary_forward_final_ranks": [
+    [4, 2],
+    [8, 4, 2],
+    [16, 8, 4, 2],
+    [32, 16, 8, 4, 2],
+    [64, 32, 16, 8, 4, 2]
+  ],
+  "primary_module_counts": [3, 6, 8, 10, 12],
+  "primary_peak_tt_complex_cells": [
+    1160,
+    2364,
+    4900,
+    10484,
+    23700
+  ],
+  "primary_program_sha256": [
+    "ef4faecbae9e912627cce93a651c9aba8610b0582a600fbe78cddfd3d16d2f8a",
+    "9ab01b8711d3137433e6e7019586c64210121e62a58968f8b2430ac3ec34fd5b",
+    "9dc3f87e4afe31d1435a86a9340192bd3702485c8ea4bf032c207367e5106285",
+    "4aadaafad1acddb3e52e7fc03ee400dd0a887c0e278a7de1055aa7f0c6f1b02e",
+    "f82fdcdc5b6f0229aa6605dfd8dbbd1eaa360e4019ad2eda01eb7a8b2a7d78dd"
+  ],
+  "primary_restoration_upper_bounds": [
+    1.0237840620998317e-14,
+    7.52543715346588e-14,
+    4.616752445559356e-14,
+    2.7646536319181295e-14,
+    2.6113343584177324e-14
+  ],
+  "primary_restored_ranks": [
+    [1, 1],
+    [1, 1, 1],
+    [1, 1, 1, 1],
+    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1]
+  ],
+  "rank_observation": {
+    "first_bond_rank_equals_full_binary_width": true,
+    "first_bond_ranks": [4, 8, 16, 32, 64],
+    "fixed_rank_across_tested_port_count": false,
+    "full_binary_widths": [4, 8, 16, 32, 64],
+    "maximum_first_bond_rank": 64,
+    "maximum_matched_explicit_dense_assignment_cells": 18240,
+    "maximum_tt_cells": 23700,
+    "monotone_non_decreasing": true,
+    "tensor_train_smaller_than_explicit_dense_assignment": false
+  },
+  "replacement_of_physical_bits_with_pi": false,
+  "resource_law": {
+    "allocator_blas_lapack_scipy_python_os_peak_bounded": false,
+    "explicit_assignment_indexed_dense_cells": 0,
+    "generator_live_complex_cells_conservatively_estimated": true,
+    "maximum_equivalent_width_first_core_complex_cells": 18240,
+    "retained_inverse_history_bytes": 0,
+    "sparse_generator_csr_array_bytes": 4189716,
+    "sparse_generator_nonzeros": 208685,
+    "sparse_generator_nonzeros_counted_via_term_updates": true,
+    "svd_temporary_matrix_complex_cells_counted": true,
+    "tt_core_complex_cells_counted": true,
+    "unique_generator_plans": 14
+  },
+  "restoration_class": "INVERSE_PLUS_CANONICAL_NUMERICAL_QUOTIENT",
+  "result": "PASS",
+  "reuse_module_counts": [3, 6, 8, 10, 12],
+  "reuse_program_sha256": [
+    "960882ec3bc02b83a983d270f187be32f2ad15217150edc37f7aef1b953cd68c",
+    "24778ef99aa0d2d5ba20393c23436111ae11218951e24b6318a0ec7b1a18220f",
+    "08c635513744aae05cacd149b435285de55f49452c4bd57e9bc499ab2431fba5",
+    "4eb83d7a0aa1a8f29bf89962b9d4119905457db097c6823d1f63683124c8dda3",
+    "2a67ade19ea6b9341196bc764d243ca7402835ce3ac42ee6c7b0e3641272544f"
+  ],
+  "reuse_restoration_upper_bounds": [
+    7.881470838856799e-15,
+    1.0371859862081124e-13,
+    1.3968985571988416e-13,
+    6.637516028855957e-14,
+    6.088096499776613e-14
+  ],
+  "small_wall_crossed": false,
+  "strongest_compact_classical_established": false,
+  "terminal": false,
+  "tested_port_counts": [2, 3, 4, 5, 6]
+}

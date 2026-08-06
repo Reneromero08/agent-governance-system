@@ -1,0 +1,140 @@
+{
+  "attack_matrix": [
+    {
+      "attack": "repeated_initialization",
+      "expected_disposition": "DENIED_NO_NONCE_MUTATION"
+    },
+    {
+      "attack": "stale_nonce",
+      "expected_disposition": "DENIED_ZERO_BOUNDARY"
+    },
+    {
+      "attack": "changed_nonce_after_denied_initialization",
+      "expected_disposition": "ACCEPTED_NONCE_UNCHANGED_REQUIRED"
+    },
+    {
+      "attack": "wrong_owner",
+      "expected_disposition": "DENIED"
+    },
+    {
+      "attack": "wrong_lease",
+      "expected_disposition": "DENIED"
+    },
+    {
+      "attack": "wrong_generation",
+      "expected_disposition": "DENIED"
+    },
+    {
+      "attack": "descriptor_mismatch_before_residency",
+      "expected_disposition": "ERROR_BEFORE_STAGE"
+    },
+    {
+      "attack": "descriptor_mismatch_during_residency",
+      "expected_disposition": "DENIED_STAGE_RESIDENT_ZERO_BOUNDARY"
+    },
+    {
+      "attack": "premature_projection",
+      "expected_disposition": "DENIED"
+    },
+    {
+      "attack": "resident_stop",
+      "expected_disposition": "DENIED_WITH_STAGE_RESIDENT_ZERO_BOUNDARY"
+    },
+    {
+      "attack": "disconnect_after_forward",
+      "expected_disposition": "SOURCE_CLAIMS_INVERSE_CLEANUP_BEFORE_EXIT"
+    },
+    {
+      "attack": "malformed_magic",
+      "expected_disposition": "ERROR_STAGE_RECEIPT_IF_RESIDENT"
+    },
+    {
+      "attack": "truncated_packet",
+      "expected_disposition": "NO_ACCEPTED_BOUNDARY_EXPECTED"
+    },
+    {
+      "attack": "oversize_packet",
+      "expected_disposition": "SEQPACKET_EXACT_SIZE_REQUIRED"
+    },
+    {
+      "attack": "unknown_command",
+      "expected_disposition": "DENIED_OR_ERROR_ZERO_BOUNDARY"
+    },
+    {
+      "attack": "snapshot_command",
+      "expected_disposition": "DENIED"
+    },
+    {
+      "attack": "missing_inverse",
+      "expected_disposition": 1.4138133039130538
+    },
+    {
+      "attack": "wrong_inverse",
+      "expected_disposition": 1.4027925543635036
+    },
+    {
+      "attack": "reordered_inverse",
+      "expected_disposition": 1.4388157010252134
+    }
+  ],
+  "candidate": "E",
+  "canonical": false,
+  "created_utc": "2026-07-29T09:13:36.411460Z",
+  "independent_runtime_scientific_defects": [
+    "OVERSIZED_SEQPACKET_ACCEPTED_AS_VALID_REQUEST"
+  ],
+  "model_decision": "Invariant is coherent as an abstract state machine, but the concrete E service does not satisfy the malformed/oversized packet boundary: the independent runtime probe observed an oversized seqpacket accepted as a valid request.",
+  "required_invariant": "No accepted final boundary leaves the service unless forward completed, inverse cleanup completed, restoration verified, and accepted custody state is consistent.",
+  "schema_version": "catvm_state_machine_model.v2",
+  "sha256": "a57629d96d8769c7cbe5cd900d22aeb37772f814bb162b1aa2cad36b4b5d0c77",
+  "small_wall_crossed": false,
+  "source_reproduction": "SOURCE_NOT_REPRODUCED",
+  "states": [
+    "UNINITIALIZED",
+    "SEALED",
+    "STAGE_RESIDENT",
+    "RESTORING",
+    "RESTORED",
+    "BOUNDARY_RELEASED",
+    "INVALID",
+    "CLOSED"
+  ],
+  "status": "MODEL_BUILT_FROM_PUBLIC_PROTOCOL_AND_REPAIR_SOURCE",
+  "transitions": {
+    "BOUNDARY_RELEASED": {
+      "STOP": "CLOSED",
+      "same carrier unrelated reuse": "STAGE_RESIDENT"
+    },
+    "CLOSED": {
+      "any": "NO_RESPONSE"
+    },
+    "INVALID": {
+      "any": "CLOSED_OR_DENIED_ZERO_BOUNDARY"
+    },
+    "RESTORED": {
+      "REUSE(valid_descriptor)": "STAGE_RESIDENT",
+      "STOP": "CLOSED",
+      "atomic_response": "BOUNDARY_RELEASED"
+    },
+    "RESTORING": {
+      "inverse_fail || restoration_fail": "INVALID_NO_BOUNDARY",
+      "inverse_ok && restoration_ok": "RESTORED"
+    },
+    "SEALED": {
+      "BEGIN(valid_owner, lease, generation, descriptor)": "STAGE_RESIDENT",
+      "INITIALIZE(repeat)": "DENIED_NO_NONCE_MUTATION",
+      "wrong_owner/wrong_lease/wrong_generation": "DENIED_ZERO_BOUNDARY"
+    },
+    "STAGE_RESIDENT": {
+      "CONTINUE(matching_descriptor)": "RESTORING",
+      "CONTINUE(mismatch)": "DENIED_STAGE_RESIDENT_ZERO_BOUNDARY",
+      "PROJECT": "DENIED_STAGE_RESIDENT_ZERO_BOUNDARY",
+      "STOP": "DENIED_STAGE_RESIDENT_ZERO_BOUNDARY",
+      "disconnect": "RESTORING_THEN_CLOSED_OR_POISONED_NO_BOUNDARY"
+    },
+    "UNINITIALIZED": {
+      "BEGIN/PROJECT/CONTINUE/REUSE/STOP": "INVALID_NO_ACCEPTED_LEASE",
+      "INITIALIZE(valid_magic, first_nonce)": "SEALED"
+    }
+  }
+}

@@ -1,0 +1,769 @@
+{
+  "branch_local_transfer_reference": {
+    "all_cycles_match": true,
+    "all_cycles_restored": true,
+    "cycles": 64,
+    "denied_hidden_projection": {
+      "error": "INTERMEDIATE_PROJECTION_DENIED",
+      "ok": false
+    },
+    "generation_last": 64,
+    "method": "branch_local_reference_carrier_independent_of_source_binary",
+    "negative_modes": {
+      "missing_g": {
+        "error": "RESTORATION_CHECK_FAILED",
+        "generation": 65,
+        "ok": false,
+        "response_after_restore": true,
+        "state": [
+          0,
+          2,
+          1,
+          1
+        ]
+      },
+      "reordered": {
+        "error": "RESTORATION_CHECK_FAILED",
+        "generation": 67,
+        "ok": false,
+        "response_after_restore": true,
+        "state": [
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "wrong_g": {
+        "error": "RESTORATION_CHECK_FAILED",
+        "generation": 66,
+        "ok": false,
+        "response_after_restore": true,
+        "state": [
+          1,
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    "negative_modes_fail_closed": true,
+    "records_sha256": "2adf03e6c4763fc079590ee3ba1ac3a06ca82373631a318871b358e0486fe104"
+  },
+  "candidate_a": {
+    "restoration_reuse_decision": "SOURCE_RESTORES_AND_REUSES_BUT_FINAL_RESPONSE_PRECEDES_RESTORE",
+    "source_binary": "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/raw_outputs/source_reproduction/candidate_a_run1/catvm_phase_service",
+    "source_binary_sha256": "baaa35eb8d7fa020140c5edd6c519bb1d1aeacce1df8057eb307c9b7e6d3bc78",
+    "source_negative_modes": {
+      "missing-g": {
+        "errors": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "events": [
+          null,
+          "CARRIER_SEALED",
+          "INTERMEDIATE_CUSTODY",
+          "FINAL_READY",
+          "FINAL_BOUNDARY",
+          "RESTORATION"
+        ],
+        "final_boundary_before_restore": true,
+        "final_coefficients": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "mode": "missing-g",
+        "oks": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "omit_restore": false,
+        "packets": [
+          {
+            "elapsed_ns": 138555,
+            "error": null,
+            "event": null,
+            "ok": true,
+            "request": "HELLO",
+            "response_bytes": 437,
+            "response_sha256": "59bdf8dec300e0bb8aeb3114e285c1e977330b59ebc85deb4b12f2c5a780f75a"
+          },
+          {
+            "elapsed_ns": 21350,
+            "error": null,
+            "event": "CARRIER_SEALED",
+            "ok": true,
+            "request": "SEAL 0 1 2 0 0 1 2 0 0 1 0 0",
+            "response_bytes": 73,
+            "response_sha256": "f5ef01652242bb1b3b069fdec09236110429fd0eb547804906aeac5389319918"
+          },
+          {
+            "elapsed_ns": 25870,
+            "error": null,
+            "event": "INTERMEDIATE_CUSTODY",
+            "ok": true,
+            "request": "F",
+            "response_bytes": 112,
+            "response_sha256": "76d1199480519862fd61c7389b18da9f97d2032de5b8f08abe7c13b883fe66cd"
+          },
+          {
+            "elapsed_ns": 23415,
+            "error": null,
+            "event": "FINAL_READY",
+            "ok": true,
+            "request": "G",
+            "response_bytes": 52,
+            "response_sha256": "5d72942a2fd5bc9a037a7f7d11a9ec297c38652064310061371f476947a57a1c"
+          },
+          {
+            "elapsed_ns": 19898,
+            "error": null,
+            "event": "FINAL_BOUNDARY",
+            "ok": true,
+            "request": "PROJECT Z",
+            "response_bytes": 178,
+            "response_sha256": "475c1664e60d2beba4894e872a3e4f95e2241d8a5526fe652bd461f25cfbd911"
+          },
+          {
+            "elapsed_ns": 28765,
+            "error": null,
+            "event": "RESTORATION",
+            "ok": true,
+            "request": "RESTORE",
+            "response_bytes": 796,
+            "response_sha256": "f752af1c7b942846fa88155e95e63ab76e15727e19bd03c835548adda6998d2d"
+          }
+        ],
+        "process": {
+          "return_code": -15,
+          "return_code_before_stop": null,
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "restore_ok": true
+      },
+      "reordered": {
+        "errors": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "events": [
+          null,
+          "CARRIER_SEALED",
+          "INTERMEDIATE_CUSTODY",
+          "FINAL_READY",
+          "FINAL_BOUNDARY",
+          "RESTORATION"
+        ],
+        "final_boundary_before_restore": true,
+        "final_coefficients": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "mode": "reordered",
+        "oks": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "omit_restore": false,
+        "packets": [
+          {
+            "elapsed_ns": 199302,
+            "error": null,
+            "event": null,
+            "ok": true,
+            "request": "HELLO",
+            "response_bytes": 437,
+            "response_sha256": "59bdf8dec300e0bb8aeb3114e285c1e977330b59ebc85deb4b12f2c5a780f75a"
+          },
+          {
+            "elapsed_ns": 33774,
+            "error": null,
+            "event": "CARRIER_SEALED",
+            "ok": true,
+            "request": "SEAL 0 1 2 0 0 1 2 0 0 1 0 0",
+            "response_bytes": 73,
+            "response_sha256": "f5ef01652242bb1b3b069fdec09236110429fd0eb547804906aeac5389319918"
+          },
+          {
+            "elapsed_ns": 28134,
+            "error": null,
+            "event": "INTERMEDIATE_CUSTODY",
+            "ok": true,
+            "request": "F",
+            "response_bytes": 112,
+            "response_sha256": "76d1199480519862fd61c7389b18da9f97d2032de5b8f08abe7c13b883fe66cd"
+          },
+          {
+            "elapsed_ns": 36570,
+            "error": null,
+            "event": "FINAL_READY",
+            "ok": true,
+            "request": "G",
+            "response_bytes": 52,
+            "response_sha256": "5d72942a2fd5bc9a037a7f7d11a9ec297c38652064310061371f476947a57a1c"
+          },
+          {
+            "elapsed_ns": 29006,
+            "error": null,
+            "event": "FINAL_BOUNDARY",
+            "ok": true,
+            "request": "PROJECT Z",
+            "response_bytes": 178,
+            "response_sha256": "475c1664e60d2beba4894e872a3e4f95e2241d8a5526fe652bd461f25cfbd911"
+          },
+          {
+            "elapsed_ns": 33424,
+            "error": null,
+            "event": "RESTORATION",
+            "ok": true,
+            "request": "RESTORE",
+            "response_bytes": 796,
+            "response_sha256": "125a8555a1d456d4c95bbf98ec1f15261ebf868d03aa142a3a9c227c5621b0c2"
+          }
+        ],
+        "process": {
+          "return_code": -15,
+          "return_code_before_stop": null,
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "restore_ok": true
+      },
+      "wrong-g": {
+        "errors": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "events": [
+          null,
+          "CARRIER_SEALED",
+          "INTERMEDIATE_CUSTODY",
+          "FINAL_READY",
+          "FINAL_BOUNDARY",
+          "RESTORATION"
+        ],
+        "final_boundary_before_restore": true,
+        "final_coefficients": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "mode": "wrong-g",
+        "oks": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "omit_restore": false,
+        "packets": [
+          {
+            "elapsed_ns": 147542,
+            "error": null,
+            "event": null,
+            "ok": true,
+            "request": "HELLO",
+            "response_bytes": 437,
+            "response_sha256": "59bdf8dec300e0bb8aeb3114e285c1e977330b59ebc85deb4b12f2c5a780f75a"
+          },
+          {
+            "elapsed_ns": 22543,
+            "error": null,
+            "event": "CARRIER_SEALED",
+            "ok": true,
+            "request": "SEAL 0 1 2 0 0 1 2 0 0 1 0 0",
+            "response_bytes": 73,
+            "response_sha256": "f5ef01652242bb1b3b069fdec09236110429fd0eb547804906aeac5389319918"
+          },
+          {
+            "elapsed_ns": 24838,
+            "error": null,
+            "event": "INTERMEDIATE_CUSTODY",
+            "ok": true,
+            "request": "F",
+            "response_bytes": 112,
+            "response_sha256": "76d1199480519862fd61c7389b18da9f97d2032de5b8f08abe7c13b883fe66cd"
+          },
+          {
+            "elapsed_ns": 19878,
+            "error": null,
+            "event": "FINAL_READY",
+            "ok": true,
+            "request": "G",
+            "response_bytes": 52,
+            "response_sha256": "5d72942a2fd5bc9a037a7f7d11a9ec297c38652064310061371f476947a57a1c"
+          },
+          {
+            "elapsed_ns": 19518,
+            "error": null,
+            "event": "FINAL_BOUNDARY",
+            "ok": true,
+            "request": "PROJECT Z",
+            "response_bytes": 178,
+            "response_sha256": "475c1664e60d2beba4894e872a3e4f95e2241d8a5526fe652bd461f25cfbd911"
+          },
+          {
+            "elapsed_ns": 32271,
+            "error": null,
+            "event": "RESTORATION",
+            "ok": true,
+            "request": "RESTORE",
+            "response_bytes": 796,
+            "response_sha256": "125a8555a1d456d4c95bbf98ec1f15261ebf868d03aa142a3a9c227c5621b0c2"
+          }
+        ],
+        "process": {
+          "return_code": -15,
+          "return_code_before_stop": null,
+          "stderr_bytes": 0,
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "restore_ok": true
+      }
+    },
+    "source_omit_restore_observation": {
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "events": [
+        null,
+        "CARRIER_SEALED",
+        "INTERMEDIATE_CUSTODY",
+        "FINAL_READY",
+        "FINAL_BOUNDARY"
+      ],
+      "final_boundary_before_restore": true,
+      "final_coefficients": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "mode": "correct",
+      "oks": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "omit_restore": true,
+      "packets": [
+        {
+          "elapsed_ns": 162070,
+          "error": null,
+          "event": null,
+          "ok": true,
+          "request": "HELLO",
+          "response_bytes": 437,
+          "response_sha256": "59bdf8dec300e0bb8aeb3114e285c1e977330b59ebc85deb4b12f2c5a780f75a"
+        },
+        {
+          "elapsed_ns": 20258,
+          "error": null,
+          "event": "CARRIER_SEALED",
+          "ok": true,
+          "request": "SEAL 0 1 2 0 0 1 2 0 0 1 0 0",
+          "response_bytes": 73,
+          "response_sha256": "f5ef01652242bb1b3b069fdec09236110429fd0eb547804906aeac5389319918"
+        },
+        {
+          "elapsed_ns": 27041,
+          "error": null,
+          "event": "INTERMEDIATE_CUSTODY",
+          "ok": true,
+          "request": "F",
+          "response_bytes": 112,
+          "response_sha256": "76d1199480519862fd61c7389b18da9f97d2032de5b8f08abe7c13b883fe66cd"
+        },
+        {
+          "elapsed_ns": 17042,
+          "error": null,
+          "event": "FINAL_READY",
+          "ok": true,
+          "request": "G",
+          "response_bytes": 52,
+          "response_sha256": "5d72942a2fd5bc9a037a7f7d11a9ec297c38652064310061371f476947a57a1c"
+        },
+        {
+          "elapsed_ns": 18585,
+          "error": null,
+          "event": "FINAL_BOUNDARY",
+          "ok": true,
+          "request": "PROJECT Z",
+          "response_bytes": 178,
+          "response_sha256": "475c1664e60d2beba4894e872a3e4f95e2241d8a5526fe652bd461f25cfbd911"
+        }
+      ],
+      "process": {
+        "return_code": -15,
+        "return_code_before_stop": null,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "restore_ok": null
+    },
+    "source_primary_transaction": {
+      "errors": [
+        null,
+        null,
+        null,
+        "E_INTERMEDIATE_PROJECTION_DENIED",
+        null,
+        null,
+        null
+      ],
+      "events": [
+        null,
+        "CARRIER_SEALED",
+        "INTERMEDIATE_CUSTODY",
+        null,
+        "FINAL_READY",
+        "FINAL_BOUNDARY",
+        "RESTORATION"
+      ],
+      "final_boundary_before_restore": true,
+      "final_coefficients": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "mode": "correct",
+      "oks": [
+        true,
+        true,
+        true,
+        false,
+        true,
+        true,
+        true
+      ],
+      "omit_restore": false,
+      "packets": [
+        {
+          "elapsed_ns": 163242,
+          "error": null,
+          "event": null,
+          "ok": true,
+          "request": "HELLO",
+          "response_bytes": 437,
+          "response_sha256": "59bdf8dec300e0bb8aeb3114e285c1e977330b59ebc85deb4b12f2c5a780f75a"
+        },
+        {
+          "elapsed_ns": 21782,
+          "error": null,
+          "event": "CARRIER_SEALED",
+          "ok": true,
+          "request": "SEAL 0 1 2 0 0 1 2 0 0 1 0 0",
+          "response_bytes": 73,
+          "response_sha256": "f5ef01652242bb1b3b069fdec09236110429fd0eb547804906aeac5389319918"
+        },
+        {
+          "elapsed_ns": 22703,
+          "error": null,
+          "event": "INTERMEDIATE_CUSTODY",
+          "ok": true,
+          "request": "F",
+          "response_bytes": 112,
+          "response_sha256": "76d1199480519862fd61c7389b18da9f97d2032de5b8f08abe7c13b883fe66cd"
+        },
+        {
+          "elapsed_ns": 14117,
+          "error": "E_INTERMEDIATE_PROJECTION_DENIED",
+          "event": null,
+          "ok": false,
+          "request": "PROJECT Y",
+          "response_bytes": 107,
+          "response_sha256": "0f295340ee35c8739e9e984bdcd45f1e1eab041bf804052653038348b4144112"
+        },
+        {
+          "elapsed_ns": 16591,
+          "error": null,
+          "event": "FINAL_READY",
+          "ok": true,
+          "request": "G",
+          "response_bytes": 52,
+          "response_sha256": "5d72942a2fd5bc9a037a7f7d11a9ec297c38652064310061371f476947a57a1c"
+        },
+        {
+          "elapsed_ns": 17524,
+          "error": null,
+          "event": "FINAL_BOUNDARY",
+          "ok": true,
+          "request": "PROJECT Z",
+          "response_bytes": 178,
+          "response_sha256": "475c1664e60d2beba4894e872a3e4f95e2241d8a5526fe652bd461f25cfbd911"
+        },
+        {
+          "elapsed_ns": 35188,
+          "error": null,
+          "event": "RESTORATION",
+          "ok": true,
+          "request": "RESTORE",
+          "response_bytes": 799,
+          "response_sha256": "c99beae130a8483eae4531035051fdd69282421489cc61d3a8323ad5a65c9995"
+        }
+      ],
+      "process": {
+        "return_code": -15,
+        "return_code_before_stop": null,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "restore_ok": true
+    },
+    "source_reuse_cycles": {
+      "all_coefficients_match": true,
+      "all_restores_ok": true,
+      "cycles": 64,
+      "generation_first": 1,
+      "generation_last": 64,
+      "generation_monotonic": true,
+      "maximum_abs_error": 4.99600361081e-16,
+      "process": {
+        "return_code": -15,
+        "return_code_before_stop": null,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "record_sha256": "c6a6bef2e57da5846eec67151c033d9b0c82d977a9a97e6983a3fd9a8acfd731",
+      "snapshot_reload_seen": false
+    }
+  },
+  "candidate_b": {
+    "correct_probe": {
+      "commands": [
+        "HELLO",
+        "PROJECT FORWARD_TAPE",
+        "EXECUTE 0",
+        "EXECUTE 1",
+        "SHUTDOWN"
+      ],
+      "errors": [
+        null,
+        "E_INTERMEDIATE_PROJECTION_DENIED",
+        null,
+        null,
+        null
+      ],
+      "events": [
+        "HELLO",
+        null,
+        "FINAL",
+        "FINAL",
+        "CLOSED"
+      ],
+      "mode": "correct",
+      "oks": [
+        true,
+        false,
+        true,
+        true,
+        true
+      ],
+      "packets": [
+        {
+          "elapsed_ns": 155678,
+          "error": null,
+          "event": "HELLO",
+          "ok": true,
+          "request": "HELLO",
+          "response_bytes": 78,
+          "response_sha256": "8d109628100ed1f254cbc424fa07c2740fa4768cfe06f0c621886ca79922954b"
+        },
+        {
+          "elapsed_ns": 30208,
+          "error": "E_INTERMEDIATE_PROJECTION_DENIED",
+          "event": null,
+          "ok": false,
+          "request": "PROJECT FORWARD_TAPE",
+          "response_bytes": 36,
+          "response_sha256": "ca4a5b3cce178a6b66028d16647f109790e721d56f68371cdead4bcffe6844c6"
+        },
+        {
+          "elapsed_ns": 37520973,
+          "error": null,
+          "event": "FINAL",
+          "ok": true,
+          "request": "EXECUTE 0",
+          "response_bytes": 149,
+          "response_sha256": "8534e7e387134e3e14baf1f0500df3c5d96e7f437242441fd144676e0edaebec"
+        },
+        {
+          "elapsed_ns": 36651478,
+          "error": null,
+          "event": "FINAL",
+          "ok": true,
+          "request": "EXECUTE 1",
+          "response_bytes": 149,
+          "response_sha256": "a25fdad1b098e6e1cb8e35e569d5567de3ed863eb4f3ea307cc6a090c24c7159"
+        },
+        {
+          "elapsed_ns": 24988,
+          "error": null,
+          "event": "CLOSED",
+          "ok": true,
+          "request": "SHUTDOWN",
+          "response_bytes": 9,
+          "response_sha256": "9b14e1b2cc733707a45deb15f5ad0c51477ba84990481556e5416233f7bff8d8"
+        }
+      ],
+      "process": {
+        "return_code": -15,
+        "return_code_before_stop": null,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "response_prefixes": [
+        [
+          "OK",
+          "HELLO"
+        ],
+        [
+          "ERR",
+          "E_INTERMEDIATE_PROJECTION_DENIED"
+        ],
+        [
+          "OK",
+          "FINAL"
+        ],
+        [
+          "OK",
+          "FINAL"
+        ],
+        [
+          "OK",
+          "CLOSED"
+        ]
+      ]
+    },
+    "negative_probe": {
+      "commands": [
+        "HELLO",
+        "EXECUTE 0"
+      ],
+      "errors": [
+        null,
+        "E_RESTORATION_DETECTED"
+      ],
+      "events": [
+        "HELLO",
+        null
+      ],
+      "mode": "wrong-root",
+      "oks": [
+        true,
+        false
+      ],
+      "packets": [
+        {
+          "elapsed_ns": 151610,
+          "error": null,
+          "event": "HELLO",
+          "ok": true,
+          "request": "HELLO",
+          "response_bytes": 78,
+          "response_sha256": "8d109628100ed1f254cbc424fa07c2740fa4768cfe06f0c621886ca79922954b"
+        },
+        {
+          "elapsed_ns": 24837858,
+          "error": "E_RESTORATION_DETECTED",
+          "event": null,
+          "ok": false,
+          "request": "EXECUTE 0",
+          "response_bytes": 26,
+          "response_sha256": "36cfeff82044b5247c393e73b85fe6cf3396a501f0292885c11a3472daeabbaa"
+        }
+      ],
+      "process": {
+        "return_code": 0,
+        "return_code_before_stop": null,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "response_prefixes": [
+        [
+          "OK",
+          "HELLO"
+        ],
+        [
+          "ERR",
+          "E_RESTORATION_DETECTED"
+        ]
+      ]
+    },
+    "restoration_reuse_decision": "SOURCE_LOCAL_ATOMIC_EXECUTE_PATTERN_REPROBED_WITH_FIXED_PUBLIC_TOPOLOGY",
+    "source_binary": "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/raw_outputs/source_reproduction/candidate_b_run1/service_testing",
+    "source_binary_sha256": "b367e3c44ab8a92a1b1fce8b03a7f5813fd0f9301cf6bdb587be429832d99fd9"
+  },
+  "canonical": false,
+  "generated_utc": "2026-07-28T05:34:40.053995Z",
+  "raw_log_directory": "/run/media/reneshizzle/860_1/CCC 2.0/AI/wt-audio-catvm-independent-verification/THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/raw_logs/restoration_boundary",
+  "raw_log_hashes": {
+    "candidate_a_negative_modes_full.json": "359922014a4b33f8d8ef8f8e2fb6ec89caeab33c6db1c0689ae029b4f0fb738f",
+    "candidate_a_omit_restore_full.json": "f66773cea4104d5fbf4e5c0802939691d8a7934ad1010811aad87a85012f1bf5",
+    "candidate_a_primary_full.json": "7916f896668feeaa09748f0db0fde9f183472269c96bc23bec1854db4d896d94",
+    "candidate_a_reuse_cycles_full.json": "07018674e48c8ca6dbd2fe39df12436bb7a793c00149a14a350309326b174864",
+    "candidate_b_correct_full.json": "b30106ae5d1906673cba7c3f73948cfe05447091bbe3fcef7e406cda0f695d1c",
+    "candidate_b_negative_full.json": "a1bf9fc39882190543a4d4c2f37e1aaa13c78cbb03389ca177a7c9514a78af8f",
+    "transfer_reference_full.json": "9fde24b922e32e0d673c2dc9b1689ec06fef2c9913ecd0600c38eedee3da07d8"
+  },
+  "result_sha256": "c5de5c3eb41ebb35b5c8e8453929e8281523a6d55494ad3ede340ab3bc9f6cfa",
+  "schema_version": "audio_catvm_restoration_reuse_stress.v1",
+  "small_wall_crossed": false,
+  "source_branch_claims_remain": [
+    "CLAIMED_BY_SOURCE_BRANCH",
+    "NOT_CANONICAL",
+    "NOT_PHYSICAL_FAMILY10H_EVIDENCE"
+  ]
+}

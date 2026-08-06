@@ -1,0 +1,148 @@
+{
+  "schema_version": "wilczek_zee_nonabelian_phase_frame.v1",
+  "source_base_head": "ae5648735e9870214e2349dbf940d22be5bae695",
+  "canonical_branch": "codex/audio-frequency-wave-substrate",
+  "milestone": "BOUNDED_NONABELIAN_WILCZEK_ZEE_SHARED_PHASE_FRAME_NONCOMMUTING_HOLONOMY_COMPOSITION_WITH_NUMERICAL_RESTORATION_AND_REUSE",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+  "claim_ceiling": "LINUX_X86_64_DIRECT_PROCESS_COMPLEX128_C3_DARK_TWO_FRAME_PUBLIC_CP2_PHI1_PHI2_LOOPS_SEGMENTS512_PRIMARY_TWO_MODULE_REUSE_THREE_MODULE_SOFTWARE_ONLY",
+  "carrier_law": {
+    "geometry": "U2_DARK_FRAME_OVER_PUBLIC_CP2_BRIGHT_RAY",
+    "ambient_complex_dimension": 3,
+    "dark_frame_columns": 2,
+    "public_alpha": 1.0,
+    "public_beta": 0.7,
+    "loop_segments": 512,
+    "edge_transport": "UNITARY_POLAR_FACTOR_MAKES_OLD_NEW_DARK_FRAME_OVERLAP_POSITIVE_HERMITIAN",
+    "shared_phase_frame_consumed_by_multiple_modules": true,
+    "intermediate_frame_projected": false,
+    "final_boundary_projected_before_inverse": true,
+    "retained_edge_history_bytes": 0
+  },
+  "accepted_path": {
+    "predeclared_numerical_tolerance": 1e-9,
+    "primary_public_word": [
+      "PHI1_POSITIVE_LOOP",
+      "PHI2_POSITIVE_LOOP"
+    ],
+    "primary_formula_error": 1.1268354878878808e-13,
+    "primary_continuous_limit_error": 1.2885293510437249e-05,
+    "primary_unitarity_error": 2.220446049250313e-16,
+    "primary_restoration_error": 4.157573610616368e-15,
+    "reordered_forward_public_word": [
+      "PHI2_POSITIVE_LOOP",
+      "PHI1_POSITIVE_LOOP"
+    ],
+    "reordered_formula_error": 1.1029093493382031e-13,
+    "loop_order_boundary_difference_frobenius": 1.9817209383202135,
+    "reuse_public_word": [
+      "PHI1_NEGATIVE_LOOP",
+      "PHI2_POSITIVE_LOOP",
+      "PHI1_POSITIVE_LOOP"
+    ],
+    "reuse_formula_error": 2.3033974110438308e-13,
+    "reuse_unitarity_error": 4.440892098500626e-16,
+    "reuse_restoration_error": 4.6874630130596784e-15,
+    "fresh_restored_reuse_boundary_error": 5.4333621782046985e-15,
+    "same_outer_carrier_variable": true,
+    "actual_restored_carrier_reused": true,
+    "restoration_generation_sequence": [
+      1,
+      2
+    ],
+    "restoration_generation_lease_enforced": false,
+    "baseline_reload_bytes": 0,
+    "stress_cycles": 100,
+    "stress_maximum_restoration_error": 1.6840494080950143e-13
+  },
+  "controls": {
+    "missing_inverse_restored": false,
+    "wrong_inverse_restored": false,
+    "reordered_inverse_applicable": true,
+    "reordered_inverse_restored": false,
+    "noncommuting_loop_order_changes_boundary": true,
+    "public_dark_frame_orthonormal": true,
+    "public_bright_dark_orthogonal": true,
+    "transported_edge_overlap_positive_hermitian": true,
+    "null_carrier_accepted": false
+  },
+  "resource_law": {
+    "resident_phase_frame_complex128_cells": 6,
+    "resident_phase_frame_inline_bytes": 96,
+    "restoration_verification_baseline_inline_bytes": 96,
+    "final_boundary_inline_bytes": 64,
+    "public_loop_descriptor_inline_bytes_each": 32,
+    "declared_named_per_edge_object_subtotal_bytes": 448,
+    "o2_compiler_reported_transport_function_stack_bytes": 784,
+    "complete_per_edge_peak_bounded": false,
+    "retained_edge_history_bytes": 0,
+    "compiler_stack_padding_code_libm_allocator_and_whole_process_excluded": true,
+    "whole_process_rss_claimed": false,
+    "runtime_advantage_claimed": false
+  },
+  "matched_baseline": {
+    "matched_compact_recurrence": "IDENTICAL_2X2_HOLONOMY_MATRIX_RECURRENCE",
+    "matrix_state_inline_bytes": 64,
+    "closed_form_fixed_loop_modules_available": true,
+    "primary_boundary_error": 1.1268354878878808e-13,
+    "reuse_boundary_error": 2.3033974110438308e-13,
+    "distinct_phase_resource_established": false,
+    "computational_advantage_established": false,
+    "small_wall_crossing_established": false
+  },
+  "independent_oracle": {
+    "implementation": "INDEPENDENT_MPMATH80_CP2_DARK_FRAME_POLAR_TRANSPORT_AND_DISCRETE_LOOP_PRODUCT",
+    "production_backend_imported": false,
+    "precision_decimal_digits": 80,
+    "primary_boundary_matches": true,
+    "reordered_boundary_matches": true,
+    "reuse_boundary_matches": true,
+    "all_discrete_loop_formulas_match_below_1e_65": true,
+    "primary_restoration_below_1e_65": true,
+    "reuse_restoration_below_1e_65": true,
+    "loop_order_noncommutator_frobenius": 1.9817209383199674,
+    "reordered_inverse_restored": false
+  },
+  "independent_review": {
+    "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "restoration_classification": "NUMERICAL_PHYSICAL_STATE_RESTORATION",
+    "rejecting_defect_found": false,
+    "resource_upper_bound_claimed": false,
+    "matrix_recurrence_state_minimal_claimed": false,
+    "fixed_loop_closed_form_classical_path_disclosed": true,
+    "generic_cp2_path_compiler_established": false,
+    "catvm_custody_established": false
+  },
+  "source_sha256": {
+    "wilczek_zee_nonabelian_phase_frame.c": "3a79e7721724f9badddbeb6c94bda0f3e01a3dcb608e995879977eb443b81489",
+    "wilczek_zee_nonabelian_phase_frame_oracle.py": "8a198784e75f6b9aa8298c887fa4b714431e701aef3b00fdbba73da71904c4f1",
+    "qualify_wilczek_zee_nonabelian_phase_frame.sh": "dd980adab575d1c7893fbc93eeb22bb2f1a78ab36d3fb1d77f4b61e2afcd4441"
+  },
+  "qualification_sha256": {
+    "result.json": "381eab1ae1fb6716c0cc7caee438f95412d99c4622cfb45c13718e3f284a1bc2",
+    "oracle.json": "e91d8f1ec51f20221f635425c570cfcf0d1d68c5de992a816d36b55b3d6027f8",
+    "qualification.json": "de4afef505a9ab2e4c23b70a46273c1e1d8ad5f2c6e4e8ca9201d34612294fc3",
+    "qualification_manifest": "281c63c0350ff87c716edd1dd456dedd177500662d534451338073b59b6cbcc4"
+  },
+  "scope_caveats": [
+    "ONE_LOCAL_CP2_CHART_WITH_ALPHA1_BETA0_7",
+    "TWO_PUBLIC_COORDINATE_LOOP_MODULES_AT_512_SEGMENTS",
+    "FINITE_EDGE_POLAR_PRODUCT_IS_DISTINCT_FROM_ITS_CONTINUOUS_CONNECTION_LIMIT",
+    "NO_GENERIC_CP2_PATH_COMPILER",
+    "NO_LEASE_ENFORCEMENT",
+    "NO_MACHINE_BOUNDARY"
+  ],
+  "not_established": [
+    "EXACT_ALGEBRAIC_RESTORATION",
+    "CATVM_CUSTODY",
+    "MACHINE_ENFORCED_NO_SMUGGLE",
+    "DISTINCT_PHASE_RESOURCE",
+    "COMPUTATIONAL_ADVANTAGE",
+    "SMALL_WALL_CROSSING",
+    "UNBOUNDED_COMPUTATION",
+    "PHYSICAL_WAVEFORM_EXECUTION",
+    "PHYSICAL_BIT_REPLACEMENT_WITH_PI"
+  ],
+  "next_obstruction": "NONABELIAN_SHARED_PHASE_FRAME_ESTABLISHES_ORDER_SENSITIVE_NATIVE_HOLONOMY_BUT_AN_IDENTICAL_2X2_MATRIX_OR_CLOSED_FORM_CLASSICAL_RECURRENCE_REMAINS"
+}

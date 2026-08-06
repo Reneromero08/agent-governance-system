@@ -1,0 +1,141 @@
+{
+  "branch": "task/audio-catvm-independent-verification",
+  "canonical": false,
+  "deliverables": [
+    {
+      "bytes": 2698,
+      "path": "SOURCE_RECEIPT.json",
+      "sha256": "ed1ce0eb440244950b5f2b7b17d8907bc72fa83f263fa1a0caa885e44924c7bb"
+    },
+    {
+      "bytes": 2547,
+      "path": "TRANSFER_MANIFEST.json",
+      "sha256": "dedd47d98f1792378a39d01472a5882e14c08399486a93e46c73efdb1ee23d66"
+    },
+    {
+      "bytes": 2311,
+      "path": "CLAIMS_UNDER_TEST.md",
+      "sha256": "8906d140b4ce8f27b4a6cbcdb80b718a9f94dca75e82f82c0091c745d2e278bf"
+    },
+    {
+      "bytes": 1647,
+      "path": "INVESTMENT_GATE.json",
+      "sha256": "7fafa3bac025836bef29949c8318b114f57269dcf4515b00ab5fae16d02d2a63"
+    },
+    {
+      "bytes": 6608,
+      "path": "SOURCE_REPRODUCTION_REPORT.md",
+      "sha256": "2d2e0cfdd75233f876d51a4b4e32d07540ce2f1b64fbeb2df6c763c680812d86"
+    },
+    {
+      "bytes": 11041,
+      "path": "STATIC_ANTI_SMUGGLE_AUDIT.json",
+      "sha256": "a7998846b25c2dc23f80af0db6d128d8678ebdbd35671e073456e3e6204a483c"
+    },
+    {
+      "bytes": 6976,
+      "path": "INDEPENDENT_RECONSTRUCTION_REPORT.md",
+      "sha256": "f1994845af9fb4e064d2cda31b7305a03c8bffe314c26cb2a028979af4c58639"
+    },
+    {
+      "bytes": 4094,
+      "path": "MUTATION_CAMPAIGN.json",
+      "sha256": "1a3ff99bb66af5c59c6f0531a6dec24f5cfddea78b541450793fa8746aa5bc88"
+    },
+    {
+      "bytes": 23271,
+      "path": "RESTORATION_REUSE_STRESS.json",
+      "sha256": "271604609c40cbe1d455623a68856571671d8f4d1e117455eb14b32681e67aad"
+    },
+    {
+      "bytes": 2195,
+      "path": "MACHINE_BOUNDARY_ATTACK_REPORT.md",
+      "sha256": "05e8fbff2a6fae06e20fcc136ac430dc21860a996650fa28cae4e91412269b56"
+    },
+    {
+      "bytes": 1339,
+      "path": "BASELINE_CHALLENGE_REPORT.md",
+      "sha256": "7f42c1f728ab1307661c00cabfd2eda6fbe476c918dd0c0e5b391e5bd0679171"
+    },
+    {
+      "bytes": 1258,
+      "path": "QUOTIENT_GENERALIZATION_REPORT.md",
+      "sha256": "7bbdcda59ad5ebc0f4fedca76d86394d08829c9c9c3ed65e33c7a23e28b7e24f"
+    },
+    {
+      "bytes": 1570,
+      "path": "TRANSFER_RELEVANCE_REPORT.md",
+      "sha256": "ae5692ecaf449f118c534a6da589f009181dba33463ac1a6b6ed0c08d72642f0"
+    },
+    {
+      "bytes": 11858,
+      "path": "INDEPENDENT_REVIEW_LEDGER.json",
+      "sha256": "8dfef76d33c77ff28f0167112a166eb7f5fc42470292e8c7eee18ed3ce1b2215"
+    },
+    {
+      "bytes": 7271,
+      "path": "FINAL_PROVISIONAL_DECISION.md",
+      "sha256": "13589ecb9176c7df51d54b257d534ef7f26f7df9696b377deaa9d8c301f37297"
+    },
+    {
+      "bytes": 2442,
+      "path": "LOCAL_VERIFICATION_COMMANDS.json",
+      "sha256": "cc72b77dc94d48425a94b8bed209bd388fd8ebbba48bdc82d9164bed2efd8367"
+    }
+  ],
+  "generated_utc": "2026-07-28T05:41:03.839831Z",
+  "git_status_short_before_closure_write": "?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/BASELINE_CHALLENGE_REPORT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/FINAL_PROVISIONAL_DECISION.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/INDEPENDENT_REVIEW_LEDGER.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/LOCAL_VERIFICATION_COMMANDS.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/MACHINE_BOUNDARY_ATTACK_REPORT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/QUOTIENT_GENERALIZATION_REPORT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/RESTORATION_REUSE_STRESS.json\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/TRANSFER_RELEVANCE_REPORT.md\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/independent_verifier/consolidate_reports.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/independent_verifier/test_consolidated_reports.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/independent_verifier/transaction_verifier.py\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/raw_logs/local_verification/\n?? THOUGHT/LAB/CAT_CAS/7_decoder/50_phase_bm_cpu/50_6_fixed_point_substrate/14_noncollapse_frontier/phase6b6/live_small_wall/cross_substrate_transfer/audio_phase_catvm_candidate_unverified_v1/raw_logs/restoration_boundary/\n",
+  "head_before_closure_write": "4d1c3386ddc0ee4e91eb290fc31f19973a557667",
+  "raw_log_file_count": 111,
+  "raw_log_hash_manifest_sha256": "319cacbf4eb219608120f2fbe6b3aa14cb2bdbde533a060b19fef425b00d531a",
+  "result_sha256": "1ce8f47c8bdbd6d7ff6f54380ef41dc737a1740c1e96f8eb8494404fd56adf91",
+  "schema_version": "audio_catvm_verification_closure.v1",
+  "small_wall_crossed": false,
+  "verifier_files": [
+    {
+      "bytes": 47630,
+      "path": "independent_verifier/INDEPENDENT_RESULTS.json",
+      "sha256": "bdcedee1075c9262cff2600db53a94b66c7342e723a8a832b1793e824cbdc98f"
+    },
+    {
+      "bytes": 1248,
+      "path": "independent_verifier/README.md",
+      "sha256": "a66d5f14555b5725808dae8ca0edad9f7a8b9adc9f772f65efa3fd09786e6330"
+    },
+    {
+      "bytes": 19173,
+      "path": "independent_verifier/adversarial_campaign.py",
+      "sha256": "9dbafd4cf120289da9c70f2ca5ef0b61bf3d11c4da6b983aafe26098dacf185f"
+    },
+    {
+      "bytes": 26285,
+      "path": "independent_verifier/cleanroom_verify.py",
+      "sha256": "335db27ef9fcc03e43ca75696d1aac7cdba9b4b2bed8f6a2358064532f584e27"
+    },
+    {
+      "bytes": 25591,
+      "path": "independent_verifier/consolidate_reports.py",
+      "sha256": "2c69b897bfe6b19fd9f75c2905aa67aa16653b768a7c53b38efdd30610141f25"
+    },
+    {
+      "bytes": 1462,
+      "path": "independent_verifier/test_adversarial_campaign.py",
+      "sha256": "2fa9c6dd4d4f68fccc87ba1c9c041d630e9dd0480a994e9cb7068a73d3c9538b"
+    },
+    {
+      "bytes": 4162,
+      "path": "independent_verifier/test_cleanroom_verify.py",
+      "sha256": "92b6a2a71a1b98bcbf2d2920ba89d56b386a134f9d1d0169dec18c7465630695"
+    },
+    {
+      "bytes": 2642,
+      "path": "independent_verifier/test_consolidated_reports.py",
+      "sha256": "1e84cd7ec40024eb875caae83b2589599732bbd4c00f3288e855c472aa4d60e9"
+    },
+    {
+      "bytes": 24579,
+      "path": "independent_verifier/transaction_verifier.py",
+      "sha256": "c3d6f759d2f167f7de0a2d140a2501044c9e35d08dbc1289892a66f45585c321"
+    }
+  ]
+}

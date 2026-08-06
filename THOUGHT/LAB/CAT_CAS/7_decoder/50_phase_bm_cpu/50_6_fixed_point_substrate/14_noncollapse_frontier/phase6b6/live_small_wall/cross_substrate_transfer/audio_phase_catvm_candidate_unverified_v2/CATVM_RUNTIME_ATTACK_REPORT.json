@@ -1,0 +1,66 @@
+{
+  "active_runtime_report_path": "raw_outputs/independent_delta_v2/candidate_e_science_runtime/runtime_report.json",
+  "active_runtime_scientific_defects": [
+    "OVERSIZED_SEQPACKET_ACCEPTED_AS_VALID_REQUEST"
+  ],
+  "candidate": "E",
+  "canonical": false,
+  "controls_available_from_source_package": {
+    "accepted_nonce_repeat_denied_by_owner_gate": true,
+    "depth_above_ceiling": "ERROR_BEFORE_STAGE",
+    "later_correct_continue_restores": true,
+    "later_same_backing_reuse_restores": true,
+    "missing_inverse_error": 1.4138133039130538,
+    "null_carrier": "ERROR_BEFORE_ACCESS",
+    "premature_projection": "DENIED",
+    "reordered_inverse_error": 1.4388157010252134,
+    "repeat_initialize_leaves_accepted_nonce_unchanged": true,
+    "resident_depth_mismatch_status": "ERROR_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_repeat_initialize_status": "DENIED_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_stop_status": "DENIED_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "resident_variant_mismatch_status": "ERROR_WITH_STAGE_RESIDENT_ZERO_BOUNDARY",
+    "service_remains_live_after_denied_resident_stop": true,
+    "snapshot_command": "DENIED",
+    "wrong_generation": "DENIED",
+    "wrong_inverse_variant_error": 1.4027925543635036,
+    "wrong_lease": "DENIED",
+    "wrong_owner": "DENIED",
+    "zero_depth": "ERROR_BEFORE_STAGE",
+    "zero_variant": "ERROR_BEFORE_STAGE"
+  },
+  "created_utc": "2026-07-29T09:13:36.415646Z",
+  "decision": "REJECTED_SOURCE_DEFECT",
+  "independent_runtime_attacks_completed": [
+    "happy_path_owner_lease_generation_reuse",
+    "wrong_lease",
+    "wrong_owner_command",
+    "snapshot_command",
+    "unknown_command",
+    "premature_projection",
+    "descriptor_mismatch_during_residency",
+    "bad_magic_during_residency",
+    "disconnect_after_stage_residency",
+    "truncated_packet",
+    "oversized_packet"
+  ],
+  "package_reproduction_defect": "Exact declared source reproduction fails with rc=126 because the E wrapper invokes a nested qualifier as an executable while the frozen source tracks it mode 0664.",
+  "runtime_status": "ACTIVE_MECHANISM_RUNTIME_PROBES_COMPLETED_WITH_DEFECT",
+  "schema_version": "catvm_runtime_attack_report.v2",
+  "scientific_runtime_disposition": "Happy-path owner/lease/generation/restoration/reuse behavior passed the independent probe, but oversized seqpacket handling is not fail-closed: a 33-byte initialize packet was accepted as a valid 32-byte request.",
+  "sha256": "723149b869ae383c5c2d2295a097ed6306161edd0ff003b895cf6dd7986f8780",
+  "small_wall_crossed": false,
+  "source_reproduction_stderr": [
+    {
+      "return_code": 126,
+      "run_index": 1,
+      "stderr_path": "raw_logs/source_reproduction/candidate_e_run1_retry1.stderr",
+      "stderr_sha256": "9157212899d8f3ec08ebe9934396f1f30c21e1ed961e6b65565a626bf0b24a23"
+    },
+    {
+      "return_code": 126,
+      "run_index": 2,
+      "stderr_path": "raw_logs/source_reproduction/candidate_e_run2.stderr",
+      "stderr_sha256": "9157212899d8f3ec08ebe9934396f1f30c21e1ed961e6b65565a626bf0b24a23"
+    }
+  ]
+}

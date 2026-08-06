@@ -1,0 +1,20 @@
+{
+  "canonical": false,
+  "created_utc": "2026-07-29T21:24:57.433573Z",
+  "do_not_reopen_except_regression_controls": true,
+  "schema_version": "audio_noncollapse_v3_predecessor_binding",
+  "sha256": "047e8362b1981f17e32a83b2f76a527a837acbcdf02ae4db34cf867434d53fcc",
+  "small_wall_crossed": false,
+  "v1": {
+    "A": "REJECTED_SOURCE_DEFECT",
+    "B": "REJECTED_FIXTURE_SPECIALIZATION",
+    "C": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_OBSTRUCTION",
+    "D": "INDEPENDENTLY_VERIFIED_SOURCE_LOCAL"
+  },
+  "v2": {
+    "E": "REJECTED_SOURCE_DEFECT",
+    "F": "INDEPENDENTLY_VERIFIED_FAMILY_SCOPED_REMATERIALIZATION",
+    "G": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_PRECISION_OBSTRUCTION",
+    "H": "INDEPENDENTLY_VERIFIED_TRANSFERABLE_COHERENCE_OBSTRUCTION"
+  }
+}
