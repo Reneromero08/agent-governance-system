@@ -1,0 +1,100 @@
+{
+  "schema": "cat_cas.phase_frontier.provenance.v1",
+  "milestone": "EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_VACUUM_FUSION_PATH_PHASE_CARRIER_EXECUTES_NONCOMMUTING_BRAID_GENERATORS_ON_OVERLAPPING_UNRESOLVED_INTERNAL_CHANNELS_WITH_FINAL_ONLY_PLAT_CLOSURE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_GLOBAL_PATH_CELLS_GROW_FROM2TO1430_ACROSS_STRANDS4TO16_AND_FIRST_JONES_WENZL_TRUNCATION_STILL_LEAVES4861_CELLS_AT18_WHILE_THE_IDENTICAL_CLASSICAL_PATH_RECURRENCE_REMAINS",
+  "scientific_source_commit": "0c5457be195ee4c652aff66671f470d649af3463",
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "INDEPENDENT_ORACLE_REEXECUTION",
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "claim_ceiling": "FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_A9_VACUUM_FUSION_PATH_REPRESENTATION_QZETA40_EVEN_STRANDS4_6_8_10_12_14_16_EIGHT_SWEEP_FAMILY_PRIMARY16_FIVE_SWEEP_FAMILY_REUSE16_VACUUM_PLAT_BOUNDARY_DIRECT_PROCESS_ONLY",
+  "files": {
+    "production": {
+      "path": "su2_level8_fusion_path_braid_phase_relation.py",
+      "sha256": "bc54076303fd12d57d9b57974832d451da603e123ea550f2312f81ad67bd9b11"
+    },
+    "independent_oracle": {
+      "path": "su2_level8_fusion_path_braid_independent_oracle.py",
+      "sha256": "9198a5695a97f52ea206fb1d155b794ebf7dc286409dfc0d048c1253f483fe8e"
+    },
+    "results": {
+      "path": "SU2_LEVEL8_FUSION_PATH_BRAID_PHASE_RELATION_RESULTS.json",
+      "sha256": "8915bf38e9f52456a6d72e8a06e7d758cfcb29db39ec016e75556a8bba7c4ee3"
+    },
+    "independent_oracle_results": {
+      "path": "SU2_LEVEL8_FUSION_PATH_BRAID_INDEPENDENT_ORACLE.json",
+      "sha256": "cdadca2c971845f7141615af12ac279e9ccdfc02570ae217e38cb36ede9599f0"
+    },
+    "review": {
+      "path": "SU2_LEVEL8_FUSION_PATH_BRAID_INDEPENDENT_REEXECUTION_REVIEW.md",
+      "sha256": "477f4029ff73fc418a67474f34f811275c34dd473a5507503d1aee4e08627ab5"
+    },
+    "qualifier": {
+      "path": "qualify_su2_level8_fusion_path_braid.sh",
+      "sha256": "4f177a3b1bd7674afc4e1f3f69e9bbca98ef0c324ecc85087760628b368bf2ae"
+    }
+  },
+  "independent_reconstruction": {
+    "imports_cat_cas_modules": false,
+    "production_gauge": "RADICAL_FREE_SOURCE_WEIGHT_TEMPERLEY_LIEB_PATH_GAUGE",
+    "oracle_gauge": "DIAGONALLY_SIMILAR_TARGET_WEIGHT_TEMPERLEY_LIEB_PATH_GAUGE",
+    "oracle_path_representation": "EXPLICIT_A9_VACUUM_PATH_LIST_AND_INDEX_MAP_VERIFICATION_BASELINE",
+    "all_executed_state_boundary_support_payload_and_topology_commitments_match": true,
+    "dimension_law_matches_through_strands20": true,
+    "yang_baxter_and_far_commutation_match": true,
+    "same_backing_restoration": true,
+    "fresh_restored_reuse_agreement": true
+  },
+  "controls": [
+    "YANG_BAXTER_RELATION",
+    "FAR_GENERATOR_COMMUTATION",
+    "ADJACENT_GENERATOR_NONCOMMUTATION",
+    "SINGLE_GENERATOR_INVERSE",
+    "WRONG_OWNER",
+    "WRONG_OPERATION_TYPE",
+    "PREMATURE_PROJECTION",
+    "MISSING_INVERSE",
+    "REORDERED_INVERSE",
+    "NULL_CARRIER",
+    "SEMANTIC_GENERATOR_PERTURBATION",
+    "SNAPSHOT_COMMAND_UNAVAILABLE"
+  ],
+  "resource_law": {
+    "executed_strands": [4, 6, 8, 10, 12, 14, 16],
+    "executed_global_path_cells": [2, 5, 14, 42, 132, 429, 1430],
+    "first_jones_wenzl_truncation_strands": 18,
+    "first_truncated_path_cells": 4861,
+    "first_untruncated_catalan_cells": 4862,
+    "primary_forward_carrier_field_cells": 1430,
+    "primary_forward_carrier_payload_bits": 256269,
+    "primary_boundary_payload_bits": 129,
+    "primary_public_topology_integer_cells": 153,
+    "primary_public_topology_payload_bits": 516,
+    "category_constant_field_cells": 20,
+    "category_constant_payload_bits": 754,
+    "primary_streamed_path_label_scratch_cells": 34,
+    "primary_local_field_scratch_cells": 8,
+    "primary_path_unrank_calls": 343200,
+    "primary_path_rank_calls": 80081,
+    "primary_path_labels_rematerialized": 7195777,
+    "primary_topology_count_reads": 7877584,
+    "primary_public_operation_records_materialized": 0,
+    "retained_path_records": 0,
+    "retained_local_action_records": 0,
+    "retained_inverse_history": 0,
+    "matched_compact_baseline": "IDENTICAL_EXACT_QZETA40_TEMPERLEY_LIEB_FUSION_PATH_RECURRENCE_WITH_PUBLIC_A9_RANK_UNRANK",
+    "excluded_not_zero": "PUBLIC_INTEGER_INDEX_ARITHMETIC_TRANSIENT_PYTHON_OBJECTS_ALLOCATOR_INTERPRETER_HASH_BYTE_TRAFFIC_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS"
+  },
+  "claim_limits": {
+    "fixed_local_label_alphabet": true,
+    "fixed_global_carrier_across_growing_strands": false,
+    "bounded_exact_coefficient_width": false,
+    "global_path_coefficients_materialized": true,
+    "catvm_custody": false,
+    "distinct_phase_resource": false,
+    "computational_advantage": false,
+    "small_wall_crossing": false,
+    "physical_waveform_execution": false,
+    "physical_bit_replacement": false,
+    "catalytic_inference": false,
+    "unbounded_catalytic_computation": false
+  }
+}

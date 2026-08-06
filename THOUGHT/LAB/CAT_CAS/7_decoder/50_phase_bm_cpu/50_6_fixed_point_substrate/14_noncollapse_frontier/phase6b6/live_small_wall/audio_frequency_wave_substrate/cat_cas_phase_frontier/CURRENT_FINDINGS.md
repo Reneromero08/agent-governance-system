@@ -11415,3 +11415,56 @@ EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_FUSION_PATH_SHARED_INTERNAL_CHANNEL_PHASE_CARRIE
 This tests whether fixed local fusion support remains globally compact under
 noncommuting braid/associator geometry, or whether the obstruction becomes
 growing fusion-path width with an identical classical tensor-network path.
+
+## M214 SU(2)_8 fusion-path braid geometry and global-width obstruction
+
+The independently reexecuted claim is:
+
+```text
+EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_VACUUM_FUSION_PATH_PHASE_CARRIER_EXECUTES_NONCOMMUTING_BRAID_GENERATORS_ON_OVERLAPPING_UNRESOLVED_INTERNAL_CHANNELS_WITH_FINAL_ONLY_PLAT_CLOSURE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_GLOBAL_PATH_CELLS_GROW_FROM2TO1430_ACROSS_STRANDS4TO16_AND_FIRST_JONES_WENZL_TRUNCATION_STILL_LEAVES4861_CELLS_AT18_WHILE_THE_IDENTICAL_CLASSICAL_PATH_RECURRENCE_REMAINS
+```
+
+The exact radical-free Temperley-Lieb path representation changes the
+mechanism from one nine-coordinate fusion vector to noncommuting braid action
+on overlapping unresolved internal fusion channels. The production carrier
+uses a public `A_9` completion-count table and streamed path rank/unrank. It
+does not retain a path list, local action plan, operation list or inverse
+history, but it does materialize one exact coefficient per global vacuum
+fusion path.
+
+Executed carrier dimensions are `2,5,14,42,132,429,1430` for 4 through 16
+strands, with every coefficient nonzero after the declared eight sweeps. The
+first level-8 Jones-Wenzl truncation removes only one of 4,862 Catalan paths
+at 18 strands, leaving 4,861. The primary 16-strand carrier holds 256,269
+exact payload bits. It also uses 153 public topology integers carrying 516
+bits, 20 category-constant field cells carrying 754 bits, 34 streamed path
+labels and eight logical local field scratch cells.
+
+Only the final vacuum plat-closure amplitude is projected. Exact reverse
+braid execution restores the actual coefficient list and canonical metadata;
+unrelated reuse agrees with fresh reuse at generation two on the same backing
+without a snapshot. Yang-Baxter, far commutation, adjacent noncommutation,
+wrong owner/type, premature projection, missing/reordered inverse, null
+carrier and semantic perturbation controls pass.
+
+An independent no-production-import target-weight gauge oracle explicitly
+enumerates the verification basis, maps back through the path-weight diagonal,
+and reproduces all state, boundary, support, payload and topology commitments.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The fixed local label alphabet does not produce a fixed global carrier. The
+strongest compact classical baseline is the identical exact fusion-path
+recurrence. No CATVM custody, bounded exact width, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_SU2_LEVEL8_FUSION_PATH_SECTOR_SCHMIDT_RANK_AND_NATIVE_MPS_BRAID_CLOSURE_DIAGNOSTIC_WITH_FIXED_LOCAL_ALPHABET_OR_GROWING_BOND_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_ANYON_MPS_RECURRENCE
+```
+
+This tests exact sector-resolved tensor factorization as the smallest repair
+of the measured global path width, with bond state and reversible
+factorization costs counted against the identical classical anyon MPS path.

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_FIXED_LOCAL_FUSION_SUPPORT_WITH_GROWING_EXACT_WIDTH_AND_FUSION_PATH_BRAID_SUCCESSOR_SELECTED`
-**Roadmap version:** `14.79`
+**Status:** `STRICT_SU2_LEVEL8_FUSION_PATH_BRAID_CLOSURE_WITH_GROWING_GLOBAL_WIDTH_AND_EXACT_MPS_RANK_SUCCESSOR_SELECTED`
+**Roadmap version:** `14.80`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d3f86603c1b01c4d179732404752bc658f0f9436`
+**Reconciled source head:** `0c5457be195ee4c652aff66671f470d649af3463`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_ROOT_OF_UNITY_SU2_LEVEL8_JONES_WENZL_FUSION_PHASE_RELATION_QUOTIENT_CLOSES_NONCOMMUTING_CASIMIR_TWIST_AND_TRUNCATED_FUNDAMENTAL_FUSION_ON_ONE_SHARED_UNRESOLVED_PORT_IN_FIXED9_QZETA40_CELLS_WITH_FINAL_ONLY_QUANTUM_DIMENSION_BOUNDARY_EXACT_PIVOT_REMATERIALIZED_RESTORATION_REUSE_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_FUSION_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_SU2_LEVEL8_VERLINDE_FUSION_ALGEBRA_QZETA40_JONES_WENZL_X9_ZERO_TWO_TWIST_POWERS_TWO_UNIT_FUSION_FACTORS_DECLARED_FAMILIES_DEPTHS1_2_4_8_16_32_64_128_PRIMARY128_REUSE73_QUANTUM_DIMENSION_BOUNDARY_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_VACUUM_FUSION_PATH_PHASE_CARRIER_EXECUTES_NONCOMMUTING_BRAID_GENERATORS_ON_OVERLAPPING_UNRESOLVED_INTERNAL_CHANNELS_WITH_FINAL_ONLY_PLAT_CLOSURE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_GLOBAL_PATH_CELLS_GROW_FROM2TO1430_ACROSS_STRANDS4TO16_AND_FIRST_JONES_WENZL_TRUNCATION_STILL_LEAVES4861_CELLS_AT18_WHILE_THE_IDENTICAL_CLASSICAL_PATH_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_A9_VACUUM_FUSION_PATH_REPRESENTATION_QZETA40_EVEN_STRANDS4_6_8_10_12_14_16_EIGHT_SWEEP_FAMILY_PRIMARY16_FIVE_SWEEP_FAMILY_REUSE16_VACUUM_PLAT_BOUNDARY_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `INDEPENDENT_ORACLE_REEXECUTION`
-**New mechanism development:** `ACTIVE_AFTER_M213_SU2_LEVEL8_FIXES_LOCAL_FUSION_SUPPORT_BUT_EXACT_COEFFICIENT_HEIGHT_GROWS_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
+**New mechanism development:** `ACTIVE_AFTER_M214_SU2_LEVEL8_BRAID_GEOMETRY_ESTABLISHES_EXACT_UNRESOLVED_CHANNEL_ACTION_BUT_GLOBAL_FUSION_PATH_WIDTH_GROWS_WITH_AN_IDENTICAL_CLASSICAL_RECURRENCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_FUSION_PATH_SHARED_INTERNAL_CHANNEL_PHASE_CARRIER_WITH_NONCOMMUTING_BRAID_GENERATORS_FIXED_LOCAL_NINE_OBJECT_ALPHABET_OR_GLOBAL_PATH_WIDTH_GROWTH_FINAL_ONLY_JONES_TRACE_EXACT_RESTORATION_REUSE_AND_MATCHED_PATH_TENSOR_NETWORK_RECURRENCE`
+**Active primary successor:** `EXACT_SU2_LEVEL8_FUSION_PATH_SECTOR_SCHMIDT_RANK_AND_NATIVE_MPS_BRAID_CLOSURE_DIAGNOSTIC_WITH_FIXED_LOCAL_ALPHABET_OR_GROWING_BOND_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_ANYON_MPS_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -10142,6 +10142,73 @@ unresolved internal channels or merely moves growth into global fusion-path
 width and exact coefficient height. The comparison must retain the strongest
 matched anyon path/tensor-network recurrence and must not treat a fixed local
 alphabet as fixed global machine state.
+
+## M214: SU(2)_8 braid geometry exposes growing global fusion-path width
+
+Claim:
+
+```text
+EXACT_SU2_LEVEL8_TEMPERLEY_LIEB_VACUUM_FUSION_PATH_PHASE_CARRIER_EXECUTES_NONCOMMUTING_BRAID_GENERATORS_ON_OVERLAPPING_UNRESOLVED_INTERNAL_CHANNELS_WITH_FINAL_ONLY_PLAT_CLOSURE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_GLOBAL_PATH_CELLS_GROW_FROM2TO1430_ACROSS_STRANDS4TO16_AND_FIRST_JONES_WENZL_TRUNCATION_STILL_LEAVES4861_CELLS_AT18_WHILE_THE_IDENTICAL_CLASSICAL_PATH_RECURRENCE_REMAINS
+```
+
+M214 changes the phase machine from M213's single nine-coordinate Verlinde
+vector to the vacuum fusion-path representation of growing numbers of
+fundamental `SU(2)_8` objects. Matrix-free Temperley-Lieb braid generators
+act in a radical-free source-weight gauge over exact `Q(zeta_40)`. Adjacent
+generators are noncommuting consumers of overlapping unresolved internal
+fusion channels. Exact Yang-Baxter and far-commutation controls pass.
+
+The accepted production path retains only the public `A_9` completion-count
+table and streams path rank/unrank. It retains no path list, local action
+plan, operation list or inverse history. The full fusion-path coefficient
+vector is nevertheless material. Only the final vacuum plat-closure
+amplitude is projected; reverse braid execution restores the exact source on
+the same list backing, and unrelated five-sweep reuse agrees with fresh reuse
+at generation two without a snapshot.
+
+Global carrier cells grow `2,5,14,42,132,429,1430` from 4 through 16 strands,
+and every cell is nonzero in each declared eight-sweep case. The first
+Jones-Wenzl truncation occurs at 18 strands but removes only one untruncated
+Catalan path, leaving 4,861 cells. The 16-strand primary vector carries
+256,269 exact payload bits. Its public topology uses 153 integer cells and
+516 bits; category constants use 20 field cells and 754 bits. The full
+transaction streams 34 path-label cells and eight logical local field cells,
+with 343,200 unrank calls, 80,081 rank calls, 7,195,777 rematerialized labels
+and 7,877,584 topology-count reads.
+
+An independent no-production-import oracle enumerates the bounded paths and
+evolves the diagonally similar target-weight gauge. After independently
+mapping back through the path-weight diagonal, it reproduces every executed
+state, boundary, support, payload and topology commitment, both restoration
+results, and reuse. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
+at `INDEPENDENT_ORACLE_REEXECUTION` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_A9_VACUUM_FUSION_PATH_REPRESENTATION_QZETA40_EVEN_STRANDS4_6_8_10_12_14_16_EIGHT_SWEEP_FAMILY_PRIMARY16_FIVE_SWEEP_FAMILY_REUSE16_VACUUM_PLAT_BOUNDARY_DIRECT_PROCESS_ONLY
+```
+
+The fixed nine-label local alphabet is not fixed global state. The strongest
+compact classical baseline is the identical exact fusion-path recurrence
+with the same public rank/unrank law. The package does not establish compact
+global fusion-tree closure, bounded coefficient width, CATVM custody, a
+distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation.
+
+Selected successor:
+
+```text
+EXACT_SU2_LEVEL8_FUSION_PATH_SECTOR_SCHMIDT_RANK_AND_NATIVE_MPS_BRAID_CLOSURE_DIAGNOSTIC_WITH_FIXED_LOCAL_ALPHABET_OR_GROWING_BOND_RANK_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_ANYON_MPS_RECURRENCE
+```
+
+This is the smallest exact relation-preserving repair of the measured global
+path width. It must derive the fusion-sector flattening ranks and test a
+native matrix-product carrier before any larger full-path fixture. Any saved
+cells must include bond dimensions, exact coefficient width, reversible
+factorization work, restoration, reuse, and the identical classical anyon
+MPS recurrence.
 
 ## 10. Roadmap Maintenance
 
