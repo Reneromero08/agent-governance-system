@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ded2ae3e6251011c6ca30c3ed8bace7e0d1c6ec4`. The canonical per-milestone
+`76eac2b69cb76f83078f251ee0fbfe6bb2a51baf`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12510,3 +12510,42 @@ This is a representation and interface change, not another fixed-five depth
 fixture.  It tests Wigner negativity or magic as a phase-owned resource
 candidate while retaining the strongest stabilizer/Wigner-aware compact
 classical comparator and the existing restoration/reuse law.
+
+## M238 exact p5 Wigner magic interface obstruction
+
+M238 propagates the exact Gross odd-prime Wigner function over `Q(zeta_5)` on
+declared one-, two-, and three-qudit interfaces. Clifford gates act as exact
+phase-space permutations and cubic diagonal gates use formula-generated local
+five-point momentum kernels. Every cubic fixture has positive exact Wigner
+negative mass; the matched quadratic/Clifford shams are exactly nonnegative.
+
+An independent amplitude implementation reconstructs the final Wigner cells
+in stream order without retaining the grid. Its full-sequence commitment,
+negative mass, selected boundary, normalization, purity, controls,
+restoration, and reuse agree with production. The actual resident Wigner and
+scratch backings restore exactly, generation advances one to two, a distinct
+program consumes the restored carrier, and no reload occurs. Focused review
+returned `PASS_STRICT_SCOPE`.
+
+The stabilizer-relative magic witness is not compact compute leverage on this
+representation. Resident Wigner cells grow `25,625,15625`, while the stronger
+exact amplitude comparator retains `5,25,125`. The three-qudit Wigner payload
+is `66,586` bits versus `1,000` and `980` for the two amplitude families.
+Resource accounting remains `PACKAGE_SELF_REVIEW` and whole-process liveness
+is incomplete.
+
+No interface synergy, tensor-product nonfactorization, distinct phase resource,
+advantage, general scaling, CATVM custody, Small Wall crossing, physical
+execution, bit replacement, inference, or unbounded computation is
+established. The Wigner-grid route stops at `n=3`.
+
+Next:
+
+```text
+EXACT_ZETA5_CUBIC_MAGIC_INJECTION_UNRESOLVED_MEASUREMENT_PORT_CONTRACTION_ON_GROWING_STABILIZER_INTERFACES_WITH_COMPOSITIONAL_NEGATIVITY_OR_STABILIZER_RANK_DIAGNOSTIC_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_STABILIZER_SUM_CLASSICAL_BASELINE
+```
+
+The successor must test magic under unresolved measurement-port composition
+and an exact reversible dilation, with strongest stabilizer-sum,
+quasiprobability, and amplitude baselines. It must not extend or optimize the
+resident Wigner grid.
