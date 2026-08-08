@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`3928f566116a4acd36eeb440ab11e7064ad3e86a`. The canonical per-milestone
+`a4304f035504a5ab353bfa91381d69e1d28a1971`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -9603,7 +9603,7 @@ M169 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE
 ```
 
-Next:
+Completed bounded successor:
 
 ```text
 EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
@@ -12201,3 +12201,58 @@ of consumption, intersect them, and stream the transposed final fusion into
 the final boundary before exact uncomputation. Do not add more M230 families.
 If rematerialization only reproduces the compact classical recurrence or moves
 cost into equivalent work, seal that obstruction and change mechanism.
+
+## M231 topology-rematerialized scalar fanout and transpose boundary
+
+M231 completes the one authorized repair of M230's retained-rail obstruction.
+The accepted claim is:
+
+```text
+BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+The actual produced nine-cell internal message remains resident. Public
+topology rematerializes one twist scalar and one semantically active cubic
+scalar per label on distinct one-cell backings. Their reversible scalar
+Hadamard product is accumulated through the analytically transposed final
+fusion into one boundary backing; all three scratch cells clear before the
+next label. Reverse traversal reconstructs and subtracts the actual
+contributions, does not consume the retained projected result, clears the
+internal message, restores the exact original backing identities and discrete
+state, advances reuse to generation two, and never reloads a baseline.
+
+The standalone polynomial-quotient reference independently materializes the
+complete M230 relation, derives the streamed transpose formula, and agrees on
+both public families, all controls, boundary commitments, exact restoration,
+and fresh-versus-restored reuse. After repairing an initially self-fulfilling
+reference type control, aligning the reference dirty-scratch attack with the
+production pre-forward boundary, and carrying caller-live classical values,
+the focused review returned `PASS_STRICT_SCOPE`. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The resource obstruction is decisive for this representation. M230's 45
+non-input work backings fall to 13, but the strongest exact source-neighbor
+classical stream requires one; totals including the shared input are 22 versus
+10. Declared interval maxima are 29 versus 20 field values. The retained
+projected result is counted during inverse. These resource values are
+`PACKAGE_SELF_REVIEW`, and whole-transaction liveness, imported public field
+descriptor storage, Python objects, allocator/interpreter state,
+serialization, timing, and process RSS are excluded or unclaimed, not zero.
+No relation table, assignment expansion, branch vector, or output vector is
+materialized. No phase-specific resource, advantage, CATVM custody, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_ANALYTIC_SU2_LEVEL8_TRIVALENT_FUSION_TENSOR_TWO_VERTEX_SHARED_LATENT_CHANNEL_NATIVE_CONTRACTION_WITH_NONDIAGONAL_F_MOVE_AND_BRAID_PHASE_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_FACTOR_GRAPH
+```
+
+This is a representation change. It must use analytic trivalent fusion
+signatures and an actually unresolved shared channel across at least two
+vertices, with non-diagonal associator and braid-phase effects before final
+closure. It must not add M230/M231 scalar-rematerialization variants, relation
+tables, assignments, or answer-dependent compilation. The comparison remains
+the strongest sparse classical factor-graph contraction.

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_OPEN_FUSION_FANOUT_INTERSECTION_CLASSICAL_SMALLER`
-**Roadmap version:** `14.96`
+**Status:** `STRICT_SU2_LEVEL8_OPEN_FUSION_REMATERIALIZED_STREAM_CLASSICAL_SMALLER`
+**Roadmap version:** `14.97`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `3928f566116a4acd36eeb440ab11e7064ad3e86a`
+**Reconciled source head:** `a4304f035504a5ab353bfa91381d69e1d28a1971`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER`
-**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FIXED_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_TWO_PUBLIC_TWIST_CUBIC_BRANCH_FAMILIES_SIX9_CELL_RAILS_PRIMARY_FAMILY0_REUSE_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FIXED_FUNDAMENTAL_FUSION_TWO_PUBLIC_TWIST_CUBIC_FAMILIES_ONE9_CELL_INTERNAL_THREE1_CELL_BRANCH_SCRATCH_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M230_ESTABLISHES_BOUNDED_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_BUT_MATCHED_STREAMING_USES9_WORK_CELLS_VERSUS45_RETAINED_RELATION_WORK_CELLS`
+**New mechanism development:** `ACTIVE_AFTER_M231_REDUCES_PHASE_WORK_BACKINGS_FROM45_TO13_BUT_THE_SOURCE_NEIGHBOR_CLASSICAL_STREAM_USES1_SO_THE_LOCAL_CUBIC_FUSION_RESOURCE_ROUTE_IS_CLOSED_AND_THE_REPRESENTATION_CLASS_MUST_CHANGE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `TOPOLOGY_REMATERIALIZED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_WITH_ONE_RESIDENT9_CELL_SHARED_INTERNAL_MESSAGE_TWO_BOUNDED_BRANCH_SCALARS_STREAMED_TRANSPOSE_FUSION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_COMPACT_CLASSICAL_STREAM`
+**Active primary successor:** `EXACT_ANALYTIC_SU2_LEVEL8_TRIVALENT_FUSION_TENSOR_TWO_VERTEX_SHARED_LATENT_CHANNEL_NATIVE_CONTRACTION_WITH_NONDIAGONAL_F_MOVE_AND_BRAID_PHASE_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_FACTOR_GRAPH`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER
+BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -4969,16 +4969,18 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-The current continuation follows M230's bounded relational positive and
-resource negative. A nonfunctional fusion signature now produces a real
-resident nine-cell internal message, two distinct branch rails consume the
-same backing, and native reversible Hadamard intersection closes them. The
-retained relation path nevertheless uses 45 work cells versus 9 for the
-matched stream, or 54 versus 18 including the public input. Do not add more
-fixed families. Rematerialize topology-derived scalar branch values and the
-transposed final fusion around the one resident internal message; if the
-compact classical law remains identical, preserve that obstruction and change
-mechanism again. This directive supersedes historical continuation prose.
+The current continuation follows M231's decisive rematerialization result.
+M231 reduces the retained relation work from 45 field backings to 13 while
+preserving the actual nine-cell internal message, scalar native intersection,
+final-only projection, exact same-backing restoration, and reuse. The exact
+source-neighbor classical recurrence nevertheless uses one work backing and
+ten total backings versus 22 for the phase path; declared live maxima are 20
+versus 29. This closes local fundamental fusion plus coordinatewise
+twist/cubic branches plus linear final projection as a resource route. Do not
+add more scalar-rematerialization variants. Change representation to a
+nonseparable trivalent shared-channel geometry and retain the strongest sparse
+classical factor graph. This directive supersedes historical continuation
+prose.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
 exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
@@ -7537,7 +7539,7 @@ Exact ceiling:
 F103_TWO_FIBER_PALEY_COHERENT_CONFIGURATIONS_ORDERS5_13_17_29_37_53_73_97_PRIMARY_DEPTH256_ALL_ORDERS_PRIMARY_DEPTH1024_ORDER97_ALTERNATE_DEPTH64_ORDER37_DIRECT_PROCESS_SOFTWARE
 ```
 
-Selected successor:
+Completed bounded successor:
 
 ```text
 EXACT_GROWING_TWO_FIBER_PALEY_COHERENT_CONFIGURATION_PHASE_FOURIER_CHIRP_COUPLING_FUSION_ESCAPE_OR_COMPACT_CLOSURE_WITH_MATCHED_CLASSICAL_RECURRENCE
@@ -11184,6 +11186,62 @@ stream the transposed final fusion into the boundary, and uncompute all scalar
 scratch. Count recomputation, topology, transients, restoration, and reuse on
 both paths. If equivalent state or work merely moves elsewhere, record the
 obstruction and change representation class.
+
+## M231: topology-rematerialized scalar fanout and transpose boundary
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M231 retains the actual produced nine-cell internal fusion message but replaces
+the nine-cell twist, cubic, intersection, and output rails with three distinct
+one-cell branch/intersection scratch backings and one final-boundary backing.
+For each label, public topology rematerializes both branch values, a reversible
+scalar Hadamard product closes them, and the analytically transposed final
+fusion contributes directly to the only projectable scalar. All scratch is
+cleared before the next label. Reverse traversal rematerializes each actual
+contribution, subtracts it from the borrowed boundary backing without using
+the retained projected result, clears the internal message, restores every
+original backing exactly, advances persistent generation to two, and supports
+an unrelated family reuse without reload.
+
+A standalone ordinary-polynomial quotient oracle independently materializes
+the full M230 relation semantics, derives the transpose recurrence, reproduces
+both families and controls, and matches exact fresh/restored reuse. The result
+is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`; the focused
+post-repair review is `PASS_STRICT_SCOPE`.
+
+The resource result closes this route rather than opening another optimization
+loop. Excluding the common public input, M231 uses 13 persistent work backings
+versus 45 in M230, but the strongest exact source-neighbor-rematerialized
+classical recurrence uses only one. Totals including input are 22 versus 10;
+declared interval maxima are 29 versus 20 field values. Projected-boundary
+retention during inverse is counted. Resource figures remain
+`PACKAGE_SELF_REVIEW`: whole-transaction liveness, imported public field
+descriptor storage, Python objects, allocator/interpreter state, JSON
+serialization, timing, and process RSS are excluded or unclaimed, not zero.
+No CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation is established.
+
+Selected representation-level successor:
+
+```text
+EXACT_ANALYTIC_SU2_LEVEL8_TRIVALENT_FUSION_TENSOR_TWO_VERTEX_SHARED_LATENT_CHANNEL_NATIVE_CONTRACTION_WITH_NONDIAGONAL_F_MOVE_AND_BRAID_PHASE_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_FACTOR_GRAPH
+```
+
+This successor must change the relation geometry, not optimize M231. Construct
+analytic trivalent fusion signatures with a genuinely unresolved shared
+channel, compose at least two vertices, and make a non-diagonal associator and
+braid phase causally relevant before final closure. Do not materialize fusion
+tables, assignments, or answer-bearing channel expansions. Compare against
+the strongest sparse classical factor-graph contraction and preserve exact
+restoration and reuse. If the new geometry again collapses to the same compact
+classical recurrence, seal that obstruction and change mechanism rather than
+adding fixed families or local tuning.
 
 ## 10. Roadmap Maintenance
 
