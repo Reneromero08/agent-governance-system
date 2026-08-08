@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_LEDGER_NATIVE_TRACE_NORM_TRANSIENT_NO_GO`
-**Roadmap version:** `14.87`
+**Status:** `STRICT_SU2_LEVEL8_STREAMED_EMBEDDING_WEIGHTED_CELL_NO_GO`
+**Roadmap version:** `14.88`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `93b72393f801d4ab59ed34161611b3f9bebf0d10`
+**Reconciled source head:** `28a498b932df35543a5a6cca22b93edb87ac7593`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UNIT_GAUGE_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_EXACT_TRACE_NORM_SCALARS_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_LEDGER_NATIVE_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_PARAMETERS3_7_9_11_13_17_19_LEDGER_NATIVE_RANK_ONE_EXACT_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_PARAMETERS3_7_9_11_13_17_19_CELL_STREAMED_EXACT_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M221_ELIMINATES_VECTOR_MATERIALIZATION_BUT_EXACT_TRACE_NORM_SCALARS_DOMINATE_DECLARED_LIVE_PAYLOAD`
+**New mechanism development:** `ACTIVE_AFTER_M222_ELIMINATES_AGGREGATE_NORM_FIELDS_BUT_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_DECLARED_LIVE_PAYLOAD`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_RESIDUAL_CELLS_WITHOUT_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_OR_PERSISTING_EXACT_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE`
+**Active primary successor:** `EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_CELLS_WITHOUT_WEIGHTED_CELL_FIELD_PRODUCT_MATERIALIZATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UNIT_GAUGE_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_EXACT_TRACE_NORM_SCALARS_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_LEDGER_NATIVE_RECURRENCE_REMAINS
+BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -10677,6 +10677,47 @@ the all-embedding energy from residual cells without retaining aggregate
 cyclotomic norm fields, count unit-power factors and integer accumulators, and
 preserve a no-go if the exact scalar height still exceeds the matched raw
 recurrence. It must not add deeper cubic-skein fixtures.
+
+## M222: streamed all-embedding energy and weighted-cell no-go
+
+The separately reconstructed strict-scope claim is:
+
+```text
+BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS
+```
+
+Exact trace linearity now accumulates each candidate energy from individual
+residual-cell Hermitian products. No aggregate residual, actual or candidate
+cyclotomic norm field is materialized, and the M221 raw/candidate vector
+elimination remains intact. The primary peak falls from 372,362 to 366,235
+bits, but the matched raw recurrence remains 129,595 bits. Six strands at
+depth two measures 351,417 versus 133,246 bits; eight strands at depth one
+measures 44,077 versus 17,174 bits. All seven cases remain above raw, with
+`STREAMED_TRACE_LINE_WEIGHTED_CELL` dominant.
+
+The same residual, ledger and scratch backings restore exactly and support
+unrelated generation-two reuse without reload. The standalone M222 reference
+imports neither M222 nor M221 production and reproduces the accepted case,
+resource, restoration and reuse tuples. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The identical cell-streamed exact-energy recurrence is the strongest compact
+classical baseline. Logical named live intervals exclude Python container,
+allocator/interpreter, serialization, timing and whole-process RSS costs.
+No CATVM custody, distinct phase resource, computational advantage, Small
+Wall crossing, physical execution, physical-bit replacement, catalytic
+inference or unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_CELLS_WITHOUT_WEIGHTED_CELL_FIELD_PRODUCT_MATERIALIZATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE
+```
+
+This must evaluate `Trace(w v conjugate(v))` directly from coordinates without
+materializing the weighted cyclotomic product, count all exact integer and
+rational temporaries, and preserve the no-go if that merely relocates height.
 
 ## 10. Roadmap Maintenance
 

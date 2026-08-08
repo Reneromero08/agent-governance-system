@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`93b72393f801d4ab59ed34161611b3f9bebf0d10`. The canonical per-milestone
+`28a498b932df35543a5a6cca22b93edb87ac7593`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11800,3 +11800,36 @@ EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_RESIDUAL_CELLS_WITHO
 This must remove aggregate cyclotomic norm-field residency, count every
 remaining exact scalar and integer accumulator, and preserve the no-go if the
 height obstruction persists.
+
+## M222 streamed all-embedding energy and weighted-cell no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS
+```
+
+Trace linearity removes aggregate residual, actual and candidate norm fields.
+The primary maximum drops from M221's 372,362 bits to 366,235 bits, still above
+the matched raw 129,595 bits. The six-strand depth-two and eight-strand
+depth-one maxima are 351,417/133,246 and 44,077/17,174 bits. All seven cases
+remain above raw; one `STREAMED_TRACE_LINE_WEIGHTED_CELL` field product is now
+the dominant named live context.
+
+A standalone implementation imports neither M222 nor M221 production and
+reproduces cases, resource counters, exact restoration and reuse. The actual
+residual, ledger and scratch backings restore exactly and are reused at
+generation two without reload. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The identical streamed-energy recurrence is the strongest compact classical
+baseline. No distinct phase resource, advantage, Small Wall crossing, CATVM
+custody, physical execution, physical-bit replacement, catalytic inference or
+unbounded computation is established.
+
+Next:
+
+```text
+EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_CELLS_WITHOUT_WEIGHTED_CELL_FIELD_PRODUCT_MATERIALIZATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE
+```
