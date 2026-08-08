@@ -1,0 +1,182 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "generation": 1,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "X",
+        "Z"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          4
+        ]
+      ],
+      "generation": 2,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "H",
+        "T"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          4
+        ]
+      ],
+      "generation": 1,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "H",
+        "T"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "controls": {
+    "commuting_tz_pair_boundary_is_one": true,
+    "dense_commutator_matrix_matches_two_branch_overlap_for_all_declared_pairs": true,
+    "dephased_order_has_zero_offdiagonal_boundary_by_exact_density_contraction": true,
+    "dirty_scratch_rejected_by_independent_port": true,
+    "ht_noncentral_boundary_matches_exact_qzeta8_formula": true,
+    "initial_state_is_exactly_normalized": true,
+    "no_path_or_assignment_enumeration": true,
+    "premature_order_projection_rejected_by_independent_port": true,
+    "same_id_changed_pair_rejected_by_independent_digest": true,
+    "same_order_pair_has_unit_boundary": true,
+    "stale_generation_rejected_by_independent_port": true,
+    "swapping_noncentral_order_conjugates_and_changes_boundary": true,
+    "wrong_owner_rejected_by_independent_port": true,
+    "xz_projective_commutator_boundary_is_minus_one": true
+  },
+  "oracle_law": {
+    "arithmetic": "Q_ZETA8_POLYNOMIAL_QUOTIENT_ZETA8_TO_THE4_PLUS1",
+    "branch_overlap_reconstructed": true,
+    "dense_two_by_two_commutator_matrix_reconstructed": true,
+    "independent_port_custody_and_atomic_ordering_reconstructed": true,
+    "strongest_transferable_one_vector_commutator_reconstructed": true
+  },
+  "result": "PASS_M252_SEPARATE_REFERENCE",
+  "reuse_parity": {
+    "boundary": true,
+    "generation_sequence": true,
+    "no_reload": true,
+    "same_backings": true,
+    "work": true
+  }
+}

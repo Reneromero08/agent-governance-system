@@ -1,0 +1,315 @@
+{
+  "cases": [
+    {
+      "backend_response_bytes": 875,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "controller_request_bytes": 351,
+      "generation": 1,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "X",
+        "Z"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 875,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          4
+        ]
+      ],
+      "controller_request_bytes": 349,
+      "generation": 2,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "H",
+        "T"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 875,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "commutator_boundary": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          4
+        ]
+      ],
+      "controller_request_bytes": 347,
+      "generation": 1,
+      "hidden_branch_field_cells": 4,
+      "hidden_order_consumer_receipt_cells": 2,
+      "hidden_scratch_field_cells": 2,
+      "pair": [
+        "H",
+        "T"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_branch_scratch_and_receipt_backings": true,
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiply_terms": 3,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_branch_field_writes": 8,
+        "forward_branch_gate_actions": 4,
+        "forward_field_accumulations": 16,
+        "forward_field_multiply_terms": 16,
+        "forward_scratch_clear_writes": 8,
+        "inverse_branch_field_writes": 8,
+        "inverse_branch_gate_actions": 4,
+        "inverse_field_accumulations": 16,
+        "inverse_field_multiply_terms": 16,
+        "inverse_scratch_clear_writes": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "claim": "CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_COHERENT_ORDER_PORT_ROUTES_ONE_TARGET_QUBIT_THROUGH_VU_AND_UV_BRANCH_CONSUMERS_AND_CLOSES_ONLY_TO_THE_COMMUTATOR_PHASE_BOUNDARY_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_STREAMED_ONE_VECTOR_CLASSICAL_COMMUTATOR_RECURRENCE_ARE_SMALLER_AND_NO_ADVANTAGE_OR_PHYSICAL_INDEFINITE_ORDER_IS_ESTABLISHED",
+  "claim_ceiling": "EXACT_SOFTWARE_ONE_HIDDEN_TWO_BRANCH_ORDER_PORT_ONE_FIXED_ZERO_TARGET_QUBIT_PUBLIC_GATE_PAIRS_FROM_X_Z_H_T_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY",
+  "claim_limits": {
+    "distinct_phase_resource_unavailable_to_compact_classical_software": false,
+    "general_catalytic_inference": false,
+    "general_process_matrix_execution": false,
+    "physical_bit_replacement": false,
+    "physical_indefinite_causal_order": false,
+    "physical_waveform_execution": false,
+    "quantum_switch_or_oracle_query_separation": false,
+    "small_wall_crossed": false,
+    "total_computational_advantage": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "coherent_order_law": {
+    "final_boundary_is_order_commutator_expectation": true,
+    "hidden_order_branch_count": 2,
+    "order_coherence_is_causally_required_for_boundary": true,
+    "order_port_remains_unprojected_until_final_overlap": true,
+    "route_disposition": "RETIRE_AFTER_ONE_BOUNDED_GATE_PAIR_SUITE_IF_STREAMED_CLASSICAL_RECURRENCE_MATCHES",
+    "same_target_consumed_in_orders": [
+      "VU",
+      "UV"
+    ]
+  },
+  "controls": {
+    "all_accepted_branch_scratch_and_receipt_backings_stable": true,
+    "all_accepted_responses_after_exact_restoration": true,
+    "answer_bearing_extra_descriptor_field_rejected": true,
+    "answer_table_absent": true,
+    "backend_responses_exclude_hidden_branch_order_and_scratch_values": true,
+    "commuting_tz_pair_boundary_is_one": true,
+    "debug_rejected": true,
+    "dirty_scratch_rejected_before_mutation": true,
+    "disconnect_restored_before_lost_response": true,
+    "dump_rejected": true,
+    "gate_matrices_rejected": true,
+    "global_phase_on_both_branches_cancels_only_at_final_boundary": true,
+    "ht_noncentral_boundary_matches_exact_qzeta8_formula": true,
+    "malformed_carrier_id_rejected": true,
+    "malformed_transaction_id_rejected_without_poisoning_carrier": true,
+    "missing_inverse_fails_full_branch_restoration": true,
+    "no_baseline_reload": true,
+    "noncommuting_reordered_inverse_fails_full_branch_restoration": true,
+    "null_carrier_rejected": true,
+    "omitting_one_branch_operation_changes_boundary": true,
+    "order_dephasing_erases_commutator_coherence_boundary": true,
+    "partial_failure_rejected_only_after_restoration": true,
+    "path_assignment_enumeration_absent": true,
+    "postprojection_failure_rejected_only_after_restoration": true,
+    "premature_order_or_branch_projection_rejected": true,
+    "project_amplitudes_rejected": true,
+    "project_branch_rejected": true,
+    "project_order_rejected": true,
+    "project_scratch_rejected": true,
+    "restored_reuse_matches_fresh": true,
+    "run_inplace_on_snapshot_rejected": true,
+    "run_snapshot_rejected": true,
+    "same_id_pair_mutation_rejected": true,
+    "same_order_pair_has_unit_boundary": true,
+    "skipped_generation_rejected": true,
+    "snapshot_rejected": true,
+    "stale_generation_rejected": true,
+    "swapping_noncentral_order_conjugates_and_changes_boundary": true,
+    "undeclared_gate_rejected": true,
+    "wrong_controller_rejected": true,
+    "wrong_inverse_completed_path_fails_full_branch_restoration": true,
+    "wrong_output_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_type_rejected": true,
+    "xz_projective_commutator_boundary_is_minus_one": true
+  },
+  "independent_reference": {
+    "all_controls_pass": true,
+    "all_reuse_parity_checks_pass": true,
+    "oracle_law": {
+      "arithmetic": "Q_ZETA8_POLYNOMIAL_QUOTIENT_ZETA8_TO_THE4_PLUS1",
+      "branch_overlap_reconstructed": true,
+      "dense_two_by_two_commutator_matrix_reconstructed": true,
+      "independent_port_custody_and_atomic_ordering_reconstructed": true,
+      "strongest_transferable_one_vector_commutator_reconstructed": true
+    },
+    "result": "PASS_M252_SEPARATE_REFERENCE"
+  },
+  "input_provenance": {
+    "backend_private_mode_delivered_only_to_service_stdin": true,
+    "controller_received_only_public_gate_pairs": true,
+    "public_controller_configuration_bytes": 545,
+    "standalone_oracle_mode_delivered_only_to_reference_stdin": true,
+    "standalone_reference_configuration_bytes": 56
+  },
+  "protocol_accounting": {
+    "backend_controller_response_bytes": 5041,
+    "controller_backend_request_bytes": 7001,
+    "disconnect_request_bytes": 392
+  },
+  "resource_law": {
+    "accepted_boundary_field_accumulations": 6,
+    "accepted_boundary_field_multiply_terms": 9,
+    "accepted_catvm_path_has_space_work_or_query_advantage": false,
+    "accepted_compiled_public_gate_plan_matrix_references": 12,
+    "accepted_forward_branch_field_writes": 24,
+    "accepted_forward_branch_gate_actions": 12,
+    "accepted_forward_field_accumulations": 48,
+    "accepted_forward_field_multiply_terms": 48,
+    "accepted_forward_scratch_clear_writes": 24,
+    "accepted_hidden_branch_field_cells_per_carrier": 4,
+    "accepted_hidden_order_consumer_receipt_cells_per_carrier": 2,
+    "accepted_hidden_scratch_field_cells_per_carrier": 2,
+    "accepted_inverse_branch_field_writes": 24,
+    "accepted_inverse_branch_gate_actions": 12,
+    "accepted_inverse_field_accumulations": 48,
+    "accepted_inverse_field_multiply_terms": 48,
+    "accepted_inverse_scratch_clear_writes": 24,
+    "accepted_persistent_carriers": 2,
+    "accepted_transactions": 3,
+    "comparison_basis": "QZETA8_FIELD_CELLS_GATE_TERMS_WRITES_FINAL_BOUNDARY_RESTORATION_REUSE_AND_PROTOCOL_TRAFFIC_NOT_WHOLE_PROCESS_RSS",
+    "declared_public_gate_pairs": [
+      [
+        "X",
+        "Z"
+      ],
+      [
+        "H",
+        "T"
+      ],
+      [
+        "H",
+        "T"
+      ]
+    ],
+    "exact_qzeta8_coordinate_payload_instrumented": false,
+    "field_cell_counts_are_not_fixed_bit_payload_claims": true,
+    "python_fraction_object_allocator_socket_hash_serialization_rss_excluded_not_zero": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "retained_dynamic_inverse_history_entries": 0,
+    "retained_final_boundary_field_cells_during_inverse_per_transaction": 1,
+    "service_static_public_gate_library_field_cells": 16,
+    "strongest_fixed_fixture_classical_baseline": "PUBLIC_PAIR_VALIDATION_PLUS_FROZEN_EXACT_COMMUTATOR_BOUNDARY_IN_O1_WORK",
+    "strongest_transferable_descriptor_level_classical_baseline": "DIRECT_EXACT_ONE_TWO_COMPONENT_QZETA8_VECTOR_COMMUTATOR_WORD_V_THEN_U_THEN_V_DAGGER_THEN_U_DAGGER_WITH2_RESIDENT_FIELD_CELLS_PLUS2_REUSABLE_SCRATCH_CELLS_AND_NO_CATVM_RESTORATION",
+    "transferable_baseline_field_multiply_terms_per_case": 16,
+    "transferable_baseline_gate_actions_per_case": 4,
+    "transferable_baseline_resident_target_field_cells": 2,
+    "transferable_baseline_reusable_scratch_field_cells": 2,
+    "whole_transaction_live_payload_peak_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_CATVM_COHERENT_ORDER_COMMUTATOR_STRICT_SCOPE",
+  "reuse_parity": true,
+  "source_dependencies": {
+    "catvm_coherent_order_commutator_client.py": "8fc24ba0db576295f6008f2bd8284ca1d8a3049f681559d1c9f9366450aba8e6",
+    "catvm_coherent_order_commutator_separate_reference.py": "f1c9fcd03895c77767c0565d6b373a91b8d733cfe90eaffef20e1c7e0aa2e96a",
+    "catvm_coherent_order_commutator_service.py": "50307f2790c6ccc0489635a0132e23cb38376b43d87cd059642f1279f6771c51",
+    "qualify_catvm_coherent_order_commutator.sh": "6ba25131463d0870bcf8f2cdc9025cb74b7084bf0c231537008df65adf2a5d64"
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
