@@ -12303,3 +12303,42 @@ factor-graph interface, retire the recoupling route. A compact transferable
 quotient must preserve unresolved channels, exact restoration/reuse, and beat
 the strongest treewidth-aware classical representation to advance the phase
 resource claim.
+
+## M233 finite continuation rank rejects fixed 2/9-state recoupling quotients
+
+M233 directly computes the reachable and observable closures of the vacuum
+plat boundary under all adjacent SU(2) level-8 braid generators and inverses.
+The continuation Hankel ranks are exactly `2,5,14,42` for
+`N=4,6,8,10` at production split primes `241,401`.  A standalone verifier
+uses independent cyclotomic arithmetic, dense verifier-only generator
+matrices, and distinct split primes `641,881`; it reproduces every rank and
+the exact selected transactions.  The `N=4` action is gauge equivalent to the
+M232 two-channel block.  At `N=8` and `N=10`, legal observables distinguish
+fusion paths sharing the same mid-cut simple-object label.
+
+The finite law rejects the fixed two-channel extension and any fixed
+nine-charge `Q(zeta_40)`-linear quotient within the declared cases.  It also
+rejects any one linear rank at most 41 through `N=10`.  It does not establish
+an all-`N` rank theorem, exclude a larger uniform carrier, or exclude nonlinear
+or non-`Q(zeta_40)` quotients.
+
+Each accepted transaction retains the full sparse fusion-path vector plus the
+projected final scalar during inverse.  The dependency-ordered inverse restores
+the exact same coefficient backing, reuse reaches generation two, fresh and
+restored boundaries and forward states agree, and no reload occurs.  The
+identical sparse classical recurrence has the same accepted state and work.
+Verifier bases and Hankel matrices are diagnostic-only component storage;
+whole-process liveness remains unclaimed.  Focused review returned
+`PASS_STRICT_SCOPE` after narrowing the finite-rank claim and correcting the
+retained-boundary accounting.
+
+Next:
+
+```text
+EXACT_PROJECTIVE_COMPLEX_GAUSSIAN_PHASE_RELATION_SIGNATURE_ALGEBRA_ON_THE_REAL_LINE_WITH_NATIVE_STATIONARY_SHARED_PORT_COMPOSITION_INTERSECTION_FIXED3_RATIONAL_COEFFICIENT_CELLS_ACROSS_GROWING_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_GAUSSIAN_CLASSICAL_RECURRENCE
+```
+
+This is a different phase law, not another fusion-path optimization.  It must
+test exact nonlinear fixed-parameter closure, preserve final-only projection
+and actual restoration/reuse, and count rational coefficient height against
+the identical compact classical Gaussian recurrence.
