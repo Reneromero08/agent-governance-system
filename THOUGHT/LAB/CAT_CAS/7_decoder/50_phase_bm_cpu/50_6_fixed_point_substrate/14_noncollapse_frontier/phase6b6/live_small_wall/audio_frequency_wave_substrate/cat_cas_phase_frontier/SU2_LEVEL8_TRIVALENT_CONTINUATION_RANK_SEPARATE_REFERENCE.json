@@ -1,0 +1,269 @@
+{
+  "certificate_primes": [
+    641,
+    881
+  ],
+  "controls": {
+    "all_adjacent_yang_baxter_exact": true,
+    "all_distant_commutation_exact": true,
+    "all_distinct_prime_ranks_full": true,
+    "all_generator_inverses_exact": true,
+    "all_transactions_restore_and_reuse": true,
+    "dimensions_match_exact_a9_walk_counts": true,
+    "flipped_first_exponent_changes_all_selected_boundaries": true,
+    "n4_negative_gauge_equivalence_exact": true,
+    "n4_positive_gauge_equivalence_exact": true
+  },
+  "imports_m214_production": false,
+  "imports_m232_production": false,
+  "imports_m233_production": false,
+  "rank_cases": [
+    {
+      "continuation_hankel_rank": 2,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 2,
+      "observable_rank": 2,
+      "peak_dense_generator_matrix_cells": 4,
+      "prime": 641,
+      "reachable_rank": 2,
+      "strands": 4
+    },
+    {
+      "continuation_hankel_rank": 2,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 2,
+      "observable_rank": 2,
+      "peak_dense_generator_matrix_cells": 4,
+      "prime": 881,
+      "reachable_rank": 2,
+      "strands": 4
+    },
+    {
+      "continuation_hankel_rank": 5,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 5,
+      "observable_rank": 5,
+      "peak_dense_generator_matrix_cells": 25,
+      "prime": 641,
+      "reachable_rank": 5,
+      "strands": 6
+    },
+    {
+      "continuation_hankel_rank": 5,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 5,
+      "observable_rank": 5,
+      "peak_dense_generator_matrix_cells": 25,
+      "prime": 881,
+      "reachable_rank": 5,
+      "strands": 6
+    },
+    {
+      "continuation_hankel_rank": 14,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 14,
+      "observable_rank": 14,
+      "peak_dense_generator_matrix_cells": 196,
+      "prime": 641,
+      "reachable_rank": 14,
+      "strands": 8
+    },
+    {
+      "continuation_hankel_rank": 14,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 14,
+      "observable_rank": 14,
+      "peak_dense_generator_matrix_cells": 196,
+      "prime": 881,
+      "reachable_rank": 14,
+      "strands": 8
+    },
+    {
+      "continuation_hankel_rank": 42,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 42,
+      "observable_rank": 42,
+      "peak_dense_generator_matrix_cells": 1764,
+      "prime": 641,
+      "reachable_rank": 42,
+      "strands": 10
+    },
+    {
+      "continuation_hankel_rank": 42,
+      "dense_generator_matrices_are_verifier_only": true,
+      "fusion_path_dimension": 42,
+      "observable_rank": 42,
+      "peak_dense_generator_matrix_cells": 1764,
+      "prime": 881,
+      "reachable_rank": 42,
+      "strands": 10
+    }
+  ],
+  "rank_law": [
+    {
+      "continuation_hankel_rank_both_primes": [
+        2,
+        2
+      ],
+      "fusion_path_dimension": 2,
+      "observable_rank_both_primes": [
+        2,
+        2
+      ],
+      "reachable_rank_both_primes": [
+        2,
+        2
+      ],
+      "strands": 4
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        5,
+        5
+      ],
+      "fusion_path_dimension": 5,
+      "observable_rank_both_primes": [
+        5,
+        5
+      ],
+      "reachable_rank_both_primes": [
+        5,
+        5
+      ],
+      "strands": 6
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        14,
+        14
+      ],
+      "fusion_path_dimension": 14,
+      "observable_rank_both_primes": [
+        14,
+        14
+      ],
+      "reachable_rank_both_primes": [
+        14,
+        14
+      ],
+      "strands": 8
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        42,
+        42
+      ],
+      "fusion_path_dimension": 42,
+      "observable_rank_both_primes": [
+        42,
+        42
+      ],
+      "reachable_rank_both_primes": [
+        42,
+        42
+      ],
+      "strands": 10
+    }
+  ],
+  "schema": "cat_cas.su2_level8_trivalent_continuation_rank_reference.v1",
+  "transactions": [
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "26c64a1c0e91abef6665071d500ce04993c6b52cede6b0df1f38a62fcc2a65d3",
+      "fresh_reuse_state_commitment": "701b49e0a39303d42e0bd8a299d3bc5e0aac09024e45ea6b7d914d7b72c92902",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 2,
+      "primary_boundary_commitment": "020b94ff89c885522f48d8c0d81ba5771bded18a1d82a3d12ec441f3f66b25ca",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "9b8c37bdbace88e05f82f04408ae75d86e1df1e2a77d3313344e8f22afc02f3d",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "26c64a1c0e91abef6665071d500ce04993c6b52cede6b0df1f38a62fcc2a65d3",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "701b49e0a39303d42e0bd8a299d3bc5e0aac09024e45ea6b7d914d7b72c92902",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "3e6e9d86ada8467791a91a6f2b41c2d3d80467a19bfc969884506be78e8f718c",
+      "fresh_reuse_state_commitment": "a5c1e1b08a37dced213d9b7194c52b4086c074d0574198788677a9b90cf94623",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 5,
+      "primary_boundary_commitment": "8faec797b1646612363830d7843dcb1e1e5437863c87888a92aff245954f2ed9",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "abebce4c93480b57dfaafc47fc6faec715bc2aee20df2c825cdc4b26e62873b5",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "3e6e9d86ada8467791a91a6f2b41c2d3d80467a19bfc969884506be78e8f718c",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "a5c1e1b08a37dced213d9b7194c52b4086c074d0574198788677a9b90cf94623",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 6
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "76aaa75c93489ad614b6d0c93963ffd62cf9bc48be7aad2adc45fae404460b89",
+      "fresh_reuse_state_commitment": "0085f3bbbaf4b90525b1ddfedf1994dafa2a01de775f849a374db0855d214881",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 14,
+      "primary_boundary_commitment": "30bfbfc3a3d956ffbdd02b668e0f8e6b19cb87d611b2a5c90382e6722075371e",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "5a24d536df0132cda4611956a3c597fc440dc2ce0c039b815ee90d793370a316",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "76aaa75c93489ad614b6d0c93963ffd62cf9bc48be7aad2adc45fae404460b89",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "0085f3bbbaf4b90525b1ddfedf1994dafa2a01de775f849a374db0855d214881",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 8
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "de4a708e12191ff719dfbb7af28a0364d67a159c64bfb264019f18359819c910",
+      "fresh_reuse_state_commitment": "f0c7cec254990d105aff7c201057db9ca972e7b665b2e214402aa571d9ab36f8",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 42,
+      "primary_boundary_commitment": "f7abe58035f38a8908c91ab7497f3b5663baed24129b3ae8b58a91818b87d495",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "2af3f9e2b6fa7d7beb798cf07d151e6beb07057ae4d55285cbb1844724ec8c7c",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "de4a708e12191ff719dfbb7af28a0364d67a159c64bfb264019f18359819c910",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "f0c7cec254990d105aff7c201057db9ca972e7b665b2e214402aa571d9ab36f8",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 10
+    }
+  ],
+  "uses_independent_cyclotomic_polynomial_oracle": true,
+  "uses_independent_dense_generator_verifier": true
+}

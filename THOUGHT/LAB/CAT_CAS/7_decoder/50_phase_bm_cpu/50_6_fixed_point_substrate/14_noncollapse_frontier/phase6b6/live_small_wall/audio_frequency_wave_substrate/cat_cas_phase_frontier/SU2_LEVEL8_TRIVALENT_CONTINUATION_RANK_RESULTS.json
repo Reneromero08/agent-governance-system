@@ -1,0 +1,824 @@
+{
+  "claim": "EXACT_DUAL_SPLIT_PRIME_REACHABLE_OBSERVABLE_AND_HANKEL_CERTIFICATES_SHOW_THE_FIXED_VACUUM_PLAT_BOUNDARY_LANGUAGE_FOR_ALL_ADJACENT_SU2_LEVEL8_FUNDAMENTAL_BRAID_GENERATORS_REQUIRES_FULL_QZETA40_LINEAR_CONTINUATION_DIMENSIONS2_5_14_42_AT_STRANDS4_6_8_10_SO_THE_M232_FIXED_TWO_CHANNEL_EXTENSION_AND_ANY_FIXED_NINE_CHARGE_LINEAR_QUOTIENT_FAIL_WITHIN_THE_DECLARED_CASES_BY_N8_WHILE_NO_ALL_N_UNBOUNDED_RANK_THEOREM_IS_CLAIMED_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_SPARSE_CLASSICAL_FUSION_PATH_RECURRENCE",
+  "claim_ceiling": "QZETA40_SU2_LEVEL8_FUNDAMENTAL_VACUUM_FUSION_PATH_SECTORS_N4_6_8_10_ALL_ADJACENT_GENERATORS_AND_INVERSES_REACHABLE_OBSERVABLE_CONTINUATION_RANKS2_5_14_42_AT_PRODUCTION_SPLIT_PRIMES241_401_AND_INDEPENDENT_PRIMES641_881_SELECTED_FOUR_SWEEP_PRIMARY_THREE_SWEEP_REUSE_DIRECT_PROCESS_ONLY",
+  "claim_limits": {
+    "catalytic_inference_established": false,
+    "computational_advantage": false,
+    "distinct_phase_resource_established": false,
+    "finite_declared_strand_counts_only": true,
+    "fixed_qzeta40_linear_quotient_rank_at_most41_through_n10": false,
+    "general_tensor_network_closure": false,
+    "machine_enforced_catvm_custody": false,
+    "materialized_fusion_path_basis_expansion": true,
+    "nonlinear_quotient_excluded": false,
+    "physical_bit_replacement": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false,
+    "unbounded_continuation_rank_growth_proved": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_adjacent_generators_satisfy_yang_baxter": true,
+    "all_declared_continuation_ranks_full_at_both_production_primes": true,
+    "all_distant_generators_commute": true,
+    "all_generators_have_exact_modular_inverse": true,
+    "flipping_first_public_braid_exponent_changes_every_selected_boundary": true,
+    "n4_local_braid_inverse_exact": true,
+    "n4_m232_gauge_equivalence_both_signs": true,
+    "n8_and_n10_exceed_nine_charge_labels": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "public_topology_compiler_reads_no_boundary_answer": true,
+    "same_charge_label_overmerge_distinguished_at_n8_and_n10": true,
+    "wrong_public_program_rejected": true
+  },
+  "m232_local_bridge": {
+    "cases": [
+      {
+        "cayley_hamilton_degree2_exact": true,
+        "distinct_braid_eigenvalues": true,
+        "exact_gauge_equivalence": true,
+        "exponent": -1,
+        "gauge_transformed_path_commitment": "801826c801a773719b41be8ed71385a2f236e2acec386f42ea288fd1e4b7ab8d",
+        "path_block_commitment": "bba52bd31f177fa94a64079593f753211f544607dd89ce6889f3d301eef67c81",
+        "serial_compact_classical_state_cells": 2,
+        "serial_powers": [
+          {
+            "depth": 1,
+            "matrix_commitment": "801826c801a773719b41be8ed71385a2f236e2acec386f42ea288fd1e4b7ab8d"
+          },
+          {
+            "depth": 2,
+            "matrix_commitment": "f4cb0bfe0f04ec8562010ea9aeee5438e3aaeafa21cddfe7f452a14aa189b7cf"
+          },
+          {
+            "depth": 4,
+            "matrix_commitment": "35740e7c06ec0771c97ba83a5720dfe6e44bd3a9c976f84bb9f427663ccb0ef8"
+          },
+          {
+            "depth": 8,
+            "matrix_commitment": "44ce30464796c0a5bb3528bff9335fce655eecbe1acec7764fcc3d139168a034"
+          },
+          {
+            "depth": 16,
+            "matrix_commitment": "7eb9e7dac023d4a579d400e229ee8507a800d4f3f6088c8567e5e13567f96abf"
+          }
+        ],
+        "serial_resident_channel_cells": 2,
+        "symmetric_block_commitment": "801826c801a773719b41be8ed71385a2f236e2acec386f42ea288fd1e4b7ab8d"
+      },
+      {
+        "cayley_hamilton_degree2_exact": true,
+        "distinct_braid_eigenvalues": true,
+        "exact_gauge_equivalence": true,
+        "exponent": 1,
+        "gauge_transformed_path_commitment": "b26791974f79666c6e6aae61977fe20e2ca620473593ee3613570b3cde0da03f",
+        "path_block_commitment": "f3fe7df6619c34502615964a4aaa42d0bb16a7bacd189a713a91139a392ad46f",
+        "serial_compact_classical_state_cells": 2,
+        "serial_powers": [
+          {
+            "depth": 1,
+            "matrix_commitment": "b26791974f79666c6e6aae61977fe20e2ca620473593ee3613570b3cde0da03f"
+          },
+          {
+            "depth": 2,
+            "matrix_commitment": "50acf357edd5786b79c9972d4089a2680861bdfa0c0076798738cafff3b6a0dc"
+          },
+          {
+            "depth": 4,
+            "matrix_commitment": "ef4732f2e9f5690a1ded9a83af9f75ef29635216584036f80994891f6db60233"
+          },
+          {
+            "depth": 8,
+            "matrix_commitment": "014dd2099a2b33f82e9808cf82527d832e612700135396b3279dabfabeaa9017"
+          },
+          {
+            "depth": 16,
+            "matrix_commitment": "4a757afd1a7e31d857b8d8148d94285ef78e88f6fe603d6b8b03a3af0ccb851e"
+          }
+        ],
+        "serial_resident_channel_cells": 2,
+        "symmetric_block_commitment": "b26791974f79666c6e6aae61977fe20e2ca620473593ee3613570b3cde0da03f"
+      }
+    ],
+    "m232_block_alone_implies_global_rank_growth": false,
+    "n4_is_exactly_the_two_channel_sector": true,
+    "new_m233_continuation_certificates_are_direct_not_inherited": true
+  },
+  "matched_classical": {
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "same_local_block_work": true,
+    "same_sparse_path_state_cells": true,
+    "smaller_qzeta40_linear_continuation_quotient_exists_for_declared_language": false,
+    "treewidth_optimized_scalar_word_baseline_implemented": false
+  },
+  "mechanism_law": {
+    "accepted_assignment_expansion_materialized": false,
+    "accepted_dense_operator_materialized": false,
+    "accepted_fusion_relation_table_materialized": false,
+    "accepted_generator_action_is_streamed_local_one_or_two_cell_blocks": true,
+    "all_adjacent_noncommuting_braid_consumers": true,
+    "direct_process_logical_custody_only": true,
+    "final_vacuum_plat_scalar_only": true,
+    "forward_state_only_one_way_committed": true,
+    "global_fusion_path_coefficient_basis_materialized": true,
+    "multiple_overlapping_shared_channels": true,
+    "phase_primitive_state": "QZETA40_COEFFICIENTS_ON_PUBLIC_SU2_LEVEL8_VACUUM_FUSION_PATHS",
+    "rank_verifier_materializes_paths_bases_and_hankel_matrix": true
+  },
+  "obstruction": {
+    "all_n_continuation_rank_theorem_established": false,
+    "any_fixed_qzeta40_linear_rank_at_most41_rejected_through_n10": true,
+    "fixed_nine_charge_label_linear_quotient_rejected_by_n8": true,
+    "fixed_two_channel_extension_rejected_through_n10": true,
+    "nonlinear_or_non_qzeta40_quotient_excluded": false,
+    "route_disposition": "RETIRE_THE_FIXED_TWO_AND_NINE_STATE_RECOUPLING_COMPRESSION_PROPOSALS_AND_CHANGE_PHASE_LAW",
+    "uniform_fixed_rank_linear_continuation_quotient_for_unbounded_family_rejected": false
+  },
+  "rank_certificates": [
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 2,
+      "distinguishing_observable_basis_index": null,
+      "fusion_path_dimension": 2,
+      "hankel_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "observable_basis_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "observable_rank": 2,
+      "prime": 241,
+      "reachable_basis_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "reachable_rank": 2,
+      "root_of_order40": 41,
+      "same_midcut_label": null,
+      "same_midcut_label_overmerge_pair": null,
+      "strands": 4,
+      "verification_work": {
+        "basis_insertions": 6,
+        "elimination_cell_updates": 60,
+        "modular_vector_applications": 24,
+        "modular_vector_cell_updates": 48,
+        "peak_basis_field_cells": 4,
+        "peak_hankel_field_cells": 4,
+        "retained_path_label_cells": 10,
+        "retained_path_records": 2
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 2,
+      "distinguishing_observable_basis_index": null,
+      "fusion_path_dimension": 2,
+      "hankel_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "observable_basis_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "observable_rank": 2,
+      "prime": 401,
+      "reachable_basis_commitment": "ee3d706c6aea8ed0b7e53bc0839ceb572542e932bb1bc6aa87c06b4d39133f9d",
+      "reachable_rank": 2,
+      "root_of_order40": 102,
+      "same_midcut_label": null,
+      "same_midcut_label_overmerge_pair": null,
+      "strands": 4,
+      "verification_work": {
+        "basis_insertions": 6,
+        "elimination_cell_updates": 60,
+        "modular_vector_applications": 24,
+        "modular_vector_cell_updates": 48,
+        "peak_basis_field_cells": 4,
+        "peak_hankel_field_cells": 4,
+        "retained_path_label_cells": 10,
+        "retained_path_records": 2
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 5,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 5,
+      "hankel_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "observable_basis_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "observable_rank": 5,
+      "prime": 241,
+      "reachable_basis_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "reachable_rank": 5,
+      "root_of_order40": 41,
+      "same_midcut_label": 1,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 6,
+      "verification_work": {
+        "basis_insertions": 15,
+        "elimination_cell_updates": 660,
+        "modular_vector_applications": 100,
+        "modular_vector_cell_updates": 500,
+        "peak_basis_field_cells": 25,
+        "peak_hankel_field_cells": 25,
+        "retained_path_label_cells": 35,
+        "retained_path_records": 5
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 5,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 5,
+      "hankel_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "observable_basis_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "observable_rank": 5,
+      "prime": 401,
+      "reachable_basis_commitment": "87c731f442134bae15fde9ac81926869dba1a68b1e372eb988c9628f4b83fa10",
+      "reachable_rank": 5,
+      "root_of_order40": 102,
+      "same_midcut_label": 1,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 6,
+      "verification_work": {
+        "basis_insertions": 15,
+        "elimination_cell_updates": 660,
+        "modular_vector_applications": 100,
+        "modular_vector_cell_updates": 500,
+        "peak_basis_field_cells": 25,
+        "peak_hankel_field_cells": 25,
+        "retained_path_label_cells": 35,
+        "retained_path_records": 5
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 14,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 14,
+      "hankel_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "observable_basis_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "observable_rank": 14,
+      "prime": 241,
+      "reachable_basis_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "reachable_rank": 14,
+      "root_of_order40": 41,
+      "same_midcut_label": 0,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 8,
+      "verification_work": {
+        "basis_insertions": 42,
+        "elimination_cell_updates": 7476,
+        "modular_vector_applications": 392,
+        "modular_vector_cell_updates": 5488,
+        "peak_basis_field_cells": 196,
+        "peak_hankel_field_cells": 196,
+        "retained_path_label_cells": 126,
+        "retained_path_records": 14
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 14,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 14,
+      "hankel_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "observable_basis_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "observable_rank": 14,
+      "prime": 401,
+      "reachable_basis_commitment": "52529ad4f6f0691499fc85a7b438bddca5211576c5a0bc2d45a298aedb60e9a8",
+      "reachable_rank": 14,
+      "root_of_order40": 102,
+      "same_midcut_label": 0,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 8,
+      "verification_work": {
+        "basis_insertions": 42,
+        "elimination_cell_updates": 7476,
+        "modular_vector_applications": 392,
+        "modular_vector_cell_updates": 5488,
+        "peak_basis_field_cells": 196,
+        "peak_hankel_field_cells": 196,
+        "retained_path_label_cells": 126,
+        "retained_path_records": 14
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 42,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 42,
+      "hankel_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "observable_basis_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "observable_rank": 42,
+      "prime": 241,
+      "reachable_basis_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "reachable_rank": 42,
+      "root_of_order40": 41,
+      "same_midcut_label": 1,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 10,
+      "verification_work": {
+        "basis_insertions": 126,
+        "elimination_cell_updates": 88284,
+        "modular_vector_applications": 1512,
+        "modular_vector_cell_updates": 63504,
+        "peak_basis_field_cells": 1764,
+        "peak_hankel_field_cells": 1764,
+        "retained_path_label_cells": 462,
+        "retained_path_records": 42
+      }
+    },
+    {
+      "all_ranks_full": true,
+      "continuation_hankel_rank": 42,
+      "distinguishing_observable_basis_index": 0,
+      "fusion_path_dimension": 42,
+      "hankel_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "observable_basis_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "observable_rank": 42,
+      "prime": 401,
+      "reachable_basis_commitment": "5467a155bb30ab452e7b403cf433c22f63f80fa280469b25113be659142d575d",
+      "reachable_rank": 42,
+      "root_of_order40": 102,
+      "same_midcut_label": 1,
+      "same_midcut_label_overmerge_pair": [
+        0,
+        1
+      ],
+      "strands": 10,
+      "verification_work": {
+        "basis_insertions": 126,
+        "elimination_cell_updates": 88284,
+        "modular_vector_applications": 1512,
+        "modular_vector_cell_updates": 63504,
+        "peak_basis_field_cells": 1764,
+        "peak_hankel_field_cells": 1764,
+        "retained_path_label_cells": 462,
+        "retained_path_records": 42
+      }
+    }
+  ],
+  "rank_law": [
+    {
+      "continuation_hankel_rank_both_primes": [
+        2,
+        2
+      ],
+      "full_minimal_qzeta40_linear_continuation_dimension_certified": true,
+      "fusion_path_dimension": 2,
+      "observable_rank_both_primes": [
+        2,
+        2
+      ],
+      "reachable_rank_both_primes": [
+        2,
+        2
+      ],
+      "strands": 4
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        5,
+        5
+      ],
+      "full_minimal_qzeta40_linear_continuation_dimension_certified": true,
+      "fusion_path_dimension": 5,
+      "observable_rank_both_primes": [
+        5,
+        5
+      ],
+      "reachable_rank_both_primes": [
+        5,
+        5
+      ],
+      "strands": 6
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        14,
+        14
+      ],
+      "full_minimal_qzeta40_linear_continuation_dimension_certified": true,
+      "fusion_path_dimension": 14,
+      "observable_rank_both_primes": [
+        14,
+        14
+      ],
+      "reachable_rank_both_primes": [
+        14,
+        14
+      ],
+      "strands": 8
+    },
+    {
+      "continuation_hankel_rank_both_primes": [
+        42,
+        42
+      ],
+      "full_minimal_qzeta40_linear_continuation_dimension_certified": true,
+      "fusion_path_dimension": 42,
+      "observable_rank_both_primes": [
+        42,
+        42
+      ],
+      "reachable_rank_both_primes": [
+        42,
+        42
+      ],
+      "strands": 10
+    }
+  ],
+  "resource_law": {
+    "accepted_path_dimensions": [
+      2,
+      5,
+      14,
+      42
+    ],
+    "accepted_retained_inverse_history_entries": 0,
+    "accepted_transactions": [
+      {
+        "accepted_carrier_field_cells": 2,
+        "accepted_carrier_plus_retained_boundary_field_cells": 3,
+        "primary_retained_boundary_payload_bits": 46,
+        "primary_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 40,
+          "field_multiplications": 136,
+          "forward_operations": 12,
+          "inverse_operations": 12,
+          "paired_local_blocks": 8,
+          "path_labels_rematerialized": 285,
+          "path_rank_calls": 9,
+          "path_unrank_calls": 48,
+          "peak_carrier_field_cells": 2,
+          "peak_carrier_payload_bits": 98,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 2,
+          "peak_streamed_path_label_cells": 10,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 54,
+          "public_descriptor_integers_hashed": 1296,
+          "scalar_local_blocks": 16,
+          "state_commitment_field_cells_hashed": 2,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 224,
+          "zero_temperley_lieb_blocks": 16
+        },
+        "public_topology_integer_cells": 45,
+        "public_topology_payload_bits": 57,
+        "retained_final_boundary_field_cells_during_inverse": 1,
+        "retained_inverse_history_entries": 0,
+        "reuse_retained_boundary_payload_bits": 46,
+        "reuse_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 30,
+          "field_multiplications": 102,
+          "forward_operations": 9,
+          "inverse_operations": 9,
+          "paired_local_blocks": 6,
+          "path_labels_rematerialized": 215,
+          "path_rank_calls": 7,
+          "path_unrank_calls": 36,
+          "peak_carrier_field_cells": 2,
+          "peak_carrier_payload_bits": 96,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 2,
+          "peak_streamed_path_label_cells": 10,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 42,
+          "public_descriptor_integers_hashed": 1008,
+          "scalar_local_blocks": 12,
+          "state_commitment_field_cells_hashed": 2,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 168,
+          "zero_temperley_lieb_blocks": 12
+        },
+        "strands": 4
+      },
+      {
+        "accepted_carrier_field_cells": 5,
+        "accepted_carrier_plus_retained_boundary_field_cells": 6,
+        "primary_retained_boundary_payload_bits": 48,
+        "primary_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 160,
+          "field_multiplications": 520,
+          "forward_operations": 20,
+          "inverse_operations": 20,
+          "paired_local_blocks": 40,
+          "path_labels_rematerialized": 1687,
+          "path_rank_calls": 41,
+          "path_unrank_calls": 200,
+          "peak_carrier_field_cells": 5,
+          "peak_carrier_payload_bits": 253,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 5,
+          "peak_streamed_path_label_cells": 14,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 86,
+          "public_descriptor_integers_hashed": 2838,
+          "scalar_local_blocks": 40,
+          "state_commitment_field_cells_hashed": 5,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 1504,
+          "zero_temperley_lieb_blocks": 80
+        },
+        "public_topology_integer_cells": 63,
+        "public_topology_payload_bits": 93,
+        "retained_final_boundary_field_cells_during_inverse": 1,
+        "retained_inverse_history_entries": 0,
+        "reuse_retained_boundary_payload_bits": 43,
+        "reuse_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 120,
+          "field_multiplications": 390,
+          "forward_operations": 15,
+          "inverse_operations": 15,
+          "paired_local_blocks": 30,
+          "path_labels_rematerialized": 1267,
+          "path_rank_calls": 31,
+          "path_unrank_calls": 150,
+          "peak_carrier_field_cells": 5,
+          "peak_carrier_payload_bits": 243,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 5,
+          "peak_streamed_path_label_cells": 14,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 66,
+          "public_descriptor_integers_hashed": 2178,
+          "scalar_local_blocks": 30,
+          "state_commitment_field_cells_hashed": 5,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 1128,
+          "zero_temperley_lieb_blocks": 60
+        },
+        "strands": 6
+      },
+      {
+        "accepted_carrier_field_cells": 14,
+        "accepted_carrier_plus_retained_boundary_field_cells": 15,
+        "primary_retained_boundary_payload_bits": 46,
+        "primary_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 616,
+          "field_multiplications": 1960,
+          "forward_operations": 28,
+          "inverse_operations": 28,
+          "paired_local_blocks": 168,
+          "path_labels_rematerialized": 8577,
+          "path_rank_calls": 169,
+          "path_unrank_calls": 784,
+          "peak_carrier_field_cells": 14,
+          "peak_carrier_payload_bits": 816,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 14,
+          "peak_streamed_path_label_cells": 18,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 118,
+          "public_descriptor_integers_hashed": 4956,
+          "scalar_local_blocks": 112,
+          "state_commitment_field_cells_hashed": 14,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 8232,
+          "zero_temperley_lieb_blocks": 336
+        },
+        "public_topology_integer_cells": 81,
+        "public_topology_payload_bits": 141,
+        "retained_final_boundary_field_cells_during_inverse": 1,
+        "retained_inverse_history_entries": 0,
+        "reuse_retained_boundary_payload_bits": 42,
+        "reuse_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 462,
+          "field_multiplications": 1470,
+          "forward_operations": 21,
+          "inverse_operations": 21,
+          "paired_local_blocks": 126,
+          "path_labels_rematerialized": 6435,
+          "path_rank_calls": 127,
+          "path_unrank_calls": 588,
+          "peak_carrier_field_cells": 14,
+          "peak_carrier_payload_bits": 725,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 14,
+          "peak_streamed_path_label_cells": 18,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 90,
+          "public_descriptor_integers_hashed": 3780,
+          "scalar_local_blocks": 84,
+          "state_commitment_field_cells_hashed": 14,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 6174,
+          "zero_temperley_lieb_blocks": 252
+        },
+        "strands": 8
+      },
+      {
+        "accepted_carrier_field_cells": 42,
+        "accepted_carrier_plus_retained_boundary_field_cells": 43,
+        "primary_retained_boundary_payload_bits": 45,
+        "primary_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 2352,
+          "field_multiplications": 7392,
+          "forward_operations": 36,
+          "inverse_operations": 36,
+          "paired_local_blocks": 672,
+          "path_labels_rematerialized": 40667,
+          "path_rank_calls": 673,
+          "path_unrank_calls": 3024,
+          "peak_carrier_field_cells": 42,
+          "peak_carrier_payload_bits": 2559,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 42,
+          "peak_streamed_path_label_cells": 22,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 150,
+          "public_descriptor_integers_hashed": 7650,
+          "scalar_local_blocks": 336,
+          "state_commitment_field_cells_hashed": 42,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 40992,
+          "zero_temperley_lieb_blocks": 1344
+        },
+        "public_topology_integer_cells": 99,
+        "public_topology_payload_bits": 210,
+        "retained_final_boundary_field_cells_during_inverse": 1,
+        "retained_inverse_history_entries": 0,
+        "reuse_retained_boundary_payload_bits": 41,
+        "reuse_work": {
+          "boundary_commitment_hashes": 1,
+          "field_additions": 1764,
+          "field_multiplications": 5544,
+          "forward_operations": 27,
+          "inverse_operations": 27,
+          "paired_local_blocks": 504,
+          "path_labels_rematerialized": 30503,
+          "path_rank_calls": 505,
+          "path_unrank_calls": 2268,
+          "peak_carrier_field_cells": 42,
+          "peak_carrier_payload_bits": 2398,
+          "peak_local_field_scratch_cells": 8,
+          "peak_nonzero_carrier_field_cells": 41,
+          "peak_streamed_path_label_cells": 22,
+          "port_leases": 1,
+          "port_releases": 1,
+          "public_descriptor_hashes": 114,
+          "public_descriptor_integers_hashed": 5814,
+          "scalar_local_blocks": 252,
+          "state_commitment_field_cells_hashed": 42,
+          "state_commitment_hashes": 1,
+          "topology_count_reads": 30744,
+          "zero_temperley_lieb_blocks": 1008
+        },
+        "strands": 10
+      }
+    ],
+    "excluded_not_zero": "RANK_VERIFIER_PATH_LISTS_MODULAR_BASES_HANKEL_MATRICES_PYTHON_OBJECT_HEADERS_ALLOCATOR_INTERPRETER_HASH_BYTE_TRAFFIC_SERIALIZATION_WALL_TIME_RSS_AND_TREE_DECOMPOSITION_COMPILER_COST",
+    "maximum_verifier_basis_cells": 1764,
+    "maximum_verifier_hankel_cells": 1764,
+    "rank_verifier_not_accepted_runtime_output": true,
+    "rank_verifier_paths_modular_bases_and_hankel_are_verifier_only": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "strongest_implemented_matched_classical": "IDENTICAL_EXACT_QZETA40_SPARSE_FUSION_PATH_TRANSFER_WITH_PUBLIC_A9_RANK_UNRANK_AND_FULL_MINIMAL_LINEAR_CONTINUATION_DIMENSION_FOR_THE_DECLARED_PLAT_LANGUAGE",
+    "verifier_peak_basis_and_hankel_cells_are_component_local_not_combined": true,
+    "whole_transaction_live_field_and_payload_accounting_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_EXACT_GROWING_SU2_LEVEL8_TRIVALENT_CONTINUATION_RANKS_REJECT_FIXED_TWO_AND_NINE_STATE_QUOTIENTS_THROUGH_N10",
+  "schema": "cat_cas.su2_level8_trivalent_continuation_rank.v1",
+  "separate_reference": {
+    "certificate_primes": [
+      641,
+      881
+    ],
+    "continuation_rank_parity_at_distinct_primes": true,
+    "exact_transaction_parity": true,
+    "imports_m214_production": false,
+    "imports_m232_production": false,
+    "imports_m233_production": false,
+    "uses_independent_cyclotomic_polynomial_oracle": true
+  },
+  "source_dependencies": {
+    "m214_production_sha256": "bc54076303fd12d57d9b57974832d451da603e123ea550f2312f81ad67bd9b11",
+    "m232_result_sha256": "85a9554a08795f20f756e7614558ad1e4bf247478ede3dd10b916d42f65a3368",
+    "m233_production_sha256": "5f11bef46b1700d4af8d350cfeae07c04563eb270b5871bbc2fc5237d354bca5",
+    "m233_reference_code_sha256": "67fb68558b37abe8a9617c5db8d96f42ab756f3b4197c7f78ebdfa311ed9ec97",
+    "m233_reference_result_sha256": "a32749608b53fe657d565743ac6de90cf1d6f1e06941eacc480725883a1bc055"
+  },
+  "terminal": false,
+  "transactions": [
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "26c64a1c0e91abef6665071d500ce04993c6b52cede6b0df1f38a62fcc2a65d3",
+      "fresh_reuse_state_commitment": "701b49e0a39303d42e0bd8a299d3bc5e0aac09024e45ea6b7d914d7b72c92902",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 2,
+      "primary_boundary_commitment": "020b94ff89c885522f48d8c0d81ba5771bded18a1d82a3d12ec441f3f66b25ca",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "9b8c37bdbace88e05f82f04408ae75d86e1df1e2a77d3313344e8f22afc02f3d",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "26c64a1c0e91abef6665071d500ce04993c6b52cede6b0df1f38a62fcc2a65d3",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "701b49e0a39303d42e0bd8a299d3bc5e0aac09024e45ea6b7d914d7b72c92902",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "3e6e9d86ada8467791a91a6f2b41c2d3d80467a19bfc969884506be78e8f718c",
+      "fresh_reuse_state_commitment": "a5c1e1b08a37dced213d9b7194c52b4086c074d0574198788677a9b90cf94623",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 5,
+      "primary_boundary_commitment": "8faec797b1646612363830d7843dcb1e1e5437863c87888a92aff245954f2ed9",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "abebce4c93480b57dfaafc47fc6faec715bc2aee20df2c825cdc4b26e62873b5",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "3e6e9d86ada8467791a91a6f2b41c2d3d80467a19bfc969884506be78e8f718c",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "a5c1e1b08a37dced213d9b7194c52b4086c074d0574198788677a9b90cf94623",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 6
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "76aaa75c93489ad614b6d0c93963ffd62cf9bc48be7aad2adc45fae404460b89",
+      "fresh_reuse_state_commitment": "0085f3bbbaf4b90525b1ddfedf1994dafa2a01de775f849a374db0855d214881",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 14,
+      "primary_boundary_commitment": "30bfbfc3a3d956ffbdd02b668e0f8e6b19cb87d611b2a5c90382e6722075371e",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "5a24d536df0132cda4611956a3c597fc440dc2ce0c039b815ee90d793370a316",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "76aaa75c93489ad614b6d0c93963ffd62cf9bc48be7aad2adc45fae404460b89",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "0085f3bbbaf4b90525b1ddfedf1994dafa2a01de775f849a374db0855d214881",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 8
+    },
+    {
+      "baseline_reload_used": false,
+      "fresh_canonical_post_restoration_state_exact": true,
+      "fresh_restoration_generation": 1,
+      "fresh_restored_reuse_boundary_agreement": true,
+      "fresh_restored_reuse_state_agreement": true,
+      "fresh_reuse_boundary_commitment": "de4a708e12191ff719dfbb7af28a0364d67a159c64bfb264019f18359819c910",
+      "fresh_reuse_state_commitment": "f0c7cec254990d105aff7c201057db9ca972e7b665b2e214402aa571d9ab36f8",
+      "fresh_same_coefficient_backing": true,
+      "fusion_path_dimension": 42,
+      "primary_boundary_commitment": "f7abe58035f38a8908c91ab7497f3b5663baed24129b3ae8b58a91818b87d495",
+      "primary_canonical_post_restoration_state_exact": true,
+      "primary_forward_state_commitment": "2af3f9e2b6fa7d7beb798cf07d151e6beb07057ae4d55285cbb1844724ec8c7c",
+      "primary_missing_inverse_error_nonzero": true,
+      "primary_restoration_error_field_cells": 0,
+      "primary_same_coefficient_backing": true,
+      "restoration_generation_after_reuse": 2,
+      "reuse_boundary_commitment": "de4a708e12191ff719dfbb7af28a0364d67a159c64bfb264019f18359819c910",
+      "reuse_canonical_post_restoration_state_exact": true,
+      "reuse_forward_state_commitment": "f0c7cec254990d105aff7c201057db9ca972e7b665b2e214402aa571d9ab36f8",
+      "reuse_restoration_error_field_cells": 0,
+      "reuse_same_coefficient_backing": true,
+      "strands": 10
+    }
+  ],
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
