@@ -1,0 +1,188 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "boundary_commitment": "e96b1b5b373ff5494e0d305188b4a6555f56850a9d812ebb175412fba8242236",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 0,
+      "forward_payload_bits": 302,
+      "module_count": 3,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 1,
+      "state_commitment": "f37c7cefde11ff2120d45af8cb06b7b5c06b2305dbc44111f817d77e0797e364"
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary_commitment": "dfdd9e83d5cde57261161a3c891d02fd7947be63db3811879cf1717eacf5de04",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 0,
+      "forward_payload_bits": 503,
+      "module_count": 6,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 2,
+      "state_commitment": "16d756d399d2c04b40ab65d7f2963ec69bf093145b57df7e69f2502dd317fff0"
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary_commitment": "e613b093dd2a10bd6fa6090b6bced227e03941c4f551a9f2dd3f32fde2db123b",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 1,
+      "forward_payload_bits": 313,
+      "module_count": 6,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 2,
+      "state_commitment": "ac079d674d9162327c90bd57e5aa1e3eaf227c8e8c119d8d713e91c118f41ee4"
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary_commitment": "6241e567164aaeceef4363e6763dcc70ccf70930af41c5e545d6a2a43e6bdecf",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 0,
+      "forward_payload_bits": 1031,
+      "module_count": 9,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 3,
+      "state_commitment": "4e3ef6853982536dcaf30257fd599ad6ac36e7356b22214b83f175ef2bfc1f6c"
+    }
+  ],
+  "controls": {
+    "assignment_expansions_materialized": false,
+    "control_restored_exactly": true,
+    "fusion_cubic_noncommuting": true,
+    "fusion_twist_noncommuting": true,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "public_topology_compilation_reads_final_answer": false,
+    "relation_tables_materialized": false,
+    "reordered_inverse_rejected": true,
+    "semantic_perturbation_changes_state": true,
+    "stale_generation_rejected": true,
+    "twist_cubic_noncommuting": true,
+    "wrong_consumer_rejected": true,
+    "wrong_generation_rejected": true,
+    "wrong_inverse_parameter_changes_restored_state": true,
+    "wrong_owner_rejected": true,
+    "wrong_port_type_rejected": true,
+    "wrong_public_program_rejected": true
+  },
+  "imports_m211_production": false,
+  "imports_m229_production": false,
+  "reuse": {
+    "fresh_restored_reuse_boundary_agreement": true,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "e613b093dd2a10bd6fa6090b6bced227e03941c4f551a9f2dd3f32fde2db123b",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 1,
+      "forward_payload_bits": 313,
+      "module_count": 6,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 2,
+      "state_commitment": "ac079d674d9162327c90bd57e5aa1e3eaf227c8e8c119d8d713e91c118f41ee4"
+    },
+    "primary": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "6241e567164aaeceef4363e6763dcc70ccf70930af41c5e545d6a2a43e6bdecf",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 0,
+      "forward_payload_bits": 1031,
+      "module_count": 9,
+      "port_type": 22908,
+      "restoration_generation": 1,
+      "rounds": 3,
+      "state_commitment": "4e3ef6853982536dcaf30257fd599ad6ac36e7356b22214b83f175ef2bfc1f6c"
+    },
+    "restoration_generation_after_reuse": 2,
+    "reuse": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "e613b093dd2a10bd6fa6090b6bced227e03941c4f551a9f2dd3f32fde2db123b",
+      "canonical_post_restoration_state_exact": true,
+      "distinct_consumers": [
+        1,
+        2,
+        3
+      ],
+      "distinct_module_kinds": [
+        "CUBIC_PHASE_SHEAR",
+        "FUSE_FUNDAMENTAL",
+        "TWIST_CASIMIR"
+      ],
+      "family": 1,
+      "forward_payload_bits": 313,
+      "module_count": 6,
+      "port_type": 22908,
+      "restoration_generation": 2,
+      "rounds": 2,
+      "state_commitment": "ac079d674d9162327c90bd57e5aa1e3eaf227c8e8c119d8d713e91c118f41ee4"
+    }
+  },
+  "schema": "cat_cas.su2_level8_typed_open_graph_relation_reference.v1",
+  "uses_independent_polynomial_quotient_substrate": true
+}
