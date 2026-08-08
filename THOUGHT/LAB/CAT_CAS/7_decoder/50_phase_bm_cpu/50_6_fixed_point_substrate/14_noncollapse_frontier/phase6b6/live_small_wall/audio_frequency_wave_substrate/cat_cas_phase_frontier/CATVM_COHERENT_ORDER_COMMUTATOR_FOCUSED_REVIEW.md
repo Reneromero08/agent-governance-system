@@ -8,8 +8,7 @@ Verification level: `SEPARATE_REFERENCE_PARITY`
 
 Restoration class: `EXACT_ALGEBRAIC_RESTORATION`
 
-Scientific source head: recorded by the canonical authority reconciliation that
-follows this scientific package commit.
+Scientific source head: `27ba6c975e1451f66ef9c202a77fb4bb88c0bb05`
 
 The focused read-only review independently reconstructed exact arithmetic in
 `Q[zeta_8]/(zeta_8^4+1)`, the two coherent order branches, and the boundary

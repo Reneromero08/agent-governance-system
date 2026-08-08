@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`912f1ed663704e76a0a97789e869abf98bddc7ba`. The canonical per-milestone
+`27ba6c975e1451f66ef9c202a77fb4bb88c0bb05`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13066,16 +13066,57 @@ Small Wall crossing, inference, physical mixed-state or waveform execution,
 physical-bit replacement, or unbounded computation. The explicit-software
 DQC1 route stops at this grammar.
 
+## M252 coherent-order commutator calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_COHERENT_ORDER_PORT_ROUTES_ONE_TARGET_QUBIT_THROUGH_VU_AND_UV_BRANCH_CONSUMERS_AND_CLOSES_ONLY_TO_THE_COMMUTATOR_PHASE_BOUNDARY_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_STREAMED_ONE_VECTOR_CLASSICAL_COMMUTATOR_RECURRENCE_ARE_SMALLER_AND_NO_ADVANTAGE_OR_PHYSICAL_INDEFINITE_ORDER_IS_ESTABLISHED
+```
+
+The accepted target is fixed to `|0>`. One actual four-cell backing carries
+the `VU` and `UV` order branches and closes only to
+
+```text
+<0|U^dagger V^dagger U V|0>.
+```
+
+Exact production and the standalone `Q[zeta8]/(zeta8^4+1)` oracle agree on
+the central `X,Z` boundary `-1`, commuting `T,Z` boundary `+1`, and noncentral
+`H,T` boundary `(1+conjugate(zeta8))/2`. The oracle reconstructs the dense
+commutator, branch overlap, and strongest one-vector recurrence for all 16
+declared pairs.
+
+The CATVM retains four branch field cells, two scratch cells, and two consumer
+receipts. Only the final scalar leaves after the actual inverse restores the
+same backing and exact canonical state. Descriptor-distinct generation-two
+reuse agrees with fresh execution. Partial, post-projection, and disconnect
+paths restore before rejection or response loss; snapshot reload is absent.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The decisive obstruction is the repaired strongest transferable comparator:
+one two-component target is streamed through `V,U,V^dagger,U^dagger` in two
+resident plus two scratch field cells, four actions, and 16 multiply terms,
+without CATVM restoration. The fixed fixtures also admit an `O(1)` invariant.
+This establishes bounded causal phase sensitivity and machine law, not
+physical indefinite order, oracle separation, a distinct phase resource,
+advantage, Small Wall crossing, inference, physical execution, bit
+replacement, or unbounded computation. The route stops here.
+
 Next:
 
 ```text
-CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE
+EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
 ```
 
-M252 changes the primitive to one hidden coherent order port. Its two branch
-amplitudes consume the same target through `VU` and `UV` and close only to the
-final exact commutator scalar `<psi|U^dagger V^dagger U V|psi>`. The actual
-four-cell branch backing must restore and support unrelated generation-two
-reuse. The decisive comparison is an `O(1)` fixed-fixture invariant plus the
-streamed two-vector classical commutator recurrence. A compact match retires
-this bounded coherent-order route without adding fixtures or target width.
+M253 returns to open relational geometry. It represents one typed four-port
+Grassmann-Gaussian relation in seven exact field cells, intersects by scalar
+multiplication and antisymmetric coefficient addition, and composes through a
+Berezin/Pfaffian transform without truth-table expansion. Only a final top-form
+scalar may leave after exact restoration and reuse. The identical seven-cell
+antisymmetric-matrix/Pfaffian recurrence and general matchgate algorithm are
+the controlling compact classical baselines. A match retires this bounded
+Gaussian relation route rather than starting a planar-fixture series.

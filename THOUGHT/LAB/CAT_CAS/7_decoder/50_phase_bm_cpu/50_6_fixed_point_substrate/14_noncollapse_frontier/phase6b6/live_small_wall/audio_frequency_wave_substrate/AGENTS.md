@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`912f1ed663704e76a0a97789e869abf98bddc7ba`. The registry assigns one
+`27ba6c975e1451f66ef9c202a77fb4bb88c0bb05`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 251-milestone lane is active by user direction. Continue from the
+The current 252-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,44 +53,45 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_DQC1_ONE_CLEAN_CONTROL_AND_TWO_QUBIT_MAXIMALLY_MIXED_OPERATOR_COHERENCE_RETURNS_THE_QZETA8_NORMALIZED_TRACE_OF_A_DECLARED_NONCOMMUTING_PUBLIC_WORD_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_DIRECT_FOUR_BY_FOUR_PUBLIC_MATRIX_TRACE_RECURRENCE_ARE_SMALLER_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_COHERENT_ORDER_PORT_ROUTES_ONE_TARGET_QUBIT_THROUGH_VU_AND_UV_BRANCH_CONSUMERS_AND_CLOSES_ONLY_TO_THE_COMMUTATOR_PHASE_BOUNDARY_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_STREAMED_ONE_VECTOR_CLASSICAL_COMMUTATOR_RECURRENCE_ARE_SMALLER_AND_NO_ADVANTAGE_OR_PHYSICAL_INDEFINITE_ORDER_IS_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_ONE_CLEAN_CONTROL_TWO_MAXIMALLY_MIXED_DATA_QUBITS_PUBLIC_WORD_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_ONE_HIDDEN_TWO_BRANCH_ORDER_PORT_ONE_FIXED_ZERO_TARGET_QUBIT_PUBLIC_GATE_PAIRS_FROM_X_Z_H_T_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone exact `Q[zeta8]/(zeta8^4+1)` oracle reproduce the full
-`8 x 8` density evolution, the direct `4 x 4` public-word trace, atomic
-controls, exact same-backing restoration, and generation-two reuse.
+and a standalone exact `Q[zeta8]/(zeta8^4+1)` oracle reproduce the two order
+branches, the dense commutator, the one-vector recurrence, atomic controls,
+exact same-backing restoration, and generation-two reuse.
 
-M251 establishes the exact bounded software identity
-`<X>+i<Y> = Tr(U)/4` for one clean control and a maximally mixed two-qubit
-carrier. Only that final scalar leaves the service after restoration. The
-strongest fixed-fixture comparator is `O(1)` and the transferable direct
-`4 x 4` matrix-and-trace recurrence uses less state and no CATVM inverse.
-No physical mixed-state execution, DQC1 hardness, distinct phase resource,
+M252 establishes the exact bounded software boundary
+`<0|U^dagger V^dagger U V|0>` from one hidden two-branch order port. Only
+that scalar leaves the service after restoration. The strongest fixed-fixture
+comparator is `O(1)` and the transferable one-vector recurrence uses two
+resident field cells plus two scratch cells and no CATVM restoration. No
+physical indefinite causal order, oracle separation, distinct phase resource,
 advantage, Small Wall crossing, physical-bit replacement, inference, or
-unbounded computation is established. The explicit-software DQC1 route is
-retired at this bounded calibration.
+unbounded computation is established. The coherent-order route is retired at
+this bounded calibration.
 
 Selected successor:
 
 ```text
-CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE
+EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
 ```
 
-Change the primitive to one hidden two-cell coherent order port consumed by
-the noncommuting `VU` and `UV` branches on one target qubit. Test the exact
-commutator boundary `<psi|U^dagger V^dagger U V|psi>` over `Q(zeta8)`, retain
-only that scalar, invert the actual four-cell branch carrier, and reuse its
-backing. Compare against the streamed two-vector commutator recurrence and an
-`O(1)` fixed-fixture invariant. Stop after this bounded suite if the compact
-classical recurrence matches; do not add order fixtures or target width.
+Change the primitive to a typed four-port Grassmann-Gaussian open relation
+stored as six antisymmetric `Q(zeta8)` coefficients plus one scalar. Test
+native coefficientwise intersection and invertible Berezin/Pfaffian closure,
+project only the final top-form scalar, restore the actual seven-cell carrier,
+and reuse its backing. Compare against the identical seven-cell antisymmetric-
+matrix/Pfaffian recurrence and the general matchgate/Pfaffian ceiling. Stop
+after this bounded geometry if the compact classical recurrence bisimulates it;
+do not scale planar matchgate fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -284,7 +285,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M251_ESTABLISHES_EXACT_MIXED_STATE_OPERATOR_COHERENCE_WITH_ATOMIC_RESTORATION_BUT_RETIRES_EXPLICIT_SOFTWARE_DQC1_AT_SMALLER_O1_AND_DIRECT_FOUR_BY_FOUR_CLASSICAL_BASELINES_THEN_SELECTS_ONE_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE
+ACTIVE_AFTER_M252_ESTABLISHES_EXACT_COHERENT_ORDER_COMMUTATOR_PHASE_WITH_ATOMIC_RESTORATION_BUT_RETIRES_THE_ROUTE_AT_A_SMALLER_ONE_VECTOR_CLASSICAL_RECURRENCE_THEN_CHANGES_TO_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_GEOMETRY
 ```
 
 The named
@@ -293,18 +294,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE
+EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
 ```
 
-M251 closes the declared explicit-software DQC1 route: operator-valued
-coherence is exact and atomic, but the fixed instances have an `O(1)` public
-invariant and the transferable direct `4 x 4` matrix-and-trace recurrence is
-smaller. Do not add DQC1 qubits or word lengths. M252 changes to one coherent
-order port whose two branches consume the same target through `VU` and `UV`.
-It must project only the exact commutator scalar, reverse the actual branch
-carrier, and compare against the streamed two-vector classical recurrence.
-One bounded suite is the route ceiling; no order-fixture series follows a
-compact-classical match.
+M252 closes the declared coherent-order route: the hidden branch phase is
+causal and atomic, but one target vector streamed through
+`V,U,V^dagger,U^dagger` uses half the resident field state and needs no CATVM
+restoration. Do not add order fixtures or target width. M253 returns to the
+primary open-relation mission with a seven-cell Grassmann-Gaussian signature.
+It must compose by exact Berezin/Pfaffian closure, intersect coefficientwise,
+project only a final top-form boundary, restore the actual relation carrier,
+and compare against the identical compact antisymmetric-matrix recurrence.
+One bounded four-port geometry is the route ceiling.
 
 ## 7. Native No-Smuggle Law
 
