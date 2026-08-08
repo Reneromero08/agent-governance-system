@@ -1,0 +1,188 @@
+{
+  "all_n_minus_one_query_witnesses_ambiguous": true,
+  "cases": [
+    {
+      "classical_basis_queries_sufficient": 1,
+      "dimension": 1,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 1,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n1_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 1,
+      "dimension": 1,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 1,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n1_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 2,
+      "dimension": 2,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 2,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n2_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 2,
+      "dimension": 2,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 2,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n2_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 4,
+      "dimension": 4,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 4,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n4_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 4,
+      "dimension": 4,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 4,
+      "independent_dense_hidden_phase_parity": true,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n4_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 8,
+      "dimension": 8,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 8,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n8_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 8,
+      "dimension": 8,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 8,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n8_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 16,
+      "dimension": 16,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 16,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n16_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 16,
+      "dimension": 16,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 16,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n16_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 32,
+      "dimension": 32,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 32,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n32_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 32,
+      "dimension": 32,
+      "direct_private_descriptor_scan_matches_final_boundary": true,
+      "direct_private_descriptor_scan_residue_accesses": 32,
+      "independent_dense_hidden_phase_parity": null,
+      "independent_factor_boundary_and_restoration_parity": true,
+      "oracle_id": "n32_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    }
+  ],
+  "classical_query_lower_bound_certificates": [
+    {
+      "dimension": 1,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 0,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "dimension": 2,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 1,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "dimension": 4,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 3,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "dimension": 8,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 7,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "dimension": 16,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 15,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "dimension": 32,
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 31,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_HAVE_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_LEAVES_A_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    }
+  ],
+  "imports_service_controller_or_predecessor": false,
+  "independent_classical_query_law": true,
+  "independent_dense_global_parity_dimensions1_2_4": true,
+  "independent_exact_power_basis_factor_reexecution": true,
+  "schema": "cat_cas.catvm_p5_tensor_factored_hidden_linear_phase_oracle_reference_seal_view.v1",
+  "source_sha256": "370bb60a84b7244dc96494c37f00737d79467211ca7eecd30649fc4371d21024",
+  "strongest_total_software_baseline_is_direct_descriptor_scan_O_N": true,
+  "varied_secret_controls": {
+    "all_zero_secret_exact_and_restored": true,
+    "mixed_secret_exact_and_restored": true,
+    "one_coordinate_perturbation_changes_only_that_boundary_coordinate": true,
+    "repeated_secret_exact_and_restored": true
+  }
+}
