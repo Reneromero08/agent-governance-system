@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`407d3576bf1497f664e953eec7d39b56bd2a9728`. The canonical per-milestone
+`87d9e49af9d676c22aa1914cf1d923c111e38049`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11916,3 +11916,44 @@ Fuse dynamic unit-power work directly into the ledger accumulator, without a
 standalone returned power value, and count every exact input, output,
 accumulator and ledger binding. Preserve the no-go if the identical classical
 recurrence retains the same law.
+
+## M225 fused dynamic unit power and persisting height no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_DYNAMIC_BINARY_PUBLIC_UNIT_POWER_FUSION_ELIMINATES_STANDALONE_POWER_RESULTS_AND_ONE_TERMINAL_FIELD_MULTIPLICATION_PER_NONZERO_FACTOR_APPLICATION_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM301426_TO300940_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_FUSED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_FUSED_COORDINATE_RECURRENCE_REMAINS
+```
+
+The accepted path fuses each public-unit binary power directly into its
+consumer and rejects every standalone-power helper. The primary case removes
+all 5,805 M224 terminal factor multiplications and executes 4,709 nonzero
+fused factor applications. Its declared exact live maximum nevertheless moves
+only from 301,426 to 300,940 bits, against 129,595 raw. All seven cases remain
+above raw and peak at `FUSED_DIRECT_TRACE_WEIGHT_POWER_ACCUMULATE` because the
+old accumulator, height-growing squared factor and product remain live.
+
+Production and a standalone implementation that imports none of M225--M221
+production match every normalized case/resource view and reuse section. The
+original residual, ledger and scratch backings restore exactly without reload;
+unrelated reuse reaches generation two and matches fresh state and boundary.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical fused dynamic binary
+unit-power coordinate recurrence. Fused-power intervals are source-complete,
+but retained projected-boundary liveness during inverse execution is not
+instrumented and whole-transaction live-payload completeness is not claimed.
+Excluded Python/runtime costs are not zero. No CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, catalytic inference or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_FUSED_LEDGER_ACCUMULATOR_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATING_DYNAMIC_SQUARED_POWER_FACTOR_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+Use direct repeated action by the fixed public unit to eliminate the growing
+squared factor. Count total exponent mass, descriptor payload and every exact
+step; retain zero power caches/tables and the identical classical recurrence.
