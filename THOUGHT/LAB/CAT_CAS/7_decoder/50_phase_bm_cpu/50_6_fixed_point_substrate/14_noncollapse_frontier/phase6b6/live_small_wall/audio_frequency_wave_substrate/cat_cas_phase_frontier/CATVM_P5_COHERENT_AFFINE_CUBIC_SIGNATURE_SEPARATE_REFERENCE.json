@@ -1,0 +1,397 @@
+{
+  "accepted_path_or_reference_stores5_to_width_amplitude_vector": false,
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          2,
+          2,
+          0,
+          1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY_W1",
+      "same_backings": true,
+      "width": 1
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          1,
+          -3,
+          -2,
+          -1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY_W2",
+      "same_backings": true,
+      "width": 2
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          2,
+          -2,
+          -2
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY_W3",
+      "same_backings": true,
+      "width": 3
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          1,
+          3,
+          1,
+          5
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY_W4",
+      "same_backings": true,
+      "width": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          -1,
+          -7,
+          -3,
+          1
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE_W4",
+      "same_backings": true,
+      "width": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          -1,
+          -7,
+          -3,
+          1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE_W4",
+      "same_backings": true,
+      "width": 4
+    }
+  ],
+  "controls": {
+    "all_cases_canonical_after_restoration": true,
+    "all_gate_semantic_oracles_match": true,
+    "all_quadratic_gauss_shams_match": true,
+    "missing_inverse_release_rejected": true,
+    "no_baseline_reload": true,
+    "omitting_shared_syndrome_z_consumer_changes_boundary": true,
+    "reordered_inverse_rejected_by_cursor": true,
+    "same_backing_restoration_and_reuse": true,
+    "same_id_changed_descriptor_rejected": true,
+    "stale_generation_rejected": true,
+    "wrong_program_digest_rejected": true,
+    "x_then_z_differs_from_z_then_x": true,
+    "zero_cubic_signature_degree_at_most_two": true
+  },
+  "gate_semantic_oracle_parity": {
+    "W1": true,
+    "W2": true
+  },
+  "implemented_classical_variable_elimination_uses_width_dependent_factor_tables": true,
+  "imports_production_service_client_or_m237": false,
+  "quadratic_gauss_shams": {
+    "W1": {
+      "cubic_absent": true,
+      "direct_final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          2,
+          2
+        ]
+      },
+      "gauss_final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          2,
+          2
+        ]
+      },
+      "gauss_parity": true
+    },
+    "W2": {
+      "cubic_absent": true,
+      "direct_final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "gauss_final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "gauss_parity": true
+    },
+    "W3": {
+      "cubic_absent": true,
+      "direct_final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          1,
+          0,
+          2,
+          2
+        ]
+      },
+      "gauss_final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          1,
+          0,
+          2,
+          2
+        ]
+      },
+      "gauss_parity": true
+    },
+    "W4": {
+      "cubic_absent": true,
+      "direct_final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      "gauss_final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      "gauss_parity": true
+    }
+  },
+  "result": "PASS_SEPARATE_REFERENCE_M247_AFFINE_CUBIC_SIGNATURE",
+  "streamed_scalar_baselines": {
+    "W1": {
+      "amplitude_vector_field_cells": 0,
+      "assignment_terms": 5,
+      "bag_table_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          2,
+          2,
+          0,
+          1
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "monomial_evaluations": 10,
+      "nonzero_monomials_per_assignment": 2,
+      "peak_assignment_cursor_residue_cells": 1,
+      "peak_field_accumulator_cells": 1
+    },
+    "W2": {
+      "amplitude_vector_field_cells": 0,
+      "assignment_terms": 25,
+      "bag_table_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          1,
+          -3,
+          -2,
+          -1
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "monomial_evaluations": 175,
+      "nonzero_monomials_per_assignment": 7,
+      "peak_assignment_cursor_residue_cells": 2,
+      "peak_field_accumulator_cells": 1
+    },
+    "W3": {
+      "amplitude_vector_field_cells": 0,
+      "assignment_terms": 125,
+      "bag_table_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          2,
+          -2,
+          -2
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "monomial_evaluations": 2250,
+      "nonzero_monomials_per_assignment": 18,
+      "peak_assignment_cursor_residue_cells": 3,
+      "peak_field_accumulator_cells": 1
+    },
+    "W4": {
+      "amplitude_vector_field_cells": 0,
+      "assignment_terms": 625,
+      "bag_table_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          1,
+          3,
+          1,
+          5
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "monomial_evaluations": 16250,
+      "nonzero_monomials_per_assignment": 26,
+      "peak_assignment_cursor_residue_cells": 4,
+      "peak_field_accumulator_cells": 1
+    }
+  },
+  "variable_elimination_baselines": {
+    "W1": {
+      "elimination_order": [
+        0
+      ],
+      "field_additions": 5,
+      "field_multiplications": 11,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          2,
+          2,
+          0,
+          1
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "observed_treewidth": 0,
+      "peak_live_factor_field_cells": 11,
+      "peak_single_bag_field_cells": 5,
+      "predicted_treewidth": 0,
+      "stores_amplitude_vector": false,
+      "stores_path_assignment_list": false
+    },
+    "W2": {
+      "elimination_order": [
+        0,
+        1
+      ],
+      "field_additions": 30,
+      "field_multiplications": 121,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          1,
+          -3,
+          -2,
+          -1
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "observed_treewidth": 1,
+      "peak_live_factor_field_cells": 100,
+      "peak_single_bag_field_cells": 25,
+      "predicted_treewidth": 1,
+      "stores_amplitude_vector": false,
+      "stores_path_assignment_list": false
+    },
+    "W3": {
+      "elimination_order": [
+        0,
+        1,
+        2
+      ],
+      "field_additions": 155,
+      "field_multiplications": 1441,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          2,
+          -2,
+          -2
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "observed_treewidth": 2,
+      "peak_live_factor_field_cells": 415,
+      "peak_single_bag_field_cells": 125,
+      "predicted_treewidth": 2,
+      "stores_amplitude_vector": false,
+      "stores_path_assignment_list": false
+    },
+    "W4": {
+      "elimination_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "field_additions": 780,
+      "field_multiplications": 6946,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          1,
+          3,
+          1,
+          5
+        ]
+      },
+      "inverse_or_restoration_work": 0,
+      "observed_treewidth": 3,
+      "peak_live_factor_field_cells": 995,
+      "peak_single_bag_field_cells": 125,
+      "predicted_treewidth": 3,
+      "stores_amplitude_vector": false,
+      "stores_path_assignment_list": false
+    }
+  }
+}
