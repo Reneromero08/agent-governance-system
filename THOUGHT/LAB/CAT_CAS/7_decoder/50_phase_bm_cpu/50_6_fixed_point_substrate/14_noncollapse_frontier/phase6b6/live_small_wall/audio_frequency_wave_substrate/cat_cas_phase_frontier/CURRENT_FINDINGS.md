@@ -12256,3 +12256,50 @@ vertices, with non-diagonal associator and braid-phase effects before final
 closure. It must not add M230/M231 scalar-rematerialization variants, relation
 tables, assignments, or answer-dependent compilation. The comparison remains
 the strongest sparse classical factor-graph contraction.
+
+## M232 analytic SU2 level-8 trivalent shared-channel block
+
+M232 realizes the selected representation change in the fundamental
+`Hom(1 tensor 1 tensor 1, 1)` sector. Exact trivalent admissibility leaves
+only channels `0` and `2`. A left trivalent vertex produces the actual
+two-cell internal message, and the right trivalent vertex consumes that same
+backing after the exact non-diagonal `F`, channel-diagonal braid, and inverse
+`F` sequence. The off-diagonal associator entries are nonzero; `F^2=I`, braid
+inverse, and Yang--Baxter hold exactly over `Q(zeta_40)`. Suppressing either
+channel, the F off-diagonal, or the braid phase changes both declared family
+boundaries. No fusion table or assignment expansion is materialized, and the
+channel cannot be projected.
+
+Only the contracted scalar crosses the boundary. The dependency-ordered
+inverse clears the contraction, applies `F`, inverse braid, `F`, and clears
+the left message. It restores the exact canonical state on the same two-cell
+channel and one-cell boundary backings, advances generation from one to two,
+and supports cross-family restored-carrier reuse without reload. A standalone
+ordinary-polynomial cyclotomic implementation reconstructs the complete
+network, controls, boundaries, and reuse. The sealed package and focused
+review support `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The fixed block does not provide leverage. It uses three persistent phase
+work backings and has a declared 15-field interval maximum. The strongest
+public-topology classical comparator precontracts `B=F R F` and streams the
+effective right row into one boundary backing, with a declared 12-field
+interval maximum. Both paths count public F/R coefficient rematerialization.
+These resource figures are `PACKAGE_SELF_REVIEW` and do not claim complete
+process liveness or runtime storage. The result proves a bounded, causal
+trivalent shared-channel relation, not CATVM custody, a distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, inference, or unbounded computation.
+
+Next:
+
+```text
+EXACT_GROWING_SU2_LEVEL8_TRIVALENT_RECOUPLING_NETWORK_SHARED_CHANNEL_CONTINUATION_RANK_OR_COMPACT_NATIVE_FUSION_CATEGORY_QUOTIENT_WITH_MATCHED_TREEWIDTH_OPTIMAL_CLASSICAL_CONTRACTION
+```
+
+This is one decisive growing-composition test, not a sequence of fixed M232
+families. If shared-channel continuation rank grows to the optimal classical
+factor-graph interface, retire the recoupling route. A compact transferable
+quotient must preserve unresolved channels, exact restoration/reuse, and beat
+the strongest treewidth-aware classical representation to advance the phase
+resource claim.

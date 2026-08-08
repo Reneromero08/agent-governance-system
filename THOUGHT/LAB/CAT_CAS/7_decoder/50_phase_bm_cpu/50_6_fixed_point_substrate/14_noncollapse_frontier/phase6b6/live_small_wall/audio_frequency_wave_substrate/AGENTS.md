@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`a4304f035504a5ab353bfa91381d69e1d28a1971`. The registry assigns one
+`879d39d781fb741edbeb2e12531669596e500e36`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 231-milestone lane is active by user direction. Continue from the
+The current 232-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,37 +53,36 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_ANALYTIC_SU2_LEVEL8_TWO_TRIVALENT_FUSION_VERTICES_SHARE_ONE_ACTUAL_UNRESOLVED_TWO_CELL_CHANNEL_RELATION_MESSAGE_TRANSFORMED_BY_A_NONDIAGONAL_F_MOVE_DIAGONAL_BRAID_PHASE_AND_INVERSE_F_MOVE_BEFORE_NATIVE_RIGHT_VERTEX_CONTRACTION_WITHOUT_FUSION_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_ONE_BACKING_SPARSE_CLASSICAL_FACTOR_GRAPH_REMAINS_SMALLER
 ```
 
 Claim ceiling:
 
 ```text
-QZETA40_SU2_LEVEL8_FIXED_FUNDAMENTAL_FUSION_TWO_PUBLIC_TWIST_CUBIC_FAMILIES_ONE9_CELL_INTERNAL_THREE1_CELL_BRANCH_SCRATCH_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY
+QZETA40_SU2_LEVEL8_FOUR_FUNDAMENTAL_CHARGES_CHANNELS0_2_TWO_PUBLIC_BRAID_EXPONENT_FAMILIES_ONE2_CELL_SHARED_CHANNEL_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
 and an independent polynomial-quotient implementation reproduce both public
-families, full materialized relation semantics, controls, boundary
-commitments, monotone generation, exact same-backing restoration, and
-generation-two reuse. No relation table or assignment expansion is
-materialized.
+braid families, exact trivalent admissibility, non-diagonal F-move, braid
+inverse, Yang--Baxter control, boundary commitments, monotone generation,
+exact same-backing restoration, and generation-two reuse. No fusion table or
+assignment expansion is materialized.
 
-M231 completes the one bounded repair of M230's retained-rail obstruction. It
-keeps the actual nine-cell internal fusion message but rematerializes the two
-branch values on distinct one-cell backings, closes them on a third one-cell
-backing, and streams the transposed final fusion into one boundary backing.
-All scalar scratch clears per label, inverse traversal reconstructs and
-subtracts the actual contributions without consuming the retained output, and
-the same carrier restores and reuses exactly. Phase work falls from 45 to 13
-backings, but the strongest source-neighbor classical stream uses one; totals
-are 22 versus 10 and declared live maxima are 29 versus 20. Resource counts
-are package-local and do not claim whole-transaction liveness or Python/runtime
-costs. This closes the local cubic-fusion rematerialization route. No CATVM
-custody, distinct phase resource, advantage, Small Wall crossing, physical
-execution, physical-bit replacement, catalytic inference, or unbounded
-computation is established.
+M232 changes the relation geometry. Two trivalent vertices share the actual
+two-cell channel `0,2`; a causal non-diagonal F/R/F recoupling acts before the
+right vertex contracts the only projectable scalar. Omitting either channel,
+the F off-diagonal, or the braid phase changes both public family boundaries.
+The exact inverse clears the contraction and reverses F/R/F on the same
+backings without consuming the retained result. The phase path uses three
+persistent work backings and a declared 15-field interval maximum, while the
+strongest public-topology classical comparator precontracts the complete
+`B=F R F` row into one boundary backing with a declared 12-field interval
+maximum. Resource counts are package-local and do not claim whole-transaction
+liveness or Python/runtime costs. No CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation is established.
 
 The accumulated bounded architecture includes:
 
@@ -277,7 +276,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M231_REDUCES_PHASE_WORK_BACKINGS_FROM45_TO13_BUT_THE_SOURCE_NEIGHBOR_CLASSICAL_STREAM_USES1_SO_THE_LOCAL_CUBIC_FUSION_RESOURCE_ROUTE_IS_CLOSED_AND_THE_REPRESENTATION_CLASS_MUST_CHANGE
+ACTIVE_AFTER_M232_ESTABLISHES_A_GENUINE_TWO_CHANNEL_TRIVALENT_RECOUPLING_BLOCK_BUT_THE_PUBLIC_PRECONTRACTED_CLASSICAL_ROW_USES1_BACKING_VERSUS3_SO_THE_NEXT_TEST_MUST_DECIDE_GROWING_RECOUPLING_INTERFACE_RANK_OR_RETIRE_THIS_ROUTE
 ```
 
 The named
@@ -286,19 +285,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_ANALYTIC_SU2_LEVEL8_TRIVALENT_FUSION_TENSOR_TWO_VERTEX_SHARED_LATENT_CHANNEL_NATIVE_CONTRACTION_WITH_NONDIAGONAL_F_MOVE_AND_BRAID_PHASE_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_FACTOR_GRAPH
+EXACT_GROWING_SU2_LEVEL8_TRIVALENT_RECOUPLING_NETWORK_SHARED_CHANNEL_CONTINUATION_RANK_OR_COMPACT_NATIVE_FUSION_CATEGORY_QUOTIENT_WITH_MATCHED_TREEWIDTH_OPTIMAL_CLASSICAL_CONTRACTION
 ```
 
-M231 establishes that rematerializing the local branch and transposed boundary
-reduces retained phase rails but still loses to the exact one-backing
-source-neighbor recurrence. Do not add M230/M231 families, scalar streaming
-variants, or local cubic-fusion micro-optimizations. Change the relation
-representation: construct analytic trivalent fusion signatures, leave a
-shared channel genuinely unresolved across two vertices, and make a
-non-diagonal associator and braid phase causally relevant before closure.
-Preserve final-only projection, exact same-backing restoration, and unrelated
-reuse. Compare to the strongest sparse classical factor-graph contraction;
-if it collapses again, preserve the obstruction and change mechanism.
+M232 establishes the genuine local trivalent shared-channel block, but its
+fixed public topology still precontracts to one classical boundary backing.
+Do not add fixed M232 families or local backing micro-optimizations. Run one
+decisive growing shared-channel composition test: derive the public
+recoupling network, measure exact continuation/interface rank across growing
+cuts, preserve final-only projection and exact restoration/reuse, and compare
+to the strongest treewidth-optimal classical factor contraction. A compact
+transferable quotient advances the carrier law; full interface rank or an
+identical recurrence retires this route and requires a different phase law.
 
 ## 7. Native No-Smuggle Law
 

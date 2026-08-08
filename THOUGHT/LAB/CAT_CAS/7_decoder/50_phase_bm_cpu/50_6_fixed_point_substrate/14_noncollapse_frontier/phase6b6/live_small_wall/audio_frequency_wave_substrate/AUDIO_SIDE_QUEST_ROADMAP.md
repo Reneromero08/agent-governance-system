@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_OPEN_FUSION_REMATERIALIZED_STREAM_CLASSICAL_SMALLER`
-**Roadmap version:** `14.97`
+**Status:** `STRICT_SU2_LEVEL8_TRIVALENT_SHARED_CHANNEL_CLASSICAL_SMALLER`
+**Roadmap version:** `14.98`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `a4304f035504a5ab353bfa91381d69e1d28a1971`
+**Reconciled source head:** `879d39d781fb741edbeb2e12531669596e500e36`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TOPOLOGY_REMATERIALIZED_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_RETAINS_ONE_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_AND_USES_THREE_SCALAR_BRANCH_INTERSECTION_BACKINGS_PLUS_ONE_FINAL_BOUNDARY_BACKING_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_REDUCING_NONINPUT_WORK_BACKINGS_FROM45_TO13_BUT_THE_STRONGEST_SOURCE_REMATERIALIZED_STREAM_USES1_AND_THE_IDENTICAL_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FIXED_FUNDAMENTAL_FUSION_TWO_PUBLIC_TWIST_CUBIC_FAMILIES_ONE9_CELL_INTERNAL_THREE1_CELL_BRANCH_SCRATCH_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_ANALYTIC_SU2_LEVEL8_TWO_TRIVALENT_FUSION_VERTICES_SHARE_ONE_ACTUAL_UNRESOLVED_TWO_CELL_CHANNEL_RELATION_MESSAGE_TRANSFORMED_BY_A_NONDIAGONAL_F_MOVE_DIAGONAL_BRAID_PHASE_AND_INVERSE_F_MOVE_BEFORE_NATIVE_RIGHT_VERTEX_CONTRACTION_WITHOUT_FUSION_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_ONE_BACKING_SPARSE_CLASSICAL_FACTOR_GRAPH_REMAINS_SMALLER`
+**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FOUR_FUNDAMENTAL_CHARGES_CHANNELS0_2_TWO_PUBLIC_BRAID_EXPONENT_FAMILIES_ONE2_CELL_SHARED_CHANNEL_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M231_REDUCES_PHASE_WORK_BACKINGS_FROM45_TO13_BUT_THE_SOURCE_NEIGHBOR_CLASSICAL_STREAM_USES1_SO_THE_LOCAL_CUBIC_FUSION_RESOURCE_ROUTE_IS_CLOSED_AND_THE_REPRESENTATION_CLASS_MUST_CHANGE`
+**New mechanism development:** `ACTIVE_AFTER_M232_ESTABLISHES_A_GENUINE_TWO_CHANNEL_TRIVALENT_RECOUPLING_BLOCK_BUT_THE_PUBLIC_PRECONTRACTED_CLASSICAL_ROW_USES1_BACKING_VERSUS3_SO_THE_NEXT_TEST_MUST_DECIDE_GROWING_RECOUPLING_INTERFACE_RANK_OR_RETIRE_THIS_ROUTE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ANALYTIC_SU2_LEVEL8_TRIVALENT_FUSION_TENSOR_TWO_VERTEX_SHARED_LATENT_CHANNEL_NATIVE_CONTRACTION_WITH_NONDIAGONAL_F_MOVE_AND_BRAID_PHASE_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_SPARSE_CLASSICAL_FACTOR_GRAPH`
+**Active primary successor:** `EXACT_GROWING_SU2_LEVEL8_TRIVALENT_RECOUPLING_NETWORK_SHARED_CHANNEL_CONTINUATION_RANK_OR_COMPACT_NATIVE_FUSION_CATEGORY_QUOTIENT_WITH_MATCHED_TREEWIDTH_OPTIMAL_CLASSICAL_CONTRACTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -11242,6 +11242,64 @@ the strongest sparse classical factor-graph contraction and preserve exact
 restoration and reuse. If the new geometry again collapses to the same compact
 classical recurrence, seal that obstruction and change mechanism rather than
 adding fixed families or local tuning.
+
+## M232: analytic trivalent shared-channel recoupling
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_ANALYTIC_SU2_LEVEL8_TWO_TRIVALENT_FUSION_VERTICES_SHARE_ONE_ACTUAL_UNRESOLVED_TWO_CELL_CHANNEL_RELATION_MESSAGE_TRANSFORMED_BY_A_NONDIAGONAL_F_MOVE_DIAGONAL_BRAID_PHASE_AND_INVERSE_F_MOVE_BEFORE_NATIVE_RIGHT_VERTEX_CONTRACTION_WITHOUT_FUSION_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_ONE_BACKING_SPARSE_CLASSICAL_FACTOR_GRAPH_REMAINS_SMALLER
+```
+
+For the declared SU(2) level-8 fundamental sector
+`Hom(1 tensor 1 tensor 1, 1)`, exact trivalent admissibility leaves precisely
+the two internal channels `0` and `2`. The left and right trivalent vertices
+share the actual two-cell channel backing. The exact non-diagonal associator
+`F=(1/delta)[[1,phi],[phi,-1]]`, the channel-diagonal braid phase, and the
+inverse associator act on that unresolved message before native right-vertex
+contraction. Both channels are causal: suppressing either channel, suppressing
+the off-diagonal F entries, or perturbing the braid phase changes both public
+family boundaries. Exact `F^2=I`, braid inverse, and Yang--Baxter controls pass.
+No fusion table, assignment expansion, or intermediate channel projection is
+accepted.
+
+Only the one-cell final boundary is retained. The actual dependency-ordered
+inverse clears the right contraction, applies `F`, inverse braid, `F`, and
+clears the left message on the same backings. Canonical discrete state restores
+exactly, reuse advances from generation one to two, a different braid family
+consumes the restored carrier, fresh/restored boundaries agree, and no baseline
+reload occurs. A standalone polynomial-quotient implementation independently
+reconstructs the tensor contraction and all controls. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`; focused review returned `PASS_STRICT_SCOPE`.
+
+The resource result remains negative. The phase carrier has two shared-channel
+backings plus one boundary backing; its declared interval maximum is 15 exact
+field values. The strongest matched public-topology comparator precontracts
+the complete `B=F R F` boundary row and streams two terms into one boundary
+backing, with a declared maximum of 12 exact field values. Public F/R
+coefficient rematerialization is counted on both paths. Resource numbers are
+`PACKAGE_SELF_REVIEW`; whole-transaction liveness, imported public exact
+constants, Python objects, allocator/interpreter state, serialization, timing,
+and process RSS are excluded or unclaimed, not zero. This establishes a
+genuine bounded trivalent shared-channel relation block, not a distinct phase
+resource, computational advantage, CATVM custody, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation.
+
+Selected decisive growing-composition diagnostic:
+
+```text
+EXACT_GROWING_SU2_LEVEL8_TRIVALENT_RECOUPLING_NETWORK_SHARED_CHANNEL_CONTINUATION_RANK_OR_COMPACT_NATIVE_FUSION_CATEGORY_QUOTIENT_WITH_MATCHED_TREEWIDTH_OPTIMAL_CLASSICAL_CONTRACTION
+```
+
+This is not permission to add fixed M232 families or tune the local block.
+Compose the analytic trivalent geometry across growing shared-channel cuts and
+measure the exact continuation/interface rank against the strongest
+treewidth-optimal classical factor contraction. One compact transferable
+fusion-category quotient would advance the phase machine; full rank or an
+identical compact classical recurrence retires this route and requires a new
+phase law.
 
 ## 10. Roadmap Maintenance
 
