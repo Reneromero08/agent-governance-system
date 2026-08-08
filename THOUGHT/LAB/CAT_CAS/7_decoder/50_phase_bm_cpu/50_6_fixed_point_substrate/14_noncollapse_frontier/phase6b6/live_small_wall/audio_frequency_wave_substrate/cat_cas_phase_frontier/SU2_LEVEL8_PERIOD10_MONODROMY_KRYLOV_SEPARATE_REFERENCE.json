@@ -1,0 +1,724 @@
+{
+  "all_cases_full_at_both_distinct_split_primes": true,
+  "cases": [
+    {
+      "family": 0,
+      "fusion_path_cells": 2,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            269,
+            411,
+            319,
+            402,
+            154,
+            402,
+            476,
+            410,
+            372,
+            640,
+            372
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 2
+        },
+        {
+          "first_terms": [
+            1,
+            39,
+            799,
+            476,
+            765,
+            494,
+            765,
+            18,
+            798,
+            842,
+            880,
+            842
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 2
+        }
+      ],
+      "strands": 4
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 5,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            509,
+            560,
+            427,
+            338,
+            477,
+            127,
+            435,
+            209,
+            431,
+            396,
+            485
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 5
+        },
+        {
+          "first_terms": [
+            1,
+            522,
+            611,
+            81,
+            263,
+            349,
+            788,
+            502,
+            446,
+            228,
+            5,
+            191
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 5
+        }
+      ],
+      "strands": 6
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 14,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            608,
+            519,
+            593,
+            56,
+            82,
+            196,
+            424,
+            76,
+            200,
+            305,
+            92
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 14
+        },
+        {
+          "first_terms": [
+            1,
+            418,
+            696,
+            640,
+            140,
+            781,
+            680,
+            252,
+            686,
+            635,
+            161,
+            346
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 14
+        }
+      ],
+      "strands": 8
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 42,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            149,
+            185,
+            173,
+            248,
+            543,
+            543,
+            574,
+            383,
+            181,
+            324,
+            125
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 42
+        },
+        {
+          "first_terms": [
+            1,
+            712,
+            524,
+            225,
+            759,
+            46,
+            252,
+            443,
+            431,
+            385,
+            129,
+            395
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 42
+        }
+      ],
+      "strands": 10
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 132,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            568,
+            378,
+            455,
+            228,
+            298,
+            408,
+            347,
+            217,
+            602,
+            252,
+            590
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 132
+        },
+        {
+          "first_terms": [
+            1,
+            232,
+            771,
+            813,
+            413,
+            186,
+            200,
+            727,
+            464,
+            549,
+            104,
+            542
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 132
+        }
+      ],
+      "strands": 12
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 429,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            144,
+            81,
+            493,
+            552,
+            52,
+            32,
+            215,
+            321,
+            91,
+            503,
+            11
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 429
+        },
+        {
+          "first_terms": [
+            1,
+            816,
+            780,
+            620,
+            540,
+            300,
+            632,
+            236,
+            846,
+            373,
+            551,
+            852
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 429
+        }
+      ],
+      "strands": 14
+    },
+    {
+      "family": 0,
+      "fusion_path_cells": 1430,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            93,
+            579,
+            636,
+            594,
+            119,
+            479,
+            101,
+            287,
+            86,
+            86,
+            180
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 1430
+        },
+        {
+          "first_terms": [
+            1,
+            663,
+            866,
+            215,
+            736,
+            517,
+            326,
+            269,
+            743,
+            272,
+            583,
+            609
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 1430
+        }
+      ],
+      "strands": 16
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 2,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            269,
+            411,
+            319,
+            402,
+            154,
+            402,
+            476,
+            410,
+            372,
+            640,
+            372
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 2
+        },
+        {
+          "first_terms": [
+            1,
+            39,
+            799,
+            476,
+            765,
+            494,
+            765,
+            18,
+            798,
+            842,
+            880,
+            842
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 2
+        }
+      ],
+      "strands": 4
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 5,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            302,
+            292,
+            366,
+            350,
+            40,
+            199,
+            633,
+            556,
+            555,
+            529,
+            408
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 5
+        },
+        {
+          "first_terms": [
+            1,
+            723,
+            36,
+            136,
+            392,
+            565,
+            587,
+            647,
+            297,
+            409,
+            485,
+            404
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 5
+        }
+      ],
+      "strands": 6
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 14,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            23,
+            163,
+            262,
+            454,
+            302,
+            232,
+            275,
+            425,
+            509,
+            485,
+            5
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 14
+        },
+        {
+          "first_terms": [
+            1,
+            829,
+            866,
+            724,
+            292,
+            292,
+            551,
+            666,
+            28,
+            471,
+            357,
+            175
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 14
+        }
+      ],
+      "strands": 8
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 42,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            40,
+            397,
+            513,
+            291,
+            185,
+            149,
+            20,
+            507,
+            362,
+            322,
+            573
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 42
+        },
+        {
+          "first_terms": [
+            1,
+            276,
+            375,
+            494,
+            446,
+            127,
+            767,
+            164,
+            641,
+            768,
+            763,
+            357
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 42
+        }
+      ],
+      "strands": 10
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 132,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            568,
+            378,
+            455,
+            228,
+            298,
+            408,
+            347,
+            217,
+            602,
+            252,
+            590
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 132
+        },
+        {
+          "first_terms": [
+            1,
+            232,
+            771,
+            813,
+            413,
+            186,
+            200,
+            727,
+            464,
+            549,
+            104,
+            542
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 132
+        }
+      ],
+      "strands": 12
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 429,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            213,
+            329,
+            103,
+            132,
+            134,
+            497,
+            57,
+            629,
+            396,
+            184,
+            386
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 429
+        },
+        {
+          "first_terms": [
+            1,
+            585,
+            330,
+            553,
+            314,
+            93,
+            469,
+            202,
+            114,
+            806,
+            818,
+            427
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 429
+        }
+      ],
+      "strands": 14
+    },
+    {
+      "family": 1,
+      "fusion_path_cells": 1430,
+      "prime_results": [
+        {
+          "first_terms": [
+            1,
+            104,
+            539,
+            260,
+            139,
+            458,
+            575,
+            287,
+            415,
+            33,
+            560,
+            470
+          ],
+          "holdout_violations": 0,
+          "prime": 641,
+          "root40": 366,
+          "scalar_recurrence_degree": 1430
+        },
+        {
+          "first_terms": [
+            1,
+            784,
+            625,
+            652,
+            116,
+            867,
+            877,
+            437,
+            247,
+            123,
+            58,
+            623
+          ],
+          "holdout_violations": 0,
+          "prime": 881,
+          "root40": 832,
+          "scalar_recurrence_degree": 1430
+        }
+      ],
+      "strands": 16
+    }
+  ],
+  "claim_limits": {
+    "arbitrary_braid_program_lower_bound": false,
+    "computational_advantage": false,
+    "declared_period10_two_family_scope_only": true,
+    "distinct_phase_resource_established": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "distinct_split_primes": [
+    641,
+    881
+  ],
+  "exact_primary_boundary_parity": {
+    "agreement": true,
+    "boundary_commitment": "beb4545484e23f999a1073f8b6d5b2346d300f33250dbddfefb3353d64dca80f",
+    "exact_modular_boundaries": {
+      "641": 93,
+      "881": 663
+    },
+    "separate_reference_first_period_boundaries": {
+      "641": 93,
+      "881": 663
+    }
+  },
+  "exact_primary_boundary_verification_work": {
+    "boundary_commitment_hashes": 0,
+    "field_additions": 164450,
+    "field_multiplications": 507650,
+    "forward_operations": 150,
+    "inverse_operations": 0,
+    "paired_local_blocks": 50050,
+    "path_labels_rematerialized": 4497350,
+    "path_rank_calls": 50050,
+    "path_unrank_calls": 214500,
+    "peak_carrier_field_cells": 1430,
+    "peak_carrier_payload_bits": 304294,
+    "peak_local_field_scratch_cells": 8,
+    "peak_nonzero_carrier_field_cells": 1430,
+    "peak_streamed_path_label_cells": 34,
+    "port_leases": 0,
+    "port_releases": 0,
+    "public_descriptor_hashes": 0,
+    "public_descriptor_integers_hashed": 0,
+    "scalar_local_blocks": 14300,
+    "state_commitment_field_cells_hashed": 0,
+    "state_commitment_hashes": 0,
+    "topology_count_reads": 4923490,
+    "zero_temperley_lieb_blocks": 100100
+  },
+  "reference_algorithm": "BITCODED_WALK_ENUMERATION_STRUCTURAL_KIND_PEER_LOCAL_ACTION_AND_INDEPENDENT_SCALAR_RECURRENCE",
+  "reference_imports_m217_production": false,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "cat_cas.su2_level8_period10_monodromy_krylov_separate_reference.v1",
+  "source_dependencies": {
+    "m214_production_sha256": "bc54076303fd12d57d9b57974832d451da603e123ea550f2312f81ad67bd9b11",
+    "separate_reference_core_sha256": "92abca6012552b7301708281b4a7ac0ef60070efe8ba47eb651004aa66a9587f"
+  },
+  "terminal": false,
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
