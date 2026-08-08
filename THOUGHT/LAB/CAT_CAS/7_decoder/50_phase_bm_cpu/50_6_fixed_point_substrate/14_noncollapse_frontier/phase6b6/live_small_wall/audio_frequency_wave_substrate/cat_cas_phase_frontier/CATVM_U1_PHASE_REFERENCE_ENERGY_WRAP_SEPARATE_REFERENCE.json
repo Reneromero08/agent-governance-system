@@ -1,0 +1,1487 @@
+{
+  "analytic_boundaries_and_minors": {
+    "L16_H": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            7,
+            16
+          ],
+          "sqrt2": [
+            1,
+            32
+          ]
+        },
+        "p0": {
+          "rational": [
+            17,
+            32
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            15,
+            32
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -1,
+          32
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L16_RATIONAL_3_4_5": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            47,
+            100
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            3,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -3,
+          100
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L2_H": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            0,
+            1
+          ],
+          "sqrt2": [
+            1,
+            4
+          ]
+        },
+        "p0": {
+          "rational": [
+            3,
+            4
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            1,
+            4
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -1,
+          4
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L2_RATIONAL_3_4_5": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            17,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            8,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -6,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L4_H": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            1,
+            4
+          ],
+          "sqrt2": [
+            1,
+            8
+          ]
+        },
+        "p0": {
+          "rational": [
+            5,
+            8
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            3,
+            8
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -1,
+          8
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L4_RATIONAL_3_4_5": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            13,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            12,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -3,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L8_H": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            3,
+            8
+          ],
+          "sqrt2": [
+            1,
+            16
+          ]
+        },
+        "p0": {
+          "rational": [
+            9,
+            16
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            7,
+            16
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -1,
+          16
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    },
+    "L8_RATIONAL_3_4_5": {
+      "boundary": {
+        "coherence": {
+          "rational": [
+            23,
+            50
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            14,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "minor_nonzero": true,
+      "open_schmidt_minor": {
+        "rational": [
+          -3,
+          50
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "bilateral_ideal": {
+    "nonzero_constant_modulus_partial_norm_squared": {
+      "1": 3,
+      "16": 33,
+      "2": 5,
+      "4": 9,
+      "8": 17
+    },
+    "nonzero_shift_eigenvector_in_l2_z": false,
+    "proof_law": "C_N_PLUS1_EQUALS_LAMBDA_C_N_WITH_ABS_LAMBDA1_IMPLIES_CONSTANT_NONZERO_MODULUS_AND_SUM_OVER_Z_DIVERGES",
+    "shift_eigenrelation_forces_equal_coefficient_modulus": true
+  },
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            0,
+            1
+          ],
+          "sqrt2": [
+            1,
+            4
+          ]
+        },
+        "p0": {
+          "rational": [
+            3,
+            4
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            1,
+            4
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "H",
+      "generation": 1,
+      "joint_carrier_commitment": "870701afbb3af77975dd934db1e3d9d3f4c5fd281975b465ffb0391fd12db1d7",
+      "joint_field_cells": 4,
+      "length": 2,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "PRIMARY",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 6,
+        "boundary_coherence_multiplications": 2,
+        "boundary_square_multiplications": 4,
+        "forward_field_additions": 2,
+        "forward_field_multiplications": 4,
+        "forward_fixed_energy_pair_updates": 1,
+        "inverse_field_additions": 2,
+        "inverse_field_multiplications": 4,
+        "inverse_fixed_energy_pair_updates": 1,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            17,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            8,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 2,
+      "joint_carrier_commitment": "870701afbb3af77975dd934db1e3d9d3f4c5fd281975b465ffb0391fd12db1d7",
+      "joint_field_cells": 4,
+      "length": 2,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "REUSE",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 6,
+        "boundary_coherence_multiplications": 2,
+        "boundary_square_multiplications": 4,
+        "forward_field_additions": 2,
+        "forward_field_multiplications": 4,
+        "forward_fixed_energy_pair_updates": 1,
+        "inverse_field_additions": 2,
+        "inverse_field_multiplications": 4,
+        "inverse_fixed_energy_pair_updates": 1,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            17,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            8,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 1,
+      "joint_carrier_commitment": "870701afbb3af77975dd934db1e3d9d3f4c5fd281975b465ffb0391fd12db1d7",
+      "joint_field_cells": 4,
+      "length": 2,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "FRESH",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 6,
+        "boundary_coherence_multiplications": 2,
+        "boundary_square_multiplications": 4,
+        "forward_field_additions": 2,
+        "forward_field_multiplications": 4,
+        "forward_fixed_energy_pair_updates": 1,
+        "inverse_field_additions": 2,
+        "inverse_field_multiplications": 4,
+        "inverse_fixed_energy_pair_updates": 1,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            1,
+            4
+          ],
+          "sqrt2": [
+            1,
+            8
+          ]
+        },
+        "p0": {
+          "rational": [
+            5,
+            8
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            3,
+            8
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "H",
+      "generation": 1,
+      "joint_carrier_commitment": "deae653cd332114a3b0ee8c46c8e479f42980f3da3eec5904001bae3c82296e1",
+      "joint_field_cells": 8,
+      "length": 4,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "PRIMARY",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 12,
+        "boundary_coherence_multiplications": 4,
+        "boundary_square_multiplications": 8,
+        "forward_field_additions": 6,
+        "forward_field_multiplications": 12,
+        "forward_fixed_energy_pair_updates": 3,
+        "inverse_field_additions": 6,
+        "inverse_field_multiplications": 12,
+        "inverse_fixed_energy_pair_updates": 3,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            13,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            12,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 2,
+      "joint_carrier_commitment": "deae653cd332114a3b0ee8c46c8e479f42980f3da3eec5904001bae3c82296e1",
+      "joint_field_cells": 8,
+      "length": 4,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "REUSE",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 12,
+        "boundary_coherence_multiplications": 4,
+        "boundary_square_multiplications": 8,
+        "forward_field_additions": 6,
+        "forward_field_multiplications": 12,
+        "forward_fixed_energy_pair_updates": 3,
+        "inverse_field_additions": 6,
+        "inverse_field_multiplications": 12,
+        "inverse_fixed_energy_pair_updates": 3,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            13,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            12,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 1,
+      "joint_carrier_commitment": "deae653cd332114a3b0ee8c46c8e479f42980f3da3eec5904001bae3c82296e1",
+      "joint_field_cells": 8,
+      "length": 4,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "FRESH",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 12,
+        "boundary_coherence_multiplications": 4,
+        "boundary_square_multiplications": 8,
+        "forward_field_additions": 6,
+        "forward_field_multiplications": 12,
+        "forward_fixed_energy_pair_updates": 3,
+        "inverse_field_additions": 6,
+        "inverse_field_multiplications": 12,
+        "inverse_fixed_energy_pair_updates": 3,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            3,
+            8
+          ],
+          "sqrt2": [
+            1,
+            16
+          ]
+        },
+        "p0": {
+          "rational": [
+            9,
+            16
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            7,
+            16
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "H",
+      "generation": 1,
+      "joint_carrier_commitment": "ae019dc86d1f4edcd72540cb15a299e3357cdca611a32c3f53e77719c92c8ff5",
+      "joint_field_cells": 16,
+      "length": 8,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "PRIMARY",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 24,
+        "boundary_coherence_multiplications": 8,
+        "boundary_square_multiplications": 16,
+        "forward_field_additions": 14,
+        "forward_field_multiplications": 28,
+        "forward_fixed_energy_pair_updates": 7,
+        "inverse_field_additions": 14,
+        "inverse_field_multiplications": 28,
+        "inverse_fixed_energy_pair_updates": 7,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            23,
+            50
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            14,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 2,
+      "joint_carrier_commitment": "ae019dc86d1f4edcd72540cb15a299e3357cdca611a32c3f53e77719c92c8ff5",
+      "joint_field_cells": 16,
+      "length": 8,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "REUSE",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 24,
+        "boundary_coherence_multiplications": 8,
+        "boundary_square_multiplications": 16,
+        "forward_field_additions": 14,
+        "forward_field_multiplications": 28,
+        "forward_fixed_energy_pair_updates": 7,
+        "inverse_field_additions": 14,
+        "inverse_field_multiplications": 28,
+        "inverse_fixed_energy_pair_updates": 7,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            23,
+            50
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            11,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            14,
+            25
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 1,
+      "joint_carrier_commitment": "ae019dc86d1f4edcd72540cb15a299e3357cdca611a32c3f53e77719c92c8ff5",
+      "joint_field_cells": 16,
+      "length": 8,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "FRESH",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 24,
+        "boundary_coherence_multiplications": 8,
+        "boundary_square_multiplications": 16,
+        "forward_field_additions": 14,
+        "forward_field_multiplications": 28,
+        "forward_fixed_energy_pair_updates": 7,
+        "inverse_field_additions": 14,
+        "inverse_field_multiplications": 28,
+        "inverse_fixed_energy_pair_updates": 7,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            7,
+            16
+          ],
+          "sqrt2": [
+            1,
+            32
+          ]
+        },
+        "p0": {
+          "rational": [
+            17,
+            32
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            15,
+            32
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "H",
+      "generation": 1,
+      "joint_carrier_commitment": "161aa5e1d89b784ede6b296a6f732babf59e6fb2942bb26eee673fcffde8fd27",
+      "joint_field_cells": 32,
+      "length": 16,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "PRIMARY",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 48,
+        "boundary_coherence_multiplications": 16,
+        "boundary_square_multiplications": 32,
+        "forward_field_additions": 30,
+        "forward_field_multiplications": 60,
+        "forward_fixed_energy_pair_updates": 15,
+        "inverse_field_additions": 30,
+        "inverse_field_multiplications": 60,
+        "inverse_fixed_energy_pair_updates": 15,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            47,
+            100
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            3,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 2,
+      "joint_carrier_commitment": "161aa5e1d89b784ede6b296a6f732babf59e6fb2942bb26eee673fcffde8fd27",
+      "joint_field_cells": 32,
+      "length": 16,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "REUSE",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 48,
+        "boundary_coherence_multiplications": 16,
+        "boundary_square_multiplications": 32,
+        "forward_field_additions": 30,
+        "forward_field_multiplications": 60,
+        "forward_fixed_energy_pair_updates": 15,
+        "inverse_field_additions": 30,
+        "inverse_field_multiplications": 60,
+        "inverse_fixed_energy_pair_updates": 15,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "boundary": {
+        "coherence": {
+          "rational": [
+            47,
+            100
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p0": {
+          "rational": [
+            2,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        },
+        "p1": {
+          "rational": [
+            3,
+            5
+          ],
+          "sqrt2": [
+            0,
+            1
+          ]
+        }
+      },
+      "canonical_after_restoration": true,
+      "gate": "RATIONAL_3_4_5",
+      "generation": 1,
+      "joint_carrier_commitment": "161aa5e1d89b784ede6b296a6f732babf59e6fb2942bb26eee673fcffde8fd27",
+      "joint_field_cells": 32,
+      "length": 16,
+      "retained_final_boundary_field_cells_during_inverse": 3,
+      "run_kind": "FRESH",
+      "same_joint_backing": true,
+      "work": {
+        "boundary_accumulations": 48,
+        "boundary_coherence_multiplications": 16,
+        "boundary_square_multiplications": 32,
+        "forward_field_additions": 30,
+        "forward_field_multiplications": 60,
+        "forward_fixed_energy_pair_updates": 15,
+        "inverse_field_additions": 30,
+        "inverse_field_multiplications": 60,
+        "inverse_fixed_energy_pair_updates": 15,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "claim_limits": {
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "general_coherence_catalyst_no_go": false,
+    "physical_energy_conservation": false,
+    "physical_phase_reference": false,
+    "small_wall_crossed": false,
+    "unbounded_catalytic_computation": false
+  },
+  "controls": {
+    "all_cyclic_basis_states_restore_under_exact_inverse": true,
+    "all_cyclic_states_factorize_exactly": true,
+    "all_cyclic_wrap_and_commutator_witnesses_nonzero": true,
+    "all_dephased_reference_coherences_zero": true,
+    "all_open_basis_states_restore_under_exact_inverse": true,
+    "all_open_schmidt_minors_nonzero": true,
+    "all_open_transitions_preserve_formal_total_number": true,
+    "all_reuse_generation2_fresh_generation1": true,
+    "all_streamed_boundaries_match_closed_form": true,
+    "all_transactions_restore_same_backing": true,
+    "missing_inverse_fails_restoration": true,
+    "premature_projection_rejected": true,
+    "reordered_h_and_pair_reflection_inverse_fails_restoration": true,
+    "same_id_changed_descriptor_rejected": true,
+    "stale_generation_rejected": true,
+    "wrong_inverse_fails_restoration": true,
+    "wrong_owner_rejected": true,
+    "wrong_program_rejected": true
+  },
+  "cyclic_sham": {
+    "L16_H": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          128,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          8,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          1,
+          32
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 16
+    },
+    "L16_RATIONAL_3_4_5": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          4096,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          256,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          1,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 16
+    },
+    "L2_H": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          2,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          1,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          1,
+          4
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 2
+    },
+    "L2_RATIONAL_3_4_5": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          64,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          32,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          8,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 2
+    },
+    "L4_H": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          8,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          2,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          1,
+          8
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 4
+    },
+    "L4_RATIONAL_3_4_5": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          256,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          64,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          4,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 4
+    },
+    "L8_H": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          32,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          4,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          1,
+          16
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 8
+    },
+    "L8_RATIONAL_3_4_5": {
+      "basis_commutator_norm_squared": {
+        "rational": [
+          1024,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "factorizes_exactly": true,
+      "nonzero": true,
+      "uniform_input_commutator_norm_squared": {
+        "rational": [
+          128,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrap_weight": {
+        "rational": [
+          2,
+          25
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "wrapped_total_number_change": 8
+    }
+  },
+  "dephased_reference": {
+    "L16_H": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L16_RATIONAL_3_4_5": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L2_H": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L2_RATIONAL_3_4_5": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L4_H": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L4_RATIONAL_3_4_5": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L8_H": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    },
+    "L8_RATIONAL_3_4_5": {
+      "coherence": {
+        "rational": [
+          0,
+          1
+        ],
+        "sqrt2": [
+          0,
+          1
+        ]
+      },
+      "coherence_zero": true
+    }
+  },
+  "resource_oracle": {
+    "accepted_joint_field_cells_by_length": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "closed_form_baseline_field_workspace": 3,
+    "closed_form_baseline_iterations_in_length": 0,
+    "streamed_baseline_field_workspace": 6,
+    "streamed_baseline_iterations_by_length": [
+      2,
+      4,
+      8,
+      16
+    ],
+    "verifier_basis_density_and_cyclic_checks_are_verifier_only": true,
+    "whole_process_resource_accounting_complete": false
+  },
+  "result": "PASS_M249_SEPARATE_REFERENCE_STRICT_SCOPE"
+}
