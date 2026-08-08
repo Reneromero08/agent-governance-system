@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_TOPOLOGY_LOCAL_CUBIC_SKEIN_EXACT_HEIGHT_OBSTRUCTION`
-**Roadmap version:** `14.85`
+**Status:** `STRICT_SU2_LEVEL8_CUBIC_SKEIN_UNIT_GAUGE_TRANSIENT_NO_GO`
+**Roadmap version:** `14.86`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `db9a08708886bbad171d029007bd8f3d9e220d01`
+**Reconciled source head:** `0656ebe853e9d9ee573a52c369b4ca170d29bc73`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_NONCROSSING_LINK_PATTERN_CUBIC_SHEAR_FAMILY0_STRANDS4_DEPTH1TO6_STRANDS6_DEPTH1TO3_STRANDS8_DEPTH1TO2_GENERIC_LEADING_TERMS_THROUGH_DEPTHS7_4_2_PRIMARY6_DEPTH3_REUSE6_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_SEVEN_DIRECTION_ALL_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_REDUCES_RESIDENT_MANTISSA_PLUS_LEDGER_PAYLOAD_ON_DECLARED_NONTRIVIAL_TOPOLOGY_LOCAL_CUBIC_SKEIN_CASES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REQUIRES_RAW_STATE_AND_CANDIDATE_MATERIALIZATION_SO_FULL_LIFECYCLE_HEIGHT_REDUCTION_IS_NOT_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_UNIT_PARAMETERS3_7_9_11_13_17_19_RANK_ONE_EXACT_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M219_TOPOLOGY_LOCAL_CUBIC_SKEIN_RETAINS_FIXED_LOGICAL_CELLS_ONLY_BY_MOVING_GROWTH_INTO_EXACT_HEIGHT_AND_GENERIC_POLYNOMIAL_DEGREE`
+**New mechanism development:** `ACTIVE_AFTER_M220_UNIT_GAUGE_REDUCES_RESIDENT_HEIGHT_BUT_FAILS_FULL_LIFECYCLE_ACCOUNTING_DUE_TO_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SKEIN_COEFFICIENTS_WITH_REVERSIBLE_UNIT_LEDGERS_OR_NET_HEIGHT_REDUCTION_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE`
+**Active primary successor:** `EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UPDATE_WITH_STREAMED_UNIT_CANDIDATE_SCORING_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_OR_EXPOSES_PERSISTING_FULL_LIFECYCLE_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -10555,6 +10555,70 @@ so it must test nontrivial cyclotomic units across all embeddings and count
 the full mantissa plus unit-ledger cost. A smaller displayed mantissa does not
 qualify if the reversible ledger carries the removed information. The
 identical classical gauge recurrence remains the matched baseline.
+
+## M220: exact all-embedding unit gauge resident reduction and transient no-go
+
+The separately reconstructed strict-scope claim is:
+
+```text
+BOUNDED_EXACT_SEVEN_DIRECTION_ALL_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_REDUCES_RESIDENT_MANTISSA_PLUS_LEDGER_PAYLOAD_ON_DECLARED_NONTRIVIAL_TOPOLOGY_LOCAL_CUBIC_SKEIN_CASES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REQUIRES_RAW_STATE_AND_CANDIDATE_MATERIALIZATION_SO_FULL_LIFECYCLE_HEIGHT_REDUCTION_IS_NOT_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE_REMAINS
+```
+
+M220 applies exact rank-one line searches along seven public cyclotomic-unit
+directions in `Q(zeta_40)`. Every accepted gauge stores the complete signed
+unit-exponent ledger, and selection minimizes the exact residual-plus-ledger
+payload using the trace energy across all sixteen embeddings. Every nonzero
+M219 state in the declared cases has primitive integer-coordinate content, so
+ordinary common-integer extraction cannot account for the reduction.
+
+At four strands and depths two, three and four the resident reductions before
+constant skein scratch are 59, 439 and 4,043 bits. Six strands at depth two
+saves 1,150 bits, and eight strands at depth one saves 38 bits. The primary
+four-strand depth-four case falls from 57,586 raw bits to 53,550
+residual-plus-ledger bits.
+
+The accepted implementation nevertheless materializes the raw actual vector
+before every operation and materializes trial residual vectors during gauge
+search. The primary lifecycle performs 24 balances, materializes 26 raw and
+105 candidate vectors, evaluates 1,978 exact embedding traces and reaches a
+conservative declared live maximum of 278,984 bits. This is larger than the
+57,586-bit raw carrier, so full-lifecycle height reduction is not established.
+
+The primary and unrelated reuse transactions restore the actual residual,
+seven-cell ledger and skein scratch backings exactly at generations one and
+two without reload. A standalone exact implementation imports no M220
+production and reproduces all state, boundary, gauge, resource, restoration
+and reuse tuples. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_UNIT_PARAMETERS3_7_9_11_13_17_19_RANK_ONE_EXACT_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+The strongest matched classical baseline is the identical
+residual-plus-unit-ledger link-pattern cubic-skein gauge recurrence. Python
+container capacity, allocator internals, serialization, timing and whole
+process peaks remain excluded rather than zero. No global unit-lattice
+optimum, asymptotic height bound, CATVM custody, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UPDATE_WITH_STREAMED_UNIT_CANDIDATE_SCORING_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_OR_EXPOSES_PERSISTING_FULL_LIFECYCLE_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
+```
+
+This is a direct repair of the measured transient obstruction. Linear skein
+updates can act on the residual under a common unit ledger, while the cubic
+term requires only the ledger-relative squared unit action. Candidate scores
+must be streamed and only the selected net unit action may mutate the
+resident vector. All unit-power, product, norm, mutation, inverse and boundary
+temporaries remain counted; failure to beat the raw lifecycle must be kept as
+the next exact obstruction.
 
 ## 10. Roadmap Maintenance
 

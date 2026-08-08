@@ -11706,3 +11706,51 @@ EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SK
 This attacks total exact height rather than adding deeper cubic fixtures.
 Integer content is already primitive, so the test must count nontrivial unit
 gauges across all embeddings together with every reversible exponent ledger.
+
+## M220 exact all-embedding unit gauge resident reduction and transient no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_SEVEN_DIRECTION_ALL_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_REDUCES_RESIDENT_MANTISSA_PLUS_LEDGER_PAYLOAD_ON_DECLARED_NONTRIVIAL_TOPOLOGY_LOCAL_CUBIC_SKEIN_CASES_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REQUIRES_RAW_STATE_AND_CANDIDATE_MATERIALIZATION_SO_FULL_LIFECYCLE_HEIGHT_REDUCTION_IS_NOT_ESTABLISHED_AND_THE_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE_REMAINS
+```
+
+Seven exact `Q(zeta_40)` unit directions and all sixteen embeddings reduce
+resident residual-plus-ledger payload at every declared nontrivial case. The
+primary four-strand depth-four state drops from 57,586 raw bits to 53,550
+resident bits including its seven-cell signed exponent ledger. Six strands
+at depth two saves 1,150 resident bits and eight strands at depth one saves
+38. Every nonzero declared M219 state has primitive integer-coordinate
+content, so a common integer divisor is not the mechanism.
+
+This does not establish a full-lifecycle reduction. The primary path
+materializes 26 raw vectors and 105 candidate residual vectors across 24
+balance calls, evaluates 1,978 exact embedding traces and reaches a
+conservative 278,984-bit declared live maximum. The identical classical
+residual-plus-ledger recurrence has the same law. Python containers,
+allocator internals and whole-process peaks remain outside the declared
+accounting.
+
+The actual residual, ledger and skein-scratch backings restore exactly and
+are reused by an unrelated family at restoration generation two without
+reload. A standalone exact reference imports no M220 production and
+reproduces the accepted state, boundary, balance, resource, restoration and
+reuse tuples. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+No global unit-lattice optimum, asymptotic height bound, CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Next:
+
+```text
+EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UPDATE_WITH_STREAMED_UNIT_CANDIDATE_SCORING_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_OR_EXPOSES_PERSISTING_FULL_LIFECYCLE_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
+```
+
+The next repair must perform skein and cubic updates in residual-plus-ledger
+coordinates, stream candidate scoring, and apply only one selected net unit
+action. It must count all scalar-unit, norm, product, mutation, inverse and
+projection temporaries and preserve a no-go if the raw lifecycle remains
+smaller.
