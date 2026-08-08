@@ -8,6 +8,8 @@ Verification level: `SEPARATE_REFERENCE_PARITY`
 
 Restoration class: `EXACT_ALGEBRAIC_RESTORATION`
 
+Scientific source head: `4c540e0f23d24a4e8b4546cdd971dd59a695e9f1`
+
 The focused read-only review reconstructed the exact interaction
 
 ```text

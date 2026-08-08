@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`eda322cb413f8b0ab2edd83ad0d0cce1e5f6fd90`. The registry assigns one
+`4c540e0f23d24a4e8b4546cdd971dd59a695e9f1`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 247-milestone lane is active by user direction. Continue from the
+The current 248-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,45 +53,46 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE
+CATVM_ENFORCED_BOUNDED_EXACT_P5_CUBIC_MAGIC_STATE_CATALYST_RETURNS_ONE5_CELL_QZETA5_CATALYST_AFTER_ONE_AND_TWO_DISTINCT_COHERENT_SYNDROME_FEEDBACK_USES_WITH_ATOMIC_RESPONSE_ORDERING_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_JOINT_CORRECTION_CONTAINS_TWO_BIVARIATE_CUBIC_TERMS_AND_THE_DIRECT_SINGLE_QUDIT_CUBIC_PHASE_AND_SYMBOLIC_CLASSICAL_IDENTITY_ARE_SMALLER_WITH_NO_MAGIC_OR_COMPUTATIONAL_ADVANTAGE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_P5_AFFINE_CUBIC_DEGREE3_SIGNATURES_AT_DECLARED_WIDTHS1_2_3_4_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_QZETA5_WIDTHS1_2_THREE_PUBLIC_CUBIC_CATALYST_DESCRIPTORS_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone power-basis implementation reproduce the affine-cubic phase
-signature, coherent syndrome closure, atomic controls, monotone generation,
-exact same-backing restoration, and generation-two descriptor-distinct reuse.
+and a standalone power-basis implementation reproduce the cubic catalyst
+identity, mixed-state dephasing control, Wigner-l1 resource balance, atomic
+controls, exact same-backing restoration, and generation-two reuse.
 
-M247 stores the declared width-one through width-four programs in exact
-degree-three phase-polynomial carriers of 4, 10, 20, and 35 F5 residues. One
-typed syndrome remains unresolved across noncommuting affine-X and phase-Z
-consumers and closes before final projection. The final scalar nevertheless
-has an identical streamed classical recurrence with one field accumulator and
-a width cursor. Exact variable elimination is a separate time-memory Pareto
-point, not an unavoidable resource or lower bound. No distinct phase resource,
-advantage, Small Wall crossing, physical execution, physical-bit replacement,
-inference, or unbounded computation is established.
+M248 returns one actual five-cell `Q(zeta_5)` catalyst exactly after one and
+two distinct coherent syndrome-feedback uses. The machine retains the
+catalyst, one 25-cell joint scratch, and two five-cell phase signatures behind
+the atomic boundary and responds only after inverse restoration. The joint
+correction itself contains two bivariate cubic terms per use, while the direct
+noncatalytic comparator uses one univariate cubic and the exact symbolic
+identity. No free magic, distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, inference, or
+unbounded computation is established.
 
 Selected successor:
 
 ```text
-EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
 ```
 
-Replace the compact description of a path sum with one actual borrowed
-non-stabilizer cubic phase state. Verify the exact coherent-feedback identity
-`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` through two distinct unresolved
-syndrome uses, exact same-backing restoration, and next-generation reuse.
-Count catalyst preparation, unchanged catalyst magic, every non-Clifford joint
-correction, the direct cubic comparator, inverse, verification, and CATVM
-traffic. If the joint correction supplies all magic or direct compact software
-matches it, publish that resource-balance obstruction and retire the identity.
+Change the primitive from finite-p cubic magic to a normalizable U(1) phase
+reference under a lawful energy-conserving dilation. Test exact finite ladders
+at `L=2,4,8,16`, the cyclic exact-return sham and its energy-wrap witness, and
+the nonnormalizable bilateral-shift ideal. Preserve atomic same-backing inverse
+restoration and unrelated reuse. Compare first against the exact O(1)
+all-`L` formulas, not only the streamed O(`L`) recurrence. If finite lawful
+references necessarily correlate, cyclic return necessarily wraps energy, and
+the ideal return is nonnormalizable, publish that strict family no-go and
+change mechanism rather than extending `L`.
 
 The accumulated bounded architecture includes:
 
@@ -285,7 +286,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M247_PRESERVES_ONE_COHERENT_SYNDROME_PORT_IN_A_COMPACT_AFFINE_CUBIC_SIGNATURE_BUT_FINDS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_SO_M248_TESTS_AN_ACTUAL_REUSABLE_CUBIC_MAGIC_STATE_CATALYST_AND_COUNTS_WHETHER_THE_JOINT_CORRECTION_SUPPLIES_ALL_MAGIC
+ACTIVE_AFTER_M248_ESTABLISHES_EXACT_RETURN_OF_ONE_P5_CUBIC_CATALYST_BUT_FINDS_THE_JOINT_CORRECTION_SUPPLIES_TWO_BIVARIATE_CUBIC_TERMS_AND_DIRECT_CUBIC_AND_SYMBOLIC_CLASSICAL_PATHS_ARE_SMALLER_SO_M249_TESTS_A_NORMALIZABLE_U1_PHASE_REFERENCE_UNDER_LAWFUL_ENERGY_CONSERVING_DILATION
 ```
 
 The named
@@ -294,19 +295,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
 ```
 
-M247 establishes exact CATVM custody for one coherent syndrome shared by
-noncommuting affine-X, phase-Z, and cubic consumers, but its compact
-degree-three signature has an identical streamed scalar classical evaluator.
-Min-fill variable elimination is only a second time-memory point, not an
-unavoidable growing-table law. Do not add finite-p widths, path evaluators, or
-factor-table optimizations. M248 must test the exact cubic catalyst identity
-`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` on the actual same backing and count
-the joint non-Clifford correction against direct cubic phase and stabilizer-
-aware baselines. A returned catalyst is not free magic, advantage, or an
-unbounded machine when the correction supplies the resource.
+M248 establishes the exact returned-catalyst identity behind the atomic CATVM
+boundary, but its correction carries two bivariate cubic terms while the
+direct phase and exact symbolic classical identity are smaller. Do not add
+catalyst widths, syndrome counts, or correction micro-optimizations. M249 must
+test whether a different continuous phase primitive—a finite normalizable U(1)
+reference—can return lawfully under an energy-conserving dilation. It must
+separate the finite open ladder, cyclic wrap sham, and nonnormalizable
+bilateral ideal and compare against the exact O(1) all-`L` formulas. A bounded
+software energy-wrap dichotomy is not a physical energy theorem or phase
+advantage.
 
 ## 7. Native No-Smuggle Law
 

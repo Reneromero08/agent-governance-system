@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_AFFINE_CUBIC_SIGNATURE_CLASSICAL_BISIMULATION_CLOSED_MAGIC_CATALYSIS_RESOURCE_BALANCE_OPEN`
-**Roadmap version:** `15.31`
+**Status:** `STRICT_CATVM_P5_CUBIC_MAGIC_CATALYST_EXACT_RETURN_RESOURCE_BALANCE_NO_ADVANTAGE_U1_PHASE_REFERENCE_DICHOTOMY_OPEN`
+**Roadmap version:** `15.32`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `eda322cb413f8b0ab2edd83ad0d0cce1e5f6fd90`
+**Reconciled source head:** `4c540e0f23d24a4e8b4546cdd971dd59a695e9f1`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE`
-**Current claim ceiling:** `EXACT_SOFTWARE_P5_AFFINE_CUBIC_DEGREE3_SIGNATURES_AT_DECLARED_WIDTHS1_2_3_4_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_P5_CUBIC_MAGIC_STATE_CATALYST_RETURNS_ONE5_CELL_QZETA5_CATALYST_AFTER_ONE_AND_TWO_DISTINCT_COHERENT_SYNDROME_FEEDBACK_USES_WITH_ATOMIC_RESPONSE_ORDERING_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_JOINT_CORRECTION_CONTAINS_TWO_BIVARIATE_CUBIC_TERMS_AND_THE_DIRECT_SINGLE_QUDIT_CUBIC_PHASE_AND_SYMBOLIC_CLASSICAL_IDENTITY_ARE_SMALLER_WITH_NO_MAGIC_OR_COMPUTATIONAL_ADVANTAGE`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_WIDTHS1_2_THREE_PUBLIC_CUBIC_CATALYST_DESCRIPTORS_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M247_PRESERVES_ONE_COHERENT_SYNDROME_PORT_IN_A_COMPACT_AFFINE_CUBIC_SIGNATURE_BUT_FINDS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_SO_M248_TESTS_AN_ACTUAL_REUSABLE_CUBIC_MAGIC_STATE_CATALYST_AND_COUNTS_WHETHER_THE_JOINT_CORRECTION_SUPPLIES_ALL_MAGIC`
+**New mechanism development:** `ACTIVE_AFTER_M248_ESTABLISHES_EXACT_RETURN_OF_ONE_P5_CUBIC_CATALYST_BUT_FINDS_THE_JOINT_CORRECTION_SUPPLIES_TWO_BIVARIATE_CUBIC_TERMS_AND_DIRECT_CUBIC_AND_SYMBOLIC_CLASSICAL_PATHS_ARE_SMALLER_SO_M249_TESTS_A_NORMALIZABLE_U1_PHASE_REFERENCE_UNDER_LAWFUL_ENERGY_CONSERVING_DILATION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE`
+**Active primary successor:** `EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -12162,30 +12162,69 @@ advantage, Small Wall crossing, inference, physical waveform execution,
 physical-bit replacement, or unbounded catalytic computation.  Do not add
 widths, path evaluators, or factor-table optimizations.
 
-Selected phase-owned successor:
+## M248: exact cubic catalyst return exposes correction-resource relocation
+
+The accepted strict-scope claim is:
 
 ```text
-EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+CATVM_ENFORCED_BOUNDED_EXACT_P5_CUBIC_MAGIC_STATE_CATALYST_RETURNS_ONE5_CELL_QZETA5_CATALYST_AFTER_ONE_AND_TWO_DISTINCT_COHERENT_SYNDROME_FEEDBACK_USES_WITH_ATOMIC_RESPONSE_ORDERING_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_JOINT_CORRECTION_CONTAINS_TWO_BIVARIATE_CUBIC_TERMS_AND_THE_DIRECT_SINGLE_QUDIT_CUBIC_PHASE_AND_SYMBOLIC_CLASSICAL_IDENTITY_ARE_SMALLER_WITH_NO_MAGIC_OR_COMPUTATIONAL_ADVANTAGE
 ```
 
-M248 changes the primitive from a compact description of a path sum to an
-actual borrowed non-stabilizer phase state.  For
-`|M_a> = 5^-1/2 sum_c zeta^(a c^3)|c>`, syndrome-controlled translation `T`
-and the joint correction
-`R_a(s,c)=zeta^(3asc^2-3as^2c)` must establish exactly
+For the exact five-cell catalyst
+`|M_a> = 5^-1/2 sum_c zeta^(a c^3)|c>`, M248 applies the actual translation
+`T:c -> c+s` followed by
+`R_a(s,c)=zeta^(3asc^2-3as^2c)`. Production and the standalone power-basis
+oracle verify all 20 pairs `a=1..4`, `s=0..4`:
 
 ```text
 R_a T (|s> |M_a>) = zeta^(-a s^3) |s> |M_a>.
 ```
 
-The catalyst must remain on the same backing through two distinct unresolved
-syndrome uses, restore exactly, and be reused at the next generation.  The
-resource balance must count catalyst preparation and its unchanged magic,
-the non-Clifford joint correction, direct noncatalytic cubic phase, stabilizer
-or quasiprobability simulation, inverse, verification, and CATVM traffic.  If
-the joint correction supplies all required magic or the compact direct phase
-recurrence is no worse, publish that obstruction and retire this identity.
-No free-magic, advantage, physical, or unbounded claim is authorized.
+The abstract Unix-socket service retains the actual catalyst, one 25-cell
+joint scratch, and two five-cell syndrome-phase backings. It returns only the
+final amplitude after inverse rematerialization clears the joint scratch and
+phase signatures, verifies canonical exact state and same backing identities,
+and advances generation. The generation-two descriptor-distinct reuse agrees
+with a fresh carrier; disconnect and injected partial-forward and
+post-projection failures restore before rejection or lost response. No
+snapshot or baseline reload is used.
+
+The repaired independent controls execute the dephased `I/5` mixed-state
+channel rather than asserting it: all 20 off-diagonal syndrome factors vanish.
+They also reconstruct the catalyst and direct target Wigner
+`l1 = 1 + 2 sqrt(5)/5`, with five negative cells for each. Focused review
+returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The decisive resource result is negative. Seven accepted syndrome uses spend
+700 joint-correction root multiplications. Each correction carries two
+bivariate cubic terms; the direct noncatalytic path uses one univariate cubic
+phase and the exact symbolic identity directly supplies
+`phase(s)=-a*s^3`. Catalyst preparation is counted once per actual carrier,
+but no joint-correction magic monotone or optimal synthesis is measured. The
+exact returned catalyst therefore establishes neither free magic nor a work
+or magic advantage. This route stops at its three declared descriptors; do
+not add widths, syndrome counts, or correction micro-optimizations.
+
+Selected phase-owned successor:
+
+```text
+EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
+```
+
+M249 changes the primitive from finite-p cubic magic to a normalizable U(1)
+phase reference under a lawful energy-conserving dilation. It tests exact
+finite open ladders at `L=2,4,8,16`, an exact-return cyclic sham with explicit
+energy-wrap witness, and the bilateral-shift ideal whose nonzero phase
+eigenvectors are nonnormalizable. The accepted finite carrier must be restored
+by the actual inverse and reused at generation two. The strongest comparator
+is the exact O(1) all-`L` formula, with an identical streamed O(`L`)
+recurrence only as parity. If finite lawful references correlate, cyclic return
+requires wrap, and the ideal reference is nonnormalizable, publish that strict
+family no-go and change mechanism rather than extending `L`. This is not a
+general coherence-catalyst theorem, physical energy-conservation result, phase
+resource, advantage, Small Wall crossing, or physical-bit replacement.
 
 ## 10. Roadmap Maintenance
 

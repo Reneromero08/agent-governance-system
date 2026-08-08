@@ -12884,16 +12884,54 @@ advantage, Small Wall crossing, inference, physical execution, bit
 replacement, or unbounded catalytic computation is established.  The finite-p
 path-signature route stops here.
 
+## M248 exact cubic catalyst return relocates the magic resource
+
+M248 verifies the exact identity
+
+```text
+R_a T (|s> |M_a>) = zeta^(-a s^3) |s> |M_a>
+```
+
+for every `a=1..4` and `s=0..4` in exact `Q(zeta_5)` arithmetic. The actual
+five-cell catalyst stays on the same backing through one- and two-syndrome
+programs. One 25-cell joint scratch and two five-cell phase-signature backings
+remain hidden behind the abstract Unix-socket service. Only the final
+amplitude is returned, after exact inverse clearing, canonical verification,
+and generation advance. Descriptor-distinct generation-two reuse agrees with
+a fresh carrier, and disconnect plus both injected fault locations restore
+before response or rejection.
+
+The repaired standalone oracle explicitly propagates the dephased `I/5`
+catalyst channel and obtains zero for every off-diagonal syndrome factor. It
+also reconstructs the catalyst and target-strength Wigner
+`l1 = 1 + 2 sqrt(5)/5`, with five negative cells in both cases. Focused review
+returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The resource balance blocks promotion. Across seven accepted uses the joint
+correction performs 700 root multiplications and carries two bivariate cubic
+terms per use. The matched direct path uses one univariate cubic, and the
+exact symbolic classical identity computes `phase(s)=-a*s^3` without catalyst
+restoration or CATVM traffic. No correction magic monotone or optimal
+synthesis is measured. Exact return is therefore established, but free magic,
+a distinct phase resource, computational advantage, Small Wall crossing,
+physical execution, physical-bit replacement, inference, and unbounded
+catalytic computation remain unestablished. The bounded catalyst identity is
+retired as an advantage route.
+
 Next:
 
 ```text
-EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
 ```
 
-This successor changes the primitive to an actual borrowed non-stabilizer
-cubic phase state.  It must verify the exact identity
-`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` through two distinct coherent
-syndrome uses and next-generation reuse, while accounting for the magic in
-the joint correction, catalyst preparation, direct cubic implementation,
-stabilizer simulation, inverse, verification, and CATVM traffic.  Returning
-the catalyst alone cannot establish free magic or advantage.
+The successor changes the primitive to a normalizable U(1) phase reference
+under a lawful energy-conserving dilation. It must distinguish finite open
+ladders, an exact-return cyclic energy-wrap sham, and the nonnormalizable
+bilateral-shift ideal at the exact declared `L=2,4,8,16` ceiling. The accepted
+finite carrier must restore by actual inverse and support unrelated
+generation-two reuse. Its strongest comparator is the exact O(1) all-`L`
+formula; the streamed O(`L`) recurrence is parity only. A confirmed dichotomy
+retires this family and does not establish a general coherence-catalyst or
+physical energy theorem.
