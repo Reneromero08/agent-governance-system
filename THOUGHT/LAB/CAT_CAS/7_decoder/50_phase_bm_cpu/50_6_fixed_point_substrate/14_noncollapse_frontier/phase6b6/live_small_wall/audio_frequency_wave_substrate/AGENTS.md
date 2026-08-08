@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`986cd93270dda250bd14e255c5d22427f1f821d9`. The registry assigns one
+`eda322cb413f8b0ab2edd83ad0d0cce1e5f6fd90`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 246-milestone lane is active by user direction. Continue from the
+The current 247-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,47 +53,45 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED
+CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QZETA5_PERMUTATION_SYMMETRIC_DEPTH3_RAILS2_3_4_6_OCCUPATION_QUOTIENT_ABSTRACT_UNIX_SOCKET_MODEL_ONLY
+EXACT_SOFTWARE_P5_AFFINE_CUBIC_DEGREE3_SIGNATURES_AT_DECLARED_WIDTHS1_2_3_4_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone power-basis implementation reproduce the occupation
-recurrence, atomic controls, monotone generation, exact same-backing
-restoration, and generation-two descriptor-distinct reuse.
+and a standalone power-basis implementation reproduce the affine-cubic phase
+signature, coherent syndrome closure, atomic controls, monotone generation,
+exact same-backing restoration, and generation-two descriptor-distinct reuse.
 
-M246 derives one analytic permutation-occupation law across rails 2, 3, 4,
-and 6. Exact split-prime certificates for actual depth-three forward programs
-give ranks 15, 35, 70, and 210, equal to every declared occupation dimension;
-the rails-six progression is 60, 205, and 210 across exact depths one, two,
-and three. Thus the lawful symmetry quotient grows as `binomial(n+4,4)` and
-is not a fixed-rank carrier. The endpoint-specialized matrix-free occupation
-classical recurrence uses fewer declared coefficient-update-plus-dot terms,
-while a stronger symmetric-power Krawtchouk factorization remains an explicit
-unimplemented classical ceiling. No total-work comparison, distinct phase
-resource, advantage, Small Wall crossing, physical execution, physical-bit
-replacement, inference, or unbounded computation is established.
+M247 stores the declared width-one through width-four programs in exact
+degree-three phase-polynomial carriers of 4, 10, 20, and 35 F5 residues. One
+typed syndrome remains unresolved across noncommuting affine-X and phase-Z
+consumers and closes before final projection. The final scalar nevertheless
+has an identical streamed classical recurrence with one field accumulator and
+a width cursor. Exact variable elimination is a separate time-memory Pareto
+point, not an unavoidable resource or lower bound. No distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+inference, or unbounded computation is established.
 
 Selected successor:
 
 ```text
-CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
+EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
 ```
 
-Replace occupation vectors with one exact affine-cubic phase-path signature
-and a typed coherent syndrome port consumed by noncommuting affine-X,
-phase-Z, and cubic modules. Compare native signature closure against exact
-treewidth variable elimination, stabilizer/Gauss decompositions, and small
-dense verifier-only oracles. If projection requires the same growing bag or
-stabilizer-sum resource, publish the bounded software-bisimulation ceiling and
-retire this finite-p path-sum route. This is not another occupation width,
-depth, or coefficient optimization.
+Replace the compact description of a path sum with one actual borrowed
+non-stabilizer cubic phase state. Verify the exact coherent-feedback identity
+`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` through two distinct unresolved
+syndrome uses, exact same-backing restoration, and next-generation reuse.
+Count catalyst preparation, unchanged catalyst magic, every non-Clifford joint
+correction, the direct cubic comparator, inverse, verification, and CATVM
+traffic. If the joint correction supplies all magic or direct compact software
+matches it, publish that resource-balance obstruction and retire the identity.
 
 The accumulated bounded architecture includes:
 
@@ -287,7 +285,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M246_DERIVES_THE_N_RAIL_PERMUTATION_OCCUPATION_LAW_AND_FINDS_DEPTH3_LINEAR_RANKS15_35_70_210_EQUAL_TO_THE_GROWING_OCCUPATION_DIMENSIONS_WITH_A_SMALLER_DECLARED_TERM_CLASSICAL_RECURRENCE_SO_M247_TESTS_THE_STRUCTURAL_SOFTWARE_PHASE_BISIMULATION_CEILING_OR_A_COUNTEREXAMPLE_NATIVE_RESOURCE
+ACTIVE_AFTER_M247_PRESERVES_ONE_COHERENT_SYNDROME_PORT_IN_A_COMPACT_AFFINE_CUBIC_SIGNATURE_BUT_FINDS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_SO_M248_TESTS_AN_ACTUAL_REUSABLE_CUBIC_MAGIC_STATE_CATALYST_AND_COUNTS_WHETHER_THE_JOINT_CORRECTION_SUPPLIES_ALL_MAGIC
 ```
 
 The named
@@ -296,17 +294,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
+EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
 ```
 
-M246 establishes the analytic permutation-occupation law for the declared
-rails and proves full linear continuation rank at each occupation dimension
-using actual depth-three forward programs. Do not add rails, depths, or
-occupation-kernel optimizations. M247 must compile one coherent affine-cubic
-path signature with an unresolved shared syndrome port, close it behind CATVM,
-and compare it with the strongest exact treewidth and stabilizer-aware
-recurrences. A matched bisimulation is not a universal complexity lower bound
-and must not be promoted beyond its declared machine model.
+M247 establishes exact CATVM custody for one coherent syndrome shared by
+noncommuting affine-X, phase-Z, and cubic consumers, but its compact
+degree-three signature has an identical streamed scalar classical evaluator.
+Min-fill variable elimination is only a second time-memory point, not an
+unavoidable growing-table law. Do not add finite-p widths, path evaluators, or
+factor-table optimizations. M248 must test the exact cubic catalyst identity
+`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` on the actual same backing and count
+the joint non-Clifford correction against direct cubic phase and stabilizer-
+aware baselines. A returned catalyst is not free magic, advantage, or an
+unbounded machine when the correction supplies the resource.
 
 ## 7. Native No-Smuggle Law
 

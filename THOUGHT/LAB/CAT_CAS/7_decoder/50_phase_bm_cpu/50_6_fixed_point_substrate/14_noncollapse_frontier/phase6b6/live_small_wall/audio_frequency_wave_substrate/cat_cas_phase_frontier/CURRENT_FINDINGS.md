@@ -12845,3 +12845,55 @@ elimination, stabilizer/Gauss baselines, and small dense verifier-only oracles.
 A matched growing bag or stabilizer-sum law is a bounded software-bisimulation
 ceiling for this route, not a universal lower bound. It must not extend the
 completed occupation width or depth fixtures.
+
+## M247 CATVM coherent affine-cubic signature closes at classical bisimulation
+
+M247 compiles each declared width-one through width-four coherent program to
+the exact degree-three phase polynomial
+
+```text
+P(x) = a·x^3 + b·((I+BA)x)^3 + (Ax)^T C(I+BA)x - u·x  (mod 5).
+```
+
+The coefficient carriers use `4,10,20,35` F5 residues rather than a `5^w`
+amplitude vector.  The typed syndrome `Ax` remains resident across distinct
+affine-X and phase-Z consumers and the later cubic, then closes under the
+actual inverse before final-only amplitude projection.  Swapping X/Z and
+omitting the Z consumer both change the selected boundaries.
+
+The abstract Unix-socket service returns only one exact `Q(zeta_5)` amplitude
+after reverse execution, canonical verification, and generation advancement.
+The actual width-four backings are consumed by a descriptor-distinct
+generation-two program and agree with a fresh carrier.  Disconnect and both
+injected failure locations restore before response or rejection, with no
+snapshot or baseline reload.
+
+The independent oracle agrees on all six transactions, reconstructs gate-step
+semantics at widths one and two, and matches the zero-cubic cases with an exact
+quadratic Gauss formula.  The accepted projection streams
+`5,25,125,625` assignments.  Its exact classical twin needs one field
+accumulator and a width cursor; min-fill elimination is a separate Pareto
+point with observed treewidth `0,1,2,3` and peak single bags
+`5,25,125,125`.  No factor-table lower bound or classical optimality is
+claimed.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.  No distinct phase resource, computational
+advantage, Small Wall crossing, inference, physical execution, bit
+replacement, or unbounded catalytic computation is established.  The finite-p
+path-signature route stops here.
+
+Next:
+
+```text
+EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+```
+
+This successor changes the primitive to an actual borrowed non-stabilizer
+cubic phase state.  It must verify the exact identity
+`R_a T |s>|M_a> = zeta^(-a s^3)|s>|M_a>` through two distinct coherent
+syndrome uses and next-generation reuse, while accounting for the magic in
+the joint correction, catalyst preparation, direct cubic implementation,
+stabilizer simulation, inverse, verification, and CATVM traffic.  Returning
+the catalyst alone cannot establish free magic or advantage.

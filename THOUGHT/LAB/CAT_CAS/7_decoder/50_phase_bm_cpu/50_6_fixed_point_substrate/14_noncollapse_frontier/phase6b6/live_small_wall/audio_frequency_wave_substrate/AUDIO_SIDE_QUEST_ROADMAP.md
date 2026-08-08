@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_PERMUTATION_OCCUPATION_RANK_GROWTH_CLOSED_SOFTWARE_PHASE_BISIMULATION_TEST_OPEN`
-**Roadmap version:** `15.30`
+**Status:** `STRICT_CATVM_P5_AFFINE_CUBIC_SIGNATURE_CLASSICAL_BISIMULATION_CLOSED_MAGIC_CATALYSIS_RESOURCE_BALANCE_OPEN`
+**Roadmap version:** `15.31`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `986cd93270dda250bd14e255c5d22427f1f821d9`
+**Reconciled source head:** `eda322cb413f8b0ab2edd83ad0d0cce1e5f6fd90`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED`
-**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_PERMUTATION_SYMMETRIC_DEPTH3_RAILS2_3_4_6_OCCUPATION_QUOTIENT_ABSTRACT_UNIX_SOCKET_MODEL_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE`
+**Current claim ceiling:** `EXACT_SOFTWARE_P5_AFFINE_CUBIC_DEGREE3_SIGNATURES_AT_DECLARED_WIDTHS1_2_3_4_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M246_DERIVES_THE_N_RAIL_PERMUTATION_OCCUPATION_LAW_AND_FINDS_DEPTH3_LINEAR_RANKS15_35_70_210_EQUAL_TO_THE_GROWING_OCCUPATION_DIMENSIONS_WITH_A_SMALLER_DECLARED_TERM_CLASSICAL_RECURRENCE_SO_M247_TESTS_THE_STRUCTURAL_SOFTWARE_PHASE_BISIMULATION_CEILING_OR_A_COUNTEREXAMPLE_NATIVE_RESOURCE`
+**New mechanism development:** `ACTIVE_AFTER_M247_PRESERVES_ONE_COHERENT_SYNDROME_PORT_IN_A_COMPACT_AFFINE_CUBIC_SIGNATURE_BUT_FINDS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_SO_M248_TESTS_AN_ACTUAL_REUSABLE_CUBIC_MAGIC_STATE_CATALYST_AND_COUNTS_WHETHER_THE_JOINT_CORRECTION_SUPPLIES_ALL_MAGIC`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC`
+**Active primary successor:** `EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED
+CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE
 ```
 
 Not established:
@@ -12109,6 +12109,83 @@ sum resource is required, publish the bounded software-bisimulation ceiling
 and retire this finite-p path-sum route. Such a ceiling is not a universal
 computational-complexity lower bound. Do not turn the successor into VM
 infrastructure or a collection of larger fixtures.
+
+## M247: coherent affine-cubic signature and classical bisimulation ceiling
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE
+```
+
+For each declared width `1,2,3,4`, production compiles the coherent circuit to
+the exact degree-three phase signature
+
+```text
+P(x) = a·x^3 + b·((I+BA)x)^3 + (Ax)^T C(I+BA)x - u·x  (mod 5).
+```
+
+The residue coefficient counts are only `4,10,20,35`.  One typed syndrome map
+`s=Ax` remains resident while distinct affine-X and phase-Z consumers act, and
+the later cubic consumes data that still depends on the same syndrome.  The
+actual inverse X and copy close the syndrome before projection.  Swapping X/Z
+or omitting Z changes every controlled final boundary.
+
+Only one final `Q(zeta_5)` amplitude crosses the abstract Unix socket, after
+the ten public actions are reversed, all coefficient/data/syndrome and
+descriptor backings are verified canonical, and generation advances.  The
+same width-four backings then execute a descriptor-distinct generation-two
+program and agree with a fresh carrier.  Disconnect, partial-forward, and
+post-projection failures restore before rejection or lost response.  No
+snapshot or baseline reload is used.
+
+The independent power-basis oracle agrees with every boundary, reconstructs
+gate-step semantics at widths one and two, and checks every zero-cubic sham by
+an exact finite-field quadratic Gauss formula.  It also exposes the decisive
+ceiling.  The accepted projection streams `5,25,125,625` assignments.  The
+identical classical streamed scalar evaluator uses one field accumulator and
+a width-sized cursor with no bag table or inverse work.  Min-fill exact
+variable elimination is a second time-memory point: observed treewidth is
+`0,1,2,3`, peak single-bag field cells are `5,25,125,125`, and neither method
+is represented as an unavoidable or globally optimal classical resource.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.  The first comparator draft incorrectly called
+variable elimination the unqualified strongest baseline; the sealed repair
+reports both exact classical implementations as a Pareto.
+
+This closes the declared finite-p affine-cubic path-signature route.  It does
+not establish a fixed-width exact state, a projection lower bound, general
+relational or tensor-network closure, a distinct phase resource, computational
+advantage, Small Wall crossing, inference, physical waveform execution,
+physical-bit replacement, or unbounded catalytic computation.  Do not add
+widths, path evaluators, or factor-table optimizations.
+
+Selected phase-owned successor:
+
+```text
+EXACT_P5_CUBIC_MAGIC_STATE_CATALYSIS_THROUGH_COHERENT_SYNDROME_FEEDBACK_WITH_ATOMIC_CATVM_RESTORATION_REUSE_AND_MAGIC_RESOURCE_BALANCE
+```
+
+M248 changes the primitive from a compact description of a path sum to an
+actual borrowed non-stabilizer phase state.  For
+`|M_a> = 5^-1/2 sum_c zeta^(a c^3)|c>`, syndrome-controlled translation `T`
+and the joint correction
+`R_a(s,c)=zeta^(3asc^2-3as^2c)` must establish exactly
+
+```text
+R_a T (|s> |M_a>) = zeta^(-a s^3) |s> |M_a>.
+```
+
+The catalyst must remain on the same backing through two distinct unresolved
+syndrome uses, restore exactly, and be reused at the next generation.  The
+resource balance must count catalyst preparation and its unchanged magic,
+the non-Clifford joint correction, direct noncatalytic cubic phase, stabilizer
+or quasiprobability simulation, inverse, verification, and CATVM traffic.  If
+the joint correction supplies all required magic or the compact direct phase
+recurrence is no worse, publish that obstruction and retire this identity.
+No free-magic, advantage, physical, or unbounded claim is authorized.
 
 ## 10. Roadmap Maintenance
 
