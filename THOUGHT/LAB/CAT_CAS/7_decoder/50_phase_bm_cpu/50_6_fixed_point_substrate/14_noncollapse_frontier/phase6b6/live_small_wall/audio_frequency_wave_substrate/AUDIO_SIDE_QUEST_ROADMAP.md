@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_INPLACE_PUBLIC_UNIT_PLAN_RESOURCE_NO_GO`
-**Roadmap version:** `14.93`
+**Status:** `STRICT_SU2_LEVEL8_TRANSPOSE_TRACE_FUNCTIONAL_RESOURCE_NO_GO`
+**Roadmap version:** `14.94`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `399983b7fb8cb5191c43f8d5a23c7306ab75e5da`
+**Reconciled source head:** `a2faedad86a9235ccd2b1026e01b4ad4e9dd2f61`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_ELIMINATES_SIMULTANEOUS_WHOLE_OLD_ACCUMULATOR_AND_WHOLE_NEW_PRODUCT_AND_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM294821_TO247272_BITS_WITH267482_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_THE_IDENTICAL_CLASSICAL_IN_PLACE_COORDINATE_RECURRENCE_AND_PUBLIC_PLAN_LIBRARY_REMAIN`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_M220_M221_M222_M223_M224_M225_M226_PARAMETERS3_7_9_11_13_17_19_GL16Z_INPLACE_PUBLIC_UNIT_AND_CONJUGATION_PLANS_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_THROUGH_M227_PARAMETERS3_7_9_11_13_17_19_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLANS_STREAMED16_COORDINATE_HERMITIAN_TRACE_FUNCTIONAL_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M227_REMOVES_WHOLE_OLD_AND_NEW_FIELD_PRODUCT_COEXISTENCE_AND_REDUCES_PRIMARY_DYNAMIC_PEAK47549_BITS_BUT267482_DYNAMIC_PLUS_STATIC_BITS_AND153538482_PLAN_STEPS_REMAIN_ABOVE_RAW`
+**New mechanism development:** `ACTIVE_AFTER_M228_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_AND_REDUCES_PRIMARY_DYNAMIC34053_BITS_BUT233429_DYNAMIC_PLUS_STATIC_BITS_114499_FUNCTIONAL_BITS_AND150866708_TRANSPOSE_STEPS_REMAIN_ABOVE_RAW_AND_THE_GAUGE_OPTIMIZATION_ROUTE_IS_RETIRED`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_WITHOUT_MATERIALIZED_WEIGHT_VECTOR_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_TYPED_OPEN_SU2_LEVEL8_GRAPH_RELATION_COMPOSITION_ACROSS_NONCOMMUTING_FUSION_TWIST_AND_REVERSIBLE_CUBIC_PHASE_SHEAR_MODULES_ON_ONE_SHARED9_CELL_QZETA40_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_COMPACT_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_ELIMINATES_SIMULTANEOUS_WHOLE_OLD_ACCUMULATOR_AND_WHOLE_NEW_PRODUCT_AND_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM294821_TO247272_BITS_WITH267482_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_THE_IDENTICAL_CLASSICAL_IN_PLACE_COORDINATE_RECURRENCE_AND_PUBLIC_PLAN_LIBRARY_REMAIN
+BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -4969,12 +4969,14 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-The current continuation is M227's measured rational trace-functional and
-retained public-plan obstruction. Apply the transposed public `GL(16,Z)` plans
-to an exact streamed Hermitian trace functional so the accepted path need not
-materialize a separately transformed weight vector. Count the complete
-functional coordinates, rational temporaries, retained plans, compiler state,
-and matched in-place work. This current directive supersedes every historical
+The current continuation follows M228's completed route decision. The tested
+M220--M228 gauge, rematerialization, power, in-place-plan, and transposed-dual
+repairs reduce live state but leave every declared case above raw while exact
+height reappears in the resident functional or equivalent work. Do not add
+another optimization of that representation. Compose exact typed graph
+relations for noncommuting fusion, twist, and reversible cubic phase-shear
+modules on the actual shared nine-cell SU(2)_8 port without relation tables or
+assignment expansion. This current directive supersedes every historical
 `continue from` sentence in the chronological evidence narrative below.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
@@ -11007,6 +11009,74 @@ state, and every coordinate operation. Preserve exact final-only restoration
 and reuse, and compare to the identical transposed-plan classical recurrence.
 If this only relocates the same height into the functional vector, publish the
 bounded no-go and move to the next phase-owned representation.
+
+## M228: transposed Hermitian trace-functional route decision
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS
+```
+
+M228 uses exact trace linearity. It streams all sixteen power-basis Hermitian
+trace coordinates from the actual resident carrier, then applies the
+transposes of the same public `GL(16,Z)` unit plans in reverse action,
+repetition, reference, and plan-operation order. The final energy is coordinate
+zero. No transformed cyclotomic trace-weight field, dense operator, standalone
+power result, cache, or answer-bearing table is materialized on the accepted
+path.
+
+The primary four-strand depth-four dynamic maximum falls from 247,272 to
+213,219 declared exact live bits. Adding the retained 18,374-bit plan library
+and 1,836-bit public descriptor gives 233,429 bits versus matched raw 129,595
+bits. The sixteen-coordinate functional itself reaches 114,499 bits and the
+primary path executes 150,866,708 transpose-plan operations. All seven
+declared cases remain above their matched raw recurrence. Thus the reduction
+is real but does not establish compact exact phase state or leverage.
+
+Production and a standalone implementation built on the prior standalone
+M227 substrate reproduce all cases, controls, normalized resources, boundary
+and state commitments, restoration, and reuse byte-for-byte. The standalone
+code imports neither M228 nor M227 production. All functional coordinates are
+released; the same residual, ledger, and scratch backings restore exactly with
+no reload; reuse reaches generation two and agrees with fresh state and
+boundary. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Accounting is source-complete only for all streamed-functional term and
+transposed-plan intervals. Retained projected-boundary liveness during inverse,
+whole-transaction live payload, Python objects and containers, allocator and
+interpreter state, JSON serialization, timing, and whole-process RSS remain
+excluded or unclaimed. The strongest compact classical comparator is the
+identical streamed sixteen-coordinate functional and transposed-plan
+recurrence. No distinct phase resource, advantage, Small Wall crossing,
+CATVM custody, physical execution, physical-bit replacement, catalytic
+inference, or unbounded computation is established.
+
+This decides the M220--M228 cubic-skein gauge optimization route within its
+declared family: rematerialization, fused powers, direct action, in-place
+unimodular plans, and transposed dual evaluation progressively remove hidden
+resources, but exact coefficient height reappears in the remaining functional
+or equivalent work and every case remains above raw. This is a bounded route
+obstruction, not an asymptotic theorem against all representations. Do not add
+another trace, unit, ledger, plan, balance, strand, depth, or line-search
+variant.
+
+Selected successor:
+
+```text
+EXACT_TYPED_OPEN_SU2_LEVEL8_GRAPH_RELATION_COMPOSITION_ACROSS_NONCOMMUTING_FUSION_TWIST_AND_REVERSIBLE_CUBIC_PHASE_SHEAR_MODULES_ON_ONE_SHARED9_CELL_QZETA40_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_COMPACT_CLASSICAL_RECURRENCE
+```
+
+Use graph relations of exact reversible maps, not a new trace encoding. The
+actual shared nine-cell SU(2)_8 port must remain unresolved while public
+fusion, twist, and cubic-shear modules consume it. Require typed ownership and
+generation, multiple noncommuting module consumers, final-only
+quantum-dimension projection, exact inverse restoration, unrelated reuse, and
+controls for order, typing, ownership, premature projection, missing or
+reordered inverse, null carrier, and semantic perturbation. Do not materialize
+relation tables, candidate assignments, or answer-dependent compiler data.
+Compare immediately to the strongest compact classical recurrence.
 
 ## 10. Roadmap Maintenance
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`399983b7fb8cb5191c43f8d5a23c7306ab75e5da`. The canonical per-milestone
+`a2faedad86a9235ccd2b1026e01b4ad4e9dd2f61`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12055,3 +12055,48 @@ Hermitian functional, then determine whether the transformed weight vector can
 be eliminated without moving its exact height into an equally wide retained
 functional. Count both dynamic and retained public resources and preserve the
 identical classical recurrence.
+
+## M228 transposed Hermitian trace-functional route decision
+
+The accepted claim is:
+
+```text
+BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS
+```
+
+M228 streams the sixteen exact power-basis Hermitian trace coordinates of the
+resident carrier and traverses the same public unit plans by their transposes
+in reverse composition order. It reproduces the M227 semantics without a
+materialized transformed trace-weight field. The primary dynamic maximum is
+213,219 bits, down 34,053 from M227; retained public state raises the total to
+233,429 bits versus matched raw 129,595. The functional reaches 114,499 bits
+and the primary path performs 150,866,708 transpose-plan operations. All seven
+declared cases remain above raw.
+
+Production and a standalone implementation importing neither M228 nor M227
+production reproduce every result and resource tuple byte-for-byte. All exact
+functional coordinates are released, the three actual backing objects restore
+without reload, and generation-two reuse matches a fresh carrier. This is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical streamed
+sixteen-coordinate functional and transposed-plan recurrence. Accounting is
+complete only for streamed-functional and transposed-plan intervals; retained
+projection during inverse, the whole transaction, and Python/runtime costs are
+not claimed complete. M220--M228 therefore establish a bounded route
+obstruction, not a universal lower bound: every tested reversible
+normalization or dualization moves exact height or equivalent work elsewhere
+and remains above raw. Further gauge-path micro-optimization is retired.
+
+Next:
+
+```text
+EXACT_TYPED_OPEN_SU2_LEVEL8_GRAPH_RELATION_COMPOSITION_ACROSS_NONCOMMUTING_FUSION_TWIST_AND_REVERSIBLE_CUBIC_PHASE_SHEAR_MODULES_ON_ONE_SHARED9_CELL_QZETA40_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_COMPACT_CLASSICAL_RECURRENCE
+```
+
+This changes mechanism. Multiple typed noncommuting graph-relation modules
+must consume the actual unresolved nine-cell fusion port, with no relation
+table or assignment expansion, final-only boundary projection, exact inverse
+restoration, unrelated reuse, and immediate comparison to the strongest
+compact classical recurrence.
