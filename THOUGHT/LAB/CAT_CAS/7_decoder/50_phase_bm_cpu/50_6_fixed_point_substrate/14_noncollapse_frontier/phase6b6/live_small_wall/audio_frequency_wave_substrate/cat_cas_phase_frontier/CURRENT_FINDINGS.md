@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`33de34c74e94e17c6d7c4a2cfd92ba198314ce27`. The canonical per-milestone
+`912f1ed663704e76a0a97789e869abf98bddc7ba`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13024,19 +13024,58 @@ The operator cocycle is therefore real and causal, but carrier-state coherence
 is unnecessary and no distinct phase resource or software advantage follows.
 The contextual-set route stops at this one square.
 
+## M251 DQC1 operator-coherence calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_DQC1_ONE_CLEAN_CONTROL_AND_TWO_QUBIT_MAXIMALLY_MIXED_OPERATOR_COHERENCE_RETURNS_THE_QZETA8_NORMALIZED_TRACE_OF_A_DECLARED_NONCOMMUTING_PUBLIC_WORD_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_DIRECT_FOUR_BY_FOUR_PUBLIC_MATRIX_TRACE_RECURRENCE_ARE_SMALLER_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+```
+
+The service and standalone exact `Q[zeta8]/(zeta8^4+1)` oracle agree on the
+full `8 x 8` density evolution and the identity
+
+```text
+rho1 = (1/8) [[I,U^dagger],[U,I]]
+<X> + i<Y> = Tr(U)/4.
+```
+
+Only the declared normalized trace leaves the abstract Unix socket. The
+service retains the actual 64-cell density backing and four-cell scratch,
+reverses every controlled gate, verifies exact canonical state, then releases
+the response. Descriptor-distinct generation-two reuse consumes the same
+backing and agrees with fresh execution without a snapshot or baseline reload.
+The standalone verifier, rather than the accepted response, reconstructs the
+selected nonproduct joint states and maximally mixed data marginal. A scalar
+word is also accepted and remains factorized, preserving the full declared
+grammar.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. Malformed identifier rejection occurs before
+lease and transaction setup is rollback-safe, including an executed numeric-
+transaction-id control on the same carrier.
+
+The fixed-fixture comparator validates the word then returns its frozen exact
+trace in `O(1)` work. The transferable direct comparator evolves one exact
+`4 x 4` public-word matrix in 16 resident field cells plus declared scratch and
+takes its trace without CATVM inverse work. Both are smaller than the density
+path. M251 therefore establishes bounded operator coherence and machine law,
+not a distinct phase resource, DQC1 hardness, computational or query advantage,
+Small Wall crossing, inference, physical mixed-state or waveform execution,
+physical-bit replacement, or unbounded computation. The explicit-software
+DQC1 route stops at this grammar.
+
 Next:
 
 ```text
-EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
+CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE
 ```
 
-M251 changes the primitive to operator-valued coherence. One clean control
-interferes a bounded public noncommuting `Q(zeta8)` word against a hidden
-maximally mixed two-qubit carrier, with final boundary
-`<X>+i<Y> = Tr(U)/4`. The actual density backing must then be inverted,
-restored, and reused. The comparison must include an `O(1)` frozen-fixture
-baseline and the transferable direct 16-cell matrix-and-trace recurrence.
-If the direct recurrence matches, retire this explicit-software DQC1 route
-without adding qubits or word lengths. M250 establishes no physical
-contextuality, general contextual resource theorem, inference, Small Wall
-crossing, physical execution, bit replacement, or unbounded computation.
+M252 changes the primitive to one hidden coherent order port. Its two branch
+amplitudes consume the same target through `VU` and `UV` and close only to the
+final exact commutator scalar `<psi|U^dagger V^dagger U V|psi>`. The actual
+four-cell branch backing must restore and support unrelated generation-two
+reuse. The decisive comparison is an `O(1)` fixed-fixture invariant plus the
+streamed two-vector classical commutator recurrence. A compact match retires
+this bounded coherent-order route without adding fixtures or target width.

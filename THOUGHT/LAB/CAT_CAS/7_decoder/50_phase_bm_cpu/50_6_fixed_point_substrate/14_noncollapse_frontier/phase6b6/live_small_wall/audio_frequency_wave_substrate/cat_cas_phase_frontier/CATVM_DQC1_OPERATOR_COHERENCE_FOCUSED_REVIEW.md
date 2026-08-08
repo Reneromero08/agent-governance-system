@@ -8,8 +8,7 @@ Verification level: `SEPARATE_REFERENCE_PARITY`
 
 Restoration class: `EXACT_ALGEBRAIC_RESTORATION`
 
-Scientific source head: recorded by the canonical authority reconciliation that
-follows this scientific package commit.
+Scientific source head: `912f1ed663704e76a0a97789e869abf98bddc7ba`
 
 The focused read-only review independently reconstructed exact arithmetic in
 `Q[zeta_8]/(zeta_8^4+1)`, the public two-data-qubit word matrix, the full

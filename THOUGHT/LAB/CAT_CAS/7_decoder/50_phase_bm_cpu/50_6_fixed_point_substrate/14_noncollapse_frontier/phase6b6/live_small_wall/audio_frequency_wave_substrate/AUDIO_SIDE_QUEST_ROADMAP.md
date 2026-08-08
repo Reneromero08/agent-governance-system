@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_PROJECTIVE_WEYL_CONTEXTUAL_PHASE_CALIBRATION_DQC1_OPERATOR_COHERENCE_OPEN`
-**Roadmap version:** `15.34`
+**Status:** `STRICT_DQC1_OPERATOR_COHERENCE_COHERENT_ORDER_OPEN`
+**Roadmap version:** `15.35`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `33de34c74e94e17c6d7c4a2cfd92ba198314ce27`
+**Reconciled source head:** `912f1ed663704e76a0a97789e869abf98bddc7ba`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED`
-**Current claim ceiling:** `EXACT_SOFTWARE_TWO_QUBIT_TYPED_MERMIN_SQUARE_PROJECTIVE_WEYL_CONTEXTUALITY_CALIBRATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_DQC1_ONE_CLEAN_CONTROL_AND_TWO_QUBIT_MAXIMALLY_MIXED_OPERATOR_COHERENCE_RETURNS_THE_QZETA8_NORMALIZED_TRACE_OF_A_DECLARED_NONCOMMUTING_PUBLIC_WORD_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_DIRECT_FOUR_BY_FOUR_PUBLIC_MATRIX_TRACE_RECURRENCE_ARE_SMALLER_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED`
+**Current claim ceiling:** `EXACT_SOFTWARE_ONE_CLEAN_CONTROL_TWO_MAXIMALLY_MIXED_DATA_QUBITS_PUBLIC_WORD_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M250_ESTABLISHES_ONE_EXACT_TYPED_PROJECTIVE_PI_PHASE_COCYCLE_CALIBRATION_BUT_THE_FIXED_MERMIN_PARITY_INVARIANT_IS_O1_CLASSICAL_SO_THE_CONTEXTUAL_SET_ROUTE_IS_RETIRED_AND_M251_CHANGES_TO_MIXED_STATE_OPERATOR_COHERENCE`
+**New mechanism development:** `ACTIVE_AFTER_M251_ESTABLISHES_EXACT_MIXED_STATE_OPERATOR_COHERENCE_WITH_ATOMIC_RESTORATION_BUT_RETIRES_EXPLICIT_SOFTWARE_DQC1_AT_SMALLER_O1_AND_DIRECT_FOUR_BY_FOUR_CLASSICAL_BASELINES_THEN_SELECTS_ONE_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE`
+**Active primary successor:** `CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`33de34c74e94e17c6d7c4a2cfd92ba198314ce27`. The current 250-milestone
+`912f1ed663704e76a0a97789e869abf98bddc7ba`. The current 251-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -12329,23 +12329,62 @@ and machine enforced but supplies no distinct resource or advantage in this
 software family. This closes the one-square contextual route; do not add
 larger contextual sets.
 
+## M251: mixed-state operator coherence is exact but classically compact
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_DQC1_ONE_CLEAN_CONTROL_AND_TWO_QUBIT_MAXIMALLY_MIXED_OPERATOR_COHERENCE_RETURNS_THE_QZETA8_NORMALIZED_TRACE_OF_A_DECLARED_NONCOMMUTING_PUBLIC_WORD_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_DIRECT_FOUR_BY_FOUR_PUBLIC_MATRIX_TRACE_RECURRENCE_ARE_SMALLER_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+```
+
+Production and the standalone `Q[zeta8]/(zeta8^4+1)` oracle independently
+reconstruct one clean control coupled to a maximally mixed two-qubit carrier:
+
+```text
+rho1 = (1/8) [[I,U^dagger],[U,I]]
+<X> + i<Y> = Tr(U)/4.
+```
+
+The abstract Unix-socket CATVM retains the actual 64-cell density backing and
+four-cell scratch. Accepted responses contain only the final normalized trace;
+pre-inverse correlation and marginal predicates are reconstructed by the
+verifier, not released. Every controlled gate is inverted on the same backing,
+canonical state is checked exactly, and descriptor-distinct generation-two
+reuse agrees with fresh execution without a baseline reload. The public grammar
+also accepts scalar words, so nonproductness is evidence for the selected
+fixtures rather than an undeclared transaction requirement.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The final repairs make transaction setup
+rollback-safe, reject malformed non-string identifiers before lease, and keep
+all forward diagnostics inside the verifier.
+
+The strongest fixed-fixture comparator validates the public word and returns
+its frozen exact normalized trace in `O(1)` work. The strongest transferable
+descriptor comparator evolves one exact `4 x 4` public-word matrix in 16
+resident field cells plus declared multiplication scratch and takes its trace
+without CATVM inverse work. Both are smaller than the accepted density path.
+This establishes no distinct phase resource, computational or query advantage,
+Small Wall crossing, DQC1 hardness, physical mixed-state execution, inference,
+physical-bit replacement, or unbounded computation. The explicit-software
+DQC1 route is retired; do not add qubits or longer words.
+
 Selected phase-owned successor:
 
 ```text
-EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
+CATVM_EXACT_QZETA8_COHERENT_ORDER_COMMUTATOR_PHASE_SIGNATURE_WITH_HIDDEN_ORDER_PORT_ATOMIC_RESTORATION_REUSE_AND_MATCHED_STREAMED_CLASSICAL_BASELINE
 ```
 
-M251 changes the primitive to operator-valued coherence of one clean control
-and a maximally mixed hidden two-qubit carrier. It must reproduce the exact
-`Q(zeta8)` identity `<X>+i<Y> = Tr(U)/4` for a bounded descriptor-driven
-noncommuting word, project only that final control boundary, apply the actual
-inverse to the same density backing, and perform unrelated generation-two
-reuse. The strongest fixed-fixture baseline is `O(1)` and the strongest
-transferable baseline is a direct 16-cell public matrix-and-trace recurrence.
-If those baselines dominate, retire explicit-software DQC1 after this one
-grammar; do not add qubits or longer words. No physical mixed-state execution,
-DQC1 hardness, query advantage, Small Wall crossing, inference, physical-bit
-replacement, or unbounded computation may be inferred.
+M252 changes the primitive to one hidden two-cell coherent order port whose
+two branches consume the same target qubit through `VU` and `UV`. It must
+reproduce the exact commutator boundary
+`<psi|U^dagger V^dagger U V|psi>` over `Q(zeta8)`, retain only that scalar,
+reverse the actual four-cell branch state, and support unrelated generation-
+two reuse. The comparison must include an `O(1)` fixed-fixture invariant and
+the streamed two-vector exact classical commutator recurrence. A compact match
+retires this coherent-order route after the bounded suite; do not add order
+fixtures or target width.
 
 ## 10. Roadmap Maintenance
 
