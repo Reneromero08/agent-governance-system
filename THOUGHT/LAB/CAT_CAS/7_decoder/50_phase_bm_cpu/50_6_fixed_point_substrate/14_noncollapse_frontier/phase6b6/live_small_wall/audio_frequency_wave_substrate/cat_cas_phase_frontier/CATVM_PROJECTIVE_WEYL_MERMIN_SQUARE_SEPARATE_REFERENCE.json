@@ -1,0 +1,159 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "central_phase": {
+        "imag": [
+          0,
+          1
+        ],
+        "real": [
+          -1,
+          1
+        ]
+      },
+      "central_phase_exponent_mod4": 2,
+      "context_count": 6,
+      "generation": 1,
+      "hidden_carrier_field_cells": 4,
+      "hidden_context_signature_cells": 6,
+      "hidden_scratch_field_cells": 4,
+      "observable_port_count": 9,
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_carrier_and_custody_backings": true,
+      "variant": "BASE",
+      "work": {
+        "final_overlap_accumulations": 4,
+        "final_overlap_field_multiplications": 4,
+        "forward_pauli_actions": 18,
+        "forward_port_consumptions": 18,
+        "forward_signature_compositions": 18,
+        "forward_vector_cell_reads": 72,
+        "forward_vector_cell_writes": 144,
+        "inverse_pauli_actions": 18,
+        "inverse_port_releases": 18,
+        "inverse_signature_compositions": 18,
+        "inverse_vector_cell_reads": 72,
+        "inverse_vector_cell_writes": 144,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "central_phase": {
+        "imag": [
+          0,
+          1
+        ],
+        "real": [
+          -1,
+          1
+        ]
+      },
+      "central_phase_exponent_mod4": 2,
+      "context_count": 6,
+      "generation": 2,
+      "hidden_carrier_field_cells": 4,
+      "hidden_context_signature_cells": 6,
+      "hidden_scratch_field_cells": 4,
+      "observable_port_count": 9,
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_carrier_and_custody_backings": true,
+      "variant": "H_CONJUGATED_REORDERED",
+      "work": {
+        "final_overlap_accumulations": 4,
+        "final_overlap_field_multiplications": 4,
+        "forward_pauli_actions": 18,
+        "forward_port_consumptions": 18,
+        "forward_signature_compositions": 18,
+        "forward_vector_cell_reads": 72,
+        "forward_vector_cell_writes": 144,
+        "inverse_pauli_actions": 18,
+        "inverse_port_releases": 18,
+        "inverse_signature_compositions": 18,
+        "inverse_vector_cell_reads": 72,
+        "inverse_vector_cell_writes": 144,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "central_phase": {
+        "imag": [
+          0,
+          1
+        ],
+        "real": [
+          -1,
+          1
+        ]
+      },
+      "central_phase_exponent_mod4": 2,
+      "context_count": 6,
+      "generation": 1,
+      "hidden_carrier_field_cells": 4,
+      "hidden_context_signature_cells": 6,
+      "hidden_scratch_field_cells": 4,
+      "observable_port_count": 9,
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_carrier_and_custody_backings": true,
+      "variant": "H_CONJUGATED_REORDERED",
+      "work": {
+        "final_overlap_accumulations": 4,
+        "final_overlap_field_multiplications": 4,
+        "forward_pauli_actions": 18,
+        "forward_port_consumptions": 18,
+        "forward_signature_compositions": 18,
+        "forward_vector_cell_reads": 72,
+        "forward_vector_cell_writes": 144,
+        "inverse_pauli_actions": 18,
+        "inverse_port_releases": 18,
+        "inverse_signature_compositions": 18,
+        "inverse_vector_cell_reads": 72,
+        "inverse_vector_cell_writes": 144,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "controls": {
+    "binary_symplectic_and_dense_boundaries_match": true,
+    "deleting_projective_cocycle_changes_minus_one_to_plus_one": true,
+    "dense_base_and_conjugated_total_products_are_minus_identity": true,
+    "dense_context_products_are_five_plus_identity_and_one_minus_identity": true,
+    "dephased_identity_over_four_trace_against_total_operator_is_minus_one": true,
+    "missing_inverse_fails_reference_release_state": true,
+    "noncommuting_reordered_inverse_fails_reference_release_state": true,
+    "noncontextual_parity_left_product_is_plus_one": true,
+    "parity_contradiction_derived_without_assignment_enumeration": true,
+    "reference_dirty_scratch_rejected": true,
+    "reference_premature_projection_rejected": true,
+    "reference_same_id_changed_descriptor_rejected": true,
+    "reference_stale_generation_rejected": true,
+    "reference_wrong_owner_rejected": true,
+    "required_context_sign_product_is_minus_one": true,
+    "wrong_inverse_completed_path_fails_reference_release_state": true
+  },
+  "independent_oracle": {
+    "assignment_enumeration_used": false,
+    "binary_symplectic_cocycle_reconstructed": true,
+    "dense_four_by_four_context_and_transaction_oracle_executed": true,
+    "dephased_density_operator_trace_executed": true,
+    "production_source_imported": false,
+    "q_i_matrix_arithmetic_reconstructed": true
+  },
+  "oracle_resource_law": {
+    "accepted_transaction_semantic_matvec_terms_per_reference_case": 576,
+    "both_declared_variants_proved_same_fixed_central_exponent": true,
+    "dense_matrix_oracle_is_verifier_only": true,
+    "dense_matvec_scalar_terms_per_action": 16,
+    "strongest_declared_family_classical_baseline": "PUBLIC_VARIANT_VALIDATION_PLUS_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_RETURNING_CENTRAL_EXPONENT2_IN_O1_WORK",
+    "strongest_transferable_descriptor_level_classical_baseline": "BINARY_SYMPLECTIC_PROJECTIVE_2_COCYCLE_CONSTANT_SIGNATURE_STATE_WITH18_COMPOSITIONS"
+  },
+  "result": "PASS_SEPARATE_REFERENCE_PROJECTIVE_WEYL_MERMIN_SQUARE_STRICT_SCOPE"
+}
