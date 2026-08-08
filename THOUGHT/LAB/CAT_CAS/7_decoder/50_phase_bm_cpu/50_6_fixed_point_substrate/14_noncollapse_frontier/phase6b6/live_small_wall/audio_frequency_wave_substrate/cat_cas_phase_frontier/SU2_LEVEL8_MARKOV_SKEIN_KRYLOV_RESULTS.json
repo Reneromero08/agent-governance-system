@@ -1,0 +1,1742 @@
+{
+  "claim": "EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE",
+  "claim_ceiling": "FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY",
+  "claim_limits": {
+    "catalytic_inference_established": false,
+    "catvm_custody": false,
+    "compact_markov_boundary_recurrence_established": false,
+    "computational_advantage": false,
+    "distinct_phase_resource_established": false,
+    "first_truncated_18_strand_case_executed": false,
+    "jones_wenzl_reduced_diagram_carrier_established": false,
+    "nonlinear_diagram_quotient_lower_bound": false,
+    "physical_bit_replacement": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "unbounded_computation_established": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "alternate_public_program_family_boundary_parity": true,
+    "both_distinct_reference_split_prime_degrees_full": true,
+    "both_split_prime_degrees_full": true,
+    "compiler_reads_final_answer": false,
+    "compiler_uses_only_public_topology_and_word": true,
+    "exact_primary_boundary_reduces_to_both_modular_boundaries": true,
+    "intermediate_link_pattern_state_projected": false,
+    "missing_inverse_detected": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "reordered_inverse_rejected": true,
+    "snapshot_command_available": false,
+    "wrong_operation_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_public_program_inverse_rejected": true
+  },
+  "core_diagnostic": {
+    "cases": [
+      {
+        "family": 0,
+        "link_pattern_cells": 2,
+        "peak_modular_state_and_scratch_cells": 4,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              119,
+              228,
+              173,
+              145,
+              64,
+              145,
+              132,
+              227,
+              122,
+              240,
+              122
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "nonzero_recurrence_coefficients": 3,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "e1699f1f3a758a76",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "ad4a94437b21310c"
+          },
+          {
+            "first_terms": [
+              1,
+              238,
+              148,
+              133,
+              52,
+              381,
+              52,
+              248,
+              147,
+              163,
+              400,
+              163
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "nonzero_recurrence_coefficients": 3,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "7708e46d8e4b887b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "67b6b1eb6567982c"
+          }
+        ],
+        "retained_pairing_integer_cells": 8,
+        "retained_skein_action_integer_cells": 12,
+        "retained_skein_action_records": 6,
+        "strands": 4
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 5,
+        "peak_modular_state_and_scratch_cells": 10,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              227,
+              19,
+              27,
+              208,
+              235,
+              175,
+              14,
+              14,
+              78,
+              156,
+              101
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "nonzero_recurrence_coefficients": 6,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "090bb29050333c12",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "f9f3342e539f05c1"
+          },
+          {
+            "first_terms": [
+              1,
+              171,
+              389,
+              322,
+              315,
+              294,
+              46,
+              221,
+              343,
+              360,
+              181,
+              193
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "nonzero_recurrence_coefficients": 6,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "728501f63d7d44f3",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "25774b6eed676540"
+          }
+        ],
+        "retained_pairing_integer_cells": 30,
+        "retained_skein_action_integer_cells": 50,
+        "retained_skein_action_records": 25,
+        "strands": 6
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 14,
+        "peak_modular_state_and_scratch_cells": 28,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              150,
+              15,
+              108,
+              75,
+              31,
+              228,
+              222,
+              183,
+              194,
+              73,
+              116
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "nonzero_recurrence_coefficients": 15,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "9a78e13d1809f37f",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "d7e84bef1b9c5ca9"
+          },
+          {
+            "first_terms": [
+              1,
+              337,
+              383,
+              66,
+              348,
+              11,
+              173,
+              308,
+              269,
+              254,
+              191,
+              123
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "nonzero_recurrence_coefficients": 14,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "4da0864d08655182",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "f95b549d48d55bd9"
+          }
+        ],
+        "retained_pairing_integer_cells": 112,
+        "retained_skein_action_integer_cells": 196,
+        "retained_skein_action_records": 98,
+        "strands": 8
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 42,
+        "peak_modular_state_and_scratch_cells": 84,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              11,
+              196,
+              62,
+              90,
+              38,
+              81,
+              72,
+              61,
+              228,
+              191,
+              45
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "nonzero_recurrence_coefficients": 42,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "f06983e2bced5800",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "bd8831459137788e"
+          },
+          {
+            "first_terms": [
+              1,
+              230,
+              289,
+              121,
+              287,
+              354,
+              52,
+              308,
+              349,
+              18,
+              82,
+              74
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "nonzero_recurrence_coefficients": 42,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "b175559493b5796b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "3de3a0f0eca010f7"
+          }
+        ],
+        "retained_pairing_integer_cells": 420,
+        "retained_skein_action_integer_cells": 756,
+        "retained_skein_action_records": 378,
+        "strands": 10
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 132,
+        "peak_modular_state_and_scratch_cells": 264,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              119,
+              11,
+              7,
+              155,
+              129,
+              9,
+              118,
+              232,
+              105,
+              52,
+              207
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "nonzero_recurrence_coefficients": 133,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "1727eaa4f870d9f9",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "7cd34c5342b5eb58"
+          },
+          {
+            "first_terms": [
+              1,
+              206,
+              357,
+              96,
+              299,
+              392,
+              280,
+              336,
+              177,
+              281,
+              336,
+              134
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "nonzero_recurrence_coefficients": 133,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "9f55bbb7cfba15da",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "72694b4190424fbd"
+          }
+        ],
+        "retained_pairing_integer_cells": 1584,
+        "retained_skein_action_integer_cells": 2904,
+        "retained_skein_action_records": 1452,
+        "strands": 12
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 429,
+        "peak_modular_state_and_scratch_cells": 858,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              228,
+              160,
+              217,
+              2,
+              146,
+              97,
+              17,
+              170,
+              7,
+              214,
+              39
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "nonzero_recurrence_coefficients": 428,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "c13a305746f916e0",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "f264fef5343a4614"
+          },
+          {
+            "first_terms": [
+              1,
+              129,
+              215,
+              73,
+              24,
+              387,
+              62,
+              374,
+              195,
+              37,
+              22,
+              74
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "nonzero_recurrence_coefficients": 426,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "4b9516d86d8399a9",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "818bf348172f22f6"
+          }
+        ],
+        "retained_pairing_integer_cells": 6006,
+        "retained_skein_action_integer_cells": 11154,
+        "retained_skein_action_records": 5577,
+        "strands": 14
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 1430,
+        "peak_modular_state_and_scratch_cells": 2860,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              82,
+              174,
+              1,
+              117,
+              73,
+              37,
+              157,
+              45,
+              67,
+              32,
+              118
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "nonzero_recurrence_coefficients": 1428,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "10cd66e7477b296b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "91c8cbaebe552675"
+          },
+          {
+            "first_terms": [
+              1,
+              152,
+              348,
+              375,
+              270,
+              293,
+              77,
+              236,
+              278,
+              189,
+              60,
+              3
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "nonzero_recurrence_coefficients": 1429,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "b81924f97e7f31eb",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "918ae6ad54e348c5"
+          }
+        ],
+        "retained_pairing_integer_cells": 22880,
+        "retained_skein_action_integer_cells": 42900,
+        "retained_skein_action_records": 21450,
+        "strands": 16
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 2,
+        "peak_modular_state_and_scratch_cells": 4,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              119,
+              228,
+              173,
+              145,
+              64,
+              145,
+              132,
+              227,
+              122,
+              240,
+              122
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "nonzero_recurrence_coefficients": 3,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "e1699f1f3a758a76",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "ad4a94437b21310c"
+          },
+          {
+            "first_terms": [
+              1,
+              238,
+              148,
+              133,
+              52,
+              381,
+              52,
+              248,
+              147,
+              163,
+              400,
+              163
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "nonzero_recurrence_coefficients": 3,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "7708e46d8e4b887b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "67b6b1eb6567982c"
+          }
+        ],
+        "retained_pairing_integer_cells": 8,
+        "retained_skein_action_integer_cells": 12,
+        "retained_skein_action_records": 6,
+        "strands": 4
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 5,
+        "peak_modular_state_and_scratch_cells": 10,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              171,
+              85,
+              40,
+              49,
+              87,
+              223,
+              127,
+              15,
+              82,
+              96,
+              79
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "nonzero_recurrence_coefficients": 6,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "090bb29050333c12",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "7f8e8f91ae2899fd"
+          },
+          {
+            "first_terms": [
+              1,
+              284,
+              50,
+              150,
+              389,
+              177,
+              130,
+              252,
+              288,
+              112,
+              179,
+              120
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "nonzero_recurrence_coefficients": 6,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "728501f63d7d44f3",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "94d1f6a10a5854d9"
+          }
+        ],
+        "retained_pairing_integer_cells": 30,
+        "retained_skein_action_integer_cells": 50,
+        "retained_skein_action_records": 25,
+        "strands": 6
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 14,
+        "peak_modular_state_and_scratch_cells": 28,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              220,
+              156,
+              7,
+              27,
+              228,
+              229,
+              116,
+              151,
+              140,
+              230,
+              93
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "nonzero_recurrence_coefficients": 15,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "9a78e13d1809f37f",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "1739fc526978e9bd"
+          },
+          {
+            "first_terms": [
+              1,
+              208,
+              203,
+              355,
+              371,
+              109,
+              217,
+              307,
+              97,
+              65,
+              327,
+              60
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "nonzero_recurrence_coefficients": 14,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "4da0864d08655182",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "5d923f8f1d3df0c2"
+          }
+        ],
+        "retained_pairing_integer_cells": 112,
+        "retained_skein_action_integer_cells": 196,
+        "retained_skein_action_records": 98,
+        "strands": 8
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 42,
+        "peak_modular_state_and_scratch_cells": 84,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              165,
+              49,
+              79,
+              158,
+              65,
+              187,
+              156,
+              231,
+              39,
+              188,
+              17
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "nonzero_recurrence_coefficients": 42,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "f06983e2bced5800",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "4f6c94d5bc491af8"
+          },
+          {
+            "first_terms": [
+              1,
+              85,
+              322,
+              163,
+              30,
+              224,
+              20,
+              292,
+              39,
+              172,
+              321,
+              215
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "nonzero_recurrence_coefficients": 42,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "b175559493b5796b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "18e5770472117ad7"
+          }
+        ],
+        "retained_pairing_integer_cells": 420,
+        "retained_skein_action_integer_cells": 756,
+        "retained_skein_action_records": 378,
+        "strands": 10
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 132,
+        "peak_modular_state_and_scratch_cells": 264,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              119,
+              11,
+              7,
+              155,
+              129,
+              9,
+              118,
+              232,
+              105,
+              52,
+              207
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "nonzero_recurrence_coefficients": 133,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "1727eaa4f870d9f9",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "7cd34c5342b5eb58"
+          },
+          {
+            "first_terms": [
+              1,
+              206,
+              357,
+              96,
+              299,
+              392,
+              280,
+              336,
+              177,
+              281,
+              336,
+              134
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "nonzero_recurrence_coefficients": 133,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "9f55bbb7cfba15da",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "72694b4190424fbd"
+          }
+        ],
+        "retained_pairing_integer_cells": 1584,
+        "retained_skein_action_integer_cells": 2904,
+        "retained_skein_action_records": 1452,
+        "strands": 12
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 429,
+        "peak_modular_state_and_scratch_cells": 858,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              228,
+              165,
+              60,
+              72,
+              171,
+              13,
+              184,
+              157,
+              137,
+              165,
+              180
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "nonzero_recurrence_coefficients": 428,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "c13a305746f916e0",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "7f68879bf08ab982"
+          },
+          {
+            "first_terms": [
+              1,
+              24,
+              198,
+              168,
+              121,
+              28,
+              173,
+              261,
+              278,
+              245,
+              168,
+              63
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "nonzero_recurrence_coefficients": 426,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "4b9516d86d8399a9",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "d02927e23c924b1c"
+          }
+        ],
+        "retained_pairing_integer_cells": 6006,
+        "retained_skein_action_integer_cells": 11154,
+        "retained_skein_action_records": 5577,
+        "strands": 14
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 1430,
+        "peak_modular_state_and_scratch_cells": 2860,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              136,
+              121,
+              75,
+              57,
+              57,
+              127,
+              70,
+              111,
+              177,
+              72,
+              212
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "nonzero_recurrence_coefficients": 1428,
+            "prime": 241,
+            "recurrence_digest_fnv1a64": "10cd66e7477b296b",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "93460c72bbc1c81a"
+          },
+          {
+            "first_terms": [
+              1,
+              74,
+              130,
+              292,
+              39,
+              257,
+              321,
+              342,
+              238,
+              216,
+              77,
+              57
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "nonzero_recurrence_coefficients": 1429,
+            "prime": 401,
+            "recurrence_digest_fnv1a64": "b81924f97e7f31eb",
+            "semantic_perturbation_changes_prefix": true,
+            "sequence_digest_fnv1a64": "a64ec2a9d92b20ca"
+          }
+        ],
+        "retained_pairing_integer_cells": 22880,
+        "retained_skein_action_integer_cells": 42900,
+        "retained_skein_action_records": 21450,
+        "strands": 16
+      }
+    ],
+    "first_possible_truncation_strands": 18,
+    "jones_wenzl_truncation_active": false,
+    "public_word_period_sweeps": 10,
+    "schema": "cat_cas.su2_level8_markov_skein_krylov_core.v1"
+  },
+  "degree_law": {
+    "all_cases_full_at_both_primes": true,
+    "all_primary_markov_sequences_identical_to_m217_vacuum_sequences": true,
+    "arbitrary_braid_program_lower_bound": false,
+    "both_family_markov_minimal_degrees": [
+      2,
+      5,
+      14,
+      42,
+      132,
+      429,
+      1430
+    ],
+    "first_possible_truncation_strands": 18,
+    "jones_wenzl_truncation_active": false,
+    "link_pattern_dimensions": [
+      2,
+      5,
+      14,
+      42,
+      132,
+      429,
+      1430
+    ],
+    "strands": [
+      4,
+      6,
+      8,
+      10,
+      12,
+      14,
+      16
+    ],
+    "uniform_fixed_degree_markov_recurrence_rejected_for_declared_family": true
+  },
+  "exact_boundary_modular_parity": {
+    "agreement": true,
+    "core_first_period_boundaries": {
+      "241": 82,
+      "401": 152
+    },
+    "exact_boundary_commitment": "beb4545484e23f999a1073f8b6d5b2346d300f33250dbddfefb3353d64dca80f",
+    "exact_modular_boundaries": {
+      "241": 82,
+      "401": 152
+    }
+  },
+  "matched_classical_baselines": {
+    "computational_advantage": false,
+    "phase_specific_reduction": false,
+    "same_state_scratch_and_full_degree_law": true,
+    "strongest_compact": "IDENTICAL_NONCROSSING_LINK_PATTERN_SKEIN_TRANSFER_AND_MARKOV_CLOSURE_RECURRENCE"
+  },
+  "representation_parity": {
+    "all_primary_markov_sequences_identical_to_m217_vacuum_sequences": true,
+    "exact_primary_boundary_identical_to_m217": true,
+    "interpretation": "THE_LINK_PATTERN_SKEIN_IS_A_BASIS_LEVEL_REEXPRESSION_OF_THE_SAME_PRETRUNCATION_TEMPERLEY_LIEB_MODULE_NOT_A_NEW_COMPACT_CARRIER"
+  },
+  "resource_law": {
+    "accepted_transaction_retained_inverse_history": 0,
+    "baseline_reload_bytes": 0,
+    "controller_backend_traffic_bytes": 0,
+    "excluded_not_zero": "PYTHON_AND_CPP_CONTAINER_CAPACITY_HASH_TABLE_ALLOCATOR_PROCESS_IMAGE_JSON_SERIALIZATION_TIMING_AND_WHOLE_PROCESS_PEAKS",
+    "primary_exact_carrier_field_cells": 1430,
+    "primary_exact_peak_carrier_plus_scratch_field_cells": 2860,
+    "primary_exact_scratch_field_cells": 1430,
+    "primary_local_gate_applications_per_prime": 438450,
+    "primary_period_applications_per_prime": 2923,
+    "primary_public_recurrence_coefficient_slots": 1431,
+    "primary_public_recurrence_nonzero_coefficients": 1428,
+    "primary_retained_pairing_integer_cells": 22880,
+    "primary_retained_skein_action_integer_cells": 42900,
+    "primary_retained_skein_action_records": 21450,
+    "primary_scalar_sequence_field_cells": 2924,
+    "snapshot_traffic_bytes": 0
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_EXACT_SU2_LEVEL8_MARKOV_SKEIN_FULL_BOUNDARY_DEGREE_OBSTRUCTION",
+  "schema": "cat_cas.su2_level8_markov_skein_krylov.v1",
+  "separate_reference": {
+    "all_cases_full_at_both_distinct_split_primes": true,
+    "cases": [
+      {
+        "family": 0,
+        "link_pattern_cells": 2,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              269,
+              411,
+              319,
+              402,
+              154,
+              402,
+              476,
+              410,
+              372,
+              640,
+              372
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              39,
+              799,
+              476,
+              765,
+              494,
+              765,
+              18,
+              798,
+              842,
+              880,
+              842
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 4
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 5,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              509,
+              560,
+              427,
+              338,
+              477,
+              127,
+              435,
+              209,
+              431,
+              396,
+              485
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              522,
+              611,
+              81,
+              263,
+              349,
+              788,
+              502,
+              446,
+              228,
+              5,
+              191
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 6
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 14,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              608,
+              519,
+              593,
+              56,
+              82,
+              196,
+              424,
+              76,
+              200,
+              305,
+              92
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              418,
+              696,
+              640,
+              140,
+              781,
+              680,
+              252,
+              686,
+              635,
+              161,
+              346
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 8
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 42,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              149,
+              185,
+              173,
+              248,
+              543,
+              543,
+              574,
+              383,
+              181,
+              324,
+              125
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              712,
+              524,
+              225,
+              759,
+              46,
+              252,
+              443,
+              431,
+              385,
+              129,
+              395
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 10
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 132,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              568,
+              378,
+              455,
+              228,
+              298,
+              408,
+              347,
+              217,
+              602,
+              252,
+              590
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              232,
+              771,
+              813,
+              413,
+              186,
+              200,
+              727,
+              464,
+              549,
+              104,
+              542
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 12
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 429,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              144,
+              81,
+              493,
+              552,
+              52,
+              32,
+              215,
+              321,
+              91,
+              503,
+              11
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              816,
+              780,
+              620,
+              540,
+              300,
+              632,
+              236,
+              846,
+              373,
+              551,
+              852
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 14
+      },
+      {
+        "family": 0,
+        "link_pattern_cells": 1430,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              93,
+              579,
+              636,
+              594,
+              119,
+              479,
+              101,
+              287,
+              86,
+              86,
+              180
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              663,
+              866,
+              215,
+              736,
+              517,
+              326,
+              269,
+              743,
+              272,
+              583,
+              609
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 16
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 2,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              269,
+              411,
+              319,
+              402,
+              154,
+              402,
+              476,
+              410,
+              372,
+              640,
+              372
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              39,
+              799,
+              476,
+              765,
+              494,
+              765,
+              18,
+              798,
+              842,
+              880,
+              842
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 2,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 4
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 5,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              302,
+              292,
+              366,
+              350,
+              40,
+              199,
+              633,
+              556,
+              555,
+              529,
+              408
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              723,
+              36,
+              136,
+              392,
+              565,
+              587,
+              647,
+              297,
+              409,
+              485,
+              404
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 5,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 6
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 14,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              23,
+              163,
+              262,
+              454,
+              302,
+              232,
+              275,
+              425,
+              509,
+              485,
+              5
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              829,
+              866,
+              724,
+              292,
+              292,
+              551,
+              666,
+              28,
+              471,
+              357,
+              175
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 14,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 8
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 42,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              40,
+              397,
+              513,
+              291,
+              185,
+              149,
+              20,
+              507,
+              362,
+              322,
+              573
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              276,
+              375,
+              494,
+              446,
+              127,
+              767,
+              164,
+              641,
+              768,
+              763,
+              357
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 42,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 10
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 132,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              568,
+              378,
+              455,
+              228,
+              298,
+              408,
+              347,
+              217,
+              602,
+              252,
+              590
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              232,
+              771,
+              813,
+              413,
+              186,
+              200,
+              727,
+              464,
+              549,
+              104,
+              542
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 132,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 12
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 429,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              213,
+              329,
+              103,
+              132,
+              134,
+              497,
+              57,
+              629,
+              396,
+              184,
+              386
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              585,
+              330,
+              553,
+              314,
+              93,
+              469,
+              202,
+              114,
+              806,
+              818,
+              427
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 429,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 14
+      },
+      {
+        "family": 1,
+        "link_pattern_cells": 1430,
+        "prime_results": [
+          {
+            "first_terms": [
+              1,
+              104,
+              539,
+              260,
+              139,
+              458,
+              575,
+              287,
+              415,
+              33,
+              560,
+              470
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "prime": 641,
+            "root40": 366
+          },
+          {
+            "first_terms": [
+              1,
+              784,
+              625,
+              652,
+              116,
+              867,
+              877,
+              437,
+              247,
+              123,
+              58,
+              623
+            ],
+            "holdout_violations": 0,
+            "markov_scalar_recurrence_degree": 1430,
+            "prime": 881,
+            "root40": 832
+          }
+        ],
+        "strands": 16
+      }
+    ],
+    "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "reference_algorithm": "BIT_FILTERED_WALKS_FIXED_ARRAY_PAIRINGS_DISTINCT_SKEIN_TABLE_AND_MARKOV_STREAM",
+    "reference_imports_m218_production": false,
+    "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "schema": "cat_cas.su2_level8_markov_skein_krylov_separate_reference.v1",
+    "split_primes": [
+      641,
+      881
+    ],
+    "terminal": false,
+    "verification_level": "SEPARATE_REFERENCE_PARITY"
+  },
+  "source_dependencies": {
+    "m214_exact_field_and_public_word_sha256": "bc54076303fd12d57d9b57974832d451da603e123ea550f2312f81ad67bd9b11",
+    "m217_modular_primitives_sha256": "d540e11d6f48f35a779b439f1e14500d26222b3168ee45dd132a7566528fc828",
+    "m217_separate_reference_primitives_sha256": "92abca6012552b7301708281b4a7ac0ef60070efe8ba47eb651004aa66a9587f",
+    "m218_core_sha256": "2368a9b6a8e00d96169c289952947abd52b6f5d30e39e7a919ffc65faa5477f4",
+    "m218_separate_reference_sha256": "f1868aab9ab7e97c9430b87a08a4559837c4edaa99cf34ee6c7307af487e8829",
+    "m218_wrapper_sha256": "f028ca9820126e0d7b02f4cc7b58b37aaa57df5f2625e4f017fb48b7cf8a7029"
+  },
+  "terminal": false,
+  "transaction": {
+    "baseline_reload_used": false,
+    "fresh_restored_reuse_boundary_agreement": true,
+    "fresh_restored_reuse_state_agreement": true,
+    "fresh_reuse": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "a210a7a59e91a5ebb5755444ab39b20a06d02901508b5a5b66eaedbc839b1a13",
+      "boundary_payload_bits": 110,
+      "canonical_post_restoration_state_exact": true,
+      "forward_field_cells": 1430,
+      "forward_nonzero_field_cells": 1430,
+      "forward_payload_bits": 165594,
+      "forward_state_commitment": "454709d782ea740aa3dfb4a25771925cd41a7710e8aa7fadcfdebcb792bda95b",
+      "missing_inverse_error_cells_and_cursor": 1535,
+      "restoration_error_field_cells": 0,
+      "restoration_generation": 1,
+      "same_coefficient_backing": true,
+      "same_scratch_backing": true
+    },
+    "fresh_reuse_full_lifecycle_work": {
+      "boundary_commitment_hashes": 1,
+      "closure_loop_graph_integer_visits": 45760,
+      "closure_pairings_streamed": 1430,
+      "field_additions": 602030,
+      "field_multiplications": 698564,
+      "forward_operations": 105,
+      "gate_applications": 210,
+      "inverse_operations": 105,
+      "peak_carrier_field_cells": 1430,
+      "peak_carrier_payload_bits": 165594,
+      "peak_scratch_field_cells": 1430,
+      "peak_scratch_payload_bits": 165594,
+      "peak_total_live_field_cells": 2860,
+      "port_leases": 1,
+      "port_releases": 1,
+      "public_descriptor_hashes": 426,
+      "public_descriptor_integers_hashed": 4874079,
+      "skein_column_updates": 300300,
+      "state_commitment_field_cells_hashed": 1430,
+      "state_commitment_hashes": 1
+    },
+    "primary": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "beb4545484e23f999a1073f8b6d5b2346d300f33250dbddfefb3353d64dca80f",
+      "boundary_payload_bits": 171,
+      "canonical_post_restoration_state_exact": true,
+      "forward_field_cells": 1430,
+      "forward_nonzero_field_cells": 1430,
+      "forward_payload_bits": 243846,
+      "forward_state_commitment": "6dcae51519308ab298fdca83cb849bd7cabdcfc94877464342445f90f41daf4f",
+      "missing_inverse_error_cells_and_cursor": 1580,
+      "restoration_error_field_cells": 0,
+      "restoration_generation": 1,
+      "same_coefficient_backing": true,
+      "same_scratch_backing": true
+    },
+    "primary_full_lifecycle_work": {
+      "boundary_commitment_hashes": 1,
+      "closure_loop_graph_integer_visits": 45760,
+      "closure_pairings_streamed": 1430,
+      "field_additions": 859430,
+      "field_multiplications": 994574,
+      "forward_operations": 150,
+      "gate_applications": 300,
+      "inverse_operations": 150,
+      "peak_carrier_field_cells": 1430,
+      "peak_carrier_payload_bits": 243846,
+      "peak_scratch_field_cells": 1430,
+      "peak_scratch_payload_bits": 243846,
+      "peak_total_live_field_cells": 2860,
+      "port_leases": 1,
+      "port_releases": 1,
+      "public_descriptor_hashes": 606,
+      "public_descriptor_integers_hashed": 6933549,
+      "skein_column_updates": 429000,
+      "state_commitment_field_cells_hashed": 1430,
+      "state_commitment_hashes": 1
+    },
+    "primary_program": {
+      "family": 0,
+      "rounds": 10,
+      "steps": 150,
+      "strands": 16
+    },
+    "restoration_generation_after_reuse": 2,
+    "reuse": {
+      "baseline_reload_used": false,
+      "boundary_commitment": "a210a7a59e91a5ebb5755444ab39b20a06d02901508b5a5b66eaedbc839b1a13",
+      "boundary_payload_bits": 110,
+      "canonical_post_restoration_state_exact": true,
+      "forward_field_cells": 1430,
+      "forward_nonzero_field_cells": 1430,
+      "forward_payload_bits": 165594,
+      "forward_state_commitment": "454709d782ea740aa3dfb4a25771925cd41a7710e8aa7fadcfdebcb792bda95b",
+      "missing_inverse_error_cells_and_cursor": 1535,
+      "restoration_error_field_cells": 0,
+      "restoration_generation": 2,
+      "same_coefficient_backing": true,
+      "same_scratch_backing": true
+    },
+    "reuse_full_lifecycle_work": {
+      "boundary_commitment_hashes": 1,
+      "closure_loop_graph_integer_visits": 45760,
+      "closure_pairings_streamed": 1430,
+      "field_additions": 602030,
+      "field_multiplications": 698564,
+      "forward_operations": 105,
+      "gate_applications": 210,
+      "inverse_operations": 105,
+      "peak_carrier_field_cells": 1430,
+      "peak_carrier_payload_bits": 165594,
+      "peak_scratch_field_cells": 1430,
+      "peak_scratch_payload_bits": 165594,
+      "peak_total_live_field_cells": 2860,
+      "port_leases": 1,
+      "port_releases": 1,
+      "public_descriptor_hashes": 426,
+      "public_descriptor_integers_hashed": 4874079,
+      "skein_column_updates": 300300,
+      "state_commitment_field_cells_hashed": 1430,
+      "state_commitment_hashes": 1
+    },
+    "reuse_program": {
+      "family": 1,
+      "rounds": 7,
+      "steps": 105,
+      "strands": 16
+    },
+    "topology": {
+      "first_possible_truncation_strands": 18,
+      "jones_wenzl_truncation_active": false,
+      "link_pattern_cells": 1430,
+      "retained_pairing_integer_cells": 22880,
+      "retained_skein_action_integer_cells": 42900,
+      "retained_skein_action_records": 21450
+    }
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
