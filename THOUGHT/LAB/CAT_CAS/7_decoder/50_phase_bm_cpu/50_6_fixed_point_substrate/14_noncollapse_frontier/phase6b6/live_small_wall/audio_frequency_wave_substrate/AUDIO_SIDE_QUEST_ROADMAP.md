@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_PERIOD10_FINAL_BOUNDARY_FULL_MINIMAL_DEGREE_OBSTRUCTION`
-**Roadmap version:** `14.83`
+**Status:** `STRICT_SU2_LEVEL8_PRETRUNCATION_SKEIN_FUSION_EQUIVALENCE_OBSTRUCTION`
+**Roadmap version:** `14.84`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ac76aa83dca37f5e9f97d77e984593532f1b6bd5`
+**Reconciled source head:** `da7e777e3be2c0aa394f9ab2f00eb713a72c2399`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER`
-**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_PUBLIC_PERIOD10_SWEEP_MONODROMY_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_TO_VACUUM_SCALAR_HANKEL_RANK_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M217_PERIOD10_FINAL_BOUNDARY_MINIMAL_DEGREE_EQUALS_FULL_FUSION_PATH_DIMENSION_ACROSS_THE_DECLARED_GROWING_FAMILY`
+**New mechanism development:** `ACTIVE_AFTER_M218_PRETRUNCATION_LINK_PATTERN_SKEIN_IS_SEQUENCE_IDENTICAL_TO_THE_FULL_DEGREE_FUSION_PATH_MODULE_AND_REQUIRES_A_SECOND_FULL_BUFFER`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SU2_LEVEL8_JONES_WENZL_REDUCED_TEMPERLEY_LIEB_DIAGRAM_PHASE_CARRIER_WITH_NATIVE_SKEIN_COMPOSITION_AND_MARKOV_TRACE_FIXED_DIAGRAM_QUOTIENT_OR_GROWING_SUPPORT_ACROSS_STRANDS_AND_SWEEP_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_LINK_INVARIANT_RECURRENCE`
+**Active primary successor:** `EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER
+EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
 ```
 
 Not established:
@@ -10410,6 +10410,80 @@ diagram support, exact coefficient height, rewrite/rematerialization work,
 restoration and reuse against the strongest identical classical skein or link
 invariant recurrence. It must report growing support as a bounded no-go rather
 than add another larger braid fixture.
+
+## M218: pretruncation skein/fusion basis-equivalence obstruction
+
+The separately reconstructed strict-scope claim is:
+
+```text
+EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
+```
+
+Production independently enumerates noncrossing link patterns and applies
+each public braid through the native Kauffman skein law
+`A I + A^-1 e_i`, followed by normalized cup/cap Markov closure. A separate
+no-production-import C++ implementation reconstructs the basis, action,
+closure and scalar recurrence at distinct split primes. Both public period-10
+families have link-pattern dimensions and Markov scalar minimal degrees
+`2,5,14,42,132,429,1430` across strands `4,6,8,10,12,14,16` at primary primes
+241 and 401 and reference primes 641 and 881. Every primary scalar sequence is
+identical to its M217 vacuum-coordinate sequence, including the exact primary
+boundary commitment
+`beb4545484e23f999a1073f8b6d5b2346d300f33250dbddfefb3353d64dca80f`.
+
+This range is explicitly pretruncation: the `SU(2)_8` Jones--Wenzl ceiling is
+not active through sixteen strands, and its first possible effect is at
+eighteen. The result therefore proves a basis-level reexpression obstruction,
+not a Jones--Wenzl-reduced compact carrier.
+
+At the primary sixteen-strand family-0 case, the accepted path retains 1,430
+exact carrier cells and 1,430 exact temporary cells. All 1,430 forward
+coefficients are nonzero, the combined payload is 243,846 bits, the normalized
+Markov closure uses 22,880 pairing integers, and the retained native action
+contains 21,450 records with 42,900 integers. The scalar diagnostic stores
+2,924 sequence cells and 1,431 recurrence slots and performs 2,923 period
+applications and 438,450 local skein gates per prime. Streamed work and plans
+are counted; allocator, native-library, serialization, timing and
+whole-process peaks remain excluded rather than treated as zero.
+
+The exact transaction projects only the completed Markov boundary, reverses
+the actual skein program, restores the same carrier and scratch backings
+exactly, and reuses them for an unrelated sixteen-strand family-1 seven-round
+program at generation two without snapshot reload. Wrong owner, real wrong
+operation type, wrong public-program inverse, premature projection, missing
+and reordered inverse, null carrier, semantic perturbations and four alternate
+public programs discriminate. The accepted comparator is the identical
+link-pattern skein recurrence; M217 supplies an equivalent full fusion-path
+realization of the same boundary sequence.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+No CATVM custody, compact diagram quotient, distinct phase resource,
+computational advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE
+```
+
+M218 closes the proposed linear diagram-basis repair at the declared ceiling.
+The successor changes the phase update law itself by interleaving a reversible,
+topology-local cubic shear with native skein composition. It must measure
+nonlinear closure support, exact coefficient height, temporary state,
+forward/inverse work, restoration and reuse against the identical compact
+classical polynomial recurrence. It must preserve a growing-support or
+growing-height obstruction if found, not replace this test with another
+period-10 or dormant-truncation fixture.
 
 ## 10. Roadmap Maintenance
 

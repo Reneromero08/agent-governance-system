@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`ac76aa83dca37f5e9f97d77e984593532f1b6bd5`. The registry assigns one
+`da7e777e3be2c0aa394f9ab2f00eb713a72c2399`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 217-milestone lane is active by user direction. Continue from the
+The current 218-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,31 +53,34 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER
+EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_PUBLIC_PERIOD10_SWEEP_MONODROMY_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_TO_VACUUM_SCALAR_HANKEL_RANK_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY
+FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Independent
-split-prime Hankel certificates show that both declared public period-10
-`SU(2)_8` sweep families have vacuum-boundary minimal scalar degrees
-`2,5,14,42,132,429,1430` across four through sixteen strands, exactly matching
-the full fusion-path dimensions. The accepted exact transaction projects only
-the final vacuum boundary, restores the same 1,430-cell coefficient backing,
-and reuses it for an unrelated program at generation two. The strongest
-classical comparator is the identical public scalar Krylov diagnostic plus
-the full fusion-path transfer. This rejects only a compact linear final-boundary
-recurrence for the declared family, not every nonlinear or diagrammatic
-representation. No CATVM custody, distinct phase resource, advantage, Small
-Wall crossing, physical execution, physical-bit replacement, catalytic
-inference, or unbounded computation is established. Continue only by changing
-the representation or phase law; do not add more period-10 strand or sweep
-fixtures.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. A native
+Kauffman/Temperley--Lieb link-pattern implementation and a separate
+no-production-import implementation reproduce full Markov-boundary scalar
+degrees `2,5,14,42,132,429,1430` for both public period-10 families across
+four through sixteen strands. The resulting scalar sequences are identical
+to the M217 fusion-path vacuum sequences. Jones--Wenzl truncation is not active
+in this range; its first possible effect is at eighteen strands. At sixteen
+strands the accepted skein path therefore retains 1,430 carrier cells plus a
+1,430-cell temporary buffer, projects only the final Markov boundary, restores
+the same coefficient and scratch backings exactly, and reuses them for an
+unrelated program at generation two. The strongest classical comparator is
+the identical link-pattern skein recurrence, with the identical M217
+fusion-path transfer as an equivalent basis realization. This establishes a
+pretruncation basis-level equivalence obstruction, not diagram compaction.
+No CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference, or
+unbounded computation is established. Continue by changing the phase update
+law itself; do not add more linear period-10 or dormant-truncation fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -271,7 +274,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M217_PERIOD10_FINAL_BOUNDARY_MINIMAL_DEGREE_EQUALS_FULL_FUSION_PATH_DIMENSION_ACROSS_THE_DECLARED_GROWING_FAMILY
+ACTIVE_AFTER_M218_PRETRUNCATION_LINK_PATTERN_SKEIN_IS_SEQUENCE_IDENTICAL_TO_THE_FULL_DEGREE_FUSION_PATH_MODULE_AND_REQUIRES_A_SECOND_FULL_BUFFER
 ```
 
 The named
@@ -280,21 +283,23 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_SU2_LEVEL8_JONES_WENZL_REDUCED_TEMPERLEY_LIEB_DIAGRAM_PHASE_CARRIER_WITH_NATIVE_SKEIN_COMPOSITION_AND_MARKOV_TRACE_FIXED_DIAGRAM_QUOTIENT_OR_GROWING_SUPPORT_ACROSS_STRANDS_AND_SWEEP_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_LINK_INVARIANT_RECURRENCE
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE
 ```
 
-M214--M217 show that the declared growing `SU(2)_8` family does not acquire a
+M214--M218 show that the declared growing `SU(2)_8` family does not acquire a
 compact exact machine merely by using fixed local fusion labels, canonical
-MPS form, public-topology factor elimination or a scalar boundary recurrence.
-The period-10 vacuum-boundary minimal degree reaches the complete fusion-path
-dimension for both public families. Do not add more strand, sweep, MPS-rank or
-Krylov fixtures. Change the representation and operator algebra by composing
-root-of-unity Temperley--Lieb diagrams through native skein rules and applying
-Jones--Wenzl reduction before the Markov trace. Count distinct reduced diagram
-support, exact coefficient height, rewrite and rematerialization work,
-restoration, reuse and the strongest identical classical skein or link
-invariant recurrence. A growing diagram frontier is a valid bounded no-go;
-it must not be described as phase compaction.
+MPS form, public-topology factor elimination, a scalar boundary recurrence,
+or a pretruncation link-pattern basis. The M218 skein and M217 fusion-path
+vacuum sequences are identical, their minimal degrees reach the complete
+module dimension, and the skein implementation needs a second full state
+buffer. Jones--Wenzl truncation is dormant through the declared ceiling. Do
+not add more strand, sweep, MPS-rank, Krylov, or linear skein fixtures. Change
+the phase update law itself by testing a reversible topology-local cubic
+shear on unresolved link-pattern coefficients, interleaved with the native
+skein action. Count nonlinear closure support, exact coefficient height,
+temporary state, inverse work, restoration, reuse, and the identical compact
+classical polynomial recurrence. Failure to close or growing height is a
+valid bounded obstruction; it must not be described as a phase resource.
 
 ## 7. Native No-Smuggle Law
 

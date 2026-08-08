@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ac76aa83dca37f5e9f97d77e984593532f1b6bd5`. The canonical per-milestone
+`da7e777e3be2c0aa394f9ab2f00eb713a72c2399`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11619,3 +11619,49 @@ measure reduced diagram support, exact height, native skein rewrite work,
 restoration and reuse against the strongest identical classical skein or link
 invariant recurrence, and preserve a growing-support no-go if that is what the
 experiment establishes.
+
+## M218 pretruncation skein/fusion equivalence obstruction
+
+The accepted strict-scope result is:
+
+```text
+EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
+```
+
+A native noncrossing link-pattern implementation applies the Kauffman skein
+law and normalized cup/cap Markov closure. A separate C++ implementation that
+does not import production reconstructs the basis, local action, closure and
+scalar minimal-degree certificates at distinct split primes. Both public
+period-10 families have degrees `2,5,14,42,132,429,1430` across four through
+sixteen strands, and every primary Markov scalar sequence equals the
+corresponding M217 fusion-path vacuum sequence.
+
+The result is explicitly pretruncation: Jones--Wenzl reduction is dormant
+through sixteen strands and can first act at eighteen. At the sixteen-strand
+primary, the link-pattern path retains 1,430 exact carrier cells plus 1,430
+exact scratch cells, all 1,430 forward coefficients are nonzero, and combined
+payload is 243,846 bits. The exact transaction projects only the final Markov
+boundary, restores the same carrier and scratch backings exactly and reuses
+them for an unrelated program at generation two without reload. Wrong
+owner/type/program inverse, premature projection, missing/reordered inverse,
+null carrier, semantic perturbation and alternate public-program controls
+pass.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. The strongest
+classical baseline is the identical link-pattern recurrence, with the M217
+fusion-path recurrence providing an equivalent basis realization. No compact
+diagram quotient, CATVM custody, distinct phase resource, advantage, Small
+Wall crossing, physical execution, physical-bit replacement, catalytic
+inference or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE
+```
+
+This changes the phase update law rather than adding a larger linear skein
+fixture. It must measure nonlinear closure support and exact height while
+preserving final-only projection, exact reversal and reuse against the
+identical compact classical polynomial recurrence.
