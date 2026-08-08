@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`ac048fbe201180f61a748c729316790107c33705`. The registry assigns one
+`407d3576bf1497f664e953eec7d39b56bd2a9728`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 223-milestone lane is active by user direction. Continue from the
+The current 224-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,37 +53,36 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS
+BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_PARAMETERS3_7_9_11_13_17_19_DIRECT_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
+FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_PARAMETERS3_7_9_11_13_17_19_LEDGER_NORM_AND_SCALE_REMATERIALIZED_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. It changes the
-M222 trace law by evaluating the weighted Hermitian trace directly in the
-public power basis. Residual-cell conjugates and norm/weighted-cell field
-products disappear from that subpath, but caller-retained unit and scale
-fields plus five rational accumulator values remain above the matched raw
-recurrence. Exact inversion restores the actual carrier without retained
-value history. A standalone exact-arithmetic implementation reproduces every
-declared case, state and boundary commitment, balance and resource tuple,
-restoration and reuse result without importing M223, M222 or M221 production.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. It
+rematerializes exact line weights and rebasing multipliers from the resident
+ledger and public unit descriptors, releases all direct-trace caller field
+scalars, and eliminates accepted-path lifecycle scale conjugates. Production
+and a standalone exact implementation match every declared case, normalized
+work tuple, state and boundary commitment, restoration and reuse result
+without the reference importing M224, M223, M222 or M221 production.
 
-The primary four-strand depth-four case reaches 364,275 declared exact live
-bits versus 129,595 for the matched raw recurrence; all seven declared cases
-remain above raw. The strongest classical comparator is the identical direct
-power-basis Ramanujan-trace coordinate recurrence. Python object/container,
-allocator/interpreter, process, serialization, timing and whole-process RSS
-costs are excluded rather than zero. This is a bounded exact-height
-obstruction, not compact bounded-width state. No CATVM custody, distinct phase
-resource, advantage, Small Wall crossing, physical execution, physical-bit
-replacement, catalytic inference, or unbounded computation is established.
-Continue by releasing and reversibly rematerializing derived caller scalars
-and reducing rational liveness; do not add deeper cubic fixtures.
+The primary four-strand depth-four peak falls from M223's 364,275 to 301,426
+declared exact live bits, but remains above the matched raw 129,595 bits. All
+seven cases remain above raw and peak at `UNIT_POWER_ACCUMULATE`. The strongest
+classical comparator is the identical ledger-rematerialized direct coordinate
+recurrence. Python object/container, allocator/interpreter, process,
+serialization, timing and whole-process RSS costs are excluded rather than
+zero. This is a bounded repair plus a relocated exact-height obstruction, not
+compact bounded-width state. No CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference, or unbounded computation is established. Continue by
+fusing dynamic unit power into the ledger accumulator; do not add deeper cubic
+fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -277,7 +276,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M223_ELIMINATES_RESIDUAL_CELL_FIELD_PRODUCTS_BUT_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_RATIONAL_VALUES_DOMINATE_DECLARED_LIVE_PAYLOAD
+ACTIVE_AFTER_M224_RELEASES_DIRECT_TRACE_CALLER_FIELD_SCALARS_AND_SCALE_CONJUGATES_BUT_UNIT_POWER_ACCUMULATION_KEEPS_ALL7_CASES_ABOVE_RAW
 ```
 
 The named
@@ -286,22 +285,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+EXACT_FUSED_LEDGER_ACCUMULATOR_DYNAMIC_BINARY_UNIT_POWER_REMATERIALIZATION_WITHOUT_STANDALONE_POWER_RESULT_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
-M214--M223 show that fixed local labels, topology contraction, scalar boundary
+M214--M224 show that fixed local labels, topology contraction, scalar boundary
 recurrences, link-pattern skein state, nonlinear cubic phase updates,
 cyclotomic unit gauges, ledger-native streaming, aggregate-norm elimination,
 and direct coordinate traces have not produced a compact exact resource beyond
-the identical classical recurrence. M223 removes the targeted field products,
-but source-complete exact liveness still peaks at 364,275 bits versus 129,595
-raw because derived caller scalars and five rational values remain live. Do
-not add more strand, depth, or line-search fixtures. Release and reversibly
-rematerialize derived line weights from public topology and the exact ledger,
-fuse or uncompute rational temporaries, count all rematerialization and live
-state, preserve final-only exact restoration/reuse, and retain the identical
-compact classical recurrence. A reduction that moves information into history
-or public answer-bearing tables is not a repair.
+the identical classical recurrence. M224 releases the derived direct-trace
+caller fields and accepted-path scale conjugates, reducing the primary peak by
+62,849 bits, but dynamic unit-power accumulation still reaches 301,426 bits
+versus 129,595 raw and dominates every case. Do not add more strand, depth, or
+line-search fixtures. Fuse dynamic power into the ledger accumulator without a
+standalone returned power value, count every exact old value, factor, output and
+ledger binding, preserve final-only exact restoration/reuse, and retain the
+identical compact classical recurrence. A reduction that moves information into
+history or public answer-bearing tables is not a repair.
 
 ## 7. Native No-Smuggle Law
 

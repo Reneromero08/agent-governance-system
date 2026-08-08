@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_DIRECT_TRACE_RATIONAL_ACCUMULATOR_NO_GO`
-**Roadmap version:** `14.89`
+**Status:** `STRICT_SU2_LEVEL8_REMATERIALIZED_UNIT_POWER_NO_GO`
+**Roadmap version:** `14.90`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ac048fbe201180f61a748c729316790107c33705`
+**Reconciled source head:** `407d3576bf1497f664e953eec7d39b56bd2a9728`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_PARAMETERS3_7_9_11_13_17_19_DIRECT_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_PARAMETERS3_7_9_11_13_17_19_LEDGER_NORM_AND_SCALE_REMATERIALIZED_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M223_ELIMINATES_RESIDUAL_CELL_FIELD_PRODUCTS_BUT_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_RATIONAL_VALUES_DOMINATE_DECLARED_LIVE_PAYLOAD`
+**New mechanism development:** `ACTIVE_AFTER_M224_RELEASES_DIRECT_TRACE_CALLER_FIELD_SCALARS_AND_SCALE_CONJUGATES_BUT_UNIT_POWER_ACCUMULATION_KEEPS_ALL7_CASES_ABOVE_RAW`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_FUSED_LEDGER_ACCUMULATOR_DYNAMIC_BINARY_UNIT_POWER_REMATERIALIZATION_WITHOUT_STANDALONE_POWER_RESULT_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`ac048fbe201180f61a748c729316790107c33705`. The current 223-milestone
+`407d3576bf1497f664e953eec7d39b56bd2a9728`. The current 224-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS
+BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -10773,6 +10773,57 @@ and fuse or uncompute rational temporaries without moving their information
 into retained history. Count rematerialization work and every exact live value,
 preserve final-only projection and same-backing restoration/reuse, and retain
 the identical compact classical recurrence.
+
+## M224: ledger rematerialization and unit-power accumulation no-go
+
+The independently reconstructed strict-scope claim is:
+
+```text
+BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS
+```
+
+The accepted path rebuilds trace weights and residual-rebasing multipliers
+from the exact resident seven-cell ledger and public unit descriptors. It
+releases all direct-trace caller field scalars and eliminates accepted-path
+scale conjugates. The primary four-strand depth-four declared-live maximum
+drops by 62,849 bits, from M223's 364,275 to 301,426 bits, but remains
+171,831 bits above the matched raw recurrence. Every one of the seven
+declared cases remains above raw and peaks at `UNIT_POWER_ACCUMULATE`.
+
+The primary run performs 2,394 ledger-norm rematerializations, 177 ledger-scale
+rematerializations, 2,394 direct-trace weight rematerializations, 105 candidate
+multiplier rematerializations, 24 selected-multiplier rematerializations, and
+4,552 explicit rematerialization field multiplications. These are counted;
+rematerialization has not been relabeled as free release. Exact restoration
+uses the original residual, ledger and scratch backings, no baseline reload is
+used, and unrelated reuse reaches generation two.
+
+The standalone M224 reference imports none of M224, M223, M222 or M221
+production and reproduces cases, normalized work, state and boundary
+commitments, balance, restoration and reuse. The qualifier independently
+regenerates both JSON artifacts and checks the predecessor delta. Classification
+is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical ledger-rematerialized
+direct coordinate recurrence. Python object/container, allocator/interpreter,
+process, serialization, timing and RSS costs remain excluded rather than zero.
+No CATVM custody, distinct phase resource, computational advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference or
+unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_FUSED_LEDGER_ACCUMULATOR_DYNAMIC_BINARY_UNIT_POWER_REMATERIALIZATION_WITHOUT_STANDALONE_POWER_RESULT_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+This must fuse dynamic binary unit-power work into the ledger accumulator so a
+standalone exact power result is not retained beside the accumulator. It must
+count old accumulator, current power, product, public descriptors, ledger
+integers and any rematerialized state at each multiply, preserve exact
+same-backing restoration and reuse, and retain the identical classical
+recurrence. Do not add more strand, depth or line-search fixtures.
 
 ## 10. Roadmap Maintenance
 

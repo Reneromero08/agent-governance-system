@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ac048fbe201180f61a748c729316790107c33705`. The canonical per-milestone
+`407d3576bf1497f664e953eec7d39b56bd2a9728`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11874,3 +11874,45 @@ Next:
 ```text
 EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
 ```
+
+## M224 ledger rematerialization and unit-power accumulation no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS
+```
+
+Exact trace weights and selected rebasing multipliers are now rematerialized
+from the resident seven-cell ledger and public unit descriptors. The accepted
+path retains zero direct-trace caller field scalars and materializes zero scale
+conjugates. This reduces the primary declared-live peak from M223's 364,275
+bits to 301,426 bits, while the matched raw recurrence remains 129,595 bits.
+All seven cases remain above raw and peak at `UNIT_POWER_ACCUMULATE`.
+
+The primary path counts 2,394 ledger-norm, 177 ledger-scale, 2,394 trace-weight,
+105 candidate-multiplier and 24 selected-multiplier rematerializations plus
+4,552 rematerialization field multiplications. The standalone reference
+imports none of M224, M223, M222 or M221 production and matches normalized
+case and reuse work. Exact same-backing restoration, no reload, generation-two
+unrelated reuse, and fresh/restored state and boundary agreement all pass.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. The
+strongest compact classical baseline is the identical rematerialized direct
+coordinate recurrence. Excluded Python object/container, allocator,
+interpreter, process, serialization, timing and RSS costs are not zero. No
+CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference or
+unbounded computation is established.
+
+Next:
+
+```text
+EXACT_FUSED_LEDGER_ACCUMULATOR_DYNAMIC_BINARY_UNIT_POWER_REMATERIALIZATION_WITHOUT_STANDALONE_POWER_RESULT_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+Fuse dynamic unit-power work directly into the ledger accumulator, without a
+standalone returned power value, and count every exact input, output,
+accumulator and ledger binding. Preserve the no-go if the identical classical
+recurrence retains the same law.
