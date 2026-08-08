@@ -1,0 +1,224 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_wigner_commitment": "731e20adc8d5d007e20b5ffa92a4a0cf8393d19220a0ce8d2681305db17e2e1b",
+      "hilbert_amplitude_cells": 5,
+      "interface_qudits": 1,
+      "negative_cell_count": 5,
+      "negative_mass": {
+        "a_numerator": 0,
+        "b_sqrt5_numerator": 2,
+        "denominator_twice_power5_exponent": 1
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_wigner_commitment": "75404310a62e72a7440b161662d30b869a0968ef2f28033041f3e22f409db703",
+      "hilbert_amplitude_cells": 25,
+      "interface_qudits": 2,
+      "negative_cell_count": 20,
+      "negative_mass": {
+        "a_numerator": 5,
+        "b_sqrt5_numerator": 7,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_wigner_commitment": "2409ee637996cb0b09cfa317e0cb6e60e1dd79be2270472547ed169d8dcf0e16",
+      "hilbert_amplitude_cells": 125,
+      "interface_qudits": 3,
+      "negative_cell_count": 675,
+      "negative_mass": {
+        "a_numerator": 19,
+        "b_sqrt5_numerator": 19,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_wigner_commitment": "9d9363004acfb39cc7070cb408d5a5b86e289dbbfe43c5440d1b9e949e006324",
+      "hilbert_amplitude_cells": 5,
+      "interface_qudits": 1,
+      "negative_cell_count": 5,
+      "negative_mass": {
+        "a_numerator": 0,
+        "b_sqrt5_numerator": 2,
+        "denominator_twice_power5_exponent": 1
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "099b89867cb6cb0c480a100ae617e302c9041ab1a3d909c357609e706de3147d"
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_wigner_commitment": "0b6e15ed66ed0dd82b77fefade941b76b2f5d0116f94b50b20352c7c16f4f8e7",
+      "hilbert_amplitude_cells": 25,
+      "interface_qudits": 2,
+      "negative_cell_count": 20,
+      "negative_mass": {
+        "a_numerator": 5,
+        "b_sqrt5_numerator": 7,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_wigner_commitment": "1e0d8ae5bc9197938376b7a3c5401726105c55c34e85c267e5190dd63aeb4fd3",
+      "hilbert_amplitude_cells": 125,
+      "interface_qudits": 3,
+      "negative_cell_count": 675,
+      "negative_mass": {
+        "a_numerator": 19,
+        "b_sqrt5_numerator": 19,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    }
+  ],
+  "controls": {
+    "all_cubic_augmented_interfaces_have_positive_negativity": true,
+    "amplitudes_or_density_matrices_serialized": false,
+    "clifford_shams_exactly_nonnegative": true,
+    "computational_basis_wigner_support_analytic": true,
+    "cubic_family_perturbation_changes_amplitude_state": true,
+    "cubic_third_finite_difference_nonzero": true,
+    "dirty_scratch_rejected": true,
+    "full_wigner_projection_rejected": true,
+    "missing_inverse_rejected": true,
+    "negative_cell_coordinates_serialized": false,
+    "null_carrier_rejected": true,
+    "path_histories_or_assignments_enumerated": false,
+    "precomputed_cubic_kernel_tables_retained": false,
+    "premature_negative_mass_projection_rejected": true,
+    "public_compiler_reads_final_answer": false,
+    "quadratic_third_finite_difference_zero": true,
+    "reordered_inverse_rejected": true,
+    "resident_wigner_cells_serialized": false,
+    "same_id_changed_descriptor_rejected": true,
+    "stale_generation_rejected": true,
+    "wrong_generation_rejected": true,
+    "wrong_interface_arity_rejected": true,
+    "wrong_inverse_after_remaining_schedule_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_type_rejected": true
+  },
+  "evolves_exact_amplitudes": true,
+  "implements_independent_custody_state_machine": true,
+  "imports_m238_or_m237_production": false,
+  "reuse": {
+    "fresh_restored_boundary_agreement": true,
+    "fresh_restored_resource_signature_agreement": true,
+    "fresh_reuse": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_wigner_commitment": "1e0d8ae5bc9197938376b7a3c5401726105c55c34e85c267e5190dd63aeb4fd3",
+      "hilbert_amplitude_cells": 125,
+      "interface_qudits": 3,
+      "negative_cell_count": 675,
+      "negative_mass": {
+        "a_numerator": 19,
+        "b_sqrt5_numerator": 19,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    "primary": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_wigner_commitment": "2409ee637996cb0b09cfa317e0cb6e60e1dd79be2270472547ed169d8dcf0e16",
+      "hilbert_amplitude_cells": 125,
+      "interface_qudits": 3,
+      "negative_cell_count": 675,
+      "negative_mass": {
+        "a_numerator": 19,
+        "b_sqrt5_numerator": 19,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 1,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    "restoration_generation_after_reuse": 2,
+    "reuse": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_wigner_commitment": "1e0d8ae5bc9197938376b7a3c5401726105c55c34e85c267e5190dd63aeb4fd3",
+      "hilbert_amplitude_cells": 125,
+      "interface_qudits": 3,
+      "negative_cell_count": 675,
+      "negative_mass": {
+        "a_numerator": 19,
+        "b_sqrt5_numerator": 19,
+        "denominator_twice_power5_exponent": 2
+      },
+      "negative_mass_positive": true,
+      "normalization_exact": true,
+      "purity_exact": true,
+      "restoration_generation": 2,
+      "same_wigner_and_scratch_backings": true,
+      "selected_boundary_commitment": "dbdeb5f2a8a03183dadadd4decfb3ba86c9de4443b9d9d434a8b6e233cbc66cc"
+    },
+    "same_backing_across_primary_and_reuse": true
+  },
+  "schema": "cat_cas.zeta5_wigner_cubic_magic_interface_reference.v1",
+  "source_sha256": "dcfc59e2e874ab68838707bbb2900affeb19e06c97007382fe33e8ebf339f350",
+  "streams_final_wigner_reconstruction": true
+}
