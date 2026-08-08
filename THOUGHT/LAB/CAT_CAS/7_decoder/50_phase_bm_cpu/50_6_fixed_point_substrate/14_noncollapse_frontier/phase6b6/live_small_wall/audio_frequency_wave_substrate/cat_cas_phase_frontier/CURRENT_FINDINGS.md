@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`db9a08708886bbad171d029007bd8f3d9e220d01`. The canonical per-milestone
+`93b72393f801d4ab59ed34161611b3f9bebf0d10`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11754,3 +11754,49 @@ coordinates, stream candidate scoring, and apply only one selected net unit
 action. It must count all scalar-unit, norm, product, mutation, inverse and
 projection temporaries and preserve a no-go if the raw lifecycle remains
 smaller.
+
+## M221 ledger-native vector-materialization repair and trace-norm no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_UNIT_GAUGE_ELIMINATES_RAW_AND_CANDIDATE_VECTOR_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_EXACT_TRACE_NORM_SCALARS_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_LEDGER_NATIVE_RECURRENCE_REMAINS
+```
+
+The carrier now evolves directly as unit-ledger times residual. Linear skein
+updates act on the residual, cubic shears use the relative squared unit, gauge
+scores stream one residual cell at a time, and only the selected net unit
+action mutates the carrier. The accepted lifecycle materializes zero raw
+actual vectors and zero candidate residual vectors.
+
+The primary four-strand depth-four resident state is 53,550 bits versus
+57,586 raw, but exact trace-norm temporaries raise maximum declared live
+payload to 372,362 bits versus 129,595 for the matched raw recurrence. The
+six-strand depth-two and eight-strand depth-one ledger-native/raw maxima are
+352,174/133,246 and 44,133/17,174 bits. All seven declared cases remain above
+the matched raw path, with
+`EXACT_TRACE_LINE_NORM_FACTOR_AND_CANDIDATE_NORM` dominant.
+
+A standalone exact reference imports no M221 production and reproduces the
+accepted state, boundary, balance, resource, restoration, reuse and control
+tuples. The residual, seven-cell ledger and scratch backings restore exactly
+and support unrelated generation-two reuse without reload. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The identical ledger-native recurrence is the strongest compact classical
+baseline. Logical named live intervals exclude Python container capacity,
+allocator/interpreter state, serialization, timing and whole-process RSS.
+No CATVM custody, distinct phase resource, computational advantage, Small
+Wall crossing, physical execution, physical-bit replacement, catalytic
+inference or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_RESIDUAL_CELLS_WITHOUT_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_OR_PERSISTING_EXACT_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
+```
+
+This must remove aggregate cyclotomic norm-field residency, count every
+remaining exact scalar and integer accumulator, and preserve the no-go if the
+height obstruction persists.
