@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`. The canonical per-milestone
+`3928f566116a4acd36eeb440ab11e7064ad3e86a`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12147,3 +12147,57 @@ consume that same resident message before native pointwise intersection and
 the only projection. Every reversible accumulator branch must uncompute and
 restore its backing. Nominal labels, sequential map wrappers, relation tables,
 assignment expansion, and answer-dependent compilation do not qualify.
+
+## M230 bounded nonfunctional fusion-signature fanout and intersection
+
+M230 closes M229's nominal-consumer defect in fixed bounded scope. The
+fundamental SU(2)_8 fusion signature is implemented analytically as the path
+neighbor law, with 16 directed support edges and seven multi-target sources.
+It produces a new nine-cell internal Q(zeta_40) message. Separate twist and
+cubic-shear rail backings consume the same actual resident internal backing,
+and a reversible coordinatewise product produces the intersection rail before
+the final fusion and only scalar boundary projection. No relation table,
+assignment expansion, or answer-dependent topology compilation is present.
+
+The initial fixture placed both cubic deltas outside internal support, making
+the distinguishing cubic term dead after intersection. This was repaired
+before sealing: family 0 uses endpoint 1 to 2 and family 1 uses 2 to 1. Both
+production and the independent polynomial-quotient oracle now require a 3/7
+cubic-phase perturbation to change both the intersection commitment and final
+boundary. The other controls reject wrong owner, generation, program, type,
+premature or internal projection, undermerge, duplicate branch, missing or
+reordered inverse, stale generation, and null carrier.
+
+All five produced rails clear by the actual reverse shears. Every original
+backing remains identical, the canonical discrete carrier state restores
+exactly, reuse advances to generation two, fresh and restored reuse agree, and
+no baseline reload occurs. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`; the focused repaired-source disposition is
+`PASS_STRICT_SCOPE`.
+
+The matched resource comparison is deliberately unfavorable. The relation
+path retains 45 work-rail field cells versus 9 in the compact streamed
+contraction when the common public input is excluded; totals including that
+input are 54 versus 18. The largest declared relation interval has 60 field
+cells and 22 retained topology integers. Resource measurements are only
+`PACKAGE_SELF_REVIEW`, with projected-boundary inverse liveness,
+whole-transaction liveness, runtime objects, allocator/interpreter state,
+serialization, timing, and process RSS excluded or unclaimed. This establishes
+bounded open relation-message fanout and intersection, not a phase-specific
+reduction, CATVM custody, computational advantage, Small Wall crossing,
+physical execution, physical-bit replacement, inference, or unbounded
+computation.
+
+Next:
+
+```text
+TOPOLOGY_REMATERIALIZED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_WITH_ONE_RESIDENT9_CELL_SHARED_INTERNAL_MESSAGE_TWO_BOUNDED_BRANCH_SCALARS_STREAMED_TRANSPOSE_FUSION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_COMPACT_CLASSICAL_STREAM
+```
+
+Remove the measured retained-rail obstruction once: retain the actual internal
+message, derive both active branch scalars from public topology at the moment
+of consumption, intersect them, and stream the transposed final fusion into
+the final boundary before exact uncomputation. Do not add more M230 families.
+If rematerialization only reproduces the compact classical recurrence or moves
+cost into equivalent work, seal that obstruction and change mechanism.

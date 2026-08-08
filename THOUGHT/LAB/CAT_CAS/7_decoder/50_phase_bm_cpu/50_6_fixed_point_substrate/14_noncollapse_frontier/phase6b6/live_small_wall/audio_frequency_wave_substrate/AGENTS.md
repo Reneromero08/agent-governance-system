@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`. The registry assigns one
+`3928f566116a4acd36eeb440ab11e7064ad3e86a`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 229-milestone lane is active by user direction. Continue from the
+The current 230-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,13 +53,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER
 ```
 
 Claim ceiling:
 
 ```text
-QZETA40_SU2_LEVEL8_SIMPLE_OBJECT9_CELL_SEQUENTIAL_REVERSIBLE_MAPS_FUSION_PARAMETERS0_1_TWIST_PARAMETERS0_1_CUBIC_SHEAR_PHASES3_7_PUBLIC_ROUNDS1_2_3_FAMILIES0_1_PRIMARY3_0_REUSE2_1_DIRECT_PROCESS_ONLY_NOT_OPEN_RELATION_SIGNATURE_CLOSURE
+QZETA40_SU2_LEVEL8_FIXED_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_TWO_PUBLIC_TWIST_CUBIC_BRANCH_FAMILIES_SIX9_CELL_RAILS_PRIMARY_FAMILY0_REUSE_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
@@ -70,18 +70,19 @@ same-backing restoration, and generation-two reuse. Fusion, twist, and cubic
 shear are pairwise noncommuting and no relation table or assignment expansion
 is materialized.
 
-M229 is deliberately a negative relational calibration. Its modules execute
-sequentially on one full nine-cell vector. The three consumer numbers are
-nominal public descriptor labels, not distinct consumer capabilities; no open
-relation signature is constructed, no shared unresolved relational port is
-contracted, and no nonfunctional relation closes. The stronger open-relation
-interpretation is `REJECTED_GENERALIZATION`. The strongest classical
-comparator is the identical nine-coordinate recurrence. Linear-kernel scalar
-temporaries, program-commitment compilation transients, whole-transaction
-liveness, and Python/runtime costs are not claimed complete. M220--M228 remain
-a separate bounded gauge-route obstruction. No CATVM custody, distinct phase
-resource, advantage, Small Wall crossing, physical execution, physical-bit
-replacement, catalytic inference, or unbounded computation is established.
+M230 repairs M229's nominal-consumer defect. An analytic nonfunctional
+fundamental-fusion signature produces a fresh nine-cell internal message; the
+same backing is read by distinct twist and cubic-shear branch rails; a native
+reversible Hadamard product closes those branches before the only projection.
+Both public families use in-support cubic endpoints, and independently
+changing the cubic phase changes both the intersection and final boundary.
+The result is still a bounded negative resource calibration: retained working
+rails use 45 field cells versus 9 for the matched stream, or 54 versus 18 when
+the shared public input is included. Resource counts are package-local and do
+not claim projected-boundary inverse liveness, whole-transaction liveness, or
+Python/runtime costs. No CATVM custody, distinct phase resource, advantage,
+Small Wall crossing, physical execution, physical-bit replacement, catalytic
+inference, or unbounded computation is established.
 
 The accumulated bounded architecture includes:
 
@@ -275,7 +276,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M229_REPAIRS_MONOTONE_GENERATION_AND_ESTABLISHES_EXACT_TYPED_SHARED_VECTOR_MAP_EXECUTION_BUT_REJECTS_OPEN_RELATION_SIGNATURE_CLOSURE_AND_IDENTIFIES_NOMINAL_CONSUMER_LABELS_AS_THE_OBSTRUCTION
+ACTIVE_AFTER_M230_ESTABLISHES_BOUNDED_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_BUT_MATCHED_STREAMING_USES9_WORK_CELLS_VERSUS45_RETAINED_RELATION_WORK_CELLS
 ```
 
 The named
@@ -284,20 +285,21 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+TOPOLOGY_REMATERIALIZED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_WITH_ONE_RESIDENT9_CELL_SHARED_INTERNAL_MESSAGE_TWO_BOUNDED_BRANCH_SCALARS_STREAMED_TRANSPOSE_FUSION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_COMPACT_CLASSICAL_STREAM
 ```
 
-M229 confirms that exact reversible maps, public typing, monotone generation,
-an unprojected full vector, and nominal consumer labels still amount only to
-ordinary sequential vector execution. Do not add more maps, labels, rounds,
-or vector fixtures. Construct an actual nonfunctional SU(2)_8 fusion relation
-signature, reversibly fan its resident unresolved internal message to distinct
-twist and cubic-shear branch registers, and close those branches by native
-pointwise intersection before the only projection. The shared internal port
-must be an actual produced relation message consumed by both branches, not the
-input vector renamed as a port. Preserve exact reversal and same-backing reuse,
-materialize no relation table or assignments, and compare to the identical
-best compact classical message recurrence.
+M230 establishes the requested bounded nonfunctional relation-message fanout
+and intersection, but retaining all five non-source nine-cell work rails loses
+to an executed stream that retains only the nine-cell internal message. Do not
+add more fixed families or widen this fixture. Derive the branch and transposed
+final-fusion values from public topology, rematerialize bounded scalar branch
+values only while they are consumed, and uncompute them exactly. Preserve the
+same resident unresolved internal message, semantic activity of both branches,
+final-only projection, exact same-backing restoration, and unrelated reuse.
+Compare like-for-like public-input, work, transient, descriptor, and full-path
+costs to the strongest compact classical stream. If equivalent work/state
+simply moves into rematerialization, record the obstruction and change
+mechanism again.
 
 ## 7. Native No-Smuggle Law
 

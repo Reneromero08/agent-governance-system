@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_TYPED_SHARED_VECTOR_MAP_CALIBRATION_NOT_RELATION_CLOSURE`
-**Roadmap version:** `14.95`
+**Status:** `STRICT_SU2_LEVEL8_OPEN_FUSION_FANOUT_INTERSECTION_CLASSICAL_SMALLER`
+**Roadmap version:** `14.96`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`
+**Reconciled source head:** `3928f566116a4acd36eeb440ab11e7064ad3e86a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE`
-**Current claim ceiling:** `QZETA40_SU2_LEVEL8_SIMPLE_OBJECT9_CELL_SEQUENTIAL_REVERSIBLE_MAPS_FUSION_PARAMETERS0_1_TWIST_PARAMETERS0_1_CUBIC_SHEAR_PHASES3_7_PUBLIC_ROUNDS1_2_3_FAMILIES0_1_PRIMARY3_0_REUSE2_1_DIRECT_PROCESS_ONLY_NOT_OPEN_RELATION_SIGNATURE_CLOSURE`
+**Current highest milestone:** `BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER`
+**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FIXED_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_TWO_PUBLIC_TWIST_CUBIC_BRANCH_FAMILIES_SIX9_CELL_RAILS_PRIMARY_FAMILY0_REUSE_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M229_REPAIRS_MONOTONE_GENERATION_AND_ESTABLISHES_EXACT_TYPED_SHARED_VECTOR_MAP_EXECUTION_BUT_REJECTS_OPEN_RELATION_SIGNATURE_CLOSURE_AND_IDENTIFIES_NOMINAL_CONSUMER_LABELS_AS_THE_OBSTRUCTION`
+**New mechanism development:** `ACTIVE_AFTER_M230_ESTABLISHES_BOUNDED_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_BUT_MATCHED_STREAMING_USES9_WORK_CELLS_VERSUS45_RETAINED_RELATION_WORK_CELLS`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `TOPOLOGY_REMATERIALIZED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_WITH_ONE_RESIDENT9_CELL_SHARED_INTERNAL_MESSAGE_TWO_BOUNDED_BRANCH_SCALARS_STREAMED_TRANSPOSE_FUSION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_COMPACT_CLASSICAL_STREAM`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
+BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER
 ```
 
 Not established:
@@ -4969,15 +4969,16 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-The current continuation follows M229's strict negative calibration. Public
-typing, monotone generation, and exact reversible execution on one unprojected
-nine-cell vector do not construct an open relation signature; nominal integer
-consumer labels are not independent consumers. Do not add more sequential
-maps or rename a vector as a relation port. Build a nonfunctional fusion
-signature whose actual resident internal message fans out to separate twist
-and cubic-shear branches and closes by native intersection without tables or
-assignment expansion. This current directive supersedes every historical
-`continue from` sentence in the chronological evidence narrative below.
+The current continuation follows M230's bounded relational positive and
+resource negative. A nonfunctional fusion signature now produces a real
+resident nine-cell internal message, two distinct branch rails consume the
+same backing, and native reversible Hadamard intersection closes them. The
+retained relation path nevertheless uses 45 work cells versus 9 for the
+matched stream, or 54 versus 18 including the public input. Do not add more
+fixed families. Rematerialize topology-derived scalar branch values and the
+transposed final fusion around the one resident internal message; if the
+compact classical law remains identical, preserve that obstruction and change
+mechanism again. This directive supersedes historical continuation prose.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
 exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
@@ -11129,6 +11130,60 @@ only boundary projection. Reversible accumulator shears must uncompute every
 branch and restore the same backings. Public analytic kernels may stream;
 relation tables, assignments, decoded internal labels, nominal consumer-only
 wrappers, and answer-dependent compilation remain forbidden.
+
+## M230: bounded nonfunctional fusion-signature fanout and intersection
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUNDAMENTAL_FUSION_SIGNATURE_PRODUCES_ONE_ACTUAL_SHARED9_CELL_INTERNAL_RELATION_MESSAGE_CONSUMED_BY_SEPARATE_TWIST_AND_CUBIC_SHEAR_BRANCH_BACKINGS_AND_CLOSED_BY_NATIVE_HADAMARD_INTERSECTION_WITHOUT_RELATION_TABLES_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_AN_EXECUTED9_CELL_STREAMED_CLASSICAL_CONTRACTION_IS_SMALLER
+```
+
+An analytic fundamental-fusion path signature has 16 directed support edges
+and seven source labels with two targets. It produces a fresh nine-cell
+Q(zeta_40) internal message rather than renaming the input vector. Distinct
+twist and cubic-shear rails read the same resident backing, and a reversible
+Hadamard product rail closes their common label before the final fusion and
+only scalar projection. Both public families use distinct in-support cubic
+endpoints; changing the cubic phase changes both intersection and boundary.
+All five forward accumulator shears reverse in dependency order, restore every
+original rail backing exactly, advance persistent generation, and permit an
+unrelated family to reuse the same carrier without reload.
+
+Production and a separate ordinary-polynomial quotient implementation agree
+on both families, controls, boundary and output commitments, exact
+restoration, stale-generation rejection, and generation-two reuse. The result
+is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. A focused adversarial review passed after
+repairing out-of-support cubic targets and asymmetric baseline accounting.
+
+The resource result is negative. Excluding their common public input, the
+retained relation path uses 45 work-rail field cells and the matched stream
+uses 9. Including input, the comparison is 54 versus 18. The largest declared
+relation interval has 60 field cells and 22 retained public descriptor
+integers. These resource numbers are `PACKAGE_SELF_REVIEW`: projected boundary
+liveness during inverse, whole-transaction liveness, Python objects,
+allocator/interpreter state, serialization, timing, and process RSS are not
+claimed complete. The classical stream computes identical boundaries without
+retaining twist, cubic, intersection, or output vectors. No CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference, or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+TOPOLOGY_REMATERIALIZED_EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_SIGNATURE_FANOUT_INTERSECTION_WITH_ONE_RESIDENT9_CELL_SHARED_INTERNAL_MESSAGE_TWO_BOUNDED_BRANCH_SCALARS_STREAMED_TRANSPOSE_FUSION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_COMPACT_CLASSICAL_STREAM
+```
+
+This is one bounded repair of the measured retained-rail obstruction, not an
+indefinite fixture-optimization route. Keep the produced internal relation
+message resident and unresolved, rematerialize the two semantically active
+branch values from public topology only at consumption, close them natively,
+stream the transposed final fusion into the boundary, and uncompute all scalar
+scratch. Count recomputation, topology, transients, restoration, and reuse on
+both paths. If equivalent state or work merely moves elsewhere, record the
+obstruction and change representation class.
 
 ## 10. Roadmap Maintenance
 
