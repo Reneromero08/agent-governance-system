@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`986cd93270dda250bd14e255c5d22427f1f821d9`. The canonical per-milestone
+`6380d317b868f7e684fbb75726649c43e90d327e`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12935,3 +12935,54 @@ generation-two reuse. Its strongest comparator is the exact O(1) all-`L`
 formula; the streamed O(`L`) recurrence is parity only. A confirmed dichotomy
 retires this family and does not establish a general coherence-catalyst or
 physical energy theorem.
+
+## M249 finite U1 phase-reference return dichotomy
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
+```
+
+M249 tests the finite open, cyclic, and bilateral shift-reference mechanisms
+without extending the earlier finite-p catalyst. Exact production and
+standalone `Q(sqrt(2))` arithmetic agree for `L=2,4,8,16` on
+
+```text
+p1 = (L-1)b^2/L
+C  = b[1+a(L-2)]/L
+minor = -ab/L != 0.
+```
+
+Thus every accepted lawful finite normalizable reference becomes correlated
+with the system. The cyclic exact-return control instead has nonzero wrap
+weight and a nonzero formal total-number commutator. The bilateral exact shift
+eigenreference is nonnormalizable because its nonzero coefficients have
+constant modulus.
+
+The CATVM service releases only the three-field final boundary after exact
+inverse restoration and canonical verification. Generation-two unrelated-gate
+reuse consumes the same actual `2L` backing and agrees with a fresh carrier;
+disconnect and injected failures restore before response or rejection. The
+strongest exact classical comparator is the `O(1)` public boundary formula,
+so no work or space advantage is present.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The result is not a theorem about every
+coherence catalyst or physical energy conservation. No distinct phase
+resource, advantage, Small Wall crossing, physical execution, bit replacement,
+inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
+```
+
+The next mechanism tests one exact typed Mermin square under the native
+projective Weyl 2-cocycle. It must preserve the shared-observable custody law,
+project only the central context phase, reverse the actual actions, and reuse
+the same carrier. The matched constant-state binary-symplectic recurrence is
+the primary comparator. A match retires contextual holonomy after this single
+calibration rather than starting a larger contextual-fixture series.

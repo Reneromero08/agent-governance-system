@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_CUBIC_MAGIC_CATALYST_EXACT_RETURN_RESOURCE_BALANCE_NO_ADVANTAGE_U1_PHASE_REFERENCE_DICHOTOMY_OPEN`
-**Roadmap version:** `15.32`
+**Status:** `STRICT_CATVM_U1_PHASE_REFERENCE_ENERGY_WRAP_DICHOTOMY_PROJECTIVE_WEYL_COCYCLE_CALIBRATION_OPEN`
+**Roadmap version:** `15.33`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4c540e0f23d24a4e8b4546cdd971dd59a695e9f1`
+**Reconciled source head:** `6380d317b868f7e684fbb75726649c43e90d327e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_P5_CUBIC_MAGIC_STATE_CATALYST_RETURNS_ONE5_CELL_QZETA5_CATALYST_AFTER_ONE_AND_TWO_DISTINCT_COHERENT_SYNDROME_FEEDBACK_USES_WITH_ATOMIC_RESPONSE_ORDERING_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_JOINT_CORRECTION_CONTAINS_TWO_BIVARIATE_CUBIC_TERMS_AND_THE_DIRECT_SINGLE_QUDIT_CUBIC_PHASE_AND_SYMBOLIC_CLASSICAL_IDENTITY_ARE_SMALLER_WITH_NO_MAGIC_OR_COMPUTATIONAL_ADVANTAGE`
-**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_WIDTHS1_2_THREE_PUBLIC_CUBIC_CATALYST_DESCRIPTORS_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE`
+**Current claim ceiling:** `EXACT_SOFTWARE_QSQRT2_FINITE_SHIFT_COVARIANT_U1_REFERENCE_FAMILY_L2_4_8_16_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M248_ESTABLISHES_EXACT_RETURN_OF_ONE_P5_CUBIC_CATALYST_BUT_FINDS_THE_JOINT_CORRECTION_SUPPLIES_TWO_BIVARIATE_CUBIC_TERMS_AND_DIRECT_CUBIC_AND_SYMBOLIC_CLASSICAL_PATHS_ARE_SMALLER_SO_M249_TESTS_A_NORMALIZABLE_U1_PHASE_REFERENCE_UNDER_LAWFUL_ENERGY_CONSERVING_DILATION`
+**New mechanism development:** `ACTIVE_AFTER_M249_ESTABLISHES_THE_BOUNDED_FINITE_OPEN_CYCLIC_WRAP_AND_BILATERAL_NORMALIZABILITY_DICHOTOMY_WITH_O1_CLASSICAL_PARITY_SO_M250_CHANGES_TO_AN_EXACT_PROJECTIVE_WEYL2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_CALIBRATION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE`
+**Active primary successor:** `EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The current 244-milestone
+`6380d317b868f7e684fbb75726649c43e90d327e`. The current 249-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_P5_WIDTHS1_2_3_4_COHERENT_AFFINE_CUBIC_PATH_SIGNATURES_RETAIN_ONE_TYPED_UNRESOLVED_SYNDROME_PORT_THROUGH_NONCOMMUTING_X_AND_Z_CONSUMERS_CLOSE_TO_ONE_FINAL_QZETA5_AMPLITUDE_WITH_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_FINAL_CONTRACTION_HAS_AN_IDENTICAL_STREAMED_SCALAR_CLASSICAL_BISIMULATION_AND_THE_MATCHED_EXACT_VARIABLE_ELIMINATION_ALTERNATIVE_USES_GROWING_FACTOR_TABLES_THROUGH_THE_DECLARED_WIDTH4_WITH_NO_ADVANTAGE
+CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
 ```
 
 Not established:
@@ -12225,6 +12225,65 @@ requires wrap, and the ideal reference is nonnormalizable, publish that strict
 family no-go and change mechanism rather than extending `L`. This is not a
 general coherence-catalyst theorem, physical energy-conservation result, phase
 resource, advantage, Small Wall crossing, or physical-bit replacement.
+
+## M249: finite U1 return is separated from wrap and nonnormalizable ideals
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
+```
+
+For each `L=2,4,8,16`, production and the standalone `Q(sqrt(2))`
+implementation reproduce the open-ladder formulas
+
+```text
+p1 = (L-1)b^2/L
+C  = b[1+a(L-2)]/L
+minor = -ab/L != 0.
+```
+
+The nonzero minor proves correlation for the accepted finite normalizable
+reference. The cyclic exact-return sham has wrap probability `b^2/L` and a
+nonzero formal total-number commutator witness. The bilateral shift eigenlaw
+forces constant nonzero coefficient modulus and therefore has no nonzero
+normalizable `l2(Z)` eigenreference.
+
+The abstract Unix-socket service releases only `(p0,p1,C)` after actual
+reverse execution, exact canonical verification, and generation advance. The
+same `2L`-cell backing is used by the unrelated rational-rotation program at
+generation two and agrees with a fresh carrier. Disconnect and both injected
+failure locations restore before rejection or response loss. No snapshot or
+baseline reload is used.
+
+The strongest comparator is the exact `O(1)` all-`L` boundary formula. The
+secondary `O(L)` streamed recurrence supplies parity only. Resource accounting
+records 12 accepted transactions, 120 persistent accepted joint field cells,
+78 forward and 78 inverse pair updates, three retained final field cells per
+inverse, and zero dynamic inverse history. Exact payload width grows with
+`L`; whole-process and Python/object/socket costs are not claimed complete.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. This closes only the declared U1 shift-reference
+family. It does not exclude all coherence catalysts and establishes no
+physical energy law, distinct phase resource, advantage, Small Wall crossing,
+physical execution, bit replacement, inference, or unbounded computation.
+
+Selected phase-owned successor:
+
+```text
+EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
+```
+
+M250 changes the primitive to exact projective two-qubit Weyl composition. It
+tests the central `-1` cocycle on one typed Mermin square, with nine shared
+observable ports, six contexts, final-only central-phase projection, actual
+inverse restoration, and generation-two reuse. The strongest comparator is
+the identical constant-state binary-symplectic cocycle recurrence, checked by
+an independent 4x4 matrix oracle. The route stops after this one square if the
+compact recurrence matches; no larger contextual fixtures or physical
+contextuality claim follow.
 
 ## 10. Roadmap Maintenance
 

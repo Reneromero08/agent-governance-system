@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`4c540e0f23d24a4e8b4546cdd971dd59a695e9f1`. The registry assigns one
+`6380d317b868f7e684fbb75726649c43e90d327e`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 248-milestone lane is active by user direction. Continue from the
+The current 249-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,46 +53,47 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_P5_CUBIC_MAGIC_STATE_CATALYST_RETURNS_ONE5_CELL_QZETA5_CATALYST_AFTER_ONE_AND_TWO_DISTINCT_COHERENT_SYNDROME_FEEDBACK_USES_WITH_ATOMIC_RESPONSE_ORDERING_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_JOINT_CORRECTION_CONTAINS_TWO_BIVARIATE_CUBIC_TERMS_AND_THE_DIRECT_SINGLE_QUDIT_CUBIC_PHASE_AND_SYMBOLIC_CLASSICAL_IDENTITY_ARE_SMALLER_WITH_NO_MAGIC_OR_COMPUTATIONAL_ADVANTAGE
+CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QZETA5_WIDTHS1_2_THREE_PUBLIC_CUBIC_CATALYST_DESCRIPTORS_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_QSQRT2_FINITE_SHIFT_COVARIANT_U1_REFERENCE_FAMILY_L2_4_8_16_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone power-basis implementation reproduce the cubic catalyst
-identity, mixed-state dephasing control, Wigner-l1 resource balance, atomic
-controls, exact same-backing restoration, and generation-two reuse.
+and a standalone `Q(sqrt(2))` implementation reproduce the finite open-ladder
+boundary, dephasing control, cyclic wrap witness, bilateral normalizability
+ceiling, atomic controls, exact same-backing restoration, and generation-two
+reuse.
 
-M248 returns one actual five-cell `Q(zeta_5)` catalyst exactly after one and
-two distinct coherent syndrome-feedback uses. The machine retains the
-catalyst, one 25-cell joint scratch, and two five-cell phase signatures behind
-the atomic boundary and responds only after inverse restoration. The joint
-correction itself contains two bivariate cubic terms per use, while the direct
-noncatalytic comparator uses one univariate cubic and the exact symbolic
-identity. No free magic, distinct phase resource, advantage, Small Wall
-crossing, physical execution, physical-bit replacement, inference, or
-unbounded computation is established.
+M249 establishes the bounded dichotomy only for the declared shift-covariant
+family. A lawful finite normalizable phase reference develops nonzero system-
+reference correlation, the cyclic exact-return sham has nonzero number wrap,
+and the bilateral exact shift eigenreference is nonnormalizable. The exact
+`O(1)` formulas for `(p0,p1,C)` are the strongest comparator and are smaller
+than the CATVM path. No general coherence-catalyst theorem, physical energy
+law, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, inference, or unbounded computation is
+established.
 
 Selected successor:
 
 ```text
-EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
+EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
 ```
 
-Change the primitive from finite-p cubic magic to a normalizable U(1) phase
-reference under a lawful energy-conserving dilation. Test exact finite ladders
-at `L=2,4,8,16`, the cyclic exact-return sham and its energy-wrap witness, and
-the nonnormalizable bilateral-shift ideal. Preserve atomic same-backing inverse
-restoration and unrelated reuse. Compare first against the exact O(1)
-all-`L` formulas, not only the streamed O(`L`) recurrence. If finite lawful
-references necessarily correlate, cyclic return necessarily wraps energy, and
-the ideal return is nonnormalizable, publish that strict family no-go and
-change mechanism rather than extending `L`.
+Change the primitive from a normalizable U(1) reference to the exact
+noncommutative two-qubit Weyl signature algebra. Test the central projective
+phase on one typed Mermin square, with nine shared observable ports and six
+commuting contexts, final-only central-phase projection, actual inverse
+restoration, and generation-two reuse. Compare first against the identical
+constant-state binary-symplectic cocycle recurrence and an independent 4x4
+matrix oracle. Stop this route after the one square: a matching compact
+symplectic recurrence means contextual phase holonomy is an exact algebraic
+calibration, not a computational separation.
 
 The accumulated bounded architecture includes:
 
@@ -286,7 +287,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M248_ESTABLISHES_EXACT_RETURN_OF_ONE_P5_CUBIC_CATALYST_BUT_FINDS_THE_JOINT_CORRECTION_SUPPLIES_TWO_BIVARIATE_CUBIC_TERMS_AND_DIRECT_CUBIC_AND_SYMBOLIC_CLASSICAL_PATHS_ARE_SMALLER_SO_M249_TESTS_A_NORMALIZABLE_U1_PHASE_REFERENCE_UNDER_LAWFUL_ENERGY_CONSERVING_DILATION
+ACTIVE_AFTER_M249_ESTABLISHES_THE_BOUNDED_FINITE_OPEN_CYCLIC_WRAP_AND_BILATERAL_NORMALIZABILITY_DICHOTOMY_WITH_O1_CLASSICAL_PARITY_SO_M250_CHANGES_TO_AN_EXACT_PROJECTIVE_WEYL2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_CALIBRATION
 ```
 
 The named
@@ -295,19 +296,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_U1_PHASE_REFERENCE_NORMALIZABILITY_AND_ENERGY_WRAP_DICHOTOMY_WITH_CATVM_INVERSE_RESTORATION_REUSE
+EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
 ```
 
-M248 establishes the exact returned-catalyst identity behind the atomic CATVM
-boundary, but its correction carries two bivariate cubic terms while the
-direct phase and exact symbolic classical identity are smaller. Do not add
-catalyst widths, syndrome counts, or correction micro-optimizations. M249 must
-test whether a different continuous phase primitive—a finite normalizable U(1)
-reference—can return lawfully under an energy-conserving dilation. It must
-separate the finite open ladder, cyclic wrap sham, and nonnormalizable
-bilateral ideal and compare against the exact O(1) all-`L` formulas. A bounded
-software energy-wrap dichotomy is not a physical energy theorem or phase
-advantage.
+M249 closes the declared finite U(1) shift-reference route: lawful finite
+references correlate, cyclic return wraps formal number, and the bilateral
+ideal is nonnormalizable, while exact `O(1)` classical formulas remain. Do not
+add ladder sizes or phase-reference variants. M250 tests a different
+phase-owned object, the nontrivial central cocycle of exact projective Weyl
+composition on one typed Mermin square. It must distinguish the operator
+cocycle from carrier-state coherence and compare against the identical compact
+symplectic recurrence. One contextual square is the route ceiling; no larger
+contextual fixture follows a compact-classical match.
 
 ## 7. Native No-Smuggle Law
 

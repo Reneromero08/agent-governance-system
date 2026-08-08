@@ -8,8 +8,7 @@ Verification level: `SEPARATE_REFERENCE_PARITY`
 
 Restoration class: `EXACT_ALGEBRAIC_RESTORATION`
 
-Scientific source head: recorded by the canonical authority reconciliation that
-follows this scientific package commit.
+Scientific source head: `6380d317b868f7e684fbb75726649c43e90d327e`
 
 The focused read-only review independently reconstructed the exact
 `Q(sqrt(2))` arithmetic, uniform finite-reference normalization, and the
