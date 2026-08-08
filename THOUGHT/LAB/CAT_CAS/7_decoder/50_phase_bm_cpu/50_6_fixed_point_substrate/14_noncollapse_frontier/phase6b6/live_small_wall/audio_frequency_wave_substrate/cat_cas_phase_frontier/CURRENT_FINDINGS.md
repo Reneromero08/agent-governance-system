@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`5a1b9f6bfa3256fe18a342522212a3c7e638045c`. The canonical per-milestone
+`6e4e766b400a69c9868d978aa3ee2275fcce0574`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12428,3 +12428,47 @@ retain all stationary branches implicitly in a quotient algebra, and project
 their critical-value norm without root enumeration.  It must preserve exact
 same-backing restoration/reuse and compare with the strongest identical
 polynomial recurrence and exact norm computation.
+
+## M236 exact connected cubic Airy-chain quotient algebra
+
+M236 realizes the connected-chain successor.  The stationary recurrence
+parameterizes every internal coordinate by one unresolved `t`, and the exact
+endpoint quotient `Q[t]/P_n` retains all declared stationary branches without
+root or assignment enumeration.  The actual carrier uses three quotient
+elements for two phase-space coordinates and the scaled critical value; only
+the characteristic/norm relation is projected.
+
+Declared lengths `2,3,4,5,6` have exact quotient dimensions and final relation
+degrees `2,4,8,16,32`.  Family-zero final-relation payload is
+`11,39,144,542,2114` bits; family one is `9,30,121,477,1759`.  Every declared
+endpoint and critical-value relation is square free, the stationary laws vanish
+in the quotient, and the relation annihilates the resident critical value.
+
+Forward execution retains no initial-state snapshot or decoded critical-value
+copy.  The public exact inverses restore the same `r`, `s`, `h`, and modulus
+backings, reuse advances to generation two on an unrelated sentinel, and no
+reload occurs.  The matched classical reconstruction executes only after
+carrier release.  A standalone sparse-dictionary reference independently
+reconstructs algebra, custody, controls, restoration, and reuse.  Focused
+review returned `PASS_STRICT_SCOPE`.
+
+The scientific outcome is negative for compact leverage.  Quotient dimension
+doubles, while the public stationary construction still has an exact
+`O(length)` expression DAG.  The chain-specific subresultant/PRS resultant is
+the strongest known compact classical projection and is smaller in state than
+the implemented multiplication-matrix norm.  It was not implemented here, so
+projection-resource comparison is explicitly forbidden.  No distinct phase
+resource, advantage, Small Wall crossing, CATVM custody, physical execution,
+physical-bit replacement, inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_ZETA5_NORMALIZED_CUBIC_FOURIER_COHERENT_SHARED_PORT_CLOSURE_WITH_CAUSAL_DESTRUCTIVE_INTERFERENCE_FIXED5_AMPLITUDE_CARRIER_ACROSS_DEPTHS2_4_8_16_32_64_EXACT_RESTORATION_REUSE_AND_IDENTICAL5_VECTOR_CLASSICAL_BASELINE
+```
+
+This changes the retained information rather than extending the cubic quotient:
+the carrier must preserve normalized coherent `Q(zeta_5)` amplitudes and exact
+interference.  The decisive comparison remains the identical fixed five-vector
+or backward-row classical recurrence, not explicit path enumeration or a
+dephased density matrix.

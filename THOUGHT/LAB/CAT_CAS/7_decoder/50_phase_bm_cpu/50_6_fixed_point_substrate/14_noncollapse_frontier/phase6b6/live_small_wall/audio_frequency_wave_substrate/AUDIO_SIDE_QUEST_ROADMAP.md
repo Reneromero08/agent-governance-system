@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CUBIC_CRITICAL_LOCUS_BRANCH_GROWTH_EXPRESSION_DAG_OBSTRUCTION`
-**Roadmap version:** `15.10`
+**Status:** `STRICT_CONNECTED_CUBIC_QUOTIENT_DIMENSION_GROWTH_OBSTRUCTION`
+**Roadmap version:** `15.20`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `5a1b9f6bfa3256fe18a342522212a3c7e638045c`
+**Reconciled source head:** `6e4e766b400a69c9868d978aa3ee2275fcce0574`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_PROJECTIVE_CUBIC_PHASE_CRITICAL_LOCUS_RELATIONS_DERIVED_FROM_W_CUBED_OVER3_MINUS_V_PLUS_C_TIMES_W_COMPOSE_ONE_UNRESOLVED_SHARED_PORT_BY_NATIVE_SUBSTITUTION_R_OF_W_SQUARED_MINUS_C_AND_ADJOIN_ONE_PUBLIC_LINEAR_BRANCH_BY_POLYNOMIAL_PRODUCT_WITH_EXACT_INVERSE_RESTORATION_REUSE_BUT_THE_EXPANDED_OPEN_RELATION_DEGREE_GROWS_AS3_TIMES2_TO_THE_DEPTH_MINUS2_THROUGH_DECLARED_DEPTH8_WHILE_A_PUBLIC_DESCRIPTOR_SCALAR_CLASSICAL_RECURRENCE_RETAINS_CONSTANT_INTEGER_CELL_COUNT_AND_NO_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED`
-**Current claim ceiling:** `FORMAL_PROJECTIVE_CUBIC_CRITICAL_LOCUS_POLYNOMIAL_RELATIONS_OVER_Z_ONE_TYPED_SCALAR_SHARED_PORT_TWO_PUBLIC_PROGRAM_FAMILIES_DEPTHS1_TO8_PRIMARY_DEPTH8_FAMILY0_REUSE_DEPTH7_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_CONNECTED_CUBIC_AIRY_CHAIN_PHASE_SIGNATURES_RETAIN_ALL_STATIONARY_SHARED_PORT_BRANCHES_IMPLICITLY_IN_Q_OF_T_MOD_PN_AND_ACCUMULATE_THE_SCALED_CRITICAL_VALUE_ON_THREE_ACTUAL_QUOTIENT_ALGEBRA_BACKINGS_WITH_FINAL_ONLY_CHARACTERISTIC_NORM_RELATION_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_SENTINEL_REUSE_THROUGH_DECLARED_LENGTHS2_3_4_5_6_BUT_QUOTIENT_DIMENSION_AND_FINAL_RELATION_DEGREE_GROW2_4_8_16_32_AND_THE_IDENTICAL_EXACT_POLYNOMIAL_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PROJECTIVE_CUBIC_AIRY_CHAIN_STATIONARY_RELATIONS_OVER_Q_TWO_RATIONAL_BOUNDARY_FAMILIES_LENGTHS2_3_4_5_6_SIMPLE_ENDPOINT_AND_CRITICAL_VALUE_POLYNOMIALS_SCALED_PHASE_W_EQUALS3PHI_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M235_ESTABLISHES_SQUARE_FREE_CUBIC_CRITICAL_LOCUS_BRANCH_GROWTH_BUT_THE_EXACT_OPEN_RELATION_HAS_AN_O_DEPTH_PUBLIC_EXPRESSION_DAG_AND_SET_THEORETIC_INTERSECTION_IS_NOT_ESTABLISHED_SO_THE_NEXT_MECHANISM_MUST_TEST_ACTUAL_MULTI_MODULE_CRITICAL_VALUES`
+**New mechanism development:** `ACTIVE_AFTER_M236_ESTABLISHES_EXACT_CONNECTED_CUBIC_STATIONARY_BRANCH_CUSTODY_BUT_QUOTIENT_DIMENSION_DOUBLES_AND_A_STRONGER_SUBRESULTANT_CLASSICAL_PROJECTION_REMAINS_SO_THE_NEXT_MECHANISM_MUST_CHANGE_THE_PHASE_RESOURCE_NOT_EXTEND_THE_CUBIC_FIXTURE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_CUBIC_AIRY_CHAIN_STATIONARY_SHARED_PORT_QUOTIENT_ALGEBRA_WITH_UNRESOLVED_BRANCHES_CRITICAL_VALUE_NORM_DEGREE_GROWTH_OR_COMPACT_QUOTIENT_EXACT_RESTORATION_REUSE_AND_MATCHED_POLYNOMIAL_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_ZETA5_NORMALIZED_CUBIC_FOURIER_COHERENT_SHARED_PORT_CLOSURE_WITH_CAUSAL_DESTRUCTIVE_INTERFERENCE_FIXED5_AMPLITUDE_CARRIER_ACROSS_DEPTHS2_4_8_16_32_64_EXACT_RESTORATION_REUSE_AND_IDENTICAL5_VECTOR_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`5a1b9f6bfa3256fe18a342522212a3c7e638045c`. The current 235-milestone
+`6e4e766b400a69c9868d978aa3ee2275fcce0574`. The current 236-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_PROJECTIVE_CUBIC_PHASE_CRITICAL_LOCUS_RELATIONS_DERIVED_FROM_W_CUBED_OVER3_MINUS_V_PLUS_C_TIMES_W_COMPOSE_ONE_UNRESOLVED_SHARED_PORT_BY_NATIVE_SUBSTITUTION_R_OF_W_SQUARED_MINUS_C_AND_ADJOIN_ONE_PUBLIC_LINEAR_BRANCH_BY_POLYNOMIAL_PRODUCT_WITH_EXACT_INVERSE_RESTORATION_REUSE_BUT_THE_EXPANDED_OPEN_RELATION_DEGREE_GROWS_AS3_TIMES2_TO_THE_DEPTH_MINUS2_THROUGH_DECLARED_DEPTH8_WHILE_A_PUBLIC_DESCRIPTOR_SCALAR_CLASSICAL_RECURRENCE_RETAINS_CONSTANT_INTEGER_CELL_COUNT_AND_NO_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+EXACT_CONNECTED_CUBIC_AIRY_CHAIN_PHASE_SIGNATURES_RETAIN_ALL_STATIONARY_SHARED_PORT_BRANCHES_IMPLICITLY_IN_Q_OF_T_MOD_PN_AND_ACCUMULATE_THE_SCALED_CRITICAL_VALUE_ON_THREE_ACTUAL_QUOTIENT_ALGEBRA_BACKINGS_WITH_FINAL_ONLY_CHARACTERISTIC_NORM_RELATION_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_SENTINEL_REUSE_THROUGH_DECLARED_LENGTHS2_3_4_5_6_BUT_QUOTIENT_DIMENSION_AND_FINAL_RELATION_DEGREE_GROW2_4_8_16_32_AND_THE_IDENTICAL_EXACT_POLYNOMIAL_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -11462,6 +11462,67 @@ implicitly in `Q[t]/P_n`, project the exact critical-value norm without root
 enumeration, restore and reuse the actual quotient-algebra carrier, and compare
 against the identical polynomial recurrence plus the strongest exact
 subresultant or companion-norm classical method.
+
+## M236: connected cubic stationary custody exposes doubling quotient dimension
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_CONNECTED_CUBIC_AIRY_CHAIN_PHASE_SIGNATURES_RETAIN_ALL_STATIONARY_SHARED_PORT_BRANCHES_IMPLICITLY_IN_Q_OF_T_MOD_PN_AND_ACCUMULATE_THE_SCALED_CRITICAL_VALUE_ON_THREE_ACTUAL_QUOTIENT_ALGEBRA_BACKINGS_WITH_FINAL_ONLY_CHARACTERISTIC_NORM_RELATION_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_SENTINEL_REUSE_THROUGH_DECLARED_LENGTHS2_3_4_5_6_BUT_QUOTIENT_DIMENSION_AND_FINAL_RELATION_DEGREE_GROW2_4_8_16_32_AND_THE_IDENTICAL_EXACT_POLYNOMIAL_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M236 composes a connected chain of formal cubic generating signatures.  The
+stationary recurrence builds an exact endpoint polynomial `P_n`; the quotient
+`Q[t]/P_n` retains every declared stationary branch implicitly without roots,
+assignments, or branch lists.  Three actual quotient-algebra backings carry the
+two phase-space coordinates and scaled critical value.  Only the exact
+characteristic/norm relation crosses the final boundary.
+
+Across lengths `2,3,4,5,6`, endpoint quotient dimensions and final relation
+degrees are exactly `2,4,8,16,32`.  Family-zero relation payload grows
+`11,39,144,542,2114` bits and family one grows
+`9,30,121,477,1759` bits.  Endpoint and critical-value relations are square
+free in every declared fixture, all stationary equations vanish in the
+endpoint quotient, and the projected relation annihilates the resident action.
+
+The public reverse program restores the exact same `r`, `s`, `h`, and modulus
+backings without a retained initial-state snapshot or dynamic inverse history.
+Generation advances from one to two and an unrelated reversible sentinel
+consumes the actual restored carrier; fresh/restored boundaries agree and no
+reload occurs.  The matched classical reconstruction runs only after release,
+so it is not retained as an answer-bearing copy during inverse.
+
+A standalone sparse-dictionary implementation reconstructs quotient arithmetic,
+the characteristic relation, custody, controls, restoration, and reuse.
+Focused review returned `PASS_STRICT_SCOPE` after canonical descriptor binding,
+removal of false zero counters, and disclosure of the stronger unimplemented
+subresultant/PRS projection.  The milestone is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The result retires this cubic critical-locus route as a compact-resource
+candidate.  The accepted quotient basis doubles, while the exact public
+stationary recurrence remains an `O(length)` expression DAG.  The strongest
+known compact classical final projection is a chain-specific univariate
+subresultant/PRS resultant, not the package's matrix norm, so no projection
+resource comparison is authorized.  Resource figures remain
+`PACKAGE_SELF_REVIEW`, whole-transaction/process liveness is incomplete, and
+no distinct phase resource or advantage is established.
+
+Selected different-law successor:
+
+```text
+EXACT_ZETA5_NORMALIZED_CUBIC_FOURIER_COHERENT_SHARED_PORT_CLOSURE_WITH_CAUSAL_DESTRUCTIVE_INTERFERENCE_FIXED5_AMPLITUDE_CARRIER_ACROSS_DEPTHS2_4_8_16_32_64_EXACT_RESTORATION_REUSE_AND_IDENTICAL5_VECTOR_CLASSICAL_BASELINE
+```
+
+This successor retains normalized coherent amplitudes and exact interference,
+which M234--M236 discarded through projective or critical-locus projection.
+It must use an exact `Q(zeta_5)` five-amplitude carrier, demonstrate causal
+cubic destructive interference against a dephased control, preserve full
+amplitude through exact inverse restoration/reuse, and compare against the
+identical exact five-vector or backward-row classical recurrence.  One bounded
+depth series decides the route; larger depth or basis micro-optimization is not
+the follow-on.
 
 ## 10. Roadmap Maintenance
 
