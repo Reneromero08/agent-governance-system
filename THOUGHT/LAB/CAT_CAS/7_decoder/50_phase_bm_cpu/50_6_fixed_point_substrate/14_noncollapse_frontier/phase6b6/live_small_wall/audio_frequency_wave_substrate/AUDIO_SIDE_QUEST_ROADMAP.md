@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_HIDDEN_LINEAR_PHASE_ORACLE_QUERY_SEPARATION`
-**Roadmap version:** `15.25`
+**Status:** `STRICT_CATVM_P5_TENSOR_FACTORED_LINEAR_ORACLE_ROUTE_CLOSED`
+**Roadmap version:** `15.26`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `71b063c63d9374dc6e30dcc5836652e8c9f4cd74`
+**Reconciled source head:** `c163b6f53289084fea436412be2809af0139e8d6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_HIDDEN_LINEAR_PHASE_ORACLE_USES_ONE_COHERENT_FORWARD_QUERY_TO_INFER_N_RESIDUES_ACROSS_DECLARED_DIMENSIONS1_2_3_4_WITH_FINAL_SECRET_RESPONSE_RELEASED_ONLY_AFTER_ACTUAL_INVERSE_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_WHILE_EXACT_CLASSICAL_BLACK_BOX_VALUE_QUERY_COMPLEXITY_IS_N_BUT_THE_SOFTWARE_PHASE_CARRIER_AND_SCRATCH_GROW5_TO_THE_N_AND_NO_TOTAL_COMPUTATIONAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
-**Current claim ceiling:** `CATVM_UNIX_SOCKET_QZETA5_HIDDEN_LINEAR_ORACLES_DIMENSIONS1_2_3_4_TWO_DECLARED_SECRETS_PER_DIMENSION_ONE_COHERENT_FORWARD_QUERY_EXACT_RESTORATION`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_TENSOR_FACTORED_HIDDEN_LINEAR_PHASE_ORACLE_PRESERVES_ONE_ABSTRACT_COHERENT_FORWARD_QUERY_ACROSS_DECLARED_DIMENSIONS1_2_4_8_16_32_WHILE_REPLACING5_TO_THE_N_GLOBAL_AMPLITUDES_WITH5N_EXACT_PHASE_FACTOR_CELLS_AND_RELEASES_ONLY_THE_FINAL_N_RESIDUES_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_REUSE_BUT_EACH_ORACLE_CALL_READS_N_HIDDEN_RESIDUES_AND_THE_STRONGEST_DIRECT_PRIVATE_DESCRIPTOR_CLASSICAL_BASELINE_IS_O_N_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
+**Current claim ceiling:** `CATVM_P5_SEPARABLE_LINEAR_CHARACTER_ORACLES_PRODUCT_INPUT_RANK1_FACTOR_CARRIER_DIMENSIONS1_2_4_8_16_32_ABSTRACT_UNIX_SOCKET_SERVICE_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M241_ESTABLISHES_A_BOUNDED_ONE_VERSUS_N_BLACK_BOX_QUERY_SEPARATION_UNDER_ATOMIC_CATVM_BUT_THE_EXACT_SOFTWARE_CARRIER_AND_SCRATCH_GROW5_TO_THE_N_SO_THE_NEXT_MECHANISM_REMATERIALIZES_THE_LINEAR_ORACLE_AS_AN_EXACT_TENSOR_FACTORED_PHASE_CARRIER_AND_COMPARES_THE_IDENTICAL_COMPACT_CLASSICAL_FACTOR_RECURRENCE`
+**New mechanism development:** `ACTIVE_AFTER_M242_REPLACES_THE5_TO_THE_N_LINEAR_ORACLE_AMPLITUDE_CARRIER_WITH5N_EXACT_PHASE_FACTOR_CELLS_BUT_THE_ACCEPTED_ORACLE_STILL_READS_N_HIDDEN_RESIDUES_AND_THE_STRONGEST_DIRECT_PRIVATE_DESCRIPTOR_CLASSICAL_BASELINE_IS_O_N_SO_THE_NEXT_MECHANISM_MUST_CHANGE_TO_A_GENUINELY_NONSEPARABLE_PHASE_LAW`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_EXACT_P5_TENSOR_FACTORED_HIDDEN_LINEAR_PHASE_ORACLE_CARRIER_WITH_ONE_COHERENT_QUERY_VERSUS_N_CLASSICAL_VALUE_QUERIES_ACROSS_DECLARED_DIMENSIONS1_2_4_8_16_32_FINAL_ONLY_SECRET_BOUNDARY_ATOMIC_RESTORATION_REUSE_AND_MATCHED_COMPACT_FACTOR_BASELINE`
+**Active primary successor:** `CATVM_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_RANK1_CUBIC_PHASE_ORACLE_QUOTIENT_COLLAPSE_TO_DIMENSION_DISCRIMINANT_DELTA_LAMBDA_WITH_FIVE_CHANNEL_COHERENT_CLOSURE_ACROSS_N2_3_4_6_8_12_16_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_LDL_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`71b063c63d9374dc6e30dcc5836652e8c9f4cd74`. The current 241-milestone
+`c163b6f53289084fea436412be2809af0139e8d6`. The current 242-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -11800,6 +11800,60 @@ access. The strongest matched classical factor recurrence must remain in the
 comparison. If the compact phase carrier is immediately equivalent to an
 `O(n)` classical recurrence, publish that ceiling and change the oracle law
 rather than extending dimensions or optimizing this factorization.
+
+## M242: tensor factorization repairs state growth but closes the separable linear route
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_EXACT_P5_TENSOR_FACTORED_HIDDEN_LINEAR_PHASE_ORACLE_PRESERVES_ONE_ABSTRACT_COHERENT_FORWARD_QUERY_ACROSS_DECLARED_DIMENSIONS1_2_4_8_16_32_WHILE_REPLACING5_TO_THE_N_GLOBAL_AMPLITUDES_WITH5N_EXACT_PHASE_FACTOR_CELLS_AND_RELEASES_ONLY_THE_FINAL_N_RESIDUES_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_REUSE_BUT_EACH_ORACLE_CALL_READS_N_HIDDEN_RESIDUES_AND_THE_STRONGEST_DIRECT_PRIVATE_DESCRIPTOR_CLASSICAL_BASELINE_IS_O_N_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+```
+
+M242 replaces the predecessor's `5^n` global amplitude carrier and equal
+scratch with an exact rank-one product-phase representation. Across declared
+dimensions `1,2,4,8,16,32`, the accepted carrier and scratch each use
+`5,10,20,40,80,160` Q(zeta5) cells. It preserves one abstract coherent
+forward query, exact same-backing inverse restoration, generation-two
+descriptor-distinct reuse, and atomic final response release. Exact dense
+semantic parity is independently reconstructed through dimensions `1,2,4`.
+
+The service exposes no pre-run secret receipt, secret-dependent response
+commitment, or intermediate factor state. Disconnect, post-projection failure,
+and a partial oracle failure after 17 factors all restore before rejection or
+response. The exact arithmetic dependency is seal-pinned, and the private
+configuration is delivered only to the service and standalone verifier over
+stdin, never to the public controller. The package passed focused review at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The repair does not create a total resource advantage. Forward plus inverse
+oracle execution reads `2n` hidden residues and evaluates `100n` exact Fourier
+character terms, while the strongest direct private-descriptor classical
+baseline reads `n` residues and runs in `O(n)`. Resource figures are
+`PACKAGE_SELF_REVIEW`; Python objects, allocator state, socket-kernel state,
+hashing, scheduling, and whole-process RSS remain excluded but nonzero.
+
+M242 therefore establishes neither a nonseparable phase resource nor total
+advantage, Small Wall crossing, inference, physical waveform execution,
+physical-bit replacement, or unbounded catalytic computation. It closes the
+separable linear-oracle route rather than inviting larger dimensions.
+
+Selected phase-owned successor:
+
+```text
+CATVM_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_RANK1_CUBIC_PHASE_ORACLE_QUOTIENT_COLLAPSE_TO_DIMENSION_DISCRIMINANT_DELTA_LAMBDA_WITH_FIVE_CHANNEL_COHERENT_CLOSURE_ACROSS_N2_3_4_6_8_12_16_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_LDL_CLASSICAL_BASELINE
+```
+
+M243 changes the phase law rather than optimizing the factor carrier. It tests
+connected invertible symmetric quadratic forms plus one multi-coordinate cubic
+functional over F5 at declared widths `2,3,4,6,8,12,16`. The exact candidate
+collapse is the five-channel Gauss quotient determined by dimension,
+discriminant, `u^T A^-1 u`, and cubic strength. The accepted transaction must
+retain hidden descriptor and channel custody, final-only amplitude projection,
+exact same-backing restoration/reuse, and the strongest identical modular
+LDL-plus-five-term classical evaluator. Dense `5^n` summation is verifier-only
+through `n<=4`. If the quotient collapse holds, stop this rank-one cubic family;
+only growing independent cubic-direction rank with a lawful compact signature
+may continue the route.
 
 ## 10. Roadmap Maintenance
 

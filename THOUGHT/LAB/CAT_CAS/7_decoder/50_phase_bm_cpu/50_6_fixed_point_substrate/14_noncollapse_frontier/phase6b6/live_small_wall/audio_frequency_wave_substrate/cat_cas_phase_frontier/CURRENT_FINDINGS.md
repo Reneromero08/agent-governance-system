@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`71b063c63d9374dc6e30dcc5836652e8c9f4cd74`. The canonical per-milestone
+`c163b6f53289084fea436412be2809af0139e8d6`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12597,3 +12597,47 @@ claim whole-process completeness. The next experiment replaces that `5^n`
 amplitude vector with the exact rank-one product-phase carrier and compares it
 against the identical compact classical factor recurrence. If both are `O(n)`,
 the linear-oracle route is closed rather than extended to larger fixtures.
+
+## M242 CATVM tensor-factored linear oracle closes the separable route
+
+M242 replaces the predecessor's `5^n` amplitude carrier with one exact
+five-amplitude factor per hidden coordinate. Across dimensions
+`1,2,4,8,16,32`, carrier and scratch each grow only as
+`5,10,20,40,80,160` Q(zeta5) cells. The CATVM service preserves one abstract
+coherent forward query, retains only the final `n` residues across inverse,
+restores the exact same factor and scratch backings, and reuses them with a
+descriptor-distinct program at generation two.
+
+The atomic service exposes no pre-run secret receipt, secret-dependent
+commitment, or resident factor amplitudes. Disconnect, post-projection
+exception, and partial oracle failure after 17 factors restore before response.
+The standalone power-basis reference reconstructs every declared boundary and
+matches the dense predecessor semantics through `n=4`. The seal pins the exact
+Q(zeta5) arithmetic dependency, and focused review returned
+`PASS_STRICT_SCOPE`.
+
+The representation repair does not establish total leverage. A complete
+forward-plus-inverse transaction performs `2n` hidden-residue reads and `100n`
+Fourier character terms. The strongest direct private-descriptor classical
+baseline reads `n` residues and is `O(n)`. Resource figures remain
+`PACKAGE_SELF_REVIEW`; whole-process and runtime-container costs are excluded
+but not zero.
+
+The strict ceiling is separable linear-character oracles on the declared
+abstract Unix-socket service. No nonseparable phase resource, total advantage,
+Small Wall crossing, inference, physical execution, bit replacement, or
+unbounded computation is established. The route is closed rather than scaled.
+
+Next:
+
+```text
+CATVM_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_RANK1_CUBIC_PHASE_ORACLE_QUOTIENT_COLLAPSE_TO_DIMENSION_DISCRIMINANT_DELTA_LAMBDA_WITH_FIVE_CHANNEL_COHERENT_CLOSURE_ACROSS_N2_3_4_6_8_12_16_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_LDL_CLASSICAL_BASELINE
+```
+
+This successor changes the phase law to a connected non-Gaussian signature.
+It tests whether one multi-coordinate cubic direction escapes compact Gaussian
+elimination or collapses exactly to the five-channel quotient determined by
+dimension, quadratic discriminant, `u^T A^-1 u`, and cubic strength. The
+matched comparator is the identical modular LDL-plus-five-term evaluator; if
+the collapse holds, the rank-one cubic family stops and any continuation must
+increase independent cubic-direction rank without hiding equivalent growth.
