@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`28a498b932df35543a5a6cca22b93edb87ac7593`. The canonical per-milestone
+`ac048fbe201180f61a748c729316790107c33705`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11832,4 +11832,45 @@ Next:
 
 ```text
 EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_CELLS_WITHOUT_WEIGHTED_CELL_FIELD_PRODUCT_MATERIALIZATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE
+```
+
+## M223 direct coordinate trace and rational-accumulator no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS
+```
+
+The direct Ramanujan-trace coordinate form removes residual-cell conjugates,
+norm-cell products and weighted-cell cyclotomic products from the accepted
+trace subpath. One scale conjugate per balance remains. All source-explicit
+exact live intervals are counted, including outer values retained across unit
+power helpers, candidate streams and keys, selected-net mutation, ledger
+commit, and the five-rational accumulation step.
+
+Primary four-strand depth-four execution reaches 364,275 declared exact live
+bits versus 129,595 for the matched raw recurrence. Six strands at depth two
+is 345,164/133,246; eight strands at depth one is 44,067/17,174. Every
+declared case remains above raw, with
+`DIRECT_TRACE_LINE_RATIONAL_ACCUMULATE` dominant. The actual residual, ledger
+and scratch backings restore exactly and support unrelated generation-two
+reuse without reload.
+
+The standalone reference imports none of M223, M222 or M221 production and
+reproduces cases, state, boundary, balance, resources, restoration and reuse.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical direct coordinate
+recurrence. Excluded Python object/container, allocator/interpreter, process,
+serialization, timing and RSS costs are not zero. No distinct phase resource,
+advantage, Small Wall crossing, CATVM custody, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Next:
+
+```text
+EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
 ```

@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_STREAMED_EMBEDDING_WEIGHTED_CELL_NO_GO`
-**Roadmap version:** `14.88`
+**Status:** `STRICT_SU2_LEVEL8_DIRECT_TRACE_RATIONAL_ACCUMULATOR_NO_GO`
+**Roadmap version:** `14.89`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `28a498b932df35543a5a6cca22b93edb87ac7593`
+**Reconciled source head:** `ac048fbe201180f61a748c729316790107c33705`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_PARAMETERS3_7_9_11_13_17_19_CELL_STREAMED_EXACT_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_PARAMETERS3_7_9_11_13_17_19_DIRECT_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M222_ELIMINATES_AGGREGATE_NORM_FIELDS_BUT_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_DECLARED_LIVE_PAYLOAD`
+**New mechanism development:** `ACTIVE_AFTER_M223_ELIMINATES_RESIDUAL_CELL_FIELD_PRODUCTS_BUT_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_RATIONAL_VALUES_DOMINATE_DECLARED_LIVE_PAYLOAD`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_CELLS_WITHOUT_WEIGHTED_CELL_FIELD_PRODUCT_MATERIALIZATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE`
+**Active primary successor:** `EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`93fec0c0c4b1040b04a5a19365ff276bf074fb86`. The current 212-milestone
+`ac048fbe201180f61a748c729316790107c33705`. The current 223-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_STREAMED_ALL_EMBEDDING_UNIT_ENERGY_FROM_LEDGER_NATIVE_TOPOLOGY_LOCAL_CUBIC_SKEIN_ELIMINATES_AGGREGATE_CYCLOTOMIC_NORM_FIELD_MATERIALIZATION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_ONE_STREAMED_WEIGHTED_CELL_FIELD_PRODUCT_DOMINATES_AND_THE_IDENTICAL_CLASSICAL_STREAMED_ENERGY_RECURRENCE_REMAINS
+BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -10718,6 +10718,61 @@ EXACT_DIRECT_TRACE_BILINEAR_FORM_FOR_LEDGER_NATIVE_CYCLOTOMIC_WEIGHTED_RESIDUAL_
 This must evaluate `Trace(w v conjugate(v))` directly from coordinates without
 materializing the weighted cyclotomic product, count all exact integer and
 rational temporaries, and preserve the no-go if that merely relocates height.
+
+## M223: direct coordinate trace and rational-accumulator no-go
+
+The independently reconstructed strict-scope claim is:
+
+```text
+BOUNDED_EXACT_DIRECT_TRACE_COORDINATE_FORM_ELIMINATES_RESIDUAL_CELL_CONJUGATE_NORM_CELL_AND_WEIGHTED_CELL_CYCLOTOMIC_FIELD_MATERIALIZATION_FROM_THE_ACCEPTED_TRACE_SUBPATH_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_ONE_SCALE_CONJUGATE_PER_BALANCE_REMAINS_AND_DECLARED_EXACT_LIVE_PAYLOAD_REMAINS_ABOVE_THE_MATCHED_RAW_RECURRENCE_ON_EVERY_DECLARED_CASE_BECAUSE_CALLER_RETAINED_FIELD_SCALARS_PLUS_FIVE_SIMULTANEOUSLY_LIVE_RATIONAL_COORDINATE_VALUES_DOMINATE_AND_THE_IDENTICAL_CLASSICAL_COORDINATE_RECURRENCE_REMAINS
+```
+
+The accepted trace subpath evaluates
+`Trace(w v conjugate(v))` directly in the public power basis with Ramanujan
+traces. It materializes no residual-cell conjugate, norm-cell field product,
+or weighted-cell field product. One lifecycle scale conjugate per balance
+remains and is counted rather than described as eliminated. Source-explicit
+live intervals include caller-retained field scalars, balance and line-search
+integers, candidate ledgers and keys, selected-net mutation state, and the
+five simultaneous rational values at the accumulation step.
+
+The primary four-strand depth-four maximum is 364,275 bits versus 129,595 for
+the matched raw recurrence. Six strands at depth two measures 345,164 versus
+133,246 bits, and eight strands at depth one measures 44,067 versus 17,174
+bits. All seven declared cases remain above raw. The direct trace removes
+almost all of M222's weighted-cell field-product transient, but retained unit
+and scale fields plus the five-rational accumulator keep
+`DIRECT_TRACE_LINE_RATIONAL_ACCUMULATE` dominant.
+
+The standalone M223 reference imports neither M223, M222 nor M221 production
+and reproduces the case, state, boundary, balance, resource, restoration and
+reuse tuples. Exact restoration uses the same residual, ledger and scratch
+backings; unrelated reuse reaches generation two without baseline reload.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical direct power-basis
+Ramanujan-trace coordinate recurrence; the raw comparison is the identical
+raw link-pattern cubic-skein recurrence under the same declared temporary
+law. Python `Fraction` object and container capacity, allocator/interpreter
+state, process image, serialization, timing and whole-process RSS are excluded
+rather than zero. No CATVM custody, distinct phase resource, computational
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference or unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_LEDGER_AND_PUBLIC_TOPOLOGY_DERIVED_REVERSIBLE_REMATERIALIZATION_OF_DIRECT_TRACE_LINE_WEIGHTS_WITH_RELEASED_CALLER_FIELD_SCALARS_AND_FUSED_RATIONAL_ACCUMULATION_OR_PERSISTING_HEIGHT_OBSTRUCTION_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+This must change the phase machine rather than add fixtures: release derived
+unit, scale and line-weight field values before coordinate accumulation,
+rematerialize them from the public topology and exact ledger only when needed,
+and fuse or uncompute rational temporaries without moving their information
+into retained history. Count rematerialization work and every exact live value,
+preserve final-only projection and same-backing restoration/reuse, and retain
+the identical compact classical recurrence.
 
 ## 10. Roadmap Maintenance
 
