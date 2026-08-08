@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_FUSED_UNIT_POWER_NO_GO`
-**Roadmap version:** `14.91`
+**Status:** `STRICT_SU2_LEVEL8_DIRECT_UNIT_ACTION_NO_GO`
+**Roadmap version:** `14.92`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `87d9e49af9d676c22aa1914cf1d923c111e38049`
+**Reconciled source head:** `607e7b0a24df62c48b83f73d25f235c572718d5a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_DYNAMIC_BINARY_PUBLIC_UNIT_POWER_FUSION_ELIMINATES_STANDALONE_POWER_RESULTS_AND_ONE_TERMINAL_FIELD_MULTIPLICATION_PER_NONZERO_FACTOR_APPLICATION_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM301426_TO300940_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_FUSED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_FUSED_COORDINATE_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_M224_REMATERIALIZED_PARAMETERS3_7_9_11_13_17_19_FUSED_DYNAMIC_BINARY_PUBLIC_UNIT_POWER_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATES_DYNAMIC_BINARY_SQUARE_FACTORS_POWER_TABLES_AND_CACHES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM300940_TO294821_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DIRECT_FIXED_FACTOR_ACCUMULATOR_PRODUCT_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_DIRECT_COORDINATE_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_M224_REMATERIALIZED_M225_FUSED_PARAMETERS3_7_9_11_13_17_19_DIRECT_REPEATED_FIXED_PUBLIC_UNIT_ACTION_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M225_ELIMINATES_STANDALONE_DYNAMIC_POWER_AND5805_PRIMARY_TERMINAL_MULTIPLICATIONS_BUT_FUSED_LINE_WEIGHT_POWER_REMAINS300940_BITS_AND_ALL7_CASES_EXCEED_RAW`
+**New mechanism development:** `ACTIVE_AFTER_M226_REMOVES_BINARY_SQUARE_FACTORS_AND_REDUCES_PRIMARY_PEAK6119_BITS_TO294821_BUT275150_DIRECT_STEPS_AND_SIMULTANEOUS_ACCUMULATOR_PRODUCT_KEEP_ALL7_CASES_ABOVE_RAW`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_FUSED_LEDGER_ACCUMULATOR_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATING_DYNAMIC_SQUARED_POWER_FACTOR_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_WITH_ONE_MUTABLE_CYCLOTOMIC_COORDINATE_VECTOR_AND_BOUNDED_RATIONAL_SCRATCH_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_LEDGER_AND_PUBLIC_UNIT_DESCRIPTOR_REMATERIALIZATION_RELEASES_ALL_DIRECT_TRACE_CALLER_FIELD_SCALARS_ELIMINATES_ACCEPTED_PATH_LIFECYCLE_SCALE_CONJUGATES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM364275_TO301426_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_REMATERIALIZED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_REMATERIALIZED_COORDINATE_RECURRENCE_REMAINS
+BOUNDED_EXACT_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATES_DYNAMIC_BINARY_SQUARE_FACTORS_POWER_TABLES_AND_CACHES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM300940_TO294821_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DIRECT_FIXED_FACTOR_ACCUMULATOR_PRODUCT_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_DIRECT_COORDINATE_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -4968,6 +4968,13 @@ An external boundary can pause hardware, procurement, credentials, destructive
 change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
+
+The current continuation is M226's measured simultaneous
+accumulator/product height obstruction. Implement the selected in-place
+`GL(16,Z)` public-unit coordinate action and count its compiler matrices,
+retained public plans, coordinate temporaries and warm work. This current
+directive supersedes every historical `continue from` sentence in the
+chronological evidence narrative below.
 
 Hard runtime or context exhaustion is not scientific completion. Preserve the
 exact F17 recurrence, pi-content, unit-search, deferred-ledger, Horner,
@@ -10880,6 +10887,66 @@ Retain zero power tables, cached powers, dense matrices or answer-dependent
 compilation, and use the identical direct recurrence as the strongest compact
 classical baseline. This is a deliberate time-for-live-payload repair, not an
 advantage claim.
+
+## M226: direct repeated public-unit action and persisting height no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATES_DYNAMIC_BINARY_SQUARE_FACTORS_POWER_TABLES_AND_CACHES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM300940_TO294821_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DIRECT_FIXED_FACTOR_ACCUMULATOR_PRODUCT_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_DIRECT_COORDINATE_RECURRENCE_REMAINS
+```
+
+Every accepted unit exponent is executed by multiplying the current exact
+accumulator directly by one fixed public descriptor `abs(exponent)` times.
+M226 retains no binary-square factor, standalone power result, terminal outer
+factor multiplication, power table or power cache. Its independently
+reconstructed compiled descriptor contains 28 exact field cells carrying
+1,802 exact payload bits and seven public parameter integers carrying 34 bits.
+
+The primary four-strand depth-four peak falls by 6,119 bits, from M225's
+300,940 to 294,821, but remains above the matched raw 129,595-bit recurrence.
+All seven cases remain above raw and peak at
+`DIRECT_PUBLIC_UNIT_TRACE_WEIGHT_STEP`, where the fixed public factor, old
+height-growing accumulator and new product coexist. M225's 29,945 primary
+binary multiplications, including 17,842 squares, become 275,150 counted
+direct steps across 4,709 nonzero applications, with maximum absolute exponent
+1,024. This is an explicit time-for-live-state trade, not a computational
+advantage.
+
+The standalone reference imports none of M226 through M221 production and
+reproduces every case, normalized work tuple, state and boundary commitment,
+descriptor metric, restoration and reuse result. Exact inversion retains the
+same residual, ledger and scratch backings, uses no baseline reload, reaches
+reuse generation two, and agrees with fresh reuse. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+Direct-action intervals count the exact old accumulator, fixed factor, new
+product, exponent, step and surviving caller integers. Retained final-boundary
+liveness during inverse remains outside this local instrumentation, so M226
+does not claim whole-transaction live-payload completeness. Python object and
+container overhead, allocator/interpreter state, JSON serialization, timing
+and whole-process RSS remain excluded rather than zero. The strongest compact
+classical comparator is the identical direct repeated coordinate recurrence.
+No CATVM custody, distinct phase resource, advantage, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference or
+unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_WITH_ONE_MUTABLE_CYCLOTOMIC_COORDINATE_VECTOR_AND_BOUNDED_RATIONAL_SCRATCH_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+Compile the seven public unit multiplication maps and one conjugation map into
+deterministic reversible swaps, signs and integer shears on the 16-coordinate
+cyclotomic basis. Compose norm actions from those primitive plans rather than
+decomposing dense norm matrices. Count compilation matrices, retained plan
+storage, plan references, every rational coordinate temporary and warm work;
+release compiler matrices before execution. Preserve final-only exact
+restoration/reuse and use the identical in-place recurrence as the strongest
+classical comparator. This tests the current accumulator/product obstruction
+without adding a deeper cubic fixture.
 
 ## 10. Roadmap Maintenance
 

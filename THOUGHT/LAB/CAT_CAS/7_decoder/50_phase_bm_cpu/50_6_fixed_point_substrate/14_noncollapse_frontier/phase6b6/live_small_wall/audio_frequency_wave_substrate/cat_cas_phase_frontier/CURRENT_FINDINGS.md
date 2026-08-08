@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`87d9e49af9d676c22aa1914cf1d923c111e38049`. The canonical per-milestone
+`607e7b0a24df62c48b83f73d25f235c572718d5a`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11957,3 +11957,55 @@ EXACT_FUSED_LEDGER_ACCUMULATOR_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATING_DY
 Use direct repeated action by the fixed public unit to eliminate the growing
 squared factor. Count total exponent mass, descriptor payload and every exact
 step; retain zero power caches/tables and the identical classical recurrence.
+
+## M226 direct repeated public-unit action and persisting height no-go
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATES_DYNAMIC_BINARY_SQUARE_FACTORS_POWER_TABLES_AND_CACHES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM300940_TO294821_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DIRECT_FIXED_FACTOR_ACCUMULATOR_PRODUCT_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_DIRECT_COORDINATE_RECURRENCE_REMAINS
+```
+
+Every accepted unit exponent is executed by direct multiplication with one
+fixed public unit descriptor for each of `abs(exponent)` steps. Binary square
+factors, standalone power results, terminal factor products, power tables and
+power caches are absent. The independently reconstructed public descriptor has
+28 exact field cells carrying 1,802 payload bits and seven parameter integers
+carrying 34 bits.
+
+The primary four-strand depth-four live maximum falls from 300,940 to 294,821
+bits but remains above the matched raw 129,595 bits. Every declared case remains
+above raw and peaks at `DIRECT_PUBLIC_UNIT_TRACE_WEIGHT_STEP`, where the old
+height-growing accumulator, fixed descriptor and new product coexist. The
+primary recurrence exchanges M225's 29,945 binary multiplications, including
+17,842 squares, for 275,150 direct steps over 4,709 nonzero actions with
+maximum absolute exponent 1,024. This is a measured time-for-live-state trade.
+
+Production and a standalone implementation importing none of M226--M221
+production match all seven normalized case/resource views, state and boundary
+commitments, descriptor metrics, restoration and reuse. The same residual,
+ledger and scratch backings restore exactly without baseline reload; unrelated
+reuse reaches generation two and agrees with fresh state and boundary.
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical direct repeated
+fixed-unit coordinate recurrence. Direct-action intervals are source-complete,
+but retained projected-boundary liveness during inverse is not instrumented
+and whole-transaction live-payload completeness is not claimed. Excluded
+Python/runtime costs are not zero. No CATVM custody, distinct phase resource,
+advantage, Small Wall crossing, physical execution, physical-bit replacement,
+catalytic inference or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_WITH_ONE_MUTABLE_CYCLOTOMIC_COORDINATE_VECTOR_AND_BOUNDED_RATIONAL_SCRATCH_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+Compile the seven public unit maps plus conjugation into deterministic
+reversible coordinate swaps, signs and integer shears. Compose norm actions
+from primitive plan references, release dense compiler matrices before
+execution, and count compiler state, retained plan storage, rational
+temporaries and warm work. Preserve final-only exact restoration/reuse and the
+identical in-place classical recurrence.

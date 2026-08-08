@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`87d9e49af9d676c22aa1914cf1d923c111e38049`. The registry assigns one
+`607e7b0a24df62c48b83f73d25f235c572718d5a`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 225-milestone lane is active by user direction. Continue from the
+The current 226-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,39 +53,40 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_DYNAMIC_BINARY_PUBLIC_UNIT_POWER_FUSION_ELIMINATES_STANDALONE_POWER_RESULTS_AND_ONE_TERMINAL_FIELD_MULTIPLICATION_PER_NONZERO_FACTOR_APPLICATION_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM301426_TO300940_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_FUSED_UNIT_POWER_ACCUMULATION_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_FUSED_COORDINATE_RECURRENCE_REMAINS
+BOUNDED_EXACT_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATES_DYNAMIC_BINARY_SQUARE_FACTORS_POWER_TABLES_AND_CACHES_AND_REDUCES_PRIMARY_DECLARED_EXACT_LIVE_PAYLOAD_FROM300940_TO294821_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_DIRECT_FIXED_FACTOR_ACCUMULATOR_PRODUCT_DOMINATES_AND_ALL_SEVEN_DECLARED_CASES_REMAIN_ABOVE_THE_MATCHED_RAW_RECURRENCE_WHILE_THE_IDENTICAL_CLASSICAL_DIRECT_COORDINATE_RECURRENCE_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_M224_REMATERIALIZED_PARAMETERS3_7_9_11_13_17_19_FUSED_DYNAMIC_BINARY_PUBLIC_UNIT_POWER_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
+FORMAL_PRETRUNCATION_QZETA40_M219_CUBIC_SKEIN_M220_UNIT_M221_LEDGER_NATIVE_M222_STREAMED_M223_DIRECT_M224_REMATERIALIZED_M225_FUSED_PARAMETERS3_7_9_11_13_17_19_DIRECT_REPEATED_FIXED_PUBLIC_UNIT_ACTION_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Every accepted
-dynamic binary public-unit power is fused into its consuming accumulator and
-the predecessor's standalone returned power plus terminal outer multiply are
-absent. Production and a standalone exact implementation match every declared
-case, normalized work tuple, state and boundary commitment, restoration and
-reuse result without the reference importing M225, M224, M223, M222 or M221
-production.
+public-unit exponent is realized by direct repeated multiplication by one
+fixed public descriptor. Dynamic binary squares, standalone powers, terminal
+factor products, power tables and power caches are absent. Production and a
+standalone exact implementation match all seven cases, normalized work, state
+and boundary commitments, restoration and reuse without the reference
+importing M226 through M221 production. The standalone chain also reconstructs
+the 28-field/7-parameter public descriptor accounting independently.
 
-The primary four-strand depth-four peak falls only from M224's 301,426 to
-300,940 declared exact live bits and remains above the matched raw 129,595
-bits. All seven cases remain above raw and peak at
-`FUSED_DIRECT_TRACE_WEIGHT_POWER_ACCUMULATE`. M225 eliminates 5,805 primary
-terminal factor multiplications, including 4,709 nonzero fused applications,
-but the old accumulator, fixed public factor and new product remain live.
-Fused-power intervals are source-complete; retained projected-boundary
-liveness during inverse execution is explicitly not instrumented, so no
-whole-transaction live-payload completeness claim is made. The strongest
-classical comparator is the identical fused coordinate recurrence. Excluded
-Python/runtime costs are not zero. No CATVM custody, distinct phase resource,
-advantage, Small Wall crossing, physical execution, physical-bit replacement,
-catalytic inference, or unbounded computation is established. Continue by
-replacing binary squaring with counted direct repeated public-unit action; do
-not add deeper cubic fixtures.
+The primary four-strand depth-four peak falls from M225's 300,940 to 294,821
+declared exact live bits but remains above the matched raw 129,595 bits. All
+seven cases remain above raw and peak at
+`DIRECT_PUBLIC_UNIT_TRACE_WEIGHT_STEP`. The primary path replaces M225's
+29,945 binary multiplications, including 17,842 squares, with 275,150 counted
+direct steps over 4,709 nonzero applications; the fixed descriptor,
+height-growing accumulator and new product remain simultaneously live.
+Direct-action intervals are source-complete, while retained projected-boundary
+liveness during inverse is not instrumented and whole-transaction live-payload
+completeness is not claimed. The strongest classical comparator is the
+identical direct coordinate recurrence. Excluded Python/runtime costs are not
+zero. No CATVM custody, distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, catalytic inference,
+or unbounded computation is established. Continue with a counted in-place
+unimodular coordinate action; do not add deeper cubic fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -279,7 +280,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M225_ELIMINATES_STANDALONE_DYNAMIC_POWER_AND5805_PRIMARY_TERMINAL_MULTIPLICATIONS_BUT_FUSED_LINE_WEIGHT_POWER_REMAINS300940_BITS_AND_ALL7_CASES_EXCEED_RAW
+ACTIVE_AFTER_M226_REMOVES_BINARY_SQUARE_FACTORS_AND_REDUCES_PRIMARY_PEAK6119_BITS_TO294821_BUT275150_DIRECT_STEPS_AND_SIMULTANEOUS_ACCUMULATOR_PRODUCT_KEEP_ALL7_CASES_ABOVE_RAW
 ```
 
 The named
@@ -288,22 +289,25 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_FUSED_LEDGER_ACCUMULATOR_DIRECT_REPEATED_PUBLIC_UNIT_ACTION_ELIMINATING_DYNAMIC_SQUARED_POWER_FACTOR_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_WITH_ONE_MUTABLE_CYCLOTOMIC_COORDINATE_VECTOR_AND_BOUNDED_RATIONAL_SCRATCH_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
-M214--M225 show that fixed local labels, topology contraction, scalar boundary
+M214--M226 show that fixed local labels, topology contraction, scalar boundary
 recurrences, link-pattern skein state, nonlinear cubic phase updates,
 cyclotomic unit gauges, ledger-native streaming, aggregate-norm elimination,
 and direct coordinate traces have not produced a compact exact resource beyond
-the identical classical recurrence. M225 fuses each binary unit power into its
-consumer and eliminates all terminal factor products, but the primary peak
-only falls 486 bits because the growing binary-square factor survives beside
-the accumulator and product. Do not add strand, depth, or line-search fixtures.
-Apply the fixed public unit directly `abs(exponent)` times, count total exponent
-mass, fixed descriptor residency, every accumulator/product interval and warm
-work, preserve final-only exact restoration/reuse, and retain the identical
-classical recurrence. A reduction that moves information into history, power
-caches, matrices or public answer-bearing tables is not a repair.
+the identical classical recurrence. M226 removes binary-square factors and
+reduces the primary peak by 6,119 bits, but all seven cases remain above raw
+because one whole old accumulator and one whole new product survive together;
+the direct path also grows to 275,150 primary steps. Do not add strand, depth,
+or line-search fixtures. Compile each fixed public unit into deterministic
+`GL(16,Z)` swaps, signs and integer shears, apply those actions to one owned
+16-coordinate vector with bounded rational scratch, and count compilation,
+retained plans, every coordinate temporary and warm work. Compose norms from
+unit and conjugation plans rather than hiding dense norm matrices. Preserve
+final-only exact restoration/reuse and the identical classical recurrence. A
+reduction that moves information into history, cached matrices or public
+answer-bearing tables is not a repair.
 
 ## 7. Native No-Smuggle Law
 
