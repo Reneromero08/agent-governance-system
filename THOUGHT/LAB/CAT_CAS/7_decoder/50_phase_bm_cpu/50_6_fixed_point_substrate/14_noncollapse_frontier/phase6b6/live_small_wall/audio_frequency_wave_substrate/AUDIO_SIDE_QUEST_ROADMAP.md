@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_TENSOR_FACTORED_LINEAR_ORACLE_ROUTE_CLOSED`
-**Roadmap version:** `15.26`
+**Status:** `STRICT_CATVM_P5_RANK1_CUBIC_GAUSS_QUOTIENT_ROUTE_CLOSED`
+**Roadmap version:** `15.27`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c163b6f53289084fea436412be2809af0139e8d6`
+**Reconciled source head:** `9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_TENSOR_FACTORED_HIDDEN_LINEAR_PHASE_ORACLE_PRESERVES_ONE_ABSTRACT_COHERENT_FORWARD_QUERY_ACROSS_DECLARED_DIMENSIONS1_2_4_8_16_32_WHILE_REPLACING5_TO_THE_N_GLOBAL_AMPLITUDES_WITH5N_EXACT_PHASE_FACTOR_CELLS_AND_RELEASES_ONLY_THE_FINAL_N_RESIDUES_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_REUSE_BUT_EACH_ORACLE_CALL_READS_N_HIDDEN_RESIDUES_AND_THE_STRONGEST_DIRECT_PRIVATE_DESCRIPTOR_CLASSICAL_BASELINE_IS_O_N_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
-**Current claim ceiling:** `CATVM_P5_SEPARABLE_LINEAR_CHARACTER_ORACLES_PRODUCT_INPUT_RANK1_FACTOR_CARRIER_DIMENSIONS1_2_4_8_16_32_ABSTRACT_UNIX_SOCKET_SERVICE_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
+**Current claim ceiling:** `EXACT_SOFTWARE_P5_CONNECTED_REGULAR_QUADRATIC_FORMS_PLUS_ONE_CUBIC_LINEAR_FUNCTIONAL_DECLARED_WIDTHS2_3_4_6_8_12_16_ABSTRACT_UNIX_SOCKET_EXACT_AMPLITUDE_BOUNDARY_MODEL_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M242_REPLACES_THE5_TO_THE_N_LINEAR_ORACLE_AMPLITUDE_CARRIER_WITH5N_EXACT_PHASE_FACTOR_CELLS_BUT_THE_ACCEPTED_ORACLE_STILL_READS_N_HIDDEN_RESIDUES_AND_THE_STRONGEST_DIRECT_PRIVATE_DESCRIPTOR_CLASSICAL_BASELINE_IS_O_N_SO_THE_NEXT_MECHANISM_MUST_CHANGE_TO_A_GENUINELY_NONSEPARABLE_PHASE_LAW`
+**New mechanism development:** `ACTIVE_AFTER_M243_PROVES_ONE_CUBIC_DIRECTION_COLLAPSES_TO_A_FIXED_FIVE_CHANNEL_GAUSS_QUOTIENT_AND_CLOSES_THE_RANK1_FAMILY_SO_THE_NEXT_MECHANISM_MUST_TEST_GROWING_INDEPENDENT_CUBIC_DIRECTION_RANK_OR_A_STRONGER_NON_GAUSSIAN_REPRESENTATION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_RANK1_CUBIC_PHASE_ORACLE_QUOTIENT_COLLAPSE_TO_DIMENSION_DISCRIMINANT_DELTA_LAMBDA_WITH_FIVE_CHANNEL_COHERENT_CLOSURE_ACROSS_N2_3_4_6_8_12_16_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_LDL_CLASSICAL_BASELINE`
+**Active primary successor:** `CATVM_EXACT_P5_CONNECTED_MULTI_CUBIC_CHAIN_TREEWIDTH1_FIVE_CELL_PHASE_TRANSFER_ACROSS_DEPTHS2_3_4_8_16_32_64_WITH_CROSS_RANK2_NONTRANSFERABILITY_CERTIFICATE_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_FIVE_VECTOR_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c163b6f53289084fea436412be2809af0139e8d6`. The current 242-milestone
+`9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`. The current 243-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_GROSS_P5_WIGNER_PHASE_CARRIERS_ON_DECLARED_ONE_TWO_THREE_QUDIT_INTERFACES_PROPAGATE_CLIFFORD_PERMUTATIONS_AND_FORMULA_GENERATED_CUBIC_KERNELS_WITH_EXACT_POSITIVE_STABILIZER_SHAMS_AND_CUBIC_CAUSED_NEGATIVITY_FINAL_ONLY_AGGREGATE_PROJECTION_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_SMALLER_EXACT5_TO_THE_N_AMPLITUDE_PLUS_STREAMED_WIGNER_CLASSICAL_RECURRENCE_REMAINS
+CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
 ```
 
 Not established:
@@ -11854,6 +11854,66 @@ LDL-plus-five-term classical evaluator. Dense `5^n` summation is verifier-only
 through `n<=4`. If the quotient collapse holds, stop this rank-one cubic family;
 only growing independent cubic-direction rank with a lawful compact signature
 may continue the route.
+
+## M243: one cubic direction collapses to a fixed five-channel Gauss quotient
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+```
+
+M243 executes connected regular quadratic forms plus one multi-coordinate
+cubic functional over F5 at widths `2,3,4,6,8,12,16`. Exact completion of the
+quadratic form reduces the full coherent sum to five Q(zeta5) channels indexed
+by the cubic Fourier coordinate and determined by dimension, determinant square
+class, `delta = u^T A^-1 u`, and cubic strength. The production no-pivot
+in-place LDL chart agrees with independently pivoted modular elimination at
+every width and with independent dense exact summation only through its declared
+verifier ceiling `n<=4`.
+
+The abstract Unix-socket CATVM service retains the packed symmetric matrix,
+direction, solve vector, quotient scalars, and coherent channels internally.
+Projection exposes only the declared final amplitude. Disconnect, partial-LDL,
+and post-projection failures restore before rejection or response. The actual
+packed backing is reversed in place, exact state is verified, and the same
+backings advance from generation one to generation two for descriptor-distinct
+reuse. Focused review returned `PASS_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The quotient is an obstruction, not leverage. The accepted path retains
+`12,20,30,56,90,182,306` residue cells when mutable carrier and hidden CATVM
+configuration are both counted, and it reads that hidden descriptor again
+during inverse. Five logical channels do not imply bounded-width exact state:
+the public denominator-power bounds grow `3,4,5,7,9,13,17`, and numerator and
+denominator material bounds grow with width. Resource figures remain
+`PACKAGE_SELF_REVIEW`, with whole-process Python, allocator, socket, hashing,
+and scheduler costs incomplete.
+
+The strongest implemented classical comparator is the identical compact
+modular LDL solve plus five-term Q(zeta5) evaluator. M243 therefore establishes
+neither a rank-one escape from the fixed Gauss quotient nor standard one-shot
+inference, a general nonlinear phase resource, total advantage, Small Wall
+crossing, physical execution, bit replacement, or unbounded catalytic
+computation. The rank-one cubic family is closed; larger widths in that family
+are not a valid successor.
+
+Selected phase-owned successor:
+
+```text
+CATVM_EXACT_P5_CONNECTED_MULTI_CUBIC_CHAIN_TREEWIDTH1_FIVE_CELL_PHASE_TRANSFER_ACROSS_DEPTHS2_3_4_8_16_32_64_WITH_CROSS_RANK2_NONTRANSFERABILITY_CERTIFICATE_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_FIVE_VECTOR_CLASSICAL_BASELINE
+```
+
+M244 uses multiple independent unresolved F5 cubic ports coupled as a connected
+treewidth-one chain. Formula-rematerialized exact five-state transfer maps act
+directly on one resident phase message at depths `2,3,4,8,16,32,64`; the final
+scalar is retained while the public reverse word restores the same backing.
+The strongest comparator is the identical five-vector recurrence, including
+exact-payload growth. One independently certified public cross-rank-two topology
+has interface rank 25 and prevents promotion of the five-cell chain law to
+arbitrary topology. If the phase and classical recurrences agree, publish the
+treewidth-one ceiling and change representation rather than adding depth,
+descriptor families, or transfer optimizations.
 
 ## 10. Roadmap Maintenance
 
