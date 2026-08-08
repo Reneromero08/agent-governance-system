@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_TRIVALENT_FINITE_CONTINUATION_RANK_OBSTRUCTION`
-**Roadmap version:** `14.99`
+**Status:** `STRICT_PROJECTIVE_GAUSSIAN_RELATION_CLOSURE_HEIGHT_OBSTRUCTION`
+**Roadmap version:** `15.00`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4a2bbfe24820488eaee053429bf74ff0c4830954`
+**Reconciled source head:** `f4ff09b3de403844ac6b6f886d3234b35692d0ab`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_DUAL_SPLIT_PRIME_REACHABLE_OBSERVABLE_AND_HANKEL_CERTIFICATES_SHOW_THE_FIXED_VACUUM_PLAT_BOUNDARY_LANGUAGE_FOR_ALL_ADJACENT_SU2_LEVEL8_FUNDAMENTAL_BRAID_GENERATORS_REQUIRES_FULL_QZETA40_LINEAR_CONTINUATION_DIMENSIONS2_5_14_42_AT_STRANDS4_6_8_10_SO_THE_M232_FIXED_TWO_CHANNEL_EXTENSION_AND_ANY_FIXED_NINE_CHARGE_LINEAR_QUOTIENT_FAIL_WITHIN_THE_DECLARED_CASES_BY_N8_WHILE_NO_ALL_N_UNBOUNDED_RANK_THEOREM_IS_CLAIMED_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_SPARSE_CLASSICAL_FUSION_PATH_RECURRENCE`
-**Current claim ceiling:** `QZETA40_SU2_LEVEL8_FUNDAMENTAL_VACUUM_FUSION_PATH_SECTORS_N4_6_8_10_ALL_ADJACENT_GENERATORS_AND_INVERSES_REACHABLE_OBSERVABLE_CONTINUATION_RANKS2_5_14_42_AT_PRODUCTION_SPLIT_PRIMES241_401_AND_INDEPENDENT_PRIMES641_881_SELECTED_FOUR_SWEEP_PRIMARY_THREE_SWEEP_REUSE_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_PROJECTIVE_COMPLEX_GAUSSIAN_PHASE_RELATIONS_EXP_I_PI_Q_ON_THE_REAL_LINE_CLOSE_POINTWISE_INTERSECTION_AND_NONDEGENERATE_STATIONARY_SHARED_PORT_COMPOSITION_IN_THREE_RATIONAL_QUADRATIC_COEFFICIENT_CELLS_ACROSS_DEPTHS1_2_4_8_16_32_64_128_WITH_FINAL_ONLY_PROJECTIVE_PHASE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_PRIMARY_PAYLOAD_GROWS12_TO51_BITS_AND_ALTERNATE13_TO655_BITS_WHILE_PUBLIC_DEPTH_CLOSED_FORMULAS_GIVE_THE_STRONGEST_SMALLER_WORK_CLASSICAL_BASELINE`
+**Current claim ceiling:** `FORMAL_PROJECTIVE_EXP_I_PI_Q_REAL_LINE_BINARY_QUADRATIC_RELATIONS_THREE_RATIONAL_COEFFICIENTS_TWO_PUBLIC_PROGRAM_FAMILIES_DEPTHS1_2_4_8_16_32_64_128_PRIMARY128_FAMILY0_REUSE73_FAMILY1_NONDEGENERATE_COMPOSE_RIGHT_AND_INTERSECTION_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M233_CERTIFIES_FULL_FINITE_CONTINUATION_RANKS2_5_14_42_THROUGH_N10_REJECTING_FIXED2_AND9_LINEAR_RECOUPLING_QUOTIENTS_SO_THIS_ROUTE_IS_RETIRED_AND_THE_NEXT_MECHANISM_MUST_CHANGE_THE_PHASE_LAW`
+**New mechanism development:** `ACTIVE_AFTER_M234_ESTABLISHES_FIXED3_RATIONAL_PROJECTIVE_GAUSSIAN_RELATION_CLOSURE_BUT_EXPOSES_GROWING_EXACT_HEIGHT_AND_A_STRONGER_PUBLIC_CLOSED_FORM_CLASSICAL_BASELINE_SO_THE_NEXT_MECHANISM_MUST_LEAVE_THE_QUADRATIC_GAUSSIAN_FAMILY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_PROJECTIVE_COMPLEX_GAUSSIAN_PHASE_RELATION_SIGNATURE_ALGEBRA_ON_THE_REAL_LINE_WITH_NATIVE_STATIONARY_SHARED_PORT_COMPOSITION_INTERSECTION_FIXED3_RATIONAL_COEFFICIENT_CELLS_ACROSS_GROWING_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_GAUSSIAN_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_CUBIC_PERTURBED_PROJECTIVE_PHASE_RELATION_STATIONARY_SHARED_PORT_ELIMINATION_WITH_NATIVE_INTERSECTION_FIXED_ALGEBRAIC_CHART_CLOSURE_OR_BRANCH_DEGREE_GROWTH_ACROSS_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_RESULTANT_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`407d3576bf1497f664e953eec7d39b56bd2a9728`. The current 224-milestone
+`f4ff09b3de403844ac6b6f886d3234b35692d0ab`. The current 234-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -11351,6 +11351,61 @@ relation manifold closes native shared-port stationary composition and
 intersection at fixed logical rank.  Exact rational coefficient height and
 the identical compact Gaussian classical recurrence remain material costs;
 fixed cell count alone is not a phase-resource claim.
+
+## M234: fixed-cell projective Gaussian closure exposes exact-height growth
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_PROJECTIVE_COMPLEX_GAUSSIAN_PHASE_RELATIONS_EXP_I_PI_Q_ON_THE_REAL_LINE_CLOSE_POINTWISE_INTERSECTION_AND_NONDEGENERATE_STATIONARY_SHARED_PORT_COMPOSITION_IN_THREE_RATIONAL_QUADRATIC_COEFFICIENT_CELLS_ACROSS_DEPTHS1_2_4_8_16_32_64_128_WITH_FINAL_ONLY_PROJECTIVE_PHASE_EXACT_SAME_BACKING_RESTORATION_REUSE_BUT_PRIMARY_PAYLOAD_GROWS12_TO51_BITS_AND_ALTERNATE13_TO655_BITS_WHILE_PUBLIC_DEPTH_CLOSED_FORMULAS_GIVE_THE_STRONGEST_SMALLER_WORK_CLASSICAL_BASELINE
+```
+
+M234 represents a formal projective oscillatory Gaussian relation
+`exp(i*pi*Q)` by the three exact rational coefficients of a binary quadratic
+form.  Pointwise intersection is coefficient addition.  Nondegenerate
+shared-port composition is the exact stationary Schur complement, with the
+stationary coordinate retained as an unresolved internal variable rather
+than projected or serialized.  The accepted path supports both operations in
+one descriptor-driven program, projects only a final phase-ratio token, and
+reverses public operations on the actual three-cell backing without retained
+dynamic inverse history.
+
+The same backing is restored exactly, reuse advances from generation one to
+two, a distinct second public family consumes it, fresh and restored results
+agree, and no baseline reload occurs.  A standalone symmetric-matrix Schur
+implementation independently reconstructs the algebra, transaction, custody
+and ordering controls.  Focused review returned `PASS_STRICT_SCOPE`, so the
+milestone is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Fixed logical rank is not fixed material cost.  Across depths
+`1,2,4,8,16,32,64,128`, primary exact coefficient payload grows
+`12,15,21,27,33,39,45,51` bits and the alternate family grows
+`13,19,30,51,92,173,334,655` bits.  These are package-local rational payload
+figures, not complete transaction or process peaks.  The strongest implemented
+classical method evaluates public depth closed formulas in the same three
+rationals, reproduces the same height, and uses fewer recurrence steps than
+the iterated phase path.  Full integer bit-operation cost is not claimed.
+
+The result is a formal projective stationary-phase law only.  It does not
+preserve Fresnel or Maslov amplitude, establish a convergent or normalized
+Gaussian integral, supply singular delta identities, enforce CATVM custody,
+or establish a distinct phase resource, advantage, Small Wall crossing,
+physical waveform execution, physical-bit replacement, inference, or
+unbounded computation.
+
+Selected non-Gaussian successor:
+
+```text
+EXACT_CUBIC_PERTURBED_PROJECTIVE_PHASE_RELATION_STATIONARY_SHARED_PORT_ELIMINATION_WITH_NATIVE_INTERSECTION_FIXED_ALGEBRAIC_CHART_CLOSURE_OR_BRANCH_DEGREE_GROWTH_ACROSS_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_RESULTANT_CLASSICAL_BASELINE
+```
+
+This is the smallest phase-law change beyond the closed quadratic Gaussian
+family.  It must determine whether cubic stationary shared-port elimination
+closes in a fixed exact algebraic chart or forces growing branch degree or
+equivalent support.  It must compare with exact classical resultant or
+critical-value elimination, count coefficient height and branch data, and
+avoid treating sampled waveforms or expanded assignment tables as a baseline.
 
 ## 10. Roadmap Maintenance
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`a4304f035504a5ab353bfa91381d69e1d28a1971`. The canonical per-milestone
+`f4ff09b3de403844ac6b6f886d3234b35692d0ab`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12342,3 +12342,45 @@ This is a different phase law, not another fusion-path optimization.  It must
 test exact nonlinear fixed-parameter closure, preserve final-only projection
 and actual restoration/reuse, and count rational coefficient height against
 the identical compact classical Gaussian recurrence.
+
+## M234 exact projective Gaussian shared-port relation algebra
+
+M234 closes formal binary quadratic phase relations
+`exp(i*pi*(a*x^2+2*b*x*y+c*y^2))` in three exact rational coefficient cells.
+Intersection adds coefficient triples.  Composition across one unresolved
+shared real port uses the nondegenerate stationary Schur complement.  The
+shared stationary coordinate is neither projected nor serialized, and public
+module descriptors provide an exact inverse without retaining old coefficient
+triples.
+
+The accepted primary executes 128 rounds of the first public family.  The
+actual three-cell backing restores exactly, advances to generation two, and is
+reused for 73 rounds of a distinct second family.  Fresh/restored boundary and
+forward-relation commitments agree; backing identity is stable and no reload
+occurs.  The standalone reference derives composition through symmetric
+matrix elimination and implements an independent custody/order state machine.
+The sealed qualifier and focused review support
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The logical closure does not remove material growth.  At depths
+`1,2,4,8,16,32,64,128`, the first family uses
+`12,15,21,27,33,39,45,51` exact rational payload bits and the alternate uses
+`13,19,30,51,92,173,334,655`.  Whole-transaction liveness and Python/runtime
+storage are not claimed complete.  The strongest implemented classical path
+evaluates exact public-depth closed formulas in the same three rational cells,
+matches coefficient height, and performs fewer recurrence steps.  Therefore
+M234 establishes fixed-cell formal projective Gaussian relation closure, not
+a distinct phase resource or advantage.
+
+Next:
+
+```text
+EXACT_CUBIC_PERTURBED_PROJECTIVE_PHASE_RELATION_STATIONARY_SHARED_PORT_ELIMINATION_WITH_NATIVE_INTERSECTION_FIXED_ALGEBRAIC_CHART_CLOSURE_OR_BRANCH_DEGREE_GROWTH_ACROSS_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_RESULTANT_CLASSICAL_BASELINE
+```
+
+This changes the relation law beyond quadratic Gaussian closure.  The decisive
+question is whether the smallest cubic perturbation admits a fixed exact
+algebraic stationary-elimination chart or whether branch degree, coefficient
+height, or equivalent support grows.  The comparison must use exact resultant
+or critical-value elimination, not sampled grids or expanded assignments.
