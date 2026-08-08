@@ -1,0 +1,256 @@
+{
+  "baseline": {
+    "character_terms": 440,
+    "classical_smaller_in_work_than_catvm_forward": true,
+    "explicit_depth_path_enumeration_used": false,
+    "strongest_implemented": "ENDPOINT_SPECIALIZED_SYMMETRIC_TWO_RAIL_FACTORIZED_FIVE_BY_FIVE_TRANSFORM_WITH15_ORBIT_RESIDENT_AND25_TEMPORARY_CELLS",
+    "total_advantage_established": false
+  },
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          -5,
+          -5,
+          -4,
+          -6
+        ]
+      },
+      "forward_character_terms": 1140,
+      "generation": 1,
+      "inverse_character_terms": 1500,
+      "run_kind": "PRIMARY",
+      "same_cell_backing": true,
+      "same_scratch_backing": true
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      },
+      "forward_character_terms": 1140,
+      "generation": 2,
+      "inverse_character_terms": 1500,
+      "run_kind": "RESTORED_REUSE",
+      "same_cell_backing": true,
+      "same_scratch_backing": true
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      },
+      "forward_character_terms": 1140,
+      "generation": 1,
+      "inverse_character_terms": 1500,
+      "run_kind": "FRESH_REUSE_REFERENCE",
+      "same_cell_backing": true,
+      "same_scratch_backing": true
+    }
+  ],
+  "controls": {
+    "all_factorized_baseline_terms_equal440": true,
+    "all_rank15_certificates_hold": true,
+    "asymmetric_lambda_breaks_swapped_amplitude_equality": true,
+    "coupling_perturbation_changes_boundary": true,
+    "declared_three_gate_exchange_broken_alphabet_has_rank25_reachable_observable_ceiling": true,
+    "exact_restoration_and_same_backing": true,
+    "first_rung_rejects_matrix_bond_rank_below5": true,
+    "full25_labelled_recurrence_matches15_orbit_quotient_at_every_stage": true,
+    "generation_sequence_primary1_reuse2_fresh1": true,
+    "lambda_perturbation_changes_boundary": true,
+    "output_selector_changes_boundary": true,
+    "primary_service_boundary_matches_independent_reference": true,
+    "reuse_service_boundary_matches_fresh_reference": true,
+    "rung_perturbation_changes_boundary": true
+  },
+  "declared_exchange_broken_three_gate_alphabet": {
+    "A": {
+      "coupling_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "lambdas": [
+        1,
+        2
+      ],
+      "quadratics": [
+        0,
+        1
+      ]
+    },
+    "B": {
+      "coupling_matrix": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "lambdas": [
+        2,
+        1
+      ],
+      "quadratics": [
+        1,
+        0
+      ]
+    },
+    "D": {
+      "coupling_matrix": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "lambdas": [
+        3,
+        1
+      ],
+      "quadratics": [
+        2,
+        4
+      ]
+    }
+  },
+  "factorized_endpoint_baseline": {
+    "primary": {
+      "character_terms": 440,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          -5,
+          -5,
+          -4,
+          -6
+        ]
+      }
+    },
+    "reuse": {
+      "character_terms": 440,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      }
+    },
+    "reuse_fresh": {
+      "character_terms": 440,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      }
+    }
+  },
+  "full25_labelled_parity": {
+    "primary": {
+      "all_stages_match_orbit_quotient": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          -5,
+          -5,
+          -4,
+          -6
+        ]
+      },
+      "verifier_labelled_character_terms": 1000,
+      "verifier_labelled_state_field_cells": 25
+    },
+    "reuse": {
+      "all_stages_match_orbit_quotient": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      },
+      "verifier_labelled_character_terms": 1000,
+      "verifier_labelled_state_field_cells": 25
+    },
+    "reuse_fresh": {
+      "all_stages_match_orbit_quotient": true,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          0,
+          -3,
+          -1,
+          -1
+        ]
+      },
+      "verifier_labelled_character_terms": 1000,
+      "verifier_labelled_state_field_cells": 25
+    }
+  },
+  "imports_production_service_client_or_m237": false,
+  "rank_certificates": {
+    "41": {
+      "declared_exchange_broken_three_gate_observability_rank": 25,
+      "declared_exchange_broken_three_gate_observability_words_digest": "680c6751316fa716ce7df375f49c104975e38ccbb5c5949aec24e1dd089eccdd",
+      "declared_exchange_broken_three_gate_reachability_rank": 25,
+      "declared_exchange_broken_three_gate_reachability_words_digest": "48bb12d4d57ce47bc1aa044a1adcaeffc7bddcc660503700f41d8faf60eb4993",
+      "first_rung_labelled_matrix_rank": 5,
+      "selected_prefix_count": 15,
+      "selected_prefix_indices_digest": "a244b0383356ca8fd240d460c8c1f8d8d05ceaadae424cf5952de580c3985b98",
+      "symmetric_hankel_rank": 15,
+      "symmetric_observability_rank": 15,
+      "symmetric_reachability_rank": 15
+    },
+    "61": {
+      "declared_exchange_broken_three_gate_observability_rank": 25,
+      "declared_exchange_broken_three_gate_observability_words_digest": "680c6751316fa716ce7df375f49c104975e38ccbb5c5949aec24e1dd089eccdd",
+      "declared_exchange_broken_three_gate_reachability_rank": 25,
+      "declared_exchange_broken_three_gate_reachability_words_digest": "48bb12d4d57ce47bc1aa044a1adcaeffc7bddcc660503700f41d8faf60eb4993",
+      "first_rung_labelled_matrix_rank": 5,
+      "selected_prefix_count": 15,
+      "selected_prefix_indices_digest": "a244b0383356ca8fd240d460c8c1f8d8d05ceaadae424cf5952de580c3985b98",
+      "symmetric_hankel_rank": 15,
+      "symmetric_observability_rank": 15,
+      "symmetric_reachability_rank": 15
+    }
+  },
+  "result": "PASS_SEPARATE_REFERENCE_P5_EXCHANGE_SYMMETRIC_RANK2_ORBIT_QUOTIENT"
+}
