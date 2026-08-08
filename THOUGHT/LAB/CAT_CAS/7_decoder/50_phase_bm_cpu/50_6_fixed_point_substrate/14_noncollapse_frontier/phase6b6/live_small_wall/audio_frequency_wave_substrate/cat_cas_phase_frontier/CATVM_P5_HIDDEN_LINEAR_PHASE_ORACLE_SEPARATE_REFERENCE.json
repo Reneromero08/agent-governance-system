@@ -1,0 +1,104 @@
+{
+  "all_n_minus_one_query_witnesses_ambiguous": true,
+  "cases": [
+    {
+      "classical_basis_queries_sufficient": 1,
+      "dimension": 1,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n1_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 1,
+      "dimension": 1,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n1_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 2,
+      "dimension": 2,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n2_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 2,
+      "dimension": 2,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n2_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 3,
+      "dimension": 3,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n3_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 3,
+      "dimension": 3,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n3_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 4,
+      "dimension": 4,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n4_primary",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    },
+    {
+      "classical_basis_queries_sufficient": 4,
+      "dimension": 4,
+      "independent_boundary_and_commitment_parity": true,
+      "independent_exact_restoration": true,
+      "oracle_id": "n4_reuse",
+      "private_oracle_authority_agreement": true,
+      "private_oracle_nonzero": true
+    }
+  ],
+  "classical_query_lower_bound_certificates": [
+    {
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 0,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_HAS_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 1,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_HAS_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 2,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_HAS_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    },
+    {
+      "distinct_secrets_with_identical_transcript": true,
+      "queries_used": 3,
+      "rank_deficiency_argument": "Q_QUERY_VECTORS_SPAN_RANK_AT_MOST_Q_SO_Q_LESS_THAN_N_HAS_NONZERO_ORTHOGONAL_SECRET_DIFFERENCE"
+    }
+  ],
+  "imports_service_or_controller": false,
+  "independent_classical_query_law": true,
+  "independent_exact_power_basis_reexecution": true,
+  "schema": "cat_cas.catvm_p5_hidden_linear_phase_oracle_reference_seal_view.v1",
+  "source_sha256": "84a061a8f75c6d80714f1e3b20a1ab53a8b6ea4e320172423bffb0fc7799478d"
+}
