@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`a2faedad86a9235ccd2b1026e01b4ad4e9dd2f61`. The canonical per-milestone
+`b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12100,3 +12100,50 @@ must consume the actual unresolved nine-cell fusion port, with no relation
 table or assignment expansion, final-only boundary projection, exact inverse
 restoration, unrelated reuse, and immediate comparison to the strongest
 compact classical recurrence.
+
+## M229 typed shared-vector reversible-map calibration
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
+```
+
+The exact nine-coordinate Q(zeta_40) carrier executes public fundamental
+fusion, Casimir twist, and reversible cubic shear. All three ordered module
+pairs differ. Only the final quantum-dimension scalar is projected. Reverse
+order restores the actual coefficient and scratch backings, an unrelated word
+reuses them at generation two, and persistent last-restored state rejects a
+stale generation. No baseline reload, relation table, assignment expansion,
+or answer-dependent public topology compilation occurs.
+
+Production and an independent ordinary-polynomial quotient implementation
+agree on all four programs, controls, state and boundary commitments,
+restoration, and reuse. The accepted calibration is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The stronger open-relation composition interpretation is
+`REJECTED_GENERALIZATION`. This is sequential full-vector execution. Its
+consumer numbers are nominal descriptor labels, not distinct consumer
+capabilities. It constructs no open relation signature, contracts no shared
+unresolved relational internal port, and closes no nonfunctional relation.
+The strongest compact classical baseline is the identical nine-coordinate
+recurrence. The primary vector uses 1,031 forward payload bits and the largest
+declared interval uses 23 field cells, 63 retained descriptor integers, and
+2,972 logical bits. Linear-kernel temporaries, program-commitment compiler
+transients, whole-transaction liveness, and Python/runtime costs are not
+claimed complete.
+
+Next:
+
+```text
+EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The fusion module must produce an actual nonfunctional relation message on a
+nine-cell internal port. Separate twist and cubic-shear branch registers must
+consume that same resident message before native pointwise intersection and
+the only projection. Every reversible accumulator branch must uncompute and
+restore its backing. Nominal labels, sequential map wrappers, relation tables,
+assignment expansion, and answer-dependent compilation do not qualify.

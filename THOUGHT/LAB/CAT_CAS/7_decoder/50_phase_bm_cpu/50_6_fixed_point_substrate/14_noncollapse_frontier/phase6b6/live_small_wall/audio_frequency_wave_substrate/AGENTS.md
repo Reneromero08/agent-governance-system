@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`a2faedad86a9235ccd2b1026e01b4ad4e9dd2f61`. The registry assigns one
+`b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 228-milestone lane is active by user direction. Continue from the
+The current 229-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,40 +53,35 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_PRETRUNCATION_QZETA40_M219_THROUGH_M227_PARAMETERS3_7_9_11_13_17_19_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLANS_STREAMED16_COORDINATE_HERMITIAN_TRACE_FUNCTIONAL_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
+QZETA40_SU2_LEVEL8_SIMPLE_OBJECT9_CELL_SEQUENTIAL_REVERSIBLE_MAPS_FUSION_PARAMETERS0_1_TWIST_PARAMETERS0_1_CUBIC_SHEAR_PHASES3_7_PUBLIC_ROUNDS1_2_3_FAMILIES0_1_PRIMARY3_0_REUSE2_1_DIRECT_PROCESS_ONLY_NOT_OPEN_RELATION_SIGNATURE_CLOSURE
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Trace
-linearity moves the public unit action onto one streamed sixteen-coordinate
-Hermitian functional, and reverse transposed-plan traversal eliminates every
-materialized cyclotomic trace-weight field from the accepted energy path.
-Production and a standalone exact implementation importing neither M228 nor
-M227 production reproduce all seven cases, controls, resources, boundary and
-state commitments, restoration, and reuse byte-for-byte.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
+and an independent polynomial-quotient implementation reproduce four public
+programs, all state and boundary commitments, monotone generation, exact
+same-backing restoration, and generation-two reuse. Fusion, twist, and cubic
+shear are pairwise noncommuting and no relation table or assignment expansion
+is materialized.
 
-The primary four-strand depth-four dynamic maximum falls from 247,272 to
-213,219 declared exact live bits; including the 20,210-bit public plan and
-descriptor state gives 233,429 bits versus matched raw 129,595 bits. The
-functional alone reaches 114,499 payload bits and the primary execution uses
-150,866,708 transposed plan steps. All seven cases remain above raw. Accounting
-is source-complete only for streamed-functional and transpose-plan intervals;
-retained projected-boundary liveness during inverse and whole-transaction live
-payload remain unclaimed, and Python/runtime exclusions are not zero. The
-strongest classical comparator is the identical streamed functional and
-transposed-plan recurrence. M220--M228 now form a bounded route obstruction:
-the tested reversible gauges and dualizations relocate exact coefficient
-height rather than bound it. Do not add another trace, unit, ledger, plan,
-height-balancing, strand, or depth variant. No CATVM custody, distinct phase
-resource, advantage, Small Wall crossing, physical execution,
-physical-bit replacement, catalytic inference, or unbounded computation is
-established.
+M229 is deliberately a negative relational calibration. Its modules execute
+sequentially on one full nine-cell vector. The three consumer numbers are
+nominal public descriptor labels, not distinct consumer capabilities; no open
+relation signature is constructed, no shared unresolved relational port is
+contracted, and no nonfunctional relation closes. The stronger open-relation
+interpretation is `REJECTED_GENERALIZATION`. The strongest classical
+comparator is the identical nine-coordinate recurrence. Linear-kernel scalar
+temporaries, program-commitment compilation transients, whole-transaction
+liveness, and Python/runtime costs are not claimed complete. M220--M228 remain
+a separate bounded gauge-route obstruction. No CATVM custody, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, catalytic inference, or unbounded computation is established.
 
 The accumulated bounded architecture includes:
 
@@ -280,7 +275,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M228_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_AND_REDUCES_PRIMARY_DYNAMIC34053_BITS_BUT233429_DYNAMIC_PLUS_STATIC_BITS_114499_FUNCTIONAL_BITS_AND150866708_TRANSPOSE_STEPS_REMAIN_ABOVE_RAW_AND_THE_GAUGE_OPTIMIZATION_ROUTE_IS_RETIRED
+ACTIVE_AFTER_M229_REPAIRS_MONOTONE_GENERATION_AND_ESTABLISHES_EXACT_TYPED_SHARED_VECTOR_MAP_EXECUTION_BUT_REJECTS_OPEN_RELATION_SIGNATURE_CLOSURE_AND_IDENTIFIES_NOMINAL_CONSUMER_LABELS_AS_THE_OBSTRUCTION
 ```
 
 The named
@@ -289,24 +284,20 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_TYPED_OPEN_SU2_LEVEL8_GRAPH_RELATION_COMPOSITION_ACROSS_NONCOMMUTING_FUSION_TWIST_AND_REVERSIBLE_CUBIC_PHASE_SHEAR_MODULES_ON_ONE_SHARED9_CELL_QZETA40_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_COMPACT_CLASSICAL_RECURRENCE
+EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
 ```
 
-M214--M228 show that fixed local labels, topology contraction, scalar boundary
-recurrences, link-pattern skein state, nonlinear cubic phase updates,
-cyclotomic unit gauges, ledger-native streaming, aggregate-norm elimination,
-and direct coordinate traces have not produced a compact exact resource beyond
-the identical classical recurrence. M228 removes the separately transformed
-weight and lowers the primary dynamic peak by 34,053 bits, but all seven cases
-remain above raw; retained public state raises the primary total to 233,429
-bits, the sixteen-coordinate functional carries 114,499 bits, and the path
-executes 150,866,708 transpose steps. This decides the cubic-skein gauge route.
-Do not extend it. Change mechanism to exact typed graph relations on the fixed
-nine-cell SU(2)_8 fusion port: multiple noncommuting fusion, twist, and
-reversible cubic shear modules must consume the actual shared unresolved port
-without relation-table or assignment expansion. Preserve exact final-only
-restoration/reuse and compare immediately to the strongest compact classical
-recurrence. A type wrapper around an ordinary scalar program is not closure.
+M229 confirms that exact reversible maps, public typing, monotone generation,
+an unprojected full vector, and nominal consumer labels still amount only to
+ordinary sequential vector execution. Do not add more maps, labels, rounds,
+or vector fixtures. Construct an actual nonfunctional SU(2)_8 fusion relation
+signature, reversibly fan its resident unresolved internal message to distinct
+twist and cubic-shear branch registers, and close those branches by native
+pointwise intersection before the only projection. The shared internal port
+must be an actual produced relation message consumed by both branches, not the
+input vector renamed as a port. Preserve exact reversal and same-backing reuse,
+materialize no relation table or assignments, and compare to the identical
+best compact classical message recurrence.
 
 ## 7. Native No-Smuggle Law
 

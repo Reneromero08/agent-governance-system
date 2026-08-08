@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_TRANSPOSE_TRACE_FUNCTIONAL_RESOURCE_NO_GO`
-**Roadmap version:** `14.94`
+**Status:** `STRICT_SU2_LEVEL8_TYPED_SHARED_VECTOR_MAP_CALIBRATION_NOT_RELATION_CLOSURE`
+**Roadmap version:** `14.95`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `a2faedad86a9235ccd2b1026e01b4ad4e9dd2f61`
+**Reconciled source head:** `b00a8721160a0a269d5bf7d258fde8d0ece4ffa0`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_M219_THROUGH_M227_PARAMETERS3_7_9_11_13_17_19_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLANS_STREAMED16_COORDINATE_HERMITIAN_TRACE_FUNCTIONAL_POWER_BASIS_RAMANUJAN_TRACE_LINE_SEARCH_FAMILY0_STRANDS4_DEPTH1TO4_STRANDS6_DEPTH1TO2_STRANDS8_DEPTH1_PRIMARY4_DEPTH4_REUSE4_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE`
+**Current claim ceiling:** `QZETA40_SU2_LEVEL8_SIMPLE_OBJECT9_CELL_SEQUENTIAL_REVERSIBLE_MAPS_FUSION_PARAMETERS0_1_TWIST_PARAMETERS0_1_CUBIC_SHEAR_PHASES3_7_PUBLIC_ROUNDS1_2_3_FAMILIES0_1_PRIMARY3_0_REUSE2_1_DIRECT_PROCESS_ONLY_NOT_OPEN_RELATION_SIGNATURE_CLOSURE`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M228_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_AND_REDUCES_PRIMARY_DYNAMIC34053_BITS_BUT233429_DYNAMIC_PLUS_STATIC_BITS_114499_FUNCTIONAL_BITS_AND150866708_TRANSPOSE_STEPS_REMAIN_ABOVE_RAW_AND_THE_GAUGE_OPTIMIZATION_ROUTE_IS_RETIRED`
+**New mechanism development:** `ACTIVE_AFTER_M229_REPAIRS_MONOTONE_GENERATION_AND_ESTABLISHES_EXACT_TYPED_SHARED_VECTOR_MAP_EXECUTION_BUT_REJECTS_OPEN_RELATION_SIGNATURE_CLOSURE_AND_IDENTIFIES_NOMINAL_CONSUMER_LABELS_AS_THE_OBSTRUCTION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_TYPED_OPEN_SU2_LEVEL8_GRAPH_RELATION_COMPOSITION_ACROSS_NONCOMMUTING_FUSION_TWIST_AND_REVERSIBLE_CUBIC_PHASE_SHEAR_MODULES_ON_ONE_SHARED9_CELL_QZETA40_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_COMPACT_CLASSICAL_RECURRENCE`
+**Active primary successor:** `EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_ELIMINATES_MATERIALIZED_TRACE_WEIGHT_FIELD_BUT_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM247272_TO213219_BITS_WITH233429_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSPOSE_FUNCTIONAL_RECURRENCE_REMAINS
+BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
 ```
 
 Not established:
@@ -4969,13 +4969,13 @@ change, merge, release, payment, or submission without ending the compute
 goal. A demonstrated mathematical limit can retire one construction without
 blocking the mission.
 
-The current continuation follows M228's completed route decision. The tested
-M220--M228 gauge, rematerialization, power, in-place-plan, and transposed-dual
-repairs reduce live state but leave every declared case above raw while exact
-height reappears in the resident functional or equivalent work. Do not add
-another optimization of that representation. Compose exact typed graph
-relations for noncommuting fusion, twist, and reversible cubic phase-shear
-modules on the actual shared nine-cell SU(2)_8 port without relation tables or
+The current continuation follows M229's strict negative calibration. Public
+typing, monotone generation, and exact reversible execution on one unprojected
+nine-cell vector do not construct an open relation signature; nominal integer
+consumer labels are not independent consumers. Do not add more sequential
+maps or rename a vector as a relation port. Build a nonfunctional fusion
+signature whose actual resident internal message fans out to separate twist
+and cubic-shear branches and closes by native intersection without tables or
 assignment expansion. This current directive supersedes every historical
 `continue from` sentence in the chronological evidence narrative below.
 
@@ -11077,6 +11077,58 @@ controls for order, typing, ownership, premature projection, missing or
 reordered inverse, null carrier, and semantic perturbation. Do not materialize
 relation tables, candidate assignments, or answer-dependent compiler data.
 Compare immediately to the strongest compact classical recurrence.
+
+## M229: typed shared-vector reversible-map calibration
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_EXACT_TYPED_SHARED_PORT_REVERSIBLE_MAP_CALIBRATION_EXECUTES_NONCOMMUTING_SU2_LEVEL8_FUSION_TWIST_AND_CUBIC_PHASE_SHEAR_ON_ONE_ACTUAL9_CELL_QZETA40_VECTOR_WITHOUT_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_STAGE_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_DOES_NOT_CONSTRUCT_OR_CLOSE_OPEN_RELATION_SIGNATURES_AND_COLLAPSES_TO_THE_IDENTICAL_NINE_COORDINATE_CLASSICAL_RECURRENCE
+```
+
+M229 runs exact fusion, twist, and reversible cubic shear on the same
+Q(zeta_40) nine-coordinate vector. All three pairs are noncommuting. The
+public word is answer-independent, intermediate projection is rejected, the
+actual coefficient and scratch backings restore exactly, and an unrelated
+program reuses them at generation two without reload. A persistent
+last-restored generation now rejects stale leases. Production and a separate
+ordinary-polynomial quotient implementation reproduce all four cases,
+controls, state and boundary commitments, restoration, and reuse.
+
+The proposed open-relation interpretation is `REJECTED_GENERALIZATION`.
+Execution is a sequential full-vector map. Consumer values are nominal public
+descriptor integers, not independently held capabilities. No open relation
+signature is constructed, no shared unresolved relational internal port is
+contracted, and no multivalued relation closes. The accepted result is only a
+typed shared-port reversible-map calibration. Its qualifier explicitly pins
+those negative fields. Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`
+at `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest compact classical baseline is the identical nine-coordinate
+fusion/twist/cubic recurrence. The primary forward vector contains 1,031 exact
+payload bits; the largest declared interval contains 23 exact field cells,
+63 retained public descriptor integers, and 2,972 logical bits. Inherited
+linear-kernel scalar temporaries, program-commitment compiler transients,
+whole-transaction liveness, Python objects, allocator/interpreter state,
+serialization, timing, and process RSS are excluded or unclaimed. No CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, catalytic inference, or unbounded
+computation is established.
+
+Selected successor:
+
+```text
+EXACT_TYPED_OPEN_SU2_LEVEL8_NONFUNCTIONAL_FUSION_RELATION_SIGNATURE_FANOUT_TO_TWIST_AND_CUBIC_SHEAR_BRANCHES_WITH_NATIVE_POINTWISE_INTERSECTION_ON_ONE_SHARED_UNRESOLVED9_CELL_INTERNAL_PORT_WITHOUT_RELATION_TABLES_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+The repair must construct an actual nonfunctional fusion signature. Its
+produced nine-cell internal message must remain resident and unprojected while
+two distinct branch registers consume it through twist and cubic-shear
+relations. Native pointwise intersection must close the branches before the
+only boundary projection. Reversible accumulator shears must uncompute every
+branch and restore the same backings. Public analytic kernels may stream;
+relation tables, assignments, decoded internal labels, nominal consumer-only
+wrappers, and answer-dependent compilation remain forbidden.
 
 ## 10. Roadmap Maintenance
 
