@@ -1,0 +1,220 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 1,
+      "cubic_strength": 1,
+      "family": 0,
+      "final_state_commitment": "d5488097ba507b524664b669fd631080bf1488f7f9066f692e0acdf86509e844",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": -1,
+        "commitment": "83f092807b6bd3025272a9233ce1e9c5ccafcfe65c4afcf8574feb6447cffbf6",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 7
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 2,
+      "cubic_strength": 1,
+      "family": 0,
+      "final_state_commitment": "36c5f6dbf50af67e18ce0c513a7ad2a7e204cf10ec39b24eab85927621032cfa",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": -1,
+        "commitment": "83f092807b6bd3025272a9233ce1e9c5ccafcfe65c4afcf8574feb6447cffbf6",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 9
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 4,
+      "cubic_strength": 1,
+      "family": 0,
+      "final_state_commitment": "3dc9b80585bb64fac47b0ce37abb01a8965a9e6c9aa34b79b1f8a971a2360604",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": -1,
+        "commitment": "83f092807b6bd3025272a9233ce1e9c5ccafcfe65c4afcf8574feb6447cffbf6",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 13
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 1,
+      "cubic_strength": 2,
+      "family": 1,
+      "final_state_commitment": "51bdecdaa39ec999a440cd4869f6e51c3c2bb2ff7783aa89d99448f10aff70d4",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": 1,
+        "commitment": "468127153c5ed734d806d065ad9df0d5ceb9dd6dc6a6f23496649f548cdeb9a9",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 7
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 2,
+      "cubic_strength": 2,
+      "family": 1,
+      "final_state_commitment": "9b860ddfc591162b07a42ac6642a3223d826b5fea733aab9327fdc0753f70c87",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": 1,
+        "commitment": "468127153c5ed734d806d065ad9df0d5ceb9dd6dc6a6f23496649f548cdeb9a9",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 9
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 4,
+      "cubic_strength": 2,
+      "family": 1,
+      "final_state_commitment": "6884232eb39d18036958938134ef4bb5a306990df7f35473aa207664ad225bdd",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": 1,
+        "commitment": "468127153c5ed734d806d065ad9df0d5ceb9dd6dc6a6f23496649f548cdeb9a9",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 13
+    }
+  ],
+  "controls": {
+    "accepted_in_place_path_retains_branch_assignment_expansion": false,
+    "adjacent_sum_cz_consumer_order_changes_full_state": true,
+    "complete_injection_compact_boundary_parity": true,
+    "complete_injection_compact_state_parity": true,
+    "dephased_diagnostic_enumerates_five_syndrome_branches": true,
+    "dephased_measurement_is_nonrestoring_diagnostic_only": true,
+    "dephased_syndrome_changes_selected_boundary": true,
+    "dirty_scratch_rejected": true,
+    "duplicate_consumer_rejected": true,
+    "g_correction_omission_changes_full_state": true,
+    "g_omission_exactly_factorizes_data_magic_and_syndrome_magic": true,
+    "injection_identity_all_data_inputs_a1_a2": true,
+    "l_correction_omission_changes_full_state": true,
+    "missing_inverse_rejected": true,
+    "null_carrier_rejected": true,
+    "premature_final_projection_rejected": true,
+    "public_compiler_reads_final_answer": false,
+    "q_correction_omission_changes_full_state": true,
+    "remove_cz_consumer_changes_full_state": true,
+    "remove_cz_consumer_changes_selected_boundary": true,
+    "remove_sum_consumer_changes_full_state": true,
+    "remove_sum_consumer_changes_selected_boundary": true,
+    "reordered_inverse_rejected": true,
+    "same_id_changed_descriptor_rejected": true,
+    "stabilizer_sham_contains_only_clifford_gates": true,
+    "stabilizer_sham_normalization_exact": true,
+    "stale_generation_rejected": true,
+    "syndrome_projection_rejected": true,
+    "syndrome_values_serialized": false,
+    "wrong_generation_rejected": true,
+    "wrong_inverse_after_remaining_schedule_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_type_rejected": true
+  },
+  "imports_m239_or_m237_production": false,
+  "independent_compiled_identity_baseline": true,
+  "independent_custody_state_machine": true,
+  "independent_exact_25_amplitude_matrix_recurrence": true,
+  "independent_injection_identity": true,
+  "reuse": {
+    "fresh_reuse": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 2,
+      "cubic_strength": 2,
+      "family": 1,
+      "final_state_commitment": "9b860ddfc591162b07a42ac6642a3223d826b5fea733aab9327fdc0753f70c87",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": 1,
+        "commitment": "468127153c5ed734d806d065ad9df0d5ceb9dd6dc6a6f23496649f548cdeb9a9",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 9
+    },
+    "primary": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 4,
+      "cubic_strength": 1,
+      "family": 0,
+      "final_state_commitment": "3dc9b80585bb64fac47b0ce37abb01a8965a9e6c9aa34b79b1f8a971a2360604",
+      "normalization_exact": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": -1,
+        "commitment": "83f092807b6bd3025272a9233ce1e9c5ccafcfe65c4afcf8574feb6447cffbf6",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 13
+    },
+    "reuse": {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "consumer_pair_count": 2,
+      "cubic_strength": 2,
+      "family": 1,
+      "final_state_commitment": "9b860ddfc591162b07a42ac6642a3223d826b5fea733aab9327fdc0753f70c87",
+      "normalization_exact": true,
+      "restoration_generation": 2,
+      "same_amplitude_and_scratch_backings": true,
+      "selected_data_probability": {
+        "a_numerator": 3,
+        "b_sqrt5_numerator": 1,
+        "commitment": "468127153c5ed734d806d065ad9df0d5ceb9dd6dc6a6f23496649f548cdeb9a9",
+        "denominator_twice_power5_exponent": 1
+      },
+      "selected_data_probability_nonzero": true,
+      "syndrome_consumer_count": 9
+    }
+  },
+  "schema": "cat_cas.zeta5_coherent_magic_injection_syndrome_port_reference.v1",
+  "source_sha256": "15b9b59c6bdb214d1792eb0a6be8b0362a029c55c866f0938639422d6649c413"
+}
