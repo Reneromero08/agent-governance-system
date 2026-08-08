@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`76eac2b69cb76f83078f251ee0fbfe6bb2a51baf`. The canonical per-milestone
+`71b063c63d9374dc6e30dcc5836652e8c9f4cd74`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12549,3 +12549,51 @@ The successor must test magic under unresolved measurement-port composition
 and an exact reversible dilation, with strongest stabilizer-sum,
 quasiprobability, and amplitude baselines. It must not extend or optimize the
 resident Wigner grid.
+
+## M239 coherent syndrome consumption retains one-injection complexity
+
+An exact two-qudit `Q(zeta_5)` carrier keeps one five-valued syndrome coherent
+while three fiberwise corrections and noncommuting `SUM`/`CZ` consumers read
+the same resident backing. Dephasing or removing either entangler changes the
+final data boundary, and the same carrier restores and reuses exactly.
+Nevertheless the complete injection has an exact five-stabilizer-component
+upper bound. The compiled classical recurrence uses 31 field values versus 50
+phase/scratch backing cells. No growing compositional magic cost or advantage
+is established, so longer words on the same injection are not responsive.
+
+## M240 interacting injections expose only product-input magic
+
+Counts one through four reuse one unresolved syndrome across distinct data
+wires and a connected Clifford network. Exact Wigner l1 grows as
+`(1 + 2*sqrt(5)/5)^m`, but this is precisely tensor-product input magic, not an
+interaction-generated lower bound. Stabilizer-component upper bounds grow
+`5,25,125,625`; the strongest selected-boundary comparator streams
+`25,125,625,3125` terms into five accumulators plus one term, while the phase
+carrier retains the same number of field cells plus equal scratch. Restoration,
+reuse, and separate-reference parity hold, but the magic-injection route is
+retired with no compute leverage claim.
+
+## M241 CATVM hidden linear phase-oracle query separation
+
+A nondumpable Unix-domain service receives fresh nonzero private `F5` linear
+oracle secrets on stdin. The controller cannot load backend code and sees no
+phase amplitudes. Across dimensions one through four, one coherent phase query
+recovers `n` residues, while exact deterministic classical black-box value
+recovery needs and suffices with `n` queries. A standalone cyclotomic
+power-basis implementation reconstructs all final boundaries and exact
+restoration independently.
+
+The final secret remains backend-resident through the actual inverse and exact
+same-backing verification. Only then is the response released. A distinct
+oracle consumes each restored carrier at generation two. Disconnect and forced
+post-projection exception controls both restore before any response; the
+earlier enumerable status commitment was removed. Sanitized durable evidence
+contains no secret or secret-dependent commitment.
+
+This is a bounded query-model resource, not a total software advantage. The
+carrier and equal scratch grow `5,25,125,625`, with Fourier character work
+`100,1000,7500,50000`. Resource accounting remains package-local and does not
+claim whole-process completeness. The next experiment replaces that `5^n`
+amplitude vector with the exact rank-one product-phase carrier and compares it
+against the identical compact classical factor recurrence. If both are `O(n)`,
+the linear-oracle route is closed rather than extended to larger fixtures.

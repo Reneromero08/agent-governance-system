@@ -273,7 +273,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M240_ESTABLISHES_EXACT_MULTIPLICATIVE_STABILIZER_RELATIVE_MAGIC_THROUGH4_INJECTIONS_BUT_IT_IS_ONLY_THE_PRODUCT_INPUT_LAW_AND_THE_STREAMED5_ACCUMULATOR_SCALAR_CLASSICAL_BOUNDARY_REMAINS_SO_THE_MAGIC_INJECTION_ROUTE_IS_RETIRED_AND_THE_NEXT_MECHANISM_TESTS_MACHINE_ENFORCED_PHASE_ORACLE_INFORMATION_ACCESS
+ACTIVE_AFTER_M241_ESTABLISHES_A_BOUNDED_ONE_VERSUS_N_BLACK_BOX_QUERY_SEPARATION_UNDER_ATOMIC_CATVM_BUT_THE_EXACT_SOFTWARE_CARRIER_AND_SCRATCH_GROW5_TO_THE_N_SO_THE_NEXT_MECHANISM_REMATERIALIZES_THE_LINEAR_ORACLE_AS_AN_EXACT_TENSOR_FACTORED_PHASE_CARRIER_AND_COMPARES_THE_IDENTICAL_COMPACT_CLASSICAL_FACTOR_RECURRENCE
 ```
 
 The named
@@ -282,19 +282,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CATVM_EXACT_P5_HIDDEN_LINEAR_PHASE_ORACLE_INFERENCE_WITH_ONE_COHERENT_QUERY_VERSUS_N_CLASSICAL_VALUE_QUERIES_ACROSS_DECLARED_DIMENSIONS1_2_3_4_FINAL_ONLY_SECRET_BOUNDARY_ATOMIC_RESTORATION_REUSE_AND_FULL_TOTAL_RESOURCE_ACCOUNTING
+CATVM_EXACT_P5_TENSOR_FACTORED_HIDDEN_LINEAR_PHASE_ORACLE_CARRIER_WITH_ONE_COHERENT_QUERY_VERSUS_N_CLASSICAL_VALUE_QUERIES_ACROSS_DECLARED_DIMENSIONS1_2_4_8_16_32_FINAL_ONLY_SECRET_BOUNDARY_ATOMIC_RESTORATION_REUSE_AND_MATCHED_COMPACT_FACTOR_BASELINE
 ```
 
-M240 closes the coherent magic-injection route: its exact Wigner resource is
-the pre-existing product-input law and its strongest streamed scalar boundary
-remains much smaller than the phase carrier. Do not add injection counts,
-syndrome fixtures, or magic-state basis optimizations. Run one bounded
-machine-enforced hidden linear phase-oracle experiment. The controller must not
-read the oracle secret or intermediate phase state; response release follows
-actual inverse restoration. Compare the coherent query law against the exact
-classical black-box value-query lower bound and against all total software
-state, traffic, projection, verification, restoration, and reuse costs. A
-query separation is not total computational advantage or a Small Wall crossing.
+M241 establishes the exact bounded query-model law: one coherent phase query
+recovers `n` hidden residues while exact deterministic classical black-box
+value recovery requires `n` queries. The atomic service releases the final
+secret only after exact same-backing inverse restoration and reuse, but its
+software amplitude carrier and equal scratch grow as `5^n`. Do not add larger
+dense-oracle dimensions or protocol wrappers. Replace that exponential state
+with the exact rank-one product-phase representation of the linear oracle,
+preserve machine-enforced hidden phase custody and atomic restoration/reuse,
+and compare against the strongest identical compact classical factor
+recurrence. Count per-factor hidden-oracle accesses and all material traffic.
+If the repair collapses to an `O(n)` classical recurrence, publish that ceiling
+and change the oracle law. A query separation is not total computational
+advantage or a Small Wall crossing.
 
 ## 7. Native No-Smuggle Law
 
