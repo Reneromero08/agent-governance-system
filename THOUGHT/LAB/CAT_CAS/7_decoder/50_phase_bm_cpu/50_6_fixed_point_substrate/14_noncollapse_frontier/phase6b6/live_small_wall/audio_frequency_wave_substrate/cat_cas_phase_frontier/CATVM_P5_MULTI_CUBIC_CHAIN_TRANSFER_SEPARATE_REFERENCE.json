@@ -1,0 +1,378 @@
+{
+  "baseline": "INDEPENDENT_ENDPOINT_SPECIALIZED_EXACT_FIVE_VECTOR_INTERIOR_WITH5_TERM_FIRST_AND_FINAL_BOUNDARY_TRANSFERS",
+  "cases": [
+    {
+      "canonical_after_restoration": true,
+      "depth": 2,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          2,
+          0,
+          -1,
+          -1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 2,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          0,
+          -2,
+          -1,
+          -2
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 2,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          0,
+          -2,
+          -1,
+          -2
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 3,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          3,
+          1,
+          2,
+          -1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 3,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          -2,
+          -3,
+          1,
+          -1
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 3,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          -2,
+          -3,
+          1,
+          -1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 4,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          0,
+          1,
+          -1,
+          0
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 4,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          0,
+          -1,
+          0,
+          1
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 4,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          0,
+          -1,
+          0,
+          1
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 8,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 8,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          2,
+          -1,
+          11,
+          8
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 8,
+      "final_amplitude": {
+        "denominator_power5": 2,
+        "numerator": [
+          2,
+          -1,
+          11,
+          8
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 16,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          -19,
+          57,
+          3,
+          -6
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 16,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          -21,
+          -17,
+          2,
+          41
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 16,
+      "final_amplitude": {
+        "denominator_power5": 3,
+        "numerator": [
+          -21,
+          -17,
+          2,
+          41
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 32,
+      "final_amplitude": {
+        "denominator_power5": 5,
+        "numerator": [
+          581,
+          1582,
+          1148,
+          -226
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 32,
+      "final_amplitude": {
+        "denominator_power5": 5,
+        "numerator": [
+          -71,
+          473,
+          42,
+          271
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 32,
+      "final_amplitude": {
+        "denominator_power5": 5,
+        "numerator": [
+          -71,
+          473,
+          42,
+          271
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 64,
+      "final_amplitude": {
+        "denominator_power5": 9,
+        "numerator": [
+          -25878,
+          -486281,
+          146131,
+          243833
+        ]
+      },
+      "generation": 1,
+      "run_kind": "PRIMARY"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 64,
+      "final_amplitude": {
+        "denominator_power5": 9,
+        "numerator": [
+          109162,
+          -231391,
+          1044326,
+          -67347
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_REUSE"
+    },
+    {
+      "canonical_after_restoration": true,
+      "depth": 64,
+      "final_amplitude": {
+        "denominator_power5": 9,
+        "numerator": [
+          109162,
+          -231391,
+          1044326,
+          -67347
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_REUSE_REFERENCE"
+    }
+  ],
+  "controls": {
+    "adjacent_module_swap_changes_boundary": true,
+    "all_dense_path_parity": true,
+    "all_endpoint_specialized_baseline_parity": true,
+    "coupling_perturbation_changes_boundary": true,
+    "cross_rank2_interface_rank": 25,
+    "cross_rank2_prime41_rank25": true,
+    "cross_rank2_prime61_rank25": true,
+    "cross_rank2_rejects_five_cell_arbitrary_topology_transfer": true,
+    "fresh_restored_boundary_and_resource_parity": true,
+    "lambda_perturbation_changes_boundary": true,
+    "mid_chain_dephasing_changes_selected_probability": true,
+    "quadratic_perturbation_changes_boundary": true,
+    "zero_coupling_disconnected_descriptor_rejected": true
+  },
+  "cross_rank_certificate": {
+    "cross_matrix": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "cross_rank_f5": 2,
+    "interface_rank_qzeta5": 25,
+    "split_prime_ranks": {
+      "41": 25,
+      "61": 25
+    }
+  },
+  "dense_path_parity_through_depth4": {
+    "2": true,
+    "3": true,
+    "4": true
+  },
+  "endpoint_specialized_baseline_character_terms": {
+    "16": 360,
+    "2": 10,
+    "3": 35,
+    "32": 760,
+    "4": 60,
+    "64": 1560,
+    "8": 160
+  },
+  "endpoint_specialized_baseline_parity": {
+    "16": true,
+    "2": true,
+    "3": true,
+    "32": true,
+    "4": true,
+    "64": true,
+    "8": true
+  },
+  "imports_production_or_m237": false,
+  "result": "PASS_M244_SEPARATE_REFERENCE_STRICT_SCOPE"
+}
