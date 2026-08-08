@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`ebca4aaf6e17682495f842aa6792a0e288747d54`. The canonical per-milestone
+`986cd93270dda250bd14e255c5d22427f1f821d9`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12776,3 +12776,72 @@ count and test its exact rank, payload, restoration, and matched classical
 occupation recurrence. It must not add more M245 word or depth fixtures. If
 the quotient grows as `binomial(n+4,4)` and stays classically identical, that
 is the route ceiling and the next mechanism must change phase primitive.
+
+## M246 CATVM permutation-symmetric occupation rank-growth ceiling
+
+M246 derives one exact p=5 permutation-occupation transfer law for rails
+`2,3,4,6`, with occupation dimensions `15,35,70,210`. The accepted service
+uses fixed message, output-scratch, and rematerialized coefficient-row
+backings of size `D_n`, retains no labelled `5^n` assignment expansion or
+dense `D_n`-squared transfer matrix, and applies the separately derived
+weighted inverse rather than a naive transpose.
+
+The controller receives only the selected final occupation amplitude after
+the actual inverse, exact canonical same-backing restoration, generation
+advancement, and response release. A descriptor-distinct rails-six program
+uses the restored carrier at generation two and agrees with a fresh carrier.
+Disconnect and injected failure paths restore before rejection or lost
+response; no snapshot or baseline reload is used.
+
+The standalone reference independently reconstructs `Q(zeta_5)` arithmetic
+and the matrix-free coefficient law. Exact forward-family ranks over both 41
+and 61 progress as follows:
+
+```text
+rails    depth1    depth2    depth3    occupation dimension
+2        15        15        15        15
+3        29        35        35        35
+4        47        70        70        70
+6        60        205       210       210
+```
+
+Every depth-three certificate persists exactly `D_n` valid public forward
+programs, uses no inverse gates, and has full rank under all public final
+occupation selectors. The finite Hankel ranks therefore equal
+`15,35,70,210`. These certificates reject only smaller transferable linear
+realizations for the declared finite language; no all-rail or nonlinear lower
+bound is established.
+
+The accepted path has `3D_n` fixed field backings, or
+`45,105,210,630` cells. The endpoint-specialized matrix-free occupation
+classical comparator uses fewer declared coefficient-update-plus-dot terms,
+but total integer and runtime work is unmeasured. A stronger exact symmetric-
+power Krawtchouk factorization remains an explicitly unimplemented classical
+ceiling. Resource verification is `PACKAGE_SELF_REVIEW`; whole-process costs
+remain incomplete.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The repaired rank evidence covers actual
+exact-depth-three forward programs rather than the rejected unrestricted
+forward-plus-inverse closure.
+
+This closes the declared occupation route at polynomial rank growth. It
+establishes no fixed bounded-width state, arbitrary labelled compression,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+bit replacement, inference, or unbounded catalytic computation.
+
+Next:
+
+```text
+CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
+```
+
+The successor replaces occupation vectors with one exact affine-cubic phase-
+path signature and a typed coherent syndrome port shared by noncommuting
+affine-X, phase-Z, and cubic consumers. It must close the syndrome without
+projection and compare final contraction with treewidth-optimal variable
+elimination, stabilizer/Gauss baselines, and small dense verifier-only oracles.
+A matched growing bag or stabilizer-sum law is a bounded software-bisimulation
+ceiling for this route, not a universal lower bound. It must not extend the
+completed occupation width or depth fixtures.

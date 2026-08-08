@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`ebca4aaf6e17682495f842aa6792a0e288747d54`. The registry assigns one
+`986cd93270dda250bd14e255c5d22427f1f821d9`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 245-milestone lane is active by user direction. Continue from the
+The current 246-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,45 +53,47 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK
+CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QZETA5_EXCHANGE_SYMMETRIC_TWO_RAIL_FOUR_MODULE_DIAGNOSTIC_ONLY_15_UNORDERED_PAIR_CELLS_ABSTRACT_UNIX_SOCKET_MODEL
+EXACT_SOFTWARE_QZETA5_PERMUTATION_SYMMETRIC_DEPTH3_RAILS2_3_4_6_OCCUPATION_QUOTIENT_ABSTRACT_UNIX_SOCKET_MODEL_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone power-basis implementation reproduce the 15-orbit quotient,
-atomic controls, monotone generation, exact same-backing restoration, and
-generation-two descriptor-distinct reuse.
+and a standalone power-basis implementation reproduce the occupation
+recurrence, atomic controls, monotone generation, exact same-backing
+restoration, and generation-two descriptor-distinct reuse.
 
-M245 closes the declared exchange-symmetric two-rail family on 15 unordered
-pair amplitudes. Exact split-prime certificates give reachability,
-observability, and Hankel rank 15 for the declared symmetric continuation
-language. A separately persisted three-gate exchange-broken labelled alphabet
-has reachability and observability rank 25; this is not generalized to every
-exchange-breaking law. The strongest endpoint-specialized factorized
-classical boundary recurrence uses 440 terms versus 1,140 accepted forward
-terms, while the equal-memory direct orbit recurrence is algebraically
-identical. No distinct phase resource, total advantage, Small Wall crossing,
-physical execution, physical-bit replacement, inference, or unbounded
-computation is established.
+M246 derives one analytic permutation-occupation law across rails 2, 3, 4,
+and 6. Exact split-prime certificates for actual depth-three forward programs
+give ranks 15, 35, 70, and 210, equal to every declared occupation dimension;
+the rails-six progression is 60, 205, and 210 across exact depths one, two,
+and three. Thus the lawful symmetry quotient grows as `binomial(n+4,4)` and
+is not a fixed-rank carrier. The endpoint-specialized matrix-free occupation
+classical recurrence uses fewer declared coefficient-update-plus-dot terms,
+while a stronger symmetric-power Krawtchouk factorization remains an explicit
+unimplemented classical ceiling. No total-work comparison, distinct phase
+resource, advantage, Small Wall crossing, physical execution, physical-bit
+replacement, inference, or unbounded computation is established.
 
 Selected successor:
 
 ```text
-EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
+CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
 ```
 
-Generalize the lawful symmetry quotient by deriving the permutation-orbit
-occupation law across rail count, then measure its exact continuation rank and
-coefficient payload against the strongest occupation/Krawtchouk classical
-recurrence. This must be one transferable composition law, not more M245 word
-or depth fixtures. If the occupation rank grows as `binomial(n+4,4)` with an
-identical classical recurrence, publish that ceiling and change primitive.
+Replace occupation vectors with one exact affine-cubic phase-path signature
+and a typed coherent syndrome port consumed by noncommuting affine-X,
+phase-Z, and cubic modules. Compare native signature closure against exact
+treewidth variable elimination, stabilizer/Gauss decompositions, and small
+dense verifier-only oracles. If projection requires the same growing bag or
+stabilizer-sum resource, publish the bounded software-bisimulation ceiling and
+retire this finite-p path-sum route. This is not another occupation width,
+depth, or coefficient optimization.
 
 The accumulated bounded architecture includes:
 
@@ -285,7 +287,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M245_CLOSES_THE_DECLARED_EXCHANGE_SYMMETRIC_TWO_RAIL_INTERFACE_ON15_ORBITS_AND_RESTRICTS_THE25_STATE_NO_GO_TO_ONE_PERSISTED_EXCHANGE_BROKEN_THREE_GATE_ALPHABET_SO_M246_DERIVES_A_TRANSFERABLE_N_RAIL_PERMUTATION_OCCUPATION_LAW
+ACTIVE_AFTER_M246_DERIVES_THE_N_RAIL_PERMUTATION_OCCUPATION_LAW_AND_FINDS_DEPTH3_LINEAR_RANKS15_35_70_210_EQUAL_TO_THE_GROWING_OCCUPATION_DIMENSIONS_WITH_A_SMALLER_DECLARED_TERM_CLASSICAL_RECURRENCE_SO_M247_TESTS_THE_STRUCTURAL_SOFTWARE_PHASE_BISIMULATION_CEILING_OR_A_COUNTEREXAMPLE_NATIVE_RESOURCE
 ```
 
 The named
@@ -294,19 +296,17 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
+CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
 ```
 
-M245 establishes a lawful 15-orbit quotient only for the declared
-exchange-symmetric two-rail family and proves that linear rank 15 is minimal
-for its declared continuation language. The persisted `A/B/D` labelled family
-reaches rank 25, but generic exchange breaking and arbitrary nonlinear
-encodings remain unclassified. Do not add more M245 words, depths, or rank-two
-fixtures. M246 must derive the analytic permutation-occupation composition law
-across rail count and compare its exact rank, payload, and work with the
-strongest occupation/Krawtchouk classical recurrence. A polynomial symmetry
-quotient remains a bounded route result, not a distinct phase resource or
-advantage.
+M246 establishes the analytic permutation-occupation law for the declared
+rails and proves full linear continuation rank at each occupation dimension
+using actual depth-three forward programs. Do not add rails, depths, or
+occupation-kernel optimizations. M247 must compile one coherent affine-cubic
+path signature with an unresolved shared syndrome port, close it behind CATVM,
+and compare it with the strongest exact treewidth and stabilizer-aware
+recurrences. A matched bisimulation is not a universal complexity lower bound
+and must not be promoted beyond its declared machine model.
 
 ## 7. Native No-Smuggle Law
 

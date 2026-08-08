@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_EXCHANGE_SYMMETRIC_RANK2_ORBIT_QUOTIENT_CLOSED_N_RAIL_LAW_OPEN`
-**Roadmap version:** `15.29`
+**Status:** `STRICT_CATVM_P5_PERMUTATION_OCCUPATION_RANK_GROWTH_CLOSED_SOFTWARE_PHASE_BISIMULATION_TEST_OPEN`
+**Roadmap version:** `15.30`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ebca4aaf6e17682495f842aa6792a0e288747d54`
+**Reconciled source head:** `986cd93270dda250bd14e255c5d22427f1f821d9`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK`
-**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_EXCHANGE_SYMMETRIC_TWO_RAIL_FOUR_MODULE_DIAGNOSTIC_ONLY_15_UNORDERED_PAIR_CELLS_ABSTRACT_UNIX_SOCKET_MODEL`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_PERMUTATION_SYMMETRIC_DEPTH3_RAILS2_3_4_6_OCCUPATION_QUOTIENT_ABSTRACT_UNIX_SOCKET_MODEL_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M245_CLOSES_THE_DECLARED_EXCHANGE_SYMMETRIC_TWO_RAIL_INTERFACE_ON15_ORBITS_AND_RESTRICTS_THE25_STATE_NO_GO_TO_ONE_PERSISTED_EXCHANGE_BROKEN_THREE_GATE_ALPHABET_SO_M246_DERIVES_A_TRANSFERABLE_N_RAIL_PERMUTATION_OCCUPATION_LAW`
+**New mechanism development:** `ACTIVE_AFTER_M246_DERIVES_THE_N_RAIL_PERMUTATION_OCCUPATION_LAW_AND_FINDS_DEPTH3_LINEAR_RANKS15_35_70_210_EQUAL_TO_THE_GROWING_OCCUPATION_DIMENSIONS_WITH_A_SMALLER_DECLARED_TERM_CLASSICAL_RECURRENCE_SO_M247_TESTS_THE_STRUCTURAL_SOFTWARE_PHASE_BISIMULATION_CEILING_OR_A_COUNTEREXAMPLE_NATIVE_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE`
+**Active primary successor:** `CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK
+CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED
 ```
 
 Not established:
@@ -12038,6 +12038,77 @@ occupation rank, coefficient payload, and contraction work with the strongest
 occupation/Krawtchouk classical recurrence. If the lawful quotient grows as
 `binomial(n+4,4)` and remains classically identical, publish that polynomial
 ceiling and change phase primitive rather than continuing symmetric widths.
+
+## M246: permutation-symmetric occupation quotient and rank-growth ceiling
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_EXACT_P5_PERMUTATION_SYMMETRIC_RAILS2_3_4_6_CUBIC_OCCUPATION_INTERFACES_CLOSE_ON15_35_70_210_QZETA5_CELLS_WITH_SPLIT_PRIME_EXACT_DEPTH3_FORWARD_DESCRIPTOR_FAMILY_REACHABLE_AND_ALL_PUBLIC_OUTPUT_SELECTOR_OBSERVABLE_LINEAR_RANKS_EQUAL_TO_EACH_DECLARED_OCCUPATION_DIMENSION_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_RANK_GROWS_AS_NPLUS4_CHOOSE4_AND_THE_MATCHED_MATRIX_FREE_OCCUPATION_CLASSICAL_RECURRENCE_USES_FEWER_DECLARED_COEFFICIENT_UPDATE_PLUS_DOT_TERMS_WHILE_TOTAL_WORK_REMAINS_UNMEASURED
+```
+
+M246 derives one analytic orbit law for permutation-symmetric p=5 cubic
+interfaces at rails `2,3,4,6`. Occupation dimensions are `15,35,70,210`.
+Production streams each multinomial coefficient row into one fixed backing,
+retains no labelled `5^n` assignment expansion and no dense occupation
+transfer matrix, and uses the separately derived weighted inverse law.
+
+Only the selected final occupation amplitude crosses the abstract Unix socket.
+The service then reverses all three modules on the same message, output-
+scratch, coefficient-row, and descriptor backings, verifies exact canonical
+state, advances generation, and releases the response. A descriptor-distinct
+rails-six transaction consumes the actual restored backings at generation two
+and agrees with a fresh carrier. No snapshot or baseline reload is used.
+
+The standalone reference independently implements `Q(zeta_5)` arithmetic and
+an iterative coefficient dynamic program. It agrees with every production
+boundary, while verifier-only labelled recurrences agree at rails two and
+three. Exact forward-family certificates over both split primes 41 and 61
+measure rank progressions `15/15/15`, `29/35/35`, `47/70/70`, and
+`60/205/210` across depths one, two, and three. The seal persists exactly
+`D_n` valid three-forward-module public programs for every full-rank
+certificate and uses no inverse gates. All public final occupation selectors
+give full observable rank, so the finite Hankel ranks are also
+`15,35,70,210`.
+
+The accepted path allocates three fixed `D_n` field backings, totaling
+`45,105,210,630` cells. Its endpoint-specialized matrix-free classical
+comparator uses fewer declared coefficient-update-plus-dot terms and performs
+no inverse, restoration, or CATVM work. Those declared terms are not a total
+time comparison. Multinomial integer work, canonicalization, Python objects,
+allocator state, sockets, hashes, scheduling, and whole-process RSS remain
+incomplete. A stronger exact symmetric-power/two-mode Krawtchouk
+factorization is disclosed as an unimplemented classical ceiling.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The first rank draft incorrectly used an
+unrestricted forward-plus-inverse closure; the repaired evidence certifies
+only actual exact-depth-three forward descriptor programs.
+
+This is a polynomial symmetry quotient, not fixed-rank or bounded-width
+closure. It establishes no arbitrary labelled compression, nonlinear lower
+bound, distinct phase resource, computational advantage, Small Wall crossing,
+physical waveform execution, physical-bit replacement, general inference, or
+unbounded catalytic computation. The occupation route stops at this declared
+ceiling; do not add rails, depths, or kernel micro-optimizations.
+
+Selected phase-owned successor:
+
+```text
+CATVM_P5_COHERENT_MEASUREMENT_AFFINE_CUBIC_PATH_SIGNATURE_BISIMULATION_AND_INTERFACE_GROWTH_DIAGNOSTIC
+```
+
+M247 replaces occupation vectors with one exact affine-cubic phase-path
+signature and a typed coherent syndrome port shared by noncommuting affine-X,
+phase-Z, and cubic consumers. It must close that syndrome without projection,
+return only the final amplitude after exact restoration, and compare projection
+against treewidth-optimal variable elimination, stabilizer/Gauss baselines,
+and small dense verifier-only oracles. If the same growing bag or stabilizer-
+sum resource is required, publish the bounded software-bisimulation ceiling
+and retire this finite-p path-sum route. Such a ceiling is not a universal
+computational-complexity lower bound. Do not turn the successor into VM
+infrastructure or a collection of larger fixtures.
 
 ## 10. Roadmap Maintenance
 
