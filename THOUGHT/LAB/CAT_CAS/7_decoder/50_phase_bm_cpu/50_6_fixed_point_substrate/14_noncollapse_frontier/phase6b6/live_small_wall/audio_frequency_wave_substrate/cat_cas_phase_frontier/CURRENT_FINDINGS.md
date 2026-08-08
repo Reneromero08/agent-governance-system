@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The canonical per-milestone
+`ebca4aaf6e17682495f842aa6792a0e288747d54`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12722,3 +12722,57 @@ must either construct a lawful exact nonlinear phase chart below 25
 materialized states or certify the reachable and observable 25-state ceiling
 against the strongest treewidth-two classical contraction. It must not extend
 the completed chain depth series or optimize the five-state recurrence again.
+
+## M245 CATVM exchange-symmetric rank-two orbit quotient
+
+M245 replaces the labelled 25-state interface for the declared
+exchange-symmetric two-rail family with the exact 15 unordered-pair orbits of
+`F5^2`. One actual 15-cell Q(zeta5) message and one 15-cell scratch backing
+remain behind the Unix-domain CATVM boundary. Only the selected final orbit
+amplitude is released, after the four-module word is inverted, exact canonical
+state is verified, and generation advances. The same actual backings then run
+a descriptor-distinct program at generation two.
+
+The standalone power-basis reference reconstructs both the 15-orbit recurrence
+and the full labelled 25-state recurrence. They agree at every stage. Exact
+reductions at split primes 41 and 61 give symmetric reachability,
+observability, and Hankel rank 15. This proves only that the declared public
+continuation and output language has no transferable linear realization below
+15. The first rung has labelled matrix rank 5, which rejects product and
+matrix-bond ranks below 5 but does not reject arbitrary nonlinear charts.
+
+A separately sealed `A/B/D` exchange-broken labelled alphabet reaches
+observable and reachable rank 25 at both primes. Its gate descriptors include
+specific asymmetric phases and off-diagonal cross-rail couplings. The result
+therefore does not generalize rank 25 to every exchange-breaking perturbation.
+
+The accepted forward performs 1,140 character terms and the exact inverse
+performs 1,500. The strongest implemented final-boundary classical recurrence
+uses 15 orbit cells plus 25 temporary cells and 440 forward-only terms. The
+equal-memory direct orbit recurrence uses 30 cells and the same 1,140 forward
+terms. There is no total resource advantage. Resource figures remain
+`PACKAGE_SELF_REVIEW`; kernel transients, canonicalization work, Python
+objects, allocator state, socket state, hashing, scheduling, and whole-process
+RSS are incomplete rather than zero.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. The strict ceiling is the declared four-module
+exchange-symmetric two-rail family only.
+
+No distinct phase resource, computational advantage, Small Wall crossing,
+arbitrary nonlinear lower bound, arbitrary graph closure, fixed bounded-width
+exact state, physical waveform execution, bit replacement, general inference,
+or unbounded catalytic computation is established.
+
+Next:
+
+```text
+EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
+```
+
+The successor must derive one analytic permutation-orbit law across rail
+count and test its exact rank, payload, restoration, and matched classical
+occupation recurrence. It must not add more M245 word or depth fixtures. If
+the quotient grows as `binomial(n+4,4)` and stays classically identical, that
+is the route ceiling and the next mechanism must change phase primitive.

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The registry assigns one
+`ebca4aaf6e17682495f842aa6792a0e288747d54`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 244-milestone lane is active by user direction. Continue from the
+The current 245-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,45 +53,45 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE
+CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QZETA5_MULTI_CUBIC_CHAIN_TREEWIDTH_ONE_ONLY_DECLARED_DEPTHS2_3_4_8_16_32_64_FIVE_LOGICAL_PHASE_CELLS_WITH_GROWING_EXACT_PAYLOAD_ABSTRACT_UNIX_SOCKET_MODEL_ONLY
+EXACT_SOFTWARE_QZETA5_EXCHANGE_SYMMETRIC_TWO_RAIL_FOUR_MODULE_DIAGNOSTIC_ONLY_15_UNORDERED_PAIR_CELLS_ABSTRACT_UNIX_SOCKET_MODEL
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone power-basis implementation reproduce the declared dimensions,
+and a standalone power-basis implementation reproduce the 15-orbit quotient,
 atomic controls, monotone generation, exact same-backing restoration, and
 generation-two descriptor-distinct reuse.
 
-M244 executes connected multi-cubic F5 chain descriptors at depths
-`2,3,4,8,16,32,64` on one actual five-cell Q(zeta5) phase message and one
-fixed scratch backing. The CATVM service exposes only the selected final
-amplitude, reverses the full transfer word, includes hidden descriptor state in
-canonical equality, and releases only after exact restoration. Independent
-Q(zeta5) and dense small-depth references agree. The strongest implemented
-classical baseline specializes both public endpoints and remains smaller in
-forward work. Public exact payload bounds grow, and a cross-rank-two kernel has
-exact interface rank 25, so the five-cell law is treewidth-one only. No
-distinct phase resource, total advantage, Small Wall crossing, physical
-execution, physical-bit replacement, inference, or unbounded computation is
-established.
+M245 closes the declared exchange-symmetric two-rail family on 15 unordered
+pair amplitudes. Exact split-prime certificates give reachability,
+observability, and Hankel rank 15 for the declared symmetric continuation
+language. A separately persisted three-gate exchange-broken labelled alphabet
+has reachability and observability rank 25; this is not generalized to every
+exchange-breaking law. The strongest endpoint-specialized factorized
+classical boundary recurrence uses 440 terms versus 1,140 accepted forward
+terms, while the equal-memory direct orbit recurrence is algebraically
+identical. No distinct phase resource, total advantage, Small Wall crossing,
+physical execution, physical-bit replacement, inference, or unbounded
+computation is established.
 
 Selected successor:
 
 ```text
-EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
+EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
 ```
 
-Attack the measured cross-rank-two interface directly. Either construct a
-lawful exact nonlinear chart below 25 materialized states or certify the
-reachable and observable 25-state ceiling against the strongest matched
-treewidth-two classical contraction. Do not add chain depths, descriptor
-families, or five-state transfer optimizations.
+Generalize the lawful symmetry quotient by deriving the permutation-orbit
+occupation law across rail count, then measure its exact continuation rank and
+coefficient payload against the strongest occupation/Krawtchouk classical
+recurrence. This must be one transferable composition law, not more M245 word
+or depth fixtures. If the occupation rank grows as `binomial(n+4,4)` with an
+identical classical recurrence, publish that ceiling and change primitive.
 
 The accumulated bounded architecture includes:
 
@@ -285,7 +285,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M244_CLOSES_THE_DECLARED_TREEWIDTH1_FIVE_CELL_TRANSFER_AND_CERTIFIES_A25_STATE_CROSS_RANK2_INTERFACE_SO_M245_TESTS_THE_ACTUAL_CROSS_RANK2_REACHABLE_OBSERVABLE_FAMILY_FOR_A_NONLINEAR_PHASE_CHART_OR_STRICT25_STATE_CEILING
+ACTIVE_AFTER_M245_CLOSES_THE_DECLARED_EXCHANGE_SYMMETRIC_TWO_RAIL_INTERFACE_ON15_ORBITS_AND_RESTRICTS_THE25_STATE_NO_GO_TO_ONE_PERSISTED_EXCHANGE_BROKEN_THREE_GATE_ALPHABET_SO_M246_DERIVES_A_TRANSFERABLE_N_RAIL_PERMUTATION_OCCUPATION_LAW
 ```
 
 The named
@@ -294,19 +294,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
+EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
 ```
 
-M244 establishes the five-cell exact transfer only for the declared
-treewidth-one chain. Public exact payload bounds grow, the endpoint-specialized
-classical forward recurrence remains smaller, and the first cross-rank-two
-kernel has exact interface rank 25. Do not add chain depths, descriptor
-families, or five-state transfer optimizations. M245 must attack that measured
-interface directly: use the actual public cross-rank-two continuation family
-and either construct a lawful exact nonlinear phase chart below 25 materialized
-states or certify the reachable and observable 25-state ceiling against the
-strongest matched treewidth-two classical contraction. A certificate is a
-bounded route decision, not a distinct phase resource or advantage.
+M245 establishes a lawful 15-orbit quotient only for the declared
+exchange-symmetric two-rail family and proves that linear rank 15 is minimal
+for its declared continuation language. The persisted `A/B/D` labelled family
+reaches rank 25, but generic exchange breaking and arbitrary nonlinear
+encodings remain unclassified. Do not add more M245 words, depths, or rank-two
+fixtures. M246 must derive the analytic permutation-occupation composition law
+across rail count and compare its exact rank, payload, and work with the
+strongest occupation/Krawtchouk classical recurrence. A polynomial symmetry
+quotient remains a bounded route result, not a distinct phase resource or
+advantage.
 
 ## 7. Native No-Smuggle Law
 

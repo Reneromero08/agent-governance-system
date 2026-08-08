@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_TREEWIDTH1_MULTI_CUBIC_TRANSFER_CLOSED_CROSS_RANK2_OPEN`
-**Roadmap version:** `15.28`
+**Status:** `STRICT_CATVM_P5_EXCHANGE_SYMMETRIC_RANK2_ORBIT_QUOTIENT_CLOSED_N_RAIL_LAW_OPEN`
+**Roadmap version:** `15.29`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`
+**Reconciled source head:** `ebca4aaf6e17682495f842aa6792a0e288747d54`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE`
-**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_MULTI_CUBIC_CHAIN_TREEWIDTH_ONE_ONLY_DECLARED_DEPTHS2_3_4_8_16_32_64_FIVE_LOGICAL_PHASE_CELLS_WITH_GROWING_EXACT_PAYLOAD_ABSTRACT_UNIX_SOCKET_MODEL_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_EXCHANGE_SYMMETRIC_TWO_RAIL_FOUR_MODULE_DIAGNOSTIC_ONLY_15_UNORDERED_PAIR_CELLS_ABSTRACT_UNIX_SOCKET_MODEL`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M244_CLOSES_THE_DECLARED_TREEWIDTH1_FIVE_CELL_TRANSFER_AND_CERTIFIES_A25_STATE_CROSS_RANK2_INTERFACE_SO_M245_TESTS_THE_ACTUAL_CROSS_RANK2_REACHABLE_OBSERVABLE_FAMILY_FOR_A_NONLINEAR_PHASE_CHART_OR_STRICT25_STATE_CEILING`
+**New mechanism development:** `ACTIVE_AFTER_M245_CLOSES_THE_DECLARED_EXCHANGE_SYMMETRIC_TWO_RAIL_INTERFACE_ON15_ORBITS_AND_RESTRICTS_THE25_STATE_NO_GO_TO_ONE_PERSISTED_EXCHANGE_BROKEN_THREE_GATE_ALPHABET_SO_M246_DERIVES_A_TRANSFERABLE_N_RAIL_PERMUTATION_OCCUPATION_LAW`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION`
+**Active primary successor:** `EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE
+CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK
 ```
 
 Not established:
@@ -11974,6 +11974,70 @@ exact nonlinear phase chart below 25 materialized states or certify the
 reachable and observable 25-state ceiling against the strongest treewidth-two
 classical contraction. It must not add chain depths, descriptor families, or
 five-vector transfer optimizations.
+
+## M245: exchange-symmetric rank-two orbit quotient and scoped labelled no-go
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_EXACT_P5_EXCHANGE_SYMMETRIC_TWO_RAIL_CUBIC_INTERFACE_CLOSES_ON_ONE15_CELL_UNORDERED_PAIR_QZETA5_MESSAGE_WITH_REACHABLE_AND_OBSERVABLE_LINEAR_RANK15_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_A_DECLARED_THREE_GATE_EXCHANGE_BROKEN_LABELLED_ALPHABET_HAS_REACHABLE_OBSERVABLE_RANK25_AND_THE_STRONGEST_FACTORIZED_TREEWIDTH2_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER_IN_WORK
+```
+
+M245 changes the cross-rank-two representation rather than materializing all
+25 labelled amplitudes. Exact rail-exchange symmetry identifies `(a,b)` with
+`(b,a)` and closes the declared two-rail cubic transfer on the 15 unordered
+pairs in `F5^2`. The CATVM service retains one 15-cell message and one 15-cell
+scratch backing, projects only the selected final orbit amplitude, reverses
+all four modules, verifies exact canonical state, and releases only after
+restoration. A descriptor-distinct generation-two transaction consumes the
+same actual backings.
+
+An independent Q(zeta5) implementation reproduces the orbit recurrence and
+the full labelled 25-state recurrence at every stage. Over both split primes
+41 and 61, the declared symmetric prefix/suffix language has reachability,
+observability, and Hankel rank 15. Thus no transferable linear realization
+below 15 preserves that language. The first rung has labelled matrix rank 5,
+rejecting product and matrix-bond ranks below 5. These are linear and
+matrix-factor ceilings only; arbitrary nonlinear encodings are not rejected.
+
+The separately persisted exchange-broken `A/B/D` labelled alphabet has
+reachability and observability rank 25 at both split primes. That result is
+restricted to those exact three gates, whose descriptors are sealed. M245
+does not claim that every exchange-breaking perturbation forces rank 25.
+
+The accepted forward uses 1,140 character terms and the exact inverse uses
+1,500. The strongest implemented selected-boundary classical comparator uses
+a 15-cell orbit vector plus 25 temporary cells and 440 forward-only terms.
+The identical direct orbit comparator uses the same 30 message-plus-scratch
+cells as the CATVM carrier and 1,140 forward terms. The result is therefore a
+time-memory tradeoff with no total advantage. Whole-process and kernel-
+transient resource accounting remains incomplete and is not represented as
+zero.
+
+Focused adversarial review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`. Disconnect, partial-forward failure,
+post-projection failure, wrong and reordered inverses, descriptor mutation,
+wrong orbit multiplicity, forbidden projection, stale generation, snapshot,
+and no-reload reuse controls pass.
+
+No fixed bounded-width exact state, arbitrary graph closure, arbitrary
+nonlinear lower bound, distinct phase resource, computational advantage,
+Small Wall crossing, physical waveform execution, physical-bit replacement,
+general inference, or unbounded catalytic computation is established.
+
+Selected phase-owned successor:
+
+```text
+EXACT_P5_PERMUTATION_SYMMETRIC_N_RAIL_CUBIC_OCCUPATION_PHASE_QUOTIENT_WITH_ANALYTIC_MULTINOMIAL_ORBIT_COMPOSITION_AND_LINEAR_MINIMALITY_OR_GROWTH_AGAINST_MATCHED_KRAWTCHOUK_CLASSICAL_RECURRENCE
+```
+
+M246 must derive one transferable permutation-orbit composition law across
+rail count, not add M245 word or depth fixtures. It must compare exact
+occupation rank, coefficient payload, and contraction work with the strongest
+occupation/Krawtchouk classical recurrence. If the lawful quotient grows as
+`binomial(n+4,4)` and remains classically identical, publish that polynomial
+ceiling and change phase primitive rather than continuing symmetric widths.
 
 ## 10. Roadmap Maintenance
 
