@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`f4ff09b3de403844ac6b6f886d3234b35692d0ab`. The canonical per-milestone
+`5a1b9f6bfa3256fe18a342522212a3c7e638045c`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12384,3 +12384,47 @@ question is whether the smallest cubic perturbation admits a fixed exact
 algebraic stationary-elimination chart or whether branch degree, coefficient
 height, or equivalent support grows.  The comparison must use exact resultant
 or critical-value elimination, not sampled grids or expanded assignments.
+
+## M235 exact cubic critical-locus substitution and branch-union law
+
+M235 derives a non-Gaussian open relation from the formal cubic phase
+`w^3/3-(v+c)w`.  Native shared-port elimination substitutes its stationary
+law `v=w^2-c` into an exact integer polynomial relation.  The accompanying
+public linear-factor multiplication adjoins one zero-set branch; it is branch
+union by product and is explicitly not set-theoretic intersection.
+
+Across declared depths one through eight, exact square-free branch counts are
+`4,10,22,46,94,190,382,766`.  Materialized coefficient cells grow
+`5,11,23,47,95,191,383,767`, while primary exact payload grows
+`12,62,327,1519,6684,29010,124214,513065` bits.  The accepted path enumerates
+no roots or branch assignments.  It projects only the final scalar boundary,
+then divides the actual relation by each public linear factor and reverses the
+even-power substitution.  The exact same coefficient backing returns to its
+canonical state, generation advances one to two, an unrelated family reuses
+it, fresh/restored outputs agree, and no reload occurs.
+
+The standalone sparse-dictionary implementation independently reconstructs
+the algebra, square-free controls, final boundary, transaction ordering, and
+reuse.  The focused review returned `PASS_STRICT_SCOPE` after correcting the
+operation name from intersection to branch union.  Authority is therefore
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, `SEPARATE_REFERENCE_PARITY`, and
+`EXACT_ALGEBRAIC_RESTORATION` at the declared finite family ceiling.
+
+The negative resource result is decisive for this representation: an exact
+`O(depth)` public expression DAG still retains the complete open relation, and
+the strongest implemented final-boundary recurrence uses two persistent
+integers.  Expanded branch count alone does not establish a compact nonlinear
+quotient lower bound or phase advantage.  Whole-transaction/process liveness
+remains incomplete and resource figures remain `PACKAGE_SELF_REVIEW`.
+
+Next:
+
+```text
+EXACT_CUBIC_AIRY_CHAIN_STATIONARY_SHARED_PORT_QUOTIENT_ALGEBRA_WITH_UNRESOLVED_BRANCHES_CRITICAL_VALUE_NORM_DEGREE_GROWTH_OR_COMPACT_QUOTIENT_EXACT_RESTORATION_REUSE_AND_MATCHED_POLYNOMIAL_CLASSICAL_BASELINE
+```
+
+The next experiment must use a connected chain of cubic generating signatures,
+retain all stationary branches implicitly in a quotient algebra, and project
+their critical-value norm without root enumeration.  It must preserve exact
+same-backing restoration/reuse and compare with the strongest identical
+polynomial recurrence and exact norm computation.
