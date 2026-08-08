@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`607e7b0a24df62c48b83f73d25f235c572718d5a`. The canonical per-milestone
+`399983b7fb8cb5191c43f8d5a23c7306ab75e5da`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12009,3 +12009,49 @@ from primitive plan references, release dense compiler matrices before
 execution, and count compiler state, retained plan storage, rational
 temporaries and warm work. Preserve final-only exact restoration/reuse and the
 identical in-place classical recurrence.
+
+## M227 in-place public-unit plan resource no-go
+
+The accepted claim is:
+
+```text
+BOUNDED_EXACT_IN_PLACE_GL16Z_PUBLIC_UNIT_COORDINATE_ACTION_ELIMINATES_SIMULTANEOUS_WHOLE_OLD_ACCUMULATOR_AND_WHOLE_NEW_PRODUCT_AND_REDUCES_PRIMARY_DECLARED_EXACT_DYNAMIC_LIVE_PAYLOAD_FROM294821_TO247272_BITS_WITH267482_BITS_INCLUDING_RETAINED_PUBLIC_PLAN_AND_UNIT_DESCRIPTOR_PAYLOAD_VERSUS129595_MATCHED_RAW_BITS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_THE_IDENTICAL_CLASSICAL_IN_PLACE_COORDINATE_RECURRENCE_AND_PUBLIC_PLAN_LIBRARY_REMAIN
+```
+
+M227 compiles seven public unit maps and conjugation into one reversible
+`GL(16,Z)` plan library with 1,585 swap/negate/shear operations and no retained
+inverse duplicate. Execution uses no dense matrices. The retained plan payload
+is 18,374 bits and the inherited public descriptor is 1,836 bits. The primary
+dynamic maximum falls from 294,821 to 247,272 bits; dynamic plus all retained
+public state is 267,482 bits versus matched raw 129,595 bits. Every case stays
+above raw, while primary in-place work reaches 153,538,482 plan-operation
+steps. The dominant primary interval remains the exact five-rational direct
+trace-line accumulation.
+
+Production and the standalone reference agree on all cases, compiler and plan
+commitments, normalized resources, exact state/boundary commitments,
+restoration, and reuse. The same three backing objects restore with zero field
+error and no reload; generation-two reuse matches fresh state and boundary.
+This is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Source-complete accounting is limited to in-place plan-operation intervals.
+Whole-transaction live payload, projected-boundary retention during inverse,
+some compiler scalar-arithmetic liveness, Python/runtime objects, timing, and
+whole-process RSS are not claimed. The identical in-place exact coordinate
+recurrence remains the strongest compact classical baseline. No distinct
+phase resource, advantage, Small Wall crossing, CATVM custody, physical
+execution, physical-bit replacement, catalytic inference, or unbounded
+computation is established.
+
+Next:
+
+```text
+EXACT_TRANSPOSE_GL16Z_PUBLIC_UNIT_PLAN_ON_STREAMED_HERMITIAN_TRACE_FUNCTIONAL_WITHOUT_MATERIALIZED_WEIGHT_VECTOR_OR_PERSISTING_HEIGHT_OBSTRUCTION_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_RECURRENCE
+```
+
+Use trace linearity to move the public unit action to a streamed exact
+Hermitian functional, then determine whether the transformed weight vector can
+be eliminated without moving its exact height into an equally wide retained
+functional. Count both dynamic and retained public resources and preserve the
+identical classical recurrence.
