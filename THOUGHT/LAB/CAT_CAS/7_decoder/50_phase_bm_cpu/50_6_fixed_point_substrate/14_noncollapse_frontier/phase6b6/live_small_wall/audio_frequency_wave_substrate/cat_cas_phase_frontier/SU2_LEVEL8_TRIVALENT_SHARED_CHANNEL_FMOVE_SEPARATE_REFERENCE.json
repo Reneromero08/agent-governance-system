@@ -1,0 +1,120 @@
+{
+  "cases": [
+    {
+      "analytic_shared_channels": [
+        0,
+        2
+      ],
+      "baseline_reload_used": false,
+      "boundary_commitment": "9f7f663f3f809c11ab135f8901e8c086cb169b4cb4865c5f7d8d3e5e677c840f",
+      "canonical_post_restoration_state_exact": true,
+      "family": 0,
+      "final_boundary_backing_cells": 1,
+      "phase_work_backing_cells": 3,
+      "program_commitment": "fb0efb8ae3d55e4ca895ff346e3fa5f5e1c6e22892d19fcdff49c8a91a0287ea",
+      "resident_unresolved_channel_cells": 2,
+      "restoration_generation": 1,
+      "topology_descriptor_integers": 11
+    },
+    {
+      "analytic_shared_channels": [
+        0,
+        2
+      ],
+      "baseline_reload_used": false,
+      "boundary_commitment": "d9f798cc78519761a3ff65f65279ada6578b4b4607fcf5e238a499f4bd0e7763",
+      "canonical_post_restoration_state_exact": true,
+      "family": 1,
+      "final_boundary_backing_cells": 1,
+      "phase_work_backing_cells": 3,
+      "program_commitment": "d1c1427eafcacb2137ac86a1f192c7ba226ed23d0c62934913e8b78ce9cac23f",
+      "resident_unresolved_channel_cells": 2,
+      "restoration_generation": 1,
+      "topology_descriptor_integers": 11
+    }
+  ],
+  "controls": {
+    "analytic_trivalent_admissibility_has_channels0_and2": true,
+    "assignment_expansions_materialized": false,
+    "both_public_families_restore": true,
+    "braid_phase_inverse_exact": true,
+    "braid_phase_perturbation_changes_boundary_all_families": true,
+    "f_move_involution_exact": true,
+    "f_move_perturbation_changes_boundary_all_families": true,
+    "fusion_relation_tables_materialized": false,
+    "invalid_trivalent_signature_rejected": true,
+    "missing_inverse_detected": true,
+    "non_diagonal_f_move_offdiagonal_nonzero": true,
+    "null_carrier_rejected": true,
+    "omitting_either_shared_channel_changes_boundary_all_families": true,
+    "premature_projection_rejected": true,
+    "public_families_have_distinct_boundaries": true,
+    "public_topology_compilation_reads_final_answer": false,
+    "reordered_dependent_inverse_rejected": true,
+    "shared_channel_projection_rejected": true,
+    "stale_generation_rejected": true,
+    "wrong_generation_rejected": true,
+    "wrong_inverse_braid_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_port_type_rejected": true,
+    "wrong_public_program_rejected": true,
+    "yang_baxter_relation_exact": true
+  },
+  "imports_m214_production": false,
+  "imports_m231_production": false,
+  "imports_m232_production": false,
+  "reuse": {
+    "fresh_restored_reuse_boundary_agreement": true,
+    "fresh_reuse": {
+      "analytic_shared_channels": [
+        0,
+        2
+      ],
+      "baseline_reload_used": false,
+      "boundary_commitment": "d9f798cc78519761a3ff65f65279ada6578b4b4607fcf5e238a499f4bd0e7763",
+      "canonical_post_restoration_state_exact": true,
+      "family": 1,
+      "final_boundary_backing_cells": 1,
+      "phase_work_backing_cells": 3,
+      "program_commitment": "d1c1427eafcacb2137ac86a1f192c7ba226ed23d0c62934913e8b78ce9cac23f",
+      "resident_unresolved_channel_cells": 2,
+      "restoration_generation": 1,
+      "topology_descriptor_integers": 11
+    },
+    "primary": {
+      "analytic_shared_channels": [
+        0,
+        2
+      ],
+      "baseline_reload_used": false,
+      "boundary_commitment": "9f7f663f3f809c11ab135f8901e8c086cb169b4cb4865c5f7d8d3e5e677c840f",
+      "canonical_post_restoration_state_exact": true,
+      "family": 0,
+      "final_boundary_backing_cells": 1,
+      "phase_work_backing_cells": 3,
+      "program_commitment": "fb0efb8ae3d55e4ca895ff346e3fa5f5e1c6e22892d19fcdff49c8a91a0287ea",
+      "resident_unresolved_channel_cells": 2,
+      "restoration_generation": 1,
+      "topology_descriptor_integers": 11
+    },
+    "restoration_generation_after_reuse": 2,
+    "reuse": {
+      "analytic_shared_channels": [
+        0,
+        2
+      ],
+      "baseline_reload_used": false,
+      "boundary_commitment": "d9f798cc78519761a3ff65f65279ada6578b4b4607fcf5e238a499f4bd0e7763",
+      "canonical_post_restoration_state_exact": true,
+      "family": 1,
+      "final_boundary_backing_cells": 1,
+      "phase_work_backing_cells": 3,
+      "program_commitment": "d1c1427eafcacb2137ac86a1f192c7ba226ed23d0c62934913e8b78ce9cac23f",
+      "resident_unresolved_channel_cells": 2,
+      "restoration_generation": 2,
+      "topology_descriptor_integers": 11
+    }
+  },
+  "schema": "cat_cas.su2_level8_trivalent_shared_channel_reference.v1",
+  "uses_independent_cyclotomic_polynomial_oracle": true
+}
