@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_PRETRUNCATION_SKEIN_FUSION_EQUIVALENCE_OBSTRUCTION`
-**Roadmap version:** `14.84`
+**Status:** `STRICT_SU2_LEVEL8_TOPOLOGY_LOCAL_CUBIC_SKEIN_EXACT_HEIGHT_OBSTRUCTION`
+**Roadmap version:** `14.85`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `da7e777e3be2c0aa394f9ab2f00eb713a72c2399`
+**Reconciled source head:** `db9a08708886bbad171d029007bd8f3d9e220d01`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE`
-**Current claim ceiling:** `FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `FORMAL_PRETRUNCATION_QZETA40_NONCROSSING_LINK_PATTERN_CUBIC_SHEAR_FAMILY0_STRANDS4_DEPTH1TO6_STRANDS6_DEPTH1TO3_STRANDS8_DEPTH1TO2_GENERIC_LEADING_TERMS_THROUGH_DEPTHS7_4_2_PRIMARY6_DEPTH3_REUSE6_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M218_PRETRUNCATION_LINK_PATTERN_SKEIN_IS_SEQUENCE_IDENTICAL_TO_THE_FULL_DEGREE_FUSION_PATH_MODULE_AND_REQUIRES_A_SECOND_FULL_BUFFER`
+**New mechanism development:** `ACTIVE_AFTER_M219_TOPOLOGY_LOCAL_CUBIC_SKEIN_RETAINS_FIXED_LOGICAL_CELLS_ONLY_BY_MOVING_GROWTH_INTO_EXACT_HEIGHT_AND_GENERIC_POLYNOMIAL_DEGREE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE`
+**Active primary successor:** `EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SKEIN_COEFFICIENTS_WITH_REVERSIBLE_UNIT_LEDGERS_OR_NET_HEIGHT_REDUCTION_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -10484,6 +10484,77 @@ forward/inverse work, restoration and reuse against the identical compact
 classical polynomial recurrence. It must preserve a growing-support or
 growing-height obstruction if found, not replace this test with another
 period-10 or dormant-truncation fixture.
+
+## M219: topology-local cubic-skein exact-height obstruction
+
+The separately reconstructed strict-scope claim is:
+
+```text
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS
+```
+
+M219 changes the phase-machine law rather than changing only its linear basis.
+After each native Kauffman/Temperley--Lieb gate, every link pattern without the
+gate's local cup controls a triangular cubic cyclotomic coefficient injection
+into its public reconnection target. Controls and targets are disjoint for
+that generator. The inverse therefore subtracts the same cubes before the
+inverse skein gate, without a retained value history. The cubic shear and
+skein gate demonstrably do not commute.
+
+A standalone exact implementation imports no M219 or M218 production. It
+reconstructs `Q(zeta_40)`, Dyck/link-pattern topology, skein gates, normalized
+Markov boundary, cubic shears, leading terms, forward/inverse transactions and
+restored reuse. It reproduces every exact height tuple, full-state and boundary
+commitment, generic leading-degree result, restoration and reuse result.
+
+The exact family-0 cases cover four strands at depths 1--6, six strands at
+depths 1--3 and eight strands at depths 1--2. Logical carrier sizes remain
+2, 5 and 14 exact field cells plus equal skein scratch. At the selected
+ceilings, the generic map degree is 1,594,323 in all three cases, while the
+actual one-hot carrier payload is 4,669,525, 5,323,618 and 6,949,604 bits;
+maximum signed numerator widths are 218,885, 172,120 and 166,299 bits. The
+generic diagnostic retains only one leading exponent vector and one exact
+leading coefficient per coordinate rather than materializing symbolic
+polynomial support, and counts the resulting quadratic exponent metadata.
+
+The primary six-strand depth-three transaction projects only the completed
+Markov boundary, reverses 15 cubic-skein operations, restores the actual
+five-cell carrier and five-cell scratch backings exactly, and then runs an
+unrelated family-1 depth-two program at restoration generation two. Fresh and
+restored state and boundary commitments agree with no baseline reload. Wrong
+owner, operation type, program, shear phase, inverse order, missing inverse,
+missing shear inverse, premature projection and null-carrier controls
+discriminate. The accepted path is direct process, not CATVM custody.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_PRETRUNCATION_QZETA40_NONCROSSING_LINK_PATTERN_CUBIC_SHEAR_FAMILY0_STRANDS4_DEPTH1TO6_STRANDS6_DEPTH1TO3_STRANDS8_DEPTH1TO2_GENERIC_LEADING_TERMS_THROUGH_DEPTHS7_4_2_PRIMARY6_DEPTH3_REUSE6_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+The strongest compact classical baseline is the identical link-pattern vector
+skein-then-cubic recurrence with the same logical cells, scratch, exact height
+and work law. Fixed logical cell count therefore does not establish a fixed
+bounded-width exact state set. No distinct phase resource, computational
+advantage, CATVM custody, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SKEIN_COEFFICIENTS_WITH_REVERSIBLE_UNIT_LEDGERS_OR_NET_HEIGHT_REDUCTION_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
+```
+
+The selected repair attacks actual height rather than adding deeper cubic
+fixtures. Integer content is already primitive in every declared M219 state,
+so it must test nontrivial cyclotomic units across all embeddings and count
+the full mantissa plus unit-ledger cost. A smaller displayed mantissa does not
+qualify if the reversible ledger carries the removed information. The
+identical classical gauge recurrence remains the matched baseline.
 
 ## 10. Roadmap Maintenance
 

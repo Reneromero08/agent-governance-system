@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`da7e777e3be2c0aa394f9ab2f00eb713a72c2399`. The registry assigns one
+`db9a08708886bbad171d029007bd8f3d9e220d01`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 218-milestone lane is active by user direction. Continue from the
+The current 219-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,34 +53,36 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_PRETRUNCATION_KAUFFMAN_TEMPERLEY_LIEB_LINK_PATTERN_SKEIN_AND_FUSION_PATH_VACUUM_BOUNDARY_SEQUENCES_ARE_IDENTICAL_FOR_THE_PUBLIC_PERIOD10_SU2_LEVEL8_FAMILIES_AND_HAVE_FULL_MINIMAL_DEGREES2_5_14_42_132_429_1430_ACROSS_STRANDS4TO16_WHILE_THE_SKEIN_PATH_REQUIRES1430_CARRIER_PLUS1430_SCRATCH_CELLS_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_SKEIN_RECURRENCE
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-FORMAL_PRETRUNCATION_SU2_LEVEL8_QZETA40_NONCROSSING_LINK_PATTERN_MODULE_PUBLIC_PERIOD10_FAMILIES0_1_EVEN_STRANDS4_TO16_NORMALIZED_CUP_CAP_MARKOV_BOUNDARY_PRIMARY_SPLIT_PRIMES241_401_REFERENCE_SPLIT_PRIMES641_881_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY
+FORMAL_PRETRUNCATION_QZETA40_NONCROSSING_LINK_PATTERN_CUBIC_SHEAR_FAMILY0_STRANDS4_DEPTH1TO6_STRANDS6_DEPTH1TO3_STRANDS8_DEPTH1TO2_GENERIC_LEADING_TERMS_THROUGH_DEPTHS7_4_2_PRIMARY6_DEPTH3_REUSE6_DEPTH2_FAMILY1_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. A native
-Kauffman/Temperley--Lieb link-pattern implementation and a separate
-no-production-import implementation reproduce full Markov-boundary scalar
-degrees `2,5,14,42,132,429,1430` for both public period-10 families across
-four through sixteen strands. The resulting scalar sequences are identical
-to the M217 fusion-path vacuum sequences. Jones--Wenzl truncation is not active
-in this range; its first possible effect is at eighteen strands. At sixteen
-strands the accepted skein path therefore retains 1,430 carrier cells plus a
-1,430-cell temporary buffer, projects only the final Markov boundary, restores
-the same coefficient and scratch backings exactly, and reuses them for an
-unrelated program at generation two. The strongest classical comparator is
-the identical link-pattern skein recurrence, with the identical M217
-fusion-path transfer as an equivalent basis realization. This establishes a
-pretruncation basis-level equivalence obstruction, not diagram compaction.
-No CATVM custody, distinct phase resource, advantage, Small Wall crossing,
-physical execution, physical-bit replacement, catalytic inference, or
-unbounded computation is established. Continue by changing the phase update
-law itself; do not add more linear period-10 or dormant-truncation fixtures.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. It changes the
+M218 update law by applying a public topology-local triangular cubic
+cyclotomic coefficient shear after every native skein gate. The shear and
+skein gate demonstrably do not commute, and subtraction of the same control
+cubes before the inverse gate restores the actual carrier without retained
+value history. A standalone exact-arithmetic implementation reproduces every
+height tuple, state and boundary commitment, generic leading-degree result,
+restoration and reuse result without importing M219 or M218 production.
+
+The declared 4-, 6- and 8-strand cases retain 2, 5 and 14 logical carrier
+cells plus equal skein scratch, but generic map degree reaches 1,594,323 at
+depths 6, 3 and 2 while exact one-hot carrier payload reaches 4,669,525,
+5,323,618 and 6,949,604 bits. The strongest classical comparator is the
+identical link-pattern vector skein-then-cubic recurrence with the same cell,
+scratch, height and work law. This establishes a bounded nonlinear exact
+height obstruction, not compact bounded-width exact state. No CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference, or unbounded computation is
+established. Continue by reducing total mantissa plus lawful normalization
+ledger cost; do not add deeper cubic fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -274,7 +276,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M218_PRETRUNCATION_LINK_PATTERN_SKEIN_IS_SEQUENCE_IDENTICAL_TO_THE_FULL_DEGREE_FUSION_PATH_MODULE_AND_REQUIRES_A_SECOND_FULL_BUFFER
+ACTIVE_AFTER_M219_TOPOLOGY_LOCAL_CUBIC_SKEIN_RETAINS_FIXED_LOGICAL_CELLS_ONLY_BY_MOVING_GROWTH_INTO_EXACT_HEIGHT_AND_GENERIC_POLYNOMIAL_DEGREE
 ```
 
 The named
@@ -283,23 +285,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_SHEAR_INTERLEAVED_WITH_TEMPERLEY_LIEB_SKEIN_ON_UNRESOLVED_LINK_PATTERN_PHASE_COEFFICIENTS_WITH_NONLINEAR_CLOSURE_OR_GROWING_ALGEBRAIC_HEIGHT_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_POLYNOMIAL_RECURRENCE
+EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SKEIN_COEFFICIENTS_WITH_REVERSIBLE_UNIT_LEDGERS_OR_NET_HEIGHT_REDUCTION_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
 ```
 
-M214--M218 show that the declared growing `SU(2)_8` family does not acquire a
+M214--M219 show that the declared growing `SU(2)_8` family does not acquire a
 compact exact machine merely by using fixed local fusion labels, canonical
 MPS form, public-topology factor elimination, a scalar boundary recurrence,
-or a pretruncation link-pattern basis. The M218 skein and M217 fusion-path
-vacuum sequences are identical, their minimal degrees reach the complete
-module dimension, and the skein implementation needs a second full state
-buffer. Jones--Wenzl truncation is dormant through the declared ceiling. Do
-not add more strand, sweep, MPS-rank, Krylov, or linear skein fixtures. Change
-the phase update law itself by testing a reversible topology-local cubic
-shear on unresolved link-pattern coefficients, interleaved with the native
-skein action. Count nonlinear closure support, exact coefficient height,
-temporary state, inverse work, restoration, reuse, and the identical compact
-classical polynomial recurrence. Failure to close or growing height is a
-valid bounded obstruction; it must not be described as a phase resource.
+or a pretruncation link-pattern basis. M219 changes the law to a genuinely
+noncommuting reversible cubic coefficient shear, but fixed logical cells move
+the resource into rapidly growing exact height and generic polynomial degree.
+Do not add more strand, sweep, MPS-rank, Krylov, linear skein, or deeper cubic
+fixtures. Test multi-embedding cyclotomic-unit gauge balancing on the actual
+M219 coefficients and count every mantissa bit, unit exponent, normalization
+operation, scratch cell and inverse ledger. A smaller mantissa is not a repair
+if the lawful ledger carries the removed information. Compare against the
+identical classical gauge recurrence, preserve exact final-only restoration
+and reuse, and report no net reduction as a bounded obstruction if found.
 
 ## 7. Native No-Smuggle Law
 

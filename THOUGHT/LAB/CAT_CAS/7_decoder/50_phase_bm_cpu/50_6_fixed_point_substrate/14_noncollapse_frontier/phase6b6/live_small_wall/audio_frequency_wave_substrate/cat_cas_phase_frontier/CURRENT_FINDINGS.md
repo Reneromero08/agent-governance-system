@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`da7e777e3be2c0aa394f9ab2f00eb713a72c2399`. The canonical per-milestone
+`db9a08708886bbad171d029007bd8f3d9e220d01`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11665,3 +11665,44 @@ This changes the phase update law rather than adding a larger linear skein
 fixture. It must measure nonlinear closure support and exact height while
 preserving final-only projection, exact reversal and reuse against the
 identical compact classical polynomial recurrence.
+
+## M219 topology-local cubic-skein exact-height obstruction
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_TOPOLOGY_LOCAL_REVERSIBLE_CUBIC_CYCLOTOMIC_COEFFICIENT_SHEAR_INTERLEAVED_WITH_PRETRUNCATION_TEMPERLEY_LIEB_SKEIN_RETAINS_LOGICAL_CARRIER_CELLS2_5_14_PLUS_EQUAL_SKEIN_SCRATCH_FOR_DECLARED_STRANDS4_6_8_WITH_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_BUT_GENERIC_MAP_POLYNOMIAL_DEGREE_REACHES1594323_AT4_STRANDS_DEPTH6_1594323_AT6_STRANDS_DEPTH3_AND1594323_AT8_STRANDS_DEPTH2_WHILE_EXACT_ONE_HOT_CARRIER_PAYLOAD_REACHES4669525_5323618_6949604_BITS_AND_THE_IDENTICAL_CLASSICAL_POLYNOMIAL_RECURRENCE_REMAINS
+```
+
+The M218 link-pattern carrier now applies a triangular topology-local cubic
+cyclotomic coefficient shear after each native skein gate. Local noncup
+coefficients control injections into local-cup reconnection targets, so the
+same cubes can be subtracted before the inverse gate without retained value
+history. The cubic and skein actions do not commute.
+
+A standalone exact implementation independently reproduces all exact height
+tuples, full-state and boundary commitments, generic leading degrees,
+restoration and restored reuse. For 4, 6 and 8 strands, the logical carrier
+retains 2, 5 and 14 field cells plus equal scratch, but selected exact one-hot
+carrier payloads reach 4,669,525, 5,323,618 and 6,949,604 bits while generic
+map degree reaches 1,594,323. The primary six-strand depth-three carrier and
+scratch backings restore exactly, and an unrelated family-1 depth-two program
+reuses them at generation two without reload.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. The identical
+classical link-pattern skein-then-cubic recurrence has the same cell, scratch,
+height and work law. No compact bounded-width exact state, CATVM custody,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation is
+established.
+
+Next:
+
+```text
+EXACT_MULTI_EMBEDDING_CYCLOTOMIC_UNIT_GAUGE_BALANCING_OF_TOPOLOGY_LOCAL_CUBIC_SKEIN_COEFFICIENTS_WITH_REVERSIBLE_UNIT_LEDGERS_OR_NET_HEIGHT_REDUCTION_ACROSS_DEPTH_FINAL_ONLY_BOUNDARY_RESTORATION_REUSE_AND_IDENTICAL_CLASSICAL_GAUGE_RECURRENCE
+```
+
+This attacks total exact height rather than adding deeper cubic fixtures.
+Integer content is already primitive, so the test must count nontrivial unit
+gauges across all embeddings together with every reversible exponent ledger.
