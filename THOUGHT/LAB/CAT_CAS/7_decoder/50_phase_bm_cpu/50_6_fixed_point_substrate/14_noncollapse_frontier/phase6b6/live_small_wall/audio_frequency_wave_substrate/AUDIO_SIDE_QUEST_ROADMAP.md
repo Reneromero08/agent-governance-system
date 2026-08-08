@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_ZETA5_COHERENT_MAGIC_INJECTION_FIXED_COMPONENT_OBSTRUCTION`
-**Roadmap version:** `15.23`
+**Status:** `STRICT_ZETA5_MULTI_INJECTION_PRODUCT_MAGIC_OBSTRUCTION`
+**Roadmap version:** `15.24`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `ff0d5d08916a8d52e41c1afcb7c32c96662cb211`
+**Reconciled source head:** `1ca79e971822863cfbcf59a67a7636a10a7dcac6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_P5_CUBIC_MAGIC_INJECTION_RETAINS_ONE_COHERENT_UNRESOLVED5_VALUE_SYNDROME_PORT_CONSUMED_BY_THREE_FIBERWISE_STABILIZER_CORRECTIONS_AND_DECLARED_NONCOMMUTING_SUM_CZ_WORDS_ON_ONE_ACTUAL25_AMPLITUDE_CARRIER_WITH_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_COMPLETE_INJECTION_HAS_AN_EXACT_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_AND_THE_SMALLER_COMPILED_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `QZETA5_TWO_QUDIT_ONE_CUBIC_INJECTION_FAMILIES_A1_2_CONSUMER_PAIR_COUNTS1_2_4_COHERENT_SYNDROME_DIRECT_PROCESS_LOGICAL_CUSTODY_ONLY`
+**Current highest milestone:** `EXACT_P5_COUNTS1_2_3_4_REPEATED_CUBIC_MAGIC_INJECTIONS_REUSE_ONE_ACTUAL_UNRESOLVED5_VALUE_SYNDROME_PORT_ACROSS_DISTINCT_DATA_WIRES_THEN_CONSUME_IT_IN_A_CONNECTED_SUM_CZ_CLIFFORD_NETWORK_WITH_EXACT_MULTIPLICATIVE_STABILIZER_RELATIVE_WIGNER_L1_MAGIC_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_MAGIC_LAW_IS_THE_PRODUCT_INPUT_LAW_THE_EXACT_STABILIZER_COMPONENT_UPPER_BOUND_GROWS5_TO_THE_INJECTION_COUNT_AND_A_STREAMED_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER`
+**Current claim ceiling:** `QZETA5_ONE_SHARED_SYNDROME_DATA_WIRES1_2_3_4_TWO_PUBLIC_FAMILIES_DIRECT_PROCESS_LOGICAL_CUSTODY_STABILIZER_RELATIVE_PRODUCT_MAGIC_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M239_ESTABLISHES_EXACT_COHERENT_SHARED_SYNDROME_CONSUMPTION_BUT_ONE_INJECTION_RETAINS_A_FIXED_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_INDEPENDENT_OF_CONSUMER_DEPTH_SO_THE_NEXT_MECHANISM_MUST_TEST_INTERACTING_MULTIPLE_INJECTIONS_NOT_LONGER_ONE_INJECTION_WORDS`
+**New mechanism development:** `ACTIVE_AFTER_M240_ESTABLISHES_EXACT_MULTIPLICATIVE_STABILIZER_RELATIVE_MAGIC_THROUGH4_INJECTIONS_BUT_IT_IS_ONLY_THE_PRODUCT_INPUT_LAW_AND_THE_STREAMED5_ACCUMULATOR_SCALAR_CLASSICAL_BOUNDARY_REMAINS_SO_THE_MAGIC_INJECTION_ROUTE_IS_RETIRED_AND_THE_NEXT_MECHANISM_TESTS_MACHINE_ENFORCED_PHASE_ORACLE_INFORMATION_ACCESS`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ZETA5_INTERACTING_MULTI_INJECTION_UNRESOLVED_SYNDROME_NETWORK_WITH_ANALYTIC_COMPOSITIONAL_MAGIC_LOWER_BOUND_OR_STABILIZER_SUM_COLLAPSE_ACROSS_INJECTION_COUNTS1_2_3_4_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_EXACT_AMPLITUDE_STABILIZER_BASELINES`
+**Active primary successor:** `CATVM_EXACT_P5_HIDDEN_LINEAR_PHASE_ORACLE_INFERENCE_WITH_ONE_COHERENT_QUERY_VERSUS_N_CLASSICAL_VALUE_QUERIES_ACROSS_DECLARED_DIMENSIONS1_2_3_4_FINAL_ONLY_SECRET_BOUNDARY_ATOMIC_RESTORATION_REUSE_AND_FULL_TOTAL_RESOURCE_ACCOUNTING`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -11692,6 +11692,60 @@ collapses the network.  It must retain unresolved syndrome interfaces, use the
 strongest exact amplitude and stabilizer-aware baselines, preserve final-only
 projection and exact same-backing restoration/reuse, and stop this magic route
 if the only law is the expected five-to-the-injection-count expansion.
+
+## M240: exact product magic grows but does not become compute leverage
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_P5_COUNTS1_2_3_4_REPEATED_CUBIC_MAGIC_INJECTIONS_REUSE_ONE_ACTUAL_UNRESOLVED5_VALUE_SYNDROME_PORT_ACROSS_DISTINCT_DATA_WIRES_THEN_CONSUME_IT_IN_A_CONNECTED_SUM_CZ_CLIFFORD_NETWORK_WITH_EXACT_MULTIPLICATIVE_STABILIZER_RELATIVE_WIGNER_L1_MAGIC_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_MAGIC_LAW_IS_THE_PRODUCT_INPUT_LAW_THE_EXACT_STABILIZER_COMPONENT_UPPER_BOUND_GROWS5_TO_THE_INJECTION_COUNT_AND_A_STREAMED_SCALAR_CLASSICAL_BOUNDARY_RECURRENCE_REMAINS_SMALLER
+```
+
+M240 reuses one actual coherent five-valued syndrome wire to inject distinct
+data wires at counts one through four, then consumes that same unresolved wire
+in connected public `SUM`/`CZ` Clifford networks.  The exact injection cut,
+all eight final boundaries, controls, same-backing inverse restoration, and
+descriptor-distinct reuse agree with a standalone power-basis implementation.
+Dephasing the shared syndrome changes the declared final boundary for counts
+two through four.  The milestone is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Both implementations independently reconstruct the one-qudit Gross-Wigner
+function.  Its exact l1 norm is `1 + 2*sqrt(5)/5`; tensor multiplication and
+Clifford invariance therefore give `(1 + 2*sqrt(5)/5)^m` through `m=4`.  This
+is a causal growing stabilizer-relative resource witness, but it is exactly the
+product-input law.  It is not an interaction-generated magic law, an optimal
+stabilizer rank or extent, or a classical runtime lower bound.
+
+The exact stabilizer-component upper bound grows `5,25,125,625`.  The strongest
+implemented selected-boundary comparator compiles the injection identities and
+streams `25,125,625,3125` component/syndrome terms into five exact accumulators
+plus one term.  It retains neither an assignment table nor the full amplitude
+vector.  The accepted carrier grows `25,125,625,3125` resident field cells plus
+equal scratch.  This is a declared field-backing comparison only; public
+descriptors, loop coordinates, phase integers, Python/container costs, hashing,
+serialization, allocator state, and RSS are excluded but not zero, and
+whole-transaction liveness remains incomplete.
+
+M240 does not establish a magic resource unavailable to compact classical
+software, computational advantage, fixed-rank or bounded-width scaling, CATVM
+custody, inference, Small Wall crossing, physical execution, physical-bit
+replacement, or unbounded computation.  The coherent magic-injection route is
+retired rather than extended to higher injection counts.
+
+Selected different-resource successor:
+
+```text
+CATVM_EXACT_P5_HIDDEN_LINEAR_PHASE_ORACLE_INFERENCE_WITH_ONE_COHERENT_QUERY_VERSUS_N_CLASSICAL_VALUE_QUERIES_ACROSS_DECLARED_DIMENSIONS1_2_3_4_FINAL_ONLY_SECRET_BOUNDARY_ATOMIC_RESTORATION_REUSE_AND_FULL_TOTAL_RESOURCE_ACCOUNTING
+```
+
+This successor changes the resource question from state magic to information
+access.  A machine boundary must hide the oracle secret and intermediate phase
+state, release only the inferred secret after inverse restoration, and compare
+one coherent phase query with the exact classical black-box value-query law as
+well as total amplitude, traffic, verification, restoration, and reuse costs.
+Any oracle-query separation must remain distinct from total software advantage
+and Small Wall crossing.
 
 ## 10. Roadmap Maintenance
 
