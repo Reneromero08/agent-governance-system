@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_ZETA5_WIGNER_MAGIC_PHASE_SPACE_GROWTH_OBSTRUCTION`
-**Roadmap version:** `15.22`
+**Status:** `STRICT_ZETA5_COHERENT_MAGIC_INJECTION_FIXED_COMPONENT_OBSTRUCTION`
+**Roadmap version:** `15.23`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `76eac2b69cb76f83078f251ee0fbfe6bb2a51baf`
+**Reconciled source head:** `ff0d5d08916a8d52e41c1afcb7c32c96662cb211`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_GROSS_P5_WIGNER_PHASE_CARRIERS_ON_DECLARED_ONE_TWO_THREE_QUDIT_INTERFACES_PROPAGATE_CLIFFORD_PERMUTATIONS_AND_FORMULA_GENERATED_CUBIC_KERNELS_WITH_EXACT_POSITIVE_STABILIZER_SHAMS_AND_CUBIC_CAUSED_NEGATIVITY_FINAL_ONLY_AGGREGATE_PROJECTION_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_SMALLER_EXACT5_TO_THE_N_AMPLITUDE_PLUS_STREAMED_WIGNER_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `EXACT_QZETA5_GROSS_WIGNER_P5_INTERFACES_N1_2_3_TWO_PUBLIC_CIRCUIT_FAMILIES_DIRECT_PROCESS_LOGICAL_CUSTODY_STABILIZER_RELATIVE_MAGIC_ONLY`
+**Current highest milestone:** `EXACT_P5_CUBIC_MAGIC_INJECTION_RETAINS_ONE_COHERENT_UNRESOLVED5_VALUE_SYNDROME_PORT_CONSUMED_BY_THREE_FIBERWISE_STABILIZER_CORRECTIONS_AND_DECLARED_NONCOMMUTING_SUM_CZ_WORDS_ON_ONE_ACTUAL25_AMPLITUDE_CARRIER_WITH_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_COMPLETE_INJECTION_HAS_AN_EXACT_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_AND_THE_SMALLER_COMPILED_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `QZETA5_TWO_QUDIT_ONE_CUBIC_INJECTION_FAMILIES_A1_2_CONSUMER_PAIR_COUNTS1_2_4_COHERENT_SYNDROME_DIRECT_PROCESS_LOGICAL_CUSTODY_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M238_ESTABLISHES_EXACT_STABILIZER_RELATIVE_WIGNER_MAGIC_BUT_THE_NATIVE_WIGNER_GRID_GROWS25_TO15625_CELLS_WHILE_THE_STRONGER_EXACT_AMPLITUDE_COMPARATOR_GROWS5_TO125_SO_THE_WIGNER_GRID_ROUTE_IS_RETIRED_AND_THE_NEXT_MECHANISM_TESTS_COMPOSITIONAL_MAGIC_THROUGH_UNRESOLVED_MEASUREMENT_PORTS`
+**New mechanism development:** `ACTIVE_AFTER_M239_ESTABLISHES_EXACT_COHERENT_SHARED_SYNDROME_CONSUMPTION_BUT_ONE_INJECTION_RETAINS_A_FIXED_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_INDEPENDENT_OF_CONSUMER_DEPTH_SO_THE_NEXT_MECHANISM_MUST_TEST_INTERACTING_MULTIPLE_INJECTIONS_NOT_LONGER_ONE_INJECTION_WORDS`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ZETA5_CUBIC_MAGIC_INJECTION_UNRESOLVED_MEASUREMENT_PORT_CONTRACTION_ON_GROWING_STABILIZER_INTERFACES_WITH_COMPOSITIONAL_NEGATIVITY_OR_STABILIZER_RANK_DIAGNOSTIC_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_STABILIZER_SUM_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_ZETA5_INTERACTING_MULTI_INJECTION_UNRESOLVED_SYNDROME_NETWORK_WITH_ANALYTIC_COMPOSITIONAL_MAGIC_LOWER_BOUND_OR_STABILIZER_SUM_COLLAPSE_ACROSS_INJECTION_COUNTS1_2_3_4_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_EXACT_AMPLITUDE_STABILIZER_BASELINES`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -11639,6 +11639,59 @@ unprojected until final closure, use an exact reversible dilation for
 restoration, and compare against the strongest stabilizer-sum, quasiprobability,
 and direct amplitude contraction. The target is compositional magic cost, not
 another phase-space grid or a larger interface fixture.
+
+## M239: coherent shared-syndrome consumption retains a fixed one-injection ceiling
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_P5_CUBIC_MAGIC_INJECTION_RETAINS_ONE_COHERENT_UNRESOLVED5_VALUE_SYNDROME_PORT_CONSUMED_BY_THREE_FIBERWISE_STABILIZER_CORRECTIONS_AND_DECLARED_NONCOMMUTING_SUM_CZ_WORDS_ON_ONE_ACTUAL25_AMPLITUDE_CARRIER_WITH_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_COMPLETE_INJECTION_HAS_AN_EXACT_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_AND_THE_SMALLER_COMPILED_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M239 replaces the resident Wigner grid with an exact `Q(zeta_5)` two-qudit
+amplitude carrier and one coherent unresolved five-valued syndrome.  The
+magic-injection identity for cubic strengths one and two is consumed by three
+fiberwise stabilizer corrections and by public noncommuting `SUM`/`CZ` words.
+The same resident syndrome backing is read by all consumers.  Removing either
+entangling module, perturbing the public word, or dephasing the syndrome changes
+the declared final data-probability boundary in every accepted family.  No
+intermediate syndrome value is projected.
+
+The production transaction and standalone polynomial-quotient reference agree
+on all six family/pair-count cases, controls, exact boundaries, commitments,
+restoration, and descriptor-distinct reuse.  The actual 25-amplitude and scratch
+backings restore exactly, generation advances one to two, and no baseline reload
+occurs.  Focused review returned `PASS_STRICT_SCOPE`, so the milestone is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.  Custody remains direct-process logical custody,
+not CATVM enforcement.
+
+The causal coherent-port result is not growing magic leverage.  The complete
+one-injection identity has an exact five-stabilizer-component upper bound for
+consumer-pair counts one, two, and four.  The strongest implemented classical
+comparator compiles that identity and uses 31 exact field values, versus 50
+resident phase/scratch backing cells.  The five-branch dephasing comparison is
+an enumerated non-restoring diagnostic excluded from the accepted in-place
+path.  Resource figures remain `PACKAGE_SELF_REVIEW`; stabilizer-component
+resource work is not instrumented and whole-transaction liveness is incomplete.
+
+M239 does not establish a growing compositional magic cost, distinct phase
+resource, computational advantage, CATVM custody, Small Wall crossing,
+physical execution, physical-bit replacement, inference, or unbounded
+computation.  Do not add longer words to the same one-injection construction.
+
+Selected representation-changing successor:
+
+```text
+EXACT_ZETA5_INTERACTING_MULTI_INJECTION_UNRESOLVED_SYNDROME_NETWORK_WITH_ANALYTIC_COMPOSITIONAL_MAGIC_LOWER_BOUND_OR_STABILIZER_SUM_COLLAPSE_ACROSS_INJECTION_COUNTS1_2_3_4_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_EXACT_AMPLITUDE_STABILIZER_BASELINES
+```
+
+This one bounded successor must decide whether interacting injections make the
+magic cost compose or whether a compact stabilizer-sum/classical recurrence
+collapses the network.  It must retain unresolved syndrome interfaces, use the
+strongest exact amplitude and stabilizer-aware baselines, preserve final-only
+projection and exact same-backing restoration/reuse, and stop this magic route
+if the only law is the expected five-to-the-injection-count expansion.
 
 ## 10. Roadmap Maintenance
 

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`879d39d781fb741edbeb2e12531669596e500e36`. The registry assigns one
+`ff0d5d08916a8d52e41c1afcb7c32c96662cb211`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 232-milestone lane is active by user direction. Continue from the
+The current 239-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,36 +53,36 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_ANALYTIC_SU2_LEVEL8_TWO_TRIVALENT_FUSION_VERTICES_SHARE_ONE_ACTUAL_UNRESOLVED_TWO_CELL_CHANNEL_RELATION_MESSAGE_TRANSFORMED_BY_A_NONDIAGONAL_F_MOVE_DIAGONAL_BRAID_PHASE_AND_INVERSE_F_MOVE_BEFORE_NATIVE_RIGHT_VERTEX_CONTRACTION_WITHOUT_FUSION_TABLE_OR_ASSIGNMENT_EXPANSION_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_THE_IDENTICAL_ONE_BACKING_SPARSE_CLASSICAL_FACTOR_GRAPH_REMAINS_SMALLER
+EXACT_P5_CUBIC_MAGIC_INJECTION_RETAINS_ONE_COHERENT_UNRESOLVED5_VALUE_SYNDROME_PORT_CONSUMED_BY_THREE_FIBERWISE_STABILIZER_CORRECTIONS_AND_DECLARED_NONCOMMUTING_SUM_CZ_WORDS_ON_ONE_ACTUAL25_AMPLITUDE_CARRIER_WITH_FINAL_ONLY_DATA_PROBABILITY_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_BUT_THE_COMPLETE_INJECTION_HAS_AN_EXACT_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_AND_THE_SMALLER_COMPILED_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Claim ceiling:
 
 ```text
-QZETA40_SU2_LEVEL8_FOUR_FUNDAMENTAL_CHARGES_CHANNELS0_2_TWO_PUBLIC_BRAID_EXPONENT_FAMILIES_ONE2_CELL_SHARED_CHANNEL_ONE1_CELL_BOUNDARY_PRIMARY0_REUSE1_DIRECT_PROCESS_ONLY
+QZETA5_TWO_QUDIT_ONE_CUBIC_INJECTION_FAMILIES_A1_2_CONSUMER_PAIR_COUNTS1_2_4_COHERENT_SYNDROME_DIRECT_PROCESS_LOGICAL_CUSTODY_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and an independent polynomial-quotient implementation reproduce both public
-braid families, exact trivalent admissibility, non-diagonal F-move, braid
-inverse, Yang--Baxter control, boundary commitments, monotone generation,
-exact same-backing restoration, and generation-two reuse. No fusion table or
-assignment expansion is materialized.
+and a standalone polynomial-quotient implementation reproduce six declared
+family/pair-count cases, exact coherent syndrome consumption, controls, final
+data-probability boundaries, monotone generation, exact same-backing
+restoration, and generation-two descriptor-distinct reuse.
 
-M232 changes the relation geometry. Two trivalent vertices share the actual
-two-cell channel `0,2`; a causal non-diagonal F/R/F recoupling acts before the
-right vertex contracts the only projectable scalar. Omitting either channel,
-the F off-diagonal, or the braid phase changes both public family boundaries.
-The exact inverse clears the contraction and reverses F/R/F on the same
-backings without consuming the retained result. The phase path uses three
-persistent work backings and a declared 15-field interval maximum, while the
-strongest public-topology classical comparator precontracts the complete
-`B=F R F` row into one boundary backing with a declared 12-field interval
-maximum. Resource counts are package-local and do not claim whole-transaction
-liveness or Python/runtime costs. No CATVM custody, distinct phase resource,
-advantage, Small Wall crossing, physical execution, physical-bit replacement,
-catalytic inference, or unbounded computation is established.
+M239 keeps one unresolved five-valued syndrome resident on the actual
+25-amplitude `Q(zeta_5)` carrier while three fiberwise corrections and public
+noncommuting `SUM`/`CZ` modules consume it. Dephasing or removing either
+entangling module changes the declared final boundary. Only that final data
+probability is projected. The complete one-injection identity nevertheless
+has an exact five-stabilizer-component upper bound independent of consumer
+depth, and the compiled exact classical recurrence uses 31 field values versus
+50 phase/scratch backing cells. The dephasing branch enumeration is a
+non-restoring diagnostic outside the accepted in-place path. Resource figures
+are package-local, stabilizer work is not instrumented, and whole-transaction
+liveness remains incomplete. No growing compositional magic cost, CATVM
+custody, distinct phase resource, advantage, Small Wall crossing, physical
+execution, physical-bit replacement, inference, or unbounded computation is
+established.
 
 The accumulated bounded architecture includes:
 
@@ -276,7 +276,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M232_ESTABLISHES_A_GENUINE_TWO_CHANNEL_TRIVALENT_RECOUPLING_BLOCK_BUT_THE_PUBLIC_PRECONTRACTED_CLASSICAL_ROW_USES1_BACKING_VERSUS3_SO_THE_NEXT_TEST_MUST_DECIDE_GROWING_RECOUPLING_INTERFACE_RANK_OR_RETIRE_THIS_ROUTE
+ACTIVE_AFTER_M239_ESTABLISHES_EXACT_COHERENT_SHARED_SYNDROME_CONSUMPTION_BUT_ONE_INJECTION_RETAINS_A_FIXED_FIVE_STABILIZER_COMPONENT_UPPER_BOUND_INDEPENDENT_OF_CONSUMER_DEPTH_SO_THE_NEXT_MECHANISM_MUST_TEST_INTERACTING_MULTIPLE_INJECTIONS_NOT_LONGER_ONE_INJECTION_WORDS
 ```
 
 The named
@@ -285,18 +285,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_SU2_LEVEL8_TRIVALENT_RECOUPLING_NETWORK_SHARED_CHANNEL_CONTINUATION_RANK_OR_COMPACT_NATIVE_FUSION_CATEGORY_QUOTIENT_WITH_MATCHED_TREEWIDTH_OPTIMAL_CLASSICAL_CONTRACTION
+EXACT_ZETA5_INTERACTING_MULTI_INJECTION_UNRESOLVED_SYNDROME_NETWORK_WITH_ANALYTIC_COMPOSITIONAL_MAGIC_LOWER_BOUND_OR_STABILIZER_SUM_COLLAPSE_ACROSS_INJECTION_COUNTS1_2_3_4_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_STRONGEST_EXACT_AMPLITUDE_STABILIZER_BASELINES
 ```
 
-M232 establishes the genuine local trivalent shared-channel block, but its
-fixed public topology still precontracts to one classical boundary backing.
-Do not add fixed M232 families or local backing micro-optimizations. Run one
-decisive growing shared-channel composition test: derive the public
-recoupling network, measure exact continuation/interface rank across growing
-cuts, preserve final-only projection and exact restoration/reuse, and compare
-to the strongest treewidth-optimal classical factor contraction. A compact
-transferable quotient advances the carrier law; full interface rank or an
-identical recurrence retires this route and requires a different phase law.
+M239 establishes a causal coherent shared-syndrome machine law, but longer
+words around the same single injection cannot make its exact five-component
+stabilizer ceiling grow. Do not add more one-injection fixtures or consumer
+depths. Run one bounded interacting-injection test across counts one through
+four. Preserve unresolved syndrome interfaces, final-only projection, exact
+same-backing restoration/reuse, and the strongest exact amplitude and
+stabilizer-aware baselines. An analytic compositional lower bound advances the
+phase-resource question; collapse to the expected five-to-the-injection-count
+stabilizer expansion retires this magic route and requires another phase law.
 
 ## 7. Native No-Smuggle Law
 
