@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`. The canonical per-milestone
+`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12677,3 +12677,48 @@ established. The rank-one family is closed. M244 must vary genuinely independent
 cubic-direction rank and compare the resulting coherent channel/Gram quotient
 against its strongest exact compact classical contraction; it must not add
 rank-one widths or another five-channel implementation optimization.
+
+## M244 CATVM multi-cubic treewidth-one transfer closes at cross rank two
+
+Multiple independent cubic phase directions over F5 were composed as a
+connected treewidth-one chain at depths `2,3,4,8,16,32,64`. The accepted
+service carries one actual five-cell Q(zeta5) phase message plus one fixed
+scratch backing. It retains only the `k-1` causal hidden inter-module
+couplings, fixes the first coupling publicly for the declared e0 input, and
+includes the selected output index in custody and restoration equality.
+
+Only the selected final amplitude is released. The complete transfer word is
+then inverted on the same backings, exact canonical state is verified, and a
+descriptor-distinct generation-two transaction consumes the restored
+carrier. Disconnect, partial-forward failure, and post-projection failure all
+restore before response. Secret-dependent intermediate width and cancellation
+metrics do not cross the service boundary or enter the seals.
+
+The standalone Q(zeta5) implementation agrees at every depth and independent
+dense path evaluation agrees through depth four. Focused review returned
+`PASS_STRICT_SCOPE`, classified `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+This result is confined to treewidth one. Public exact single-vector payload
+bounds grow from 226 to 6,470 bits, while conservative message, scratch, and
+retained-boundary bounds grow from 912 to 27,212 bits. The endpoint-specialized
+forward-only classical comparator uses five terms at each fixed endpoint and
+25 only for interior transfers, giving `10,35,60,160,360,760,1560` terms. A
+separate cross-rank-two kernel has exact interface rank 25 over both declared
+split primes, so the five-cell law does not transfer unchanged.
+
+No fixed-width exact state, distinct phase resource, computational advantage,
+Small Wall crossing, arbitrary topology, physical execution, bit replacement,
+general inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
+```
+
+This successor tests the actual cross-rank-two public continuation family. It
+must either construct a lawful exact nonlinear phase chart below 25
+materialized states or certify the reachable and observable 25-state ceiling
+against the strongest treewidth-two classical contraction. It must not extend
+the completed chain depth series or optimize the five-state recurrence again.

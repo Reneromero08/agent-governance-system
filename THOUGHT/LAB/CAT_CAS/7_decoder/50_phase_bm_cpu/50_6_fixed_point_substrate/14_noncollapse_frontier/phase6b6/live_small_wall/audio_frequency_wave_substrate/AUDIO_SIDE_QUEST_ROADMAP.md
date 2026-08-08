@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_P5_RANK1_CUBIC_GAUSS_QUOTIENT_ROUTE_CLOSED`
-**Roadmap version:** `15.27`
+**Status:** `STRICT_CATVM_P5_TREEWIDTH1_MULTI_CUBIC_TRANSFER_CLOSED_CROSS_RANK2_OPEN`
+**Roadmap version:** `15.28`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`
+**Reconciled source head:** `8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED`
-**Current claim ceiling:** `EXACT_SOFTWARE_P5_CONNECTED_REGULAR_QUADRATIC_FORMS_PLUS_ONE_CUBIC_LINEAR_FUNCTIONAL_DECLARED_WIDTHS2_3_4_6_8_12_16_ABSTRACT_UNIX_SOCKET_EXACT_AMPLITUDE_BOUNDARY_MODEL_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_MULTI_CUBIC_CHAIN_TREEWIDTH_ONE_ONLY_DECLARED_DEPTHS2_3_4_8_16_32_64_FIVE_LOGICAL_PHASE_CELLS_WITH_GROWING_EXACT_PAYLOAD_ABSTRACT_UNIX_SOCKET_MODEL_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M243_PROVES_ONE_CUBIC_DIRECTION_COLLAPSES_TO_A_FIXED_FIVE_CHANNEL_GAUSS_QUOTIENT_AND_CLOSES_THE_RANK1_FAMILY_SO_THE_NEXT_MECHANISM_MUST_TEST_GROWING_INDEPENDENT_CUBIC_DIRECTION_RANK_OR_A_STRONGER_NON_GAUSSIAN_REPRESENTATION`
+**New mechanism development:** `ACTIVE_AFTER_M244_CLOSES_THE_DECLARED_TREEWIDTH1_FIVE_CELL_TRANSFER_AND_CERTIFIES_A25_STATE_CROSS_RANK2_INTERFACE_SO_M245_TESTS_THE_ACTUAL_CROSS_RANK2_REACHABLE_OBSERVABLE_FAMILY_FOR_A_NONLINEAR_PHASE_CHART_OR_STRICT25_STATE_CEILING`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_EXACT_P5_CONNECTED_MULTI_CUBIC_CHAIN_TREEWIDTH1_FIVE_CELL_PHASE_TRANSFER_ACROSS_DEPTHS2_3_4_8_16_32_64_WITH_CROSS_RANK2_NONTRANSFERABILITY_CERTIFICATE_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_FIVE_VECTOR_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`. The current 243-milestone
+`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The current 244-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE
 ```
 
 Not established:
@@ -11914,6 +11914,66 @@ has interface rank 25 and prevents promotion of the five-cell chain law to
 arbitrary topology. If the phase and classical recurrences agree, publish the
 treewidth-one ceiling and change representation rather than adding depth,
 descriptor families, or transfer optimizations.
+
+## M244: exact multi-cubic treewidth-one transfer and cross-rank-two ceiling
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE
+```
+
+M244 executes connected multi-cubic F5 chain descriptors at depths
+`2,3,4,8,16,32,64` through one actual five-cell Q(zeta5) phase message and one
+fixed scratch backing. The service retains `k-1` causal inter-module
+couplings, fixes the nonmaterial first coupling publicly for the declared e0
+input, and counts the hidden selected output index. Only the selected final
+amplitude crosses the socket boundary. Every transfer is then inverted on the
+same backings, canonical equality includes the hidden descriptor state, and a
+descriptor-distinct generation-two transaction consumes the restored carrier.
+
+Production agrees with a standalone Q(zeta5) implementation at every depth
+and with independent dense path evaluation through depth four. Disconnect,
+partial-forward failure, and post-projection failure restore before any
+response. Secret-dependent intermediate widths and cancellation counts are
+absent from the response and seals. Focused review returned
+`PASS_STRICT_SCOPE`, classified `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The five logical message cells are not a fixed-width resource. Public exact
+single-vector payload bounds grow from 226 to 6,470 bits, and conservative
+message-plus-scratch-plus-retained-boundary bounds grow from 912 to 27,212
+bits. Hidden configuration and carrier-resident descriptor storage each grow
+from 6 to 192 residues. Resource accounting is `PACKAGE_SELF_REVIEW`; the
+whole-process Python, allocator, socket, hashing, and scheduler costs remain
+incomplete and nonzero.
+
+The strongest implemented classical comparator specializes both public
+endpoints: five terms form the first vector, every interior transfer uses 25
+terms, and five terms close the selected boundary. Its forward work is
+`10,35,60,160,360,760,1560` character terms, while the phase transaction also
+performs the full reverse transfer for restoration. A separate cross-rank-two
+kernel has exact interface rank 25 over both declared split primes. The
+five-cell law therefore remains treewidth-one and cannot be promoted to that
+rank-two interface.
+
+No distinct phase resource, total computational advantage, Small Wall
+crossing, physical waveform execution, physical-bit replacement, general
+inference, arbitrary topology, or unbounded catalytic computation is
+established.
+
+Selected phase-owned successor:
+
+```text
+EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
+```
+
+M245 attacks the measured interface obstruction directly. It must use the
+actual public cross-rank-two continuation family and either construct a lawful
+exact nonlinear phase chart below 25 materialized states or certify the
+reachable and observable 25-state ceiling against the strongest treewidth-two
+classical contraction. It must not add chain depths, descriptor families, or
+five-vector transfer optimizations.
 
 ## 10. Roadmap Maintenance
 

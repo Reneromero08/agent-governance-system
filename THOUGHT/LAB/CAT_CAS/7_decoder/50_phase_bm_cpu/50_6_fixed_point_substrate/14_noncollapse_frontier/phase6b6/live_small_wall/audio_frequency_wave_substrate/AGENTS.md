@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`9cf94a223ca3fc4f06f1ca8cf0ad2ad8ce3a06ae`. The registry assigns one
+`8bcf144d2b020bec185b6d9f8bdbdb5d03e1fea4`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 243-milestone lane is active by user direction. Continue from the
+The current 244-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,13 +53,13 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_EXACT_P5_CONNECTED_REGULAR_QUADRATIC_PLUS_ONE_MULTI_COORDINATE_CUBIC_FUNCTIONAL_COLLAPSES_THE_FINAL_COHERENT_AMPLITUDE_TO_A_FIVE_CHANNEL_GAUSS_QUOTIENT_DETERMINED_BY_DIMENSION_DISCRIMINANT_DELTA_AND_LAMBDA_ACROSS_DECLARED_WIDTHS2_3_4_6_8_12_16_WITH_FINAL_RESPONSE_ONLY_AFTER_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_WHILE_THE_IDENTICAL_COMPACT_MODULAR_LDL_PLUS_FIVE_TERM_CLASSICAL_EVALUATOR_MATCHES_THE_ACCEPTED_PATH_SO_NO_TOTAL_ADVANTAGE_OR_SMALL_WALL_CROSSING_IS_ESTABLISHED
+CATVM_ENFORCED_EXACT_P5_CONNECTED_MULTI_CUBIC_TREEWIDTH1_CHAIN_USES_ONE_ACTUAL_FIVE_CELL_QZETA5_PHASE_MESSAGE_ACROSS_INDEPENDENT_INTERACTING_CUBIC_DIRECTIONS_AT_DECLARED_DEPTHS2_3_4_8_16_32_64_WITH_FINAL_ONLY_AMPLITUDE_RESPONSE_EXACT_SAME_BACKING_RESTORATION_AND_REUSE_BUT_PUBLIC_EXACT_PAYLOAD_BOUNDS_AND_DESCRIPTOR_WORK_GROW_AN_ENDPOINT_SPECIALIZED_FIVE_VECTOR_CLASSICAL_RECURRENCE_REMAINS_AND_A_CROSS_RANK2_CERTIFICATE_REQUIRES25_INTERFACE_STATES_OUTSIDE_TREEWIDTH_ONE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_P5_CONNECTED_REGULAR_QUADRATIC_FORMS_PLUS_ONE_CUBIC_LINEAR_FUNCTIONAL_DECLARED_WIDTHS2_3_4_6_8_12_16_ABSTRACT_UNIX_SOCKET_EXACT_AMPLITUDE_BOUNDARY_MODEL_ONLY
+EXACT_SOFTWARE_QZETA5_MULTI_CUBIC_CHAIN_TREEWIDTH_ONE_ONLY_DECLARED_DEPTHS2_3_4_8_16_32_64_FIVE_LOGICAL_PHASE_CELLS_WITH_GROWING_EXACT_PAYLOAD_ABSTRACT_UNIX_SOCKET_MODEL_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
@@ -68,19 +68,30 @@ and a standalone power-basis implementation reproduce the declared dimensions,
 atomic controls, monotone generation, exact same-backing restoration, and
 generation-two descriptor-distinct reuse.
 
-M243 tests connected regular quadratic forms plus one multi-coordinate cubic
-functional over F5 at widths `2,3,4,6,8,12,16`. The exact coherent amplitude
-collapses to five Q(zeta5) channels determined by dimension, determinant square
-class, `u^T A^-1 u`, and cubic strength. The CATVM service retains the hidden
-matrix, direction, solve, quotient, and channels through final-only projection,
-then restores the actual packed backing before response release and generation-
-two reuse. Independent power-basis and modular-elimination reconstruction agrees
-at every declared width; dense exact summation is verifier-only through `n=4`.
-The identical compact modular LDL-plus-five-term evaluator remains the strongest
-implemented classical baseline. Exact payload width grows despite the fixed five
-channels. No general nonlinear phase resource, total advantage, Small Wall
-crossing, physical execution, physical-bit replacement, inference, or unbounded
-computation is established. The rank-one cubic family is closed.
+M244 executes connected multi-cubic F5 chain descriptors at depths
+`2,3,4,8,16,32,64` on one actual five-cell Q(zeta5) phase message and one
+fixed scratch backing. The CATVM service exposes only the selected final
+amplitude, reverses the full transfer word, includes hidden descriptor state in
+canonical equality, and releases only after exact restoration. Independent
+Q(zeta5) and dense small-depth references agree. The strongest implemented
+classical baseline specializes both public endpoints and remains smaller in
+forward work. Public exact payload bounds grow, and a cross-rank-two kernel has
+exact interface rank 25, so the five-cell law is treewidth-one only. No
+distinct phase resource, total advantage, Small Wall crossing, physical
+execution, physical-bit replacement, inference, or unbounded computation is
+established.
+
+Selected successor:
+
+```text
+EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
+```
+
+Attack the measured cross-rank-two interface directly. Either construct a
+lawful exact nonlinear chart below 25 materialized states or certify the
+reachable and observable 25-state ceiling against the strongest matched
+treewidth-two classical contraction. Do not add chain depths, descriptor
+families, or five-state transfer optimizations.
 
 The accumulated bounded architecture includes:
 
@@ -274,7 +285,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M243_PROVES_ONE_CUBIC_DIRECTION_COLLAPSES_TO_A_FIXED_FIVE_CHANNEL_GAUSS_QUOTIENT_AND_CLOSES_THE_RANK1_FAMILY_SO_M244_TESTS_MULTIPLE_INTERACTING_CUBIC_DIRECTIONS_AT_TREEWIDTH_ONE_WITH_ONE_CROSS_RANK2_NONTRANSFERABILITY_CERTIFICATE
+ACTIVE_AFTER_M244_CLOSES_THE_DECLARED_TREEWIDTH1_FIVE_CELL_TRANSFER_AND_CERTIFIES_A25_STATE_CROSS_RANK2_INTERFACE_SO_M245_TESTS_THE_ACTUAL_CROSS_RANK2_REACHABLE_OBSERVABLE_FAMILY_FOR_A_NONLINEAR_PHASE_CHART_OR_STRICT25_STATE_CEILING
 ```
 
 The named
@@ -283,22 +294,19 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CATVM_EXACT_P5_CONNECTED_MULTI_CUBIC_CHAIN_TREEWIDTH1_FIVE_CELL_PHASE_TRANSFER_ACROSS_DEPTHS2_3_4_8_16_32_64_WITH_CROSS_RANK2_NONTRANSFERABILITY_CERTIFICATE_ATOMIC_RESTORATION_REUSE_AND_IDENTICAL_FIVE_VECTOR_CLASSICAL_BASELINE
+EXACT_P5_CROSS_RANK2_MULTI_CUBIC_PHASE_INTERFACE_REACHABLE_OBSERVABLE_QUOTIENT_OR_NONLINEAR_FACTOR_CHART_WITHOUT25_STATE_MATERIALIZATION_AND_MATCHED_TREEWIDTH2_CLASSICAL_CONTRACTION
 ```
 
-M243 proves that one multi-coordinate cubic direction collapses exactly to a
-fixed five-channel Gauss quotient and matches the compact LDL-plus-five-term
-classical evaluator. Do not add rank-one widths or optimize that quotient.
-M244 increases genuinely independent cubic-direction rank on a connected
-treewidth-one F5 chain. Apply formula-rematerialized exact five-state transfer
-maps to one actual resident message at depths `2,3,4,8,16,32,64`, retain only
-the final scalar, then reverse and reuse the same backing behind the atomic
-CATVM boundary. The accepted comparator is the identical five-vector transfer
-recurrence, including canonical exact-payload growth. Independently certify a
-public cross-rank-two topology has interface rank 25, forbidding transfer of the
-five-cell claim to arbitrary topology. If the chain matches the classical
-recurrence, publish the treewidth-one ceiling and change representation rather
-than extending depth or adding descriptor families.
+M244 establishes the five-cell exact transfer only for the declared
+treewidth-one chain. Public exact payload bounds grow, the endpoint-specialized
+classical forward recurrence remains smaller, and the first cross-rank-two
+kernel has exact interface rank 25. Do not add chain depths, descriptor
+families, or five-state transfer optimizations. M245 must attack that measured
+interface directly: use the actual public cross-rank-two continuation family
+and either construct a lawful exact nonlinear phase chart below 25 materialized
+states or certify the reachable and observable 25-state ceiling against the
+strongest matched treewidth-two classical contraction. A certificate is a
+bounded route decision, not a distinct phase resource or advantage.
 
 ## 7. Native No-Smuggle Law
 
