@@ -1,0 +1,289 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_state_commitment": "d2126fbffc96a3bb430f54a1a0e7a3fc9e9e64f71955d3989cd96bb826e3a526",
+      "final_total_exact_payload_bits": 151,
+      "injection_count": 1,
+      "resident_amplitude_field_cells": 25,
+      "response_released_after_restoration": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 25,
+      "selected_boundary_slice_commitment": "6ec39984381618ada63a73eb72f84a01459801e4c9fed41ab49f14562b2d447d",
+      "selected_data_probability": {
+        "a_numerator": 2,
+        "b_sqrt5_numerator": 0,
+        "commitment": "6571312bbd6a19f838ea2a16cb46815458dbdcfcaa870fd34cbb11659ea23072",
+        "denominator_twice_power5_exponent": 1
+      },
+      "syndrome_consumer_count": 7,
+      "wire_count": 2
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_state_commitment": "29c48a3623a03d3b5fa721e931f909221aa7a9139cf5c408c3e062d101174ba3",
+      "final_total_exact_payload_bits": 142,
+      "injection_count": 1,
+      "resident_amplitude_field_cells": 25,
+      "response_released_after_restoration": true,
+      "restoration_generation": 2,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 25,
+      "selected_boundary_slice_commitment": "7cf27cab8fdf927792a765af0d900d471d41b53a68b7e5c5d58376262ee50d5b",
+      "selected_data_probability": {
+        "a_numerator": 2,
+        "b_sqrt5_numerator": 0,
+        "commitment": "6571312bbd6a19f838ea2a16cb46815458dbdcfcaa870fd34cbb11659ea23072",
+        "denominator_twice_power5_exponent": 1
+      },
+      "syndrome_consumer_count": 7,
+      "wire_count": 2
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_state_commitment": "b63fd5944bf9df9fbc0927afa50cebe6c18f03fa1c7ba292d1e079975dbccfb9",
+      "final_total_exact_payload_bits": 905,
+      "injection_count": 2,
+      "resident_amplitude_field_cells": 125,
+      "response_released_after_restoration": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 125,
+      "selected_boundary_slice_commitment": "c52967d84515e33561a7e8af6283c27e3d462c0888da90f67c89ba477a75c690",
+      "selected_data_probability": {
+        "a_numerator": 12,
+        "b_sqrt5_numerator": 2,
+        "commitment": "62aa56dae977b8472897fecd49a3c9c821f9f7c1e21d686a0ecde913cedc80ad",
+        "denominator_twice_power5_exponent": 3
+      },
+      "syndrome_consumer_count": 14,
+      "wire_count": 3
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_state_commitment": "ac72163727bc165077b9c771fd6eb9695b0487e02fcf13ae47e5dac57a3fb212",
+      "final_total_exact_payload_bits": 1005,
+      "injection_count": 2,
+      "resident_amplitude_field_cells": 125,
+      "response_released_after_restoration": true,
+      "restoration_generation": 2,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 125,
+      "selected_boundary_slice_commitment": "00f14d43196d9062d3cb17aefb6e75782828bd1b0dc4ad1005793ba95f28c885",
+      "selected_data_probability": {
+        "a_numerator": 7,
+        "b_sqrt5_numerator": -1,
+        "commitment": "f533cfc7cbf88b7fc114191b267ac0267291bc9bb16c513763bd1c8941633b64",
+        "denominator_twice_power5_exponent": 3
+      },
+      "syndrome_consumer_count": 14,
+      "wire_count": 3
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_state_commitment": "94ee805fd7708091cc2212c4e0f5e70bae9100017c6f356fa3404bcc6ade6174",
+      "final_total_exact_payload_bits": 6868,
+      "injection_count": 3,
+      "resident_amplitude_field_cells": 625,
+      "response_released_after_restoration": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 625,
+      "selected_boundary_slice_commitment": "987222db6f45b235004d526f9a25c2787f280bb9172423f360da053d5ae10c97",
+      "selected_data_probability": {
+        "a_numerator": 13,
+        "b_sqrt5_numerator": -1,
+        "commitment": "3b462f041de790af9df7c4e14416b005c666b3b0f0c8a3bfe47c469c6911a6cb",
+        "denominator_twice_power5_exponent": 4
+      },
+      "syndrome_consumer_count": 21,
+      "wire_count": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_state_commitment": "189ede60929cb462e75f756118eeee0102a48a76d127348780610851852f9ba1",
+      "final_total_exact_payload_bits": 3436,
+      "injection_count": 3,
+      "resident_amplitude_field_cells": 625,
+      "response_released_after_restoration": true,
+      "restoration_generation": 2,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 625,
+      "selected_boundary_slice_commitment": "7abd089bcd53c7ac43ebcab0fccfab7ec53b01dc1a826c3d3e28d75c0f495436",
+      "selected_data_probability": {
+        "a_numerator": 9,
+        "b_sqrt5_numerator": -3,
+        "commitment": "f7fc2ca463a4867c1b9612b1032eae7867b57205572cc92e41fcb4df42a732a6",
+        "denominator_twice_power5_exponent": 4
+      },
+      "syndrome_consumer_count": 21,
+      "wire_count": 4
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 0,
+      "final_state_commitment": "e3be9f6c0083f64090c26b96026d50b9f7d1b7006631dcc5d029fcab8ad8d1cd",
+      "final_total_exact_payload_bits": 25330,
+      "injection_count": 4,
+      "resident_amplitude_field_cells": 3125,
+      "response_released_after_restoration": true,
+      "restoration_generation": 1,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 3125,
+      "selected_boundary_slice_commitment": "0e75bf40bd1162b63e5b2706ccb519f27a2f93387572e77ae0f416d51e4ed3a9",
+      "selected_data_probability": {
+        "a_numerator": 45,
+        "b_sqrt5_numerator": -1,
+        "commitment": "3d31dbe4bc17fcd21163aecb4fb133d63250bc08c62d6de523ea2e2cb406bcfd",
+        "denominator_twice_power5_exponent": 6
+      },
+      "syndrome_consumer_count": 28,
+      "wire_count": 5
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_post_inverse_state_exact": true,
+      "family": 1,
+      "final_state_commitment": "2156c70cac3703c0bd0a089de7ef88ec0e369cdca21ebd5dcd6d171909b9305e",
+      "final_total_exact_payload_bits": 25305,
+      "injection_count": 4,
+      "resident_amplitude_field_cells": 3125,
+      "response_released_after_restoration": true,
+      "restoration_generation": 2,
+      "same_amplitude_and_scratch_backings": true,
+      "scratch_amplitude_field_cells": 3125,
+      "selected_boundary_slice_commitment": "4fc970f58bb7faa7be1bac8a05bfbcc6c0e668d12f675a9305d2192697f4e342",
+      "selected_data_probability": {
+        "a_numerator": 65,
+        "b_sqrt5_numerator": -9,
+        "commitment": "89880c34656bdb3e4c024fb13c3fcdd35d2da2ff1d15e0c6cf91ecbc370d0c39",
+        "denominator_twice_power5_exponent": 6
+      },
+      "syndrome_consumer_count": 28,
+      "wire_count": 5
+    }
+  ],
+  "controls": {
+    "accepted_path_materializes_assignment_or_history_table": false,
+    "accepted_path_serializes_syndrome_values": false,
+    "all_injection_cut_identities_exact": true,
+    "dephased_diagnostic_enumerates_five_syndrome_branches": true,
+    "dephased_diagnostic_is_nonrestoring": true,
+    "dephasing_shared_syndrome_changes_selected_boundary_counts2_3_4": true,
+    "dirty_scratch_rejected": true,
+    "each_declared_injection_changes_final_state_commitment": true,
+    "missing_inverse_rejected": true,
+    "null_carrier_rejected": true,
+    "premature_projection_rejected": true,
+    "public_compiler_reads_final_answer": false,
+    "remove_network_cz_changes_selected_boundary": true,
+    "remove_network_sum_changes_selected_boundary": true,
+    "reorder_noncommuting_network_gates_changes_final_state": true,
+    "reordered_inverse_rejected": true,
+    "same_id_descriptor_mutation_rejected": true,
+    "single_magic_negative_cell_count_a1_a2": true,
+    "single_magic_wigner_l1_exact_a1_a2": true,
+    "stale_generation_rejected": true,
+    "syndrome_projection_rejected": true,
+    "wrong_generation_rejected": true,
+    "wrong_inverse_rejected_before_mutation": true,
+    "wrong_owner_rejected": true,
+    "wrong_type_rejected": true
+  },
+  "imports_m240_m239_or_m237_production": false,
+  "independent_custody_state_machine": true,
+  "independent_full_amplitude_transaction": true,
+  "independent_power_basis_arithmetic": true,
+  "independent_streamed_scalar_boundary": true,
+  "independent_wigner_l1_reconstruction": true,
+  "magic_laws": [
+    {
+      "computational_lower_bound_established": false,
+      "exact_negative_mass": {
+        "rational_denominator": 1,
+        "rational_numerator": 0,
+        "sqrt5_denominator": 5,
+        "sqrt5_numerator": 1
+      },
+      "exact_wigner_l1": {
+        "rational_denominator": 1,
+        "rational_numerator": 1,
+        "sqrt5_denominator": 5,
+        "sqrt5_numerator": 2
+      },
+      "injection_count": 1,
+      "product_input_law_only": true,
+      "stabilizer_component_upper_bound": 5
+    },
+    {
+      "computational_lower_bound_established": false,
+      "exact_negative_mass": {
+        "rational_denominator": 5,
+        "rational_numerator": 2,
+        "sqrt5_denominator": 5,
+        "sqrt5_numerator": 2
+      },
+      "exact_wigner_l1": {
+        "rational_denominator": 5,
+        "rational_numerator": 9,
+        "sqrt5_denominator": 5,
+        "sqrt5_numerator": 4
+      },
+      "injection_count": 2,
+      "product_input_law_only": true,
+      "stabilizer_component_upper_bound": 25
+    },
+    {
+      "computational_lower_bound_established": false,
+      "exact_negative_mass": {
+        "rational_denominator": 5,
+        "rational_numerator": 6,
+        "sqrt5_denominator": 25,
+        "sqrt5_numerator": 19
+      },
+      "exact_wigner_l1": {
+        "rational_denominator": 5,
+        "rational_numerator": 17,
+        "sqrt5_denominator": 25,
+        "sqrt5_numerator": 38
+      },
+      "injection_count": 3,
+      "product_input_law_only": true,
+      "stabilizer_component_upper_bound": 125
+    },
+    {
+      "computational_lower_bound_established": false,
+      "exact_negative_mass": {
+        "rational_denominator": 25,
+        "rational_numerator": 68,
+        "sqrt5_denominator": 25,
+        "sqrt5_numerator": 36
+      },
+      "exact_wigner_l1": {
+        "rational_denominator": 25,
+        "rational_numerator": 161,
+        "sqrt5_denominator": 25,
+        "sqrt5_numerator": 72
+      },
+      "injection_count": 4,
+      "product_input_law_only": true,
+      "stabilizer_component_upper_bound": 625
+    }
+  ],
+  "schema": "cat_cas.zeta5_interacting_multi_injection_syndrome_network_reference.v1",
+  "source_sha256": "830301abcd48d3ad3b095e6346e75e143d436e0be9cc00c3fb700a60e97c5629"
+}
