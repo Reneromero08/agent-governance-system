@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`a48ef23e654b5753b0a462c6c58f86f41322bda8`. The canonical per-milestone
+`ac76aa83dca37f5e9f97d77e984593532f1b6bd5`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -11560,3 +11560,62 @@ EXACT_SU2_LEVEL8_PERIOD10_PUBLIC_SWEEP_MONODROMY_FINAL_BOUNDARY_KRYLOV_RECURRENC
 
 This targets the measured sweep-depth obstruction using the public period-10
 word law and must not become another larger fixed-depth factor-grid fixture.
+
+## M217 exact SU(2)_8 period-10 boundary-degree obstruction
+
+The separately reconstructed strict-scope claim is:
+
+```text
+EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER
+```
+
+The public sweep direction and sign laws combine into a true period-10
+monodromy. Production reconstructs modular `A_9` local actions independently
+of the exact carrier and computes scalar vacuum-boundary Hankel degrees at
+split primes 241 and 401. For both public families at strands
+`4,6,8,10,12,14,16`, those degrees are `2,5,14,42,132,429,1430`, equal to the
+complete fusion-path dimensions.
+
+A no-production-import C++ implementation independently enumerates bit-coded
+walks, reconstructs local actions from structural kind/peer rules and applies
+Berlekamp--Massey at distinct split primes 641 and 881. It reproduces every
+full-degree result. A full modular Hankel minor cannot have larger rank than
+its exact source, while the exact carrier dimension supplies the matching
+upper bound, so the split-prime certificates establish the exact scalar
+minimal degrees. The package does not lift exact recurrence coefficients and
+does not cover arbitrary braid programs.
+
+At the 16-strand family-0 primary, the modular diagnostic uses a 1,430-cell
+state, 2,924 scalar sequence cells, 1,431 recurrence coefficient slots,
+32,890 one-prime action records and 105,820 action integers. It performs
+2,923 monodromy applications and 438,450 local gates per prime. The exact
+verification transaction uses the actual 1,430-cell `Q(zeta_40)` carrier,
+projects only the final boundary, restores the same backing exactly and
+reuses it for an unrelated 16-strand, seven-round family-1 program at
+generation two without baseline reload.
+
+Wrong owner/type/program inverse, premature projection, missing and reordered
+inverse, null carrier, semantic perturbation, undersampled recurrence and
+period-law controls pass. Classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The identical public scalar Krylov calculation plus the full 1,430-cell
+fusion-path transfer is the strongest compact classical baseline. M217
+rejects a compact exact linear final-boundary recurrence only for the declared
+period-10 families. It establishes no distinct phase resource, computational
+advantage, CATVM custody, Small Wall crossing, physical execution,
+physical-bit replacement, catalytic inference or unbounded computation.
+
+Next:
+
+```text
+EXACT_SU2_LEVEL8_JONES_WENZL_REDUCED_TEMPERLEY_LIEB_DIAGRAM_PHASE_CARRIER_WITH_NATIVE_SKEIN_COMPOSITION_AND_MARKOV_TRACE_FIXED_DIAGRAM_QUOTIENT_OR_GROWING_SUPPORT_ACROSS_STRANDS_AND_SWEEP_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_LINK_INVARIANT_RECURRENCE
+```
+
+This changes representation and operator algebra after the path, MPS,
+factor-width and scalar-recurrence routes all expose growing state. It must
+measure reduced diagram support, exact height, native skein rewrite work,
+restoration and reuse against the strongest identical classical skein or link
+invariant recurrence, and preserve a growing-support no-go if that is what the
+experiment establishes.

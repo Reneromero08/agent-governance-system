@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SU2_LEVEL8_FIXED_EIGHT_SWEEP_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_WITH_SWEEP_DEPTH_SEPARATOR_GROWTH_OBSTRUCTION`
-**Roadmap version:** `14.82`
+**Status:** `STRICT_SU2_LEVEL8_PERIOD10_FINAL_BOUNDARY_FULL_MINIMAL_DEGREE_OBSTRUCTION`
+**Roadmap version:** `14.83`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `a48ef23e654b5753b0a462c6c58f86f41322bda8`
+**Reconciled source head:** `ac76aa83dca37f5e9f97d77e984593532f1b6bd5`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS`
-**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_FIXED_EIGHT_SWEEP_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_PLAT_BOUNDARY_MIN_FILL_PUBLIC_TOPOLOGY_CONTRACTION_PRIMARY16_REUSE_STRANDS12_ROUNDS5_FAMILY1_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER`
+**Current claim ceiling:** `FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_PUBLIC_PERIOD10_SWEEP_MONODROMY_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_TO_VACUUM_SCALAR_HANKEL_RANK_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M216_EXACT_FINAL_BOUNDARY_TOPOLOGY_CONTRACTION_SUCCEEDS_AT_FIXED_EIGHT_SWEEPS_BUT_SEPARATOR_WIDTH_GROWS_WITH_SWEEP_DEPTH`
+**New mechanism development:** `ACTIVE_AFTER_M217_PERIOD10_FINAL_BOUNDARY_MINIMAL_DEGREE_EQUALS_FULL_FUSION_PATH_DIMENSION_ACROSS_THE_DECLARED_GROWING_FAMILY`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SU2_LEVEL8_PERIOD10_PUBLIC_SWEEP_MONODROMY_FINAL_BOUNDARY_KRYLOV_RECURRENCE_WITH_TOPOLOGY_REMATERIALIZED_COMPILATION_OR_GROWING_MINIMAL_DEGREE_ACROSS_STRANDS_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_TRANSFER`
+**Active primary successor:** `EXACT_SU2_LEVEL8_JONES_WENZL_REDUCED_TEMPERLEY_LIEB_DIAGRAM_PHASE_CARRIER_WITH_NATIVE_SKEIN_COMPOSITION_AND_MARKOV_TRACE_FIXED_DIAGRAM_QUOTIENT_OR_GROWING_SUPPORT_ACROSS_STRANDS_AND_SWEEP_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_LINK_INVARIANT_RECURRENCE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_PUBLIC_TOPOLOGY_SPARSE_FACTOR_ELIMINATION_CONTRACTS_TWO_SU2_LEVEL8_EIGHT_SWEEP_BRAID_PLAT_FAMILIES_ACROSS_STRANDS4TO16_WITHOUT_FULL_FUSION_PATH_VECTOR_PEAKING_AT771_EXACT_FACTOR_CELLS_VERSUS1430_DIRECT_WITH_FINAL_ONLY_BOUNDARY_EXACT_REMATERIALIZED_RESTORATION_REUSE_BUT_16_STRAND_SEPARATOR_WIDTH_GROWS0TO23_ACROSS_SWEEP_DEPTH1TO16_AND_THE_IDENTICAL_CLASSICAL_TENSOR_NETWORK_REMAINS
+EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER
 ```
 
 Not established:
@@ -10338,6 +10338,78 @@ fixed-depth factor grid. It must exploit only the public period-10 braid-word
 law, count recurrence compilation and exact coefficient height, test whether
 minimal boundary degree grows across strands, preserve exact restoration and
 reuse, and retain the identical classical transfer/Krylov baseline.
+
+## M217: period-10 boundary recurrence reaches full fusion-path degree
+
+Claim:
+
+```text
+EXACT_SPLIT_PRIME_HANKEL_CERTIFICATES_PROVE_THE_PUBLIC_PERIOD10_SU2_LEVEL8_SWEEP_MONODROMY_VACUUM_BOUNDARY_HAS_FULL_MINIMAL_SCALAR_DEGREES2_5_14_42_132_429_1430_FOR_BOTH_DECLARED_FAMILIES_ACROSS_STRANDS4TO16_SO_NO_COMPACT_FINAL_BOUNDARY_RECURRENCE_EXISTS_FOR_THIS_GROWING_FAMILY_WITH_FINAL_ONLY_BOUNDARY_EXACT_SAME_BACKING_RESTORATION_REUSE_AND_THE_IDENTICAL_CLASSICAL_TRANSFER
+```
+
+The public full-sweep direction has period two and the public sign rule has
+period five, giving a true ten-sweep monodromy. Production independently
+reconstructs the modular `A_9` local actions and computes vacuum-boundary
+Berlekamp--Massey degrees at split primes 241 and 401. For both declared
+families and strands `4,6,8,10,12,14,16`, the minimal degrees are exactly
+`2,5,14,42,132,429,1430`, equal to the full fusion-path dimensions.
+
+A separate no-production-import C++ implementation uses bit-coded walk
+enumeration, independently reconstructed structural local actions and split
+primes 641 and 881. It reproduces all fourteen full-degree decisions. Since
+reduction cannot increase Hankel rank and the exact carrier dimension is the
+matching upper bound, each nonzero split-prime full-rank certificate proves
+the corresponding exact `Q(zeta_40)` scalar minimal degree. Exact recurrence
+coefficients were not lifted, and arbitrary braid programs are outside scope.
+
+The primary 16-strand family-0 diagnostic retains a 1,430-cell modular state,
+2,924 scalar-sequence field cells and 1,431 recurrence-coefficient slots; the
+one-prime public modular action representation contains 32,890 action records
+and 105,820 integer cells. It performs 2,923 period applications and 438,450
+local-gate applications per prime. Allocator, native-library, serialization,
+timing and whole-process peaks remain excluded, not zero. The strongest
+compact comparator is the identical public monodromy scalar Krylov procedure
+plus the full 1,430-cell fusion-path transfer.
+
+The exact primary transaction operates on the actual 1,430-cell
+`Q(zeta_40)` carrier, projects only the completed vacuum boundary, restores
+the same coefficient backing exactly by the actual inverse, and reuses it for
+an unrelated 16-strand seven-round family-1 program at restoration generation
+two without snapshot reload. Wrong owner, type and public-program inverses,
+premature projection, missing and reordered inverse, null carrier, semantic
+perturbation, undersampled recurrence and period-law controls discriminate.
+
+Classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+Exact ceiling:
+
+```text
+FORMAL_SU2_LEVEL8_TEMPERLEY_LIEB_QZETA40_PUBLIC_PERIOD10_SWEEP_MONODROMY_FAMILIES0_1_EVEN_STRANDS4_6_8_10_12_14_16_VACUUM_TO_VACUUM_SCALAR_HANKEL_RANK_AT_SPLIT_PRIMES241_401_PRIMARY16_FAMILY0_REUSE16_ROUNDS7_FAMILY1_DIRECT_PROCESS_ONLY
+```
+
+This closes only the compact linear final-boundary recurrence route for the
+declared period-10 families. It does not prove a lower bound against every
+nonlinear, diagrammatic or problem-specific representation. No phase-specific
+resource, computational advantage, CATVM custody, Small Wall crossing,
+physical execution, physical-bit replacement, catalytic inference or
+unbounded computation is established.
+
+Selected successor:
+
+```text
+EXACT_SU2_LEVEL8_JONES_WENZL_REDUCED_TEMPERLEY_LIEB_DIAGRAM_PHASE_CARRIER_WITH_NATIVE_SKEIN_COMPOSITION_AND_MARKOV_TRACE_FIXED_DIAGRAM_QUOTIENT_OR_GROWING_SUPPORT_ACROSS_STRANDS_AND_SWEEP_DEPTH_EXACT_RESTORATION_REUSE_AND_MATCHED_CLASSICAL_LINK_INVARIANT_RECURRENCE
+```
+
+M214--M217 now reject fixed global path width, fixed MPS bond rank, growing
+depth factor width and compact linear scalar recurrence for the declared
+family. The successor therefore changes representation and operator algebra:
+it tests native skein composition and Jones--Wenzl reduction directly in a
+Temperley--Lieb diagram/Markov-trace carrier. It must count distinct reduced
+diagram support, exact coefficient height, rewrite/rematerialization work,
+restoration and reuse against the strongest identical classical skein or link
+invariant recurrence. It must report growing support as a bounded no-go rather
+than add another larger braid fixture.
 
 ## 10. Roadmap Maintenance
 
