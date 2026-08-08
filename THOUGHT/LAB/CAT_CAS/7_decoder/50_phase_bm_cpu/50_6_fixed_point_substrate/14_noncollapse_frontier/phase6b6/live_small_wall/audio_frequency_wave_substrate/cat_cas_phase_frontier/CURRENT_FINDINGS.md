@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`6380d317b868f7e684fbb75726649c43e90d327e`. The canonical per-milestone
+`33de34c74e94e17c6d7c4a2cfd92ba198314ce27`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12986,3 +12986,57 @@ project only the central context phase, reverse the actual actions, and reuse
 the same carrier. The matched constant-state binary-symplectic recurrence is
 the primary comparator. A match retires contextual holonomy after this single
 calibration rather than starting a larger contextual-fixture series.
+
+## M250 projective Weyl contextual phase calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+```
+
+Production and the standalone oracle independently reconstruct the exact
+two-qubit Weyl law over `Q(i)`. All nine observable ports have two distinct
+typed context consumers. Five commuting Mermin contexts close to `+I`, the
+third column closes to `-I`, and deleting the projective cocycle changes the
+total central phase to `+I` without enumerating assignments. The independent
+`4 x 4` matrix oracle confirms both the base and globally Hadamard-conjugated
+and reordered variants, including the state-independent dephased control.
+
+The service retains the actual four-cell carrier, fixed scratch, six context
+signatures, and nine consumer receipts behind an abstract Unix socket. Only
+the final central phase leaves, after all 18 public actions have been reversed
+and exact canonical state has been verified. Generation-two reuse consumes
+the same actual backing and agrees with a fresh carrier. Disconnect and both
+injected fault paths restore before response or rejection, and no snapshot or
+baseline reload occurs.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The decisive obstruction is the stronger comparator found during review. For
+the two declared variants, public validation plus the fixed Mermin parity/
+cocycle invariant returns central exponent two in `O(1)` work. The exact
+18-composition binary-symplectic recurrence is only the strongest transferable
+descriptor-level comparator. Both avoid the carrier inverse and CATVM traffic.
+The operator cocycle is therefore real and causal, but carrier-state coherence
+is unnecessary and no distinct phase resource or software advantage follows.
+The contextual-set route stops at this one square.
+
+Next:
+
+```text
+EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
+```
+
+M251 changes the primitive to operator-valued coherence. One clean control
+interferes a bounded public noncommuting `Q(zeta8)` word against a hidden
+maximally mixed two-qubit carrier, with final boundary
+`<X>+i<Y> = Tr(U)/4`. The actual density backing must then be inverted,
+restored, and reused. The comparison must include an `O(1)` frozen-fixture
+baseline and the transferable direct 16-cell matrix-and-trace recurrence.
+If the direct recurrence matches, retire this explicit-software DQC1 route
+without adding qubits or word lengths. M250 establishes no physical
+contextuality, general contextual resource theorem, inference, Small Wall
+crossing, physical execution, bit replacement, or unbounded computation.

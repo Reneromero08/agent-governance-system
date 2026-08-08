@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CATVM_U1_PHASE_REFERENCE_ENERGY_WRAP_DICHOTOMY_PROJECTIVE_WEYL_COCYCLE_CALIBRATION_OPEN`
-**Roadmap version:** `15.33`
+**Status:** `STRICT_PROJECTIVE_WEYL_CONTEXTUAL_PHASE_CALIBRATION_DQC1_OPERATOR_COHERENCE_OPEN`
+**Roadmap version:** `15.34`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6380d317b868f7e684fbb75726649c43e90d327e`
+**Reconciled source head:** `33de34c74e94e17c6d7c4a2cfd92ba198314ce27`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE`
-**Current claim ceiling:** `EXACT_SOFTWARE_QSQRT2_FINITE_SHIFT_COVARIANT_U1_REFERENCE_FAMILY_L2_4_8_16_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED`
+**Current claim ceiling:** `EXACT_SOFTWARE_TWO_QUBIT_TYPED_MERMIN_SQUARE_PROJECTIVE_WEYL_CONTEXTUALITY_CALIBRATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M249_ESTABLISHES_THE_BOUNDED_FINITE_OPEN_CYCLIC_WRAP_AND_BILATERAL_NORMALIZABILITY_DICHOTOMY_WITH_O1_CLASSICAL_PARITY_SO_M250_CHANGES_TO_AN_EXACT_PROJECTIVE_WEYL2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_CALIBRATION`
+**New mechanism development:** `ACTIVE_AFTER_M250_ESTABLISHES_ONE_EXACT_TYPED_PROJECTIVE_PI_PHASE_COCYCLE_CALIBRATION_BUT_THE_FIXED_MERMIN_PARITY_INVARIANT_IS_O1_CLASSICAL_SO_THE_CONTEXTUAL_SET_ROUTE_IS_RETIRED_AND_M251_CHANGES_TO_MIXED_STATE_OPERATOR_COHERENCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE`
+**Active primary successor:** `EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6380d317b868f7e684fbb75726649c43e90d327e`. The current 249-milestone
+`33de34c74e94e17c6d7c4a2cfd92ba198314ce27`. The current 250-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
+CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
 ```
 
 Not established:
@@ -12280,10 +12280,72 @@ M250 changes the primitive to exact projective two-qubit Weyl composition. It
 tests the central `-1` cocycle on one typed Mermin square, with nine shared
 observable ports, six contexts, final-only central-phase projection, actual
 inverse restoration, and generation-two reuse. The strongest comparator is
-the identical constant-state binary-symplectic cocycle recurrence, checked by
-an independent 4x4 matrix oracle. The route stops after this one square if the
-compact recurrence matches; no larger contextual fixtures or physical
+at least the constant-state binary-symplectic cocycle recurrence, checked by
+an independent 4x4 matrix oracle, and the completed package must also disclose
+any stronger fixed-family invariant. The route stops after this one square if
+a compact comparator matches; no larger contextual fixtures or physical
 contextuality claim follow.
+
+## M250: projective Weyl contextual phase is exact but classically invariant
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+```
+
+The native exact signature law is
+
+```text
+(q,x,z) o (q',x',z')
+  = (q+q'+2 z.x' mod 4, x xor x', z xor z').
+```
+
+All nine public Mermin observables have exactly two typed context consumers.
+The six commuting contexts close centrally: five to `+I` and the third column
+to `-I`. Deleting the projective two-cocycle changes the total to `+I`. The
+standalone exact `4 x 4` `Q(i)` matrix oracle independently reproduces the
+base and Hadamard-conjugated/reordered variants and confirms that the `-I`
+witness is state independent.
+
+The abstract Unix-socket CATVM keeps the four-cell carrier, four-cell scratch,
+six context signatures, and nine consumer receipts hidden. It releases only
+the final central phase after reversing all 18 actions, exact canonical
+verification, and generation advance. Descriptor-distinct generation-two
+reuse consumes the same backing and agrees with fresh execution. Disconnect,
+partial-forward, post-projection, custody, no-smuggle, missing, wrong, and
+applicable reordered-inverse controls pass without snapshot reload.
+
+Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The initial package overstated the 18-composition binary-symplectic recurrence
+as strongest. The repaired strongest declared-family comparator validates one
+of the two fixed variants and returns the Mermin parity/cocycle invariant in
+`O(1)` work. The 18-composition recurrence remains only the strongest
+transferable descriptor-level baseline. Thus the projective phase is causal
+and machine enforced but supplies no distinct resource or advantage in this
+software family. This closes the one-square contextual route; do not add
+larger contextual sets.
+
+Selected phase-owned successor:
+
+```text
+EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
+```
+
+M251 changes the primitive to operator-valued coherence of one clean control
+and a maximally mixed hidden two-qubit carrier. It must reproduce the exact
+`Q(zeta8)` identity `<X>+i<Y> = Tr(U)/4` for a bounded descriptor-driven
+noncommuting word, project only that final control boundary, apply the actual
+inverse to the same density backing, and perform unrelated generation-two
+reuse. The strongest fixed-fixture baseline is `O(1)` and the strongest
+transferable baseline is a direct 16-cell public matrix-and-trace recurrence.
+If those baselines dominate, retire explicit-software DQC1 after this one
+grammar; do not add qubits or longer words. No physical mixed-state execution,
+DQC1 hardness, query advantage, Small Wall crossing, inference, physical-bit
+replacement, or unbounded computation may be inferred.
 
 ## 10. Roadmap Maintenance
 

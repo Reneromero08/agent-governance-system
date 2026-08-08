@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`6380d317b868f7e684fbb75726649c43e90d327e`. The registry assigns one
+`33de34c74e94e17c6d7c4a2cfd92ba198314ce27`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 249-milestone lane is active by user direction. Continue from the
+The current 250-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,47 +53,43 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_U1_FINITE_OPEN_LADDER_PHASE_REFERENCES_AT_L2_4_8_16_UNDER_FORMAL_ENERGY_CONSERVING_TWO_LEVEL_DILATIONS_DEVELOP_NONZERO_SYSTEM_REFERENCE_CORRELATION_WHILE_CYCLIC_EXACT_RETURN_HAS_NONZERO_ENERGY_WRAP_AND_THE_BILATERAL_EXACT_SHIFT_EIGENREFERENCE_IS_NONNORMALIZABLE_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_AND_AN_O1_ANALYTIC_CLASSICAL_BASELINE
+CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QSQRT2_FINITE_SHIFT_COVARIANT_U1_REFERENCE_FAMILY_L2_4_8_16_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_TWO_QUBIT_TYPED_MERMIN_SQUARE_PROJECTIVE_WEYL_CONTEXTUALITY_CALIBRATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone `Q(sqrt(2))` implementation reproduce the finite open-ladder
-boundary, dephasing control, cyclic wrap witness, bilateral normalizability
-ceiling, atomic controls, exact same-backing restoration, and generation-two
-reuse.
+and a standalone exact `4 x 4` `Q(i)` matrix oracle reproduce the native Weyl
+two-cocycle, all six Mermin context closures, typed two-consumer custody,
+atomic controls, exact same-backing restoration, and generation-two reuse.
 
-M249 establishes the bounded dichotomy only for the declared shift-covariant
-family. A lawful finite normalizable phase reference develops nonzero system-
-reference correlation, the cyclic exact-return sham has nonzero number wrap,
-and the bilateral exact shift eigenreference is nonnormalizable. The exact
-`O(1)` formulas for `(p0,p1,C)` are the strongest comparator and are smaller
-than the CATVM path. No general coherence-catalyst theorem, physical energy
-law, distinct phase resource, advantage, Small Wall crossing, physical
-execution, physical-bit replacement, inference, or unbounded computation is
-established.
+M250 establishes one bounded formal software contextuality calibration. The
+projective cocycle changes the central context product from `+I` to `-I`, but
+carrier-state coherence is not required and the strongest declared-family
+comparator validates the public variant then returns the fixed Mermin parity
+invariant in `O(1)` work. No physical contextuality, general resource theorem,
+distinct phase resource, advantage, Small Wall crossing, physical execution,
+physical-bit replacement, inference, or unbounded computation is established.
 
 Selected successor:
 
 ```text
-EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
+EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
 ```
 
-Change the primitive from a normalizable U(1) reference to the exact
-noncommutative two-qubit Weyl signature algebra. Test the central projective
-phase on one typed Mermin square, with nine shared observable ports and six
-commuting contexts, final-only central-phase projection, actual inverse
-restoration, and generation-two reuse. Compare first against the identical
-constant-state binary-symplectic cocycle recurrence and an independent 4x4
-matrix oracle. Stop this route after the one square: a matching compact
-symplectic recurrence means contextual phase holonomy is an exact algebraic
-calibration, not a computational separation.
+Change the primitive from a fixed projective context invariant to operator-
+valued coherence of one clean control coupled to a hidden maximally mixed
+two-qubit carrier. Test the exact normalized-trace identity over `Q(zeta8)`,
+retain only the final `X+iY` boundary, reverse the actual controlled public
+word, and reuse the same density backing. Compare against both the strongest
+fixed-fixture `O(1)` baseline and the transferable 16-cell direct matrix-and-
+trace recurrence. Stop this route after the one bounded descriptor grammar if
+the direct recurrence matches; do not add qubits or longer words.
 
 The accumulated bounded architecture includes:
 
@@ -287,7 +283,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M249_ESTABLISHES_THE_BOUNDED_FINITE_OPEN_CYCLIC_WRAP_AND_BILATERAL_NORMALIZABILITY_DICHOTOMY_WITH_O1_CLASSICAL_PARITY_SO_M250_CHANGES_TO_AN_EXACT_PROJECTIVE_WEYL2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_CALIBRATION
+ACTIVE_AFTER_M250_ESTABLISHES_ONE_EXACT_TYPED_PROJECTIVE_PI_PHASE_COCYCLE_CALIBRATION_BUT_THE_FIXED_MERMIN_PARITY_INVARIANT_IS_O1_CLASSICAL_SO_THE_CONTEXTUAL_SET_ROUTE_IS_RETIRED_AND_M251_CHANGES_TO_MIXED_STATE_OPERATOR_COHERENCE
 ```
 
 The named
@@ -296,18 +292,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_PROJECTIVE_WEYL_2_COCYCLE_CONTEXTUAL_PHASE_HOLONOMY_ON_TYPED_MERMIN_SQUARE_WITH_CATVM_RESTORATION_REUSE
+EXACT_DQC1_OPERATOR_COHERENCE_NORMALIZED_TRACE_INTERFERENCE_WITH_CATVM_RESTORATION_REUSE_AND_MATCHED_DIRECT_TRACE_BASELINE
 ```
 
-M249 closes the declared finite U(1) shift-reference route: lawful finite
-references correlate, cyclic return wraps formal number, and the bilateral
-ideal is nonnormalizable, while exact `O(1)` classical formulas remain. Do not
-add ladder sizes or phase-reference variants. M250 tests a different
-phase-owned object, the nontrivial central cocycle of exact projective Weyl
-composition on one typed Mermin square. It must distinguish the operator
-cocycle from carrier-state coherence and compare against the identical compact
-symplectic recurrence. One contextual square is the route ceiling; no larger
-contextual fixture follows a compact-classical match.
+M250 closes the declared projective-contextual route: the native Weyl
+two-cocycle is causal and machine enforced, but the fixed Mermin family has an
+`O(1)` public parity/cocycle invariant and does not require carrier-state
+coherence. Do not add contextual sets. M251 changes to one clean control and a
+maximally mixed two-qubit carrier. It must test exact operator-coherence trace
+interference over `Q(zeta8)`, reverse the actual density action, and compare
+against both the fixed-fixture `O(1)` baseline and the transferable 16-cell
+direct matrix-and-trace recurrence. One bounded grammar is the route ceiling;
+no qubit or word-length series follows a compact-classical match.
 
 ## 7. Native No-Smuggle Law
 

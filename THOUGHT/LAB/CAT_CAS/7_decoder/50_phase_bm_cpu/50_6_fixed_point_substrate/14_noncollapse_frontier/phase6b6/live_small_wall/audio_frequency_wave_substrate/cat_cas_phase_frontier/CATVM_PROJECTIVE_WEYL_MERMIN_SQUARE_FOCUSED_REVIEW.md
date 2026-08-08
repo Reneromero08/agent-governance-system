@@ -8,8 +8,7 @@ Verification level: `SEPARATE_REFERENCE_PARITY`
 
 Restoration class: `EXACT_ALGEBRAIC_RESTORATION`
 
-Scientific source head: recorded by the canonical authority reconciliation that
-follows this scientific package commit.
+Scientific source head: `33de34c74e94e17c6d7c4a2cfd92ba198314ce27`
 
 The focused read-only review independently reconstructed the exact two-qubit
 projective Weyl law over `Q(i)`,
