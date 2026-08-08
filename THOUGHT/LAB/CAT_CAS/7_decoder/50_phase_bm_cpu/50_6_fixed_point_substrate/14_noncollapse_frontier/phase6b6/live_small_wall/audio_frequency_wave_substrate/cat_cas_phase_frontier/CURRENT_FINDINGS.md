@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`6e4e766b400a69c9868d978aa3ee2275fcce0574`. The canonical per-milestone
+`ded2ae3e6251011c6ca30c3ed8bace7e0d1c6ec4`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -12472,3 +12472,41 @@ the carrier must preserve normalized coherent `Q(zeta_5)` amplitudes and exact
 interference.  The decisive comparison remains the identical fixed five-vector
 or backward-row classical recurrence, not explicit path enumeration or a
 dephased density matrix.
+
+## M237 exact normalized zeta5 coherent interference
+
+M237 retains the full coherent state discarded by the preceding projective and
+critical-locus mechanisms.  Exact normalized Fourier and cubic diagonal phase
+modules act on one five-amplitude `Q(zeta_5)` carrier without path or assignment
+enumeration.  The selected cubic witness has exact destructive interference at
+the final boundary: coherent probability is zero, an independently computed
+dephased control is `1/5`, and the identity-phase control is one.
+
+Only the selected final amplitude and a one-way final-vector commitment survive
+the inverse.  Probability is computed after exact restoration and release.
+The actual amplitude and scratch backings restore canonically, a
+descriptor-distinct program reuses them at generation two, fresh/restored
+boundaries and resource signatures agree, and no snapshot or baseline reload
+occurs.  Both production and the standalone matrix reference execute the full
+remaining inverse schedule after a deliberately wrong last inverse before
+release is required to fail.  Focused review returned `PASS_STRICT_SCOPE`.
+
+The result establishes causal exact coherent interference, not bounded-width
+state.  Across depths `2,4,8,16,32,64`, denominator exponent reaches nine;
+family-zero payload grows `43,43,79,115,221,416` bits and family one grows
+`45,43,72,128,228,418`.  The identical exact five-amplitude recurrence, or a
+backward five-component row recurrence for one boundary, remains the strongest
+implemented compact classical method.  No distinct phase resource, advantage,
+CATVM custody, Small Wall crossing, physical execution, physical-bit
+replacement, inference, or unbounded computation is established.
+
+Next:
+
+```text
+EXACT_ZETA5_ODD_PRIME_DISCRETE_WIGNER_CUBIC_MAGIC_RESOURCE_DIAGNOSTIC_ON_GROWING_ONE_TWO_THREE_QUDIT_INTERFACES_WITH_NONNEGATIVITY_BREAKING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_STABILIZER_WIGNER_CLASSICAL_BASELINE
+```
+
+This is a representation and interface change, not another fixed-five depth
+fixture.  It tests Wigner negativity or magic as a phase-owned resource
+candidate while retaining the strongest stabilizer/Wigner-aware compact
+classical comparator and the existing restoration/reuse law.

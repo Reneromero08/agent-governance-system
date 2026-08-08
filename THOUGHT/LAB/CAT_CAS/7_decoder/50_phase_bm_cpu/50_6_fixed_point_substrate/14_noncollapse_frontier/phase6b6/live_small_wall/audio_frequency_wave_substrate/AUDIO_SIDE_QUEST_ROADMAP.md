@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_CONNECTED_CUBIC_QUOTIENT_DIMENSION_GROWTH_OBSTRUCTION`
-**Roadmap version:** `15.20`
+**Status:** `STRICT_ZETA5_COHERENT_INTERFERENCE_EXACT_WIDTH_OBSTRUCTION`
+**Roadmap version:** `15.21`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6e4e766b400a69c9868d978aa3ee2275fcce0574`
+**Reconciled source head:** `ded2ae3e6251011c6ca30c3ed8bace7e0d1c6ec4`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_CONNECTED_CUBIC_AIRY_CHAIN_PHASE_SIGNATURES_RETAIN_ALL_STATIONARY_SHARED_PORT_BRANCHES_IMPLICITLY_IN_Q_OF_T_MOD_PN_AND_ACCUMULATE_THE_SCALED_CRITICAL_VALUE_ON_THREE_ACTUAL_QUOTIENT_ALGEBRA_BACKINGS_WITH_FINAL_ONLY_CHARACTERISTIC_NORM_RELATION_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_SENTINEL_REUSE_THROUGH_DECLARED_LENGTHS2_3_4_5_6_BUT_QUOTIENT_DIMENSION_AND_FINAL_RELATION_DEGREE_GROW2_4_8_16_32_AND_THE_IDENTICAL_EXACT_POLYNOMIAL_CLASSICAL_RECURRENCE_REMAINS`
-**Current claim ceiling:** `FORMAL_PROJECTIVE_CUBIC_AIRY_CHAIN_STATIONARY_RELATIONS_OVER_Q_TWO_RATIONAL_BOUNDARY_FAMILIES_LENGTHS2_3_4_5_6_SIMPLE_ENDPOINT_AND_CRITICAL_VALUE_POLYNOMIALS_SCALED_PHASE_W_EQUALS3PHI_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `EXACT_NORMALIZED_QZETA5_CUBIC_PHASE_AND_FOURIER_MODULES_PRESERVE_A_FIXED5_AMPLITUDE_COHERENT_SHARED_PORT_WITH_CAUSAL_EXACT_DESTRUCTIVE_INTERFERENCE_ZERO_VERSUS_DEPHASED_PROBABILITY1_OVER5_FINAL_ONLY_AMPLITUDE_PROJECTION_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_ACROSS_DEPTHS2_4_8_16_32_64_BUT_THE_IDENTICAL_EXACT_FIVE_AMPLITUDE_OR_BACKWARD_ROW_CLASSICAL_RECURRENCE_REMAINS`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA5_NORMALIZED_FOURIER_AND_CUBIC_DIAGONAL_CIRCUITS_ONE_FIXED_F5_PORT_TWO_PUBLIC_DESCRIPTOR_FAMILIES_DEPTHS2_4_8_16_32_64_DIRECT_PROCESS_LOGICAL_CUSTODY_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M236_ESTABLISHES_EXACT_CONNECTED_CUBIC_STATIONARY_BRANCH_CUSTODY_BUT_QUOTIENT_DIMENSION_DOUBLES_AND_A_STRONGER_SUBRESULTANT_CLASSICAL_PROJECTION_REMAINS_SO_THE_NEXT_MECHANISM_MUST_CHANGE_THE_PHASE_RESOURCE_NOT_EXTEND_THE_CUBIC_FIXTURE`
+**New mechanism development:** `ACTIVE_AFTER_M237_ESTABLISHES_CAUSAL_EXACT_NORMALIZED_COHERENT_INTERFERENCE_BUT_FIXED5_LOGICAL_RANK_HIDES_GROWING_EXACT_WIDTH_AND_THE_IDENTICAL_FIVE_AMPLITUDE_CLASSICAL_RECURRENCE_REMAINS_SO_THE_DEPTH_ROUTE_IS_RETIRED_AND_THE_NEXT_MECHANISM_TESTS_A_PHASE_RESOURCE_CANDIDATE_ACROSS_GROWING_INTERFACE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_ZETA5_NORMALIZED_CUBIC_FOURIER_COHERENT_SHARED_PORT_CLOSURE_WITH_CAUSAL_DESTRUCTIVE_INTERFERENCE_FIXED5_AMPLITUDE_CARRIER_ACROSS_DEPTHS2_4_8_16_32_64_EXACT_RESTORATION_REUSE_AND_IDENTICAL5_VECTOR_CLASSICAL_BASELINE`
+**Active primary successor:** `EXACT_ZETA5_ODD_PRIME_DISCRETE_WIGNER_CUBIC_MAGIC_RESOURCE_DIAGNOSTIC_ON_GROWING_ONE_TWO_THREE_QUDIT_INTERFACES_WITH_NONNEGATIVITY_BREAKING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_STABILIZER_WIGNER_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6e4e766b400a69c9868d978aa3ee2275fcce0574`. The current 236-milestone
+`ded2ae3e6251011c6ca30c3ed8bace7e0d1c6ec4`. The current 237-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-EXACT_CONNECTED_CUBIC_AIRY_CHAIN_PHASE_SIGNATURES_RETAIN_ALL_STATIONARY_SHARED_PORT_BRANCHES_IMPLICITLY_IN_Q_OF_T_MOD_PN_AND_ACCUMULATE_THE_SCALED_CRITICAL_VALUE_ON_THREE_ACTUAL_QUOTIENT_ALGEBRA_BACKINGS_WITH_FINAL_ONLY_CHARACTERISTIC_NORM_RELATION_EXACT_SAME_BACKING_RESTORATION_AND_UNRELATED_SENTINEL_REUSE_THROUGH_DECLARED_LENGTHS2_3_4_5_6_BUT_QUOTIENT_DIMENSION_AND_FINAL_RELATION_DEGREE_GROW2_4_8_16_32_AND_THE_IDENTICAL_EXACT_POLYNOMIAL_CLASSICAL_RECURRENCE_REMAINS
+EXACT_NORMALIZED_QZETA5_CUBIC_PHASE_AND_FOURIER_MODULES_PRESERVE_A_FIXED5_AMPLITUDE_COHERENT_SHARED_PORT_WITH_CAUSAL_EXACT_DESTRUCTIVE_INTERFERENCE_ZERO_VERSUS_DEPHASED_PROBABILITY1_OVER5_FINAL_ONLY_AMPLITUDE_PROJECTION_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_ACROSS_DEPTHS2_4_8_16_32_64_BUT_THE_IDENTICAL_EXACT_FIVE_AMPLITUDE_OR_BACKWARD_ROW_CLASSICAL_RECURRENCE_REMAINS
 ```
 
 Not established:
@@ -11523,6 +11523,66 @@ amplitude through exact inverse restoration/reuse, and compare against the
 identical exact five-vector or backward-row classical recurrence.  One bounded
 depth series decides the route; larger depth or basis micro-optimization is not
 the follow-on.
+
+## M237: exact normalized coherent interference retains growing width
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_NORMALIZED_QZETA5_CUBIC_PHASE_AND_FOURIER_MODULES_PRESERVE_A_FIXED5_AMPLITUDE_COHERENT_SHARED_PORT_WITH_CAUSAL_EXACT_DESTRUCTIVE_INTERFERENCE_ZERO_VERSUS_DEPHASED_PROBABILITY1_OVER5_FINAL_ONLY_AMPLITUDE_PROJECTION_EXACT_SAME_BACKING_RESTORATION_AND_DESCRIPTOR_DISTINCT_REUSE_ACROSS_DEPTHS2_4_8_16_32_64_BUT_THE_IDENTICAL_EXACT_FIVE_AMPLITUDE_OR_BACKWARD_ROW_CLASSICAL_RECURRENCE_REMAINS
+```
+
+M237 changes the retained law from critical loci to exact coherent amplitudes
+over `Q(zeta_5)`.  The normalized Fourier factor uses the exact element
+`sqrt(5)=-1-2*zeta^2-2*zeta^3`, and the cubic diagonal is genuinely
+nonquadratic over `F5`.  The fixed five-amplitude carrier enumerates no path or
+assignment histories.  Its exact witness has selected-boundary probability
+zero, while an independently computed dephased control has probability `1/5`
+and the identity-phase control has probability one.
+
+The final selected amplitude and a one-way final-vector commitment survive the
+inverse.  Probability is derived only after restoration and release.  Public
+inverse gates restore the exact same amplitude and scratch backings, generation
+advances from one to two for a descriptor-distinct program, fresh/restored
+outputs and resource signatures agree, and no baseline reload occurs.  The
+wrong-inverse control executes every remaining declared inverse before release
+is required to fail.
+
+A standalone exact-matrix implementation reconstructs the cyclotomic field,
+normalization, circuit, descriptor custody, restoration, controls, and reuse.
+Focused review returned `PASS_STRICT_SCOPE`.  Authority is therefore
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION` for this direct-process logical-custody package.
+
+The coherent effect is causal but not a compact-resource result.  At depths
+`2,4,8,16,32,64`, the common denominator exponents are
+`1,1,2,3,5,9`.  Family-zero exact payload is
+`43,43,79,115,221,416` bits and family one is
+`45,43,72,128,228,418`.  Fixed five-cell logical rank therefore conceals
+growing exact width.  The strongest implemented compact comparator is the
+identical exact five-amplitude recurrence, equivalently a backward
+five-component row recurrence for one boundary.  Resource figures remain
+`PACKAGE_SELF_REVIEW` and whole-transaction/process liveness is incomplete.
+
+M237 does not establish bounded-width exact state, a distinct phase resource,
+advantage, CATVM custody, Small Wall crossing, physical waveform execution,
+physical-bit replacement, inference, or unbounded computation.  The fixed-five
+depth route is retired rather than extended with more depths or basis tuning.
+
+Selected representation-changing successor:
+
+```text
+EXACT_ZETA5_ODD_PRIME_DISCRETE_WIGNER_CUBIC_MAGIC_RESOURCE_DIAGNOSTIC_ON_GROWING_ONE_TWO_THREE_QUDIT_INTERFACES_WITH_NONNEGATIVITY_BREAKING_FINAL_ONLY_BOUNDARY_EXACT_RESTORATION_REUSE_AND_MATCHED_STABILIZER_WIGNER_CLASSICAL_BASELINE
+```
+
+This diagnostic asks whether odd-prime Wigner negativity or magic supplies a
+phase-owned resource candidate when interface width grows, instead of treating
+coefficient height or five-vector depth as the resource.  It must compare with
+the strongest stabilizer/Wigner-aware compact classical recurrence, preserve
+final-only projection and exact same-backing restoration/reuse, and avoid
+state-path or assignment enumeration.  Negativity alone is not computational
+advantage; the test must measure whether it scales and whether every material
+cost simply reappears in the matched classical representation.
 
 ## 10. Roadmap Maintenance
 
