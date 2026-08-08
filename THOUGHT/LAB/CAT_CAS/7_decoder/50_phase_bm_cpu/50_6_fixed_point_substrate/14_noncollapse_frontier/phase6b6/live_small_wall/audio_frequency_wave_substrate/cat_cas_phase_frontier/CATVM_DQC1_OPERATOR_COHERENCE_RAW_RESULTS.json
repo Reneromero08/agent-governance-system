@@ -1,0 +1,288 @@
+{
+  "cases": [
+    {
+      "backend_response_bytes": 857,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 369,
+      "generation": 1,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "normalized_trace": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H0",
+        "T0",
+        "H0",
+        "CNOT01"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_controlled_gates": 4,
+        "forward_density_field_writes": 256,
+        "forward_field_multiply_terms": 1024,
+        "forward_scratch_clear_writes": 256,
+        "forward_scratch_result_writes": 256,
+        "inverse_controlled_gates": 4,
+        "inverse_density_field_writes": 256,
+        "inverse_field_multiply_terms": 1024,
+        "inverse_scratch_clear_writes": 256,
+        "inverse_scratch_result_writes": 256,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 873,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 381,
+      "generation": 2,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "normalized_trace": [
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H1",
+        "CNOT01",
+        "T0",
+        "H0",
+        "T1",
+        "CNOT10"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 6,
+        "forward_controlled_gates": 6,
+        "forward_density_field_writes": 384,
+        "forward_field_multiply_terms": 1536,
+        "forward_scratch_clear_writes": 384,
+        "forward_scratch_result_writes": 384,
+        "inverse_controlled_gates": 6,
+        "inverse_density_field_writes": 384,
+        "inverse_field_multiply_terms": 1536,
+        "inverse_scratch_clear_writes": 384,
+        "inverse_scratch_result_writes": 384,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 873,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 379,
+      "generation": 1,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "normalized_trace": [
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H1",
+        "CNOT01",
+        "T0",
+        "H0",
+        "T1",
+        "CNOT10"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 6,
+        "forward_controlled_gates": 6,
+        "forward_density_field_writes": 384,
+        "forward_field_multiply_terms": 1536,
+        "forward_scratch_clear_writes": 384,
+        "forward_scratch_result_writes": 384,
+        "inverse_controlled_gates": 6,
+        "inverse_density_field_writes": 384,
+        "inverse_field_multiply_terms": 1536,
+        "inverse_scratch_clear_writes": 384,
+        "inverse_scratch_result_writes": 384,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "claim": "CATVM_ENFORCED_BOUNDED_EXACT_DQC1_ONE_CLEAN_CONTROL_AND_TWO_QUBIT_MAXIMALLY_MIXED_OPERATOR_COHERENCE_RETURNS_THE_QZETA8_NORMALIZED_TRACE_OF_A_DECLARED_NONCOMMUTING_PUBLIC_WORD_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_DIRECT_FOUR_BY_FOUR_PUBLIC_MATRIX_TRACE_RECURRENCE_ARE_SMALLER_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED",
+  "claim_ceiling": "EXACT_SOFTWARE_ONE_CLEAN_CONTROL_TWO_MAXIMALLY_MIXED_DATA_QUBITS_PUBLIC_WORD_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY",
+  "claim_limits": {
+    "distinct_phase_resource_unavailable_to_compact_classical_software": false,
+    "dqc1_hardness_established": false,
+    "general_catalytic_inference": false,
+    "oracle_or_query_separation": false,
+    "physical_bit_replacement": false,
+    "physical_mixed_state_execution": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "total_computational_advantage": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_accepted_density_and_scratch_backings_stable": true,
+    "all_accepted_responses_after_exact_restoration": true,
+    "answer_table_absent": true,
+    "backend_responses_exclude_hidden_density_and_operator_blocks": true,
+    "basis_data_input_returns_diagonal_element_not_normalized_trace": true,
+    "clean_control_dephasing_erases_xy_boundary": true,
+    "computational_path_enumeration_absent": true,
+    "data_marginal_remains_maximally_mixed": true,
+    "debug_rejected": true,
+    "declared_noncommuting_pair_reorder_changes_trace": true,
+    "density_matrix_rejected": true,
+    "dirty_scratch_rejected_before_mutation": true,
+    "disconnect_restored_before_lost_response": true,
+    "dump_rejected": true,
+    "exact_density_block_boundary_matches_direct_normalized_trace": true,
+    "full_joint_density_is_not_product_with_mixed_data": true,
+    "gate_matrices_rejected": true,
+    "malformed_carrier_id_rejected": true,
+    "malformed_transaction_id_rejected_without_poisoning_carrier": true,
+    "missing_inverse_fails_full_density_restoration": true,
+    "no_baseline_reload": true,
+    "noncommuting_reordered_inverse_fails_full_density_restoration": true,
+    "null_carrier_rejected": true,
+    "omitting_declared_controlled_gate_changes_trace": true,
+    "partial_failure_rejected_only_after_restoration": true,
+    "postprojection_failure_rejected_only_after_restoration": true,
+    "premature_operator_coherence_projection_rejected": true,
+    "project_block_rejected": true,
+    "project_density_rejected": true,
+    "project_operator_coherence_rejected": true,
+    "restored_reuse_matches_fresh": true,
+    "run_inplace_on_snapshot_rejected": true,
+    "run_snapshot_rejected": true,
+    "same_id_word_mutation_rejected": true,
+    "skipped_generation_rejected": true,
+    "snapshot_rejected": true,
+    "stale_generation_rejected": true,
+    "undeclared_gate_rejected": true,
+    "valid_scalar_public_word_retains_factorized_joint_state_and_trace_boundary": true,
+    "word_longer_than8_rejected": true,
+    "wrong_controller_rejected": true,
+    "wrong_inverse_completed_path_fails_full_density_restoration": true,
+    "wrong_output_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_right_action_breaks_density_hermiticity": true,
+    "wrong_type_rejected": true
+  },
+  "operator_coherence_law": {
+    "data_marginal_unchanged_but_full_joint_state_correlated": true,
+    "final_boundary_is_normalized_trace": true,
+    "maximally_mixed_data_qubits": 2,
+    "one_clean_control": true,
+    "operator_coherence_is_causally_required_for_xy_boundary": true,
+    "route_disposition": "RETIRE_AFTER_ONE_BOUNDED_GRAMMAR_IF_DIRECT_FOUR_BY_FOUR_TRACE_RECURRENCE_MATCHES"
+  },
+  "protocol_accounting": {
+    "backend_controller_response_bytes": 5122,
+    "controller_backend_request_bytes": 7344,
+    "disconnect_request_bytes": 410
+  },
+  "resource_law": {
+    "accepted_boundary_field_accumulations": 12,
+    "accepted_boundary_field_multiplications": 12,
+    "accepted_catvm_path_has_space_work_or_query_advantage": false,
+    "accepted_compiled_public_gate_plan_matrix_references": 16,
+    "accepted_forward_controlled_gates": 16,
+    "accepted_forward_density_field_writes": 1024,
+    "accepted_forward_field_multiply_terms": 4096,
+    "accepted_hidden_density_field_cells_per_carrier": 64,
+    "accepted_hidden_scratch_field_cells_per_carrier": 4,
+    "accepted_inverse_controlled_gates": 16,
+    "accepted_inverse_density_field_writes": 1024,
+    "accepted_inverse_field_multiply_terms": 4096,
+    "accepted_persistent_carriers": 2,
+    "accepted_scratch_result_and_clear_writes_forward": [
+      1024,
+      1024
+    ],
+    "accepted_scratch_result_and_clear_writes_inverse": [
+      1024,
+      1024
+    ],
+    "accepted_transactions": 3,
+    "comparison_basis": "QZETA8_FIELD_CELLS_GATE_TERMS_DENSITY_AND_SCRATCH_WRITES_FINAL_BOUNDARY_RESTORATION_REUSE_AND_PROTOCOL_TRAFFIC_NOT_WHOLE_PROCESS_RSS",
+    "declared_public_word_lengths": [
+      4,
+      6,
+      6
+    ],
+    "direct_transferable_baseline_resident_matrix_field_cells": 16,
+    "direct_transferable_baseline_transient_peak_complete": false,
+    "exact_qzeta8_coordinate_payload_instrumented": false,
+    "field_cell_counts_are_not_fixed_bit_payload_claims": true,
+    "independent_verifier_only_baseline": "EXACT_DENSE_EIGHT_BY_EIGHT_QZETA8_DENSITY_CONJUGATION",
+    "python_fraction_object_allocator_socket_hash_serialization_rss_excluded_not_zero": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "retained_dynamic_inverse_history_entries": 0,
+    "retained_final_boundary_field_cells_during_inverse_per_transaction": 1,
+    "service_static_public_gate_library_field_cells": 96,
+    "strongest_fixed_fixture_classical_baseline": "PUBLIC_WORD_VALIDATION_PLUS_FROZEN_EXACT_NORMALIZED_TRACE_IN_O1_WORK",
+    "strongest_transferable_descriptor_level_classical_baseline": "DIRECT_EXACT_FOUR_BY_FOUR_QZETA8_PUBLIC_WORD_MATRIX_RECURRENCE_PLUS_TRACE_WITH16_RESIDENT_MATRIX_FIELD_CELLS_PLUS_DECLARED_TRANSIENT_MULTIPLICATION_SCRATCH_AND_NO_CATVM_INVERSE",
+    "whole_transaction_live_payload_peak_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_CATVM_DQC1_OPERATOR_COHERENCE_STRICT_SCOPE",
+  "reuse_parity": true,
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

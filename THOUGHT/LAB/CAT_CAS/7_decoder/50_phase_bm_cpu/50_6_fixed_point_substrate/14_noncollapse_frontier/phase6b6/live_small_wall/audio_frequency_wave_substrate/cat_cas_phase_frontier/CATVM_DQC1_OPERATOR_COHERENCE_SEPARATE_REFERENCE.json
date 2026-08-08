@@ -1,0 +1,198 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "data_marginal_maximally_mixed_after_forward": true,
+      "generation": 1,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "joint_not_product_after_forward": true,
+      "normalized_trace": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H0",
+        "T0",
+        "H0",
+        "CNOT01"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 4,
+        "forward_controlled_gates": 4,
+        "forward_density_field_writes": 256,
+        "forward_field_multiply_terms": 1024,
+        "forward_scratch_clear_writes": 256,
+        "forward_scratch_result_writes": 256,
+        "inverse_controlled_gates": 4,
+        "inverse_density_field_writes": 256,
+        "inverse_field_multiply_terms": 1024,
+        "inverse_scratch_clear_writes": 256,
+        "inverse_scratch_result_writes": 256,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "data_marginal_maximally_mixed_after_forward": true,
+      "generation": 2,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "joint_not_product_after_forward": true,
+      "normalized_trace": [
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H1",
+        "CNOT01",
+        "T0",
+        "H0",
+        "T1",
+        "CNOT10"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 6,
+        "forward_controlled_gates": 6,
+        "forward_density_field_writes": 384,
+        "forward_field_multiply_terms": 1536,
+        "forward_scratch_clear_writes": 384,
+        "forward_scratch_result_writes": 384,
+        "inverse_controlled_gates": 6,
+        "inverse_density_field_writes": 384,
+        "inverse_field_multiply_terms": 1536,
+        "inverse_scratch_clear_writes": 384,
+        "inverse_scratch_result_writes": 384,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "data_marginal_maximally_mixed_after_forward": true,
+      "generation": 1,
+      "hidden_density_field_cells": 64,
+      "hidden_scratch_field_cells": 4,
+      "joint_not_product_after_forward": true,
+      "normalized_trace": [
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          -1,
+          8
+        ]
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_density_and_scratch_backings": true,
+      "word": [
+        "H1",
+        "CNOT01",
+        "T0",
+        "H0",
+        "T1",
+        "CNOT10"
+      ],
+      "work": {
+        "boundary_field_accumulations": 4,
+        "boundary_field_multiplications": 4,
+        "compiled_public_gate_plan_matrix_references": 6,
+        "forward_controlled_gates": 6,
+        "forward_density_field_writes": 384,
+        "forward_field_multiply_terms": 1536,
+        "forward_scratch_clear_writes": 384,
+        "forward_scratch_result_writes": 384,
+        "inverse_controlled_gates": 6,
+        "inverse_density_field_writes": 384,
+        "inverse_field_multiply_terms": 1536,
+        "inverse_scratch_clear_writes": 384,
+        "inverse_scratch_result_writes": 384,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "controls": {
+    "basis_data_input_returns_diagonal_element_not_trace": true,
+    "density_boundary_matches_direct_four_by_four_normalized_trace": true,
+    "dephased_clean_control_has_zero_xy_boundary": true,
+    "exact_eight_by_eight_block_identity_reconstructed": true,
+    "missing_inverse_fails_reference_density_restoration": true,
+    "noncommuting_reorder_changes_direct_trace": true,
+    "omitted_gate_changes_direct_trace": true,
+    "reference_dirty_scratch_rejected": true,
+    "reference_premature_projection_rejected": true,
+    "reference_same_id_changed_word_rejected": true,
+    "reference_stale_generation_rejected": true,
+    "reference_wrong_owner_rejected": true,
+    "reordered_inverse_fails_reference_density_restoration": true,
+    "valid_scalar_public_word_retains_factorized_joint_state_and_trace_boundary": true,
+    "wrong_inverse_completed_path_fails_reference_density_restoration": true,
+    "wrong_right_action_breaks_hermiticity": true
+  },
+  "independent_oracle": {
+    "block_identity_reconstructed": true,
+    "computational_path_enumeration_used": false,
+    "dense_eight_by_eight_density_oracle_executed": true,
+    "direct_four_by_four_trace_oracle_executed": true,
+    "production_source_imported": false,
+    "qzeta8_polynomial_quotient_arithmetic_reconstructed": true
+  },
+  "oracle_resource_law": {
+    "dense_eight_by_eight_oracle_is_verifier_only": true,
+    "direct_transferable_baseline_resident_matrix_field_cells": 16,
+    "direct_transferable_baseline_transient_peak_complete": false,
+    "strongest_fixed_fixture_classical_baseline": "PUBLIC_WORD_VALIDATION_PLUS_FROZEN_EXACT_NORMALIZED_TRACE_IN_O1_WORK",
+    "strongest_transferable_descriptor_level_classical_baseline": "DIRECT_EXACT_FOUR_BY_FOUR_QZETA8_PUBLIC_WORD_MATRIX_RECURRENCE_PLUS_TRACE_WITH16_RESIDENT_MATRIX_FIELD_CELLS_PLUS_DECLARED_TRANSIENT_MULTIPLICATION_SCRATCH_AND_NO_CATVM_INVERSE"
+  },
+  "result": "PASS_SEPARATE_REFERENCE_DQC1_OPERATOR_COHERENCE_STRICT_SCOPE"
+}
