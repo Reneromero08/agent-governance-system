@@ -1,0 +1,390 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "catalyst_commitment": "31a152396ed266a9147459d3ba9a42b422fafca171360fe5d97ead372f5b3687",
+      "family": 0,
+      "final_amplitude": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation": 1,
+      "run_kind": "SINGLE_SYNDROME",
+      "same_all_backings": true,
+      "syndrome_use_count": 1,
+      "width": 1
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "catalyst_commitment": "31a152396ed266a9147459d3ba9a42b422fafca171360fe5d97ead372f5b3687",
+      "family": 1,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation": 1,
+      "run_kind": "TWO_SYNDROME_PRIMARY",
+      "same_all_backings": true,
+      "syndrome_use_count": 2,
+      "width": 2
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "catalyst_commitment": "31a152396ed266a9147459d3ba9a42b422fafca171360fe5d97ead372f5b3687",
+      "family": 2,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation": 2,
+      "run_kind": "RESTORED_UNRELATED_REUSE",
+      "same_all_backings": true,
+      "syndrome_use_count": 2,
+      "width": 2
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "catalyst_commitment": "31a152396ed266a9147459d3ba9a42b422fafca171360fe5d97ead372f5b3687",
+      "family": 2,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "generation": 1,
+      "run_kind": "FRESH_UNRELATED_REFERENCE",
+      "same_all_backings": true,
+      "syndrome_use_count": 2,
+      "width": 2
+    }
+  ],
+  "controls": {
+    "all_nonzero_catalyst_strength_identities_exact": true,
+    "correction_coefficient_three_to_two_breaks_factorization": true,
+    "dephased_catalyst_erases_offdiagonal_syndrome_coherence": true,
+    "missing_inverse_rejected": true,
+    "null_carrier_rejected": true,
+    "omit_first_correction_term_breaks_factorization": true,
+    "omit_second_correction_term_breaks_factorization": true,
+    "omit_translation_breaks_factorization": true,
+    "premature_projection_rejected": true,
+    "r_before_translation_breaks_factorization": true,
+    "reordered_inverse_rejected_before_mutation": true,
+    "resident_catalyst_joint_and_phase_cells_not_serialized": true,
+    "same_id_changed_descriptor_rejected": true,
+    "stabilizer_fourier_catalyst_fails_cubic_factorization": true,
+    "stale_generation_rejected": true,
+    "wrong_inverse_completes_remaining_inverses_then_fails_release": true,
+    "wrong_owner_rejected": true,
+    "wrong_type_rejected": true
+  },
+  "dephased_sham": {
+    "accepted_pure_catalyst_identity_changed": true,
+    "all_offdiagonal_syndrome_channel_factors_zero": true,
+    "cubic_phase_kick_established": false,
+    "offdiagonal_syndrome_channel_factors": {
+      "0_1": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "0_2": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "0_3": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "0_4": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "1_0": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "1_2": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "1_3": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "1_4": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "2_0": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "2_1": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "2_3": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "2_4": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "3_0": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "3_1": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "3_2": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "3_4": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "4_0": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "4_1": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "4_2": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "4_3": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "offdiagonal_syndrome_coherence_survives": false
+  },
+  "direct_non_catalytic_baselines": {
+    "FRESH_UNRELATED_REFERENCE": {
+      "catalyst_or_joint_scratch_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "inverse_or_catvm_work": 0,
+      "phase_signature_root_values_per_use": 5,
+      "resident_field_accumulator_cells": 1,
+      "streamed_terms": 25
+    },
+    "RESTORED_UNRELATED_REUSE": {
+      "catalyst_or_joint_scratch_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "inverse_or_catvm_work": 0,
+      "phase_signature_root_values_per_use": 5,
+      "resident_field_accumulator_cells": 1,
+      "streamed_terms": 25
+    },
+    "SINGLE_SYNDROME": {
+      "catalyst_or_joint_scratch_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 0,
+        "numerator": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "inverse_or_catvm_work": 0,
+      "phase_signature_root_values_per_use": 5,
+      "resident_field_accumulator_cells": 1,
+      "streamed_terms": 5
+    },
+    "TWO_SYNDROME_PRIMARY": {
+      "catalyst_or_joint_scratch_field_cells": 0,
+      "final_amplitude": {
+        "denominator_power5": 1,
+        "numerator": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "inverse_or_catvm_work": 0,
+      "phase_signature_root_values_per_use": 5,
+      "resident_field_accumulator_cells": 1,
+      "streamed_terms": 25
+    }
+  },
+  "imports_m248_service_client_or_m237": false,
+  "independent_custody_state_machine": true,
+  "independent_direct_phase_boundary": true,
+  "independent_polynomial_quotient_arithmetic": true,
+  "independent_tensor_contraction": true,
+  "magic_resource": {
+    "catalyst_negative_wigner_cells": 5,
+    "catalyst_wigner_l1_exact": {
+      "rational_denominator": 1,
+      "rational_numerator": 1,
+      "sqrt5_denominator": 5,
+      "sqrt5_numerator": 2
+    },
+    "direct_target_cubic_magic_state_has_the_same_single_state_l1": true,
+    "direct_target_cubic_magic_state_negative_wigner_cells": 5,
+    "direct_target_cubic_magic_state_wigner_l1_exact": {
+      "rational_denominator": 1,
+      "rational_numerator": 1,
+      "sqrt5_denominator": 5,
+      "sqrt5_numerator": 2
+    },
+    "expected_l1_one_plus_two_sqrt5_over5": true,
+    "joint_correction_magic_monotone_measured": false
+  },
+  "result": "PASS_SEPARATE_REFERENCE_M248_CUBIC_MAGIC_CATALYST",
+  "schema": "cat_cas.catvm_p5_cubic_magic_catalyst_reference.v1",
+  "tensor_identity": {
+    "all_strengths1_2_3_4_and_syndromes0_TO_4_exact": true,
+    "joint_state_refactors_after_each_use": true,
+    "law": "R_A_T_MAGIC_A_EQUALS_ZETA_MINUS_A_S_CUBED_TIMES_MAGIC_A",
+    "root_or_branch_enumeration": false
+  }
+}
