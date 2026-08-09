@@ -1,0 +1,199 @@
+{
+  "cases": {
+    "FRESH": {
+      "actual_final_denominator_degree": 3,
+      "actual_final_numerator_degree": 3,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "evaluation": [
+        [
+          -7826,
+          18761
+        ],
+        [
+          -10773,
+          37522
+        ],
+        [
+          -14706,
+          18761
+        ],
+        [
+          5733,
+          37522
+        ]
+      ],
+      "exact_formal_laurent_allpass_identity": true,
+      "final_waveform_service_basis_payload": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 6,
+        "maximum_numerator_signed_bits": 4,
+        "total_fraction_payload_bits": 139
+      },
+      "generation": 1,
+      "peak_resident_waveform_service_basis_payload_component": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 6,
+        "maximum_numerator_signed_bits": 4,
+        "total_fraction_payload_bits": 139
+      },
+      "same_reference_backings": true,
+      "winding": 3
+    },
+    "PRIMARY": {
+      "actual_final_denominator_degree": 3,
+      "actual_final_numerator_degree": 3,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "evaluation": [
+        [
+          -552,
+          2377
+        ],
+        [
+          -2275,
+          4754
+        ],
+        [
+          1560,
+          2377
+        ],
+        [
+          -805,
+          4754
+        ]
+      ],
+      "exact_formal_laurent_allpass_identity": true,
+      "final_waveform_service_basis_payload": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 5,
+        "maximum_numerator_signed_bits": 3,
+        "total_fraction_payload_bits": 130
+      },
+      "generation": 1,
+      "peak_resident_waveform_service_basis_payload_component": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 5,
+        "maximum_numerator_signed_bits": 3,
+        "total_fraction_payload_bits": 130
+      },
+      "same_reference_backings": true,
+      "winding": 3
+    },
+    "REUSE": {
+      "actual_final_denominator_degree": 3,
+      "actual_final_numerator_degree": 3,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "evaluation": [
+        [
+          -7826,
+          18761
+        ],
+        [
+          -10773,
+          37522
+        ],
+        [
+          -14706,
+          18761
+        ],
+        [
+          5733,
+          37522
+        ]
+      ],
+      "exact_formal_laurent_allpass_identity": true,
+      "final_waveform_service_basis_payload": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 6,
+        "maximum_numerator_signed_bits": 4,
+        "total_fraction_payload_bits": 139
+      },
+      "generation": 2,
+      "peak_resident_waveform_service_basis_payload_component": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 6,
+        "maximum_numerator_signed_bits": 4,
+        "total_fraction_payload_bits": 139
+      },
+      "same_reference_backings": true,
+      "winding": 3
+    },
+    "SHAM": {
+      "actual_final_denominator_degree": 0,
+      "actual_final_numerator_degree": 3,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "evaluation": [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "exact_formal_laurent_allpass_identity": true,
+      "final_waveform_service_basis_payload": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 2,
+        "maximum_numerator_signed_bits": 2,
+        "total_fraction_payload_bits": 69
+      },
+      "generation": 1,
+      "peak_resident_waveform_service_basis_payload_component": {
+        "integer_coordinate_count": 32,
+        "maximum_denominator_bits": 2,
+        "maximum_numerator_signed_bits": 2,
+        "total_fraction_payload_bits": 69
+      },
+      "same_reference_backings": true,
+      "winding": 3
+    }
+  },
+  "classical_baselines": {
+    "actual_boundary": "ONE_FIELD_SCALAR_PLUS_ONE_INTEGER_WINDING",
+    "actual_boundary_scalar_field_cells": 1,
+    "catvm_restoration_required_for_classical_baselines": false,
+    "fixed_fixture": "O1_PUBLIC_CERTIFICATE",
+    "full_waveform": "TWO_POLYNOMIAL_SCHUR_RECURRENCE",
+    "full_waveform_field_cells_at_depth3": 8
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "declared_first_two_sections_are_noncommuting": true,
+    "exact_formal_laurent_allpass_identity_for_declared_words": true,
+    "exact_unit_circle_norm_at_public_evaluation": true,
+    "feedback_disabled_sham_retains_winding_but_changes_boundary": true,
+    "independent_boundaries_match_atomic_backend_responses": true,
+    "independent_polynomial_and_scalar_schur_boundaries_match": true,
+    "missing_inverse_fails_exact_release": true,
+    "no_reference_baseline_reload": true,
+    "phase_seed_mutation_changes_primary_boundary": true,
+    "reordered_noncommuting_inverse_fails_exact_divisibility_or_restoration": true,
+    "restored_generation2_reuse_matches_fresh_boundary_and_payload": true,
+    "same_reference_backings_and_exact_restoration": true,
+    "sixty_four_descriptor_words_exact_scalar_polynomial_inverse_parity": true,
+    "wrong_inverse_fails_exact_divisibility_or_restoration": true
+  },
+  "exact_laws": {
+    "field_representation": "Q_ZETA8_AS_Q_Z_MOD_Z4_PLUS1",
+    "formal_winding_increment_per_section": 1,
+    "forward_polynomial_recurrence_derived_independently": true,
+    "inverse_polynomial_recurrence_derived_independently": true,
+    "scalar_schur_recurrence_is_exact_boundary_bisimulation": true
+  },
+  "milestone": 256,
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
