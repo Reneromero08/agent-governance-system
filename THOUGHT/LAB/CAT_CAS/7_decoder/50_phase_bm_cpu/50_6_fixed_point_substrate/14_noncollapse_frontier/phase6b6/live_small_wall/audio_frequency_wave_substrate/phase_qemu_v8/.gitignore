@@ -1,0 +1,3 @@
+evidence/*.candidate.json
+*.run.json
+*.run.log
