@@ -50,6 +50,13 @@ The replay state is keyed by session and sequence.  Missing blocks, a changed
 challenge, a replay, a wrong signature domain, and a changed signature fail.
 The two signed manifests are committed by a deterministic Merkle inventory.
 
+Adjudication must not consume a parallel in-memory copy of the fixture values.
+After signature and manifest verification, the accepted raw block bytes are
+checked against their block receipts, encoding, channel map, sample rate,
+declared count, and total length; only the integers decoded from those verified
+bytes may enter endpoint analysis.  A changed raw byte or forged sample count
+must fail before statistics or replay-state acceptance.
+
 The transport digest, measured boot, attestation-result digest, firmware,
 calibration, BOM, board, and device identifiers are conspicuous offline
 placeholders.  They are not observations.
@@ -96,7 +103,8 @@ Strict qualification requires:
 2. two byte-identical, bytecode-disabled executions of each;
 3. empty stderr and successful exit;
 4. exact parity for encoded-object digests, fixture analyses, failure
-   controls, resource/nonclaim fields, and authority gates;
+   controls, verified-byte-to-analysis dataflow, resource/nonclaim fields, and
+   authority gates;
 5. canonical stored seals equal to regenerated stdout bytes; and
 6. no QEMU, VM, network transport, hardware, enrollment, or capture action.
 

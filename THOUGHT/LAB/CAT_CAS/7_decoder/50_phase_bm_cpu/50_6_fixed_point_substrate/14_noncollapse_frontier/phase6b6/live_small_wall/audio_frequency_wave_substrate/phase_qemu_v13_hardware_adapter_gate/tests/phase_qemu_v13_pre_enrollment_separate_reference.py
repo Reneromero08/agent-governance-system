@@ -142,6 +142,32 @@ def receipt(result: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def decode_bound_samples(manifest: dict[str, Any], blocks: list[bytes]) -> list[int]:
+    if manifest["sample_encoding"] != "SIGNED_INT32_LE_MICRORADIANS":
+        raise ValueError("encoding")
+    if manifest["sample_rate_hz"] != 1_000 or manifest["channel_map"] != ["SYNTHETIC_PHASE_ERROR"]:
+        raise ValueError("sample descriptor")
+    if manifest["rail_labels"] != ["RAIL_A", "RAIL_B"]:
+        raise ValueError("rails")
+    if len(manifest["payload_blocks"]) != len(blocks):
+        raise ValueError("block count")
+    for index, (entry, block) in enumerate(zip(manifest["payload_blocks"], blocks, strict=True)):
+        if entry != {"index": index, "length": len(block), "sha256": digest(block)}:
+            raise ValueError("block receipt")
+    raw = b"".join(blocks)
+    if manifest["raw_total_length"] != len(raw) or manifest["sample_count"] * 4 != len(raw):
+        raise ValueError("sample count")
+    return list(struct.unpack(f"<{manifest['sample_count']}i", raw))
+
+
+def rejected(function: Any) -> bool:
+    try:
+        function()
+    except ValueError:
+        return True
+    return False
+
+
 def run() -> dict[str, Any]:
     enrollment_key = private("enrollment-authority")
     device_key = private("device")
@@ -211,6 +237,7 @@ def run() -> dict[str, Any]:
     challenges = []
     signed_manifests = []
     manifests = []
+    decoded_samples = []
     for i in (1, 2):
         challenge = {
             "schema": "phase_qemu.v13.offline_challenge.v1",
@@ -262,11 +289,12 @@ def run() -> dict[str, Any]:
         challenges.append(challenge)
         manifests.append(manifest)
         signed_manifests.append(sign1(manifest, device_key, device_kid, "raw-manifest"))
+        decoded_samples.append(decode_bound_samples(manifest, [block]))
 
     nodes = sorted(digest(b"\x00" + item) for item in signed_manifests)
     inventory = digest(b"\x01" + nodes[0] + nodes[1])
-    endpoint_a = analyze(samples[0], 0)
-    endpoint_b = analyze(samples[1], 1_570_796)
+    endpoint_a = analyze(decoded_samples[0], 0)
+    endpoint_b = analyze(decoded_samples[1], 1_570_796)
     control = analyze(control_values, 0)
     report = {
         "schema": "phase_qemu.v13.offline_adjudication_preflight.v1",
@@ -304,6 +332,10 @@ def run() -> dict[str, Any]:
     except InvalidSignature:
         invalid_signature_rejected = True
 
+    altered_raw = bytes([raw[0][0] ^ 1]) + raw[0][1:]
+    bad_count = dict(manifests[0])
+    bad_count["sample_count"] += 1
+
     encoded = {
         "enrollment_payload_sha256": dhex(canonical(enrollment)),
         "signed_enrollment_sha256": dhex(encoded_enrollment),
@@ -320,6 +352,13 @@ def run() -> dict[str, Any]:
         "fixture_enrollment_not_authorized": enrollment["production_authorization"] is False,
         "plan_locked_no_interim_looks": plan["locked_before_first_capture"] is True and plan["interim_looks"] == 0,
         "two_manifest_signatures_created": len(signed_manifests) == 2,
+        "analysis_uses_decoded_manifest_bound_bytes": decoded_samples == samples,
+        "altered_raw_block_rejected": rejected(
+            lambda: decode_bound_samples(manifests[0], [altered_raw])
+        ),
+        "sample_count_mismatch_rejected": rejected(
+            lambda: decode_bound_samples(bad_count, [raw[0]])
+        ),
         "invalid_manifest_signature_rejected": invalid_signature_rejected,
         "manifest_inventory_complete": len(inventory) == 32,
         "program_a_passes": endpoint_a["endpoint_pass"],

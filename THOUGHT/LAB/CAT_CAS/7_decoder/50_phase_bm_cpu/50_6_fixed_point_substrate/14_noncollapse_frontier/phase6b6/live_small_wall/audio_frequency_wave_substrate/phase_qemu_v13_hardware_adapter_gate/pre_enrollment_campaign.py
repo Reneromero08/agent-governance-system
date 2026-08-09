@@ -456,15 +456,29 @@ def verify_manifest(
     raw_blocks: list[bytes],
     expected_sequence: int,
     replay_seen: set[tuple[str, int]],
-) -> None:
+) -> list[int]:
     _require_keys(manifest, MANIFEST_KEYS)
     _require_keys(challenge, CHALLENGE_KEYS)
     if manifest["schema"] != "phase_qemu.v13.offline_raw_manifest.v1":
         raise VerificationError("manifest schema")
+    if challenge["schema"] != "phase_qemu.v13.offline_challenge.v1":
+        raise VerificationError("challenge schema")
+    if challenge["campaign_id"] != CAMPAIGN_ID or challenge["backend_id"] != BACKEND_ID:
+        raise VerificationError("challenge campaign or backend")
+    if challenge["protocol_version"] != 1 or challenge["manifest_schema_version"] != 1:
+        raise VerificationError("challenge version")
+    if challenge["expected_rails"] != [0, 1]:
+        raise VerificationError("challenge rails")
+    if challenge["transport_evidence_class"] != "OFFLINE_TEST_VECTOR_ONLY":
+        raise VerificationError("challenge evidence class")
     if manifest["evidence_class"] != "OFFLINE_TEST_VECTOR_ONLY":
         raise VerificationError("manifest evidence class")
     if manifest["physical_sample"] is not False:
         raise VerificationError("offline manifest cannot claim a physical sample")
+    if manifest["device_id"] != DEVICE_ID or manifest["signer_kid"] != enrollment["device_signing_kid"]:
+        raise VerificationError("manifest device or signer")
+    if manifest["attestation_result_digest"] != sha256(b"NO_ATTESTATION_OFFLINE_VECTOR"):
+        raise VerificationError("offline attestation placeholder")
     for key in ("campaign_id", "session_id", "transaction_id", "allocation_id", "generation"):
         if manifest[key] != challenge[key]:
             raise VerificationError(f"challenge binding: {key}")
@@ -492,7 +506,24 @@ def verify_manifest(
             raise VerificationError("payload block receipt")
     if manifest["raw_total_length"] != sum(len(block) for block in raw_blocks):
         raise VerificationError("raw total length")
+    if manifest["rail_labels"] != ["RAIL_A", "RAIL_B"]:
+        raise VerificationError("rail labels")
+    if manifest["sample_encoding"] != "SIGNED_INT32_LE_MICRORADIANS":
+        raise VerificationError("sample encoding")
+    if manifest["sample_rate_hz"] != 1_000 or manifest["channel_map"] != ["SYNTHETIC_PHASE_ERROR"]:
+        raise VerificationError("sample rate or channel map")
+    if manifest["capture_state"] != "OFFLINE_SYNTHETIC_COMPLETE" or manifest["faults"] != []:
+        raise VerificationError("capture state or faults")
+    if manifest["source"] != "SYNTHETIC_BYTES_GENERATED_IN_PROCESS":
+        raise VerificationError("manifest source")
+    raw_payload = b"".join(raw_blocks)
+    if len(raw_payload) % 4 or manifest["sample_count"] * 4 != len(raw_payload):
+        raise VerificationError("sample count does not match signed raw bytes")
+    decoded_samples = list(
+        struct.unpack(f"<{manifest['sample_count']}i", raw_payload)
+    )
     replay_seen.add(replay_key)
+    return decoded_samples
 
 
 def build_plan(plan_kid: bytes) -> dict[str, Any]:
@@ -667,6 +698,7 @@ def run() -> dict[str, Any]:
     raw_sets = [[raw_a], [raw_b]]
     manifests: list[dict[str, Any]] = []
     signed_manifests: list[bytes] = []
+    decoded_sample_sets: list[list[int]] = []
     replay_seen: set[tuple[str, int]] = set()
     for index, (challenge, raw_set) in enumerate(zip(challenges, raw_sets, strict=True), start=1):
         manifest = build_manifest(
@@ -674,7 +706,7 @@ def run() -> dict[str, Any]:
         )
         signed = cose_sign1(manifest, device_private, device_kid, "raw-manifest")
         verified = cose_verify1(signed, device_public, device_kid, "raw-manifest")
-        verify_manifest(
+        decoded_samples = verify_manifest(
             verified,
             challenge,
             verified_enrollment,
@@ -684,10 +716,11 @@ def run() -> dict[str, Any]:
         )
         manifests.append(verified)
         signed_manifests.append(signed)
+        decoded_sample_sets.append(decoded_samples)
 
     inventory_root = merkle_root(signed_manifests)
-    endpoint_a = analyze_endpoint(program_a_samples, target_a, verified_plan)
-    endpoint_b = analyze_endpoint(program_b_samples, target_b, verified_plan)
+    endpoint_a = analyze_endpoint(decoded_sample_sets[0], target_a, verified_plan)
+    endpoint_b = analyze_endpoint(decoded_sample_sets[1], target_b, verified_plan)
     control = analyze_endpoint(control_samples, 0, verified_plan)
 
     report = {
@@ -724,6 +757,9 @@ def run() -> dict[str, Any]:
     wrong_challenge["nonce"] = sha256(b"wrong-nonce")
     missing_block_manifest = dict(manifests[0])
     missing_block_manifest["payload_blocks"] = []
+    wrong_count_manifest = dict(manifests[0])
+    wrong_count_manifest["sample_count"] += 1
+    altered_raw_a = bytes([raw_a[0] ^ 1]) + raw_a[1:]
     replay_probe: set[tuple[str, int]] = set()
     verify_manifest(
         manifests[0],
@@ -750,6 +786,7 @@ def run() -> dict[str, Any]:
         "preregistration_locked_before_data": verified_plan["locked_before_first_capture"] is True,
         "post_lock_plan_mutation_changes_hash": sha256(cbor_encode(mutated_plan)) != sha256(cbor_encode(verified_plan)),
         "two_signed_manifests_verified": len(signed_manifests) == 2 and len(replay_seen) == 2,
+        "analysis_consumes_decoded_verified_raw_bytes": decoded_sample_sets == [program_a_samples, program_b_samples],
         "bad_manifest_signature_rejected": _rejected(
             lambda: cose_verify1(bytes(bad_signature), device_public, device_kid, "raw-manifest")
         ),
@@ -764,6 +801,26 @@ def run() -> dict[str, Any]:
         "missing_payload_block_rejected": _rejected(
             lambda: verify_manifest(
                 missing_block_manifest,
+                challenges[0],
+                verified_enrollment,
+                raw_sets[0],
+                1,
+                set(),
+            )
+        ),
+        "altered_payload_bytes_rejected": _rejected(
+            lambda: verify_manifest(
+                manifests[0],
+                challenges[0],
+                verified_enrollment,
+                [altered_raw_a],
+                1,
+                set(),
+            )
+        ),
+        "sample_count_mismatch_rejected": _rejected(
+            lambda: verify_manifest(
+                wrong_count_manifest,
                 challenges[0],
                 verified_enrollment,
                 raw_sets[0],

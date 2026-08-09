@@ -23,10 +23,10 @@ PRODUCTION_SEAL = ROOT / "evidence" / "PHASE_QEMU_V13_PRE_ENROLLMENT_CAMPAIGN.js
 REFERENCE_SEAL = ROOT / "evidence" / "PHASE_QEMU_V13_PRE_ENROLLMENT_CAMPAIGN_SEPARATE_REFERENCE.json"
 
 EXPECTED_HASHES = {
-    PRODUCTION: "0568f5453e67af8dc92874f9c70bbef3c975d5bbc08e66ca0c213b44a8ae2581",
-    REFERENCE: "fad516a7791ce8e12f126c35eadc56d5b1b7af4caca85db7b14daded7dbfc14f",
-    CONTRACT: "4b8d58be8a40d272e497243ddb1102ec34e20c2a0c054aef4d8e94da46af423b",
-    FINDINGS: "3ea832c6c0fbc6012dd702d7079b2c2a2487be708af4e2673a401b6cb6a5ed2c",
+    PRODUCTION: "1e96207c88cdb660f570956a9ea5143239520bad7a7297094f8aba0c3c959072",
+    REFERENCE: "0f721520996598bd290113af65277d4d6dd39e2c06839c185a03db80c053698c",
+    CONTRACT: "96054a957222ed2e8e10f7acc544edd905f6ef5910fe0b27973d928fe5a13473",
+    FINDINGS: "f73fc9e44c4c4cfc31cced0b4b4dedc91ff502e6578d9fea443ee08225fe3357",
 }
 
 AUTHORITY_GATE = "EXPLICIT_USER_AUTHORIZATION_REQUIRED_BEFORE_DEVICE_ENROLLMENT_CONNECTION_OR_CAPTURE"
@@ -51,10 +51,13 @@ PRODUCTION_CHECKS = {
     "preregistration_locked_before_data",
     "post_lock_plan_mutation_changes_hash",
     "two_signed_manifests_verified",
+    "analysis_consumes_decoded_verified_raw_bytes",
     "bad_manifest_signature_rejected",
     "wrong_signature_domain_rejected",
     "wrong_challenge_rejected",
     "missing_payload_block_rejected",
+    "altered_payload_bytes_rejected",
+    "sample_count_mismatch_rejected",
     "replay_rejected",
     "role_keys_are_distinct",
     "manifest_inventory_complete",
@@ -72,6 +75,9 @@ REFERENCE_CHECKS = {
     "fixture_enrollment_not_authorized",
     "plan_locked_no_interim_looks",
     "two_manifest_signatures_created",
+    "analysis_uses_decoded_manifest_bound_bytes",
+    "altered_raw_block_rejected",
+    "sample_count_mismatch_rejected",
     "invalid_manifest_signature_rejected",
     "manifest_inventory_complete",
     "program_a_passes",
@@ -100,7 +106,8 @@ def static_audit() -> None:
         if actual != expected:
             fail(f"dependency hash drift: {path.name} {actual}")
 
-    production_tree = ast.parse(PRODUCTION.read_text(encoding="utf-8"))
+    production_text = PRODUCTION.read_text(encoding="utf-8")
+    production_tree = ast.parse(production_text)
     reference_text = REFERENCE.read_text(encoding="utf-8")
     reference_tree = ast.parse(reference_text)
     allowed_roots = {
@@ -117,6 +124,17 @@ def static_audit() -> None:
         unexpected = imports - allowed_roots
         if unexpected:
             fail(f"{label} unexpected imports: {sorted(unexpected)}")
+    source_dataflow_anchors = {
+        "decoded_samples = verify_manifest(": production_text,
+        "endpoint_a = analyze_endpoint(decoded_sample_sets[0]": production_text,
+        "endpoint_b = analyze_endpoint(decoded_sample_sets[1]": production_text,
+        "decoded_samples.append(decode_bound_samples(manifest, [block]))": reference_text,
+        "endpoint_a = analyze(decoded_samples[0]": reference_text,
+        "endpoint_b = analyze(decoded_samples[1]": reference_text,
+    }
+    for anchor, text in source_dataflow_anchors.items():
+        if anchor not in text:
+            fail(f"verified-byte dataflow anchor missing: {anchor}")
 
     combined_docs = CONTRACT.read_text(encoding="utf-8") + FINDINGS.read_text(encoding="utf-8")
     required = {

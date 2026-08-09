@@ -25,7 +25,15 @@ monotonic replay state, and a signed adjudication preflight.  It rejects:
 - an altered manifest signature and the same signature under the wrong AAD
   domain;
 - a changed challenge, a missing raw block, and a repeated sequence; and
+- a bit-changed raw block and a declared sample count inconsistent with the
+  signed bytes; and
 - post-lock plan mutation through a changed plan digest.
+
+The statistics are now causally downstream of the evidence boundary.  Both
+implementations decode the receipt-verified signed raw blocks and analyze only
+those decoded integers; neither endpoint analysis consumes the parallel
+fixture-construction arrays.  The qualifier pins this source/dataflow property
+as well as the resulting value parity.
 
 The preregistered A and B synthetic endpoints pass both the Bonferroni-adjusted
 TOST and exact finite-count rule.  The positive-offset control fails.  These
