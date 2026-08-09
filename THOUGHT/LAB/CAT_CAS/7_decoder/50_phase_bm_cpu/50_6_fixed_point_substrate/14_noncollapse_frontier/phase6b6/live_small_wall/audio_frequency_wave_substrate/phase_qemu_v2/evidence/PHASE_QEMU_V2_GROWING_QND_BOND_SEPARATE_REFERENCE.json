@@ -1,0 +1,654 @@
+{
+  "claim_ceiling": "EXACT_IDEAL_SOFTWARE_GROWING_EVEN_MODE_DIAGNOSTIC_ONLY",
+  "claim_limits": {
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "m257_escape": false,
+    "machine_enforced_custody": false,
+    "phase_qemu_device_execution": false,
+    "physical_bosons_or_phonons": false,
+    "physical_qnd_detector": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_compute": false
+  },
+  "controls": {
+    "all_connected_fixtures_restore": true,
+    "dimensions_10_56_330": true,
+    "fixed_core_public_control_matches_declared_geometry": true,
+    "n6_nontrivial_exhaustive_zero_hit": true,
+    "peak_central_ranks_2_8_18": true,
+    "supports_1_54_292": true
+  },
+  "exhaustive_n6": {
+    "edge_count": 15,
+    "excluded_trivial_selector": {
+      "modes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "reason": "FIXED_N_GLOBAL_PARTICLE_PARITY_IS_CONSERVED"
+    },
+    "modes": 6,
+    "nonempty_kerr_edge_subsets": 32767,
+    "particles": 3,
+    "searched_selector_scope": "ALL_NONEMPTY_PROPER_MODE_SUBSETS",
+    "theorem": "ZERO_WORD1_NONTRIVIAL_DETERMINISTIC_BOUNDARIES_AND_ZERO_WORD2_NONTRIVIAL_PARITY_FLIP_CLOSURES_AT_N6",
+    "word1": {
+      "all_nonempty_deterministic_selector_hits_including_global": 32767,
+      "conserved_full_system_selector_hits": 32767,
+      "form": "A B K_E A B",
+      "minimum_support_affine_gf2_rank": 5,
+      "proper_nonempty_deterministic_selector_hits": 0
+    },
+    "word2": {
+      "all_nonempty_deterministic_selector_hits_including_global": 212929,
+      "conserved_full_system_selector_hits": 32767,
+      "form": "A B K_E B_DAG A_DAG",
+      "minimum_support_affine_gf2_rank": 0,
+      "proper_nonempty_deterministic_selector_closures": 180162,
+      "proper_nonempty_parity_flip_closures": 0
+    }
+  },
+  "family": {
+    "A": "product_j R_(2j,2j+1)",
+    "B": "R_(0,n-1) product_j R_(2j+1,2j+2)",
+    "K_E": "(-1)^(sum_(i,j in E) n_i*n_j)",
+    "R_ij": {
+      "creation_i": "(creation_i-creation_j)/sqrt(2)",
+      "creation_j": "(creation_i+creation_j)/sqrt(2)"
+    },
+    "boundary": "P_S=(-1)^(sum_(i in S) n_i)",
+    "dimension_formula": "binomial(n+N-1,N)",
+    "initial": "|1010...10>",
+    "modes": "n=2m",
+    "particles": "N=m"
+  },
+  "fixed_core_disconnected_controls": {
+    "6": {
+      "both_kerr_edges_change_projective_state_and_boundary": true,
+      "boundary_even_weight": "0",
+      "boundary_odd_weight": "1",
+      "central_schmidt_trace": [
+        {
+          "exact_rational_rank": 2,
+          "independent_modular_ranks": {
+            "1000000007": 2,
+            "1000000009": 2
+          }
+        },
+        {
+          "exact_rational_rank": 2,
+          "independent_modular_ranks": {
+            "1000000007": 2,
+            "1000000009": 2
+          }
+        },
+        {
+          "exact_rational_rank": 4,
+          "independent_modular_ranks": {
+            "1000000007": 4,
+            "1000000009": 4
+          }
+        }
+      ],
+      "connected_public_geometry": true,
+      "declared_boundary_selector_modes": [
+        0,
+        4
+      ],
+      "edge_ablation_controls": {
+        "remove_K_12": {
+          "boundary_even_weight": "1/2",
+          "boundary_odd_weight": "1/2",
+          "declared_boundary_changed": true,
+          "projective_state_changed": true,
+          "state_commitment": "af231b977aa3e75bb111e58af966fe58b61b25fb154a80746ab7c7e95c608a03",
+          "support_cells": 4
+        },
+        "remove_K_34": {
+          "boundary_even_weight": "1/2",
+          "boundary_odd_weight": "1/2",
+          "declared_boundary_changed": true,
+          "projective_state_changed": true,
+          "state_commitment": "48638ff0da8773706b6aaec8700d98b8322c62a84048d1217a7f131d31e0aaea",
+          "support_cells": 4
+        }
+      },
+      "final_central_schmidt_rank": {
+        "exact_rational_rank": 4,
+        "independent_modular_ranks": {
+          "1000000007": 4,
+          "1000000009": 4
+        }
+      },
+      "final_state_commitment": "8936ae2e7882db0316f34fbb94da79e490c83dcecd208b697fd112bf8841474e",
+      "final_support_cells": 4,
+      "fixed_kerr_core_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "full_matching_edges": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph_component_sizes": [
+        6
+      ],
+      "graph_components": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "modes": 6,
+      "no_kerr_control": {
+        "boundary_even_weight": "1",
+        "boundary_odd_weight": "0",
+        "declared_boundary_changed": true,
+        "projective_state_changed": true,
+        "state_commitment": "3e26755f269c35f6037755d15265f8c3cd59347d614876dac43aa726f0a91ecb",
+        "support_cells": 1
+      },
+      "peak_central_schmidt_rank": 4,
+      "public_word": [
+        "A_n",
+        "K_{(1,2),(3,4)}",
+        "A_n_DAG"
+      ],
+      "restored_exactly": true,
+      "restored_state_commitment": "3e26755f269c35f6037755d15265f8c3cd59347d614876dac43aa726f0a91ecb"
+    },
+    "8": {
+      "both_kerr_edges_change_projective_state_and_boundary": true,
+      "boundary_even_weight": "0",
+      "boundary_odd_weight": "1",
+      "central_schmidt_trace": [
+        {
+          "exact_rational_rank": 1,
+          "independent_modular_ranks": {
+            "1000000007": 1,
+            "1000000009": 1
+          }
+        },
+        {
+          "exact_rational_rank": 2,
+          "independent_modular_ranks": {
+            "1000000007": 2,
+            "1000000009": 2
+          }
+        },
+        {
+          "exact_rational_rank": 2,
+          "independent_modular_ranks": {
+            "1000000007": 2,
+            "1000000009": 2
+          }
+        }
+      ],
+      "connected_public_geometry": false,
+      "declared_boundary_selector_modes": [
+        0,
+        4
+      ],
+      "edge_ablation_controls": {
+        "remove_K_12": {
+          "boundary_even_weight": "1/2",
+          "boundary_odd_weight": "1/2",
+          "declared_boundary_changed": true,
+          "projective_state_changed": true,
+          "state_commitment": "17eabc8216bda6eaca8199131851d7c5166b7bcb1c6d8d5961f006f0efe3ed01",
+          "support_cells": 4
+        },
+        "remove_K_34": {
+          "boundary_even_weight": "1/2",
+          "boundary_odd_weight": "1/2",
+          "declared_boundary_changed": true,
+          "projective_state_changed": true,
+          "state_commitment": "cfd97a631fcd021f795edf12ee6f51cc9db7796bfdfdd82fcd049570d5d28e54",
+          "support_cells": 4
+        }
+      },
+      "final_central_schmidt_rank": {
+        "exact_rational_rank": 2,
+        "independent_modular_ranks": {
+          "1000000007": 2,
+          "1000000009": 2
+        }
+      },
+      "final_state_commitment": "a958ce242a5b0e6d234ded040ad1b739ccd92ab0e244d959fe62102a1d5cff21",
+      "final_support_cells": 4,
+      "fixed_kerr_core_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "full_matching_edges": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "graph_component_sizes": [
+        6,
+        2
+      ],
+      "graph_components": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "modes": 8,
+      "no_kerr_control": {
+        "boundary_even_weight": "1",
+        "boundary_odd_weight": "0",
+        "declared_boundary_changed": true,
+        "projective_state_changed": true,
+        "state_commitment": "0fc1b022d33378343d30498f7b03744bf8ac6b25b0dd8781c564d01767b9bb9e",
+        "support_cells": 1
+      },
+      "peak_central_schmidt_rank": 2,
+      "public_word": [
+        "A_n",
+        "K_{(1,2),(3,4)}",
+        "A_n_DAG"
+      ],
+      "restored_exactly": true,
+      "restored_state_commitment": "0fc1b022d33378343d30498f7b03744bf8ac6b25b0dd8781c564d01767b9bb9e"
+    }
+  },
+  "fixtures": {
+    "4": {
+      "central_half_parity": {
+        "even_weight": "0",
+        "odd_weight": "1",
+        "selector_modes": [
+          0,
+          1
+        ]
+      },
+      "central_schmidt_trace": [
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 1,
+            "independent_modular_ranks": {
+              "1000000007": 1,
+              "1000000009": 1
+            }
+          },
+          "operation": "A",
+          "support_cells": 4
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 2,
+            "independent_modular_ranks": {
+              "1000000007": 2,
+              "1000000009": 2
+            }
+          },
+          "operation": "B",
+          "support_cells": 6
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 2,
+            "independent_modular_ranks": {
+              "1000000007": 2,
+              "1000000009": 2
+            }
+          },
+          "operation": "K01",
+          "support_cells": 6
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 2,
+            "independent_modular_ranks": {
+              "1000000007": 2,
+              "1000000009": 2
+            }
+          },
+          "operation": "A",
+          "support_cells": 2
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 1,
+            "independent_modular_ranks": {
+              "1000000007": 1,
+              "1000000009": 1
+            }
+          },
+          "operation": "B",
+          "support_cells": 1
+        }
+      ],
+      "connected_public_geometry": true,
+      "dimension": 10,
+      "exchange_kerr_graph_components": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "final_state_commitment": "ea8e0ef53b6b674ec5969cdee9ed22023de352f243604e15f272802d7788a5df",
+      "final_support_cells": 1,
+      "forward_execution_order": [
+        "A",
+        "B",
+        "K01",
+        "A",
+        "B"
+      ],
+      "inverse_execution_order": [
+        "B_DAG",
+        "A_DAG",
+        "K01",
+        "B_DAG",
+        "A_DAG"
+      ],
+      "last_mode_parity": {
+        "even_weight": "0",
+        "odd_weight": "1",
+        "selector_modes": [
+          3
+        ]
+      },
+      "modes": 4,
+      "particles": 2,
+      "peak_central_schmidt_rank": 2,
+      "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+      "restored_exactly": true,
+      "restored_state_commitment": "ee78ae9e7519ea32dfff2416a88940f799c5ea6b714f92cb15bc0d80dc681849"
+    },
+    "6": {
+      "central_half_parity": {
+        "even_weight": "125/256",
+        "odd_weight": "131/256",
+        "selector_modes": [
+          0,
+          1,
+          2
+        ]
+      },
+      "central_schmidt_trace": [
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 2,
+            "independent_modular_ranks": {
+              "1000000007": 2,
+              "1000000009": 2
+            }
+          },
+          "operation": "A",
+          "support_cells": 8
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 8,
+            "independent_modular_ranks": {
+              "1000000007": 8,
+              "1000000009": 8
+            }
+          },
+          "operation": "B",
+          "support_cells": 28
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 8,
+            "independent_modular_ranks": {
+              "1000000007": 8,
+              "1000000009": 8
+            }
+          },
+          "operation": "K01",
+          "support_cells": 28
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 8,
+            "independent_modular_ranks": {
+              "1000000007": 8,
+              "1000000009": 8
+            }
+          },
+          "operation": "A",
+          "support_cells": 50
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 8,
+            "independent_modular_ranks": {
+              "1000000007": 8,
+              "1000000009": 8
+            }
+          },
+          "operation": "B",
+          "support_cells": 54
+        }
+      ],
+      "connected_public_geometry": true,
+      "dimension": 56,
+      "exchange_kerr_graph_components": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "final_state_commitment": "dc597b5f82517eb09122e23beb97ef4ed9a09fcb5a20ab07a0663f4918a6d4fb",
+      "final_support_cells": 54,
+      "forward_execution_order": [
+        "A",
+        "B",
+        "K01",
+        "A",
+        "B"
+      ],
+      "inverse_execution_order": [
+        "B_DAG",
+        "A_DAG",
+        "K01",
+        "B_DAG",
+        "A_DAG"
+      ],
+      "last_mode_parity": {
+        "even_weight": "95/128",
+        "odd_weight": "33/128",
+        "selector_modes": [
+          5
+        ]
+      },
+      "modes": 6,
+      "particles": 3,
+      "peak_central_schmidt_rank": 8,
+      "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+      "restored_exactly": true,
+      "restored_state_commitment": "3e26755f269c35f6037755d15265f8c3cd59347d614876dac43aa726f0a91ecb"
+    },
+    "8": {
+      "central_half_parity": {
+        "even_weight": "273/512",
+        "odd_weight": "239/512",
+        "selector_modes": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "central_schmidt_trace": [
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 1,
+            "independent_modular_ranks": {
+              "1000000007": 1,
+              "1000000009": 1
+            }
+          },
+          "operation": "A",
+          "support_cells": 16
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 16,
+            "independent_modular_ranks": {
+              "1000000007": 16,
+              "1000000009": 16
+            }
+          },
+          "operation": "B",
+          "support_cells": 112
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 16,
+            "independent_modular_ranks": {
+              "1000000007": 16,
+              "1000000009": 16
+            }
+          },
+          "operation": "K01",
+          "support_cells": 112
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 16,
+            "independent_modular_ranks": {
+              "1000000007": 16,
+              "1000000009": 16
+            }
+          },
+          "operation": "A",
+          "support_cells": 164
+        },
+        {
+          "central_schmidt_rank": {
+            "exact_rational_rank": 18,
+            "independent_modular_ranks": {
+              "1000000007": 18,
+              "1000000009": 18
+            }
+          },
+          "operation": "B",
+          "support_cells": 292
+        }
+      ],
+      "connected_public_geometry": true,
+      "dimension": 330,
+      "exchange_kerr_graph_components": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "final_state_commitment": "a6267bfd005b53b0a5a1a465c528f8c45f9bfb1c6deb0d0cbfa2cd22eff0eb25",
+      "final_support_cells": 292,
+      "forward_execution_order": [
+        "A",
+        "B",
+        "K01",
+        "A",
+        "B"
+      ],
+      "inverse_execution_order": [
+        "B_DAG",
+        "A_DAG",
+        "K01",
+        "B_DAG",
+        "A_DAG"
+      ],
+      "last_mode_parity": {
+        "even_weight": "767/1024",
+        "odd_weight": "257/1024",
+        "selector_modes": [
+          7
+        ]
+      },
+      "modes": 8,
+      "particles": 4,
+      "peak_central_schmidt_rank": 18,
+      "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+      "restored_exactly": true,
+      "restored_state_commitment": "0fc1b022d33378343d30498f7b03744bf8ac6b25b0dd8781c564d01767b9bb9e"
+    }
+  },
+  "implementation_independence": {
+    "floating_point_scientific_decisions": false,
+    "imports_phase_qemu_v1": false,
+    "imports_production": false,
+    "operator_construction": "DIRECT_BINOMIAL_CREATION_OPERATOR_SUBSTITUTION",
+    "rank_oracles": [
+      "EXACT_RATIONAL_ELIMINATION",
+      "TWO_PRIME_MODULAR_ELIMINATION"
+    ],
+    "state_representation": "DENSE_INTEGER_HOMOGENEOUS_COEFFICIENT_ARRAY_WITH_SHARED_SQRT2_EXPONENT"
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "phase-qemu-v2-growing-even-mode-qnd-bond-separate-reference-v1",
+  "verification_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

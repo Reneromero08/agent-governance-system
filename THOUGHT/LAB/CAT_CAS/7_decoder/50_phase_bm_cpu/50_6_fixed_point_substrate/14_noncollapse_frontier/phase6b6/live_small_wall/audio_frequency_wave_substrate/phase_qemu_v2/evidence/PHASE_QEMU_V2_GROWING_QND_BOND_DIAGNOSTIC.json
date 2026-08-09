@@ -1,0 +1,936 @@
+{
+  "claim": "EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE",
+  "claim_ceiling": "EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY",
+  "claim_ceilings": [
+    "software exact-arithmetic diagnostic only",
+    "no physical Phase-QEMU execution",
+    "no QEMU or CATVM custody enforcement",
+    "no same-backing restoration or reuse claim",
+    "no phase-native resource advantage",
+    "no complexity lower bound",
+    "no general cross-Kerr no-go",
+    "no Small Wall crossing",
+    "no physical-bit replacement",
+    "no unbounded catalytic computation"
+  ],
+  "exactness": {
+    "floating_point_scientific_decisions": 0,
+    "probabilities": "exact dyadic Fraction",
+    "schmidt_rank": "exact rational matrix rank after invertible Fock normalization factors are removed",
+    "state_representation": "integer homogeneous-polynomial coefficients"
+  },
+  "experiment": "GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC",
+  "fixed_core_controls": [
+    {
+      "all_edges_change_declared_boundary": true,
+      "all_edges_change_projective_state": true,
+      "bounded_active_core_certificate": false,
+      "final": {
+        "boundary": {
+          "even_weight": "0",
+          "factorized": true,
+          "odd_weight": "1",
+          "pointer_purity": "1",
+          "pointer_schmidt_rank": 1,
+          "selector_modes": [
+            0,
+            4
+          ]
+        },
+        "central_schmidt_rank": 4,
+        "commitment": "facaf236edb7a8df79cc858ea5bbc268013bb09d4963a9a97f9c21f66eb589f4",
+        "common_sqrt2_denominator_exponent": 6,
+        "matching_layers": 2,
+        "maximum_integer_coefficient_signed_bits": 4,
+        "support": 4
+      },
+      "geometry_component_sizes": [
+        6
+      ],
+      "geometry_connected": true,
+      "kerr_disabled_boundary": {
+        "even_weight": "1",
+        "factorized": true,
+        "odd_weight": "0",
+        "pointer_purity": "1",
+        "pointer_schmidt_rank": 1,
+        "selector_modes": [
+          0,
+          4
+        ]
+      },
+      "kerr_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "modes": 6,
+      "particles": 3,
+      "per_edge_causality": [
+        {
+          "changes_declared_boundary": true,
+          "changes_projective_state": true,
+          "edge": [
+            1,
+            2
+          ]
+        },
+        {
+          "changes_declared_boundary": true,
+          "changes_projective_state": true,
+          "edge": [
+            3,
+            4
+          ]
+        }
+      ],
+      "public_word": [
+        "A",
+        "K_FIXED_CORE",
+        "A_DAGGER"
+      ],
+      "public_word_exact_result_free_restore": true,
+      "selector_modes": [
+        0,
+        4
+      ]
+    },
+    {
+      "all_edges_change_declared_boundary": true,
+      "all_edges_change_projective_state": true,
+      "bounded_active_core_certificate": true,
+      "final": {
+        "boundary": {
+          "even_weight": "0",
+          "factorized": true,
+          "odd_weight": "1",
+          "pointer_purity": "1",
+          "pointer_schmidt_rank": 1,
+          "selector_modes": [
+            0,
+            4
+          ]
+        },
+        "central_schmidt_rank": 2,
+        "commitment": "b73f28540dfed6aa10f0e9218bc8ef1411a7a4c7706150f48534a78cdf042d67",
+        "common_sqrt2_denominator_exponent": 8,
+        "matching_layers": 2,
+        "maximum_integer_coefficient_signed_bits": 5,
+        "support": 4
+      },
+      "geometry_component_sizes": [
+        6,
+        2
+      ],
+      "geometry_connected": false,
+      "kerr_disabled_boundary": {
+        "even_weight": "1",
+        "factorized": true,
+        "odd_weight": "0",
+        "pointer_purity": "1",
+        "pointer_schmidt_rank": 1,
+        "selector_modes": [
+          0,
+          4
+        ]
+      },
+      "kerr_edges": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "modes": 8,
+      "particles": 4,
+      "per_edge_causality": [
+        {
+          "changes_declared_boundary": true,
+          "changes_projective_state": true,
+          "edge": [
+            1,
+            2
+          ]
+        },
+        {
+          "changes_declared_boundary": true,
+          "changes_projective_state": true,
+          "edge": [
+            3,
+            4
+          ]
+        }
+      ],
+      "public_word": [
+        "A",
+        "K_FIXED_CORE",
+        "A_DAGGER"
+      ],
+      "public_word_exact_result_free_restore": true,
+      "selector_modes": [
+        0,
+        4
+      ]
+    }
+  ],
+  "milestone": "M260",
+  "n6_exhaustive_searches": [
+    {
+      "algorithm": {
+        "floating_point_decisions": 0,
+        "fwht_integer_add_subtract_operations": 27525120,
+        "generated_fwht_table_columns": 32768,
+        "generated_fwht_table_integer_cells": 1835008,
+        "generated_fwht_table_is_verifier_only": true,
+        "generated_fwht_table_peak_integer_signed_bits": 6,
+        "generated_fwht_table_rows": 56,
+        "generated_table_is_not_an_accepted_carrier_or_compiler": true,
+        "kerr_graph_enumeration": "exact 15-bit Walsh-Hadamard transform",
+        "scientific_numeric_type": "integer coefficients and Fraction weights",
+        "selector_enumeration": "all nonempty proper six-mode subsets"
+      },
+      "all_edge_boundary_causal_deterministic_pairs": 0,
+      "all_edge_state_causal_deterministic_graphs": 0,
+      "complete_graph_kerr_edges": 15,
+      "conserved_total_parity_sham": {
+        "checked_for_every_nonempty_kerr_graph": true,
+        "even_weight": "0",
+        "excluded_from_nontrivial_search": true,
+        "odd_weight": "1",
+        "selector_modes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "deterministic_proper_selector_pairs": 0,
+      "first_hit": null,
+      "graph_selector_pairs_checked": 2031554,
+      "graphs_with_any_deterministic_proper_selector": 0,
+      "kerr_distinguishing_deterministic_pairs": 0,
+      "modes": 6,
+      "nonempty_kerr_graphs": 32767,
+      "nonempty_proper_parity_selectors": 62,
+      "particles": 3,
+      "public_word": [
+        "A",
+        "B",
+        "K_E",
+        "A",
+        "B"
+      ],
+      "word_form": "TRANSFER_ABKAB"
+    },
+    {
+      "algorithm": {
+        "floating_point_decisions": 0,
+        "fwht_integer_add_subtract_operations": 27525120,
+        "generated_fwht_table_columns": 32768,
+        "generated_fwht_table_integer_cells": 1835008,
+        "generated_fwht_table_is_verifier_only": true,
+        "generated_fwht_table_peak_integer_signed_bits": 8,
+        "generated_fwht_table_rows": 56,
+        "generated_table_is_not_an_accepted_carrier_or_compiler": true,
+        "kerr_graph_enumeration": "exact 15-bit Walsh-Hadamard transform",
+        "scientific_numeric_type": "integer coefficients and Fraction weights",
+        "selector_enumeration": "all nonempty proper six-mode subsets"
+      },
+      "all_edge_boundary_causal_deterministic_pairs": 22466,
+      "all_edge_state_causal_deterministic_graphs": 2047,
+      "complete_graph_kerr_edges": 15,
+      "conserved_total_parity_sham": {
+        "checked_for_every_nonempty_kerr_graph": true,
+        "even_weight": "0",
+        "excluded_from_nontrivial_search": true,
+        "odd_weight": "1",
+        "selector_modes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "deterministic_proper_selector_pairs": 180162,
+      "first_hit": {
+        "differs_from_kerr_disabled": false,
+        "edge_count": 2,
+        "even_weight": "0",
+        "odd_weight": "1",
+        "selector_modes": [
+          2,
+          3
+        ]
+      },
+      "graph_selector_pairs_checked": 2031554,
+      "graphs_with_any_deterministic_proper_selector": 16383,
+      "kerr_distinguishing_deterministic_pairs": 0,
+      "modes": 6,
+      "nonempty_kerr_graphs": 32767,
+      "nonempty_proper_parity_selectors": 62,
+      "particles": 3,
+      "public_word": [
+        "A",
+        "B",
+        "K_E",
+        "B_DAGGER",
+        "A_DAGGER"
+      ],
+      "word_form": "ECHO_ABKBdAd"
+    }
+  ],
+  "next_materially_different_backend_if_killed": "CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND",
+  "observed_disposition": {
+    "classification": "DETERMINISTIC_QND_PARITY_CLOSURE_AND_CONNECTED_BOND_GROWTH_DO_NOT_COEXIST_IN_THE_TESTED_PI_CROSS_KERR_ALTERNATING_MATCHING_FAMILY",
+    "exact_exhaustive_zero_kerr_distinguishing_deterministic_boundary_hit": true,
+    "primary_final_central_schmidt_ranks_n4_n6_n8": [
+      1,
+      8,
+      18
+    ],
+    "primary_last_mode_qnd_factorized_n4_n6_n8": [
+      true,
+      false,
+      false
+    ],
+    "primary_maximum_central_schmidt_ranks_n4_n6_n8": [
+      2,
+      8,
+      18
+    ],
+    "raw_echo_deterministic_parities_are_not_promoted": true,
+    "scope": "declared n=4,6,8 primary descriptor; exhaustive n=6 single-pi-Kerr graph search for two declared word forms; declared n=6,8 fixed-core controls"
+  },
+  "package_verification_level": "PACKAGE_SELF_REVIEW",
+  "primary_family": [
+    {
+      "controls": {
+        "descriptor_distinct_reuse": {
+          "boundary": {
+            "even_weight": "1/2",
+            "factorized": false,
+            "odd_weight": "1/2",
+            "pointer_purity": "1/2",
+            "pointer_schmidt_rank": 2,
+            "selector_modes": [
+              0
+            ]
+          },
+          "consumes_returned_restored_value": true,
+          "forward_commitment": "d128bd698ef46a6d70c9faf7a88a8f98dd702131b076cb527d0112d0b21673eb",
+          "public_adjoint_exact_restore": true,
+          "same_backing_reuse_established": false,
+          "word": [
+            "A",
+            "K_12",
+            "A_DAGGER"
+          ]
+        },
+        "kerr_changes_central_half_boundary": true,
+        "kerr_changes_last_mode_boundary": true,
+        "kerr_changes_projective_state": true,
+        "kerr_disabled_central_half_parity": {
+          "even_weight": "1/2",
+          "factorized": false,
+          "odd_weight": "1/2",
+          "pointer_purity": "1/2",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            0,
+            1
+          ]
+        },
+        "kerr_disabled_final_commitment": "3c60f299cb44312680334e7180311ca6b95191a5208bf4f31d730397a2a9581e",
+        "kerr_disabled_last_mode_parity": {
+          "even_weight": "3/4",
+          "factorized": false,
+          "odd_weight": "1/4",
+          "pointer_purity": "5/8",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            3
+          ]
+        },
+        "no_baseline_reload": true,
+        "public_adjoint_exact_restore": true,
+        "wrong_kerr_inverse_rejected": true
+      },
+      "final": {
+        "central_half_parity": {
+          "even_weight": "0",
+          "factorized": true,
+          "odd_weight": "1",
+          "pointer_purity": "1",
+          "pointer_schmidt_rank": 1,
+          "selector_modes": [
+            0,
+            1
+          ]
+        },
+        "central_schmidt_rank": 1,
+        "commitment": "46ce8a00f4ed9f08840897b3539b9e7da796ccde4885f096d0a7eafc76ac1f63",
+        "common_sqrt2_denominator_exponent": 8,
+        "last_mode_parity": {
+          "even_weight": "0",
+          "factorized": true,
+          "odd_weight": "1",
+          "pointer_purity": "1",
+          "pointer_schmidt_rank": 1,
+          "selector_modes": [
+            3
+          ]
+        },
+        "matching_layers": 4,
+        "maximum_integer_coefficient_signed_bits": 6,
+        "support": 1
+      },
+      "modes": 4,
+      "particles": 2,
+      "public_descriptor": {
+        "A": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "B": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "K": [
+          [
+            0,
+            1
+          ]
+        ],
+        "initial": "alternating unit Fock occupancy",
+        "word": [
+          "A",
+          "B",
+          "K",
+          "A",
+          "B"
+        ]
+      },
+      "resource_signature": {
+        "bosons": 2,
+        "common_sqrt2_denominator_exponent_after_forward": 8,
+        "exact_sparse_sector_dimension": 10,
+        "forward_exchange_count": 8,
+        "forward_kerr_edge_count": 1,
+        "forward_matching_count": 4,
+        "inverse_derived_from_public_word": true,
+        "logical_modes": 4,
+        "resident_state_integer_coefficient_cells": 10,
+        "retained_inverse_history": 0
+      },
+      "sector_dimension": 10,
+      "stages": [
+        {
+          "central_schmidt_rank": 1,
+          "commitment": "fe0d4bca444cf8695b8c866ad6e540835ca0c01863800bc287b82d26e824d198",
+          "common_sqrt2_denominator_exponent": 2,
+          "matching_layers": 1,
+          "maximum_integer_coefficient_signed_bits": 2,
+          "operation": "A",
+          "support": 4
+        },
+        {
+          "central_schmidt_rank": 2,
+          "commitment": "f92dd5a12caea82b10f03ee15411710347fe51c34e50895a42b75239fb52e70c",
+          "common_sqrt2_denominator_exponent": 4,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "B",
+          "support": 6
+        },
+        {
+          "central_schmidt_rank": 2,
+          "commitment": "efe51ffc0e41dc142101679c7de200a44c88daf364d4c4a53e0e0b79cc1614c2",
+          "common_sqrt2_denominator_exponent": 4,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "K_01",
+          "support": 6
+        },
+        {
+          "central_schmidt_rank": 2,
+          "commitment": "f2526e4bd75ee0a5f6aca7746ef434bd28c2e65b4a5f4c3168dde1ed0bb0b824",
+          "common_sqrt2_denominator_exponent": 6,
+          "matching_layers": 3,
+          "maximum_integer_coefficient_signed_bits": 4,
+          "operation": "A",
+          "support": 2
+        },
+        {
+          "central_schmidt_rank": 1,
+          "commitment": "46ce8a00f4ed9f08840897b3539b9e7da796ccde4885f096d0a7eafc76ac1f63",
+          "common_sqrt2_denominator_exponent": 8,
+          "matching_layers": 4,
+          "maximum_integer_coefficient_signed_bits": 6,
+          "operation": "B",
+          "support": 1
+        }
+      ]
+    },
+    {
+      "controls": {
+        "descriptor_distinct_reuse": {
+          "boundary": {
+            "even_weight": "1/2",
+            "factorized": false,
+            "odd_weight": "1/2",
+            "pointer_purity": "1/2",
+            "pointer_schmidt_rank": 2,
+            "selector_modes": [
+              0
+            ]
+          },
+          "consumes_returned_restored_value": true,
+          "forward_commitment": "7a0d7fcfc0fae77d521547d1250e041f328a629d6b9065ba7fd70c3a89f17195",
+          "public_adjoint_exact_restore": true,
+          "same_backing_reuse_established": false,
+          "word": [
+            "A",
+            "K_12",
+            "A_DAGGER"
+          ]
+        },
+        "kerr_changes_central_half_boundary": true,
+        "kerr_changes_last_mode_boundary": false,
+        "kerr_changes_projective_state": true,
+        "kerr_disabled_central_half_parity": {
+          "even_weight": "133/256",
+          "factorized": false,
+          "odd_weight": "123/256",
+          "pointer_purity": "16409/32768",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            0,
+            1,
+            2
+          ]
+        },
+        "kerr_disabled_final_commitment": "788faff4bdad045d7e0b1c62bb33e693d6ef169a591793c2193a757a25fd8a1e",
+        "kerr_disabled_last_mode_parity": {
+          "even_weight": "95/128",
+          "factorized": false,
+          "odd_weight": "33/128",
+          "pointer_purity": "5057/8192",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            5
+          ]
+        },
+        "no_baseline_reload": true,
+        "public_adjoint_exact_restore": true,
+        "wrong_kerr_inverse_rejected": true
+      },
+      "final": {
+        "central_half_parity": {
+          "even_weight": "125/256",
+          "factorized": false,
+          "odd_weight": "131/256",
+          "pointer_purity": "16393/32768",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            0,
+            1,
+            2
+          ]
+        },
+        "central_schmidt_rank": 8,
+        "commitment": "e860477dd70506e28801c57a4c08ee31a661580ae2a86e153687ed095e7a1b31",
+        "common_sqrt2_denominator_exponent": 12,
+        "last_mode_parity": {
+          "even_weight": "95/128",
+          "factorized": false,
+          "odd_weight": "33/128",
+          "pointer_purity": "5057/8192",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            5
+          ]
+        },
+        "matching_layers": 4,
+        "maximum_integer_coefficient_signed_bits": 6,
+        "support": 54
+      },
+      "modes": 6,
+      "particles": 3,
+      "public_descriptor": {
+        "A": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ]
+        ],
+        "B": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "K": [
+          [
+            0,
+            1
+          ]
+        ],
+        "initial": "alternating unit Fock occupancy",
+        "word": [
+          "A",
+          "B",
+          "K",
+          "A",
+          "B"
+        ]
+      },
+      "resource_signature": {
+        "bosons": 3,
+        "common_sqrt2_denominator_exponent_after_forward": 12,
+        "exact_sparse_sector_dimension": 56,
+        "forward_exchange_count": 12,
+        "forward_kerr_edge_count": 1,
+        "forward_matching_count": 4,
+        "inverse_derived_from_public_word": true,
+        "logical_modes": 6,
+        "resident_state_integer_coefficient_cells": 56,
+        "retained_inverse_history": 0
+      },
+      "sector_dimension": 56,
+      "stages": [
+        {
+          "central_schmidt_rank": 2,
+          "commitment": "39aba39e04ad94566a3e43ab255e12cfb4cc4896cb8219d16dcee8d23f722702",
+          "common_sqrt2_denominator_exponent": 3,
+          "matching_layers": 1,
+          "maximum_integer_coefficient_signed_bits": 2,
+          "operation": "A",
+          "support": 8
+        },
+        {
+          "central_schmidt_rank": 8,
+          "commitment": "76ca7600c5ecdbdb65b30ffc6adaa6097baf6047028ce2ca68e209979074ff03",
+          "common_sqrt2_denominator_exponent": 6,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "B",
+          "support": 28
+        },
+        {
+          "central_schmidt_rank": 8,
+          "commitment": "be320b459fd8774b7a092947f2caac7c25a1d3caafc6a0ab5fa917a69906cb1f",
+          "common_sqrt2_denominator_exponent": 6,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "K_01",
+          "support": 28
+        },
+        {
+          "central_schmidt_rank": 8,
+          "commitment": "5205b35b0f77abc5262918dcdfcbd4ced8db449f7bb578641d6a8cededebca52",
+          "common_sqrt2_denominator_exponent": 9,
+          "matching_layers": 3,
+          "maximum_integer_coefficient_signed_bits": 4,
+          "operation": "A",
+          "support": 50
+        },
+        {
+          "central_schmidt_rank": 8,
+          "commitment": "e860477dd70506e28801c57a4c08ee31a661580ae2a86e153687ed095e7a1b31",
+          "common_sqrt2_denominator_exponent": 12,
+          "matching_layers": 4,
+          "maximum_integer_coefficient_signed_bits": 6,
+          "operation": "B",
+          "support": 54
+        }
+      ]
+    },
+    {
+      "controls": {
+        "descriptor_distinct_reuse": {
+          "boundary": {
+            "even_weight": "1/2",
+            "factorized": false,
+            "odd_weight": "1/2",
+            "pointer_purity": "1/2",
+            "pointer_schmidt_rank": 2,
+            "selector_modes": [
+              0
+            ]
+          },
+          "consumes_returned_restored_value": true,
+          "forward_commitment": "9eb9c1d581017b5dfa087301f3f6fc93eb0d54b64c321f2840805b5c0c0ab551",
+          "public_adjoint_exact_restore": true,
+          "same_backing_reuse_established": false,
+          "word": [
+            "A",
+            "K_12",
+            "A_DAGGER"
+          ]
+        },
+        "kerr_changes_central_half_boundary": true,
+        "kerr_changes_last_mode_boundary": true,
+        "kerr_changes_projective_state": true,
+        "kerr_disabled_central_half_parity": {
+          "even_weight": "9/16",
+          "factorized": false,
+          "odd_weight": "7/16",
+          "pointer_purity": "65/128",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "kerr_disabled_final_commitment": "cc95c20c680aa436ce74db3a98d2843404d90370bf8c5f46ae297fde8e9b46d8",
+        "kerr_disabled_last_mode_parity": {
+          "even_weight": "843/1024",
+          "factorized": false,
+          "odd_weight": "181/1024",
+          "pointer_purity": "371705/524288",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            7
+          ]
+        },
+        "no_baseline_reload": true,
+        "public_adjoint_exact_restore": true,
+        "wrong_kerr_inverse_rejected": true
+      },
+      "final": {
+        "central_half_parity": {
+          "even_weight": "273/512",
+          "factorized": false,
+          "odd_weight": "239/512",
+          "pointer_purity": "65825/131072",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "central_schmidt_rank": 18,
+        "commitment": "d2fb4dfa08f96d0b2665a56ea09b33a73ec4a7313c0fc3d08cea4d96949afa9e",
+        "common_sqrt2_denominator_exponent": 16,
+        "last_mode_parity": {
+          "even_weight": "767/1024",
+          "factorized": false,
+          "odd_weight": "257/1024",
+          "pointer_purity": "327169/524288",
+          "pointer_schmidt_rank": 2,
+          "selector_modes": [
+            7
+          ]
+        },
+        "matching_layers": 4,
+        "maximum_integer_coefficient_signed_bits": 7,
+        "support": 292
+      },
+      "modes": 8,
+      "particles": 4,
+      "public_descriptor": {
+        "A": [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "B": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "K": [
+          [
+            0,
+            1
+          ]
+        ],
+        "initial": "alternating unit Fock occupancy",
+        "word": [
+          "A",
+          "B",
+          "K",
+          "A",
+          "B"
+        ]
+      },
+      "resource_signature": {
+        "bosons": 4,
+        "common_sqrt2_denominator_exponent_after_forward": 16,
+        "exact_sparse_sector_dimension": 330,
+        "forward_exchange_count": 16,
+        "forward_kerr_edge_count": 1,
+        "forward_matching_count": 4,
+        "inverse_derived_from_public_word": true,
+        "logical_modes": 8,
+        "resident_state_integer_coefficient_cells": 330,
+        "retained_inverse_history": 0
+      },
+      "sector_dimension": 330,
+      "stages": [
+        {
+          "central_schmidt_rank": 1,
+          "commitment": "fdce7699a32bdc92cbded1f99d9a4d0d96dca43cbf8492726daeb60b3b6eaa35",
+          "common_sqrt2_denominator_exponent": 4,
+          "matching_layers": 1,
+          "maximum_integer_coefficient_signed_bits": 2,
+          "operation": "A",
+          "support": 16
+        },
+        {
+          "central_schmidt_rank": 16,
+          "commitment": "eaf262f041510a26bf89be932be90e03815ac8e5405a11cd1670ab442719d786",
+          "common_sqrt2_denominator_exponent": 8,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "B",
+          "support": 112
+        },
+        {
+          "central_schmidt_rank": 16,
+          "commitment": "e6ebfdadaeaeaa193a081d55d831ecf1b92e14576f35d65481ac7bf8be29efc5",
+          "common_sqrt2_denominator_exponent": 8,
+          "matching_layers": 2,
+          "maximum_integer_coefficient_signed_bits": 3,
+          "operation": "K_01",
+          "support": 112
+        },
+        {
+          "central_schmidt_rank": 16,
+          "commitment": "d1800267340c5a5fa40e7ccb103d46f64ed197196152aa001a161ba75eedbfd7",
+          "common_sqrt2_denominator_exponent": 12,
+          "matching_layers": 3,
+          "maximum_integer_coefficient_signed_bits": 5,
+          "operation": "A",
+          "support": 164
+        },
+        {
+          "central_schmidt_rank": 18,
+          "commitment": "d2fb4dfa08f96d0b2665a56ea09b33a73ec4a7313c0fc3d08cea4d96949afa9e",
+          "common_sqrt2_denominator_exponent": 16,
+          "matching_layers": 4,
+          "maximum_integer_coefficient_signed_bits": 7,
+          "operation": "B",
+          "support": 292
+        }
+      ]
+    }
+  ],
+  "resource_accounting": {
+    "exhaustive_n6_generated_fwht_integer_cells_per_word": 1835008,
+    "exhaustive_n6_generated_fwht_tables_sequential_not_simultaneous": true,
+    "matching_transition_cache_and_compiler_entries_instrumented": false,
+    "physical_energy_noise_precision_bandwidth_and_latency_modeled": false,
+    "primary_resident_integer_coefficient_cells_n4_n6_n8": [
+      10,
+      56,
+      330
+    ],
+    "python_object_allocator_hashing_and_serialization_accounted": false,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "whole_process_live_payload_peak_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "FUNCTIONAL_NORMALIZED_EXACT_STATE_EQUALITY_AND_RETURNED_VALUE_REUSE_WITHOUT_SAME_BACKING",
+  "schema": "phase_qemu_v2_growing_even_mode_qnd_bond_diagnostic_v1",
+  "strict_kill_rule": [
+    "deterministic parity requires n-specific answer-bearing selector search",
+    "connectedness depends on inactive edges",
+    "the causal active component remains bounded",
+    "parity becomes mixed precisely when Schmidt rank grows",
+    "the strongest adaptive boundary-only comparator remains bounded or compact"
+  ],
+  "strict_promote_rule": [
+    "one formula-generated public descriptor works at n=4,6,8 without answer search",
+    "all-mode causal interaction geometry is connected",
+    "every declared Kerr edge changes the declared boundary under ablation",
+    "a nontrivial parity is exactly deterministic and differs from the Kerr-disabled path",
+    "QND copy, unlatch, public-adjoint restoration, and reuse are exact",
+    "minimal MPS or TTN bond rank grows with no bounded-component or symmetry certificate"
+  ],
+  "strongest_honest_comparator": {
+    "adaptive_tensor_network_comparator_implemented": false,
+    "comparator_optimality_established": false,
+    "constant_depth_growth_is_not_an_asymptotic_separation": true,
+    "dense_sector_only_comparison_forbidden": true,
+    "required": [
+      "exact sparse fixed-number propagation",
+      "adaptive U(1)-symmetric MPS using measured minimal bond dimensions",
+      "TTN or boundary-only contraction of the requested parity projector",
+      "fixed-number linear-optical recurrence for the Kerr-disabled path",
+      "period-two, reflection, translation, involution, and finite-depth symmetry reductions",
+      "O(1) active-component certificate when causal support remains bounded"
+    ],
+    "resource_advantage_comparison_authorized": false
+  }
+}
