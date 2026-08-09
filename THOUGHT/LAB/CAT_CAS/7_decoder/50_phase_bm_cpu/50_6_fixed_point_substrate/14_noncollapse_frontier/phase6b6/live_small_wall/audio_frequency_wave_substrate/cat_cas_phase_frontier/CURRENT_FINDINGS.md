@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`f330d517b80b1f0ba94d503058025b2ec853912c`. The canonical per-milestone
+`92d33c227925180a30f7d032df988834fbab8afe`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13825,3 +13825,66 @@ equal-access comparator may directly compile `exp(-i theta AB)` from the
 same public Hamiltonian, truncation, environment, controller, and program
 descriptors rather than simulate the bus. No advantage or physical claim is
 authorized by the model architecture.
+
+## M265 ideal Weyl-loop logical carrier-return calibration
+
+The accepted claim is:
+
+```text
+IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD
+```
+
+The ideal infinite-CCR group commutator returns the bus identically and applies
+`exp(-i lambda mu AB)` to commuting client observables. Production and an
+independent spectral reference agree on the sign, pulse order, complete client
+state, selected boundaries, bus/reference return, and factorization for seven
+named finite-energy fixture sequences at cutoffs 16, 32, 64, and 128. Programs
+A and B execute on one resident logical array allocation without detach,
+reseed, reinitialization, snapshot, reload, or baseline read.
+
+Restoration is classified `NUMERICAL_PHYSICAL_STATE_RESTORATION` only at exact
+scope:
+
+```text
+ENERGY_CONSTRAINED_COMPLEX128_LOGICAL_RESIDENT_BACKING_BUS_AND_REFERENCE_RETURN_WITH_CLIENT_TRANSFORMATION_AND_COMPLETE_FACTORIZATION_AT_CUTOFF128_WITHOUT_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+This scope means the bus/reference returns and factorizes inside the same
+logical backing while the clients intentionally transform. It is not a return
+of the whole joint state, physical same-mode custody, or physical restoration.
+The convergence claim is limited to the named fixture sequences, not a uniform
+energy-bounded ball. The top-Fock witness and finite-cutoff CCR defect reject
+arbitrary-state uniformity; the `Phi4` reference fixture rejects marginal-only
+restoration.
+
+The claim ceiling is:
+
+```text
+DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+The strongest equal-access comparator applies the two direct compiled `ZZ`
+client phases and omits all eight hybrid bus pulses; declared graph-state
+moments also admit direct product formulas. The exact disposition is:
+
+```text
+DIRECT_COMPILED_ZZ_FORWARD_SHADOW_STRICTLY_OMITS_THE_BUS_LOOP_AND_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+M265 therefore establishes a bounded logical restoration architecture, not a
+resource advantage. M257 remains intact. No physical oscillator, physical
+observation, physical restoration, unbounded computation, Small Wall crossing,
+or bit-to-pi replacement is established.
+
+The active successor is:
+
+```text
+MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
+```
+
+It must test the law in a physically structured multimode state-dependent-force
+model, including spectator closure, detuning, heating, finite pulse envelopes,
+controller precision and bandwidth, energy, latency, preparation, and two
+distinct programs without a mode reset. The direct compiled client interaction
+remains the controlling forward shadow, and the model authorizes no physical
+or advantage claim.

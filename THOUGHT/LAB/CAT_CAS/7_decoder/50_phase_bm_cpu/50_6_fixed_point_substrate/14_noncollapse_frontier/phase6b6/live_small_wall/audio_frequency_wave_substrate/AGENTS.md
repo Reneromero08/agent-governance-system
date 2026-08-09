@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`f330d517b80b1f0ba94d503058025b2ec853912c`. The registry assigns one
+`92d33c227925180a30f7d032df988834fbab8afe`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 264-milestone lane remains nonterminal under user-only closure.
+The current 265-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,37 +56,35 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-FROZEN_L641_SIGMA50_NEAR_THRESHOLD_TIME_DOMAIN_SCATTERING_EXECUTES_TRANSIENT_BORROW_DRAIN_AND_COMPLETE_RETURNED_DENSITY_HANDOFF_BUT_THE_PUBLIC_T120_ADIABATIC_PREPARATION_AND_FINITE_PACKET_T340_RETURN_FAIL_DECLARED_1E_MINUS_7_MATCHED_FREE_TARGET_TRACE_DISTANCE_GATES
+IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD
 ```
 
 Claim ceiling:
 
 ```text
-FINITE_COMPLEX128_DETERMINISTIC_SOFTWARE_SINGLE_PROBE_L641_FOUR_SPIN_TIME_DOMAIN_MODEL_WITH_RETURNED_TARGET_DENSITY_REMATERIALIZATION_AND_NO_SAME_BACKING_OR_PHYSICAL_RESTORATION
+DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific
-evidence at `SEPARATE_REFERENCE_PARITY`, theory at
-`FORMAL_DERIVATION_SOURCE_AUDITED`, and resources only at
-`PACKAGE_SELF_REVIEW`. Restoration is `NO_RESTORATION_CLAIM` at exact scope
-`FAILED_DECLARED_TIME_DOMAIN_RETURN_OR_REUSE_THRESHOLDS`. The frozen
-`L=641`, `sigma=50` deterministic complex128 model executes real transient
-target excitation, contact drain, finite-packet boundary delay, and a complete
-16-by-16 returned-density handoff. The public `Tprep=120`, `T=340` query A
-matched-free target trace distance is `8.038931410866084e-05`; the
-returned-density-rematerialized query B value is
-`2.8167715493073277e-05`. Both fail the predeclared `1e-7` return gate.
-The handoff reconstructs and rematerializes the returned density into new
-numerical storage. It is not continuous custody, same-backing reuse, physical
-restoration, or catalytic restoration. The fixed `641*16=10256`-amplitude
-model has an identical sparse-evolution classical recurrence, and its
-one-particle lead admits MPS cut bond dimension at most 17, so no
-tensor-network crossover or resource advantage is established.
+evidence at `SEPARATE_REFERENCE_PARITY` and resources only at
+`PACKAGE_SELF_REVIEW`. Restoration is classified
+`NUMERICAL_PHYSICAL_STATE_RESTORATION` only at the exact logical scope
+`ENERGY_CONSTRAINED_COMPLEX128_LOGICAL_RESIDENT_BACKING_BUS_AND_REFERENCE_RETURN_WITH_CLIENT_TRANSFORMATION_AND_COMPLETE_FACTORIZATION_AT_CUTOFF128_WITHOUT_PHYSICAL_SAME_MODE_CUSTODY`.
+The ideal infinite-CCR group commutator restores the bus identically while
+applying an operator-valued geometric phase to the clients. Seven named
+finite-energy fixture sequences converge across cutoffs 16, 32, 64, and 128;
+two distinct programs execute on one resident logical allocation with no
+detach, reseed, snapshot, or reload. The clients intentionally transform, so
+the established return is the bus/reference and complete factorization inside
+the same logical backing, not return of the whole joint state. The top-Fock
+control and finite-cutoff CCR defect reject any uniform arbitrary-state
+finite-cutoff interpretation. Physical same-mode custody, physical
+restoration, and a uniform theorem over an energy-bounded ball remain false.
 
 The exact route disposition is:
 
 ```text
-STRICT_PREPARATION_AND_FINITE_PACKET_RESTORATION_OBSTRUCTION_RETAINS_REAL_TRANSIENT_INTERACTION_DRAIN_AND_APPROXIMATE_FUNCTIONAL_HANDOFF_BUT_REQUIRES_A_CHANGED_RETURN_PREPARATION_LAW_NOT_POST_HOC_FIXTURE_TUNING
+DIRECT_COMPILED_ZZ_FORWARD_SHADOW_STRICTLY_OMITS_THE_BUS_LOOP_AND_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
 ```
 
 M257 applies only when the comparator receives the same canonical input,
@@ -105,15 +103,13 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE`.
-Its present authority ceiling is a deterministic truncated open-quantum
-digital twin. It must keep truncation, environment, preparation, controller,
-boundary, precision, history, and rematerialization costs explicit and must
-compare against an equal-access implementation that directly compiles
-`exp(-i theta AB)` from the same public law instead of forcing the comparator
-to emulate the bus. M257 remains intact. No advantage, physical execution,
-physical restoration, or physical-resource claim follows from the digital
-twin or a QEMU wrapper.
+`MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE`.
+It must test whether the ideal Weyl-loop law survives a physically structured
+multimode state-dependent-force model with spectator modes, detuning, heating,
+finite pulse envelopes, mode closure, controller bandwidth, and explicit
+energy cost. The equal-access comparator may still compile the resulting
+client interaction directly. M257 remains intact; no physical observation,
+advantage, or bit-to-pi replacement follows from the digital twin.
 
 The accumulated bounded architecture includes:
 
@@ -309,7 +305,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_AFTER_M264_FAILED_DECLARED_TIME_DOMAIN_RETURN_OR_REUSE_THRESHOLDS
+ACTIVE_MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_AFTER_M265_LOGICAL_WEYL_BUS_RETURN_WITH_DIRECT_COMPILED_FORWARD_SHADOW
 ```
 
 The named
@@ -318,22 +314,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE
+MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
 algebraically distinct sealed exact software CATVM packages. M258-M263 moved
 through QEMU reference modeling, QND-versus-bond, Gaussian/Ising, central
-fixed-finite-UMTC, and stipulated stationary-resolvent obstructions. M264
-executes the missing time-domain process and establishes transient borrow,
-drain, delay, and complete returned-density handoff, but its frozen public
-preparation and packet fail both declared return gates. Density
-rematerialization is not restoration. The active mechanism therefore changes
-the return law to a non-Gaussian quantum Weyl-loop bus with arbitrary-state
-carrier return and distinct-program reuse. Until a stronger backend exists,
-it is only a deterministic truncated open-quantum digital twin. The strongest
-honest comparator may compile `exp(-i theta AB)` directly with equal public
-access; no advantage or physical claim may be inferred from bus semantics.
+fixed-finite-UMTC, stipulated stationary-resolvent, and frozen time-domain
+return obstructions. M265 then establishes the ideal Weyl-loop bus identity
+and named-fixture complex128 logical return/factorization on one resident
+allocation. It simultaneously closes the resource claim: the equal-access
+direct compiled `ZZ` shadow uses two client gates where the accepted path uses
+eight hybrid pulses. The active mechanism now translates that law into the
+smallest physically structured multimode trapped-ion state-dependent-force
+digital twin. Spectator closure, heating, pulse/controller cost, energy, and
+same-mode reuse must be charged. No advantage or physical claim may be
+inferred from the emulator.
 
 ## 7. Native No-Smuggle Law
 

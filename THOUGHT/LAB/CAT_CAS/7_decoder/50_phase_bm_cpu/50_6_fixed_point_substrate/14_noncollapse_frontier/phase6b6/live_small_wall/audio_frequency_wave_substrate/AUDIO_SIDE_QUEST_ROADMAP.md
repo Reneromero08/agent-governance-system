@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V6_TIME_DOMAIN_RETURN_OBSTRUCTION_VERIFIED_NO_RESTORATION_CLAIM_NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_ACTIVE`
-**Roadmap version:** `15.48`
+**Status:** `PHASE_QEMU_V7_WEYL_LOOP_LOGICAL_RETURN_VERIFIED_DIRECT_COMPILED_FORWARD_SHADOW_MULTIMODE_TRAPPED_ION_DIGITAL_TWIN_ACTIVE`
+**Roadmap version:** `15.49`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `f330d517b80b1f0ba94d503058025b2ec853912c`
+**Reconciled source head:** `92d33c227925180a30f7d032df988834fbab8afe`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `FROZEN_L641_SIGMA50_NEAR_THRESHOLD_TIME_DOMAIN_SCATTERING_EXECUTES_TRANSIENT_BORROW_DRAIN_AND_COMPLETE_RETURNED_DENSITY_HANDOFF_BUT_THE_PUBLIC_T120_ADIABATIC_PREPARATION_AND_FINITE_PACKET_T340_RETURN_FAIL_DECLARED_1E_MINUS_7_MATCHED_FREE_TARGET_TRACE_DISTANCE_GATES`
-**Current claim ceiling:** `FINITE_COMPLEX128_DETERMINISTIC_SOFTWARE_SINGLE_PROBE_L641_FOUR_SPIN_TIME_DOMAIN_MODEL_WITH_RETURNED_TARGET_DENSITY_REMATERIALIZATION_AND_NO_SAME_BACKING_OR_PHYSICAL_RESTORATION`
+**Current highest milestone:** `IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD`
+**Current claim ceiling:** `DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE`
+**Active primary successor:** `MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`f330d517b80b1f0ba94d503058025b2ec853912c`. The current 264-milestone
+`92d33c227925180a30f7d032df988834fbab8afe`. The current 265-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,12 +751,12 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS
-SCIENTIFIC_SOURCE_HEAD       f330d517b80b1f0ba94d503058025b2ec853912c
-COMPLETED_MECHANISM          M264_STRICT_PREPARATION_AND_FINITE_PACKET_RESTORATION_OBSTRUCTION_WITH_NO_RESTORATION_CLAIM
-ACTIVE_SUCCESSOR             NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE
-SUCCESSOR_CEILING            DETERMINISTIC_TRUNCATED_OPEN_QUANTUM_DIGITAL_TWIN_ONLY_WITH_NO_ADVANTAGE_OR_PHYSICAL_CLAIM
-NEXT_OBSTRUCTION             TEST_ARBITRARY_STATE_RETURN_AND_DISTINCT_PROGRAM_REUSE_WITH_PAID_OPEN_SYSTEM_AND_TRUNCATION_COSTS_AGAINST_THE_EQUAL_ACCESS_DIRECT_COMPILED_EXP_MINUS_I_THETA_AB_COMPARATOR
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN
+SCIENTIFIC_SOURCE_HEAD       92d33c227925180a30f7d032df988834fbab8afe
+COMPLETED_MECHANISM          M265_IDEAL_WEYL_COMMUTATOR_AND_NAMED_FIXTURE_LOGICAL_BUS_REFERENCE_RETURN_WITH_DIRECT_COMPILED_FORWARD_SHADOW
+ACTIVE_SUCCESSOR             MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
+SUCCESSOR_CEILING            PHYSICALLY_STRUCTURED_SOFTWARE_DIGITAL_TWIN_ONLY_WITH_NO_PHYSICAL_OBSERVATION_ADVANTAGE_OR_M257_ESCAPE_CLAIM
+NEXT_OBSTRUCTION             TEST_MULTIMODE_CLOSURE_HEATING_SPECTATOR_COUPLINGS_PULSE_CONTROLLER_ENERGY_AND_TWO_PROGRAM_SAME_MODE_REUSE_AGAINST_THE_EQUAL_ACCESS_DIRECT_COMPILED_ZZ_FORWARD_SHADOW
 ```
 
 The earlier route remains historical context:
@@ -13159,6 +13159,70 @@ strongest honest equal-access comparator may compile `exp(-i theta AB)`
 directly from the same public Hamiltonian and descriptors instead of
 simulating a bus. No resource advantage, M257 escape, physical execution,
 physical restoration, or physical carrier claim is established in advance.
+
+## M265 ideal Weyl-loop logical carrier-return calibration
+
+The accepted claim is:
+
+```text
+IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD
+```
+
+For commuting client observables, the ideal infinite-CCR four-pulse group
+commutator applies `exp(-i lambda mu AB)` to the clients and the identity to
+the bus. Production and a separately implemented spectral reference agree on
+the sign, chronological pulse order, selected client boundaries, and all seven
+named finite-energy fixture sequences across cutoffs 16, 32, 64, and 128.
+Programs A and B execute consecutively on one resident client-plus-bus logical
+allocation without detach, reseed, snapshot, reload, or baseline read. At
+cutoff 128 the bus/reference returns and completely factorizes from the
+transformed clients within the declared complex128 tolerances.
+
+Restoration is classified `NUMERICAL_PHYSICAL_STATE_RESTORATION` only at the
+following exact logical scope:
+
+```text
+ENERGY_CONSTRAINED_COMPLEX128_LOGICAL_RESIDENT_BACKING_BUS_AND_REFERENCE_RETURN_WITH_CLIENT_TRANSFORMATION_AND_COMPLETE_FACTORIZATION_AT_CUTOFF128_WITHOUT_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+That classification does not claim that the transformed whole joint state
+returns. It does not establish a physical oscillator, physical same-mode
+custody, or uniform finite-cutoff return for every energy-bounded state. The
+top-Fock control and the exact finite-cutoff CCR defect reject arbitrary-state
+uniformity, while the `Phi4` reference fixture rejects marginal-only
+restoration.
+
+The claim ceiling is:
+
+```text
+DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+The resource disposition is:
+
+```text
+DIRECT_COMPILED_ZZ_FORWARD_SHADOW_STRICTLY_OMITS_THE_BUS_LOOP_AND_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+The strongest equal-access comparator applies two direct compiled `ZZ` client
+phases and omits all eight hybrid bus pulses. The selected graph-state moments
+also have direct product formulas. M265 therefore promotes a bounded catalytic
+restoration architecture, not a computational resource advantage. M257
+remains intact.
+
+The active successor is:
+
+```text
+MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
+```
+
+It must replace the single ideal projected oscillator with a physically
+structured multimode state-dependent-force law, then charge spectator-mode
+closure, heating, detuning, finite pulse envelopes, controller precision and
+bandwidth, energy, latency, preparation, and two-program same-mode reuse. The
+direct compiled client interaction remains the controlling forward shadow.
+No physical observation, advantage, unbounded-compute, or bit-to-pi claim is
+authorized by the digital twin.
 
 ## 10. Roadmap Maintenance
 
