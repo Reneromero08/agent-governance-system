@@ -1,0 +1,46 @@
+{
+  "schema": "PHASE_QEMU_V1_BUILD_RECEIPT_V1",
+  "build_scope": "PROJECT_LOCAL_MANAGED_DISK_BACKED_SCRATCH_BUILD_ONLY",
+  "build_date": "2026-08-09",
+  "qemu": {
+    "version": "10.2.4",
+    "source_url": "https://download.qemu.org/qemu-10.2.4.tar.xz",
+    "signature_url": "https://download.qemu.org/qemu-10.2.4.tar.xz.sig",
+    "source_archive_sha256": "821b545b92f165e57dddccac5077d76d4d436a226595b8813ad59306bbfd0746",
+    "detached_signature_sha256": "aca12b432b3c12c03812763ab306936c62550f4a120d94e454aee18de3e0eb84",
+    "signing_key_fingerprint": "CEACC9E15534EBABB82D3FA03353C9CEF108B584",
+    "signature_result": "VALID_SIGNATURE_WITH_EXPIRED_SIGNING_KEY",
+    "signature_caveat": "The detached signature verified against the stated QEMU signing-key fingerprint, but the signing key was expired at verification time."
+  },
+  "configure_arguments": [
+    "--target-list=x86_64-softmmu",
+    "--disable-docs",
+    "--disable-werror",
+    "--enable-debug"
+  ],
+  "toolchain": {
+    "compiler": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "ninja": "1.13.2"
+  },
+  "source_dependencies": {
+    "PHASE_QEMU_V1_CONTRACT.md": "78ab3aa7ea74cb1ca886f591273d8606a576b0a0f93c880615b9db07b781ecad",
+    "PHASE_QEMU_V1_FINDINGS.md": "354d2dc58b8f7215f6c06632a1f999baa139dcc9579ae3705debf030e7b27826",
+    "apply_to_qemu.py": "1a16b7f987a4d747fc8673d38aed1c10d5f5c0b8e6f161a81318423f5cc613c1",
+    "qemu/hw/misc/phase-qemu-v1.c": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+    "tests/phase_qemu_v1_separate_reference.py": "512f97d557ecc6d71a17a49ee2fc7adcbbbf9a884a1fd192d8eb4cdf2b1741a6",
+    "tests/qualify_phase_qemu_v1.py": "dfef669cdf3007f9f5184ba3f72c578ca399df531baa13504c4b8993e429b7e2",
+    "tests/run_phase_qemu_v1_qtest.py": "6a6ab645e56ba91c3b8f9398be3ef033fe7137d678a72d2c42d3a4e7d9f733e4"
+  },
+  "phase_qemu_device_source_sha256": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+  "installed_device_source_sha256": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+  "installed_kconfig_phase_qemu_v1_entry_count": 1,
+  "installed_meson_phase_qemu_v1_entry_count": 1,
+  "qemu_binary_sha256": "c70afb9f1d567678bd169c867970d7233875b855b514bb52668aa153ba364581",
+  "sealed_qtest_result_sha256": "e38a2029292f3663e97c22af55a7735ec8d58e144f13140a24211be75a92fed2",
+  "sealed_separate_reference_sha256": "da7977f48f5792e7c2627d975b3b10882239673935cdeaea57ed54504e1e3cc9",
+  "system_install_performed": false,
+  "system_qemu_modified": false,
+  "additional_ags_worktree_or_clone_created": false,
+  "ram_backed_scratch_used": false,
+  "physical_hardware_accessed": false
+}

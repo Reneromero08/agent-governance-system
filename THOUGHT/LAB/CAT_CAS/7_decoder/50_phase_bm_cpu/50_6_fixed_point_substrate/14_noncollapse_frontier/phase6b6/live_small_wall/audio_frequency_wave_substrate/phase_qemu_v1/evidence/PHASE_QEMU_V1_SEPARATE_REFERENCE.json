@@ -1,0 +1,340 @@
+{
+  "baseline_caveats": {
+    "fixed_number_fock_input_is_not_gaussian": true,
+    "frozen_fixture_analytic_certificate_is_not_transferable": true,
+    "gaussian_covariance_is_not_a_sufficient_kerr_disabled_comparator_for_this_input": true,
+    "n2_linear_optical_boundary_uses_at_most_2x2_permanents": true,
+    "transferable_exact_sparse_state_and_boundary_only_tensor_contraction_both_remain_controlling": true
+  },
+  "basis": [
+    "|2000>",
+    "|1100>",
+    "|1010>",
+    "|1001>",
+    "|0200>",
+    "|0110>",
+    "|0101>",
+    "|0020>",
+    "|0011>",
+    "|0002>"
+  ],
+  "claim_ceiling": "EXACT_IDEAL_FOUR_MODE_TWO_BOSON_UNITARY_AND_PARITY_POINTER_FIXTURE_ONLY",
+  "claim_limits": {
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "m257_escape": false,
+    "physical_bosons_or_phonons": false,
+    "physical_qnd_detector": false,
+    "physical_restoration": false,
+    "replace_physical_bit_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_compute": false
+  },
+  "controls": {
+    "f1_boundary_factorizes": true,
+    "f1_exact_restore": true,
+    "f1_kerr_changes_final_state": true,
+    "f1_kerr_sham_entangles_pointer": true,
+    "f2_boundary_factorizes": true,
+    "f2_exact_restore": true,
+    "f2_kerr_changes_final_state": true,
+    "f2_kerr_sham_entangles_pointer": true,
+    "matchings_noncommute": true,
+    "missing_entire_inverse": {
+      "passes": true,
+      "restoration_fidelity": "0"
+    },
+    "omitted_kerr_from_inverse": {
+      "passes": true,
+      "restoration_fidelity": "1/4",
+      "state_commitment": "5669c5bdfc1b43213d0d9063f06b334872b55e2820ada5f639a86ef8e9d35eb3"
+    },
+    "reordered_inverse_prefix": {
+      "passes": true,
+      "restoration_fidelity": "0",
+      "state_commitment": "cf3bd72e18ba90fcf42a850f2e20d6637ffe46dd5a7ef9d341957d3e82e88144"
+    },
+    "valid_plus_one_boundary_factorizes": true,
+    "wrong_kerr_edge_in_inverse": {
+      "passes": true,
+      "restoration_fidelity": "1/4",
+      "state_commitment": "5669c5bdfc1b43213d0d9063f06b334872b55e2820ada5f639a86ef8e9d35eb3"
+    }
+  },
+  "descriptor_distinct_reuse": {
+    "accepted_vs_kerr_disabled_fidelity": "1/4",
+    "boundary": {
+      "even_weight": "0",
+      "factorized": true,
+      "odd_weight": "1",
+      "pointer_z": -1,
+      "reduced_purity": "1",
+      "schmidt_rank": 1,
+      "selector": "PARITY_MODE_1"
+    },
+    "final_state_commitment": "a875da267ef8bc2c638130fbc1a9db2793522dfd10a3e9ae6baa08391e79a4e0",
+    "final_support_cells": 1,
+    "forward_execution_order": [
+      "B",
+      "A",
+      "K03",
+      "B",
+      "A"
+    ],
+    "inverse_execution_order": [
+      "A_DAG",
+      "B_DAG",
+      "K03",
+      "A_DAG",
+      "B_DAG"
+    ],
+    "kerr_disabled_boundary": {
+      "even_weight": "3/4",
+      "factorized": false,
+      "odd_weight": "1/4",
+      "pointer_z": null,
+      "reduced_purity": "5/8",
+      "schmidt_rank": 2,
+      "selector": "PARITY_MODE_1"
+    },
+    "kerr_disabled_state_commitment": "8611960d553b859bbf07b2d9ddc4ebdbe8f8bb3c4af955ac56740a3780e79998",
+    "pointer_transaction": {
+      "boundary_copy_gate_count": 1,
+      "boundary_parity_bit": 1,
+      "boundary_pointer_z": -1,
+      "boundary_retained_through_inverse": true,
+      "carrier_pointer_gate_count": 2,
+      "factorized": true,
+      "mixed_parity_copy_prevents_exact_carrier_restoration": false,
+      "no_retention_emits_boundary": false,
+      "no_retention_roundtrip_restores": true,
+      "pointer_cleared_before_inverse": true,
+      "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+      "retained_copy_carrier_fidelity": "1"
+    },
+    "public_initial": "|1010>",
+    "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b"
+  },
+  "field": "Q(sqrt(2))_SUBFIELD_OF_Q(zeta_8)",
+  "held_out_public_descriptor": {
+    "final_state_commitment": "cf3bd72e18ba90fcf42a850f2e20d6637ffe46dd5a7ef9d341957d3e82e88144",
+    "final_support_cells": 1,
+    "forward_execution_order": [
+      "A",
+      "B",
+      "K01",
+      "A",
+      "B_DAG"
+    ],
+    "inverse_execution_order": [
+      "B",
+      "A_DAG",
+      "K01",
+      "B_DAG",
+      "A_DAG"
+    ],
+    "kerr_changes_final_state": true,
+    "kerr_disabled_state_commitment": "846026dcdebd66b3f76026afd0a4fda092f853d865e026a9794aca063758d836",
+    "pointer_transaction": {
+      "boundary_copy_gate_count": 1,
+      "boundary_parity_bit": 1,
+      "boundary_pointer_z": -1,
+      "boundary_retained_through_inverse": true,
+      "carrier_pointer_gate_count": 2,
+      "factorized": true,
+      "mixed_parity_copy_prevents_exact_carrier_restoration": false,
+      "no_retention_emits_boundary": false,
+      "no_retention_roundtrip_restores": true,
+      "pointer_cleared_before_inverse": true,
+      "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+      "retained_copy_carrier_fidelity": "1"
+    }
+  },
+  "kill_conditions": [
+    "PRODUCTION_LATCH_READS_OR_PROJECTS_HIDDEN_AMPLITUDES",
+    "PARITY_EIGENSTATE_CLOSURE_IS_FIXTURE_ONLY",
+    "PRODUCTION_COMPILER_OBTAINS_BOUNDARY_PROMISE_BY_COMPUTING_THE_ANSWER",
+    "GROWING_WORD_REDUCES_TO_A_COMPACT_MONOMIAL_OR_BOUNDED_BOND_RECURRENCE",
+    "INVERSE_REQUIRES_HISTORY_SNAPSHOT_OR_STATE_DEPENDENT_CONTROLS"
+  ],
+  "primary": {
+    "accepted_vs_kerr_disabled_fidelity": "1/4",
+    "boundary": {
+      "even_weight": "0",
+      "factorized": true,
+      "odd_weight": "1",
+      "pointer_z": -1,
+      "reduced_purity": "1",
+      "schmidt_rank": 1,
+      "selector": "PARITY_MODE_3"
+    },
+    "final_state_commitment": "8b7f849f6e7782d00f88be6ba00eb94f8a9d4cadc0b923cc490672503aaf1246",
+    "final_support_cells": 1,
+    "forward_execution_order": [
+      "A",
+      "B",
+      "K01",
+      "A",
+      "B"
+    ],
+    "inverse_execution_order": [
+      "B_DAG",
+      "A_DAG",
+      "K01",
+      "B_DAG",
+      "A_DAG"
+    ],
+    "kerr_disabled_boundary": {
+      "even_weight": "3/4",
+      "factorized": false,
+      "odd_weight": "1/4",
+      "pointer_z": null,
+      "reduced_purity": "5/8",
+      "schmidt_rank": 2,
+      "selector": "PARITY_MODE_3"
+    },
+    "kerr_disabled_pointer_transaction": {
+      "boundary_copy_gate_count": 1,
+      "boundary_parity_bit": null,
+      "boundary_pointer_z": null,
+      "boundary_retained_through_inverse": false,
+      "carrier_pointer_gate_count": 2,
+      "factorized": false,
+      "mixed_parity_copy_prevents_exact_carrier_restoration": true,
+      "no_retention_emits_boundary": false,
+      "no_retention_roundtrip_restores": true,
+      "pointer_cleared_before_inverse": true,
+      "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+      "retained_copy_carrier_fidelity": "5/8"
+    },
+    "kerr_disabled_state_commitment": "5298f71d7250c34ca6dd8dcbf44a82b6295deaec387ee0591b6bfbe74be56624",
+    "pointer_transaction": {
+      "boundary_copy_gate_count": 1,
+      "boundary_parity_bit": 1,
+      "boundary_pointer_z": -1,
+      "boundary_retained_through_inverse": true,
+      "carrier_pointer_gate_count": 2,
+      "factorized": true,
+      "mixed_parity_copy_prevents_exact_carrier_restoration": false,
+      "no_retention_emits_boundary": false,
+      "no_retention_roundtrip_restores": true,
+      "pointer_cleared_before_inverse": true,
+      "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+      "retained_copy_carrier_fidelity": "1"
+    },
+    "public_initial": "|1010>",
+    "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+    "valid_plus_one_boundary": {
+      "even_weight": "1",
+      "factorized": true,
+      "odd_weight": "0",
+      "pointer_z": 1,
+      "reduced_purity": "1",
+      "schmidt_rank": 1,
+      "selector": "PARITY_MODE_2"
+    },
+    "valid_plus_one_pointer_transaction": {
+      "boundary_copy_gate_count": 1,
+      "boundary_parity_bit": 0,
+      "boundary_pointer_z": 1,
+      "boundary_retained_through_inverse": true,
+      "carrier_pointer_gate_count": 2,
+      "factorized": true,
+      "mixed_parity_copy_prevents_exact_carrier_restoration": false,
+      "no_retention_emits_boundary": false,
+      "no_retention_roundtrip_restores": true,
+      "pointer_cleared_before_inverse": true,
+      "restored_state_commitment": "5a8007f5f607a91037e361d61d6e32312ff9e633feeff0eca4234ee5a967dc1b",
+      "retained_copy_carrier_fidelity": "1"
+    }
+  },
+  "public_maps": {
+    "A": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "A_B_noncommuting": true,
+    "B": [
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "K_ij": "(-1)^(n_i*n_j)",
+    "R_ij": {
+      "creation_i": "(creation_i-creation_j)/sqrt(2)",
+      "creation_j": "(creation_i+creation_j)/sqrt(2)"
+    }
+  },
+  "qnd_factorization_law": {
+    "commitment_ceiling": "A_ONE_WAY_RECEIPT_IS_NOT_A_RETAINED_COMPUTATIONAL_BOUNDARY",
+    "generic_superposed_boundary": "POINTER_ENTANGLES_AND_CARRIER_CANNOT_RESTORE_WHILE_RESULT_IS_RETAINED",
+    "joint_state": "psi_even*|0> + psi_odd*|1>",
+    "retained_pointer_and_carrier_restoration_law": "LAWFUL_IFF_ONE_PARITY_BRANCH_HAS_ZERO_WEIGHT"
+  },
+  "resource_law": {
+    "bounded_degree_matching_edges_per_layer": "n/2",
+    "bounded_sweep": {
+      "10": {
+        "homogeneous_basis_dimension": 2002,
+        "matching_edges_per_layer": 5,
+        "minimum_declared_depth_for_sweep": 5,
+        "particles": 5
+      },
+      "12": {
+        "homogeneous_basis_dimension": 12376,
+        "matching_edges_per_layer": 6,
+        "minimum_declared_depth_for_sweep": 6,
+        "particles": 6
+      },
+      "4": {
+        "homogeneous_basis_dimension": 10,
+        "matching_edges_per_layer": 2,
+        "minimum_declared_depth_for_sweep": 2,
+        "particles": 2
+      },
+      "6": {
+        "homogeneous_basis_dimension": 56,
+        "matching_edges_per_layer": 3,
+        "minimum_declared_depth_for_sweep": 3,
+        "particles": 3
+      },
+      "8": {
+        "homogeneous_basis_dimension": 330,
+        "matching_edges_per_layer": 4,
+        "minimum_declared_depth_for_sweep": 4,
+        "particles": 4
+      }
+    },
+    "constant_depth_warning": "ONE_DIMENSIONAL_CONSTANT_DEPTH_HAS_A_BOUNDED_BOND_TENSOR_NETWORK_SHADOW",
+    "exact_reference_retains_dense_matrices": true,
+    "family": "n=2m_modes_k=m_bosons",
+    "family_dimension_formula": "binomial(3*n/2-1,n/2)",
+    "n4_dense_operator_cells_if_retained": 100,
+    "n4_exact_state_cells": 10,
+    "n4_maximum_schmidt_rank_across_01_23_fixed_number_cut": 4,
+    "n4_modes": 4,
+    "n4_particles": 2,
+    "whole_python_process_memory_accounted": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "schema": "phase-qemu-v1-separate-reference-v1",
+  "strongest_classical_baselines": [
+    "O1_ANALYTIC_CERTIFICATE_AFTER_VALIDATING_EITHER_OF_THE_TWO_PINNED_PUBLIC_FIXTURES",
+    "IDENTICAL_EXACT_FIXED_NUMBER_STATE_RECURRENCE",
+    "KERR_DISABLED_SINGLE_PARTICLE_LINEAR_OPTICS_PLUS_2X2_PERMANENT_BOUNDARY",
+    "ADAPTIVE_MPS_OR_TTN_WITH_MEASURED_BOND_DIMENSION"
+  ],
+  "verification_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
