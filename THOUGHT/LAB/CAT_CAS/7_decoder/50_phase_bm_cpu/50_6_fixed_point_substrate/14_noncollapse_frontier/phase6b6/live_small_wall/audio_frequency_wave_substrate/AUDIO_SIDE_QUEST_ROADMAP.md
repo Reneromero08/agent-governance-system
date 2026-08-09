@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V3_ISING_HOLONOMY_CALIBRATION_VERIFIED_FINITE_MTC_SUPERSELECTION_OBSTRUCTION_ACTIVE`
-**Roadmap version:** `15.45`
+**Status:** `PHASE_QEMU_V4_FINITE_MTC_CENTRAL_WILSON_OBSTRUCTION_VERIFIED_NONCENTRAL_INTERACTING_EIGENPHASE_ACTIVE`
+**Roadmap version:** `15.46`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c2bf2e9647026680472c4f302c33c10ff1076601`
+**Reconciled source head:** `d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL`
-**Current claim ceiling:** `IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY`
+**Current highest milestone:** `EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES`
+**Current claim ceiling:** `ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION`
+**Active primary successor:** `NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c2bf2e9647026680472c4f302c33c10ff1076601`. The current 261-milestone
+`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The current 262-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,11 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_FINITE_MTC_CLOSED_PROBE_SUPERSELECTION_OBSTRUCTION
-SCIENTIFIC_SOURCE_HEAD       c2bf2e9647026680472c4f302c33c10ff1076601
-COMPLETED_MECHANISM          M261_ISING_TRANSPORTED_PAIR_HOLONOMY_SIGNED_PAIRING_RESOURCE_KILL
-ACTIVE_SUCCESSOR             FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
-NEXT_OBSTRUCTION             DETERMINE_WHETHER_DETERMINISTIC_CLOSED_PROBE_HOLONOMY_IN_EVERY_FIXED_FINITE_MTC_READS_ONLY_A_CONSTANT_SIZE_SIMPLE_OBJECT_LABEL_AND_NONSCALAR_MULTIPLICITY_ACTION_ENTANGLES_THE_PROBE
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE
+SCIENTIFIC_SOURCE_HEAD       d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2
+COMPLETED_MECHANISM          M262_FIXED_FINITE_UMTC_CENTRAL_WILSON_CHARACTER_RESOURCE_KILL
+ACTIVE_SUCCESSOR             NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
+NEXT_OBSTRUCTION             FIND_A_FACTORABLE_EIGENPHASE_DEPENDING_ON_A_GROWING_RELATIONAL_INVARIANT_RATHER_THAN_A_SUPPLIED_EIGENLABEL_CONSERVED_CHARGE_FINITE_SYMMETRY_STABILIZER_GAUSSIAN_FRAME_OR_PREPARATION_DESCRIPTOR
 ```
 
 The earlier route remains historical context:
@@ -12945,6 +12945,84 @@ retained-boundary restoration. If this class obstruction closes, the next
 hardware mechanism must use genuinely interacting non-Gaussian scattering or
 Floquet eigenphase dynamics whose factorized phase depends on a growing
 relational invariant.
+
+## M262 fixed finite-UMTC central Wilson-character obstruction
+
+The accepted claim is:
+
+```text
+EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES
+```
+
+For a fixed finite unitary modular tensor category, one disk-like target with
+definite simple total charge `a`, and a canonical simple probe `b` executing a
+boundary-parallel whole-region closed encirclement, the normalized
+vacuum-return amplitude is
+
+```text
+M_ab = sum_c N_ab^c d_c/(d_a d_b) * theta_c/(theta_a theta_b)
+     = S_ab S_00/(S_0a S_0b).
+```
+
+The closed loop is scalar on the entire internal fusion-multiplicity space.
+All simple whole-region loops commute, are simultaneously diagonal in total
+charge, and span only the fixed finite charge-projector algebra. Therefore the
+accepted observable rank does not grow with the target's internal fusion
+dimension. This is a class obstruction for central boundary Wilson
+characters, not for arbitrary braids or finite-MTC computation.
+
+The exact fixtures distinguish the two catalytic cases. Semion `s,s` and
+Ising `sigma,psi` yield `-1`, while Ising `psi,psi` yields `+1`; these
+plus/minus-one responses are retained through a functional exact inverse and
+used in a distinct-probe reuse transaction. Ising `sigma,sigma` has one-loop
+vacuum amplitude zero but aligned two-loop phase `-i`. Fibonacci `tau,tau`
+has amplitude `-phi^-2` and vacuum-return probability `phi^-4`; after five
+loops its supported channel phases realign. For every strictly intermediate
+return probability, coherently retaining the orthogonal outcome creates
+Schmidt rank two across response versus carrier/probe, so a carrier/probe-only
+inverse cannot both erase the correlation and preserve that response.
+
+Scientific fixture arithmetic and the bounded response/restoration
+construction are `SEPARATE_REFERENCE_PARITY`; the central-character theorem
+is `FORMAL_DERIVATION_SOURCE_AUDITED`. Restoration is
+`EXACT_ALGEBRAIC_RESTORATION` only at scope
+`FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING`.
+
+The controlling classical representation is the fixed exact monodromy table:
+after validating simple charges it answers one definite `(a,b)` query in
+O(1), tracks unresolved charge statistics in O(K), or boundary charge-sector
+coherences in O(K squared), where fixed `K=|Irr(C)|`. Deriving those statistics
+from growing input is charged separately, including descriptor length and
+coefficient height. No claim is made that the finite quotient represents the
+arbitrary internal target state; it represents exactly what this central
+whole-region loop algebra can observe.
+
+The claim ceiling is:
+
+```text
+ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY
+```
+
+Noncentral weaves entering the target, open ribbons, tube/coupon matrix units,
+multiple independently encircled regions, growing link networks, adaptive or
+forced-measurement protocols, prepared noncentral eigenstates, growing MTC
+families, and nontopological interactions remain outside the theorem. No QEMU
+device, CATVM custody, same-backing or physical restoration, physical anyon,
+distinct phase resource, advantage, M257 escape, Small Wall crossing,
+unbounded computation, or bit-to-pi replacement is established.
+
+The active successor is:
+
+```text
+NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
+```
+
+Promotion now requires an actual factorized eigenphase that depends on a
+growing relational invariant after charging preparation, reference-complete
+factorization, controller state, precision, energy, latency, and the strongest
+integrability/tensor-network/forward-only shadows. A supplied eigenlabel,
+conserved charge, finite symmetry sector, stabilizer or Gaussian frame, or
+preparation descriptor is not a qualifying growing resource.
 
 ## 10. Roadmap Maintenance
 

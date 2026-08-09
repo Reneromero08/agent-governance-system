@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`c2bf2e9647026680472c4f302c33c10ff1076601`. The registry assigns one
+`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 261-milestone lane remains nonterminal under user-only closure.
+The current 262-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,28 +56,32 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL
+EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES
 ```
 
 Claim ceiling:
 
 ```text
-IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY
+ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY
 ```
 
-This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`; exact algebra,
-ranks, holonomy boundaries, and public-adjoint equality are
-`SEPARATE_REFERENCE_PARITY`, while production transaction ordering is
-`PACKAGE_SELF_REVIEW_SOURCE_AUDITED`. `EXACT_ALGEBRAIC_RESTORATION` is
-restricted to `FUNCTIONAL_EXACT_VALUE_RESTORATION_AND_REUSE_WITHOUT_SAME_BACKING`.
-The triangular adjacent-braid family has exact contiguous-cut ranks `2,4,8`
-at n=`8,12,16`, and distinct transported pair holonomies return deterministic
-`+1,-1` boundaries with exact functional reuse. Yet an O(n) signed Majorana
-pairing reproduces every boundary and rank, and same-sector scrambling changes
-the carrier ray without changing either output. Ising holonomy is therefore a
-bounded machine-law calibration and an immediate resource kill. No QEMU/CATVM
-custody, same-backing reuse, physical resource, advantage, or general anyon
-no-go is established.
+This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`; fixture algebra
+and the bounded response/restoration construction are
+`SEPARATE_REFERENCE_PARITY`, while the central Wilson-character theorem is
+`FORMAL_DERIVATION_SOURCE_AUDITED`. `EXACT_ALGEBRAIC_RESTORATION` is restricted
+to `FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING`.
+For a fixed finite UMTC and one disk-like target with definite simple total
+charge, every boundary-parallel whole-region simple Wilson loop is scalar on
+the internal fusion-multiplicity space and the full loop family spans only the
+fixed simple-charge projector algebra. Semion, Ising, and Fibonacci fixtures
+also distinguish deterministic phase-aligned returns from strictly
+intermediate vacuum-return branches whose retained outcome blocks factorized
+restoration. The accepted boundary therefore collapses to a constant-size
+monodromy table, not growing relational geometry. This kills only the central
+whole-region closed-loop class; noncentral weaves, tube/coupon operations,
+multiple regions, and growing probe networks remain outside scope. No
+QEMU/CATVM custody, same-backing reuse, physical resource, advantage, or
+general anyon no-go is established.
 
 M257 applies only when the comparator receives the same canonical input,
 descriptors, auxiliary/secret state, and oracle access as the accepted exact
@@ -95,15 +99,16 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION`.
-It must determine whether every deterministic closed probe loop in a fixed
-finite modular tensor category reduces to a constant-size simple-object charge
-label even when fusion multiplicity grows, and whether every non-scalar action
-necessarily entangles the probe and blocks retained-boundary restoration.
-This is a class-level obstruction test, not another Ising fixture. If it
-closes, move directly to genuinely interacting non-Gaussian scattering or
-Floquet eigenphase dynamics whose factorized phase depends on a growing
-relational invariant. QEMU remains a virtual laboratory, not physical evidence.
+`NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT`.
+M262 closed the central whole-region Wilson-character class: it reads only a
+fixed finite total-charge quotient and is blind to internal multiplicity. The
+successor must leave that class through a genuinely noncentral interacting
+law and demonstrate a factorized eigenphase that depends on a growing
+relational invariant after charging state preparation, controller/reference
+state, precision, and the strongest integrability, tensor-network, and
+forward-only shadows. A supplied eigenlabel, conserved charge, finite
+symmetry, stabilizer/Gaussian frame, or preparation descriptor is not such an
+invariant. QEMU remains a virtual laboratory, not physical evidence.
 
 The accumulated bounded architecture includes:
 
@@ -299,7 +304,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_PHASE_QEMU_FINITE_MTC_CLOSED_PROBE_SUPERSELECTION_OBSTRUCTION_AFTER_M261_ISING_SIGNED_PAIRING_RESOURCE_KILL
+ACTIVE_NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_AFTER_M262_FIXED_FINITE_UMTC_CENTRAL_WILSON_CHARACTER_RESOURCE_KILL
 ```
 
 The named
@@ -308,18 +313,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
+NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
 algebraically distinct sealed exact software CATVM packages. M258-M260 moved
-into QEMU process modeling and the QND-versus-bond obstruction. M261 then
-showed that exact contiguous fusion-rank growth and coherent deterministic
-Ising holonomy coexist, but the accepted boundary still reads one compact
-signed-pairing charge. Do not add Ising sizes, Wilson-loop variants, more
-software CATVM fixtures, or representation optimizations merely to enlarge
-the evidence set. Test the finite-superselection class obstruction, then
-change to interacting non-Gaussian eigenphase dynamics if it closes.
+into QEMU process modeling and the QND-versus-bond obstruction. M261 showed
+that exact contiguous fusion-rank growth and coherent deterministic Ising
+holonomy coexist while the accepted boundary reads one compact signed-pairing
+charge. M262 then proved the broader but still narrow fixed-finite-UMTC
+boundary-parallel whole-region Wilson-loop class is multiplicity-blind and
+factors through a finite total-charge character algebra. Do not add Ising
+sizes, more central closed-loop category fixtures, software CATVM algebras, or
+representation optimizations merely to enlarge the evidence set. The active
+mechanism must now be noncentral and interacting, with a factorized eigenphase
+that depends on a growing relational invariant after charging preparation and
+reference-complete factorization costs.
 
 ## 7. Native No-Smuggle Law
 

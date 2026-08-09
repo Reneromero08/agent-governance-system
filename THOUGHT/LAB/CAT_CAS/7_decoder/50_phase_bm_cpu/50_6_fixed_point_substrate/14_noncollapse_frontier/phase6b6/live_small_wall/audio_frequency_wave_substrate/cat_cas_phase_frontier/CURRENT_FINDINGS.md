@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`c2bf2e9647026680472c4f302c33c10ff1076601`. The canonical per-milestone
+`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13612,3 +13612,81 @@ the probe and prevents lawful retained-boundary restoration. If confirmed,
 the next hardware architecture must use genuinely interacting non-Gaussian
 scattering or Floquet eigenphase dynamics whose phase depends on a growing
 relational invariant.
+
+## M262 fixed finite-UMTC central boundary Wilson-character obstruction
+
+The accepted claim is:
+
+```text
+EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES
+```
+
+For one disk-like target region of a fixed finite UMTC with definite simple
+total charge `a`, a canonical simple probe `b` taken once around the entire
+region has normalized vacuum-return amplitude
+
+```text
+M_ab = sum_c N_ab^c d_c/(d_a d_b) * theta_c/(theta_a theta_b)
+     = S_ab S_00/(S_0a S_0b).
+```
+
+The corresponding boundary-parallel Wilson loop is scalar on every internal
+fusion-multiplicity state. The full family of such simple whole-region loops
+commutes and spans only the fixed finite total-charge projector algebra. It
+can distinguish at most a finite monodromy-equivalence class and cannot see
+growing geometry inside one definite-charge block.
+
+The executable fixtures independently agree for semion, Ising, and Fibonacci
+data. Semion `s,s` and Ising `sigma,psi` yield `-1`; Ising `psi,psi` yields
+`+1`; Ising `sigma,sigma` has one-loop amplitude zero but common two-loop
+phase `-i`; Fibonacci `tau,tau` has amplitude `-phi^-2`, probability
+`phi^-4`, and exact five-loop phase realignment. Strictly intermediate
+vacuum-return probabilities are handled as a coherent two-outcome process:
+retaining the orthogonal outcome produces Schmidt rank two across response
+versus carrier/probe, so a carrier/probe-only inverse cannot both preserve the
+response and recover a factorized initial state. The endpoints p=`0,1` are
+classified separately.
+
+The bounded plus/minus-one transaction explicitly retains one response
+register through the public inverse and performs a distinct-probe reuse.
+Scientific fixtures and transaction arithmetic are
+`SEPARATE_REFERENCE_PARITY`; the category theorem is
+`FORMAL_DERIVATION_SOURCE_AUDITED`. Restoration classification is
+`EXACT_ALGEBRAIC_RESTORATION` only at scope
+`FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING`.
+
+The strongest fixed-theory comparator is the exact finite monodromy table.
+After charge validation, a definite `(a,b)` query is O(1); unresolved charge
+statistics use O(K), and boundary coherences across charge sectors use O(K
+squared), with fixed `K=|Irr(C)|`. Computing those statistics from a growing
+input, coefficient height, descriptor size, crossings, precision, probe count,
+and preparation remain paid resources. The quotient represents the central
+loop observable algebra, not an arbitrary internal many-anyon state.
+
+The claim ceiling is:
+
+```text
+ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY
+```
+
+This does not cover noncentral braids or weaves entering the target, open
+ribbons, tube/coupon matrix units, multiple separately encircled regions,
+growing link networks, adaptive or forced-measurement computation, prepared
+noncentral eigenstates, growing MTC families, defects, boundaries, or
+nontopological dynamics. No QEMU/CATVM custody, same-backing or physical
+restoration, physical anyon, distinct phase resource, advantage, M257 escape,
+Small Wall crossing, unbounded computation, or bit-to-pi replacement is
+established.
+
+The active successor is:
+
+```text
+NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
+```
+
+The next minimum must make a lawful factorized eigenphase depend on a growing
+relational invariant, not a supplied eigenlabel, conserved total charge,
+finite symmetry class, stabilizer/Gaussian frame, or preparation descriptor.
+Preparation, reference-complete factorization, controller state, coefficient
+height, physical resource models, tensor-network/integrability structure, and
+the equal-access forward-only shadow all remain explicit costs.
