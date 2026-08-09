@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V2_GROWING_QND_BOND_OBSTRUCTION_VERIFIED_CONTROLLED_MANY_BODY_HOLONOMY_SCATTERING_ACTIVE`
-**Roadmap version:** `15.44`
+**Status:** `PHASE_QEMU_V3_ISING_HOLONOMY_CALIBRATION_VERIFIED_FINITE_MTC_SUPERSELECTION_OBSTRUCTION_ACTIVE`
+**Roadmap version:** `15.45`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `c79693808f10540d6ec80a0084444f72f1a364e8`
+**Reconciled source head:** `c2bf2e9647026680472c4f302c33c10ff1076601`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE`
-**Current claim ceiling:** `EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY`
+**Current highest milestone:** `IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL`
+**Current claim ceiling:** `IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND`
+**Active primary successor:** `FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`c79693808f10540d6ec80a0084444f72f1a364e8`. The current 260-milestone
+`c2bf2e9647026680472c4f302c33c10ff1076601`. The current 261-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,11 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_CONTROLLED_MANY_BODY_HOLONOMY_SCATTERING
-SCIENTIFIC_SOURCE_HEAD       c79693808f10540d6ec80a0084444f72f1a364e8
-COMPLETED_MECHANISM          M260_GROWING_EVEN_MODE_QND_VERSUS_BOND_GROWTH_OBSTRUCTION
-ACTIVE_SUCCESSOR             CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
-NEXT_OBSTRUCTION             FACTORIZED_PROBE_PHASE_MUST_DEPEND_ON_A_GROWING_MANY_BODY_EIGENSTATE_OR_HOLONOMY_WITH_FULL_PREPARATION_RESTORATION_AND_CLASSICAL_COMPARATOR_COST
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_FINITE_MTC_CLOSED_PROBE_SUPERSELECTION_OBSTRUCTION
+SCIENTIFIC_SOURCE_HEAD       c2bf2e9647026680472c4f302c33c10ff1076601
+COMPLETED_MECHANISM          M261_ISING_TRANSPORTED_PAIR_HOLONOMY_SIGNED_PAIRING_RESOURCE_KILL
+ACTIVE_SUCCESSOR             FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
+NEXT_OBSTRUCTION             DETERMINE_WHETHER_DETERMINISTIC_CLOSED_PROBE_HOLONOMY_IN_EVERY_FIXED_FINITE_MTC_READS_ONLY_A_CONSTANT_SIZE_SIMPLE_OBJECT_LABEL_AND_NONSCALAR_MULTIPLICITY_ACTION_ENTANGLES_THE_PROBE
 ```
 
 The earlier route remains historical context:
@@ -12879,6 +12879,72 @@ The compact topological-charge and Majorana/stabilizer recurrences are the
 controlling classical baselines. If they reproduce every boundary and
 internal-state scrambling at fixed charge is invisible, publish the bounded
 holonomy machine law and retire Ising immediately rather than adding fixtures.
+
+## M261 Ising transported-pair holonomy calibration and resource kill
+
+The accepted claim is:
+
+```text
+IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL
+```
+
+The scaling family uses only formula-generated adjacent Majorana exchanges.
+At n=`8,12,16`, exact fixed-sector dimensions are `8,32,128`, support is
+`2,4,8`, and exact amplitude flattenings across the ordinary contiguous center
+have ranks `2,4,8`. Two commuting braid-transported pair parities on the same
+prepared carrier have exact eigenvalues `+1,-1`. Production evolves an
+explicit coherent path and response, derives the inverse from the public loop,
+verifies functional exact restoration, and then reuses the returned value for
+the distinct second loop without re-preparation.
+
+The mixed parity `-i gamma_3 gamma_4` has weights `1/2,1/2`; retaining a
+response copy prevents factorized restoration and locks the boundary, while a
+result-free latch/unlatch restores. A disjoint same-sector rotation changes the
+carrier ray with overlap squared `1/2` while leaving both accepted loop outputs
+unchanged and restoring under its public adjoint. These controls prove that the
+boundary ignores growing internal amplitude geometry and reads compact
+pair-charge data.
+
+The controlling comparator stores an O(n) signed Majorana frame and perfect
+pairing, updates each adjacent exchange in O(1), answers each accepted pair
+holonomy in O(1), and obtains the selected rank from an O(n) crossing-edge
+count. The dense fusion vector is reference evidence, not the strongest
+representation. Ising is therefore retained only as a bounded machine-law
+calibration and killed immediately as a resource candidate.
+
+Scientific algebra, ranks, boundaries, and public adjoints are independently
+verified at `SEPARATE_REFERENCE_PARITY`. Production transaction ordering is
+`PACKAGE_SELF_REVIEW_SOURCE_AUDITED`; the dephasing control is analytic and
+does not execute a density matrix. Restoration is `EXACT_ALGEBRAIC_RESTORATION`
+only at scope
+`FUNCTIONAL_EXACT_VALUE_RESTORATION_AND_REUSE_WITHOUT_SAME_BACKING`.
+
+The claim ceiling is:
+
+```text
+IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY
+```
+
+No QEMU device, CATVM custody, same-backing reuse, physical anyon, coherent
+interferometer, topological protection, physical restoration, distinct phase
+resource, advantage, M257 escape, Small Wall crossing, unbounded computation,
+or bit-to-pi replacement is established.
+
+The active successor is:
+
+```text
+FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
+```
+
+Its purpose is to test the whole simple closed-probe class before another
+hardware model is built: in a fixed finite modular tensor category, a
+deterministic probe loop around a definite sector is expected to return an
+S-matrix/topological-spin scalar indexed by one simple-object charge, while a
+non-scalar multiplicity-space action entangles the probe and prevents lawful
+retained-boundary restoration. If this class obstruction closes, the next
+hardware mechanism must use genuinely interacting non-Gaussian scattering or
+Floquet eigenphase dynamics whose factorized phase depends on a growing
+relational invariant.
 
 ## 10. Roadmap Maintenance
 

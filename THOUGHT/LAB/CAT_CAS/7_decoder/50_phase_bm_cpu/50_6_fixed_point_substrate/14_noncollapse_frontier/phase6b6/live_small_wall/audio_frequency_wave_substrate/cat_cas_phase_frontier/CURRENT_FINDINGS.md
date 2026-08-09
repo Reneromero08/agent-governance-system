@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`c79693808f10540d6ec80a0084444f72f1a364e8`. The canonical per-milestone
+`c2bf2e9647026680472c4f302c33c10ff1076601`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13545,3 +13545,70 @@ recurrences remain controlling. If they reproduce the boundary and internal
 state changes inside a fixed charge sector are invisible, Ising holonomy is
 retired immediately as a computational resource and the mechanism must change
 to a non-Gaussian interacting eigenphase rather than another loop fixture.
+
+That minimum falsifier completed as M261's ideal exact Ising
+transported-pair holonomy calibration. It killed the Ising realization without
+completing the broader many-body eigenphase, holonomy, and scattering class.
+
+## M261 exact Ising transported-pair holonomy calibration and resource kill
+
+The accepted claim is:
+
+```text
+IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL
+```
+
+The formula-generated adjacent-braid family has fixed-sector dimensions
+`8,32,128`, supports `2,4,8`, and exact ordinary contiguous-center ranks
+`2,4,8` at n=`8,12,16`. The same prepared carrier is an exact simultaneous
+eigenstate of two distinct braid-transported pair-parity holonomies with
+phases `+1,-1`. Production explicitly evolves the coherent probe path,
+retains only a deterministic response, executes the public-derived inverse,
+checks exact functional restoration, and consumes the returned value for the
+second loop without a second preparation.
+
+The mixed parity `-i gamma_3 gamma_4` has exact weights `1/2,1/2`: copying a
+response leaves carrier and boundary nonfactorized and prevents release,
+whereas a result-free latch/unlatch restores. A disjoint same-sector rotation
+changes the carrier ray with overlap squared `1/2` while preserving both loop
+outputs and restoring under its public adjoint. The deterministic boundary is
+therefore blind to the growing internal amplitude geometry.
+
+An independent dense even-sector oracle and signed-covariance comparator agree
+with production on all exact states, ranks, phases, mixed-loop probabilities,
+scramble invariance, and public adjoints. Scientific algebra is
+`SEPARATE_REFERENCE_PARITY`; production transaction order is
+`PACKAGE_SELF_REVIEW_SOURCE_AUDITED`. Restoration classification is
+`EXACT_ALGEBRAIC_RESTORATION` only at scope
+`FUNCTIONAL_EXACT_VALUE_RESTORATION_AND_REUSE_WITHOUT_SAME_BACKING`.
+
+The controlling O(n) signed Majorana frame/perfect-pairing representation
+updates adjacent exchanges and accepted pair queries compactly and reproduces
+the selected rank by counting crossing pairs. This kills Ising transported
+pair holonomy as a computational-resource candidate while preserving it as a
+bounded coherent machine-law calibration.
+
+The claim ceiling is:
+
+```text
+IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY
+```
+
+No QEMU device/CATVM custody, same-backing reuse, physical anyon or coherent
+interferometer, topological protection, physical restoration, distinct phase
+resource, advantage, M257 escape, Small Wall crossing, unbounded compute, or
+bit-to-pi replacement is established.
+
+The active successor is:
+
+```text
+FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
+```
+
+It tests whether the whole fixed finite-MTC closed-probe class collapses in
+the same way: deterministic factorized monodromy reads one constant-size
+simple-object label, while a non-scalar multiplicity-space action entangles
+the probe and prevents lawful retained-boundary restoration. If confirmed,
+the next hardware architecture must use genuinely interacting non-Gaussian
+scattering or Floquet eigenphase dynamics whose phase depends on a growing
+relational invariant.

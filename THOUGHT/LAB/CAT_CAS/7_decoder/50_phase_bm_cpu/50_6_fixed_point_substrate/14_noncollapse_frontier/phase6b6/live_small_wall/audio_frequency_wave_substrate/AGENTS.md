@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`c79693808f10540d6ec80a0084444f72f1a364e8`. The registry assigns one
+`c2bf2e9647026680472c4f302c33c10ff1076601`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 260-milestone lane remains nonterminal under user-only closure.
+The current 261-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,24 +56,28 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE
+IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY
+IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY
 ```
 
-This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION` restricted to
-`FUNCTIONAL_NORMALIZED_EXACT_STATE_EQUALITY_AND_RETURNED_VALUE_REUSE_WITHOUT_SAME_BACKING`.
-It finds sector dimensions `10,56,330` and peak central ranks `2,8,18`, but
-the connected growing primary loses deterministic QND parity at n=6 and n=8.
-An exhaustive n=6 search finds no Kerr-distinguishing deterministic proper
-selector, while the deterministic n=8 fixed-core control is disconnected.
-No QEMU/CATVM custody, same-backing reuse, physical resource, advantage, or
-general cross-Kerr no-go is established.
+This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`; exact algebra,
+ranks, holonomy boundaries, and public-adjoint equality are
+`SEPARATE_REFERENCE_PARITY`, while production transaction ordering is
+`PACKAGE_SELF_REVIEW_SOURCE_AUDITED`. `EXACT_ALGEBRAIC_RESTORATION` is
+restricted to `FUNCTIONAL_EXACT_VALUE_RESTORATION_AND_REUSE_WITHOUT_SAME_BACKING`.
+The triangular adjacent-braid family has exact contiguous-cut ranks `2,4,8`
+at n=`8,12,16`, and distinct transported pair holonomies return deterministic
+`+1,-1` boundaries with exact functional reuse. Yet an O(n) signed Majorana
+pairing reproduces every boundary and rank, and same-sector scrambling changes
+the carrier ray without changing either output. Ising holonomy is therefore a
+bounded machine-law calibration and an immediate resource kill. No QEMU/CATVM
+custody, same-backing reuse, physical resource, advantage, or general anyon
+no-go is established.
 
 M257 applies only when the comparator receives the same canonical input,
 descriptors, auxiliary/secret state, and oracle access as the accepted exact
@@ -91,13 +95,15 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND`.
-Its first falsifier is an ideal exact Ising-anyon controlled-monodromy machine
-law with actual F/R or Majorana evolution, coherent probe-path restoration,
-distinct-loop reuse, independently measured cut ranks, full preparation and
-verification cost, and compact topological-charge/Majorana comparators. QEMU
-is the virtual hardware laboratory, not evidence of a physical resource. Do
-not add another ordinary exact software algebra or relabel inverse overhead.
+`FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION`.
+It must determine whether every deterministic closed probe loop in a fixed
+finite modular tensor category reduces to a constant-size simple-object charge
+label even when fusion multiplicity grows, and whether every non-scalar action
+necessarily entangles the probe and blocks retained-boundary restoration.
+This is a class-level obstruction test, not another Ising fixture. If it
+closes, move directly to genuinely interacting non-Gaussian scattering or
+Floquet eigenphase dynamics whose factorized phase depends on a growing
+relational invariant. QEMU remains a virtual laboratory, not physical evidence.
 
 The accumulated bounded architecture includes:
 
@@ -293,7 +299,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_PHASE_QEMU_CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_AFTER_M260_QND_VERSUS_BOND_GROWTH_OBSTRUCTION
+ACTIVE_PHASE_QEMU_FINITE_MTC_CLOSED_PROBE_SUPERSELECTION_OBSTRUCTION_AFTER_M261_ISING_SIGNED_PAIRING_RESOURCE_KILL
 ```
 
 The named
@@ -302,17 +308,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
+FINITE_MTC_CLOSED_PROBE_HOLONOMY_SUPERSELECTION_LABEL_OBSTRUCTION
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
 algebraically distinct sealed exact software CATVM packages. M258-M260 moved
-into QEMU process modeling and then established that growing bond rank and
-deterministic Kerr-sensitive QND closure do not coexist in the tested
-single-pi family. Do not add Schur sections, more software CATVM fixtures,
-larger Kerr ladders, or representation optimizations merely to enlarge the
-evidence set. Test the minimum many-body eigenphase/holonomy mechanism and
-preserve M257's equal-access boundary wherever it still applies.
+into QEMU process modeling and the QND-versus-bond obstruction. M261 then
+showed that exact contiguous fusion-rank growth and coherent deterministic
+Ising holonomy coexist, but the accepted boundary still reads one compact
+signed-pairing charge. Do not add Ising sizes, Wilson-loop variants, more
+software CATVM fixtures, or representation optimizations merely to enlarge
+the evidence set. Test the finite-superselection class obstruction, then
+change to interacting non-Gaussian eigenphase dynamics if it closes.
 
 ## 7. Native No-Smuggle Law
 
