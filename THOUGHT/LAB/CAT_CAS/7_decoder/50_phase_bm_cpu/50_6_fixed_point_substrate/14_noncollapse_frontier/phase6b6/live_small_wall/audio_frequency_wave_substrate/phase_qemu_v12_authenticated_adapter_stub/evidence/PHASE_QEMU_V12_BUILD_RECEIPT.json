@@ -1,0 +1,87 @@
+{
+  "schema": "PHASE_QEMU_V12_AUTHENTICATED_ADAPTER_COMPILED_BUILD_RECEIPT_V1",
+  "qemu": {
+    "version": "10.2.4",
+    "official_source_archive_sha256": "821b545b92f165e57dddccac5077d76d4d436a226595b8813ad59306bbfd0746",
+    "configured_targets": [
+      "x86_64-softmmu"
+    ],
+    "configure_options": [
+      "--target-list=x86_64-softmmu",
+      "--disable-docs",
+      "--disable-werror",
+      "--enable-debug"
+    ],
+    "binary_sha256": "917f9f76047b8b255545dd67f7de12a1c1448a55397db0e811ff86858a55dffe",
+    "binary_version_line": "QEMU emulator version 10.2.4",
+    "system_install_modified": false
+  },
+  "build_environment": {
+    "managed_disk_backed_scratch": true,
+    "post_crash_runtime_evidence_used_fresh_managed_disk_scratch": true,
+    "ram_backed_scratch_used": false,
+    "rebuild_result": "INCREMENTAL_COMPILE_AND_LINK_PASS"
+  },
+  "coexisting_phase_qemu_devices": {
+    "v0": {
+      "source_sha256": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v1": {
+      "source_sha256": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v11": {
+      "source_sha256": "84c2ec576ae54b298046fadcda719dcb4c2e97bbe31aa0ac3c77ae5455027771",
+      "qtest_transport_runner_sha256": "fa70a83c24cb9bd9ffc78e6cf07ed3c21dc99d342c6302ac1482dd5df48b47dd",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v12": {
+      "package_source_sha256": "5fe4f99e9bf2ff78774e75149c532293adb03c01c035fcac3d05e2fe74b6153f",
+      "installed_source_sha256": "5fe4f99e9bf2ff78774e75149c532293adb03c01c035fcac3d05e2fe74b6153f",
+      "installer_sha256": "f8cd2b819e4c3ae72d40b3edd6dce5eb996dc17cb4dc78e4c62cc7ff116e0ea9",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    }
+  },
+  "runtime_qualification": {
+    "runner_sha256": "5bdc38c369f89f8afe61a574dbafba24e012cb64c18912e5e282ce5a0d151766",
+    "qtest_deterministic_payload_sha256": "f16afc21f7d4a054d7aba67715507566bb28a234d11a2594dfe8c4211bc099bd",
+    "qtest_matching_replay_count": 2,
+    "qtest_aggregate_check_count": 11,
+    "separate_reference_source_sha256": "f97e53b52502eb357df4a8bbc0411655c64a6f4a5f4a2705378088d6133ea080",
+    "separate_reference_stdout_sha256": "f738f46ce13bc18b717c6f56767f6c94fd40dad763dfb0031e612db5682638fd",
+    "separate_reference_payload_sha256": "3cf0771d4826485fcfc350a42b023f49fc6138a612b94ac2bfd856e881fd7aba",
+    "separate_reference_matching_replay_count": 2,
+    "separate_reference_check_count": 29,
+    "headless_qtest_qmp_only": true,
+    "all_nine_residue_pairs": true,
+    "all_external_results_are_approx_model": true,
+    "authentication_negative_control_count": 7,
+    "timeout_and_cancel_commit_sealed_failed_receipts": true,
+    "timeout_cancel_reset_and_migration_reject_begin_reuse": true,
+    "real_qmp_pre_save_and_two_hop_migration_sham": true,
+    "pending_process_teardown_exits_cleanly": true,
+    "unrealize_cancel_and_sanitize_is_pinned_source_static_audit": true,
+    "qemu_stdout_stderr_empty": true
+  },
+  "architecture": {
+    "qemu_device_source_integrated": true,
+    "qemu_device_implemented": true,
+    "common_guest_visible_contract_source_integrated": true,
+    "common_guest_visible_contract_compiled": true,
+    "common_guest_visible_contract_exercised": true,
+    "reintegration_gate_passed": true,
+    "standalone_twin_qualifies": false,
+    "external_adapter_is_hardware_disconnected_test_stub": true,
+    "physical_adapter_or_carrier_custody_observed": false,
+    "cryptographic_authentication_established": false,
+    "physical_restoration_or_reuse_established": false,
+    "resource_or_query_advantage_established": false,
+    "m257_escape_established": false
+  },
+  "status": "PASS_COMPILED_COMMON_PHASE_QEMU_V12_TEST_ADAPTER_BUILD_AND_QTEST_WITHOUT_PHYSICAL_PROMOTION"
+}
