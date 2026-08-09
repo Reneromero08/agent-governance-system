@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The registry assigns one
+`4fb24b2a59149a66adf641a10204988267761a5f`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 262-milestone lane remains nonterminal under user-only closure.
+The current 263-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,32 +56,32 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES
+EXACT_RATIONAL_SINGLE_CHANNEL_SUBGAP_CAYLEY_RESOLVENT_DIAGNOSTIC_IMPLEMENTS_A_STIPULATED_FORMAL_STATIONARY_UNIT_MODULUS_BOUNDARY_LAW_AT_DECLARED_FIXTURES_WITH_DISTINCT_ENERGY_DESCRIPTOR_REUSE_GROWING_EXACT_KRYLOV_RANK_AND_PATH_ONLY_FIXED_MARGIN_EFFECTIVE_DEPTH_BOUND_PLUS_TILTED_FIELD_AND_BETHE_FACTORIZATION_CONTROLS
 ```
 
 Claim ceiling:
 
 ```text
-ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY
+EXACT_DETERMINISTIC_SOFTWARE_FINITE_DIMENSIONAL_RATIONAL_ONE_CHANNEL_K_MATRIX_BOUNDARY_MODEL_WITH_FORMAL_STATIONARY_ASYMPTOTIC_RETURN_ONLY
 ```
 
-This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`; fixture algebra
-and the bounded response/restoration construction are
-`SEPARATE_REFERENCE_PARITY`, while the central Wilson-character theorem is
-`FORMAL_DERIVATION_SOURCE_AUDITED`. `EXACT_ALGEBRAIC_RESTORATION` is restricted
-to `FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING`.
-For a fixed finite UMTC and one disk-like target with definite simple total
-charge, every boundary-parallel whole-region simple Wilson loop is scalar on
-the internal fusion-multiplicity space and the full loop family spans only the
-fixed simple-charge projector algebra. Semion, Ising, and Fibonacci fixtures
-also distinguish deterministic phase-aligned returns from strictly
-intermediate vacuum-return branches whose retained outcome blocks factorized
-restoration. The accepted boundary therefore collapses to a constant-size
-monodromy table, not growing relational geometry. This kills only the central
-whole-region closed-loop class; noncentral weaves, tube/coupon operations,
-multiple regions, and growing probe networks remain outside scope. No
-QEMU/CATVM custody, same-backing reuse, physical resource, advantage, or
-general anyon no-go is established.
+This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`: exact fixtures
+and parity are `SEPARATE_REFERENCE_PARITY`, its stationary scattering law is
+`FORMAL_DERIVATION_SOURCE_AUDITED`, and resource interpretation is only
+`PACKAGE_SELF_REVIEW`. Restoration is classified `NO_RESTORATION_CLAIM` at
+scope
+`STIPULATED_FORMAL_STATIONARY_ONE_CHANNEL_BOUNDARY_AND_DISTINCT_ENERGY_DESCRIPTOR_REUSE_ONLY`.
+The rational model evaluates a one-channel boundary Green function and its
+Cayley phase exactly, including a non-unit-coupling control. Formula-generated
+paths have growing exact Krylov rank and a fixed-margin Neumann degree bound,
+but only that path family has an executed compact O(n) moment/continuant
+comparator. Tilted-field interacting ranks through dimensions 4, 8, 16, 32,
+and 64 are structural diagnostics: they do not establish an approximation
+work or state lower bound, a tensor-network crossover, or a computational
+win. The Bethe control instead collapses to a public rapidity pair product.
+The target's stationary asymptotic return is stipulated, not executed in a
+time-domain process, so no same-backing, physical, or catalytic restoration
+has occurred.
 
 M257 applies only when the comparator receives the same canonical input,
 descriptors, auxiliary/secret state, and oracle access as the accepted exact
@@ -99,16 +99,13 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT`.
-M262 closed the central whole-region Wilson-character class: it reads only a
-fixed finite total-charge quotient and is blind to internal multiplicity. The
-successor must leave that class through a genuinely noncentral interacting
-law and demonstrate a factorized eigenphase that depends on a growing
-relational invariant after charging state preparation, controller/reference
-state, precision, and the strongest integrability, tensor-network, and
-forward-only shadows. A supplied eigenlabel, conserved charge, finite
-symmetry, stabilizer/Gaussian frame, or preparation descriptor is not such an
-invariant. QEMU remains a virtual laboratory, not physical evidence.
+`NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER`.
+It must execute the missing time-domain preparation, scattering, delay,
+finite-bandwidth return, boundary extraction, and reuse semantics and compare
+them against the strongest tensor-network and streamed classical shadows.
+M257 remains intact: the M263 deterministic software model is not an escape
+from equal-access forward-shadow dominance. QEMU remains a virtual laboratory,
+not physical evidence.
 
 The accumulated bounded architecture includes:
 
@@ -304,7 +301,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_AFTER_M262_FIXED_FINITE_UMTC_CENTRAL_WILSON_CHARACTER_RESOURCE_KILL
+ACTIVE_NEAR_THRESHOLD_TIME_DOMAIN_NONINTEGRABLE_BOUNDARY_RESOLVENT_AFTER_M263_STIPULATED_STATIONARY_MODEL_WITH_NO_RESTORATION_CLAIM
 ```
 
 The named
@@ -313,22 +310,22 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
+NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
-algebraically distinct sealed exact software CATVM packages. M258-M260 moved
-into QEMU process modeling and the QND-versus-bond obstruction. M261 showed
-that exact contiguous fusion-rank growth and coherent deterministic Ising
-holonomy coexist while the accepted boundary reads one compact signed-pairing
-charge. M262 then proved the broader but still narrow fixed-finite-UMTC
-boundary-parallel whole-region Wilson-loop class is multiplicity-blind and
-factors through a finite total-charge character algebra. Do not add Ising
-sizes, more central closed-loop category fixtures, software CATVM algebras, or
-representation optimizations merely to enlarge the evidence set. The active
-mechanism must now be noncentral and interacting, with a factorized eigenphase
-that depends on a growing relational invariant after charging preparation and
-reference-complete factorization costs.
+algebraically distinct sealed exact software CATVM packages. M258-M262 moved
+through QEMU reference modeling, QND-versus-bond, Gaussian/Ising, and central
+fixed-finite-UMTC obstructions. M263 then supplied an exact noncentral
+one-channel resolvent boundary model, but only as a stipulated formal
+stationary law. Growing exact Krylov rank did not prove approximation hardness;
+only the path family has an executed compact comparator, the interacting
+ranks establish no resource win, and the Bethe control factorizes publicly.
+Do not add stationary rank fixtures merely to enlarge the evidence set. The
+active mechanism is the near-threshold time-domain successor, with Wigner
+delay, finite bandwidth, precision, preparation amortization, and
+tensor-network crossover charged explicitly before any restoration or
+resource claim.
 
 ## 7. Native No-Smuggle Law
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The canonical per-milestone
+`4fb24b2a59149a66adf641a10204988267761a5f`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13690,3 +13690,75 @@ finite symmetry class, stabilizer/Gaussian frame, or preparation descriptor.
 Preparation, reference-complete factorization, controller state, coefficient
 height, physical resource models, tensor-network/integrability structure, and
 the equal-access forward-only shadow all remain explicit costs.
+
+## M263 exact rational subgap boundary-resolvent stationary diagnostic
+
+The accepted claim is:
+
+```text
+EXACT_RATIONAL_SINGLE_CHANNEL_SUBGAP_CAYLEY_RESOLVENT_DIAGNOSTIC_IMPLEMENTS_A_STIPULATED_FORMAL_STATIONARY_UNIT_MODULUS_BOUNDARY_LAW_AT_DECLARED_FIXTURES_WITH_DISTINCT_ENERGY_DESCRIPTOR_REUSE_GROWING_EXACT_KRYLOV_RANK_AND_PATH_ONLY_FIXED_MARGIN_EFFECTIVE_DEPTH_BOUND_PLUS_TILTED_FIELD_AND_BETHE_FACTORIZATION_CONTROLS
+```
+
+The exact rational backend implements the stipulated one-channel boundary law
+
+```text
+G(E) = <chi|(E-H)^-1|chi>
+S(E) = (1 - i kappa G(E))/(1 + i kappa G(E)).
+```
+
+Exact one-, two-, and three-mode fixtures, the independent non-unit-coupling
+control `G=-1/3`, `kappa=2`, `S=5/13+12i/13`, and a two-energy
+finite-bandwidth distortion control agree with a separately implemented
+reference. Scientific evidence is `SEPARATE_REFERENCE_PARITY`; the stationary
+derivation is `FORMAL_DERIVATION_SOURCE_AUDITED`; resource claims receive only
+`PACKAGE_SELF_REVIEW`.
+
+For tridiagonal paths at n=`2,4,8,16,32`, exact Krylov rank grows with n and
+the direct resolvent agrees with continuant/Lanczos evaluation. At the declared
+fixed margin and epsilon `2^-20`, Neumann truncation gives degree `19`. This is
+only a degree upper bound. Only the path family has an executed compact O(n)
+moment/continuant comparator; it neither proves general interacting resource
+collapse nor makes moment-generation work free.
+
+The public-product-vacuum tilted-field blocks at n=`2..6` have measured exact
+Krylov ranks `4,8,16,32,64`. These exact ranks do not establish an
+approximation work or state lower bound, an honest tensor-network crossover,
+or any computational win. The Bethe rapidity controls at M=`2,4,8` instead
+show that a nominally factorized eigenphase can be computed from the public
+rapidity pair product and is therefore a resource kill.
+
+The claim ceiling is:
+
+```text
+EXACT_DETERMINISTIC_SOFTWARE_FINITE_DIMENSIONAL_RATIONAL_ONE_CHANNEL_K_MATRIX_BOUNDARY_MODEL_WITH_FORMAL_STATIONARY_ASYMPTOTIC_RETURN_ONLY
+```
+
+Restoration classification is `NO_RESTORATION_CLAIM`, with exact scope:
+
+```text
+STIPULATED_FORMAL_STATIONARY_ONE_CHANNEL_BOUNDARY_AND_DISTINCT_ENERGY_DESCRIPTOR_REUSE_ONLY
+```
+
+The stationary asymptotic target return is formal and stipulated. Production
+does not execute time-domain return, inverse restoration, echo, same-backing
+reuse, physical scattering, or physical restoration. M257 therefore remains
+intact: M263 is a deterministic software/hardware-model diagnostic, not an
+escape from the equal-access forward shadow, a distinct phase resource, an
+advantage, or a Small Wall crossing.
+
+The route disposition is:
+
+```text
+GROWING_EXACT_KRYLOV_RANK_ALONE_IS_NOT_AN_APPROXIMATION_LOWER_BOUND_PATH_FIXED_MARGIN_HAS_COMPACT_STREAMED_SHADOW_AND_BETHE_FACTORIZED_EIGENPHASE_IS_PUBLIC_RAPIDITY_PRODUCT_NEAR_THRESHOLD_TIME_DOMAIN_QUALIFICATION_REQUIRED
+```
+
+The active successor is:
+
+```text
+NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER
+```
+
+It must execute the missing near-threshold time-domain process, expose Wigner
+delay and packet distortion, charge bandwidth, exact/effective precision,
+preparation and reuse amortization, and identify any tensor-network resource
+crossover against the strongest honest classical model before promotion.

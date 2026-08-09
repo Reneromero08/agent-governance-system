@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V4_FINITE_MTC_CENTRAL_WILSON_OBSTRUCTION_VERIFIED_NONCENTRAL_INTERACTING_EIGENPHASE_ACTIVE`
-**Roadmap version:** `15.46`
+**Status:** `PHASE_QEMU_V5_SUBGAP_RESOLVENT_STATIONARY_DIAGNOSTIC_VERIFIED_NO_RESTORATION_CLAIM_NEAR_THRESHOLD_TIME_DOMAIN_ACTIVE`
+**Roadmap version:** `15.47`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`
+**Reconciled source head:** `4fb24b2a59149a66adf641a10204988267761a5f`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES`
-**Current claim ceiling:** `ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY`
+**Current highest milestone:** `EXACT_RATIONAL_SINGLE_CHANNEL_SUBGAP_CAYLEY_RESOLVENT_DIAGNOSTIC_IMPLEMENTS_A_STIPULATED_FORMAL_STATIONARY_UNIT_MODULUS_BOUNDARY_LAW_AT_DECLARED_FIXTURES_WITH_DISTINCT_ENERGY_DESCRIPTOR_REUSE_GROWING_EXACT_KRYLOV_RANK_AND_PATH_ONLY_FIXED_MARGIN_EFFECTIVE_DEPTH_BOUND_PLUS_TILTED_FIELD_AND_BETHE_FACTORIZATION_CONTROLS`
+**Current claim ceiling:** `EXACT_DETERMINISTIC_SOFTWARE_FINITE_DIMENSIONAL_RATIONAL_ONE_CHANNEL_K_MATRIX_BOUNDARY_MODEL_WITH_FORMAL_STATIONARY_ASYMPTOTIC_RETURN_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT`
+**Active primary successor:** `NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2`. The current 262-milestone
+`4fb24b2a59149a66adf641a10204988267761a5f`. The current 263-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,11 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE
-SCIENTIFIC_SOURCE_HEAD       d06fd0dbfd7e7529ea2717a12b07c6f25a7bc7f2
-COMPLETED_MECHANISM          M262_FIXED_FINITE_UMTC_CENTRAL_WILSON_CHARACTER_RESOURCE_KILL
-ACTIVE_SUCCESSOR             NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT
-NEXT_OBSTRUCTION             FIND_A_FACTORABLE_EIGENPHASE_DEPENDING_ON_A_GROWING_RELATIONAL_INVARIANT_RATHER_THAN_A_SUPPLIED_EIGENLABEL_CONSERVED_CHARGE_FINITE_SYMMETRY_STABILIZER_GAUSSIAN_FRAME_OR_PREPARATION_DESCRIPTOR
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_NEAR_THRESHOLD_TIME_DOMAIN_NONINTEGRABLE_BOUNDARY_RESOLVENT
+SCIENTIFIC_SOURCE_HEAD       4fb24b2a59149a66adf641a10204988267761a5f
+COMPLETED_MECHANISM          M263_STIPULATED_FORMAL_STATIONARY_SUBGAP_RESOLVENT_DIAGNOSTIC_WITH_NO_RESTORATION_CLAIM
+ACTIVE_SUCCESSOR             NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER
+NEXT_OBSTRUCTION             EXECUTE_TIME_DOMAIN_RETURN_AND_CHARGE_WIGNER_DELAY_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_CROSSOVER_WITHOUT_PROMOTING_EXACT_KRYLOV_RANK_TO_AN_APPROXIMATION_LOWER_BOUND
 ```
 
 The earlier route remains historical context:
@@ -13023,6 +13023,80 @@ factorization, controller state, precision, energy, latency, and the strongest
 integrability/tensor-network/forward-only shadows. A supplied eigenlabel,
 conserved charge, finite symmetry sector, stabilizer or Gaussian frame, or
 preparation descriptor is not a qualifying growing resource.
+
+## M263 exact rational subgap boundary-resolvent stationary diagnostic
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_RATIONAL_SINGLE_CHANNEL_SUBGAP_CAYLEY_RESOLVENT_DIAGNOSTIC_IMPLEMENTS_A_STIPULATED_FORMAL_STATIONARY_UNIT_MODULUS_BOUNDARY_LAW_AT_DECLARED_FIXTURES_WITH_DISTINCT_ENERGY_DESCRIPTOR_REUSE_GROWING_EXACT_KRYLOV_RANK_AND_PATH_ONLY_FIXED_MARGIN_EFFECTIVE_DEPTH_BOUND_PLUS_TILTED_FIELD_AND_BETHE_FACTORIZATION_CONTROLS
+```
+
+The deterministic exact rational backend evaluates
+
+```text
+G(E) = <chi|(E-H)^-1|chi>
+S(E) = (1 - i kappa G(E))/(1 + i kappa G(E))
+```
+
+at declared finite-dimensional fixtures. One-, two-, and three-mode tests,
+the non-unit-coupling control `G=-1/3`, `kappa=2`,
+`S=5/13+12i/13`, and distinct-energy finite-bandwidth checks agree with a
+separate exact reference. The scientific classification is
+`SEPARATE_REFERENCE_PARITY`; the stationary derivation is
+`FORMAL_DERIVATION_SOURCE_AUDITED`; resource interpretation is only
+`PACKAGE_SELF_REVIEW`.
+
+Formula-generated paths at n=`2,4,8,16,32` have growing exact Krylov rank and
+continuant/Lanczos parity. At the declared fixed margin and epsilon `2^-20`,
+the Neumann truncation gives degree `19`, but this is an approximation-degree
+upper bound only. Only the path family has an executed compact O(n) streamed
+moment/continuant comparator. It does not supply a general interacting
+resource kill or count moment-generation work as free.
+
+The rational tilted-field flagged blocks at n=`2..6`, prepared from the public
+product vacuum, have measured exact Krylov ranks `4,8,16,32,64`. Those ranks
+are structural exact-representation evidence only: they do not establish an
+approximation work or state lower bound, tensor-network crossover, physical
+advantage, or computational win. The Bethe control at rapidity counts
+`2,4,8` is a resource kill because its factorized eigenphase is a public
+rapidity pair product.
+
+Restoration classification is explicitly:
+
+```text
+NO_RESTORATION_CLAIM
+STIPULATED_FORMAL_STATIONARY_ONE_CHANNEL_BOUNDARY_AND_DISTINCT_ENERGY_DESCRIPTOR_REUSE_ONLY
+```
+
+The stationary asymptotic target return is stipulated by the one-channel
+boundary law. No time-domain return, inverse, echo, same-backing reuse,
+physical restoration, or physical scattering was executed. Therefore M257
+remains intact: this exact deterministic software/hardware model supplies no
+phase-resource or advantage claim under equal-access forward comparison.
+
+The claim ceiling is:
+
+```text
+EXACT_DETERMINISTIC_SOFTWARE_FINITE_DIMENSIONAL_RATIONAL_ONE_CHANNEL_K_MATRIX_BOUNDARY_MODEL_WITH_FORMAL_STATIONARY_ASYMPTOTIC_RETURN_ONLY
+```
+
+The exact route disposition is:
+
+```text
+GROWING_EXACT_KRYLOV_RANK_ALONE_IS_NOT_AN_APPROXIMATION_LOWER_BOUND_PATH_FIXED_MARGIN_HAS_COMPACT_STREAMED_SHADOW_AND_BETHE_FACTORIZED_EIGENPHASE_IS_PUBLIC_RAPIDITY_PRODUCT_NEAR_THRESHOLD_TIME_DOMAIN_QUALIFICATION_REQUIRED
+```
+
+The active successor is:
+
+```text
+NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER
+```
+
+It must execute a near-threshold time-domain scattering and return process,
+measure or bound Wigner delay and packet distortion, charge finite bandwidth,
+precision, preparation and reuse amortization, and identify the actual
+tensor-network crossover against the strongest honest classical comparator.
 
 ## 10. Roadmap Maintenance
 
