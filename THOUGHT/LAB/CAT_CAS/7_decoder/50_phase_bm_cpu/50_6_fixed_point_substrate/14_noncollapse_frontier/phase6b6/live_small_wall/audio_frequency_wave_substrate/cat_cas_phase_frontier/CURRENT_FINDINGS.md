@@ -13255,3 +13255,47 @@ phase under native Schur feedback. It must retain the unresolved numerator and
 denominator inside CATVM, release only winding plus one exact boundary
 evaluation after same-backing inverse restoration, and compare against the
 stronger scalar-plus-winding and identical full-polynomial classical laws.
+
+## M256 exact Schur all-pass waveform calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+The backend retains actual numerator and denominator coefficient backings for
+`f(z)=N(z)/D(z)` and applies three exact lossless Schur feedback sections.
+Neither polynomial nor the phase seed is returned. Only winding three and one
+exact `zeta8` evaluation leave the abstract Unix socket, after reverse Schur
+execution, exact divisibility checks, canonical verification, and release.
+Partial-forward, post-projection, and disconnect paths also restore before a
+rejection or lost response. Descriptor-distinct generation-two reuse matches
+fresh execution with stable backings and no reload.
+
+The independent `Q[z]/(z^4+1)` oracle reproduces the exact boundaries, proves
+the formal Laurent all-pass identity, and checks 64 coefficient words for
+scalar/polynomial/inverse parity. The feedback-disabled sham keeps winding
+three but changes the phase, so feedback is causal. Focused review returned
+`PASS_STRICT_SCOPE`, classified `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The obstruction is decisive for this route. One exact field scalar and one
+winding integer reproduce the requested boundary; the identical
+two-polynomial Schur recurrence reproduces the entire formal waveform without
+CATVM inverse work. This establishes a bounded exact waveform-phase machine
+law, not a physical filter, distinct phase resource, advantage, Small Wall
+crossing, physical-bit replacement, inference, or unbounded computation. Do
+not add all-pass fixture sizes.
+
+Next:
+
+```text
+EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
+```
+
+The successor will turn the repeated compact-classical match into an explicit
+same-domain theorem and executable cross-package diagnostic. It must separate
+what follows from an ordinary deterministic software backend from resources
+that could escape the shadow only if supplied externally, physically,
+stochastically, approximately, or under a different oracle/cost model.

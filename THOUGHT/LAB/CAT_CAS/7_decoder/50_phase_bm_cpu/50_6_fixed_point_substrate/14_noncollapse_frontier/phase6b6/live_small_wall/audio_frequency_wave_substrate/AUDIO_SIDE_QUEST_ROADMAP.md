@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_QUARTIC_CUMULANT_RANK_GROWTH_CLOSED_SCHUR_ALLPASS_WAVEFORM_OPEN`
-**Roadmap version:** `15.39`
+**Status:** `STRICT_SCHUR_ALLPASS_WAVEFORM_CLOSED_FORWARD_SHADOW_THEOREM_OPEN`
+**Roadmap version:** `15.40`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7801dc7d0ab4a0a40c25d723f8758019c4cf9420`
+**Reconciled source head:** `2105a5de80b4b60c15137f1c0b20ff0a1127d82d`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_EXACT_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_GAUSSIAN_PLUS_DECOMPOSABLE_QUARTIC_CHAIN_GRASSMANN_CUMULANT_INTERSECTION_HAS_A_COMPACT_PFAFFIAN_HODGE_PROJECTION_BUT_ESCAPES_THE_RANK1_DEGREE4_CHART_AT_SIX_PORTS_AND_GENERATES_NONZERO_TOP_CUMULANTS_THROUGH_EIGHT_PORTS_WITH_DIRECT_PROCESS_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE`
-**Current claim ceiling:** `EXACT_SOFTWARE_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_DECOMPOSABLE_QUARTIC_CHAIN_AT_PORT_COUNTS4_6_8_DIRECT_PROCESS_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED`
+**Current claim ceiling:** `EXACT_SOFTWARE_QZETA8_SEEDED_THREE_SECTION_RATIONAL_SCHUR_ALLPASS_WORDS_AT_ONE_PUBLIC_ZETA8_EVALUATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M255_PROVES_THE_RANK1_QUARTIC_CUMULANT_CHART_FAILS_MINIMALLY_AT_SIX_PORTS_AND_GENERATES_TOP_DEGREE_CUMULANTS_THROUGH_EIGHT_PORTS_THEN_CHANGES_THE_PHASE_PRIMITIVE_TO_EXACT_SCHUR_ALLPASS_WAVEFORM_FEEDBACK_AND_WINDING`
+**New mechanism development:** `ACTIVE_AFTER_M256_PROVES_EXACT_ATOMIC_FORMAL_SCHUR_WAVEFORM_EXECUTION_BUT_THE_RELEASED_BOUNDARY_HAS_A_STRICTLY_SMALLER_SCALAR_CLASSICAL_BISIMULATION_THEN_FORMALIZES_THE_SOFTWARE_FORWARD_SHADOW_ESCAPE_CRITERION`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC`
+**Active primary successor:** `EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7801dc7d0ab4a0a40c25d723f8758019c4cf9420`. The current 255-milestone
+`2105a5de80b4b60c15137f1c0b20ff0a1127d82d`. The current 256-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_EXACT_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_GAUSSIAN_PLUS_DECOMPOSABLE_QUARTIC_CHAIN_GRASSMANN_CUMULANT_INTERSECTION_HAS_A_COMPACT_PFAFFIAN_HODGE_PROJECTION_BUT_ESCAPES_THE_RANK1_DEGREE4_CHART_AT_SIX_PORTS_AND_GENERATES_NONZERO_TOP_CUMULANTS_THROUGH_EIGHT_PORTS_WITH_DIRECT_PROCESS_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
 ```
 
 Not established:
@@ -12581,6 +12581,70 @@ The decisive controls compare against both the identical two-polynomial
 classical recurrence and the stronger one-scalar-plus-winding boundary
 recurrence. If those baselines match, publish the waveform-feedback no-go and
 retire the route rather than adding larger filter fixtures.
+
+## M256 exact Schur all-pass waveform execution is scalar-bisimulated
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+```
+
+One abstract Unix-socket CATVM retains the actual four-coefficient numerator
+and denominator backings for `f(z)=N(z)/D(z)`, plus equal fixed scratch and
+three public rational custody receipts. Each lossless public section applies
+the exact simultaneous Schur update
+
+```text
+N' = a D + z N
+D' = D + a z N
+```
+
+without projecting either polynomial. The inverse checks exact divisibility
+by `z` and divides by `1-a^2`. Only winding three and one exact evaluation at
+`zeta8` leave the service, after the actual inverse restores both polynomial
+backings, scratch, receipts, and custody state. Descriptor-distinct
+generation-two reuse agrees with fresh execution and no snapshot or baseline
+reload occurs.
+
+The independent `Q[z]/(z^4+1)` oracle reproduces every boundary, derives the
+formal Laurent all-pass identity
+`N(z) conjugate(N(z^-1)) = D(z) conjugate(D(z^-1))`, and checks 64 exact public
+coefficient words for scalar/polynomial/inverse parity. Partial-forward,
+post-projection, disconnect, wrong/missing/reordered inverse, descriptor,
+type, owner, controller, consumer, generation, snapshot, and no-smuggle
+controls pass. Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The result closes this route. The actual requested boundary is reproduced by
+one `Q(zeta8)` scalar and one winding integer under the same Schur recurrence;
+the full formal waveform is reproduced by the identical two-polynomial
+classical recurrence without CATVM inverse work. The feedback-disabled sham
+keeps winding three but changes the final phase, establishing causal feedback
+without establishing a resource unavailable to compact classical software.
+No physical filter, waveform, audio, silicon, bounded-width exact state,
+advantage, Small Wall crossing, physical-bit replacement, inference, or
+unbounded computation is established. Do not add filter sections, evaluation
+points, or matrix-valued variants merely to enlarge this fixture.
+
+Selected phase-owned successor:
+
+```text
+EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
+```
+
+M257 must now formalize the obstruction exposed repeatedly across the lane:
+for a deterministic software phase transaction implemented by an ordinary
+backend, the accepted forward carrier update followed by boundary projection
+itself supplies a forward-only classical shadow that omits CATVM inverse,
+restoration, and custody overhead. The experiment must reconstruct that shadow
+from several algebraically distinct verified packages, compare state and work
+on the same basis, and state exact escape conditions. It may not claim that
+the theorem rules out physical, oracle, stochastic, approximate, or
+externally supplied phase resources. Its purpose is to stop manufacturing
+software-only advantage claims and identify the smallest additional resource
+that a future phase machine would actually need.
 
 ## 10. Roadmap Maintenance
 

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`7801dc7d0ab4a0a40c25d723f8758019c4cf9420`. The registry assigns one
+`2105a5de80b4b60c15137f1c0b20ff0a1127d82d`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 255-milestone lane is active by user direction. Continue from the
+The current 256-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,48 +53,43 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_EXACT_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_GAUSSIAN_PLUS_DECOMPOSABLE_QUARTIC_CHAIN_GRASSMANN_CUMULANT_INTERSECTION_HAS_A_COMPACT_PFAFFIAN_HODGE_PROJECTION_BUT_ESCAPES_THE_RANK1_DEGREE4_CHART_AT_SIX_PORTS_AND_GENERATES_NONZERO_TOP_CUMULANTS_THROUGH_EIGHT_PORTS_WITH_DIRECT_PROCESS_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_DECOMPOSABLE_QUARTIC_CHAIN_AT_PORT_COUNTS4_6_8_DIRECT_PROCESS_ONLY
+EXACT_SOFTWARE_QZETA8_SEEDED_THREE_SECTION_RATIONAL_SCHUR_ALLPASS_WORDS_AT_ONE_PUBLIC_ZETA8_EVALUATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone rational full-exterior oracle independently reproduce the
-compact Pfaffian projection, signed Berezin/Hodge transform, exact exterior
-logarithm, six-port rank-two Pluecker certificate, exact top cumulants,
-same-backing restoration, and generation-two reuse.
+and a standalone `Q[z]/(z^4+1)` oracle independently reproduce exact Schur
+updates, the divisibility-gated inverse, formal Laurent all-pass identity,
+final winding/evaluation, same-backing restoration, and generation-two reuse.
 
-M255 tests a compact logarithmic relation chart instead of materializing the
-full even exterior vector. Native cumulant intersection remains compact, but
-the exact two-term quartic sum has rank two at the minimal six-port interface
-and Berezin/Hodge closure generates connected top cumulants `-2/27` and
-`14/625` at six and eight ports. Exact same-backing restoration and
-generation-two reuse pass in direct process. Fixed fixtures have `O(1)` public
-certificates, and the descriptor-level boundary has an identical classical
-recurrence. No compact closed wide-interface chart, CATVM custody, distinct
-phase resource, advantage, Small Wall crossing, physical-bit replacement,
-inference, or unbounded computation is established. The quartic chart is
-retired after the eight-port confirmation.
+M256 changes the primitive to a formal rational waveform phase. Native
+feedback is causal and machine-enforced, but the declared boundary is exactly
+reproduced by one field scalar plus one winding integer. The complete formal
+waveform is reproduced by the identical two-polynomial classical recurrence.
+No physical waveform, compact bounded-width exact state, distinct phase
+resource, advantage, Small Wall crossing, physical-bit replacement,
+inference, or unbounded computation is established. The all-pass route is
+retired after this three-section diagnostic.
 
 Selected successor:
 
 ```text
-CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC
+EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
 ```
 
-Change the primitive rather than optimizing the failed cumulant chart. Retain
-an exact formal all-pass waveform phase `f(z)=N(z)/D(z)` behind CATVM and apply
-public Schur feedback sections by native Mobius composition. Project only the
-declared winding and one exact boundary evaluation after actual inverse
-restoration, then reuse the same backing. Compare against the stronger
-one-scalar-plus-winding recurrence and the identical full-polynomial Schur
-recurrence. If both match, publish the waveform-feedback no-go and retire the
-route without adding filter sizes.
+Formalize and execute the forward-shadow comparison across algebraically
+distinct verified software phase transactions. A deterministic software
+backend's own forward update plus boundary projection is an ordinary
+classical implementation that omits CATVM inverse, restoration, and custody
+overhead. Derive the exact scope and escape criteria rather than adding another
+bounded fixture. Do not generalize the software theorem to physical, oracle,
+stochastic, approximate, or externally supplied phase resources.
 
 The accumulated bounded architecture includes:
 
@@ -288,7 +283,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M255_PROVES_THE_RANK1_QUARTIC_CUMULANT_CHART_FAILS_MINIMALLY_AT_SIX_PORTS_AND_GENERATES_TOP_DEGREE_CUMULANTS_THROUGH_EIGHT_PORTS_THEN_CHANGES_THE_PHASE_PRIMITIVE_TO_EXACT_SCHUR_ALLPASS_WAVEFORM_FEEDBACK_AND_WINDING
+ACTIVE_AFTER_M256_PROVES_EXACT_ATOMIC_FORMAL_SCHUR_WAVEFORM_EXECUTION_BUT_THE_RELEASED_BOUNDARY_HAS_A_STRICTLY_SMALLER_SCALAR_CLASSICAL_BISIMULATION_THEN_FORMALIZES_THE_SOFTWARE_FORWARD_SHADOW_ESCAPE_CRITERION
 ```
 
 The named
@@ -297,15 +292,16 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC
+EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
 ```
 
-M255 closes the compact quartic-cumulant route: the rank-one chart fails
-minimally at six ports and Hodge closure generates connected degree six and
-eight. Do not add Grassmann port counts or optimize the failed chart. M256
-changes the primitive to an exact formal all-pass waveform phase under native
-Schur feedback and tests whether winding or boundary evaluation escapes the
-strong scalar and full-polynomial classical recurrences.
+M256 closes the formal all-pass route: the hidden polynomial waveform,
+feedback law, atomic restoration, and reuse are exact, but one scalar plus one
+winding integer reproduces the released boundary and the identical
+two-polynomial recurrence reproduces the whole function. Do not add Schur
+sections, evaluation points, or matrix-valued variants merely to enlarge the
+fixture. M257 must formalize the same-domain forward-shadow obstruction and
+the exact resource conditions required to escape it.
 
 ## 7. Native No-Smuggle Law
 
