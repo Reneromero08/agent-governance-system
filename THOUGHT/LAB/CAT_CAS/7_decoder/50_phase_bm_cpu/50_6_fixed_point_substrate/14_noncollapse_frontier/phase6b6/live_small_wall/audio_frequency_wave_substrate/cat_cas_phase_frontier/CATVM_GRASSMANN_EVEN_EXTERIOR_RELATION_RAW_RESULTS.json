@@ -1,0 +1,361 @@
+{
+  "cases": [
+    {
+      "backend_response_bytes": 1333,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1152,
+      "generation": 1,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 1335,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1150,
+      "generation": 2,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 1335,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1148,
+      "generation": 1,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "claim": "CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE",
+  "claim_ceiling": "EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_FULL_EVEN_EXTERIOR_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY",
+  "claim_limits": {
+    "compact_wide_interface_even_exterior_relation": false,
+    "distinct_phase_resource_unavailable_to_compact_classical_software": false,
+    "fixed_bounded_rank_or_width_across_growing_interfaces": false,
+    "general_catalytic_inference": false,
+    "general_grassmann_relation_or_arbitrary_topology_closure": false,
+    "normalized_or_convergent_fermionic_path_integral": false,
+    "physical_bit_replacement": false,
+    "physical_fermion_or_berezin_execution": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "total_computational_advantage": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_accepted_relation_scratch_and_receipt_backings_stable": true,
+    "all_accepted_responses_after_exact_restoration": true,
+    "answer_bearing_extra_descriptor_field_rejected": true,
+    "backend_responses_exclude_relation_coefficients_scratch_and_factor_inverses": true,
+    "boolean_generation_rejected": true,
+    "debug_rejected": true,
+    "decoded_boolean_relation_table_absent": true,
+    "dense_signature_rejected": true,
+    "dirty_hodge_scratch_rejected_before_mutation": true,
+    "disconnect_restored_before_lost_response": true,
+    "dump_rejected": true,
+    "four_port_berezin_hodge_transform_is_exact_involution": true,
+    "gaussian_pure_spinor_defect_is_zero": true,
+    "hodge_restricts_to_the_m253_gaussian_pfaffian_transform": true,
+    "independent_quartic_coefficient_changes_selected_boundary": true,
+    "independent_quartic_violates_gaussian_pure_spinor_identity": true,
+    "intersection_and_hodge_do_not_commute": true,
+    "malformed_carrier_id_rejected": true,
+    "malformed_transaction_id_rejected_without_poisoning_carrier": true,
+    "missing_inverse_fails_exact_exterior_restoration": true,
+    "nilpotent_square_term_is_required_for_factor_inverse": true,
+    "no_baseline_reload": true,
+    "noncommuting_reordered_inverse_fails_exact_exterior_restoration": true,
+    "null_carrier_rejected": true,
+    "partial_failure_rejected_only_after_restoration": true,
+    "postprojection_failure_rejected_only_after_restoration": true,
+    "premature_exterior_coefficient_projection_rejected": true,
+    "project_coefficients_rejected": true,
+    "project_grassmann_ports_rejected": true,
+    "project_relation_rejected": true,
+    "project_scratch_rejected": true,
+    "public_nonzero_scalar_factors_have_exact_nilpotent_inverses": true,
+    "restored_reuse_matches_fresh": true,
+    "run_inplace_on_snapshot_rejected": true,
+    "run_snapshot_rejected": true,
+    "same_id_changed_relation_descriptor_rejected": true,
+    "signed_even_exterior_intersection_is_associative": true,
+    "signed_even_exterior_intersection_is_commutative": true,
+    "skipped_generation_rejected": true,
+    "snapshot_rejected": true,
+    "stale_generation_rejected": true,
+    "truth_table_and_assignment_expansion_absent": true,
+    "wrong_controller_rejected": true,
+    "wrong_inverse_completed_path_fails_exact_exterior_restoration": true,
+    "wrong_output_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_port_order_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_type_rejected": true,
+    "zero_denominator_rejected": true,
+    "zero_scalar_factor_rejected": true,
+    "zero_scalar_intersection_factor_rejected_before_mutation": true
+  },
+  "open_relation_law": {
+    "declared_public_linear_language_minimal_dimension": 8,
+    "four_port_berezin_hodge_closure_is_exact_signed_complement_involution": true,
+    "independent_quartic_coordinate_is_strictly_broader_than_m253_gaussian_chart": true,
+    "intersection_is_native_signed_exterior_multiplication": true,
+    "relation_coefficients_remain_unprojected_until_final_top_form_boundary": true,
+    "resident_full_even_relation_field_cells": 8,
+    "route_disposition": "RETIRE_AFTER_ONE_BOUNDED_FOUR_PORT_SUITE_BECAUSE_IDENTICAL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATES_IT_AND_EVEN_INTERFACE_DIMENSION_GROWS_EXPONENTIALLY",
+    "typed_open_grassmann_ports": [
+      "THETA0",
+      "THETA1",
+      "THETA2",
+      "THETA3"
+    ]
+  },
+  "protocol_accounting": {
+    "backend_controller_response_bytes": 6820,
+    "controller_backend_request_bytes": 24907,
+    "disconnect_request_bytes": 1193
+  },
+  "resource_law": {
+    "accepted_catvm_path_has_space_work_or_query_advantage": false,
+    "accepted_compiled_public_intersection_factor_field_cells": 72,
+    "accepted_compiled_public_module_plan_references": 15,
+    "accepted_forward_carrier_field_writes": 120,
+    "accepted_forward_field_accumulations": 126,
+    "accepted_forward_field_multiplications": 189,
+    "accepted_forward_field_negations": 42,
+    "accepted_forward_hodge_closures": 6,
+    "accepted_forward_hodge_scratch_writes_and_clears": 48,
+    "accepted_forward_intersections": 9,
+    "accepted_hidden_even_relation_field_cells_per_carrier": 8,
+    "accepted_hidden_hodge_scratch_field_cells_per_carrier": 1,
+    "accepted_hidden_module_receipt_cells_per_carrier": 8,
+    "accepted_inverse_carrier_field_writes": 120,
+    "accepted_inverse_factor_field_accumulations": 63,
+    "accepted_inverse_factor_field_inversions": 9,
+    "accepted_inverse_factor_field_multiplications": 144,
+    "accepted_inverse_factor_field_negations": 81,
+    "accepted_inverse_factor_rematerializations": 9,
+    "accepted_inverse_factor_returned_field_cells_materialized": 72,
+    "accepted_inverse_field_accumulations": 126,
+    "accepted_inverse_field_multiplications": 189,
+    "accepted_inverse_field_negations": 42,
+    "accepted_inverse_hodge_closures": 6,
+    "accepted_inverse_hodge_scratch_writes_and_clears": 48,
+    "accepted_inverse_intersections": 9,
+    "accepted_peak_returned_inverse_factor_field_cells": 8,
+    "accepted_persistent_carriers": 2,
+    "accepted_public_module_kind_sequences": [
+      [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ]
+    ],
+    "accepted_retained_dynamic_inverse_history_entries": 0,
+    "accepted_transactions": 3,
+    "comparison_basis": "QZETA8_FIELD_CELLS_PUBLIC_FACTOR_CELLS_FIELD_OPERATIONS_WRITES_FINAL_BOUNDARY_RESTORATION_REUSE_AND_PROTOCOL_TRAFFIC_NOT_WHOLE_PROCESS_RSS",
+    "declared_public_linear_language_exact_hankel_rank": 8,
+    "declared_public_linear_language_exact_observable_rank": 8,
+    "declared_public_linear_language_exact_reachable_rank": 8,
+    "exact_qzeta8_coordinate_payload_instrumented": false,
+    "field_cell_counts_are_not_fixed_bit_payload_claims": true,
+    "full_even_interface_dimension_law": "TWO_TO_THE_POWER_PORT_COUNT_MINUS_ONE",
+    "public_factor_storage_python_temporaries_fraction_objects_allocator_socket_hash_serialization_rss_excluded_not_zero": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "retained_final_boundary_field_cells_during_inverse_per_transaction": 1,
+    "strongest_fixed_fixture_classical_baseline": "PUBLIC_DESCRIPTOR_VALIDATION_PLUS_FROZEN_EXACT_TOP_FORM_BOUNDARY_IN_O1_WORK",
+    "strongest_implemented_transferable_descriptor_level_classical_baseline": "IDENTICAL_EXACT_INPLACE_EIGHT_QZETA8_CELL_FULL_EVEN_EXTERIOR_WEDGE_AND_HODGE_RECURRENCE_WITH_ONE_REUSABLE_FIELD_SCRATCH_CELL_NO_CATVM_RESTORATION",
+    "transferable_baseline_resident_relation_field_cells": 8,
+    "transferable_baseline_reusable_hodge_and_intersection_scratch_field_cells": 1,
+    "whole_transaction_live_payload_peak_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_CATVM_GRASSMANN_EVEN_EXTERIOR_OPEN_RELATION_STRICT_SCOPE",
+  "reuse_parity": true,
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

@@ -1,0 +1,229 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 1,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 2,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 1,
+      "hidden_even_relation_field_cells": 8,
+      "hidden_hodge_scratch_field_cells": 1,
+      "hidden_module_receipt_cells": 8,
+      "module_kinds": [
+        "INTERSECT",
+        "HODGE",
+        "INTERSECT",
+        "INTERSECT",
+        "HODGE"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          2
+        ]
+      ],
+      "work": {
+        "compiled_public_intersection_factor_field_cells": 24,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3,
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3,
+        "peak_returned_inverse_factor_field_cells": 8,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "controls": {
+    "berezin_hodge_is_exact_involution_on_all_eight_basis_masks": true,
+    "compact_classical_recurrence_uses_no_truth_table_assignment_or_path_expansion": true,
+    "declared_public_linear_reachable_observable_hankel_ranks_are_exactly_eight": true,
+    "dirty_hodge_scratch_rejected_by_independent_port": true,
+    "eight_variable_berezin_kernel_derives_expected_signed_complement_on_all_basis_masks": true,
+    "generic_even_exterior_product_is_commutative": true,
+    "generic_nilpotent_geometric_inverse_is_exact": true,
+    "generic_signed_exterior_product_is_associative": true,
+    "independent_quartic_coordinate_leaves_gaussian_chart": true,
+    "m253_gaussian_pfaffian_chart_is_preserved_by_hodge": true,
+    "nilpotent_square_term_is_required": true,
+    "one_scratch_inplace_hodge_matches_independent_berezin_kernel": true,
+    "premature_relation_projection_rejected_by_independent_port": true,
+    "same_id_changed_relation_rejected_by_independent_digest": true,
+    "stale_generation_rejected_by_independent_port": true,
+    "wrong_owner_rejected_by_independent_port": true
+  },
+  "oracle_law": {
+    "arithmetic": "Q_ZETA8_POLYNOMIAL_QUOTIENT_ZETA8_TO_THE4_PLUS1",
+    "factor_inverse_reconstructed_by_nilpotent_geometric_series": true,
+    "hodge_reconstructed_from_eight_generator_berezin_kernel": true,
+    "identical_eight_cell_classical_recurrence_reconstructed": true,
+    "independent_port_custody_and_atomic_ordering_reconstructed": true,
+    "signed_exterior_product_reconstructed_from_bitmask_inversions": true
+  },
+  "rank_certificate": {
+    "hankel_rank": 8,
+    "observable_rank": 8,
+    "reachable_rank": 8
+  },
+  "result": "PASS_M254_SEPARATE_REFERENCE",
+  "reuse_parity": {
+    "boundary": true,
+    "generation_sequence": true,
+    "no_reload": true,
+    "same_backings": true,
+    "work": true
+  }
+}
