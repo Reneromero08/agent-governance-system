@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_GRASSMANN_GAUSSIAN_OPEN_RELATION_NON_GAUSSIAN_EXTERIOR_OPEN`
-**Roadmap version:** `15.37`
+**Status:** `STRICT_FULL_EVEN_GRASSMANN_OPEN_RELATION_COMPACT_GROWING_CUMULANT_OPEN`
+**Roadmap version:** `15.38`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `24fbc1acb2095d4bef0bfb649b44d76014a19859`
+**Reconciled source head:** `aad46509f9760a5e03998c2405f334e2e9ff28d6`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_ANTISYMMETRIC_COEFFICIENT_ADDITION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_PFAFFIAN_TRANSFORM_ON_ONE_SEVEN_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SEVEN_CELL_CLASSICAL_RECURRENCE_AND_GENERAL_PFAFFIAN_MATCHGATE_ALGORITHMS_BISIMULATE_THE_DECLARED_LAW_WITH_NO_ADVANTAGE`
-**Current claim ceiling:** `EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_GAUSSIAN_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE`
+**Current claim ceiling:** `EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_FULL_EVEN_EXTERIOR_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M253_ESTABLISHES_EXACT_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_CLOSURE_WITH_ATOMIC_RESTORATION_BUT_RETIRES_THE_MATCHGATE_ROUTE_AT_AN_IDENTICAL_SEVEN_CELL_TWO_SCRATCH_CLASSICAL_RECURRENCE_THEN_CHANGES_TO_THE_SMALLEST_FULL_EVEN_NON_GAUSSIAN_EXTERIOR_RELATION_ALGEBRA`
+**New mechanism development:** `ACTIVE_AFTER_M254_ESTABLISHES_THE_SMALLEST_FULL_EVEN_NON_GAUSSIAN_EXTERIOR_RELATION_ALGEBRA_WITH_ATOMIC_RESTORATION_BUT_FINDS_EXACT_DECLARED_LINEAR_RANK8_AN_IDENTICAL_EIGHT_CELL_ONE_SCRATCH_CLASSICAL_RECURRENCE_AND_EXPONENTIAL_FULL_EVEN_INTERFACE_DIMENSION_THEN_TESTS_A_STRUCTURED_GROWING_PORT_QUARTIC_CUMULANT_CHART`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_QZETA8_FOUR_PORT_EVEN_GRASSMANN_NON_GAUSSIAN_EXTERIOR_RELATION_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_WITH_CATVM_RESTORATION_REUSE_AND_EIGHT_CELL_CLASSICAL_BISIMULATION`
+**Active primary successor:** `EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`24fbc1acb2095d4bef0bfb649b44d76014a19859`. The current 253-milestone
+`aad46509f9760a5e03998c2405f334e2e9ff28d6`. The current 254-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_TWO_QUBIT_PROJECTIVE_WEYL_2_COCYCLE_COMPOSES_NINE_TYPED_SHARED_OBSERVABLE_PORTS_ACROSS_SIX_MERMIN_SQUARE_CONTEXTS_TO_ONE_CENTRAL_MINUS_ONE_PHASE_WITH_FINAL_ONLY_RESPONSE_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_PUBLIC_VARIANT_VALIDATION_PLUS_THE_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_IS_AN_O1_CLASSICAL_BASELINE_AND_NO_COMPUTATIONAL_ADVANTAGE_IS_ESTABLISHED
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE
 ```
 
 Not established:
@@ -12476,6 +12476,62 @@ top-form only. The strongest comparator is the identical eight-cell exterior
 recurrence; a compact match is expected and must be published rather than
 hidden. This is the smallest exact composition algebra strictly broader than
 the Gaussian class, not a claim of advantage or arbitrary-port closure.
+
+## M254 full-even Grassmann relation closure broadens the algebra but not the resource
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE
+```
+
+The abstract Unix-socket CATVM retains the complete even exterior signature on
+four typed Grassmann ports: one scalar, six pair coefficients, and one
+independent quartic coefficient. Signed wedge multiplication is the native
+intersection. The four-port Berezin kernel independently derives the exact
+signed-complement Hodge involution. For a public factor `g=s+n`, `s!=0`, the
+actual inverse is rematerialized as `s^-1(1-n+n^2)` from the public descriptor;
+the accepted non-Gaussian factor requires the `n^2` term. Only the final
+top-form coefficient leaves the service after exact reverse execution,
+canonical verification, and release. The same eight-cell backing then supports
+descriptor-distinct generation-two reuse with no reload.
+
+The independent `Q[zeta8]/(zeta8^4+1)` oracle reconstructs generic bitmask
+exterior multiplication, the eight-generator Berezin kernel, the finite
+nilpotent inverse, and an independent custody state machine. It reproduces the
+accepted boundaries and work records and certifies exact reachable,
+observable, and Hankel ranks eight for the declared linear prefix/suffix
+language. Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+This is a genuine algebraic advance beyond M253: the independent quartic
+coordinate violates the Gaussian pure-spinor identity, survives Hodge closure,
+and causally changes the final boundary. It is not a compact wide-interface
+advance. The strongest transferable comparator is the identical eight-cell
+in-place exterior recurrence with one reusable scratch cell and no CATVM
+restoration. The full even algebra on `m` ports has dimension `2^(m-1)`. M254
+therefore establishes one bounded non-Gaussian open-relation machine law, not a
+distinct phase resource, computational advantage, general Grassmann closure,
+Small Wall crossing, physical execution, physical-bit replacement, inference,
+or unbounded computation. Do not add more four-port full-exterior fixtures.
+
+Selected phase-owned successor:
+
+```text
+EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
+```
+
+The successor attacks the actual M254 obstruction instead of enlarging its
+fixture. It must test whether a structured Gaussian-plus-decomposable-quartic
+cumulant chart closes under native intersection and Berezin/Hodge composition
+as port count grows, or whether exact cumulant rank/support necessarily grows
+toward the full `2^(m-1)` even signature. It must preserve unresolved relation
+structure, exact restoration, and reuse, and compare against the strongest
+matched Pfaffian plus exterior-tensor classical recurrence. A finite compact
+chart may be claimed only if its parameters, coefficient height, inverse
+history, and projection work all remain compact; otherwise publish the rank
+growth obstruction and change mechanism.
 
 ## 10. Roadmap Maintenance
 

@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`27ba6c975e1451f66ef9c202a77fb4bb88c0bb05`. The registry assigns one
+`aad46509f9760a5e03998c2405f334e2e9ff28d6`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 252-milestone lane is active by user direction. Continue from the
+The current 254-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,45 +53,47 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_COHERENT_ORDER_PORT_ROUTES_ONE_TARGET_QUBIT_THROUGH_VU_AND_UV_BRANCH_CONSUMERS_AND_CLOSES_ONLY_TO_THE_COMMUTATOR_PHASE_BOUNDARY_WITH_ATOMIC_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_AN_O1_FIXED_FIXTURE_INVARIANT_AND_THE_STREAMED_ONE_VECTOR_CLASSICAL_COMMUTATOR_RECURRENCE_ARE_SMALLER_AND_NO_ADVANTAGE_OR_PHYSICAL_INDEFINITE_ORDER_IS_ESTABLISHED
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_ONE_HIDDEN_TWO_BRANCH_ORDER_PORT_ONE_FIXED_ZERO_TARGET_QUBIT_PUBLIC_GATE_PAIRS_FROM_X_Z_H_T_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_FULL_EVEN_EXTERIOR_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone exact `Q[zeta8]/(zeta8^4+1)` oracle reproduce the two order
-branches, the dense commutator, the one-vector recurrence, atomic controls,
-exact same-backing restoration, and generation-two reuse.
+and a standalone exact `Q[zeta8]/(zeta8^4+1)` oracle reproduce signed exterior
+multiplication, the eight-generator Berezin/Hodge transform, finite nilpotent
+factor inverses, exact rank-eight linear certificates, atomic controls, exact
+same-backing restoration, and generation-two reuse.
 
-M252 establishes the exact bounded software boundary
-`<0|U^dagger V^dagger U V|0>` from one hidden two-branch order port. Only
-that scalar leaves the service after restoration. The strongest fixed-fixture
-comparator is `O(1)` and the transferable one-vector recurrence uses two
-resident field cells plus two scratch cells and no CATVM restoration. No
-physical indefinite causal order, oracle separation, distinct phase resource,
+M254 establishes the smallest full-even non-Gaussian Grassmann relation
+algebra on four typed ports. Signed wedge intersection and the exact
+Berezin/Hodge involution preserve one actual eight-cell carrier, and only the
+final top form leaves after atomic reverse restoration. The strongest fixed
+fixture comparator is `O(1)` and the transferable recurrence uses the same
+eight resident cells plus one scratch cell without CATVM restoration. The
+declared linear language has exact rank eight and the full even `m`-port
+dimension is `2^(m-1)`. No compact growing interface, distinct phase resource,
 advantage, Small Wall crossing, physical-bit replacement, inference, or
-unbounded computation is established. The coherent-order route is retired at
-this bounded calibration.
+unbounded computation is established. The fixed four-port route is retired.
 
 Selected successor:
 
 ```text
-EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
+EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
 ```
 
-Change the primitive to a typed four-port Grassmann-Gaussian open relation
-stored as six antisymmetric `Q(zeta8)` coefficients plus one scalar. Test
-native coefficientwise intersection and invertible Berezin/Pfaffian closure,
-project only the final top-form scalar, restore the actual seven-cell carrier,
-and reuse its backing. Compare against the identical seven-cell antisymmetric-
-matrix/Pfaffian recurrence and the general matchgate/Pfaffian ceiling. Stop
-after this bounded geometry if the compact classical recurrence bisimulates it;
-do not scale planar matchgate fixtures.
+Change the representation rather than enlarging the full exterior vector.
+Test whether a Gaussian plus decomposable rank-one quartic cumulant chart
+closes under native intersection and Berezin/Hodge composition as typed port
+count grows. Preserve exact restoration and reuse and compare against the
+strongest matched Pfaffian plus exterior-tensor recurrence. If exact cumulant
+rank, height, history, or projection cost grows toward the full `2^(m-1)`
+signature, publish that obstruction and change mechanism; do not materialize
+larger full-even fixtures.
 
 The accumulated bounded architecture includes:
 
@@ -285,7 +287,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M252_ESTABLISHES_EXACT_COHERENT_ORDER_COMMUTATOR_PHASE_WITH_ATOMIC_RESTORATION_BUT_RETIRES_THE_ROUTE_AT_A_SMALLER_ONE_VECTOR_CLASSICAL_RECURRENCE_THEN_CHANGES_TO_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_GEOMETRY
+ACTIVE_AFTER_M254_ESTABLISHES_THE_SMALLEST_FULL_EVEN_NON_GAUSSIAN_EXTERIOR_RELATION_ALGEBRA_WITH_ATOMIC_RESTORATION_BUT_FINDS_EXACT_DECLARED_LINEAR_RANK8_AN_IDENTICAL_EIGHT_CELL_ONE_SCRATCH_CLASSICAL_RECURRENCE_AND_EXPONENTIAL_FULL_EVEN_INTERFACE_DIMENSION_THEN_TESTS_A_STRUCTURED_GROWING_PORT_QUARTIC_CUMULANT_CHART
 ```
 
 The named
@@ -294,18 +296,18 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
+EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
 ```
 
-M252 closes the declared coherent-order route: the hidden branch phase is
-causal and atomic, but one target vector streamed through
-`V,U,V^dagger,U^dagger` uses half the resident field state and needs no CATVM
-restoration. Do not add order fixtures or target width. M253 returns to the
-primary open-relation mission with a seven-cell Grassmann-Gaussian signature.
-It must compose by exact Berezin/Pfaffian closure, intersect coefficientwise,
-project only a final top-form boundary, restore the actual relation carrier,
-and compare against the identical compact antisymmetric-matrix recurrence.
-One bounded four-port geometry is the route ceiling.
+M254 closes the fixed four-port full-even route: the independent quartic
+coordinate is genuinely beyond the Gaussian chart and remains atomic, but the
+declared public linear language has rank eight, the identical eight-cell
+one-scratch classical recurrence bisimulates it, and the full even interface
+dimension is exponential. Do not add fixed four-port factors or materialize a
+larger complete exterior vector. M255 tests whether a structured
+Gaussian-plus-rank-one-quartic cumulant chart preserves unresolved relation
+geometry across growing ports without moving growth into rank, coefficient
+height, inverse history, or projection work.
 
 ## 7. Native No-Smuggle Law
 

@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`24fbc1acb2095d4bef0bfb649b44d76014a19859`. The canonical per-milestone
+`aad46509f9760a5e03998c2405f334e2e9ff28d6`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13156,3 +13156,57 @@ derived in the nilpotent exterior algebra without dynamic old-state history.
 The identical eight-cell exterior recurrence is the strongest immediate
 comparator, so this is a strict algebra-broadening test rather than an expected
 advantage or arbitrary-port claim.
+
+## M254 full-even four-port Grassmann open-relation calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE
+```
+
+One actual eight-cell `Q(zeta8)` backing retains the complete even exterior
+signature on four typed Grassmann ports. Native signed wedge multiplication
+intersects public factors. The exact signed-complement Hodge map is derived
+independently from the eight-generator Berezin kernel and squares to identity.
+It restricts to M253's Gaussian Pfaffian transform, while the independent
+quartic coordinate violates the Gaussian pure-spinor identity and changes the
+accepted boundary.
+
+Every accepted public factor has nonzero scalar. Its inverse is rematerialized
+from the public descriptor by the exact finite law `s^-1(1-n+n^2)`; the
+accepted non-Gaussian control fails if `n^2` is omitted. No dynamic old-state
+history is retained. Only the final top-form coefficient is released after
+the actual reverse, exact canonical verification, and release. The same
+relation, scratch, and receipt backings support descriptor-distinct
+generation-two reuse with no reload.
+
+The independent polynomial-quotient oracle reconstructs generic exterior
+multiplication, the Berezin kernel, nilpotent factor inversion, custody, and
+restoration. It reproduces all accepted boundaries and work records. Its
+declared public prefix/suffix family has exact reachable, observable, and
+Hankel ranks eight. Focused review returned `PASS_STRICT_SCOPE`, classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`EXACT_ALGEBRAIC_RESTORATION`.
+
+The accepted carrier has eight relation cells, one Hodge scratch cell, eight
+receipt cells, and one retained final boundary field cell during inverse. The
+strongest implemented transferable comparator is the identical in-place
+eight-cell exterior recurrence with one reusable scratch and no CATVM
+restoration. Full even `m`-port signatures have dimension `2^(m-1)`. Thus M254
+broadens the native exact relation algebra but does not establish compact
+wide-interface growth, a distinct phase resource, advantage, Small Wall
+crossing, physical execution, physical-bit replacement, inference, or
+unbounded computation. The fixed four-port full-exterior route stops here.
+
+Next:
+
+```text
+EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
+```
+
+The successor tests a structured compact non-Gaussian chart across growing
+port count rather than materializing another full even signature. It must
+either close Gaussian plus decomposable quartic cumulants with compact exact
+rank, height, history, and projection cost, or publish the exact cumulant-rank
+growth obstruction against the matched Pfaffian/exterior-tensor recurrence.
