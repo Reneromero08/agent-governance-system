@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SOFTWARE_FORWARD_SHADOW_THEOREM_ESTABLISHED_RESOURCE_DOMAIN_ESCAPE_REQUIRED`
-**Roadmap version:** `15.41`
+**Status:** `PHASE_QEMU_V0_REFERENCE_HARDWARE_MODEL_CALIBRATED_V1_NON_GAUSSIAN_NATIVE_ECHO_FRONTIER_ACTIVE`
+**Roadmap version:** `15.42`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `26f0a9f0374dc1edc367c581492fa29d2feee49b`
+**Reconciled source head:** `aec4fb72902c7b54cba1b712d4f51ee491e5a13e`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION`
-**Current claim ceiling:** `FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY`
+**Current highest milestone:** `PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION`
+**Current claim ceiling:** `DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE`
+**New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
-**Physical carrier work:** `NOT_AUTHORIZED`
-**P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `NO_AUTHORIZED_SOFTWARE_ONLY_SUCCESSOR_CAN_ESCAPE_M257_WITHOUT_CHANGING_THE_ACCESS_OR_RESOURCE_MODEL`
+**Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
+**P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
+**Active primary successor:** `PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -12673,6 +12673,64 @@ only when a concrete resource or access model outside the M257 assumptions is
 available and authorized. Do not add another exact deterministic software
 fixture and describe its CATVM inverse overhead as a computational resource.
 
+## M258 Phase-QEMU V0 P0 reference-hardware calibration
+
+The accepted strict-scope claim is:
+
+```text
+PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION
+```
+
+An actual QEMU 10.2.4 PCI device now separates source, mechanical carrier,
+detector, dissipative environment, pending boundary, and controller/tag state
+behind a backend-operations seam. The P0 backend models the frozen 32.768 kHz
+quartz architecture with Q30 I/Q coordinates, guarded isolation receipt 8,
+source-side feedthrough, switching impulse, detector response, ringdown, and
+dissipated energy. Guest MMIO cannot read hidden process coordinates or the
+pending boundary. Its owner/program fields enforce only nominal command-time
+tag equality, not authentication, malicious-guest isolation, multi-controller
+custody, or a CATVM security boundary.
+
+The independent integer recurrence reproduces the 0, pi, and carrier-removed
+boundaries exactly. The 0/pi arms are antipodal within predeclared fixed-point
+quantization bounds and both dissipate positive mechanical energy. The source
+remains energized upstream after isolation; therefore the claim is not
+literal source absence. P0 advertises no native inverse, restoration, or
+restored reuse. Diagnostic release spends the transaction.
+
+A separate actual QEMU migration control captures a hidden mid-ringdown state,
+loads it into a second QEMU process, preserves PCI BAR state without guest
+configuration replay, keeps the boundary locked, and reaches the exact warm
+uninterrupted boundary. The positive migration stream, process recreation,
+changed backing identity, and absent inverse make this `SNAPSHOT_RELOAD`, not
+catalytic restoration. The milestone restoration class is
+`NO_RESTORATION_CLAIM`. Migration topology rejection is
+`SOURCE_AUDITED_PACKAGE_LOCAL`; the numerical recurrence and positive
+same-topology migration are `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY`.
+
+The result rejects only the implemented deterministic selected-P0 natural
+ringdown recurrence as a catalytic-restoration route. It does not reject every
+possible physical P0 echo. The QEMU recurrence still has an equal-access
+classical shadow, so V0 does not escape M257 and establishes no physical
+waveform execution, distinct phase resource, advantage, Small Wall crossing,
+unbounded compute, or physical-bit replacement.
+
+Phase-QEMU is now the active hardware-emulation frontier. The selected
+successor is:
+
+```text
+PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE
+```
+
+Its minimum falsifier must combine history-free public-adjoint echo, actual
+same-mode restoration/reuse, causal non-Gaussian interaction, pointer
+factorization before response, and a growing fixed-number bosonic family. It
+must compare against exact sparse sector evolution, adaptive MPS/TTN, Gaussian
+covariance for the Kerr-disabled sham, and controlled approximate phase-space
+methods. QEMU remains an ordinary classical emulator; only a future physical
+resource law can escape M257. Do not add more P0 ringdown fixtures.
+
 ## 10. Roadmap Maintenance
 
 Whenever capability changes, update this file and `AUTONOMOUS_LANE_STATE.json` with:
@@ -12699,14 +12757,16 @@ codex/audio-frequency-wave-substrate
 
 Commit and push meaningful progress. Do not merge or open a PR without user authority. Do not rewrite frozen predecessor evidence.
 
-P0 remains frozen and parked. Its audio/hardware execution path is not
+The frozen P0 physical contract remains unchanged and now serves as
+`REFERENCE_HARDWARE_MODEL_0`. Its actual audio/hardware execution path is not
 reactivated.
 
-The current unified goal does not authorize direct-metal, physical audio,
-powered-circuit, firmware, device, or hardware experiments. Historical
-direct-metal evidence remains valid only within its recorded scope. Current
-work is confined to repository-local Linux software compilation, execution,
-simulation, and non-destructive analysis.
+The current unified goal authorizes Phase-QEMU device/backend development,
+software simulation, co-simulation architecture, digital twins, hardware
+design, and non-purchasing BOM work. It does not authorize physical audio,
+powered-circuit contact, procurement, fabrication, firmware mutation, lab
+instrument commands, or claims of physical observation. Historical
+direct-metal evidence remains valid only within its recorded scope.
 
 ## 12. Standing Directive
 

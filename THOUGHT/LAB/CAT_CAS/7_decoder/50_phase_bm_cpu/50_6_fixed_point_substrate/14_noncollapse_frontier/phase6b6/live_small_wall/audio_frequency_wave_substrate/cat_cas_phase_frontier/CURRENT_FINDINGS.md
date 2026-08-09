@@ -13345,3 +13345,60 @@ a concrete resource or access model outside the M257 assumptions. No distinct
 phase resource, computational advantage, Small Wall crossing, physical
 waveform execution, physical-bit replacement, inference, or unbounded
 catalytic computation has been established.
+
+## M258 Phase-QEMU V0 P0 reference-hardware calibration
+
+The accepted strict-scope claim is:
+
+```text
+PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION
+```
+
+An actual QEMU 10.2.4 PCI device now preserves separate fixed-point source,
+mechanical-carrier, detector, dissipative-environment, pending-boundary, and
+controller/tag state behind a swappable backend interface. Its P0 reference
+backend implements the selected 32.768 kHz quartz process recurrence with
+guarded source isolation, upstream feedthrough, switching impulse, ringdown,
+detector loading, and dissipated energy. Guest MMIO cannot read the hidden
+process coordinates or the pending boundary. Owner and program fields are
+nominal guest-writable command-consistency tags only, not authenticated
+custody or a malicious-guest boundary.
+
+The independent integer recurrence exactly reproduces the 0, pi, and
+carrier-removed boundaries. The carrier-present arms are antipodal within the
+predeclared quantization bound and dissipate positive modeled mechanical
+energy. The source remains energized upstream after isolation, so this is not
+a source-absent claim. The device advertises no native inverse, restoration,
+or restored reuse; diagnostic release spends the transaction.
+
+An actual QEMU migration sham saves hidden mid-ringdown state and loads it
+into a second QEMU process. It preserves PCI/BAR state without guest
+configuration replay, keeps the boundary locked, and continues to the exact
+uninterrupted boundary. This is `SNAPSHOT_RELOAD`: it changes process/backing
+identity, uses a positive migration stream, and performs no inverse. The M258
+restoration classification is `NO_RESTORATION_CLAIM`. Numerical recurrence
+and positive same-topology migration are
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY`; the
+unexecuted topology-mismatch migration guard is
+`SOURCE_AUDITED_PACKAGE_LOCAL`.
+
+This rejects only the implemented deterministic selected-P0 natural-ringdown
+recurrence as a catalytic-restoration route, not every possible physical P0
+echo law. Its equal-access QEMU recurrence remains classically shadowable, so
+M258 does not escape M257 and establishes no physical waveform execution,
+distinct phase resource, advantage, Small Wall crossing, unbounded compute,
+or replacement of physical bits with pi.
+
+The selected next mechanism is:
+
+```text
+PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE
+```
+
+Its minimum falsifier is a four-mode, two-phonon, history-free public-adjoint
+echo with causal Kerr non-Gaussianity, final-only factorized pointer boundary,
+actual same-mode restoration/reuse, and a growing fixed-number bosonic family.
+The required comparators are exact sparse-sector evolution, adaptive MPS/TTN,
+Gaussian covariance for the Kerr-disabled sham, and controlled approximate
+phase-space methods. QEMU remains a classical emulator; only a future
+physical resource law could escape the M257 assumptions.

@@ -1,15 +1,15 @@
 {
   "schema_version": "2.0.0",
   "lane_id": "AUDIO_PHASE_NATIVE_COMPUTE",
-  "state_date": "2026-08-08",
-  "reconciled_source_head": "26f0a9f0374dc1edc367c581492fa29d2feee49b",
+  "state_date": "2026-08-09",
+  "reconciled_source_head": "aec4fb72902c7b54cba1b712d4f51ee491e5a13e",
   "canonical_branch": "codex/audio-frequency-wave-substrate",
   "standing_mission": "CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1",
   "supporting_mission": "CAT_CAS_UNBOUNDED_COMPUTE_V1",
   "prime_directive": "REPLACE_THE_BIT_WITH_PI",
   "claim_authority": {
     "registry": "CLAIM_AUTHORITY_REGISTRY.json",
-    "milestones_classified": 257,
+    "milestones_classified": 258,
     "original_catvm_atomic_transaction": "REJECTED_SOURCE_DEFECT_ATOMICITY",
     "original_catvm_preserved_subclaims": [
       "BOUNDED_BOOLEAN_F3_F_TO_G_ALGEBRA",
@@ -39,7 +39,7 @@
     "post_inverse_canonical_closure_unqualified_exact_restoration": false
   },
   "development_state": {
-    "new_mechanism_development": "HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE",
+    "new_mechanism_development": "ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE",
     "already_completed_do_not_restart": "COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER",
     "rejected_successor": "CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER",
     "rejected_successor_defect": "MODULE_OWNER_NONZERO_CHECK_DID_NOT_BIND_CONSUMERS_TO_DECLARED_SHARED_PORT_OWNER",
@@ -914,9 +914,18 @@
     "software_phase_forward_shadow_distinct_phase_resource": false,
     "software_phase_forward_shadow_small_wall_crossed": false,
     "software_phase_forward_shadow_route_disposition": "CONCRETE_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_BLOCKER_REQUIRES_A_RESOURCE_OR_ACCESS_MODEL_OUTSIDE_THE_THEOREM_ASSUMPTIONS",
-    "next_experiment": "NO_AUTHORIZED_SOFTWARE_ONLY_SUCCESSOR_CAN_ESCAPE_M257_WITHOUT_CHANGING_THE_ACCESS_OR_RESOURCE_MODEL",
-    "next_experiment_status": "HELD_AT_CONCRETE_M257_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_BLOCKER",
-    "next_obstruction": "M257_CONSTRUCTS_THE_FINAL_BOUNDARY_CLASSICAL_SHADOW_FROM_THE_ACCEPTED_FORWARD_PREFIX_FOR_FIVE_ALGEBRAICALLY_DISTINCT_EXACT_SOFTWARE_CATVM_PACKAGES"
+    "completed_phase_qemu_v0_p0_reference_result": "PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION",
+    "phase_qemu_v0_p0_source_head": "aec4fb72902c7b54cba1b712d4f51ee491e5a13e",
+    "phase_qemu_v0_p0_verification_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+    "phase_qemu_v0_p0_verification_level": "SEPARATE_REFERENCE_PARITY",
+    "phase_qemu_v0_p0_migration_topology_guard_verification_level": "SOURCE_AUDITED_PACKAGE_LOCAL",
+    "phase_qemu_v0_p0_restoration_classification": "NO_RESTORATION_CLAIM",
+    "phase_qemu_v0_p0_migration_sham_classification": "SNAPSHOT_RELOAD",
+    "phase_qemu_v0_p0_claim_ceiling": "DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY",
+    "phase_qemu_v0_p0_route_disposition": "SELECTED_NATURAL_RINGDOWN_RECURRENCE_REJECTED_AS_CATALYTIC_RESTORATION_ROUTE_WITHOUT_GENERALIZING_TO_ALL_P0_PHYSICAL_ECHO_LAWS",
+    "next_experiment": "PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE",
+    "next_experiment_status": "SELECTED_AFTER_PHASE_QEMU_V0_P0_DISSIPATIVE_NATURAL_RINGDOWN_OBSTRUCTION",
+    "next_obstruction": "P0_SELECTED_NATURAL_RINGDOWN_IS_DISSIPATIVE_HAS_NO_IMPLEMENTED_NATIVE_INVERSE_RESTORE_REUSE_AND_REMAINS_AN_EQUAL_ACCESS_FIXED_POINT_CLASSICAL_SHADOW"
   },
   "durable_main_goal_reminder": {
     "primary": [
@@ -949,8 +958,20 @@
       "COMPOSITION_ALGEBRA_STRICTLY_BROADER_THAN_GF2_AFFINE_RELATIONS",
       "CONTROLLED_BASELINE_SHAM_AUGMENTED_CATVM_SMALL_WALL_EXPERIMENT"
     ],
-    "current_phase_obstruction": "M257_CONSTRUCTS_THE_FINAL_BOUNDARY_CLASSICAL_SHADOW_FROM_THE_ACCEPTED_FORWARD_PREFIX_FOR_FIVE_ALGEBRAICALLY_DISTINCT_EXACT_SOFTWARE_CATVM_PACKAGES",
-    "selected_phase_machine_repair": "REQUIRES_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE_NOT_CURRENTLY_AVAILABLE_OR_AUTHORIZED",
+    "current_phase_obstruction": "P0_SELECTED_NATURAL_RINGDOWN_IS_DISSIPATIVE_HAS_NO_IMPLEMENTED_NATIVE_INVERSE_RESTORE_REUSE_AND_REMAINS_AN_EQUAL_ACCESS_FIXED_POINT_CLASSICAL_SHADOW",
+    "selected_phase_machine_repair": "PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE_WITH_HISTORY_FREE_ADJOINT_ECHO_AND_GROWING_FIXED_NUMBER_SECTOR_DIAGNOSTIC",
+    "active_architectural_frontier": "PHASE_QEMU",
+    "phase_qemu_role": "EXTENSIBLE_VIRTUAL_HARDWARE_LABORATORY_NOT_A_PHYSICAL_RESOURCE_CLAIM",
+    "phase_qemu_reference_hardware_model_0": "P0_32768HZ_QUARTZ_SOURCE_SEPARATED_IQ_RINGDOWN_ARCHITECTURE",
+    "m257_guardrail": "EQUAL_ACCESS_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_REMAINS_CONTROLLING_FOR_EVERY_QEMU_BACKEND_IMPLEMENTATION",
+    "native_restoration_excludes": [
+      "QEMU_MIGRATION",
+      "QEMU_SNAPSHOT",
+      "CANONICAL_MODEL_REINITIALIZATION",
+      "PROCESS_RECREATION",
+      "SAVED_BASELINE",
+      "SOURCE_REPLAY"
+    ],
     "affine_fixture_expansion_without_concrete_main_goal_blocker": false,
     "successor_questions": [
       "DOES_THIS_REMOVE_A_MAIN_GOAL_OBSTRUCTION",
@@ -961,8 +982,8 @@
   },
   "lane_closure_authority": "USER_ONLY",
   "terminal": false,
-  "current_highest_milestone": "BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION",
-  "current_claim_ceiling": "FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY",
+  "current_highest_milestone": "PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION",
+  "current_claim_ceiling": "DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY",
   "architectural_alignment": {
     "current_phase_circuit_substrate": "ESTABLISHED_DEVELOPMENT_FOUNDATION",
     "bounded_holographic_relational_substrate": "ESTABLISHED_FOR_PUBLIC_SERIES_PARALLEL_GRAPHS_AND_EXACT_15_NODE_FOUR_OWNER_AFFINE_DAG",
@@ -1080,7 +1101,7 @@
     "f17_period17_projective_residual_width_growth": "PRIMARY15_TO99_BITS_REUSE16_TO104_BITS_PERIODS1_TO8",
     "f17_period17_exact_restoration_and_reuse": "PERIOD4_SAME_BACKING_NO_RELOAD_NO_HISTORY",
     "f17_period17_best_matched_baseline": "IDENTICAL_EXACT_272_CELL_PERIOD_BLOCK_RECURRENCE",
-    "selected_next_experiment": "NO_AUTHORIZED_SOFTWARE_ONLY_SUCCESSOR_CAN_ESCAPE_M257_WITHOUT_CHANGING_THE_ACCESS_OR_RESOURCE_MODEL",
+    "selected_next_experiment": "PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE",
     "held_successor": "COMPLETED_WITH_DISTINCT_OWNER_BOUND_REPAIR"
   },
   "strongest_bounded_architecture": [
@@ -6456,7 +6477,7 @@
     "OFFICIAL_EXTERNAL_ACCEPTANCE",
     "CROSS_DOMAIN_TRANSFER"
   ],
-  "active_frontier_candidates_status": "HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE",
+  "active_frontier_candidates_status": "ACTIVE_PHASE_QEMU_HARDWARE_MODEL_SEARCH_P0_IS_REFERENCE_HARDWARE_MODEL_0_NOT_FINAL_ARCHITECTURE",
   "next_crossing": [
     "COMPACT_COMPILED_BODY_TYPED_RELATIONAL_MODULES",
     "NATIVE_DENSE_WIDTH2_RELATIONAL_PHASE_CONTRACTION",
@@ -6667,15 +6688,15 @@
     "RESOURCE_OR_ACCESS_MODEL_OUTSIDE_M257_ASSUMPTIONS",
     "PHASE_NATIVE_RESOURCE_BEYOND_IDENTICAL_COMPACT_CLASSICAL_RECURRENCE"
   ],
-  "next_crossing_status": "HELD_AT_M257_CONCRETE_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_BLOCKER_PENDING_A_RESOURCE_OR_ACCESS_MODEL_OUTSIDE_THE_THEOREM_ASSUMPTIONS",
-  "frontier_warning": "DO_NOT_ADD_ANOTHER_EXACT_DETERMINISTIC_SOFTWARE_FIXTURE_AND_CALL_CATVM_INVERSE_OVERHEAD_A_PHASE_RESOURCE_DO_NOT_GENERALIZE_M257_TO_PHYSICAL_OR_ORACLE_DOMAINS_AND_RESUME_ONLY_WITH_A_CONCRETE_EXTERNAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE_MODEL",
+  "next_crossing_status": "ACTIVE_PHASE_QEMU_V1_MODEL_SEARCH_MUST_TEST_HISTORY_FREE_NATIVE_ECHO_NON_GAUSSIAN_CAUSALITY_AND_GROWING_RESOURCE_LAW_WITHOUT_PROMOTING_EMULATION_TO_PHYSICAL_EVIDENCE",
+  "frontier_warning": "DO_NOT_ADD_ANOTHER_EQUAL_ACCESS_DETERMINISTIC_SOFTWARE_ALGEBRA_OR_MORE_P0_RINGDOWN_FIXTURES_DO_NOT_TREAT_QEMU_AS_A_PHYSICAL_RESOURCE_AND_DO_NOT_SUBSTITUTE_MIGRATION_RESET_REPLAY_OR_SNAPSHOT_FOR_NATIVE_RESTORATION",
   "agent_policy": {
     "continue_without_new_user_prompt": true,
     "ordinary_reversible_choices_are_autonomous": true,
-    "may_replace_architecture": false,
-    "may_select_next_experiment": false,
-    "claim_reconciliation_only": true,
-    "explicit_user_resume_required": true,
+    "may_replace_architecture": true,
+    "may_select_next_experiment": true,
+    "claim_reconciliation_only": false,
+    "explicit_user_resume_required": false,
     "verification_follows_substantive_result": true,
     "audit_of_audit_loops_forbidden": true,
     "roadmap_must_track_evidence": true,
@@ -6774,7 +6795,12 @@
     "may_claim_blocked": false
   },
   "physical_authority": {
-    "p0_state": "FROZEN_AND_PARKED",
+    "p0_state": "FROZEN_PHYSICAL_CONTRACT_USED_AS_REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_WITHOUT_PHYSICAL_EXECUTION",
+    "phase_qemu_software_modeling_authorized": true,
+    "qemu_device_and_backend_development_authorized": true,
+    "hardware_digital_twins_and_cosimulation_architecture_authorized": true,
+    "non_purchasing_hardware_design_and_bom_authorized": true,
+    "actual_external_physical_backend_connection_authorized": false,
     "ssh_direct_metal_compute_authorized": true,
     "ssh_authority_date": "2026-07-23",
     "ordinary_source_transfer_compile_and_isolated_core_execution_authorized": true,
