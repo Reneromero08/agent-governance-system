@@ -1,0 +1,94 @@
+{
+  "schema": "PHASE_QEMU_V13_HARDWARE_ADAPTER_GATE_COMPILED_BUILD_RECEIPT_V1",
+  "qemu": {
+    "version": "10.2.4",
+    "official_source_archive_sha256": "821b545b92f165e57dddccac5077d76d4d436a226595b8813ad59306bbfd0746",
+    "configured_targets": [
+      "x86_64-softmmu"
+    ],
+    "configure_options": [
+      "--target-list=x86_64-softmmu",
+      "--disable-docs",
+      "--disable-werror",
+      "--enable-debug"
+    ],
+    "binary_sha256": "6d70c461f860c83be4436000f7babaa17ff014d9de0fdf8b60a27008d6891050",
+    "binary_version_line": "QEMU emulator version 10.2.4",
+    "system_install_modified": false
+  },
+  "build_environment": {
+    "single_existing_qemu_source_and_build_reused_after_crash": true,
+    "managed_disk_backed_scratch": true,
+    "ram_backed_scratch_used": false,
+    "rebuild_priority": "NICE_10_IONICE_BEST_EFFORT_7",
+    "rebuild_result": "INCREMENTAL_COMPILE_AND_LINK_PASS"
+  },
+  "coexisting_phase_qemu_devices": {
+    "v0": {
+      "source_sha256": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v1": {
+      "source_sha256": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v11": {
+      "source_sha256": "84c2ec576ae54b298046fadcda719dcb4c2e97bbe31aa0ac3c77ae5455027771",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v12": {
+      "source_sha256": "5fe4f99e9bf2ff78774e75149c532293adb03c01c035fcac3d05e2fe74b6153f",
+      "qtest_transport_runner_sha256": "5bdc38c369f89f8afe61a574dbafba24e012cb64c18912e5e282ce5a0d151766",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v13": {
+      "package_source_sha256": "88889411164e9e49c4029585b90703b306a5ac12d9acf6c1a5479790ddc89eeb",
+      "installed_source_sha256": "88889411164e9e49c4029585b90703b306a5ac12d9acf6c1a5479790ddc89eeb",
+      "installer_sha256": "edd6c7ace7debbaa89bf5ee6085fb7fd9dd9c9500e3bf26fb7d41ae3a85a8599",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    }
+  },
+  "runtime_qualification": {
+    "runner_sha256": "ddb2cb169691b829130ee03a446fc14df7189aa4f82eb68629164ca43418c0ad",
+    "qtest_deterministic_payload_sha256": "8449c53dec5c28b0aeeef4290c5a94591c6b3b714946799fabb8703e2d9df6ff",
+    "qtest_matching_replay_count": 2,
+    "qtest_aggregate_check_count": 12,
+    "separate_reference_source_sha256": "6812712066f29c95de641f880607ffd2fa3be0392ed0626038436dfd86950a87",
+    "separate_reference_stdout_sha256": "4dec177f55ba8bf5bfe7ccf814aaa672bccbd739f976a3629c72c69519490d83",
+    "separate_reference_payload_sha256": "f2bfbd7b0a4b055fcde1fba59ac3472157102bac8729ae5f23f192def4d4e2f9",
+    "separate_reference_matching_replay_count": 2,
+    "separate_reference_check_count": 22,
+    "headless_qtest_qmp_only": true,
+    "wall_times_excluded_from_deterministic_qtest_payload": true,
+    "all_seven_fixed_selectors_failed_closed": true,
+    "production_backend_hardware_absent_before_dispatch": true,
+    "ordinary_fixture_dispatches_failed_ack_spent": true,
+    "destructive_reset_and_two_hop_migration_irreversible_sham": true,
+    "pending_process_teardown_exits_cleanly": true,
+    "unrealize_cancel_and_sanitize_is_pinned_source_static_audit": true,
+    "qemu_stdout_stderr_empty": true
+  },
+  "architecture": {
+    "qemu_device_source_integrated": true,
+    "qemu_device_implemented": true,
+    "common_guest_visible_contract_source_integrated": true,
+    "common_guest_visible_contract_compiled": true,
+    "common_guest_visible_contract_exercised": true,
+    "reintegration_gate_passed": true,
+    "standalone_twin_qualifies": false,
+    "fixed_selectors_are_parsers_or_cryptographic_verifiers": false,
+    "external_hardware_connected": false,
+    "authenticated_physical_sample_published": false,
+    "campaign_statistical_certificate_published": false,
+    "physical_carrier_custody_observed": false,
+    "physical_restoration_or_reuse_established": false,
+    "resource_or_query_advantage_established": false,
+    "m257_escape_established": false
+  },
+  "status": "PASS_COMPILED_COMMON_PHASE_QEMU_V13_HARDWARE_ABSENCE_AND_FIXED_SELECTOR_GATE_WITHOUT_PHYSICAL_PROMOTION"
+}
