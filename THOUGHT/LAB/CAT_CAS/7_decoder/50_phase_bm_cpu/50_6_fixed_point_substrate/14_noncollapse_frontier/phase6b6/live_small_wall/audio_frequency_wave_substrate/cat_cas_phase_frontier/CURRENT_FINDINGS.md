@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`92d33c227925180a30f7d032df988834fbab8afe`. The canonical per-milestone
+`7d6e4117376c02d65289105e2cde8969bf483923`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13888,3 +13888,62 @@ controller precision and bandwidth, energy, latency, preparation, and two
 distinct programs without a mode reset. The direct compiled client interaction
 remains the controlling forward shadow, and the model authorizes no physical
 or advantage claim.
+
+## M266 three-mode trapped-ion Weyl-loop closure and heated no-return
+
+The accepted claim is:
+
+```text
+THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING
+```
+
+The deterministic complex128/float64 Gaussian-moment digital twin uses the
+exact piecewise-constant multimode Magnus law, including intra-segment
+self-area. Separate-reference parity confirms that two eight-segment
+nullspace pulse programs close all three nominal displacements and implement
+distinct `ZZ` phases `-pi/8` and `-pi/6` on one logical multimode backing.
+Five named Gaussian fixtures and the declared omission, spectator, detuning,
+quantization, amplitude, orientation, reset, replacement, and coherence
+controls constrain this to a synthetic nominal zero-heating calibration.
+
+Restoration is `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+NOMINAL_ZERO_HEATING_LOGICAL_GAUSSIAN_MODE_RETURN_ONLY_WITH_NONZERO_HEATING_EXACT_SAME_MODE_RETURN_REJECTED_AND_FRESH_MODE_SWAP_OR_RECOOLING_CLASSIFIED_AS_EXTERNAL_RESET
+```
+
+Under the claim-bearing standard Markovian additive-heating law with rates
+`[15,30,60]` quanta/s, mode covariances increase monotonically and the two-run
+occupation drift is `[0.0036,0.0072,0.0144]`. Thus the heated primary rejects
+exact initial-mode return without recooling. The implementation retains
+Gaussian moments and branch-coherence influence factors, not a full joint
+heated master-equation state. Physical ion custody, physical same-mode
+restoration, and physical observation remain false.
+
+The exact claim ceiling is:
+
+```text
+DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW
+```
+
+The exact route disposition is:
+
+```text
+DIRECT_COMPILED_ZZ_AND_DEPHASING_CHANNEL_SHADOW_OMITS_THE_THREE_MODE_CONTROLLER_LOOP_WHILE_HEATING_PREVENTS_CATALYTIC_RETURN_SO_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+The strongest honest comparator directly compiles the same ideal `ZZ` phases
+and declared dephasing channel while omitting all three-mode controller-loop
+pulses. M257 remains intact. The positive result is nominal logical closure;
+the primary physical-process conclusion is heated no-return.
+
+The active successor is:
+
+```text
+CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
+```
+
+This is a mechanism-class conclusion, not another Gaussian construction:
+conditional Gaussian loops are directly shadowable, and irreversible
+diffusion prevents exact catalytic return. A credible next architecture must
+change the access or resource law.

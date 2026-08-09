@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V7_WEYL_LOOP_LOGICAL_RETURN_VERIFIED_DIRECT_COMPILED_FORWARD_SHADOW_MULTIMODE_TRAPPED_ION_DIGITAL_TWIN_ACTIVE`
-**Roadmap version:** `15.49`
+**Status:** `PHASE_QEMU_V8_TRAPPED_ION_NOMINAL_CLOSURE_VERIFIED_HEATED_PRIMARY_NO_RETURN_DIRECT_CHANNEL_SHADOW`
+**Roadmap version:** `15.50`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `92d33c227925180a30f7d032df988834fbab8afe`
+**Reconciled source head:** `7d6e4117376c02d65289105e2cde8969bf483923`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD`
-**Current claim ceiling:** `DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY`
+**Current highest milestone:** `THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING`
+**Current claim ceiling:** `DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE`
+**Active primary successor:** `CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`92d33c227925180a30f7d032df988834fbab8afe`. The current 265-milestone
+`7d6e4117376c02d65289105e2cde8969bf483923`. The current 266-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,12 +751,12 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN
-SCIENTIFIC_SOURCE_HEAD       92d33c227925180a30f7d032df988834fbab8afe
-COMPLETED_MECHANISM          M265_IDEAL_WEYL_COMMUTATOR_AND_NAMED_FIXTURE_LOGICAL_BUS_REFERENCE_RETURN_WITH_DIRECT_COMPILED_FORWARD_SHADOW
-ACTIVE_SUCCESSOR             MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
-SUCCESSOR_CEILING            PHYSICALLY_STRUCTURED_SOFTWARE_DIGITAL_TWIN_ONLY_WITH_NO_PHYSICAL_OBSERVATION_ADVANTAGE_OR_M257_ESCAPE_CLAIM
-NEXT_OBSTRUCTION             TEST_MULTIMODE_CLOSURE_HEATING_SPECTATOR_COUPLINGS_PULSE_CONTROLLER_ENERGY_AND_TWO_PROGRAM_SAME_MODE_REUSE_AGAINST_THE_EQUAL_ACCESS_DIRECT_COMPILED_ZZ_FORWARD_SHADOW
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
+SCIENTIFIC_SOURCE_HEAD       7d6e4117376c02d65289105e2cde8969bf483923
+COMPLETED_MECHANISM          M266_THREE_MODE_NOMINAL_LOGICAL_CLOSURE_WITH_HEATED_PRIMARY_NO_RETURN_AND_DIRECT_ZZ_PLUS_DEPHASING_CHANNEL_SHADOW
+ACTIVE_SUCCESSOR             CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
+SUCCESSOR_CEILING            GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_NONZERO_DIFFUSION_NO_RETURN_ONLY_WITHOUT_PHYSICAL_OR_ADVANTAGE_CLAIMS
+NEXT_OBSTRUCTION             CHANGE_THE_ACCESS_OR_RESOURCE_LAW_BEYOND_CONDITIONAL_GAUSSIAN_CLOSURE_BECAUSE_THE_FORWARD_CHANNEL_IS_DIRECTLY_COMPILABLE_AND_NONZERO_DIFFUSION_PREVENTS_EXACT_MODE_RETURN
 ```
 
 The earlier route remains historical context:
@@ -13223,6 +13223,65 @@ bandwidth, energy, latency, preparation, and two-program same-mode reuse. The
 direct compiled client interaction remains the controlling forward shadow.
 No physical observation, advantage, unbounded-compute, or bit-to-pi claim is
 authorized by the digital twin.
+
+## M266 three-mode trapped-ion Weyl-loop closure and heated no-return
+
+The accepted claim is:
+
+```text
+THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING
+```
+
+The deterministic complex128/float64 Gaussian-moment twin evaluates the exact
+piecewise-constant multimode Magnus recurrence, including each segment's
+self-area. Two eight-segment nullspace pulses close all three nominal mode
+displacements to numerical tolerance and generate phases `-pi/8` and `-pi/6`.
+Programs A and B use one logical multimode backing without snapshot, reload,
+recooling, or carrier replacement. Production and a separate analytic
+reference agree for five named Gaussian fixtures and the declared controls.
+
+Restoration is classified `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+NOMINAL_ZERO_HEATING_LOGICAL_GAUSSIAN_MODE_RETURN_ONLY_WITH_NONZERO_HEATING_EXACT_SAME_MODE_RETURN_REJECTED_AND_FRESH_MODE_SWAP_OR_RECOOLING_CLASSIFIED_AS_EXTERNAL_RESET
+```
+
+The nominal zero-heating recurrence closes, but the claim-bearing nonzero
+standard Markovian additive-heating primary with rates `[15,30,60]` quanta/s
+monotonically increases mode covariance. Across both programs the declared
+occupation increments are `[0.0036,0.0072,0.0144]`; exact initial-mode return
+therefore fails. The retained model is a Gaussian moment/influence model, not
+a full joint heated master-equation integration. Physical ion custody,
+physical same-mode restoration, and physical observation all remain false.
+
+The claim ceiling is:
+
+```text
+DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW
+```
+
+The exact route disposition is:
+
+```text
+DIRECT_COMPILED_ZZ_AND_DEPHASING_CHANNEL_SHADOW_OMITS_THE_THREE_MODE_CONTROLLER_LOOP_WHILE_HEATING_PREVENTS_CATALYTIC_RETURN_SO_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+The equal-access direct compiled client channel reproduces the ideal `ZZ`
+phases and the declared heating-induced dephasing without executing the
+three-mode pulse loop. M257 remains intact. M266 establishes a positive
+nominal logical closure calibration and a negative heated-primary return
+result, not a resource advantage or physical carrier qualification.
+
+The active successor is:
+
+```text
+CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
+```
+
+This successor records the closed mechanism-class conclusion: conditional
+Gaussian loops remain directly forward-shadowable, while nonzero irreversible
+diffusion prevents catalytic return. Further architecture work must change the
+physical access or resource law rather than add another Gaussian loop variant.
 
 ## 10. Roadmap Maintenance
 

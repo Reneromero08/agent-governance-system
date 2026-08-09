@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`92d33c227925180a30f7d032df988834fbab8afe`. The registry assigns one
+`7d6e4117376c02d65289105e2cde8969bf483923`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 265-milestone lane remains nonterminal under user-only closure.
+The current 266-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,35 +56,35 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-IDEAL_INFINITE_CCR_WEYL_COMMUTATOR_FACTORIZATION_WITH_ARBITRARY_NORMAL_STATE_BUS_IDENTITY_AND_FINITE_ENERGY_CONSTRAINED_TRUNCATED_FOCK_NUMERICAL_CONVERGENCE_ON_A_BOUNDED_THREE_QUBIT_CALIBRATION_LOAD
+THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING
 ```
 
 Claim ceiling:
 
 ```text
-DETERMINISTIC_COMPLEX128_SOFTWARE_EMULATION_WITH_LOGICAL_RESIDENT_ARRAY_CUSTODY_DIRECT_COMPILED_FORWARD_SHADOW_AND_NO_PHYSICAL_SAME_MODE_CUSTODY
+DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific
 evidence at `SEPARATE_REFERENCE_PARITY` and resources only at
-`PACKAGE_SELF_REVIEW`. Restoration is classified
-`NUMERICAL_PHYSICAL_STATE_RESTORATION` only at the exact logical scope
-`ENERGY_CONSTRAINED_COMPLEX128_LOGICAL_RESIDENT_BACKING_BUS_AND_REFERENCE_RETURN_WITH_CLIENT_TRANSFORMATION_AND_COMPLETE_FACTORIZATION_AT_CUTOFF128_WITHOUT_PHYSICAL_SAME_MODE_CUSTODY`.
-The ideal infinite-CCR group commutator restores the bus identically while
-applying an operator-valued geometric phase to the clients. Seven named
-finite-energy fixture sequences converge across cutoffs 16, 32, 64, and 128;
-two distinct programs execute on one resident logical allocation with no
-detach, reseed, snapshot, or reload. The clients intentionally transform, so
-the established return is the bus/reference and complete factorization inside
-the same logical backing, not return of the whole joint state. The top-Fock
-control and finite-cutoff CCR defect reject any uniform arbitrary-state
-finite-cutoff interpretation. Physical same-mode custody, physical
-restoration, and a uniform theorem over an energy-bounded ball remain false.
+`PACKAGE_SELF_REVIEW`. Restoration is `NO_RESTORATION_CLAIM` at the exact
+scope
+`NOMINAL_ZERO_HEATING_LOGICAL_GAUSSIAN_MODE_RETURN_ONLY_WITH_NONZERO_HEATING_EXACT_SAME_MODE_RETURN_REJECTED_AND_FRESH_MODE_SWAP_OR_RECOOLING_CLASSIFIED_AS_EXTERNAL_RESET`.
+Two eight-segment nullspace pulses close all three nominal mode displacements
+at zero heating and implement distinct `ZZ` phases on one logical multimode
+backing across programs A and B. Five named Gaussian fixtures, spectator-mode
+controls, pulse/detuning perturbations, and a separate analytic reference
+support only that synthetic complex128/float64 moment-model statement. The
+primary declared standard Markovian additive-heating law monotonically changes
+the mode covariances and rejects exact initial-mode return. Snapshot reload,
+recooling, and fresh-mode swap are controls or external resets, never
+restoration. No physical ion custody, physical restoration, full joint heated
+master-equation integration, or physical observation is established.
 
 The exact route disposition is:
 
 ```text
-DIRECT_COMPILED_ZZ_FORWARD_SHADOW_STRICTLY_OMITS_THE_BUS_LOOP_AND_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+DIRECT_COMPILED_ZZ_AND_DEPHASING_CHANNEL_SHADOW_OMITS_THE_THREE_MODE_CONTROLLER_LOOP_WHILE_HEATING_PREVENTS_CATALYTIC_RETURN_SO_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
 ```
 
 M257 applies only when the comparator receives the same canonical input,
@@ -103,13 +103,13 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE`.
-It must test whether the ideal Weyl-loop law survives a physically structured
-multimode state-dependent-force model with spectator modes, detuning, heating,
-finite pulse envelopes, mode closure, controller bandwidth, and explicit
-energy cost. The equal-access comparator may still compile the resulting
-client interaction directly. M257 remains intact; no physical observation,
-advantage, or bit-to-pi replacement follows from the digital twin.
+`CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN`.
+M266 closes the conditional Gaussian-loop question: nominal closure remains
+directly compilable, while nonzero irreversible diffusion prevents catalytic
+mode return. The next architecture must change the physical access or resource
+law rather than add cosmetic Gaussian variants. M257 remains intact; no
+physical observation, advantage, or bit-to-pi replacement follows from the
+digital twin.
 
 The accumulated bounded architecture includes:
 
@@ -305,7 +305,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_AFTER_M265_LOGICAL_WEYL_BUS_RETURN_WITH_DIRECT_COMPILED_FORWARD_SHADOW
+ACTIVE_CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN_AFTER_M266_HEATED_PRIMARY_NO_RETURN
 ```
 
 The named
@@ -314,7 +314,7 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-MULTIMODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_WEYL_LOOP_DIGITAL_TWIN_WITH_HEATING_SPECTATOR_MODE_CLOSURE_CONTROLLER_COST_AND_ENERGY_CONSTRAINED_SAME_MODE_REUSE
+CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
