@@ -1,20 +1,23 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V9_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION_VERIFIED_NO_RESTORATION_CLAIM`
-**Roadmap version:** `15.51`
+**Status:** `PHASE_QEMU_V10_EXACT_PHASE_EIGENSTATE_KICKBACK_VERIFIED_MECHANISM_KILL_OUTSIDE_QEMU_DEVICE`
+**Roadmap version:** `15.52`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `6da3de70772a682dd8cf51e9892dcb042fe68a17`
+**Reconciled source head:** `25a11c4aedc8538b238052fe1b1e444b0e20ea5a`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE`
-**Current claim ceiling:** `FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY`
+**Current highest milestone:** `FINITE_QUDIT_PHASE_EIGENSTATE_KICKBACK_RETURNS_A_SECRET_INDEPENDENT_CHARACTER_CARRIER_EXACTLY_FOR_TWO_DISTINCT_COHERENT_ORACLE_QUERIES_WHILE_PUBLIC_LAWS_ADMIT_DIRECT_PHASE_COMPILATION_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_REQUIRE_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_ERASES_ANY_UNIQUE_PHASE_QEMU_ADVANTAGE`
+**Current claim ceiling:** `DETERMINISTIC_EXACT_FINITE_DIMENSIONAL_SOFTWARE_ORACLE_DIGITAL_TWIN_WITH_STIPULATED_EXTERNAL_COHERENT_QUERY_INTERFACE_NO_PHYSICAL_ORACLE_CARRIER_CUSTODY_QUERY_SEPARATION_OR_TOTAL_RESOURCE_ADVANTAGE`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
+**Current resource authority:** `PACKAGE_SELF_REVIEW`
+**Current restoration:** `EXACT_ALGEBRAIC_RESTORATION`
+**New mechanism development:** `ACTIVE_PHASE_QEMU_V11_COMMON_DEVICE_BACKEND_REINTEGRATION_FOR_DUAL_RAIL_ONE_PHOTON_DISPERSIVE_KICKBACK`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS`
+**Active primary successor:** `COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING`
+**Mandatory integration target:** `PHASE_QEMU_V11_SWAPPABLE_COMMON_GUEST_VISIBLE_PCI_DEVICE_BACKEND_DUAL_RAIL_ONE_PHOTON_DISPERSIVE_KICKBACK_MINIMUM_NOT_ANOTHER_STANDALONE_PYTHON_TWIN`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +188,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The current 267-milestone
+`25a11c4aedc8538b238052fe1b1e444b0e20ea5a`. The current 268-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,12 +754,17 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE
-SCIENTIFIC_SOURCE_HEAD       6da3de70772a682dd8cf51e9892dcb042fe68a17
-COMPLETED_MECHANISM          M267_FORMAL_FINITE_MODE_FIXED_AXIS_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION_WITH_REFERENCE_COMPLETE_IDENTITY_AND_SUPPORT_QUALIFIED_CP_DIVISIBLE_DIFFUSION_NO_RETURN
-ACTIVE_SUCCESSOR             RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
-SUCCESSOR_CEILING            RESTRICTED_ACCESS_NON_GAUSSIAN_ORACLE_MODEL_ONLY_WITH_PREPARATION_PRECISION_QUERY_CUSTODY_RETURN_AND_STRONGEST_COMPARATOR_COSTS_EXPLICIT_NO_PHYSICAL_OR_ADVANTAGE_CLAIMS
-NEXT_OBSTRUCTION             CHANGE_THE_ACCESS_AND_NON_GAUSSIAN_RESOURCE_LAW_BEYOND_PUBLIC_CONDITIONAL_GAUSSIAN_DYNAMICS_WITHOUT_HIDING_PREPARATION_PRECISION_QUERY_CUSTODY_OR_REFERENCE_COMPLETE_RETURN_COSTS
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_V11_COMMON_DEVICE_BACKEND_REINTEGRATION
+SCIENTIFIC_SOURCE_HEAD       25a11c4aedc8538b238052fe1b1e444b0e20ea5a
+COMPLETED_MECHANISM          M268_EXACT_QUTRIT_PHASE_EIGENSTATE_KICKBACK_LOGICAL_CARRIER_REUSE_AND_EQUAL_ACCESS_RESOURCE_KILL
+PHASE_QEMU_LAYER             MECHANISM_SEARCH_DIGITAL_TWIN_OUTSIDE_QEMU_DEVICE
+QEMU_DEVICE_IMPLEMENTED      false
+COMMON_GUEST_CONTRACT        false
+ARCHITECTURE_PROMOTION       false
+ACTIVE_SUCCESSOR             COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
+INTEGRATION_TARGET           V11_SWAPPABLE_COMMON_GUEST_VISIBLE_PHASE_QEMU_PCI_DEVICE_BACKEND_DUAL_RAIL_ONE_PHOTON_DISPERSIVE_KICKBACK_MINIMUM
+STANDALONE_PYTHON_TWIN       forbidden_for_architecture_promotion
+NEXT_OBSTRUCTION             IMPLEMENT_AND_EXERCISE_COMMON_DEVICE_LIFECYCLE_CUSTODY_ATOMIC_BOUNDARY_ORDERING_RESTORATION_REUSE_AND_SNAPSHOT_MIGRATION_SHAM_LINEAGE_WITH_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
 ```
 
 The earlier route remains historical context:
@@ -13339,12 +13347,81 @@ GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND
 
 There is no executed or physical carrier restoration, physical custody,
 resource advantage, blanket classical-efficiency result, or M257 escape.
-M267 closes only the declared conditional-Gaussian class. The active successor
-changes the access and interaction law:
+M267 closes only the declared conditional-Gaussian class. Its selected
+successor changed the access and interaction law:
 
 ```text
 RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
 ```
+
+## M268 exact phase-eigenstate kickback and mechanism kill
+
+The accepted claim is:
+
+```text
+FINITE_QUDIT_PHASE_EIGENSTATE_KICKBACK_RETURNS_A_SECRET_INDEPENDENT_CHARACTER_CARRIER_EXACTLY_FOR_TWO_DISTINCT_COHERENT_ORACLE_QUERIES_WHILE_PUBLIC_LAWS_ADMIT_DIRECT_PHASE_COMPILATION_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_REQUIRE_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_ERASES_ANY_UNIQUE_PHASE_QEMU_ADVANTAGE
+```
+
+M268 evaluates exact `Q(omega)` qutrit-character kickback for two fresh client
+transactions, `A=[0,1]` and `B=[0,2]`, on one resident logical software
+allocation. Both stipulated coherent addition-oracle basis permutations are
+executed. After each query the target character projector and inert qutrit
+spectator/reference Bell sentinel factorize and return exactly before the
+client boundary is released. Generations advance `0 -> 1 -> 2` without
+snapshot, reload, reseed, carrier swap, reprepare, saved-baseline read, or
+retained history.
+
+Restoration is `EXACT_ALGEBRAIC_RESTORATION` at exact scope:
+
+```text
+EXACT_CYCLOTOMIC_LOGICAL_CARRIER_AND_INERT_REFERENCE_RETURN_FOR_TWO_DISTINCT_STIPULATED_COHERENT_ORACLE_QUERIES_ON_ONE_RESIDENT_SOFTWARE_ALLOCATION_WITHOUT_PHYSICAL_ORACLE_OR_CARRIER_CUSTODY
+```
+
+The exact claim ceiling is:
+
+```text
+DETERMINISTIC_EXACT_FINITE_DIMENSIONAL_SOFTWARE_ORACLE_DIGITAL_TWIN_WITH_STIPULATED_EXTERNAL_COHERENT_QUERY_INTERFACE_NO_PHYSICAL_ORACLE_CARRIER_CUSTODY_QUERY_SEPARATION_OR_TOTAL_RESOURCE_ADVANTAGE
+```
+
+Public descriptors compile directly to the same client phase gates. A
+hypothetical fixed deterministic exact reusable processor requires orthogonal
+program states for A and B because their client gates are nonproportional, but
+no program states or overlap measurement were materialized. With equal
+stipulated coherent-oracle access, the comparator executes the identical A/B
+query sequence and returns identical boundaries. The exact disposition is:
+
+```text
+EXACT_KICKBACK_AND_LOGICAL_CARRIER_REUSE_ARE_VALID_BUT_PUBLIC_DESCRIPTORS_COMPILE_DIRECTLY_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_PAY_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_RUNS_THE_IDENTICAL_QUERY_SO_NO_UNIQUE_PHASE_RESOURCE_TOTAL_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+M268 has scientific evidence at `SEPARATE_REFERENCE_PARITY`, resources at
+`PACKAGE_SELF_REVIEW`, and is nonterminal. Its exact successor token is:
+
+```text
+COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
+```
+
+### Current Phase-QEMU architecture discipline
+
+V0 and V1 are real compiled common guest-visible QEMU PCI devices. V2 through
+V10 are mechanism-search/digital-twin packages that can cheaply kill or refine
+candidate mechanisms but cannot alone qualify the common Phase-QEMU machine
+architecture. M268 is exactly
+`MECHANISM_SEARCH_DIGITAL_TWIN_OUTSIDE_QEMU_DEVICE` with
+`qemu_device_implemented=false`,
+`common_guest_visible_device_contract_exercised=false`,
+`eligible_for_mechanism_kill=true`, and
+`eligible_for_architecture_promotion=false`.
+
+Any promoted survivor must return through a compiled common guest-visible
+Phase-QEMU PCI device/backend and demonstrate lifecycle, carrier and controller
+custody, atomic guest-boundary ordering, restoration before response release,
+same-backing reuse, and snapshot/reload plus migration-sham lineage. The
+immediate reintegration target is V11: a swappable common Phase-QEMU
+backend/device implementing the finite-energy dual-rail one-photon dispersive
+kickback minimum with equal-interface total-resource accounting. It is not
+another standalone Python twin, and surviving its mechanism tests would only
+make it eligible to exercise this architecture gate.
 
 ## 10. Roadmap Maintenance
 

@@ -6,10 +6,18 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The canonical per-milestone
-verification levels, restoration classifications, source-audit authority,
-and strict ceilings are recorded in
+`25a11c4aedc8538b238052fe1b1e444b0e20ea5a`. The canonical verification
+levels, restoration classifications, source-audit authority, and strict
+ceilings for all 268 milestones are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
+
+Phase-QEMU architecture discipline is current authority. V0 and V1 are real
+compiled common guest-visible QEMU PCI devices. V2 through V10 are standalone
+mechanism-search/digital-twin packages that may cheaply kill or refine an idea
+but do not by themselves qualify common Phase-QEMU architecture. Any survivor
+must return through a compiled common guest-visible device/backend and exercise
+lifecycle, custody, atomic boundary ordering, restoration/reuse, and
+snapshot/migration-sham lineage before architecture promotion.
 
 The original CATVM open-intermediate atomic transaction is
 `REJECTED_SOURCE_DEFECT_ATOMICITY`: its `PROJECT Z` response precedes a later,
@@ -14004,9 +14012,76 @@ GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND
 
 This is a formal class obstruction, not an executed or physical restoration
 result. No physical custody, catalytic-bus resource advantage, blanket
-classical-efficiency theorem, or M257 escape is established. The active
-successor is:
+classical-efficiency theorem, or M257 escape is established. Its selected
+successor was:
 
 ```text
 RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
 ```
+
+## M268 exact phase-eigenstate kickback and architecture boundary
+
+The accepted claim is:
+
+```text
+FINITE_QUDIT_PHASE_EIGENSTATE_KICKBACK_RETURNS_A_SECRET_INDEPENDENT_CHARACTER_CARRIER_EXACTLY_FOR_TWO_DISTINCT_COHERENT_ORACLE_QUERIES_WHILE_PUBLIC_LAWS_ADMIT_DIRECT_PHASE_COMPILATION_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_REQUIRE_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_ERASES_ANY_UNIQUE_PHASE_QEMU_ADVANTAGE
+```
+
+The production and separate reference establish exact `Q(omega)` qutrit
+character kickback for the two distinct coherent addition-oracle programs
+`A=[0,1]` and `B=[0,2]`. Production runs two fresh-client transactions on the
+same resident target plus inert qutrit spectator/reference carrier allocation,
+returns and factorizes that logical carrier after each query, and advances
+generation `0 -> 1 -> 2` without snapshot, reload, reseed, carrier swap,
+reprepare, baseline read, or retained history.
+
+Restoration is exactly `EXACT_ALGEBRAIC_RESTORATION` at scope:
+
+```text
+EXACT_CYCLOTOMIC_LOGICAL_CARRIER_AND_INERT_REFERENCE_RETURN_FOR_TWO_DISTINCT_STIPULATED_COHERENT_ORACLE_QUERIES_ON_ONE_RESIDENT_SOFTWARE_ALLOCATION_WITHOUT_PHYSICAL_ORACLE_OR_CARRIER_CUSTODY
+```
+
+The exact claim ceiling is:
+
+```text
+DETERMINISTIC_EXACT_FINITE_DIMENSIONAL_SOFTWARE_ORACLE_DIGITAL_TWIN_WITH_STIPULATED_EXTERNAL_COHERENT_QUERY_INTERFACE_NO_PHYSICAL_ORACLE_CARRIER_CUSTODY_QUERY_SEPARATION_OR_TOTAL_RESOURCE_ADVANTAGE
+```
+
+Public descriptors compile directly to the exact client phases. A hypothetical
+fixed exact reusable processor would require orthogonal program states for the
+nonproportional A and B gates, but M268 materializes no such program states and
+executes or measures no program overlap. Under equal coherent-oracle access,
+the comparator runs the identical A/B query sequence. Therefore:
+
+```text
+EXACT_KICKBACK_AND_LOGICAL_CARRIER_REUSE_ARE_VALID_BUT_PUBLIC_DESCRIPTORS_COMPILE_DIRECTLY_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_PAY_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_RUNS_THE_IDENTICAL_QUERY_SO_NO_UNIQUE_PHASE_RESOURCE_TOTAL_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+Verification is `SEPARATE_REFERENCE_PARITY`; resource verification is
+`PACKAGE_SELF_REVIEW`; M268 is nonterminal. The exact successor token is:
+
+```text
+COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
+```
+
+M268 is classified
+`MECHANISM_SEARCH_DIGITAL_TWIN_OUTSIDE_QEMU_DEVICE`:
+`qemu_device_implemented=false`,
+`common_guest_visible_device_contract_exercised=false`,
+`eligible_for_mechanism_kill=true`, and
+`eligible_for_architecture_promotion=false`. Its exact logical restoration
+evidence remains valid, but it is not device integration.
+
+V0 and V1 are real compiled common guest-visible QEMU PCI devices. V2 through
+V10 are mechanism-search/digital-twin packages outside that device
+architecture. Any surviving mechanism must return through a compiled common
+guest-visible Phase-QEMU PCI device/backend and demonstrate lifecycle, carrier
+and controller custody, atomic guest-boundary ordering, restoration before
+release, same-backing reuse, and snapshot/reload plus migration-sham lineage
+before machine-architecture promotion.
+
+The immediate successor/reintegration target is V11: a swappable common
+Phase-QEMU backend/device implementing the finite-energy dual-rail one-photon
+dispersive-kickback minimum with equal-interface total-resource accounting.
+It is not another standalone Python twin. Mechanism survival makes the
+candidate eligible for the architecture gate; it does not itself promote it.

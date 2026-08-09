@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The registry assigns one
+`25a11c4aedc8538b238052fe1b1e444b0e20ea5a`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 267-milestone lane remains nonterminal under user-only closure.
+The current 268-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,43 +56,44 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE
+FINITE_QUDIT_PHASE_EIGENSTATE_KICKBACK_RETURNS_A_SECRET_INDEPENDENT_CHARACTER_CARRIER_EXACTLY_FOR_TWO_DISTINCT_COHERENT_ORACLE_QUERIES_WHILE_PUBLIC_LAWS_ADMIT_DIRECT_PHASE_COMPILATION_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_REQUIRE_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_ERASES_ANY_UNIQUE_PHASE_QEMU_ADVANTAGE
 ```
 
 Claim ceiling:
 
 ```text
-FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY
+DETERMINISTIC_EXACT_FINITE_DIMENSIONAL_SOFTWARE_ORACLE_DIGITAL_TWIN_WITH_STIPULATED_EXTERNAL_COHERENT_QUERY_INTERFACE_NO_PHYSICAL_ORACLE_CARRIER_CUSTODY_QUERY_SEPARATION_OR_TOTAL_RESOURCE_ADVANTAGE
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific
 evidence at `SEPARATE_REFERENCE_PARITY` and resources only at
-`PACKAGE_SELF_REVIEW`. Restoration is `NO_RESTORATION_CLAIM` at the exact
+`PACKAGE_SELF_REVIEW`. Restoration is `EXACT_ALGEBRAIC_RESTORATION` at the exact
 scope
-`FORMAL_REFERENCE_COMPLETE_GAUSSIAN_CHANNEL_IDENTITY_CRITERION_AND_POSITIVE_DIFFUSION_NO_RETURN_ON_DECLARED_SUPPORT_WITHOUT_EXECUTED_OR_PHYSICAL_CARRIER_RESTORATION`.
-M267 is a formal finite-mode, finite-label, fixed-axis conditional-Gaussian
-class obstruction. Exact metaplectic and Weyl lifts preserve central phases
-that projected symplectic endpoints omit. Faithful carrier-reference identity
-requires the identity Gaussian channel, not return of one rotationally
-invariant marginal. Under a declared common dilation, the surviving client
-map reduces to a direct diagonal phase or declared environment-overlap Schur
-channel. Positive accumulated CP-divisible Markov diffusion forbids exact
-same-mode channel return only on its declared positive support; dark kernels
-and finite-environment recoherence remain outside that conclusion.
-
-The generic direct shadow costs `L` diagonal phases or `L^2` Schur entries.
-The polynomial `q^2` corollary applies only to public `K`-segment
-label-affine Weyl forces under common label-independent symplectic propagation,
-closed displacement, and no label-dependent quadratic generator. It charges
-`O(K(M^2+qM))` input, compilation, and per-label application explicitly. No
-executed carrier restoration, physical custody, physical observation,
-resource advantage, or M257 escape is established.
+`EXACT_CYCLOTOMIC_LOGICAL_CARRIER_AND_INERT_REFERENCE_RETURN_FOR_TWO_DISTINCT_STIPULATED_COHERENT_ORACLE_QUERIES_ON_ONE_RESIDENT_SOFTWARE_ALLOCATION_WITHOUT_PHYSICAL_ORACLE_OR_CARRIER_CUSTODY`.
+M268 exactly executes the two distinct qutrit addition-oracle permutations
+`A=[0,1]` and `B=[0,2]` on two fresh clients while retaining one resident
+target-character plus qutrit spectator/reference carrier allocation. Exact
+`Q(omega)` factorization returns that logical carrier after each transaction,
+with generation `0 -> 1 -> 2` and no reset, snapshot, reload, reseed,
+reprepare, swap, saved-baseline read, or retained history. Public descriptors
+compile directly; a hypothetical fixed exact reusable processor needs
+orthogonal program states for the nonproportional A and B gates; and equal
+coherent-oracle access executes the identical query sequence. Physical oracle
+generation, access enforcement, custody, total-resource advantage, and M257
+escape remain unestablished.
 
 The exact route disposition is:
 
 ```text
-GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND_THE_AFFINE_LABEL_COROLLARY_IS_POLYNOMIALLY_COMPACT_WHILE_POSITIVE_DIFFUSION_ON_CLAIMED_SUPPORT_FORBIDS_EXACT_REFERENCE_COMPLETE_RETURN_SO_NO_CATALYTIC_BUS_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+EXACT_KICKBACK_AND_LOGICAL_CARRIER_REUSE_ARE_VALID_BUT_PUBLIC_DESCRIPTORS_COMPILE_DIRECTLY_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_PAY_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_RUNS_THE_IDENTICAL_QUERY_SO_NO_UNIQUE_PHASE_RESOURCE_TOTAL_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
 ```
+
+The frozen M267/v9 predecessor remains a formal finite-mode, finite-label,
+fixed-axis conditional-Gaussian class obstruction. Its exact metaplectic and
+Weyl lifts, reference-complete identity criterion, direct `L` or `L^2` shadow,
+narrow public affine-force `q^2` corollary, and support-qualified positive
+CP-divisible diffusion no-return law retain their recorded scope and
+`NO_RESTORATION_CLAIM` classification. M268 does not rewrite that result.
 
 M257 applies only when the comparator receives the same canonical input,
 descriptors, auxiliary/secret state, and oracle access as the accepted exact
@@ -110,13 +111,16 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS`.
-M267 closes the public fixed-axis conditional-Gaussian class under its exact
-finite-mode assumptions. The next architecture must change the access or
-non-Gaussian resource law while charging eigenstate preparation, precision,
-queries, custody, reference-complete return, and the strongest honest
-comparator. M257 remains intact; no physical observation, advantage, or
-bit-to-pi replacement follows from the formal obstruction.
+`COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING`.
+Its mandatory reintegration target is a V11 swappable common Phase-QEMU
+guest-visible PCI device/backend implementing the dual-rail one-photon
+dispersive-kickback minimum. It is not another standalone Python twin. It must
+charge preparation, precision, queries, custody, finite energy, environment,
+controller, return, and the strongest equal-interface comparator, while
+exercising lifecycle, custody, atomic guest-boundary ordering, restoration
+before release, same-backing reuse, and snapshot/migration-sham lineage.
+M257 remains intact; no physical observation, advantage, or bit-to-pi
+replacement follows from M268.
 
 The accumulated bounded architecture includes:
 
@@ -312,7 +316,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_AFTER_M267_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION
+ACTIVE_PHASE_QEMU_V11_COMMON_DEVICE_BACKEND_REINTEGRATION_FOR_DUAL_RAIL_ONE_PHOTON_DISPERSIVE_KICKBACK_AFTER_M268_MECHANISM_KILL
 ```
 
 The named
@@ -321,7 +325,7 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
+COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
@@ -331,10 +335,29 @@ ideal Weyl-loop return, and the trapped-ion heated no-return twin. M267 now
 closes the finite public fixed-axis conditional-Gaussian class at formal
 strict scope: exact reference-complete identity leaves only a direct client
 phase or declared Schur channel, while positive CP-divisible diffusion blocks
-return on declared support. The active mechanism therefore tests a restricted
-access non-Gaussian phase-eigenstate kickback oracle and must charge
-preparation, precision, query, custody, return, energy, and comparator access.
-No advantage or physical claim may be inferred from the formal model.
+return on declared support. M268 then establishes bounded exact logical
+qutrit-character kickback and two-query carrier reuse, but public compilation,
+orthogonal reusable-program dimension, and the identical equal-access oracle
+comparator kill any unique resource or advantage claim.
+
+Phase-QEMU architectural lineage is now explicit current authority. V0 and V1
+are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
+mechanism-search/digital-twin packages outside the QEMU device; they may kill
+or refine ideas cheaply, but they do not by themselves qualify common
+Phase-QEMU architecture. M268 is classified
+`MECHANISM_SEARCH_DIGITAL_TWIN_OUTSIDE_QEMU_DEVICE`, with
+`qemu_device_implemented=false`,
+`common_guest_visible_device_contract_exercised=false`, and
+`eligible_for_architecture_promotion=false`.
+
+Any surviving mechanism must return through a compiled common guest-visible
+Phase-QEMU PCI device/backend and demonstrate device/backend lifecycle,
+carrier and controller custody, atomic guest-boundary ordering, restoration
+before response release, same-backing reuse, and snapshot/reload plus
+migration-sham lineage before machine-architecture promotion. The immediate
+V11 target is the swappable common backend/device implementation of the
+dual-rail one-photon dispersive-kickback minimum. It is not another standalone
+Python twin. No advantage or physical claim may be inferred before that gate.
 
 ## 7. Native No-Smuggle Law
 
