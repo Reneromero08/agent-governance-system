@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`25a11c4aedc8538b238052fe1b1e444b0e20ea5a`. The registry assigns one
+`d809b451c335fe2c03e13b6b724387d3fba8ae2b`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 268-milestone lane remains nonterminal under user-only closure.
+The current 269-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -54,6 +54,61 @@ final computational architecture. Phase-circuit scaling is support work only
 when it enables the relational lift.
 
 ## 2. Current Highest Milestone
+
+```text
+COMMON_PHASE_QEMU_V11_SWAPPABLE_BACKEND_DEVICE_EXECUTES_TWO_LATE_BOUND_DUAL_RAIL_NUMBER_EIGENSPACE_DISPERSIVE_KICKBACK_QUERIES_ON_ONE_HIDDEN_CARRIER_REFERENCE_STATE_AND_RELEASES_ATOMIC_RECEIPTS_ONLY_AFTER_EXACT_COMPLETE_RETURN_WHILE_OPEN_AND_EXTERNAL_BACKENDS_FAIL_CLOSED
+```
+
+Claim ceiling:
+
+```text
+COMPILED_QEMU_10_2_4_PCI_DEVICE_WITH_EXACT_QOMEGA_IDEAL_BACKEND_TEST_ONLY_PRIVATE_PROVIDER_AND_ANALYTIC_OPEN_EXTERNAL_STUBS_NO_PHYSICAL_ORACLE_COHERENT_PORT_CUSTODY_QUERY_SEPARATION_OR_ADVANTAGE
+```
+
+M269 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific evidence at
+`SEPARATE_REFERENCE_PARITY`, resources at `PACKAGE_SELF_REVIEW`, and
+restoration `EXACT_ALGEBRAIC_RESTORATION` at exact scope:
+
+```text
+EXACT_HIDDEN_96_DIMENSION_QOMEGA_DUAL_RAIL_CARRIER_REFERENCE_AND_TWO_CLIENT_REFERENCE_RETURN_ON_ONE_RESIDENT_QEMU_ALLOCATION_FOR_IDEAL_BACKEND_ONLY_WITH_NO_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+V11 is an actual compiled QEMU 10.2.4 PCI device behind one common
+guest-visible ABI and a swappable backend boundary. Its ideal backend executes
+the two late-bound controlled-number queries through the hidden full 96 by 96
+`Q(omega)` joint density, verifies complete carrier/reference and both
+client/reference returns, and seals the response-local resource receipt before
+atomic release. Nine residue-pair generations reuse one allocation with one
+prepare, 18 fresh-client supplies, eight reuse cycles, re-isolation every
+generation, and output held until acknowledgement. Split execute and
+verify-return lifecycle callbacks remain core-owned. Real QMP migration,
+second-hop migration, and reset remain irreversibly `SHAM`. The OPEN nonzero
+model is only an analytic `APPROX` stub without reuse; EXTERNAL is unavailable
+through backend lease preflight. The test-only private provider is not an
+authenticated physical adapter.
+
+The exact route disposition is:
+
+```text
+COMMON_DEVICE_REINTEGRATION_ESTABLISHES_BACKEND_NEUTRAL_LIFECYCLE_AND_EXACT_IDEAL_MACHINE_LAW_BUT_TEST_ONLY_PRIVATE_BINDING_AND_EQUAL_ACCESS_DIRECT_PHASE_SHADOW_PRECLUDE_PHYSICAL_OR_RESOURCE_PROMOTION
+```
+
+V0, V1, and V11 are compiled common guest-visible QEMU PCI devices. V2 through
+V10 remain mechanism-search/digital twins: they may kill or nominate a
+mechanism, but cannot promote architecture. Promotion requires return through
+the common Phase-QEMU device/backend contract. No physical oracle execution,
+coherent-port custody, access separation, advantage, or M257 escape follows.
+
+The active successor is:
+
+```text
+AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_WITH_COHERENT_CLIENT_PORT_REFERENCE_PRESERVATION_LATE_BOUND_PRIVATE_CONTROL_AND_TOTAL_RESOURCE_CERTIFICATION
+```
+
+It is an adapter and certification target only; actual physical execution is
+not authorized or claimed.
+
+### Frozen M268/v10 predecessor
 
 ```text
 FINITE_QUDIT_PHASE_EIGENSTATE_KICKBACK_RETURNS_A_SECRET_INDEPENDENT_CHARACTER_CARRIER_EXACTLY_FOR_TWO_DISTINCT_COHERENT_ORACLE_QUERIES_WHILE_PUBLIC_LAWS_ADMIT_DIRECT_PHASE_COMPILATION_SECRET_DEPENDENT_REUSABLE_PROGRAM_STATES_REQUIRE_ORTHOGONAL_DIMENSION_AND_EQUAL_COHERENT_ORACLE_ACCESS_ERASES_ANY_UNIQUE_PHASE_QEMU_ADVANTAGE
@@ -316,7 +371,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_PHASE_QEMU_V11_COMMON_DEVICE_BACKEND_REINTEGRATION_FOR_DUAL_RAIL_ONE_PHOTON_DISPERSIVE_KICKBACK_AFTER_M268_MECHANISM_KILL
+ACTIVE_AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_DESIGN_AND_TOTAL_RESOURCE_CERTIFICATION_AFTER_M269_COMPILED_REINTEGRATION
 ```
 
 The named
@@ -325,7 +380,7 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-COMPACT_PHYSICAL_COHERENT_ORACLE_GENERATION_LAW_WITH_SECRET_INDEPENDENT_FINITE_ENERGY_EIGENSTATE_CARRIER_AND_EQUAL_INTERFACE_TOTAL_RESOURCE_ACCOUNTING
+AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_WITH_COHERENT_CLIENT_PORT_REFERENCE_PRESERVATION_LATE_BOUND_PRIVATE_CONTROL_AND_TOTAL_RESOURCE_CERTIFICATION
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
@@ -338,10 +393,13 @@ phase or declared Schur channel, while positive CP-divisible diffusion blocks
 return on declared support. M268 then establishes bounded exact logical
 qutrit-character kickback and two-query carrier reuse, but public compilation,
 orthogonal reusable-program dimension, and the identical equal-access oracle
-comparator kill any unique resource or advantage claim.
+comparator kill any unique resource or advantage claim. M269 returns the
+surviving mechanism to the compiled common Phase-QEMU architecture and closes
+the exact ideal backend machine law, but its private binding remains test-only
+and its direct equal-interface phase shadow still forbids resource promotion.
 
-Phase-QEMU architectural lineage is now explicit current authority. V0 and V1
-are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
+Phase-QEMU architectural lineage is now explicit current authority. V0, V1,
+and V11 are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
 mechanism-search/digital-twin packages outside the QEMU device; they may kill
 or refine ideas cheaply, but they do not by themselves qualify common
 Phase-QEMU architecture. M268 is classified
@@ -354,10 +412,13 @@ Any surviving mechanism must return through a compiled common guest-visible
 Phase-QEMU PCI device/backend and demonstrate device/backend lifecycle,
 carrier and controller custody, atomic guest-boundary ordering, restoration
 before response release, same-backing reuse, and snapshot/reload plus
-migration-sham lineage before machine-architecture promotion. The immediate
-V11 target is the swappable common backend/device implementation of the
-dual-rail one-photon dispersive-kickback minimum. It is not another standalone
-Python twin. No advantage or physical claim may be inferred before that gate.
+migration-sham lineage before machine-architecture promotion. The required
+V11 target was the swappable common backend/device implementation of the
+dual-rail one-photon dispersive-kickback minimum, not another standalone
+Python twin. M269 passed that reintegration gate for the exact ideal backend;
+the next gate is an authenticated external adapter with real coherent client
+ports, reference preservation, late-bound private control, and certified total
+resources. No physical execution or advantage is authorized or established.
 
 ## 7. Native No-Smuggle Law
 

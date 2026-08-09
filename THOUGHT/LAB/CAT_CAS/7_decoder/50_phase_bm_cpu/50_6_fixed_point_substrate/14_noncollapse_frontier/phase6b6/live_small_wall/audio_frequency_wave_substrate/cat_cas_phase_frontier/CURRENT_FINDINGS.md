@@ -6,16 +6,16 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`25a11c4aedc8538b238052fe1b1e444b0e20ea5a`. The canonical verification
+`d809b451c335fe2c03e13b6b724387d3fba8ae2b`. The canonical verification
 levels, restoration classifications, source-audit authority, and strict
-ceilings for all 268 milestones are recorded in
+ceilings for all 269 milestones are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
 
-Phase-QEMU architecture discipline is current authority. V0 and V1 are real
-compiled common guest-visible QEMU PCI devices. V2 through V10 are standalone
-mechanism-search/digital-twin packages that may cheaply kill or refine an idea
-but do not by themselves qualify common Phase-QEMU architecture. Any survivor
-must return through a compiled common guest-visible device/backend and exercise
+Phase-QEMU architecture discipline is current authority. V0, V1, and V11 are
+real compiled common guest-visible QEMU PCI devices. V2 through V10 are
+standalone mechanism-search/digital-twin packages that may cheaply kill or
+nominate an idea but cannot promote architecture. Every promoted survivor must
+return through a compiled common guest-visible device/backend and exercise
 lifecycle, custody, atomic boundary ordering, restoration/reuse, and
 snapshot/migration-sham lineage before architecture promotion.
 
@@ -14085,3 +14085,87 @@ Phase-QEMU backend/device implementing the finite-energy dual-rail one-photon
 dispersive-kickback minimum with equal-interface total-resource accounting.
 It is not another standalone Python twin. Mechanism survival makes the
 candidate eligible for the architecture gate; it does not itself promote it.
+
+## M269 compiled Phase-QEMU V11 dual-rail oracle reintegration
+
+The accepted claim is:
+
+```text
+COMMON_PHASE_QEMU_V11_SWAPPABLE_BACKEND_DEVICE_EXECUTES_TWO_LATE_BOUND_DUAL_RAIL_NUMBER_EIGENSPACE_DISPERSIVE_KICKBACK_QUERIES_ON_ONE_HIDDEN_CARRIER_REFERENCE_STATE_AND_RELEASES_ATOMIC_RECEIPTS_ONLY_AFTER_EXACT_COMPLETE_RETURN_WHILE_OPEN_AND_EXTERNAL_BACKENDS_FAIL_CLOSED
+```
+
+V11 is an actual compiled QEMU 10.2.4 PCI device, not a standalone mechanism
+twin. One immutable guest-visible ABI fronts swappable IDEAL, OPEN, and
+EXTERNAL backend operations while the common core owns lifecycle, custody,
+classification, sealing, and reuse policy. The IDEAL backend materializes the
+hidden full 96 by 96 `Q(omega)` density and independent scratch, prepares two
+client/reference Bell Choi pairs plus the dual-rail carrier/reference state,
+and applies each late-bound residue through the actual diagonal
+controlled-number law rather than a client shortcut.
+
+Before atomic response release, V11 verifies complete joint factorization,
+both client/reference channels, exact carrier/reference return, clear ports,
+factored environment, and stable backing. The execute and verify-return phases
+are distinct backend callbacks. The sealed boundary captures a response-local
+complete resource snapshot and digest that later controller traffic cannot
+change; outputs remain held until acknowledgement. All nine residue pairs run
+on one allocation with prepare count one, 18 client supplies, eight reuse
+cycles, and per-generation source isolation.
+
+Migration is a sham, not restoration. Real QMP Unix migration, a second hop,
+QMP system reset, and BAR re-enumeration preserve irreversible `SHAM` lineage.
+Faults 1 through 7, invalid-width and unaligned MMIO, observer access with the
+test provider disabled, counter overflow, and malformed or partial installer
+integration fail closed. EXTERNAL is unavailable through its backend
+`lease_preflight` callback rather than a core backend-ID special case. OPEN
+forwards at zero noise only; nonzero configuration returns analytic `APPROX`
+without reuse and supports no physical open-dynamics claim.
+
+Restoration is exactly `EXACT_ALGEBRAIC_RESTORATION` at scope:
+
+```text
+EXACT_HIDDEN_96_DIMENSION_QOMEGA_DUAL_RAIL_CARRIER_REFERENCE_AND_TWO_CLIENT_REFERENCE_RETURN_ON_ONE_RESIDENT_QEMU_ALLOCATION_FOR_IDEAL_BACKEND_ONLY_WITH_NO_PHYSICAL_SAME_MODE_CUSTODY
+```
+
+The exact ceiling is:
+
+```text
+COMPILED_QEMU_10_2_4_PCI_DEVICE_WITH_EXACT_QOMEGA_IDEAL_BACKEND_TEST_ONLY_PRIVATE_PROVIDER_AND_ANALYTIC_OPEN_EXTERNAL_STUBS_NO_PHYSICAL_ORACLE_COHERENT_PORT_CUSTODY_QUERY_SEPARATION_OR_ADVANTAGE
+```
+
+The hidden private residues are supplied only by a host-side qtest provider.
+That provider is not an authenticated external oracle and establishes no
+physical access restriction. Public descriptors are identical across all nine
+secret pairs. Resource receipts charge the dense state and scratch, controller
+traffic, allocation and reuse, and preserve explicit unknown sentinels for
+uninstrumented compiler, construction, duration, bandwidth, energy, and
+maintenance coordinates rather than silently reporting zero.
+
+The strongest equal-interface comparator applies the same direct client phase;
+the coherent-wave comparator is likewise charged for the full field,
+reference, controller, and oracle interface. Nielsen-Chuang reusable program
+dimension, the M241/M242 linear-query collapse, and complete Forrelation-style
+oracle-table construction remain costs, not free resources. M257 therefore
+remains controlling. The exact disposition is:
+
+```text
+COMMON_DEVICE_REINTEGRATION_ESTABLISHES_BACKEND_NEUTRAL_LIFECYCLE_AND_EXACT_IDEAL_MACHINE_LAW_BUT_TEST_ONLY_PRIVATE_BINDING_AND_EQUAL_ACCESS_DIRECT_PHASE_SHADOW_PRECLUDE_PHYSICAL_OR_RESOURCE_PROMOTION
+```
+
+M269 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, with
+`SEPARATE_REFERENCE_PARITY`, `PACKAGE_SELF_REVIEW` resource authority, and
+`terminal=false`. V0, V1, and V11 are compiled common guest-visible devices.
+V2 through V10 remain mechanism twins that may kill or nominate only; a twin
+or folder name cannot qualify architecture promotion. M269 establishes no
+physical execution, coherent-port custody, query separation, computational or
+resource advantage, Small Wall crossing, or M257 escape.
+
+The exact active successor is:
+
+```text
+AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_WITH_COHERENT_CLIENT_PORT_REFERENCE_PRESERVATION_LATE_BOUND_PRIVATE_CONTROL_AND_TOTAL_RESOURCE_CERTIFICATION
+```
+
+It must remain behind the existing common V11 guest-visible device/backend
+boundary. Actual external physical connection and execution are not authorized
+or claimed.
