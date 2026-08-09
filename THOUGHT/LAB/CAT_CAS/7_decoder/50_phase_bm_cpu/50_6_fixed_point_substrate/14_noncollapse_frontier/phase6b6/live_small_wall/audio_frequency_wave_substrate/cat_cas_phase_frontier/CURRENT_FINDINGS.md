@@ -6,13 +6,13 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`139a337a8b0bc39562eb25771409ef8fb5095c74`. The canonical verification
+`840c2d3b9cf7dc6351d0fb890d16d3e4d6e75fe4`. The canonical verification
 levels, restoration classifications, source-audit authority, and strict
-ceilings for all 270 milestones are recorded in
+ceilings for all 271 milestones are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
 
-Phase-QEMU architecture discipline is current authority. V0, V1, V11, and V12 are
-real compiled common guest-visible QEMU PCI devices. V2 through V10 are
+Phase-QEMU architecture discipline is current authority. V0, V1, V11, V12,
+and V13 are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
 standalone mechanism-search/digital-twin packages that may cheaply kill or
 nominate an idea but cannot promote architecture. Every promoted survivor must
 return through a compiled common guest-visible device/backend and exercise
@@ -14240,3 +14240,68 @@ REAL_AUTHENTICATED_HARDWARE_CONNECTED_DUAL_RAIL_DISPERSIVE_ADAPTER_BEHIND_THE_CO
 
 It must remain behind the common compiled Phase-QEMU backend. Actual external
 physical connection and execution remain outside current authority.
+
+## M271 compiled Phase-QEMU V13 fixed hardware-adapter selector gate
+
+The accepted claim is:
+
+```text
+COMPILED_COMMON_PHASE_QEMU_V13_FIXED_OFFLINE_HARDWARE_ADAPTER_SELECTOR_GATE_REJECTS_ABSENT_UNENROLLED_UNATTESTED_STALE_REPLAYED_DOWNGRADED_AND_TEST_FIXTURE_SESSIONS_WITHOUT_PUBLISHING_A_PHYSICAL_OUTPUT_OR_CAMPAIGN_STATISTICAL_CERTIFICATE_AND_WITH_EVERY_NONDESTRUCTIVELY_COMPLETED_DISPATCHED_ATTEMPT_TERMINAL_ACK_THEN_SPENT
+```
+
+V13 is an actual compiled QEMU 10.2.4 PCI device, not a standalone mechanism
+twin. It preserves all V12 registers and appends a common-backend hardware
+gate. The production backend returns hardware absence before dispatch. The
+test-only backend maps seven fixed offline selector values to predetermined
+failure receipts; it is not an evidence parser, signature verifier, live
+adapter, or physical measurement implementation.
+
+Ordinary nondestructively completed fixture dispatches seal a typed `FAILED`
+receipt, require acknowledgement, and end `SPENT`. Reset, migration, and
+unrealize burn lineage to `SHAM` without ACK. The independent reference's
+symbolic disconnect coordinate is also destructive `SHAM`, but no compiled
+live-disconnect input was exercised. All physical/sample/campaign fields stay
+absent or unknown.
+
+Restoration is exactly `NO_RESTORATION_CLAIM` at scope:
+
+```text
+COMPILED_QEMU_10_2_4_PHASE_QEMU_V13_COMMON_PCI_BACKEND_HARDWARE_ABSENCE_AND_FIXED_OFFLINE_SYMBOLIC_SELECTOR_STATE_MACHINE_ONLY
+```
+
+The exact ceiling is:
+
+```text
+HARDWARE_ABSENT_PROTOCOL_CONFORMANCE_ONLY_NO_AUTHENTICATED_LIVE_DEVICE_SESSION_NO_PHYSICAL_SAMPLE_NO_CAMPAIGN_STATISTICAL_CERTIFICATE_NO_CUSTODY_RETURN_RESTORATION_REUSE_ADVANTAGE_OR_M257_ESCAPE
+```
+
+The strict qualifier pins the compiled device, no-follow installer, qtest,
+separate symbolic reference, contract, findings, build receipt, and canonical
+evidence. The qtest establishes the compiled common-device lifecycle and
+hardware-absence selector boundary. The separate reference validates its
+declared 17-case symbolic truth table without claiming QEMU execution,
+cryptographic verification, live hardware, or physical evidence.
+
+The exact disposition is:
+
+```text
+V13_ESTABLISHES_COMMON_BACKEND_FAIL_CLOSED_FIXED_SELECTOR_STATE_MACHINE_CONFORMANCE_FOR_DEVICE_ENROLLMENT_ATTESTATION_REPLAY_DOWNGRADE_AND_FIXTURE_DOMAIN_SEPARATION_WITHOUT_A_LIVE_HARDWARE_SESSION_OR_PHYSICAL_OUTPUT_DIRECT_EQUAL_ACCESS_PROTOCOL_COMPARATOR_CONTROLS_AND_M257_REMAINS_INTACT
+```
+
+M271 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, with
+`SEPARATE_REFERENCE_PARITY`, `PACKAGE_SELF_REVIEW` resource authority, and
+`terminal=false`. V0, V1, V11, V12, and V13 are compiled common guest-visible
+devices; V2 through V10 remain mechanism twins that may kill or nominate only.
+M271 establishes no hardware connection or enrollment, live authenticated
+session, physical sample, statistical campaign certificate, custody, physical
+return, restoration, reuse, advantage, Small Wall crossing, or M257 escape.
+
+The exact active M272 successor is:
+
+```text
+USER_AUTHORIZED_PINNED_DEVICE_ENROLLMENT_FOLLOWED_BY_A_PREREGISTERED_BLINDED_DUAL_RAIL_DISPERSIVE_CAPTURE_CAMPAIGN_WITH_DEVICE_SIGNED_RAW_MANIFESTS_INDEPENDENT_MEASUREMENT_AND_FAMILYWISE_STATISTICAL_VALIDATION_BEHIND_THE_COMMON_PHASE_QEMU_BACKEND
+```
+
+It requires explicit user authorization and real enrolled hardware. It must
+remain behind the common V13 backend, and it cannot self-award a campaign-level
+statistical certificate from a single device response.
