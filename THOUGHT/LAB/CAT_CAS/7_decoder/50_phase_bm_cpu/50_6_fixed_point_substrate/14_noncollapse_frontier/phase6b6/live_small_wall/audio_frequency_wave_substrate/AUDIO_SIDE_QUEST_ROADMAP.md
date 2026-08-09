@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V0_REFERENCE_HARDWARE_MODEL_CALIBRATED_V1_NON_GAUSSIAN_NATIVE_ECHO_FRONTIER_ACTIVE`
-**Roadmap version:** `15.42`
+**Status:** `PHASE_QEMU_V1_EXACT_BOUNDED_ECHO_CALIBRATED_GROWING_EVEN_MODE_QND_BOND_GROWTH_DIAGNOSTIC_ACTIVE`
+**Roadmap version:** `15.43`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `aec4fb72902c7b54cba1b712d4f51ee491e5a13e`
+**Reconciled source head:** `1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION`
-**Current claim ceiling:** `DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY`
+**Current highest milestone:** `PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE`
+**Current claim ceiling:** `DETERMINISTIC_EXACT_IDEAL_QEMU_4_MODE_2_BOSON_BACKEND_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE`
+**Active primary successor:** `GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`2105a5de80b4b60c15137f1c0b20ff0a1127d82d`. The current 256-milestone
+`1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`. The current 259-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,11 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    RESUMED_AFTER_CLEANROOM_GATE
-SCIENTIFIC_SOURCE_HEAD       65be0046ae02c79ab8c3b3356ef68d891de19e53
-REJECTED_SUCCESSOR           CATVM_ENFORCED_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
-REPAIRED_SUCCESSOR           CATVM_ENFORCED_OWNER_BOUND_COHERENT_SHARED_LATENT_OBSERVATION_PORT_PHASE_CONTRACTION_ON_NECKLACE_CARRIER
-NEXT_OBSTRUCTION             IDENTICAL_570_COMPLEX_COMPACT_CLASSICAL_RECURRENCE
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_GROWING_FAMILY_DIAGNOSTIC
+SCIENTIFIC_SOURCE_HEAD       1fcee10bdac00cdc77de7074b68a71a7bc0d3a11
+COMPLETED_MECHANISM          PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
+ACTIVE_SUCCESSOR             GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
+NEXT_OBSTRUCTION             DETERMINISTIC_QND_EXTRACTION_AND_GROWING_BOND_RANK_HAVE_NOT_YET_COEXISTED_IN_ONE_CONNECTED_CAUSAL_FAMILY
 ```
 
 The earlier route remains historical context:
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
+PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
 ```
 
 Not established:
@@ -12716,8 +12716,8 @@ classical shadow, so V0 does not escape M257 and establishes no physical
 waveform execution, distinct phase resource, advantage, Small Wall crossing,
 unbounded compute, or physical-bit replacement.
 
-Phase-QEMU is now the active hardware-emulation frontier. The selected
-successor is:
+Phase-QEMU is now the active hardware-emulation frontier. That selected
+successor completed as M259:
 
 ```text
 PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE
@@ -12726,10 +12726,86 @@ PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE
 Its minimum falsifier must combine history-free public-adjoint echo, actual
 same-mode restoration/reuse, causal non-Gaussian interaction, pointer
 factorization before response, and a growing fixed-number bosonic family. It
-must compare against exact sparse sector evolution, adaptive MPS/TTN, Gaussian
-covariance for the Kerr-disabled sham, and controlled approximate phase-space
-methods. QEMU remains an ordinary classical emulator; only a future physical
-resource law can escape M257. Do not add more P0 ringdown fixtures.
+must compare against exact sparse sector evolution, adaptive MPS/TTN,
+single-particle evolution plus two-by-two permanents for the Kerr-disabled
+Fock-state sham, and controlled approximate phase-space methods. QEMU remains
+an ordinary classical emulator; only a future physical resource law can
+escape M257. Do not add more P0 ringdown fixtures.
+
+## M259 Phase-QEMU V1 exact bounded non-Gaussian echo calibration
+
+The accepted strict-scope claim is:
+
+```text
+PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
+```
+
+An actual QEMU 10.2.4 PCI device now executes one deterministic exact ideal
+four-mode, two-boson backend. It retains the homogeneous degree-two carrier
+across two computational pointer branches, applies noncommuting public
+50:50 exchange matchings and a causal cross-Kerr sign, latches only the final
+mode-parity pointer, requires exact branch factorization before copying one
+private boundary bit, unlatches the pointer, and derives all reverse adjoints
+from the public forward descriptor. The boundary becomes readable only after
+the exact initial carrier, pointer, coupler, and restoration predicates pass.
+
+The primary word `A B K01 A B` reaches odd mode-3 parity and restores the
+original `|1010>` carrier at generation 1. The unrelated word
+`B A K03 B A` reaches odd mode-1 parity and restores at generation 2 on the
+same resident coefficient backing in the same QEMU process, without a second
+prepare, reset, snapshot, migration, or baseline reload. An even selector and
+a held-out public-adjoint word agree with an independently reconstructed exact
+operator oracle. Missing, wrong-Kerr, and reordered inverses leave the
+boundary locked and the carrier spent. Replacing the Kerr gate with identity
+produces a mixed pointer of exact purity `5/8`; the device restores it
+result-free, then accepts a distinct generation-2 transaction on that same
+carrier.
+
+The verification classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, the
+verification level is `SEPARATE_REFERENCE_PARITY`, and the restoration class
+is `EXACT_ALGEBRAIC_RESTORATION`. V1 migration-lineage rejection is only
+`SOURCE_AUDITED_PACKAGE_LOCAL`; this package does not execute V1 migration.
+The claim ceiling is:
+
+```text
+DETERMINISTIC_EXACT_IDEAL_QEMU_4_MODE_2_BOSON_BACKEND_ONLY
+```
+
+The accepted device allocates 20 carrier-pointer coefficient cells and 20
+exchange scratch cells. Those are backing counts, not complete resource
+accounting. Denominator height, transient arithmetic, canonicalization,
+factorization, norm/restoration verification, MMIO, whole-process memory,
+controller state, and every physical energy, noise, calibration, precision,
+bandwidth, and latency cost remain uninstrumented. The resource figures are
+`PACKAGE_SELF_REVIEW`. The strongest pinned-fixture comparator is an O(1)
+analytic certificate; the strongest transferable exact comparator is the
+identical ten-state recurrence without the catalytic inverse. The
+Kerr-disabled Fock-state case has a single-particle recurrence plus at most
+two-by-two permanents, and adaptive MPS/TTN or boundary-only contraction is the
+controlling growing-family baseline.
+
+M259 advances the virtual machine law but does not escape M257. It establishes
+no physical carrier, detector, QND process, nonlinear coupler, restoration,
+authenticated custody, distinct phase resource, advantage, Small Wall
+crossing, unbounded compute, or replacement of physical bits with pi. Its QND
+copy is lawful only on parity-eigenstate boundaries, and the bounded accepted
+words have smaller exact classical descriptions.
+
+The active successor is:
+
+```text
+GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
+```
+
+It tests even mode counts `n=4,6,8`, boson number `N=n/2`, alternating public
+matchings, connected cross-Kerr edge sets, exact public adjoints, and final
+subset-parity selectors. Promotion requires one descriptor family with
+connected all-edge-causal geometry, deterministic causal parity, exact
+copy/unlatch/restoration/reuse, and increasing minimal Schmidt or bond rank at
+all three sizes. A family that becomes mixed when rank grows, or remains
+deterministic only by extending a disconnected fixed core, is a bounded
+QND-versus-rank obstruction and forces a change to controlled many-body
+eigenphase or holonomy scattering rather than more four-mode fixtures.
 
 ## 10. Roadmap Maintenance
 

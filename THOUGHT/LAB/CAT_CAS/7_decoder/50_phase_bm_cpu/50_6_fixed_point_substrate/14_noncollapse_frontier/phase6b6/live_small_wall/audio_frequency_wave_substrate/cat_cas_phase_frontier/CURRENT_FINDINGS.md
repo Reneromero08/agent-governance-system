@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7801dc7d0ab4a0a40c25d723f8758019c4cf9420`. The canonical per-milestone
+`1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13389,7 +13389,7 @@ M258 does not escape M257 and establishes no physical waveform execution,
 distinct phase resource, advantage, Small Wall crossing, unbounded compute,
 or replacement of physical bits with pi.
 
-The selected next mechanism is:
+That selected successor completed as M259:
 
 ```text
 PHASE_QEMU_V1_QUANTUM_ACOUSTIC_NON_GAUSSIAN_ECHO_LATTICE
@@ -13399,6 +13399,76 @@ Its minimum falsifier is a four-mode, two-phonon, history-free public-adjoint
 echo with causal Kerr non-Gaussianity, final-only factorized pointer boundary,
 actual same-mode restoration/reuse, and a growing fixed-number bosonic family.
 The required comparators are exact sparse-sector evolution, adaptive MPS/TTN,
-Gaussian covariance for the Kerr-disabled sham, and controlled approximate
-phase-space methods. QEMU remains a classical emulator; only a future
-physical resource law could escape the M257 assumptions.
+single-particle evolution plus two-by-two permanents for the Kerr-disabled
+Fock-state sham, and controlled approximate phase-space methods. QEMU remains
+a classical emulator; only a future physical resource law could escape the
+M257 assumptions.
+
+## M259 Phase-QEMU V1 exact bounded non-Gaussian echo calibration
+
+The accepted strict-scope claim is:
+
+```text
+PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
+```
+
+An actual QEMU 10.2.4 PCI device executes a deterministic exact ideal
+four-mode, two-boson backend on one homogeneous degree-two carrier split over
+two computational pointer branches. Public noncommuting 50:50 exchange
+matchings and a causal cross-Kerr sign evolve the carrier. A controlled
+pointer-X latches final mode parity; exact branch factorization is required
+before one private bit is copied. The device then unlatches the pointer,
+derives the reverse adjoints from the public forward descriptor, and verifies
+the exact initial carrier, pointer, coupler, and lifecycle state before it
+releases the boundary.
+
+The primary word `A B K01 A B` returns odd mode-3 parity and restores the
+original `|1010>` carrier at generation 1. The unrelated reuse word
+`B A K03 B A` returns odd mode-1 parity and restores at generation 2 on the
+same resident backing in the same QEMU process, with no second preparation,
+reset, snapshot, migration, or baseline reload. Independent exact operator
+algebra reproduces the primary, reuse, even-selector, and held-out
+public-adjoint boundaries. Missing, wrong-Kerr, and reordered inverses lock
+the response and spend the carrier. The identity-Kerr sham has exact pointer
+purity `5/8`; it is restored result-free and then accepts a distinct
+generation-2 transaction on the same carrier.
+
+The verification classification is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, the
+verification level is `SEPARATE_REFERENCE_PARITY`, and restoration is
+`EXACT_ALGEBRAIC_RESTORATION`. V1 migration-lineage rejection is only
+`SOURCE_AUDITED_PACKAGE_LOCAL`, because V1 save/load was not executed. The
+claim ceiling is `DETERMINISTIC_EXACT_IDEAL_QEMU_4_MODE_2_BOSON_BACKEND_ONLY`.
+
+The accepted device allocates 20 carrier-pointer coefficient cells and 20
+exchange scratch cells. This is component-local `PACKAGE_SELF_REVIEW`, not a
+whole-process resource result. Denominator height, transient arithmetic,
+canonicalization, factorization, norm/restoration verification, MMIO,
+controller/runtime state, and physical energy, noise, calibration, precision,
+bandwidth, and latency remain uninstrumented. The strongest fixed-fixture
+baseline is an O(1) certificate; the strongest transferable exact baseline is
+the identical ten-state recurrence without catalytic inverse work. The
+Kerr-disabled Fock-state comparator is a single-particle recurrence plus at
+most two-by-two permanents. Adaptive MPS/TTN and boundary-only contractions
+control the growing-family comparison.
+
+M259 does not escape M257 and establishes no physical carrier, detector, QND
+process, nonlinear coupler, restoration, authenticated custody, distinct
+phase resource, computational advantage, Small Wall crossing, unbounded
+compute, or physical-bit replacement. The accepted QND copy is lawful only
+for parity-eigenstate boundaries, and the four-mode fixtures have smaller
+exact classical descriptions.
+
+The active successor is:
+
+```text
+GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
+```
+
+It tests `n=4,6,8`, `N=n/2`, alternating matchings, connected cross-Kerr edge
+sets, exact adjoints, and final subset-parity selectors. Promotion requires a
+single all-edge-causal family with deterministic causal parity, exact
+copy/unlatch/restoration/reuse, and increasing minimal Schmidt or bond rank.
+If rank growth makes the pointer mixed, or deterministic cases merely extend
+a disconnected four-mode core, the result becomes a bounded QND-versus-rank
+obstruction and the mechanism changes to controlled many-body eigenphase or
+holonomy scattering.
