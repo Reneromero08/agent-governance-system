@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V5_SUBGAP_RESOLVENT_STATIONARY_DIAGNOSTIC_VERIFIED_NO_RESTORATION_CLAIM_NEAR_THRESHOLD_TIME_DOMAIN_ACTIVE`
-**Roadmap version:** `15.47`
+**Status:** `PHASE_QEMU_V6_TIME_DOMAIN_RETURN_OBSTRUCTION_VERIFIED_NO_RESTORATION_CLAIM_NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_ACTIVE`
+**Roadmap version:** `15.48`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `4fb24b2a59149a66adf641a10204988267761a5f`
+**Reconciled source head:** `f330d517b80b1f0ba94d503058025b2ec853912c`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `EXACT_RATIONAL_SINGLE_CHANNEL_SUBGAP_CAYLEY_RESOLVENT_DIAGNOSTIC_IMPLEMENTS_A_STIPULATED_FORMAL_STATIONARY_UNIT_MODULUS_BOUNDARY_LAW_AT_DECLARED_FIXTURES_WITH_DISTINCT_ENERGY_DESCRIPTOR_REUSE_GROWING_EXACT_KRYLOV_RANK_AND_PATH_ONLY_FIXED_MARGIN_EFFECTIVE_DEPTH_BOUND_PLUS_TILTED_FIELD_AND_BETHE_FACTORIZATION_CONTROLS`
-**Current claim ceiling:** `EXACT_DETERMINISTIC_SOFTWARE_FINITE_DIMENSIONAL_RATIONAL_ONE_CHANNEL_K_MATRIX_BOUNDARY_MODEL_WITH_FORMAL_STATIONARY_ASYMPTOTIC_RETURN_ONLY`
+**Current highest milestone:** `FROZEN_L641_SIGMA50_NEAR_THRESHOLD_TIME_DOMAIN_SCATTERING_EXECUTES_TRANSIENT_BORROW_DRAIN_AND_COMPLETE_RETURNED_DENSITY_HANDOFF_BUT_THE_PUBLIC_T120_ADIABATIC_PREPARATION_AND_FINITE_PACKET_T340_RETURN_FAIL_DECLARED_1E_MINUS_7_MATCHED_FREE_TARGET_TRACE_DISTANCE_GATES`
+**Current claim ceiling:** `FINITE_COMPLEX128_DETERMINISTIC_SOFTWARE_SINGLE_PROBE_L641_FOUR_SPIN_TIME_DOMAIN_MODEL_WITH_RETURNED_TARGET_DENSITY_REMATERIALIZATION_AND_NO_SAME_BACKING_OR_PHYSICAL_RESTORATION`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER`
+**Active primary successor:** `NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`4fb24b2a59149a66adf641a10204988267761a5f`. The current 263-milestone
+`f330d517b80b1f0ba94d503058025b2ec853912c`. The current 264-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,12 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_NEAR_THRESHOLD_TIME_DOMAIN_NONINTEGRABLE_BOUNDARY_RESOLVENT
-SCIENTIFIC_SOURCE_HEAD       4fb24b2a59149a66adf641a10204988267761a5f
-COMPLETED_MECHANISM          M263_STIPULATED_FORMAL_STATIONARY_SUBGAP_RESOLVENT_DIAGNOSTIC_WITH_NO_RESTORATION_CLAIM
-ACTIVE_SUCCESSOR             NEAR_THRESHOLD_NONINTEGRABLE_BOUNDARY_RESOLVENT_WITH_EXPLICIT_WIGNER_DELAY_FINITE_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_RESOURCE_CROSSOVER
-NEXT_OBSTRUCTION             EXECUTE_TIME_DOMAIN_RETURN_AND_CHARGE_WIGNER_DELAY_BANDWIDTH_PRECISION_PREPARATION_AMORTIZATION_AND_TENSOR_NETWORK_CROSSOVER_WITHOUT_PROMOTING_EXACT_KRYLOV_RANK_TO_AN_APPROXIMATION_LOWER_BOUND
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS
+SCIENTIFIC_SOURCE_HEAD       f330d517b80b1f0ba94d503058025b2ec853912c
+COMPLETED_MECHANISM          M264_STRICT_PREPARATION_AND_FINITE_PACKET_RESTORATION_OBSTRUCTION_WITH_NO_RESTORATION_CLAIM
+ACTIVE_SUCCESSOR             NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE
+SUCCESSOR_CEILING            DETERMINISTIC_TRUNCATED_OPEN_QUANTUM_DIGITAL_TWIN_ONLY_WITH_NO_ADVANTAGE_OR_PHYSICAL_CLAIM
+NEXT_OBSTRUCTION             TEST_ARBITRARY_STATE_RETURN_AND_DISTINCT_PROGRAM_REUSE_WITH_PAID_OPEN_SYSTEM_AND_TRUNCATION_COSTS_AGAINST_THE_EQUAL_ACCESS_DIRECT_COMPILED_EXP_MINUS_I_THETA_AB_COMPARATOR
 ```
 
 The earlier route remains historical context:
@@ -13097,6 +13098,67 @@ It must execute a near-threshold time-domain scattering and return process,
 measure or bound Wigner delay and packet distortion, charge finite bandwidth,
 precision, preparation and reuse amortization, and identify the actual
 tensor-network crossover against the strongest honest classical comparator.
+
+## M264 frozen near-threshold time-domain return obstruction
+
+The accepted claim is:
+
+```text
+FROZEN_L641_SIGMA50_NEAR_THRESHOLD_TIME_DOMAIN_SCATTERING_EXECUTES_TRANSIENT_BORROW_DRAIN_AND_COMPLETE_RETURNED_DENSITY_HANDOFF_BUT_THE_PUBLIC_T120_ADIABATIC_PREPARATION_AND_FINITE_PACKET_T340_RETURN_FAIL_DECLARED_1E_MINUS_7_MATCHED_FREE_TARGET_TRACE_DISTANCE_GATES
+```
+
+The production model and separately implemented reference establish the
+finite numerical process at `SEPARATE_REFERENCE_PARITY`. The frozen `L=641`,
+`sigma=50` source-off packets execute transient target excitation, drain from
+the local interaction site, boundary delay, and a complete returned target
+density handoff. Query A reaches matched-free target trace distance
+`8.038931410866084e-05`; the production returned-density-rematerialized query
+B reaches `2.8167715493073277e-05`. Both fail the predeclared `<=1e-7`
+return gate. The exact restoration classification is `NO_RESTORATION_CLAIM`
+at scope:
+
+```text
+FAILED_DECLARED_TIME_DOMAIN_RETURN_OR_REUSE_THRESHOLDS
+```
+
+The density matrix is Hermitized, normalized, diagonalized, and instantiated
+in new numerical blocks. This complete functional handoff is explicit
+returned-state rematerialization, not continuous custody, same-backing reuse,
+an echo, physical restoration, or catalytic restoration. Exact-ground and
+slower-preparation arms remain diagnostics and may not replace the frozen
+failed public path after observing its result.
+
+The claim ceiling is:
+
+```text
+FINITE_COMPLEX128_DETERMINISTIC_SOFTWARE_SINGLE_PROBE_L641_FOUR_SPIN_TIME_DOMAIN_MODEL_WITH_RETURNED_TARGET_DENSITY_REMATERIALIZATION_AND_NO_SAME_BACKING_OR_PHYSICAL_RESTORATION
+```
+
+The exact disposition is:
+
+```text
+STRICT_PREPARATION_AND_FINITE_PACKET_RESTORATION_OBSTRUCTION_RETAINS_REAL_TRANSIENT_INTERACTION_DRAIN_AND_APPROXIMATE_FUNCTIONAL_HANDOFF_BUT_REQUIRES_A_CHANGED_RETURN_PREPARATION_LAW_NOT_POST_HOC_FIXTURE_TUNING
+```
+
+The equal-access classical shadow can execute the identical `10256`-amplitude
+sparse recurrence, and the one-particle lead has an MPS cut bond dimension no
+greater than 17. M264 therefore establishes neither a tensor-network crossover
+nor an advantage. M257 remains intact.
+
+The active successor is:
+
+```text
+NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE
+```
+
+The successor is authorized only as a deterministic truncated open-quantum
+digital twin at this stage. It must charge oscillator/truncation dimension,
+open-system loss, environment state, preparation, controller, detector,
+precision, boundary extraction, retained history, and rematerialization. Its
+strongest honest equal-access comparator may compile `exp(-i theta AB)`
+directly from the same public Hamiltonian and descriptors instead of
+simulating a bus. No resource advantage, M257 escape, physical execution,
+physical restoration, or physical carrier claim is established in advance.
 
 ## 10. Roadmap Maintenance
 

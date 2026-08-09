@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`4fb24b2a59149a66adf641a10204988267761a5f`. The canonical per-milestone
+`f330d517b80b1f0ba94d503058025b2ec853912c`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13762,3 +13762,66 @@ It must execute the missing near-threshold time-domain process, expose Wigner
 delay and packet distortion, charge bandwidth, exact/effective precision,
 preparation and reuse amortization, and identify any tensor-network resource
 crossover against the strongest honest classical model before promotion.
+
+## M264 frozen near-threshold time-domain return obstruction
+
+The accepted claim is:
+
+```text
+FROZEN_L641_SIGMA50_NEAR_THRESHOLD_TIME_DOMAIN_SCATTERING_EXECUTES_TRANSIENT_BORROW_DRAIN_AND_COMPLETE_RETURNED_DENSITY_HANDOFF_BUT_THE_PUBLIC_T120_ADIABATIC_PREPARATION_AND_FINITE_PACKET_T340_RETURN_FAIL_DECLARED_1E_MINUS_7_MATCHED_FREE_TARGET_TRACE_DISTANCE_GATES
+```
+
+The finite complex128 production model and an independently implemented
+split-operator/DST reference reach `SEPARATE_REFERENCE_PARITY` within the
+declared numerical scope. The source-off `L=641`, `sigma=50` fixture executes
+transient target excitation, interaction-site drain, finite-packet boundary
+delay, and a complete returned target density handoff. The claim-bearing
+query A matched-free target trace distance is
+`8.038931410866084e-05`; the returned-density-rematerialized query B value is
+`2.8167715493073277e-05`. Both exceed the frozen `1e-7` gate.
+
+Restoration is classified `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+FAILED_DECLARED_TIME_DOMAIN_RETURN_OR_REUSE_THRESHOLDS
+```
+
+Production represents, Hermitizes, normalizes, diagonalizes, and rematerializes
+the returned 16-by-16 density matrix into new query-B numerical blocks. That
+is a complete functional state handoff, but it is not continuous carrier
+custody, same-backing reuse, an inverse, an echo, physical restoration, or
+catalytic restoration. Exact-ground and longer-preparation controls identify
+the source of error without replacing the frozen failed public path.
+
+The claim ceiling is:
+
+```text
+FINITE_COMPLEX128_DETERMINISTIC_SOFTWARE_SINGLE_PROBE_L641_FOUR_SPIN_TIME_DOMAIN_MODEL_WITH_RETURNED_TARGET_DENSITY_REMATERIALIZATION_AND_NO_SAME_BACKING_OR_PHYSICAL_RESTORATION
+```
+
+The exact disposition is:
+
+```text
+STRICT_PREPARATION_AND_FINITE_PACKET_RESTORATION_OBSTRUCTION_RETAINS_REAL_TRANSIENT_INTERACTION_DRAIN_AND_APPROXIMATE_FUNCTIONAL_HANDOFF_BUT_REQUIRES_A_CHANGED_RETURN_PREPARATION_LAW_NOT_POST_HOC_FIXTURE_TUNING
+```
+
+The strongest honest equal-access comparator can execute the identical
+`641*16=10256`-amplitude sparse forward recurrence and final projection. An
+exact one-particle-lead MPS has cut bond dimension at most 17 here. M264 thus
+establishes no tensor-network crossover, phase-resource advantage, M257
+escape, physical observation, physical restoration, or unbounded result.
+
+The active successor is:
+
+```text
+NON_GAUSSIAN_QUANTUM_WEYL_LOOP_BUS_WITH_ARBITRARY_STATE_CARRIER_RETURN_AND_DISTINCT_PROGRAM_REUSE
+```
+
+This successor begins under a deterministic truncated open-quantum
+digital-twin ceiling. It must expose and charge carrier truncation,
+environment and loss channels, preparation, controller and detector state,
+precision, boundary extraction, retained history, and rematerialization. The
+equal-access comparator may directly compile `exp(-i theta AB)` from the
+same public Hamiltonian, truncation, environment, controller, and program
+descriptors rather than simulate the bus. No advantage or physical claim is
+authorized by the model architecture.
