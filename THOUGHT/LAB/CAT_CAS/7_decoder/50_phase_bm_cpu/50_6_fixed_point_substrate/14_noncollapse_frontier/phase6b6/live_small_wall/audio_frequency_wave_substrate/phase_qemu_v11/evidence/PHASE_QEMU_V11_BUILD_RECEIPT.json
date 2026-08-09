@@ -1,0 +1,80 @@
+{
+  "schema": "PHASE_QEMU_V11_COMPILED_BUILD_RECEIPT_V1",
+  "qemu": {
+    "version": "10.2.4",
+    "official_source_archive_sha256": "821b545b92f165e57dddccac5077d76d4d436a226595b8813ad59306bbfd0746",
+    "configured_targets": [
+      "x86_64-softmmu"
+    ],
+    "configure_options": [
+      "--target-list=x86_64-softmmu",
+      "--disable-docs",
+      "--disable-werror",
+      "--enable-debug"
+    ],
+    "binary_sha256": "02543d7c7df868c19c4fcc040c9f0717d99b4f9f2786c677f4621debe9e7ea40",
+    "binary_version_line": "QEMU emulator version 10.2.4",
+    "system_install_modified": false
+  },
+  "build_environment": {
+    "managed_disk_backed_scratch": true,
+    "ram_backed_scratch_used": false,
+    "compiler_version_line": "cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "ninja_version": "1.13.2",
+    "meson_version": "1.10.1",
+    "managed_subproject_dtc_commit": "b6910bec11614980a21e46fbccc35934b671bd81",
+    "rebuild_result": "INCREMENTAL_COMPILE_AND_LINK_PASS"
+  },
+  "coexisting_phase_qemu_devices": {
+    "v0": {
+      "source_sha256": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v1": {
+      "source_sha256": "8b991d8961a6e108d1a4aa7498172564b017c6e622cb8192c6fa15c33638e362",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    },
+    "v11": {
+      "package_source_sha256": "84c2ec576ae54b298046fadcda719dcb4c2e97bbe31aa0ac3c77ae5455027771",
+      "installed_source_sha256": "84c2ec576ae54b298046fadcda719dcb4c2e97bbe31aa0ac3c77ae5455027771",
+      "installer_sha256": "0d7aadbf5088cf124544a53c16ae895a3b759255cf01510e9983b7cf85dfe92e",
+      "kconfig_entry_count": 1,
+      "meson_entry_count": 1
+    }
+  },
+  "runtime_qualification": {
+    "runner_sha256": "fa70a83c24cb9bd9ffc78e6cf07ed3c21dc99d342c6302ac1482dd5df48b47dd",
+    "qtest_deterministic_payload_sha256": "2286987541ebf283c1ed6733b750430fd09f8c978d32dbd9e75a6caf4f9ae49e",
+    "separate_reference_source_sha256": "b9791716c6d973c0e119e3666e960efed0f84e16676c74b923e198b4930c1d3a",
+    "separate_reference_stdout_sha256": "020dc7235bb43d785553f587be0b43453fb310dc252f79cb17901c4765219b11",
+    "separate_reference_claim_payload_sha256": "263b791d7898195f94aad9e6f5c7033c94b6a0fc249a2172705333a5502a8d16",
+    "headless_qtest_qmp_only": true,
+    "all_nine_residue_pairs": true,
+    "same_allocation_generations": 9,
+    "prepare_count": 1,
+    "client_supply_count": 18,
+    "reuse_count": 8,
+    "real_qmp_unix_migration_sham": true,
+    "second_hop_migration_preserves_sham": true,
+    "sham_latched_across_qmp_system_reset_after_pci_reenumeration": true,
+    "sealed_resource_snapshot_rejects_post_commit_mutation": true,
+    "external_unavailability_dispatched_by_backend_lease_preflight": true,
+    "qemu_stdout_stderr_empty": true
+  },
+  "architecture": {
+    "qemu_device_source_integrated": true,
+    "qemu_device_implemented": true,
+    "common_guest_visible_contract_source_integrated": true,
+    "common_guest_visible_contract_compiled": true,
+    "common_guest_visible_contract_exercised": true,
+    "reintegration_gate_passed": true,
+    "standalone_twin_qualifies": false,
+    "physical_oracle_adapter_implemented": false,
+    "physical_oracle_or_carrier_custody_observed": false,
+    "resource_or_query_advantage_established": false,
+    "m257_escape_established": false
+  },
+  "status": "PASS_COMPILED_COMMON_PHASE_QEMU_V11_REINTEGRATION_BUILD_AND_QTEST"
+}

@@ -1,0 +1,3 @@
+evidence/*.candidate.json
+*.local.json
+*.stdout.json
