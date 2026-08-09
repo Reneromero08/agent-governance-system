@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`7d6e4117376c02d65289105e2cde8969bf483923`. The registry assigns one
+`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 266-milestone lane remains nonterminal under user-only closure.
+The current 267-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -56,35 +56,42 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING
+FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE
 ```
 
 Claim ceiling:
 
 ```text
-DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW
+FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific
 evidence at `SEPARATE_REFERENCE_PARITY` and resources only at
 `PACKAGE_SELF_REVIEW`. Restoration is `NO_RESTORATION_CLAIM` at the exact
 scope
-`NOMINAL_ZERO_HEATING_LOGICAL_GAUSSIAN_MODE_RETURN_ONLY_WITH_NONZERO_HEATING_EXACT_SAME_MODE_RETURN_REJECTED_AND_FRESH_MODE_SWAP_OR_RECOOLING_CLASSIFIED_AS_EXTERNAL_RESET`.
-Two eight-segment nullspace pulses close all three nominal mode displacements
-at zero heating and implement distinct `ZZ` phases on one logical multimode
-backing across programs A and B. Five named Gaussian fixtures, spectator-mode
-controls, pulse/detuning perturbations, and a separate analytic reference
-support only that synthetic complex128/float64 moment-model statement. The
-primary declared standard Markovian additive-heating law monotonically changes
-the mode covariances and rejects exact initial-mode return. Snapshot reload,
-recooling, and fresh-mode swap are controls or external resets, never
-restoration. No physical ion custody, physical restoration, full joint heated
-master-equation integration, or physical observation is established.
+`FORMAL_REFERENCE_COMPLETE_GAUSSIAN_CHANNEL_IDENTITY_CRITERION_AND_POSITIVE_DIFFUSION_NO_RETURN_ON_DECLARED_SUPPORT_WITHOUT_EXECUTED_OR_PHYSICAL_CARRIER_RESTORATION`.
+M267 is a formal finite-mode, finite-label, fixed-axis conditional-Gaussian
+class obstruction. Exact metaplectic and Weyl lifts preserve central phases
+that projected symplectic endpoints omit. Faithful carrier-reference identity
+requires the identity Gaussian channel, not return of one rotationally
+invariant marginal. Under a declared common dilation, the surviving client
+map reduces to a direct diagonal phase or declared environment-overlap Schur
+channel. Positive accumulated CP-divisible Markov diffusion forbids exact
+same-mode channel return only on its declared positive support; dark kernels
+and finite-environment recoherence remain outside that conclusion.
+
+The generic direct shadow costs `L` diagonal phases or `L^2` Schur entries.
+The polynomial `q^2` corollary applies only to public `K`-segment
+label-affine Weyl forces under common label-independent symplectic propagation,
+closed displacement, and no label-dependent quadratic generator. It charges
+`O(K(M^2+qM))` input, compilation, and per-label application explicitly. No
+executed carrier restoration, physical custody, physical observation,
+resource advantage, or M257 escape is established.
 
 The exact route disposition is:
 
 ```text
-DIRECT_COMPILED_ZZ_AND_DEPHASING_CHANNEL_SHADOW_OMITS_THE_THREE_MODE_CONTROLLER_LOOP_WHILE_HEATING_PREVENTS_CATALYTIC_RETURN_SO_NO_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND_THE_AFFINE_LABEL_COROLLARY_IS_POLYNOMIALLY_COMPACT_WHILE_POSITIVE_DIFFUSION_ON_CLAIMED_SUPPORT_FORBIDS_EXACT_REFERENCE_COMPLETE_RETURN_SO_NO_CATALYTIC_BUS_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
 ```
 
 M257 applies only when the comparator receives the same canonical input,
@@ -103,13 +110,13 @@ EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_
 ```
 
 The active successor is
-`CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN`.
-M266 closes the conditional Gaussian-loop question: nominal closure remains
-directly compilable, while nonzero irreversible diffusion prevents catalytic
-mode return. The next architecture must change the physical access or resource
-law rather than add cosmetic Gaussian variants. M257 remains intact; no
-physical observation, advantage, or bit-to-pi replacement follows from the
-digital twin.
+`RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS`.
+M267 closes the public fixed-axis conditional-Gaussian class under its exact
+finite-mode assumptions. The next architecture must change the access or
+non-Gaussian resource law while charging eigenstate preparation, precision,
+queries, custody, reference-complete return, and the strongest honest
+comparator. M257 remains intact; no physical observation, advantage, or
+bit-to-pi replacement follows from the formal obstruction.
 
 The accumulated bounded architecture includes:
 
@@ -305,7 +312,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN_AFTER_M266_HEATED_PRIMARY_NO_RETURN
+ACTIVE_RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_AFTER_M267_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION
 ```
 
 The named
@@ -314,22 +321,20 @@ work already exists at the reconciled source head; do not restart or extend
 it. The exact active successor is:
 
 ```text
-CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
+RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
-algebraically distinct sealed exact software CATVM packages. M258-M263 moved
-through QEMU reference modeling, QND-versus-bond, Gaussian/Ising, central
-fixed-finite-UMTC, stipulated stationary-resolvent, and frozen time-domain
-return obstructions. M265 then establishes the ideal Weyl-loop bus identity
-and named-fixture complex128 logical return/factorization on one resident
-allocation. It simultaneously closes the resource claim: the equal-access
-direct compiled `ZZ` shadow uses two client gates where the accepted path uses
-eight hybrid pulses. The active mechanism now translates that law into the
-smallest physically structured multimode trapped-ion state-dependent-force
-digital twin. Spectator closure, heating, pulse/controller cost, energy, and
-same-mode reuse must be charged. No advantage or physical claim may be
-inferred from the emulator.
+algebraically distinct sealed exact software CATVM packages. M258-M266 moved
+through QEMU P0 reference modeling, QND-versus-bond, Ising/UMTC, scattering,
+ideal Weyl-loop return, and the trapped-ion heated no-return twin. M267 now
+closes the finite public fixed-axis conditional-Gaussian class at formal
+strict scope: exact reference-complete identity leaves only a direct client
+phase or declared Schur channel, while positive CP-divisible diffusion blocks
+return on declared support. The active mechanism therefore tests a restricted
+access non-Gaussian phase-eigenstate kickback oracle and must charge
+preparation, precision, query, custody, return, energy, and comparator access.
+No advantage or physical claim may be inferred from the formal model.
 
 ## 7. Native No-Smuggle Law
 

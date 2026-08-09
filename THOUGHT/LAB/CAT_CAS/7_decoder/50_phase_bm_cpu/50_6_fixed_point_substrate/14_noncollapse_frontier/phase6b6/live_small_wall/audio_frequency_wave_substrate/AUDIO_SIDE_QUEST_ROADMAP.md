@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V8_TRAPPED_ION_NOMINAL_CLOSURE_VERIFIED_HEATED_PRIMARY_NO_RETURN_DIRECT_CHANNEL_SHADOW`
-**Roadmap version:** `15.50`
+**Status:** `PHASE_QEMU_V9_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION_VERIFIED_NO_RESTORATION_CLAIM`
+**Roadmap version:** `15.51`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `7d6e4117376c02d65289105e2cde8969bf483923`
+**Reconciled source head:** `6da3de70772a682dd8cf51e9892dcb042fe68a17`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `THREE_MODE_TRAPPED_ION_STATE_DEPENDENT_FORCE_NULLSPACE_PULSES_CLOSE_ALL_NOMINAL_MODE_DISPLACEMENTS_AND_IMPLEMENT_TWO_DISTINCT_ZZ_PHASE_PROGRAMS_ON_ONE_LOGICAL_MULTIMODE_BACKING_WHILE_DECLARED_NONZERO_MARKOVIAN_HEATING_MONOTONICALLY_BREAKS_EXACT_INITIAL_MODE_STATE_RETURN_WITHOUT_RECOOLING`
-**Current claim ceiling:** `DETERMINISTIC_COMPLEX128_FLOAT64_GAUSSIAN_MOMENT_SOFTWARE_DIGITAL_TWIN_WITH_DECLARED_LINEAR_HARMONIC_STATE_DEPENDENT_FORCE_AND_MARKOVIAN_ADDITIVE_HEATING_LAWS_NO_PHYSICAL_ION_CUSTODY_AND_DIRECT_COMPILED_CLIENT_CHANNEL_SHADOW`
+**Current highest milestone:** `FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE`
+**Current claim ceiling:** `FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN`
+**Active primary successor:** `RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`7d6e4117376c02d65289105e2cde8969bf483923`. The current 266-milestone
+`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The current 267-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,12 +751,12 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
-SCIENTIFIC_SOURCE_HEAD       7d6e4117376c02d65289105e2cde8969bf483923
-COMPLETED_MECHANISM          M266_THREE_MODE_NOMINAL_LOGICAL_CLOSURE_WITH_HEATED_PRIMARY_NO_RETURN_AND_DIRECT_ZZ_PLUS_DEPHASING_CHANNEL_SHADOW
-ACTIVE_SUCCESSOR             CONDITIONAL_GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_IRREVERSIBLE_DIFFUSION_NO_RETURN
-SUCCESSOR_CEILING            GAUSSIAN_CLOSED_LOOP_FORWARD_SHADOW_AND_NONZERO_DIFFUSION_NO_RETURN_ONLY_WITHOUT_PHYSICAL_OR_ADVANTAGE_CLAIMS
-NEXT_OBSTRUCTION             CHANGE_THE_ACCESS_OR_RESOURCE_LAW_BEYOND_CONDITIONAL_GAUSSIAN_CLOSURE_BECAUSE_THE_FORWARD_CHANNEL_IS_DIRECTLY_COMPILABLE_AND_NONZERO_DIFFUSION_PREVENTS_EXACT_MODE_RETURN
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE
+SCIENTIFIC_SOURCE_HEAD       6da3de70772a682dd8cf51e9892dcb042fe68a17
+COMPLETED_MECHANISM          M267_FORMAL_FINITE_MODE_FIXED_AXIS_CONDITIONAL_GAUSSIAN_CLASS_OBSTRUCTION_WITH_REFERENCE_COMPLETE_IDENTITY_AND_SUPPORT_QUALIFIED_CP_DIVISIBLE_DIFFUSION_NO_RETURN
+ACTIVE_SUCCESSOR             RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
+SUCCESSOR_CEILING            RESTRICTED_ACCESS_NON_GAUSSIAN_ORACLE_MODEL_ONLY_WITH_PREPARATION_PRECISION_QUERY_CUSTODY_RETURN_AND_STRONGEST_COMPARATOR_COSTS_EXPLICIT_NO_PHYSICAL_OR_ADVANTAGE_CLAIMS
+NEXT_OBSTRUCTION             CHANGE_THE_ACCESS_AND_NON_GAUSSIAN_RESOURCE_LAW_BEYOND_PUBLIC_CONDITIONAL_GAUSSIAN_DYNAMICS_WITHOUT_HIDING_PREPARATION_PRECISION_QUERY_CUSTODY_OR_REFERENCE_COMPLETE_RETURN_COSTS
 ```
 
 The earlier route remains historical context:
@@ -13282,6 +13282,69 @@ This successor records the closed mechanism-class conclusion: conditional
 Gaussian loops remain directly forward-shadowable, while nonzero irreversible
 diffusion prevents catalytic return. Further architecture work must change the
 physical access or resource law rather than add another Gaussian loop variant.
+
+## M267 conditional-Gaussian closed-loop class obstruction
+
+The accepted claim is:
+
+```text
+FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE
+```
+
+M267 is a formal finite-mode, finite-joint-label obstruction for public
+piecewise-quadratic or affine Gaussian dynamics controlled by fixed commuting
+client observables. It retains exact lifted metaplectic and Weyl phases rather
+than collapsing them to carrier marginals: the `2pi` versus zero and `4pi`
+fixtures pin the metaplectic sign, and the four-sector affine-force rectangle
+pins the two-client Weyl cocycle `exp[-i z0 z1/6]`. Exact reference-complete
+identity is required; the rational TMSV witness rejects a vacuum-marginal
+rotation false positive, and the declared common dilation exposes the direct
+client diagonal phase or environment-overlap Schur channel.
+
+The additive-diffusion, pure-loss, rank-deficient dark-mode, finite-environment
+recurrence, common nontrivial bus evolution, and declared-environment Schur
+fixtures keep the no-return law support-qualified. Positive accumulated
+CP-divisible Markov diffusion forbids exact same-mode channel return only on
+the claimed carrier support where the diffusion Gramian is positive. A dark
+kernel is not claimed noisy, and finite-environment recoherence outside the
+CP-divisible scope remains an explicit control.
+
+Restoration is `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+FORMAL_REFERENCE_COMPLETE_GAUSSIAN_CHANNEL_IDENTITY_CRITERION_AND_POSITIVE_DIFFUSION_NO_RETURN_ON_DECLARED_SUPPORT_WITHOUT_EXECUTED_OR_PHYSICAL_CARRIER_RESTORATION
+```
+
+The exact claim ceiling is:
+
+```text
+FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY
+```
+
+The generic sector shadow is charged honestly at direct diagonal `L` work or
+declared Schur `L^2` work. The polynomial `q^2` corollary is narrower: it
+requires a fixed public `K`-segment structure, label-affine Weyl forces
+`v_k(z)=v_k0+sum_i z_i v_ki`, common label-independent quadratic/symplectic
+propagation, closed displacement for every label, and no label-dependent
+quadratic generator. The bilinear Weyl cocycle then bounds the compiled phase
+degree by two. Its input descriptor is `O(K(M^2+qM))`; `K`, coefficient
+compilation, and application are all charged, while the compiled phase table
+has `O(q^2)` coefficients.
+
+The exact route disposition is:
+
+```text
+GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND_THE_AFFINE_LABEL_COROLLARY_IS_POLYNOMIALLY_COMPACT_WHILE_POSITIVE_DIFFUSION_ON_CLAIMED_SUPPORT_FORBIDS_EXACT_REFERENCE_COMPLETE_RETURN_SO_NO_CATALYTIC_BUS_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+There is no executed or physical carrier restoration, physical custody,
+resource advantage, blanket classical-efficiency result, or M257 escape.
+M267 closes only the declared conditional-Gaussian class. The active successor
+changes the access and interaction law:
+
+```text
+RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
+```
 
 ## 10. Roadmap Maintenance
 

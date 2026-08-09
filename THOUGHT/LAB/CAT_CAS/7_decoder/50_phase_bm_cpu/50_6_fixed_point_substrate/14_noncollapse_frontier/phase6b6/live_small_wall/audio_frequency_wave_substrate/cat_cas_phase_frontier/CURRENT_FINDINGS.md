@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`7d6e4117376c02d65289105e2cde8969bf483923`. The canonical per-milestone
+`6da3de70772a682dd8cf51e9892dcb042fe68a17`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13947,3 +13947,66 @@ This is a mechanism-class conclusion, not another Gaussian construction:
 conditional Gaussian loops are directly shadowable, and irreversible
 diffusion prevents exact catalytic return. A credible next architecture must
 change the access or resource law.
+
+## M267 conditional-Gaussian closed-loop class obstruction
+
+The accepted claim is:
+
+```text
+FINITE_MODE_PUBLIC_FIXED_AXIS_CONDITIONAL_GAUSSIAN_LOOPS_WITH_EXACT_FAITHFUL_CARRIER_REFERENCE_IDENTITY_REDUCE_TO_A_DIRECT_CLIENT_DIAGONAL_PHASE_OR_DECLARED_DILATION_SCHUR_CHANNEL_WHILE_POSITIVE_ACCUMULATED_CP_DIVISIBLE_MARKOV_DIFFUSION_ON_A_CLAIMED_CARRIER_SUBSPACE_PRECLUDES_EXACT_SAME_MODE_CHANNEL_RETURN_ON_THAT_SUBSPACE
+```
+
+The executable theorem and separate reference close the finite-mode,
+finite-joint-label, fixed-commuting-axis conditional-Gaussian class under its
+declared public piecewise-quadratic or affine dynamics. Exact lifted
+metaplectic and Weyl semantics are necessary: the `2pi` versus zero and `4pi`
+controls retain the metaplectic sign, and the four-sector two-client rectangle
+retains the affine-force cocycle `exp[-i z0 z1/6]`. Exact faithful
+carrier-reference identity, not a carrier marginal, is the return criterion;
+the rational TMSV fixture catches the vacuum-rotation marginal false positive.
+
+For exact reference-complete carrier return, common carrier evolution factors
+away and the remaining client map is a direct diagonal phase, or a declared
+common dilation gives an environment-overlap Schur channel. Positive
+accumulated CP-divisible Markov diffusion prevents exact same-mode channel
+return only on a claimed carrier subspace where the diffusion Gramian is
+positive. The rank-deficient dark kernel and finite-environment beam-splitter
+recurrence explicitly reject claims that all noise changes all states or that
+intermediate noise can never recohere.
+
+Restoration is `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+FORMAL_REFERENCE_COMPLETE_GAUSSIAN_CHANNEL_IDENTITY_CRITERION_AND_POSITIVE_DIFFUSION_NO_RETURN_ON_DECLARED_SUPPORT_WITHOUT_EXECUTED_OR_PHYSICAL_CARRIER_RESTORATION
+```
+
+The exact claim ceiling is:
+
+```text
+FINITE_MODE_FINITE_JOINT_CLIENT_LABEL_PUBLIC_PIECEWISE_QUADRATIC_OR_AFFINE_GAUSSIAN_DYNAMICS_WITH_FIXED_COMMUTING_CLIENT_OBSERVABLES_DECLARED_COMMON_DILATION_AND_EXACT_GAUSSIAN_MOMENT_OR_LIFTED_AFFINE_SYMPLECTIC_SEMANTICS_ONLY_NO_NONCOMMUTING_AXES_NONQUADRATIC_INTERACTIONS_NON_GAUSSIAN_BOUNDARY_MEASUREMENTS_QEC_RESTRICTED_ACCESS_NONMARKOV_RECOHERENCE_INFINITE_MODE_OR_PHYSICAL_CUSTODY
+```
+
+The strongest honest general-sector shadow charges direct diagonal `L` work or
+declared Schur `L^2` work. The `O(q^2)` corollary is fail-closed to fixed public
+`K`-segment label-affine Weyl forces
+`v_k(z)=v_k0+sum_i z_i v_ki`, common label-independent
+quadratic/symplectic propagation, all-label closed displacement, and no
+label-dependent quadratic generator. The phase degree is at most two because
+the Weyl cocycle is bilinear. The input descriptor is
+`O(K(M^2+qM))`; `K`, compilation, and application remain explicit costs, and
+only the compiled phase coefficients are `O(q^2)`.
+
+The exact disposition is:
+
+```text
+GENERAL_SECTOR_DIRECT_CLIENT_SHADOW_EXISTS_WITH_EXPLICIT_L_OR_L_SQUARED_COST_AND_THE_AFFINE_LABEL_COROLLARY_IS_POLYNOMIALLY_COMPACT_WHILE_POSITIVE_DIFFUSION_ON_CLAIMED_SUPPORT_FORBIDS_EXACT_REFERENCE_COMPLETE_RETURN_SO_NO_CATALYTIC_BUS_RESOURCE_ADVANTAGE_OR_M257_ESCAPE_IS_ESTABLISHED
+```
+
+This is a formal class obstruction, not an executed or physical restoration
+result. No physical custody, catalytic-bus resource advantage, blanket
+classical-efficiency theorem, or M257 escape is established. The active
+successor is:
+
+```text
+RESTRICTED_ACCESS_NON_GAUSSIAN_PHASE_EIGENSTATE_KICKBACK_ORACLE_WITH_FAITHFUL_CARRIER_RETURN_PREPARATION_PRECISION_QUERY_AND_CUSTODY_COSTS
+```
