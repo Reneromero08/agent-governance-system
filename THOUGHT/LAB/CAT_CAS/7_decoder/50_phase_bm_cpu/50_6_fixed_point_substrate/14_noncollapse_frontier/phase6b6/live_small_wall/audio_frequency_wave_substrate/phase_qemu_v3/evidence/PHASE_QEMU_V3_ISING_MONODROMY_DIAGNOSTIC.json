@@ -1,0 +1,1340 @@
+{
+  "claim": "IDEAL_EXACT_ISING_MTC_TRIANGULAR_ADJACENT_BRAID_PREPARATION_CONTROLLED_TRANSPORTED_MAJORANA_PAIR_HOLONOMY_FINAL_ONLY_BOUNDARY_FUNCTIONAL_RESTORATION_AND_REUSE_AT_N4_N8_N12_N16_WITH_CONTIGUOUS_CUT_RANKS2_4_8_AND_COMPACT_SIGNED_PAIRING_RESOURCE_KILL",
+  "claim_ceiling": "IDEAL_DETERMINISTIC_EXACT_SOFTWARE_ISING_MTC_CONTROLLED_HOLONOMY_DIAGNOSTIC_AT_N4_N8_N12_N16_ONLY",
+  "exactness": {
+    "braids": "EXACT_JORDAN_WIGNER_MAJORANA_ACTION",
+    "coefficient_ring": "Z[i]/sqrt(2)^h_SUBRING_OF_Q(zeta_16)",
+    "holonomy": "ACTUAL_CONTROLLED_MINUS_I_GAMMA_A_GAMMA_B_ACTION_ON_EVERY_RESIDENT_AMPLITUDE",
+    "ranks": "EXACT_GAUSSIAN_RATIONAL_ELIMINATION_ON_ACTUAL_AMPLITUDE_FLATTENINGS",
+    "scientific_floating_point_decisions": 0
+  },
+  "experiment": "CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND",
+  "milestone": "M261",
+  "next_obstruction": "A_FACTORING_EIGENPHASE_MUST_DEPEND_ON_A_GROWING_INTERACTING_RELATIONAL_INVARIANT_NOT_COMPACTLY_TRACKABLE_BY_GAUSSIAN_SIGNED_PAIRING_OR_STABILIZER_STATE",
+  "observed_disposition": {
+    "classification": "TRIANGULAR_ISING_BRAIDS_AND_TRANSPORTED_PAIR_HOLONOMIES_REMAIN_COMPACTLY_TRACKABLE_BY_AN_O_N_SIZED_SIGNED_MAJORANA_PAIRING",
+    "commuting_same_sector_scramble_preserves_outputs_and_restores": true,
+    "compact_signed_pairing_matches": true,
+    "contiguous_cut_exact_ranks_n8_n12_n16": [
+      2,
+      4,
+      8
+    ],
+    "deterministic_holonomies_restore_functional_exact_values": true,
+    "kill_as_computational_resource": true,
+    "m257_controls_deterministic_software_comparison": true,
+    "mixed_holonomies_fail_after_retained_boundary_copy": true,
+    "mixed_holonomies_restore_when_result_copy_is_unlatched": true,
+    "promote_as_machine_law_calibration_only": true
+  },
+  "public_family": {
+    "accepted_loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+    "clockwise_adjacent_exchange": "C_j=(I-gamma_j gamma_(j+1))/sqrt(2)",
+    "literal_subset_or_framing_free_Wilson_loop_claimed": false,
+    "majorana_even_one_based": "gamma_(2a)=Z_<(a) Y_a",
+    "majorana_odd_one_based": "gamma_(2a-1)=Z_<(a) X_a",
+    "pair_charge_modes": "2r_WITH_GLOBAL_EVEN_PARITY",
+    "sigma_anyons": "n=4r",
+    "triangular_execution_word": "CONCAT_t=1_TO_2r-3 [2t+2,2t+1,...,t+3]"
+  },
+  "resource_accounting": {
+    "allocated_full_occupation_cells_n4_n8_n12_n16": [
+      4,
+      16,
+      64,
+      256
+    ],
+    "allocated_rank_matrix_gaussian_cells_n4_n8_n12_n16": [
+      4,
+      16,
+      64,
+      256
+    ],
+    "allocated_transaction_joint_coefficient_cells_n4_n8_n12_n16": [
+      16,
+      64,
+      256,
+      1024
+    ],
+    "functional_immutable_value_allocations_counted_completely": false,
+    "physical_preparation_energy_gap_noise_precision_bandwidth_latency_modeled": false,
+    "preparation_braid_counts_n4_n8_n12_n16": [
+      2,
+      1,
+      6,
+      15
+    ],
+    "python_objects_hashing_serialization_whole_process_peak_complete": false,
+    "resident_support_cells_n8_n12_n16": [
+      2,
+      4,
+      8
+    ],
+    "retained_dynamic_inverse_history": 0,
+    "verification_level": "PACKAGE_SELF_REVIEW"
+  },
+  "restoration": {
+    "classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "inverse": "PUBLIC_LOOP_DERIVED_HERMITIAN_PAIR_HOLONOMY",
+    "physical_restoration_established": false,
+    "same_backing_established": false,
+    "scope": "FUNCTIONAL_EXACT_VALUE_RESTORATION_AND_REUSE_WITHOUT_SAME_BACKING",
+    "snapshot_reload": false
+  },
+  "scaling_fixtures": [
+    {
+      "allocated_full_occupation_cells": 16,
+      "allocated_rank_matrix_gaussian_cells": 16,
+      "allocated_transaction_joint_coefficient_cells": 64,
+      "carrier_commitment": "d5e9c7ffc59568a1f3e963bf283e4b4ee8fd6581c9191a7724d9a2b3e8b80ddb",
+      "carrier_support_cells": 2,
+      "contiguous_cut": {
+        "exact_amplitude_flattening_rank": 2,
+        "expected_triangular_family_rank": 2,
+        "left_pair_charge_modes_zero_based": [
+          0,
+          1
+        ],
+        "right_pair_charge_modes_zero_based": [
+          2,
+          3
+        ]
+      },
+      "fixed_sector_dimension": 8,
+      "fixed_total_charge": "1",
+      "framing_control": {
+        "carrier_unchanged": true,
+        "descriptor_rejected": true,
+        "error": "NONZERO_FRAMING_NOT_IN_ACCEPTED_EXACT_CONTRACT",
+        "response_released": false
+      },
+      "functional_returned_value_reuse": {
+        "exact_value_restored_twice": true,
+        "same_backing_reuse_established": false,
+        "same_returned_value_consumed_by_generation2": true,
+        "second_prepare_used": false
+      },
+      "generation1_L0": {
+        "boundary_bit": 0,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "ea2a383bac1fddb0044e62a1280bf67ed08d0eb5ace8c45d83dc4cc25dcd162e",
+        "loop_majoranas_one_based": [
+          3,
+          5
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "1",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "generation2_distinct_L1": {
+        "boundary_bit": 1,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "340f12c052e7f1697a343b1b19df1c85189d763fcf3d68cb79609cc804087b10",
+        "loop_majoranas_one_based": [
+          4,
+          6
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "1"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "maximum_integer_coefficient_signed_bits": 2,
+      "missing_inverse_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": false,
+        "joint_final_commitment": "e97204360c030390bcdfc1c2b5ebd747b35ee210cc1b90894bd7c97ea3054974",
+        "loop_majoranas_one_based": [
+          4,
+          6
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "mixed_loop_control": {
+        "each_computational_basis_response_restored_form_fidelity": "1/4",
+        "exact_eigenvalue": null,
+        "loop_majoranas_one_based": [
+          3,
+          4
+        ],
+        "maximum_factorized_fidelity_allowing_arbitrary_ancilla": "1/2",
+        "restored_prepared_carrier_marginal_weight": "1/2",
+        "result_free_exact_restore": true,
+        "result_free_latch_unlatch": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": true,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "ea2a383bac1fddb0044e62a1280bf67ed08d0eb5ace8c45d83dc4cc25dcd162e",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": false,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1",
+            "1": "0"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        },
+        "retained_copy_transaction": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": false,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "5c6a0549d1043bc58b14e73a2b77a0cf4f36835bbe61f3e8cae555c2135d01df",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": true,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1/4",
+            "1": "1/4"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        }
+      },
+      "orientation_control": {
+        "expected_failure_applicable": false,
+        "reason": "HERMITIAN_Z2_PAIR_PARITY_HAS_PHASE_PLUS_OR_MINUS_ONE",
+        "reverse_orientation_boundary": 1,
+        "reverse_orientation_restores": true
+      },
+      "pair_charge_modes": 4,
+      "path_dephasing_control": {
+        "density_matrix_materialized": false,
+        "derivation": "REMOVING_THE_EXACT_OFF_DIAGONAL_PATH_BLOCKS_PREVENTS_INTERFERENCE",
+        "deterministic_boundary_survives": false,
+        "exact_post_recombination_port_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "exact_pre_dephasing_path_weights": [
+          "1/2",
+          "1/2"
+        ]
+      },
+      "public_preparation_braid_count": 1,
+      "public_triangular_execution_word": [
+        4
+      ],
+      "same_sector_scramble_control": {
+        "K_expectation_imag": "0",
+        "K_expectation_real": "0",
+        "K_majoranas_one_based": [
+          2,
+          7
+        ],
+        "U_K": "(I-gamma_2 gamma_(4r-1))/sqrt(2)",
+        "adjacent_synthesis": "P_dagger C_(4r-2) P",
+        "adjacent_transport_path_P": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "carrier_overlap_squared": "1/2",
+        "changes_projective_carrier": true,
+        "direct_and_synthesized_exact_state_agree_up_to_sign": true,
+        "preserves_L0_boundary": true,
+        "preserves_L1_boundary": true,
+        "public_adjoint_exactly_restores": true,
+        "scrambled_value_transactions_restore": true
+      },
+      "sigma_anyons": 8,
+      "signed_pairing_comparator": {
+        "loop_eigenvalues": {
+          "L0": 1,
+          "L1": -1,
+          "mixed": null
+        },
+        "matches_exact_amplitude_transactions": true,
+        "pairing": [
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            3,
+            5,
+            1
+          ],
+          [
+            4,
+            6,
+            -1
+          ],
+          [
+            7,
+            8,
+            1
+          ]
+        ],
+        "public_word_updates": 1,
+        "state_cells": 4
+      },
+      "sqrt2_denominator_power": 1,
+      "transported_holonomies": {
+        "L0": {
+          "exact_eigenvalue": 1,
+          "majoranas_one_based": [
+            3,
+            5
+          ],
+          "transport_formula": "L0=W S_2 W_dagger"
+        },
+        "L1": {
+          "exact_eigenvalue": -1,
+          "majoranas_one_based": [
+            4,
+            6
+          ],
+          "transport_formula": "L1=-W S_3 W_dagger"
+        },
+        "W": "PUBLIC_TRIANGULAR_BRAID_WORD",
+        "literal_enclosed_subset_without_transport_descriptor_claimed": false,
+        "local_pair_parity": "S_k=-i gamma_(2k-1) gamma_(2k)",
+        "semantic_ceiling": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY"
+      },
+      "wrong_inverse_loop_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": false,
+        "inverse_executed": true,
+        "joint_final_commitment": "9c4d40970cbe1d6121f52732f0ee4b12a0f29f004a8a935395fb9ab9fc50d5f7",
+        "loop_majoranas_one_based": [
+          3,
+          5
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      }
+    },
+    {
+      "allocated_full_occupation_cells": 64,
+      "allocated_rank_matrix_gaussian_cells": 64,
+      "allocated_transaction_joint_coefficient_cells": 256,
+      "carrier_commitment": "ff3b4e542167b5e711c084a936df3e404602df9958ef8ff1f84c934ad814828b",
+      "carrier_support_cells": 4,
+      "contiguous_cut": {
+        "exact_amplitude_flattening_rank": 4,
+        "expected_triangular_family_rank": 4,
+        "left_pair_charge_modes_zero_based": [
+          0,
+          1,
+          2
+        ],
+        "right_pair_charge_modes_zero_based": [
+          3,
+          4,
+          5
+        ]
+      },
+      "fixed_sector_dimension": 32,
+      "fixed_total_charge": "1",
+      "framing_control": {
+        "carrier_unchanged": true,
+        "descriptor_rejected": true,
+        "error": "NONZERO_FRAMING_NOT_IN_ACCEPTED_EXACT_CONTRACT",
+        "response_released": false
+      },
+      "functional_returned_value_reuse": {
+        "exact_value_restored_twice": true,
+        "same_backing_reuse_established": false,
+        "same_returned_value_consumed_by_generation2": true,
+        "second_prepare_used": false
+      },
+      "generation1_L0": {
+        "boundary_bit": 0,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "91ee822ceeb2f6eacf2a9d3fd1c1f4d827b880ef9fab193b0ab91e9d0e69ec05",
+        "loop_majoranas_one_based": [
+          3,
+          7
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "1",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "generation2_distinct_L1": {
+        "boundary_bit": 1,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "d1d1ec4e35d4d3b601b8ef4e60c69667ca7540ad0395d610342fa39b951b51fb",
+        "loop_majoranas_one_based": [
+          4,
+          8
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "1"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "maximum_integer_coefficient_signed_bits": 2,
+      "missing_inverse_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": false,
+        "joint_final_commitment": "5fcd9a05a684dc0cb9265256b6fa8e72e70d65b583602d51be5fa688f1f04b22",
+        "loop_majoranas_one_based": [
+          4,
+          8
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "mixed_loop_control": {
+        "each_computational_basis_response_restored_form_fidelity": "1/4",
+        "exact_eigenvalue": null,
+        "loop_majoranas_one_based": [
+          3,
+          4
+        ],
+        "maximum_factorized_fidelity_allowing_arbitrary_ancilla": "1/2",
+        "restored_prepared_carrier_marginal_weight": "1/2",
+        "result_free_exact_restore": true,
+        "result_free_latch_unlatch": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": true,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "91ee822ceeb2f6eacf2a9d3fd1c1f4d827b880ef9fab193b0ab91e9d0e69ec05",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": false,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1",
+            "1": "0"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        },
+        "retained_copy_transaction": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": false,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "906e50f65f288ca1b14d1be148dc093e69d41e02ca7e8b29bd045809d3b1d2e1",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": true,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1/4",
+            "1": "1/4"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        }
+      },
+      "orientation_control": {
+        "expected_failure_applicable": false,
+        "reason": "HERMITIAN_Z2_PAIR_PARITY_HAS_PHASE_PLUS_OR_MINUS_ONE",
+        "reverse_orientation_boundary": 1,
+        "reverse_orientation_restores": true
+      },
+      "pair_charge_modes": 6,
+      "path_dephasing_control": {
+        "density_matrix_materialized": false,
+        "derivation": "REMOVING_THE_EXACT_OFF_DIAGONAL_PATH_BLOCKS_PREVENTS_INTERFERENCE",
+        "deterministic_boundary_survives": false,
+        "exact_post_recombination_port_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "exact_pre_dephasing_path_weights": [
+          "1/2",
+          "1/2"
+        ]
+      },
+      "public_preparation_braid_count": 6,
+      "public_triangular_execution_word": [
+        4,
+        6,
+        5,
+        8,
+        7,
+        6
+      ],
+      "same_sector_scramble_control": {
+        "K_expectation_imag": "0",
+        "K_expectation_real": "0",
+        "K_majoranas_one_based": [
+          2,
+          11
+        ],
+        "U_K": "(I-gamma_2 gamma_(4r-1))/sqrt(2)",
+        "adjacent_synthesis": "P_dagger C_(4r-2) P",
+        "adjacent_transport_path_P": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "carrier_overlap_squared": "1/2",
+        "changes_projective_carrier": true,
+        "direct_and_synthesized_exact_state_agree_up_to_sign": true,
+        "preserves_L0_boundary": true,
+        "preserves_L1_boundary": true,
+        "public_adjoint_exactly_restores": true,
+        "scrambled_value_transactions_restore": true
+      },
+      "sigma_anyons": 12,
+      "signed_pairing_comparator": {
+        "loop_eigenvalues": {
+          "L0": 1,
+          "L1": -1,
+          "mixed": null
+        },
+        "matches_exact_amplitude_transactions": true,
+        "pairing": [
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            3,
+            7,
+            1
+          ],
+          [
+            4,
+            8,
+            -1
+          ],
+          [
+            5,
+            9,
+            1
+          ],
+          [
+            6,
+            10,
+            -1
+          ],
+          [
+            11,
+            12,
+            1
+          ]
+        ],
+        "public_word_updates": 6,
+        "state_cells": 6
+      },
+      "sqrt2_denominator_power": 2,
+      "transported_holonomies": {
+        "L0": {
+          "exact_eigenvalue": 1,
+          "majoranas_one_based": [
+            3,
+            7
+          ],
+          "transport_formula": "L0=W S_2 W_dagger"
+        },
+        "L1": {
+          "exact_eigenvalue": -1,
+          "majoranas_one_based": [
+            4,
+            8
+          ],
+          "transport_formula": "L1=-W S_3 W_dagger"
+        },
+        "W": "PUBLIC_TRIANGULAR_BRAID_WORD",
+        "literal_enclosed_subset_without_transport_descriptor_claimed": false,
+        "local_pair_parity": "S_k=-i gamma_(2k-1) gamma_(2k)",
+        "semantic_ceiling": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY"
+      },
+      "wrong_inverse_loop_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": false,
+        "inverse_executed": true,
+        "joint_final_commitment": "c14f2dcafc3183c7fe5fbf6e7f176e2b584248fd412f252085827256d34957a6",
+        "loop_majoranas_one_based": [
+          3,
+          7
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      }
+    },
+    {
+      "allocated_full_occupation_cells": 256,
+      "allocated_rank_matrix_gaussian_cells": 256,
+      "allocated_transaction_joint_coefficient_cells": 1024,
+      "carrier_commitment": "8ffa256a245ff10ef43df4faecbebfee366120ee0352481d608b3141b4bb77b4",
+      "carrier_support_cells": 8,
+      "contiguous_cut": {
+        "exact_amplitude_flattening_rank": 8,
+        "expected_triangular_family_rank": 8,
+        "left_pair_charge_modes_zero_based": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "right_pair_charge_modes_zero_based": [
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "fixed_sector_dimension": 128,
+      "fixed_total_charge": "1",
+      "framing_control": {
+        "carrier_unchanged": true,
+        "descriptor_rejected": true,
+        "error": "NONZERO_FRAMING_NOT_IN_ACCEPTED_EXACT_CONTRACT",
+        "response_released": false
+      },
+      "functional_returned_value_reuse": {
+        "exact_value_restored_twice": true,
+        "same_backing_reuse_established": false,
+        "same_returned_value_consumed_by_generation2": true,
+        "second_prepare_used": false
+      },
+      "generation1_L0": {
+        "boundary_bit": 0,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "e6fba6b47fddadb3f066d4181707fcc0123ba1c94f7d51daee1abcbb87074a0d",
+        "loop_majoranas_one_based": [
+          3,
+          9
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "1",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "generation2_distinct_L1": {
+        "boundary_bit": 1,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": true,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": true,
+        "joint_final_commitment": "283a99bc4ebc024bdd0bd6b32504f0655fb08fb58ff8b69a40850bd3774ded1d",
+        "loop_majoranas_one_based": [
+          4,
+          10
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": true,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "1"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "maximum_integer_coefficient_signed_bits": 2,
+      "missing_inverse_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "0",
+        "forward_port_odd_weight": "1",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": true,
+        "inverse_executed": false,
+        "joint_final_commitment": "c283b181018226cd9c48fd9b9464af03daf3d04b64fe440e9e1d02c0fc241521",
+        "loop_majoranas_one_based": [
+          4,
+          10
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      },
+      "mixed_loop_control": {
+        "each_computational_basis_response_restored_form_fidelity": "1/4",
+        "exact_eigenvalue": null,
+        "loop_majoranas_one_based": [
+          3,
+          4
+        ],
+        "maximum_factorized_fidelity_allowing_arbitrary_ancilla": "1/2",
+        "restored_prepared_carrier_marginal_weight": "1/2",
+        "result_free_exact_restore": true,
+        "result_free_latch_unlatch": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": true,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "e6fba6b47fddadb3f066d4181707fcc0123ba1c94f7d51daee1abcbb87074a0d",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": false,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1",
+            "1": "0"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        },
+        "retained_copy_transaction": {
+          "boundary_bit": null,
+          "descriptor_rejected": false,
+          "exact_functional_restoration": false,
+          "forward_port_even_weight": "1/2",
+          "forward_port_odd_weight": "1/2",
+          "forward_probe_factorized": false,
+          "framing": 0,
+          "initial_coherent_path_weights": [
+            "1/2",
+            "1/2"
+          ],
+          "inverse_derived_from_public_loop": true,
+          "inverse_executed": true,
+          "joint_final_commitment": "dfa018282e93400d88bb0cc920c29a500f9ef17dd5b74c8eb8dbdd5867f31003",
+          "loop_majoranas_one_based": [
+            3,
+            4
+          ],
+          "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+          "orientation": 1,
+          "private_boundary_copy_retained": true,
+          "response_released_after_restoration_only": false,
+          "restored_form_fidelities": {
+            "0": "1/4",
+            "1": "1/4"
+          },
+          "retained_dynamic_inverse_history": 0,
+          "same_backing_restoration_established": false,
+          "snapshot_or_baseline_reload_used": false
+        }
+      },
+      "orientation_control": {
+        "expected_failure_applicable": false,
+        "reason": "HERMITIAN_Z2_PAIR_PARITY_HAS_PHASE_PLUS_OR_MINUS_ONE",
+        "reverse_orientation_boundary": 1,
+        "reverse_orientation_restores": true
+      },
+      "pair_charge_modes": 8,
+      "path_dephasing_control": {
+        "density_matrix_materialized": false,
+        "derivation": "REMOVING_THE_EXACT_OFF_DIAGONAL_PATH_BLOCKS_PREVENTS_INTERFERENCE",
+        "deterministic_boundary_survives": false,
+        "exact_post_recombination_port_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "exact_pre_dephasing_path_weights": [
+          "1/2",
+          "1/2"
+        ]
+      },
+      "public_preparation_braid_count": 15,
+      "public_triangular_execution_word": [
+        4,
+        6,
+        5,
+        8,
+        7,
+        6,
+        10,
+        9,
+        8,
+        7,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "same_sector_scramble_control": {
+        "K_expectation_imag": "0",
+        "K_expectation_real": "0",
+        "K_majoranas_one_based": [
+          2,
+          15
+        ],
+        "U_K": "(I-gamma_2 gamma_(4r-1))/sqrt(2)",
+        "adjacent_synthesis": "P_dagger C_(4r-2) P",
+        "adjacent_transport_path_P": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "carrier_overlap_squared": "1/2",
+        "changes_projective_carrier": true,
+        "direct_and_synthesized_exact_state_agree_up_to_sign": true,
+        "preserves_L0_boundary": true,
+        "preserves_L1_boundary": true,
+        "public_adjoint_exactly_restores": true,
+        "scrambled_value_transactions_restore": true
+      },
+      "sigma_anyons": 16,
+      "signed_pairing_comparator": {
+        "loop_eigenvalues": {
+          "L0": 1,
+          "L1": -1,
+          "mixed": null
+        },
+        "matches_exact_amplitude_transactions": true,
+        "pairing": [
+          [
+            1,
+            2,
+            1
+          ],
+          [
+            3,
+            9,
+            1
+          ],
+          [
+            4,
+            10,
+            -1
+          ],
+          [
+            5,
+            11,
+            1
+          ],
+          [
+            6,
+            12,
+            -1
+          ],
+          [
+            7,
+            13,
+            1
+          ],
+          [
+            8,
+            14,
+            -1
+          ],
+          [
+            15,
+            16,
+            1
+          ]
+        ],
+        "public_word_updates": 15,
+        "state_cells": 8
+      },
+      "sqrt2_denominator_power": 3,
+      "transported_holonomies": {
+        "L0": {
+          "exact_eigenvalue": 1,
+          "majoranas_one_based": [
+            3,
+            9
+          ],
+          "transport_formula": "L0=W S_2 W_dagger"
+        },
+        "L1": {
+          "exact_eigenvalue": -1,
+          "majoranas_one_based": [
+            4,
+            10
+          ],
+          "transport_formula": "L1=-W S_3 W_dagger"
+        },
+        "W": "PUBLIC_TRIANGULAR_BRAID_WORD",
+        "literal_enclosed_subset_without_transport_descriptor_claimed": false,
+        "local_pair_parity": "S_k=-i gamma_(2k-1) gamma_(2k)",
+        "semantic_ceiling": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY"
+      },
+      "wrong_inverse_loop_control": {
+        "boundary_bit": null,
+        "descriptor_rejected": false,
+        "exact_functional_restoration": false,
+        "forward_port_even_weight": "1",
+        "forward_port_odd_weight": "0",
+        "forward_probe_factorized": true,
+        "framing": 0,
+        "initial_coherent_path_weights": [
+          "1/2",
+          "1/2"
+        ],
+        "inverse_derived_from_public_loop": false,
+        "inverse_executed": true,
+        "joint_final_commitment": "8303f94d2d62d9bf6dfee2f8310a558dd3641433ec8b4116ecadeeb6c061b5bc",
+        "loop_majoranas_one_based": [
+          3,
+          9
+        ],
+        "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+        "orientation": 1,
+        "private_boundary_copy_retained": true,
+        "response_released_after_restoration_only": false,
+        "restored_form_fidelities": {
+          "0": "0",
+          "1": "0"
+        },
+        "retained_dynamic_inverse_history": 0,
+        "same_backing_restoration_established": false,
+        "snapshot_or_baseline_reload_used": false
+      }
+    }
+  ],
+  "schema": "phase_qemu_v3_exact_ising_triangular_holonomy_diagnostic_v1",
+  "smoke_n4": {
+    "allocated_full_occupation_cells": 4,
+    "allocated_rank_matrix_gaussian_cells": 4,
+    "allocated_transaction_joint_coefficient_cells": 16,
+    "carrier_commitment": "4b0516a03656cf6083d543d4fd4a394d6c4ba6bbe81fcaee72b65ebb3b860b01",
+    "contiguous_cut_exact_rank": 1,
+    "excited_commitment": "b8d8c8446274ce9a31dcec25d06a7165f3e0cbc125591022e51169f61b100f09",
+    "excited_is_occupation_11_up_to_exact_phase": true,
+    "excited_loop_eigenvalue": -1,
+    "excited_result_free_latch_unlatch": {
+      "boundary_bit": null,
+      "descriptor_rejected": false,
+      "exact_functional_restoration": true,
+      "forward_port_even_weight": "0",
+      "forward_port_odd_weight": "1",
+      "forward_probe_factorized": true,
+      "framing": 0,
+      "initial_coherent_path_weights": [
+        "1/2",
+        "1/2"
+      ],
+      "inverse_derived_from_public_loop": true,
+      "inverse_executed": true,
+      "joint_final_commitment": "f9e62d5ceb6705ca860c791c0929b77e7754b55f3f6221076f4addc452ab361a",
+      "loop_majoranas_one_based": [
+        1,
+        2
+      ],
+      "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+      "orientation": 1,
+      "private_boundary_copy_retained": false,
+      "response_released_after_restoration_only": false,
+      "restored_form_fidelities": {
+        "0": "1",
+        "1": "0"
+      },
+      "retained_dynamic_inverse_history": 0,
+      "same_backing_restoration_established": false,
+      "snapshot_or_baseline_reload_used": false
+    },
+    "excited_retained_copy_transaction": {
+      "boundary_bit": 1,
+      "descriptor_rejected": false,
+      "exact_functional_restoration": true,
+      "forward_port_even_weight": "0",
+      "forward_port_odd_weight": "1",
+      "forward_probe_factorized": true,
+      "framing": 0,
+      "initial_coherent_path_weights": [
+        "1/2",
+        "1/2"
+      ],
+      "inverse_derived_from_public_loop": true,
+      "inverse_executed": true,
+      "joint_final_commitment": "3bf3af0823492d31dfd455349533945a649d7aebf1f55217a0b6059d674f2f54",
+      "loop_majoranas_one_based": [
+        1,
+        2
+      ],
+      "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+      "orientation": 1,
+      "private_boundary_copy_retained": true,
+      "response_released_after_restoration_only": true,
+      "restored_form_fidelities": {
+        "0": "0",
+        "1": "1"
+      },
+      "retained_dynamic_inverse_history": 0,
+      "same_backing_restoration_established": false,
+      "snapshot_or_baseline_reload_used": false
+    },
+    "fixed_sector_dimension": 2,
+    "local_loop_majoranas_one_based": [
+      1,
+      2
+    ],
+    "pair_charge_modes": 2,
+    "public_adjoint_excitation_word_exactly_restores_vacuum": true,
+    "public_smoke_excitation_word": [
+      2,
+      2
+    ],
+    "public_smoke_forward_braid_count": 2,
+    "public_smoke_restoration_word": [
+      "C_2_dagger",
+      "C_2_dagger"
+    ],
+    "public_triangular_execution_word": [],
+    "scaling_cross_cut_loop_formula_claimed": false,
+    "scope": "ALGEBRA_AND_TWO_GENERATION_LIFECYCLE_SMOKE_ONLY",
+    "sigma_anyons": 4,
+    "vacuum_loop_eigenvalue": 1,
+    "vacuum_result_free_latch_unlatch": {
+      "boundary_bit": null,
+      "descriptor_rejected": false,
+      "exact_functional_restoration": true,
+      "forward_port_even_weight": "1",
+      "forward_port_odd_weight": "0",
+      "forward_probe_factorized": true,
+      "framing": 0,
+      "initial_coherent_path_weights": [
+        "1/2",
+        "1/2"
+      ],
+      "inverse_derived_from_public_loop": true,
+      "inverse_executed": true,
+      "joint_final_commitment": "3c369f7cd83ae4d228d033ec9a862ba90942398dc2c9dd4d2adb13bd7c1bf7bb",
+      "loop_majoranas_one_based": [
+        1,
+        2
+      ],
+      "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+      "orientation": 1,
+      "private_boundary_copy_retained": false,
+      "response_released_after_restoration_only": false,
+      "restored_form_fidelities": {
+        "0": "1",
+        "1": "0"
+      },
+      "retained_dynamic_inverse_history": 0,
+      "same_backing_restoration_established": false,
+      "snapshot_or_baseline_reload_used": false
+    },
+    "vacuum_retained_copy_transaction": {
+      "boundary_bit": 0,
+      "descriptor_rejected": false,
+      "exact_functional_restoration": true,
+      "forward_port_even_weight": "1",
+      "forward_port_odd_weight": "0",
+      "forward_probe_factorized": true,
+      "framing": 0,
+      "initial_coherent_path_weights": [
+        "1/2",
+        "1/2"
+      ],
+      "inverse_derived_from_public_loop": true,
+      "inverse_executed": true,
+      "joint_final_commitment": "3c369f7cd83ae4d228d033ec9a862ba90942398dc2c9dd4d2adb13bd7c1bf7bb",
+      "loop_majoranas_one_based": [
+        1,
+        2
+      ],
+      "loop_semantics": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+      "orientation": 1,
+      "private_boundary_copy_retained": true,
+      "response_released_after_restoration_only": true,
+      "restored_form_fidelities": {
+        "0": "1",
+        "1": "0"
+      },
+      "retained_dynamic_inverse_history": 0,
+      "same_backing_restoration_established": false,
+      "snapshot_or_baseline_reload_used": false
+    }
+  },
+  "strict_claim_ceilings": [
+    "software Phase-QEMU backend diagnostic only; no QEMU device execution",
+    "no CATVM or authenticated custody enforcement",
+    "no same-backing restoration or reuse",
+    "no physical Ising anyons or coherent anyon interferometer",
+    "no physical braid, detector, topological protection, or restoration",
+    "no literal enclosed-subset Wilson-loop claim without transport and framing descriptor",
+    "no distinct phase-native computational resource",
+    "no computational advantage or complexity lower bound",
+    "no M257 escape",
+    "no Small Wall crossing",
+    "no general holonomy or anyon-computation result",
+    "no unbounded computation",
+    "no replacement of physical bits with pi"
+  ],
+  "strongest_honest_comparator": {
+    "comparator_optimality_established": false,
+    "declared_pair_holonomy_after_pairing_validation": "O(1)_LOOKUP",
+    "dense_exact_occupation_vector": "REFERENCE_ONLY_EXPONENTIAL_REPRESENTATION",
+    "equal_access_forward_only_shadow_omits_positive_cost_inverse": true,
+    "general_ising_gaussian": "O(n_squared)_COVARIANCE_OR_STABILIZER_STATE_WITH_POLYNOMIAL_UPDATES",
+    "implemented_formula_specific": "O(n)_SIGNED_MAJORANA_PAIRING_WITH_O(n_squared)_PUBLIC_PREPARATION_UPDATES",
+    "resource_advantage_comparison_authorized": false
+  },
+  "verification_scope": {
+    "algebra_ranks_holonomy_boundaries": "SEPARATE_REFERENCE_PARITY",
+    "path_dephasing_control": "ANALYTIC_EXACT_NOT_DENSITY_MATRIX_EXECUTED",
+    "production_transaction_response_order": "PACKAGE_SELF_REVIEW_SOURCE_AUDITED"
+  }
+}

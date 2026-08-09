@@ -1,0 +1,906 @@
+{
+  "cases": {
+    "12": {
+      "compact_comparator": {
+        "adjacent_braid_update": "SIGNED_MAJORANA_SWAP",
+        "all_declared_loop_expectations_reproduced": true,
+        "bilinear_loop_query": "SIGNED_PAIRING_LOOKUP",
+        "dense_covariance_cells_used_only_as_independent_oracle": 144,
+        "dense_rank_reproduced": true,
+        "signed_majorana_frame_cells": 12,
+        "signed_pairing": [
+          {
+            "first": 1,
+            "second": 2,
+            "sign": 1
+          },
+          {
+            "first": 3,
+            "second": 7,
+            "sign": 1
+          },
+          {
+            "first": 4,
+            "second": 8,
+            "sign": -1
+          },
+          {
+            "first": 5,
+            "second": 9,
+            "sign": 1
+          },
+          {
+            "first": 6,
+            "second": 10,
+            "sign": -1
+          },
+          {
+            "first": 11,
+            "second": 12,
+            "sign": 1
+          }
+        ],
+        "signed_pairing_integer_cells": 18
+      },
+      "definite_loop_queries": {
+        "L0_charge_1": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "1",
+          "compact_majorana_charge_expectation": 1,
+          "controlled_sigma_probe_phase": "+1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "e67c149443739aee9ac049e5c922963d522f19e7dcbbb894450c61d9bb42b032",
+          "majorana_endpoints_one_based": [
+            3,
+            7
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "1",
+          "target_commitment_after_loop_branch": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+          "target_commitment_before": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+          "topological_charge": "1"
+        },
+        "L1_charge_psi": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "-1",
+          "compact_majorana_charge_expectation": -1,
+          "controlled_sigma_probe_phase": "-1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "daee2ee687c0a727caf4303d546d31d3a6f52c9d04da21b908788f93b3007ac4",
+          "majorana_endpoints_one_based": [
+            4,
+            8
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "-1",
+          "target_commitment_after_loop_branch": "e3cdff5c16ea3d598bca23bb79d6c904bcfa6e84b3b643b899fa8e8d71d6687b",
+          "target_commitment_before": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+          "topological_charge": "psi"
+        }
+      },
+      "distinct_loop_reuse": {
+        "first_loop_majoranas": [
+          3,
+          7
+        ],
+        "first_loop_squared_restores_target": true,
+        "first_phase": "+1",
+        "prepared_target_commitment": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+        "same_backing_or_machine_custody_established": false,
+        "same_prepared_value_consumed_by_both_queries": true,
+        "second_distinct_loop_squared_restores_target": true,
+        "second_loop_majoranas": [
+          4,
+          8
+        ],
+        "second_phase": "-1"
+      },
+      "fusion_dimension": 32,
+      "global_charge_sector": "EVEN_PAIR_CHARGE_PARITY_TOTAL_VACUUM",
+      "initial_state_commitment": "734182dde1c2dea90551cb822497467e50a48d8b11954064f877d25696632a3b",
+      "internal_fixed_charge_scrambling": {
+        "L0_phase_before_after": [
+          "+1",
+          "+1"
+        ],
+        "L1_phase_before_after": [
+          "-1",
+          "-1"
+        ],
+        "adjacent_synthesis": {
+          "P_word_one_based": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "formula": "U_K=P_DAG C_(4r-2) P",
+          "matches_direct_unitary_on_prepared_ray": true,
+          "middle_C_index_one_based": 10,
+          "relative_gaussian_unit": "1"
+        },
+        "both_fixed_charges_invariant": true,
+        "commutation_law": "K_IS_DISJOINT_FROM_AND_COMMUTES_WITH_L0_AND_L1",
+        "generator": "K=-i gamma_2 gamma_11",
+        "prepared_expectation_of_K": "0",
+        "prepared_scrambled_overlap_squared": "1/2",
+        "projective_state_changed": true,
+        "public_adjoint_restores_prepared_state_exactly": true,
+        "unitary": "U_K=(I-gamma_2gamma_11)/sqrt(2)"
+      },
+      "invalid_superposed_loop_control": {
+        "actual_second_monodromy_restores_joint": true,
+        "charge_1_probability": "1/2",
+        "charge_expectation": "0",
+        "charge_psi_probability": "1/2",
+        "controlled_sigma_probe_phase": null,
+        "copy_failure_derivation": "EXACT_CHARGE_BRANCH_PROBABILITIES_FROM_(1_PLUS_OR_MINUS_EXPECTATION_M)_OVER_2",
+        "definite_topological_charge": false,
+        "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+        "factorized_boundary_retention_lawful": false,
+        "joint_norm": "1",
+        "joint_probe_target_commitment": "0723df01dd238380e9b0b7e5a49ed161b80d9be0663d0052dcf82f546ef9c174",
+        "majorana_endpoints_one_based": [
+          3,
+          4
+        ],
+        "no_copy_latch_unlatch_exact_restore": true,
+        "operator": "-i gamma_a gamma_b",
+        "probe_reduced_purity": "1/2",
+        "probe_target_schmidt_rank": 2,
+        "probe_x_boundary": "0",
+        "public_control_name": "M=-i gamma_3 gamma_4",
+        "retained_coherent_boundary_copy_restored_target_marginal_fidelity": "1/2",
+        "retained_copy_disposition": "BOUNDARY_COPY_PREVENTS_LAWFUL_FACTORIZED_RETENTION",
+        "retained_copy_max_factorized_fidelity": "1/2",
+        "target_commitment_after_loop_branch": "aeecc261cc1e65ec5e78f759971cb3dc1dcabccaa0bef75da0cd4e0d2d1dfec5",
+        "target_commitment_before": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+        "topological_charge": "SUPERPOSITION"
+      },
+      "ordinary_contiguous_central_cut": {
+        "compact_majorana_covariance_rank": 4,
+        "dense_exact_schmidt_rank": 4,
+        "left_pair_modes_zero_based": [
+          0,
+          1,
+          2
+        ],
+        "right_pair_modes_zero_based": [
+          3,
+          4,
+          5
+        ],
+        "signed_pairing_crossing_edges": 4
+      },
+      "pair_charge_modes": 6,
+      "prepared_dense_amplitudes": {
+        "000000": {
+          "gaussian_integer_numerator": "-1i",
+          "sqrt2_denominator_exponent": 2
+        },
+        "001010": {
+          "gaussian_integer_numerator": "-1",
+          "sqrt2_denominator_exponent": 2
+        },
+        "010100": {
+          "gaussian_integer_numerator": "-1",
+          "sqrt2_denominator_exponent": 2
+        },
+        "011110": {
+          "gaussian_integer_numerator": "-1i",
+          "sqrt2_denominator_exponent": 2
+        }
+      },
+      "prepared_state_commitment": "4a336dd10786e6dac812dd5e42c549d5a4ca2fb69a0aeffb3fbe0b349b033952",
+      "prepared_support_cells": 4,
+      "public_adjoint_word": [
+        {
+          "C_index_one_based": 6,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 7,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 8,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 5,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 6,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 4,
+          "orientation": "ADJOINT"
+        }
+      ],
+      "public_inverse_exact_restoration": true,
+      "public_preparation_C_word_one_based": [
+        4,
+        6,
+        5,
+        8,
+        7,
+        6
+      ],
+      "restored_state_commitment": "734182dde1c2dea90551cb822497467e50a48d8b11954064f877d25696632a3b",
+      "sigma_anyons": 12
+    },
+    "16": {
+      "compact_comparator": {
+        "adjacent_braid_update": "SIGNED_MAJORANA_SWAP",
+        "all_declared_loop_expectations_reproduced": true,
+        "bilinear_loop_query": "SIGNED_PAIRING_LOOKUP",
+        "dense_covariance_cells_used_only_as_independent_oracle": 256,
+        "dense_rank_reproduced": true,
+        "signed_majorana_frame_cells": 16,
+        "signed_pairing": [
+          {
+            "first": 1,
+            "second": 2,
+            "sign": 1
+          },
+          {
+            "first": 3,
+            "second": 9,
+            "sign": 1
+          },
+          {
+            "first": 4,
+            "second": 10,
+            "sign": -1
+          },
+          {
+            "first": 5,
+            "second": 11,
+            "sign": 1
+          },
+          {
+            "first": 6,
+            "second": 12,
+            "sign": -1
+          },
+          {
+            "first": 7,
+            "second": 13,
+            "sign": 1
+          },
+          {
+            "first": 8,
+            "second": 14,
+            "sign": -1
+          },
+          {
+            "first": 15,
+            "second": 16,
+            "sign": 1
+          }
+        ],
+        "signed_pairing_integer_cells": 24
+      },
+      "definite_loop_queries": {
+        "L0_charge_1": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "1",
+          "compact_majorana_charge_expectation": 1,
+          "controlled_sigma_probe_phase": "+1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "e362df37a14d1e392375af623fb2a22978911825a2ac94bdfc70280f4a4a16de",
+          "majorana_endpoints_one_based": [
+            3,
+            9
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "1",
+          "target_commitment_after_loop_branch": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+          "target_commitment_before": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+          "topological_charge": "1"
+        },
+        "L1_charge_psi": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "-1",
+          "compact_majorana_charge_expectation": -1,
+          "controlled_sigma_probe_phase": "-1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "2f15d8915f5045073b4c213e67363224dbab5ff7b77cebf2913f25ef28631b5f",
+          "majorana_endpoints_one_based": [
+            4,
+            10
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "-1",
+          "target_commitment_after_loop_branch": "a89c957f75e8846aeb770554251143449030165be89feae793be58e1849a4549",
+          "target_commitment_before": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+          "topological_charge": "psi"
+        }
+      },
+      "distinct_loop_reuse": {
+        "first_loop_majoranas": [
+          3,
+          9
+        ],
+        "first_loop_squared_restores_target": true,
+        "first_phase": "+1",
+        "prepared_target_commitment": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+        "same_backing_or_machine_custody_established": false,
+        "same_prepared_value_consumed_by_both_queries": true,
+        "second_distinct_loop_squared_restores_target": true,
+        "second_loop_majoranas": [
+          4,
+          10
+        ],
+        "second_phase": "-1"
+      },
+      "fusion_dimension": 128,
+      "global_charge_sector": "EVEN_PAIR_CHARGE_PARITY_TOTAL_VACUUM",
+      "initial_state_commitment": "5751065cef8105354d32edb4c80594c3c73c820a16ee50bfe32ff83fbb289692",
+      "internal_fixed_charge_scrambling": {
+        "L0_phase_before_after": [
+          "+1",
+          "+1"
+        ],
+        "L1_phase_before_after": [
+          "-1",
+          "-1"
+        ],
+        "adjacent_synthesis": {
+          "P_word_one_based": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ],
+          "formula": "U_K=P_DAG C_(4r-2) P",
+          "matches_direct_unitary_on_prepared_ray": true,
+          "middle_C_index_one_based": 14,
+          "relative_gaussian_unit": "1"
+        },
+        "both_fixed_charges_invariant": true,
+        "commutation_law": "K_IS_DISJOINT_FROM_AND_COMMUTES_WITH_L0_AND_L1",
+        "generator": "K=-i gamma_2 gamma_15",
+        "prepared_expectation_of_K": "0",
+        "prepared_scrambled_overlap_squared": "1/2",
+        "projective_state_changed": true,
+        "public_adjoint_restores_prepared_state_exactly": true,
+        "unitary": "U_K=(I-gamma_2gamma_15)/sqrt(2)"
+      },
+      "invalid_superposed_loop_control": {
+        "actual_second_monodromy_restores_joint": true,
+        "charge_1_probability": "1/2",
+        "charge_expectation": "0",
+        "charge_psi_probability": "1/2",
+        "controlled_sigma_probe_phase": null,
+        "copy_failure_derivation": "EXACT_CHARGE_BRANCH_PROBABILITIES_FROM_(1_PLUS_OR_MINUS_EXPECTATION_M)_OVER_2",
+        "definite_topological_charge": false,
+        "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+        "factorized_boundary_retention_lawful": false,
+        "joint_norm": "1",
+        "joint_probe_target_commitment": "d2fc9f523a8fa7fa15aec96262a3093dd8f31e30ebccc2dc6bc6e0a02dc0db06",
+        "majorana_endpoints_one_based": [
+          3,
+          4
+        ],
+        "no_copy_latch_unlatch_exact_restore": true,
+        "operator": "-i gamma_a gamma_b",
+        "probe_reduced_purity": "1/2",
+        "probe_target_schmidt_rank": 2,
+        "probe_x_boundary": "0",
+        "public_control_name": "M=-i gamma_3 gamma_4",
+        "retained_coherent_boundary_copy_restored_target_marginal_fidelity": "1/2",
+        "retained_copy_disposition": "BOUNDARY_COPY_PREVENTS_LAWFUL_FACTORIZED_RETENTION",
+        "retained_copy_max_factorized_fidelity": "1/2",
+        "target_commitment_after_loop_branch": "3b882365292f724f3cb85e4319b75842cb18377ba7ee51f9087a34ffe8543343",
+        "target_commitment_before": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+        "topological_charge": "SUPERPOSITION"
+      },
+      "ordinary_contiguous_central_cut": {
+        "compact_majorana_covariance_rank": 8,
+        "dense_exact_schmidt_rank": 8,
+        "left_pair_modes_zero_based": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "right_pair_modes_zero_based": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "signed_pairing_crossing_edges": 6
+      },
+      "pair_charge_modes": 8,
+      "prepared_dense_amplitudes": {
+        "00000000": {
+          "gaussian_integer_numerator": "1i",
+          "sqrt2_denominator_exponent": 3
+        },
+        "00010010": {
+          "gaussian_integer_numerator": "1",
+          "sqrt2_denominator_exponent": 3
+        },
+        "00100100": {
+          "gaussian_integer_numerator": "1",
+          "sqrt2_denominator_exponent": 3
+        },
+        "00110110": {
+          "gaussian_integer_numerator": "1i",
+          "sqrt2_denominator_exponent": 3
+        },
+        "01001000": {
+          "gaussian_integer_numerator": "1",
+          "sqrt2_denominator_exponent": 3
+        },
+        "01011010": {
+          "gaussian_integer_numerator": "1i",
+          "sqrt2_denominator_exponent": 3
+        },
+        "01101100": {
+          "gaussian_integer_numerator": "1i",
+          "sqrt2_denominator_exponent": 3
+        },
+        "01111110": {
+          "gaussian_integer_numerator": "1",
+          "sqrt2_denominator_exponent": 3
+        }
+      },
+      "prepared_state_commitment": "01d985c0a3c84c5f3aa0ae8168dd10393b609f58a73a102387325bb33df04deb",
+      "prepared_support_cells": 8,
+      "public_adjoint_word": [
+        {
+          "C_index_one_based": 8,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 9,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 10,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 11,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 12,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 7,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 8,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 9,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 10,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 6,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 7,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 8,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 5,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 6,
+          "orientation": "ADJOINT"
+        },
+        {
+          "C_index_one_based": 4,
+          "orientation": "ADJOINT"
+        }
+      ],
+      "public_inverse_exact_restoration": true,
+      "public_preparation_C_word_one_based": [
+        4,
+        6,
+        5,
+        8,
+        7,
+        6,
+        10,
+        9,
+        8,
+        7,
+        12,
+        11,
+        10,
+        9,
+        8
+      ],
+      "restored_state_commitment": "5751065cef8105354d32edb4c80594c3c73c820a16ee50bfe32ff83fbb289692",
+      "sigma_anyons": 16
+    },
+    "8": {
+      "compact_comparator": {
+        "adjacent_braid_update": "SIGNED_MAJORANA_SWAP",
+        "all_declared_loop_expectations_reproduced": true,
+        "bilinear_loop_query": "SIGNED_PAIRING_LOOKUP",
+        "dense_covariance_cells_used_only_as_independent_oracle": 64,
+        "dense_rank_reproduced": true,
+        "signed_majorana_frame_cells": 8,
+        "signed_pairing": [
+          {
+            "first": 1,
+            "second": 2,
+            "sign": 1
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "sign": 1
+          },
+          {
+            "first": 4,
+            "second": 6,
+            "sign": -1
+          },
+          {
+            "first": 7,
+            "second": 8,
+            "sign": 1
+          }
+        ],
+        "signed_pairing_integer_cells": 12
+      },
+      "definite_loop_queries": {
+        "L0_charge_1": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "1",
+          "compact_majorana_charge_expectation": 1,
+          "controlled_sigma_probe_phase": "+1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "626f8c9052a9b79db73e215842e85767d30ef1542e3eea878d8dcf4bd152d044",
+          "majorana_endpoints_one_based": [
+            3,
+            5
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "1",
+          "target_commitment_after_loop_branch": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+          "target_commitment_before": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+          "topological_charge": "1"
+        },
+        "L1_charge_psi": {
+          "actual_second_monodromy_restores_joint": true,
+          "charge_expectation": "-1",
+          "compact_majorana_charge_expectation": -1,
+          "controlled_sigma_probe_phase": "-1",
+          "definite_topological_charge": true,
+          "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+          "factorized_boundary_retention_lawful": true,
+          "joint_norm": "1",
+          "joint_probe_target_commitment": "adb4f51d427177b2fc1e539f7fe7075e24a2595050b3c79c409009392cc63827",
+          "majorana_endpoints_one_based": [
+            4,
+            6
+          ],
+          "operator": "-i gamma_a gamma_b",
+          "probe_reduced_purity": "1",
+          "probe_target_schmidt_rank": 1,
+          "probe_x_boundary": "-1",
+          "target_commitment_after_loop_branch": "f6de642f32a015073ad745df15fef7c59fd8ab1567ec2d916904d18499cb1889",
+          "target_commitment_before": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+          "topological_charge": "psi"
+        }
+      },
+      "distinct_loop_reuse": {
+        "first_loop_majoranas": [
+          3,
+          5
+        ],
+        "first_loop_squared_restores_target": true,
+        "first_phase": "+1",
+        "prepared_target_commitment": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+        "same_backing_or_machine_custody_established": false,
+        "same_prepared_value_consumed_by_both_queries": true,
+        "second_distinct_loop_squared_restores_target": true,
+        "second_loop_majoranas": [
+          4,
+          6
+        ],
+        "second_phase": "-1"
+      },
+      "fusion_dimension": 8,
+      "global_charge_sector": "EVEN_PAIR_CHARGE_PARITY_TOTAL_VACUUM",
+      "initial_state_commitment": "65c7b74978293ba68db3443d497dc105d091b496d14704083fb5804b090e40e5",
+      "internal_fixed_charge_scrambling": {
+        "L0_phase_before_after": [
+          "+1",
+          "+1"
+        ],
+        "L1_phase_before_after": [
+          "-1",
+          "-1"
+        ],
+        "adjacent_synthesis": {
+          "P_word_one_based": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "formula": "U_K=P_DAG C_(4r-2) P",
+          "matches_direct_unitary_on_prepared_ray": true,
+          "middle_C_index_one_based": 6,
+          "relative_gaussian_unit": "1"
+        },
+        "both_fixed_charges_invariant": true,
+        "commutation_law": "K_IS_DISJOINT_FROM_AND_COMMUTES_WITH_L0_AND_L1",
+        "generator": "K=-i gamma_2 gamma_7",
+        "prepared_expectation_of_K": "0",
+        "prepared_scrambled_overlap_squared": "1/2",
+        "projective_state_changed": true,
+        "public_adjoint_restores_prepared_state_exactly": true,
+        "unitary": "U_K=(I-gamma_2gamma_7)/sqrt(2)"
+      },
+      "invalid_superposed_loop_control": {
+        "actual_second_monodromy_restores_joint": true,
+        "charge_1_probability": "1/2",
+        "charge_expectation": "0",
+        "charge_psi_probability": "1/2",
+        "controlled_sigma_probe_phase": null,
+        "copy_failure_derivation": "EXACT_CHARGE_BRANCH_PROBABILITIES_FROM_(1_PLUS_OR_MINUS_EXPECTATION_M)_OVER_2",
+        "definite_topological_charge": false,
+        "derived_joint_probe_target_state": "(|0> tensor |psi> + |1> tensor L|psi>)/sqrt(2)",
+        "factorized_boundary_retention_lawful": false,
+        "joint_norm": "1",
+        "joint_probe_target_commitment": "828465c85535e4a046291e8b084316063edb6618fbbf729e619fbdde277caadd",
+        "majorana_endpoints_one_based": [
+          3,
+          4
+        ],
+        "no_copy_latch_unlatch_exact_restore": true,
+        "operator": "-i gamma_a gamma_b",
+        "probe_reduced_purity": "1/2",
+        "probe_target_schmidt_rank": 2,
+        "probe_x_boundary": "0",
+        "public_control_name": "M=-i gamma_3 gamma_4",
+        "retained_coherent_boundary_copy_restored_target_marginal_fidelity": "1/2",
+        "retained_copy_disposition": "BOUNDARY_COPY_PREVENTS_LAWFUL_FACTORIZED_RETENTION",
+        "retained_copy_max_factorized_fidelity": "1/2",
+        "target_commitment_after_loop_branch": "d068cec819d34893bd85ce412ca4bc2d8cfb7965dd62734b373adcaaf3c53a20",
+        "target_commitment_before": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+        "topological_charge": "SUPERPOSITION"
+      },
+      "ordinary_contiguous_central_cut": {
+        "compact_majorana_covariance_rank": 2,
+        "dense_exact_schmidt_rank": 2,
+        "left_pair_modes_zero_based": [
+          0,
+          1
+        ],
+        "right_pair_modes_zero_based": [
+          2,
+          3
+        ],
+        "signed_pairing_crossing_edges": 2
+      },
+      "pair_charge_modes": 4,
+      "prepared_dense_amplitudes": {
+        "0000": {
+          "gaussian_integer_numerator": "1",
+          "sqrt2_denominator_exponent": 1
+        },
+        "0110": {
+          "gaussian_integer_numerator": "-1i",
+          "sqrt2_denominator_exponent": 1
+        }
+      },
+      "prepared_state_commitment": "4f97fd666da7614c284ce557e5d2e8d06dc54bb36a0e599e3c5e990598a771c0",
+      "prepared_support_cells": 2,
+      "public_adjoint_word": [
+        {
+          "C_index_one_based": 4,
+          "orientation": "ADJOINT"
+        }
+      ],
+      "public_inverse_exact_restoration": true,
+      "public_preparation_C_word_one_based": [
+        4
+      ],
+      "restored_state_commitment": "65c7b74978293ba68db3443d497dc105d091b496d14704083fb5804b090e40e5",
+      "sigma_anyons": 8
+    }
+  },
+  "claim_ceiling": "EXACT_IDEAL_ISING_ANYON_SOFTWARE_DIAGNOSTIC_ONLY",
+  "claim_limits": {
+    "arbitrary_enclosed_subset_wilson_loop": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "m257_escape": false,
+    "machine_enforced_custody": false,
+    "physical_anyons_or_majoranas": false,
+    "physical_probe_or_monodromy": false,
+    "qemu_or_catvm_device_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "same_backing_catalytic_reuse": false,
+    "small_wall_crossing": false,
+    "unbounded_compute": false
+  },
+  "implementation_independence": {
+    "dense_state_representation": "EVEN_PARITY_GAUSSIAN_INTEGER_AMPLITUDES_WITH_SHARED_SQRT2_EXPONENT",
+    "floating_point_scientific_decisions": false,
+    "hardcoded_expected_state_vectors_or_ranks": false,
+    "imports_phase_qemu_v1_or_v2": false,
+    "imports_production": false,
+    "independent_compact_representation": "SIGNED_MAJORANA_COVARIANCE",
+    "operator_construction": "DIRECT_JORDAN_WIGNER_MAJORANA_ACTION"
+  },
+  "measured_family_laws": {
+    "all_L0_loops_are_charge_1_plus": true,
+    "all_L1_loops_are_charge_psi_minus": true,
+    "all_dense_ranks_match_compact_majorana_covariance": true,
+    "all_internal_fixed_charge_scrambles_preserve_both_phases": true,
+    "all_invalid_bilinear_controls_entangle": true,
+    "all_public_inverses_restore_exactly": true,
+    "fusion_dimensions_n8_n12_n16": [
+      8,
+      32,
+      128
+    ],
+    "minimum_supported_r": 2,
+    "ordinary_contiguous_central_schmidt_ranks_n8_n12_n16": [
+      2,
+      4,
+      8
+    ],
+    "prepared_support_n8_n12_n16": [
+      2,
+      4,
+      8
+    ]
+  },
+  "n4_algebra_orientation_smoke": {
+    "even_sector_fusion_dimension": 2,
+    "included_in_triangular_scaling_family": false,
+    "initial_state_commitment": "340ca537dc397db18878ba87c6ab4e400538ab44c293a64ea539d4bbadb531d7",
+    "loop": {
+      "majorana_endpoints_one_based": [
+        1,
+        2
+      ],
+      "operator": "L=-i gamma_1 gamma_2"
+    },
+    "pair_charge_modes": 2,
+    "preparation": {
+      "dense_amplitudes": {
+        "11": {
+          "gaussian_integer_numerator": "-1i",
+          "sqrt2_denominator_exponent": 0
+        }
+      },
+      "derived_gaussian_unit_phase_relative_to_|11>": "-1i",
+      "prepared_ray": "|11>",
+      "public_C_word_one_based": [
+        2,
+        2
+      ]
+    },
+    "prepared": {
+      "loop_phase": "-1",
+      "probe_copy_unlatch": {
+        "coherent_boundary_copy_retains_only_definite_phase": "-1",
+        "controlled_probe_phase": "-1",
+        "copy_does_not_entangle_target_for_definite_charge": true,
+        "definite_charge_before_copy": true,
+        "factorized_boundary_retention_lawful": true,
+        "second_monodromy_unlatches_target_exactly": true
+      }
+    },
+    "public_adjoint_twice_restores_vacuum_exactly": true,
+    "public_adjoint_word": [
+      {
+        "C_index_one_based": 2,
+        "orientation": "ADJOINT"
+      },
+      {
+        "C_index_one_based": 2,
+        "orientation": "ADJOINT"
+      }
+    ],
+    "restored_state_commitment": "340ca537dc397db18878ba87c6ab4e400538ab44c293a64ea539d4bbadb531d7",
+    "scope": "SEPARATE_N4_ALGEBRA_AND_ORIENTATION_SMOKE_ONLY",
+    "sigma_anyons": 4,
+    "vacuum": {
+      "loop_phase": "+1",
+      "probe_copy_unlatch": {
+        "coherent_boundary_copy_retains_only_definite_phase": "+1",
+        "controlled_probe_phase": "+1",
+        "copy_does_not_entangle_target_for_definite_charge": true,
+        "definite_charge_before_copy": true,
+        "factorized_boundary_retention_lawful": true,
+        "second_monodromy_unlatches_target_exactly": true
+      },
+      "state": "|00>"
+    }
+  },
+  "public_algebra": {
+    "clockwise_adjacent_exchange": "C_j=(I-gamma_j gamma_(j+1))/sqrt(2)",
+    "gamma_2a": "Z_1...Z_(a-1) Y_a",
+    "gamma_2a_minus_1": "Z_1...Z_(a-1) X_a",
+    "loop_interpretation": "BRAID_TRANSPORTED_MAJORANA_PAIR_PARITY_HOLONOMY",
+    "loop_operator": "L_(a,b)=-i gamma_a gamma_b",
+    "preparation_word": "J_r=concat_(t=1..2r-3)[2t+2,2t+1,...,t+3]",
+    "sigma_probe_monodromy": {
+      "charge_1": "+1",
+      "charge_psi": "-1"
+    },
+    "wilson_loop_scope": "NOT_AN_ARBITRARY_ENCLOSED_SUBSET_WILSON_LOOP_WITHOUT_A_SUPPLIED_TRANSPORT_AND_FRAMING_DESCRIPTOR"
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "restoration_scope": "FUNCTIONAL_EXACT_STATE_EQUALITY_WITHOUT_SAME_BACKING",
+  "schema": "phase-qemu-v3-ising-anyon-controlled-monodromy-separate-reference-v1",
+  "strongest_classical_comparator": {
+    "adjacent_braid_work": "O(1) signed-frame swap with inverse replay",
+    "bilinear_loop_work": "O(1) signed-pair lookup",
+    "cut_rank_work": "O(n) count of pairing edges crossing the declared cut",
+    "name": "SIGNED_MAJORANA_FRAME_AND_SIGNED_PERFECT_PAIRING",
+    "reproduces_every_accepted_dense_boundary_and_rank": true,
+    "route_disposition": "COMPACT_SIGNED_MAJORANA_PAIRING_IS_A_CONTROLLING_NO_GO",
+    "state_cells": "O(n) signed permutation/pairing entries"
+  },
+  "verification_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
