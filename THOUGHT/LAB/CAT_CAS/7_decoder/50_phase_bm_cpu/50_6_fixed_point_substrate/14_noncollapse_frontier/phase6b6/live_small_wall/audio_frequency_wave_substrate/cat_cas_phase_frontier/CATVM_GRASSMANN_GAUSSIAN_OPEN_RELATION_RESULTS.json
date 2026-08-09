@@ -1,0 +1,363 @@
+{
+  "cases": [
+    {
+      "backend_response_bytes": 1108,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1109,
+      "generation": 1,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 1109,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1107,
+      "generation": 2,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "backend_response_bytes": 1109,
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "controller_request_bytes": 1105,
+      "generation": 1,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "claim": "CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_ANTISYMMETRIC_COEFFICIENT_ADDITION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_PFAFFIAN_TRANSFORM_ON_ONE_SEVEN_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SEVEN_CELL_CLASSICAL_RECURRENCE_AND_GENERAL_PFAFFIAN_MATCHGATE_ALGORITHMS_BISIMULATE_THE_DECLARED_LAW_WITH_NO_ADVANTAGE",
+  "claim_ceiling": "EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_GAUSSIAN_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY",
+  "claim_limits": {
+    "distinct_phase_resource_unavailable_to_compact_classical_software": false,
+    "fixed_bounded_width_exact_state_across_growing_interfaces": false,
+    "general_catalytic_inference": false,
+    "general_grassmann_relation_or_arbitrary_topology_closure": false,
+    "non_gaussian_relation_closure": false,
+    "normalized_or_convergent_fermionic_path_integral": false,
+    "physical_bit_replacement": false,
+    "physical_fermion_or_berezin_execution": false,
+    "physical_waveform_execution": false,
+    "small_wall_crossed": false,
+    "total_computational_advantage": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "controls": {
+    "all_accepted_relation_scratch_and_receipt_backings_stable": true,
+    "all_accepted_responses_after_exact_restoration": true,
+    "answer_bearing_extra_descriptor_field_rejected": true,
+    "backend_responses_exclude_relation_coefficients_scratch_and_dense_signatures": true,
+    "debug_rejected": true,
+    "dense_eight_entry_even_signature_absent": true,
+    "dense_signature_rejected": true,
+    "dirty_fourier_scratch_rejected_before_mutation": true,
+    "disconnect_restored_before_lost_response": true,
+    "dump_rejected": true,
+    "fourier_berezin_transform_is_exact_involution": true,
+    "grassmann_plucker_gaussian_identity_exact": true,
+    "intersection_and_fourier_do_not_commute": true,
+    "malformed_carrier_id_rejected": true,
+    "malformed_transaction_id_rejected_without_poisoning_carrier": true,
+    "missing_inverse_fails_exact_relation_restoration": true,
+    "no_baseline_reload": true,
+    "noncommuting_reordered_inverse_fails_exact_relation_restoration": true,
+    "null_carrier_rejected": true,
+    "partial_failure_rejected_only_after_restoration": true,
+    "postprojection_failure_rejected_only_after_restoration": true,
+    "premature_relation_coefficient_projection_rejected": true,
+    "project_coefficients_rejected": true,
+    "project_grassmann_ports_rejected": true,
+    "project_relation_rejected": true,
+    "project_scratch_rejected": true,
+    "quartic_perturbation_violates_gaussian_identity": true,
+    "restored_reuse_matches_fresh": true,
+    "run_inplace_on_snapshot_rejected": true,
+    "run_snapshot_rejected": true,
+    "same_id_changed_relation_descriptor_rejected": true,
+    "selected_complex_phase_is_boundary_causal": true,
+    "singular_fourier_rejected_before_mutation": true,
+    "skipped_generation_rejected": true,
+    "snapshot_rejected": true,
+    "stale_generation_rejected": true,
+    "truth_table_and_assignment_expansion_absent": true,
+    "two_intersections_commute_on_same_unresolved_port": true,
+    "wrong_controller_rejected": true,
+    "wrong_inverse_completed_path_fails_exact_relation_restoration": true,
+    "wrong_output_type_rejected": true,
+    "wrong_owner_rejected": true,
+    "wrong_port_order_rejected": true,
+    "wrong_program_rejected": true,
+    "wrong_type_rejected": true,
+    "zero_denominator_rejected": true
+  },
+  "independent_reference": {
+    "all_controls_pass": true,
+    "all_reuse_parity_checks_pass": true,
+    "oracle_law": {
+      "arithmetic": "Q_ZETA8_POLYNOMIAL_QUOTIENT_ZETA8_TO_THE4_PLUS1",
+      "four_by_four_antisymmetric_matrix_reconstructed": true,
+      "identical_seven_cell_classical_recurrence_reconstructed": true,
+      "independent_port_custody_and_atomic_ordering_reconstructed": true,
+      "inplace_classical_fourier_uses_two_reusable_field_scratch_cells": true,
+      "inverse_reconstructed_by_dense_gauss_jordan": true,
+      "pfaffian_reconstructed_recursively": true
+    },
+    "result": "PASS_M253_SEPARATE_REFERENCE"
+  },
+  "input_provenance": {
+    "backend_private_mode_delivered_only_to_service_stdin": true,
+    "controller_received_only_public_typed_ports_and_relation_modules": true,
+    "public_controller_configuration_bytes": 5760,
+    "standalone_oracle_received_the_same_public_descriptors_plus_suite_selector": true,
+    "standalone_reference_configuration_bytes": 5821
+  },
+  "open_relation_law": {
+    "formal_gaussian_relation_class_is_closed_for_declared_modules": true,
+    "four_port_berezin_closure_is_pfaffian_scaled_inverse_on_nonsingular_chart": true,
+    "fourier_closure_is_exact_involution": true,
+    "intersection_is_native_coefficient_addition_and_scalar_multiplication": true,
+    "relation_coefficients_remain_unprojected_until_final_top_form_boundary": true,
+    "resident_gaussian_relation_field_cells": 7,
+    "route_disposition": "RETIRE_AFTER_ONE_BOUNDED_FOUR_PORT_SUITE_BECAUSE_IDENTICAL_CLASSICAL_PFAFFIAN_RECURRENCE_BISIMULATES_IT",
+    "typed_open_grassmann_ports": [
+      "THETA0",
+      "THETA1",
+      "THETA2",
+      "THETA3"
+    ]
+  },
+  "protocol_accounting": {
+    "backend_controller_response_bytes": 5760,
+    "controller_backend_request_bytes": 21762,
+    "disconnect_request_bytes": 1150
+  },
+  "resource_law": {
+    "accepted_boundary_field_accumulations": 6,
+    "accepted_boundary_field_multiplications": 12,
+    "accepted_catvm_path_has_space_work_or_query_advantage": false,
+    "accepted_compiled_public_intersection_field_cells": 63,
+    "accepted_compiled_public_module_plan_references": 15,
+    "accepted_forward_carrier_field_writes": 105,
+    "accepted_forward_field_accumulations": 66,
+    "accepted_forward_field_inversions": 6,
+    "accepted_forward_field_multiplications": 69,
+    "accepted_forward_fourier_closures": 6,
+    "accepted_forward_intersections": 9,
+    "accepted_forward_scratch_field_writes_and_clears": 84,
+    "accepted_hidden_fourier_scratch_field_cells_per_carrier": 7,
+    "accepted_hidden_module_receipt_cells_per_carrier": 8,
+    "accepted_hidden_relation_field_cells_per_carrier": 7,
+    "accepted_inverse_carrier_field_writes": 105,
+    "accepted_inverse_field_accumulations": 66,
+    "accepted_inverse_field_inversions": 15,
+    "accepted_inverse_field_multiplications": 69,
+    "accepted_inverse_fourier_closures": 6,
+    "accepted_inverse_intersections": 9,
+    "accepted_inverse_scratch_field_writes_and_clears": 84,
+    "accepted_persistent_carriers": 2,
+    "accepted_public_module_kind_sequences": [
+      [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ]
+    ],
+    "accepted_retained_dynamic_inverse_history_entries": 0,
+    "accepted_transactions": 3,
+    "comparison_basis": "QZETA8_FIELD_CELLS_PUBLIC_PLAN_FIELD_CELLS_FIELD_OPERATIONS_WRITES_FINAL_BOUNDARY_RESTORATION_REUSE_AND_PROTOCOL_TRAFFIC_NOT_WHOLE_PROCESS_RSS",
+    "exact_qzeta8_coordinate_payload_instrumented": false,
+    "field_cell_counts_are_not_fixed_bit_payload_claims": true,
+    "python_fraction_object_allocator_socket_hash_serialization_rss_excluded_not_zero": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "retained_final_boundary_field_cells_during_inverse_per_transaction": 1,
+    "stronger_general_algorithmic_ceiling_not_claimed_as_implemented_baseline": "GENERAL_PLANAR_MATCHGATE_OR_GRASSMANN_GAUSSIAN_CONTRACTION_BY_POLYNOMIAL_TIME_PFAFFIAN_ALGORITHMS",
+    "strongest_fixed_fixture_classical_baseline": "PUBLIC_DESCRIPTOR_VALIDATION_PLUS_FROZEN_EXACT_TOP_FORM_BOUNDARY_IN_O1_WORK",
+    "strongest_implemented_transferable_descriptor_level_classical_baseline": "IDENTICAL_EXACT_INPLACE_SEVEN_QZETA8_CELL_ANTISYMMETRIC_PFAFFIAN_INTERSECTION_AND_COMPLEMENTARY_PAIR_BEREZIN_RECURRENCE_WITH_TWO_REUSABLE_FIELD_SCRATCH_CELLS_NO_CATVM_RESTORATION",
+    "transferable_baseline_carrier_writes_per_fourier": 7,
+    "transferable_baseline_field_accumulations_per_fourier": 2,
+    "transferable_baseline_field_inversions_per_fourier": 1,
+    "transferable_baseline_field_multiplications_per_fourier": 10,
+    "transferable_baseline_resident_relation_field_cells": 7,
+    "transferable_baseline_reusable_fourier_scratch_field_cells": 2,
+    "whole_transaction_live_payload_peak_complete": false
+  },
+  "restoration_classification": "EXACT_ALGEBRAIC_RESTORATION",
+  "result": "PASS_CATVM_GRASSMANN_GAUSSIAN_OPEN_RELATION_STRICT_SCOPE",
+  "reuse_parity": true,
+  "source_dependencies": {
+    "catvm_grassmann_gaussian_open_relation_client.py": "45767cab5b3a004fd39aee1d0002c2ebdc3fa95c55e68682f1d2929633a7357c",
+    "catvm_grassmann_gaussian_open_relation_separate_reference.py": "5a5c0f6ba25eb0a2033e864487f5695cc7e091e359527ac8d69b97f0f8990750",
+    "catvm_grassmann_gaussian_open_relation_service.py": "7851b4bc68de0efdb5522428bdbfbaf02f3484a758385b37f7671c8918e75db6",
+    "qualify_catvm_grassmann_gaussian_open_relation.sh": "081bae8745a9283e7a1813f2f8e7a552c1c9e4048298e0b15bac28ee8ba65f2a"
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

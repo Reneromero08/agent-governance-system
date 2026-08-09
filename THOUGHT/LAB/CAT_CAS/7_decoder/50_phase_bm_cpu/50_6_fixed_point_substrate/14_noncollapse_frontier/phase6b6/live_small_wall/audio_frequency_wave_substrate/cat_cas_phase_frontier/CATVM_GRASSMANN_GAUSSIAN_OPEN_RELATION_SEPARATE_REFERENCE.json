@@ -1,0 +1,207 @@
+{
+  "cases": [
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 1,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "PRIMARY",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 2,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "REUSE",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    },
+    {
+      "baseline_reload_used": false,
+      "canonical_after_restoration": true,
+      "generation": 1,
+      "hidden_fourier_scratch_field_cells": 7,
+      "hidden_module_receipt_cells": 8,
+      "hidden_relation_field_cells": 7,
+      "module_kinds": [
+        "INTERSECT",
+        "INTERSECT",
+        "FOURIER",
+        "INTERSECT",
+        "FOURIER"
+      ],
+      "retained_final_boundary_field_cells_during_inverse": 1,
+      "run_kind": "FRESH",
+      "same_relation_scratch_and_receipt_backings": true,
+      "top_form_boundary": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "work": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4,
+        "compiled_public_intersection_field_cells": 21,
+        "compiled_public_module_plan_references": 5,
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28,
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28,
+        "retained_dynamic_inverse_history_entries": 0
+      }
+    }
+  ],
+  "controls": {
+    "compact_classical_recurrence_uses_no_dense_even_signature_or_assignment_table": true,
+    "dense_gauss_jordan_fourier_matches_inplace_seven_cell_two_scratch_formula": true,
+    "dirty_fourier_scratch_rejected_by_independent_port": true,
+    "four_port_fourier_transform_is_exact_involution": true,
+    "grassmann_plucker_gaussian_identity_exact": true,
+    "inplace_comparator_two_cell_scratch_is_cleared_after_fourier": true,
+    "premature_relation_projection_rejected_by_independent_port": true,
+    "quartic_perturbation_violates_gaussian_identity": true,
+    "recursive_pfaffian_matches_explicit_four_port_formula": true,
+    "same_id_changed_relation_rejected_by_independent_digest": true,
+    "singular_fourier_rejected_before_mutation": true,
+    "stale_generation_rejected_by_independent_port": true,
+    "wrong_owner_rejected_by_independent_port": true
+  },
+  "oracle_law": {
+    "arithmetic": "Q_ZETA8_POLYNOMIAL_QUOTIENT_ZETA8_TO_THE4_PLUS1",
+    "four_by_four_antisymmetric_matrix_reconstructed": true,
+    "identical_seven_cell_classical_recurrence_reconstructed": true,
+    "independent_port_custody_and_atomic_ordering_reconstructed": true,
+    "inplace_classical_fourier_uses_two_reusable_field_scratch_cells": true,
+    "inverse_reconstructed_by_dense_gauss_jordan": true,
+    "pfaffian_reconstructed_recursively": true
+  },
+  "result": "PASS_M253_SEPARATE_REFERENCE",
+  "reuse_parity": {
+    "boundary": true,
+    "generation_sequence": true,
+    "no_reload": true,
+    "same_backings": true,
+    "work": true
+  }
+}
