@@ -1,0 +1,312 @@
+{
+  "claim": "EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES",
+  "claim_ceiling": "ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY",
+  "deterministic_transactions": {
+    "records": [
+      {
+        "dimension": 1,
+        "functional_exact_restoration_and_reuse": true,
+        "generation_1_bit": 1,
+        "generation_2_bit": 0,
+        "same_backing_established": false
+      },
+      {
+        "dimension": 2,
+        "functional_exact_restoration_and_reuse": true,
+        "generation_1_bit": 1,
+        "generation_2_bit": 0,
+        "same_backing_established": false
+      },
+      {
+        "dimension": 4,
+        "functional_exact_restoration_and_reuse": true,
+        "generation_1_bit": 1,
+        "generation_2_bit": 0,
+        "same_backing_established": false
+      },
+      {
+        "dimension": 8,
+        "functional_exact_restoration_and_reuse": true,
+        "generation_1_bit": 1,
+        "generation_2_bit": 0,
+        "same_backing_established": false
+      },
+      {
+        "dimension": 16,
+        "functional_exact_restoration_and_reuse": true,
+        "generation_1_bit": 1,
+        "generation_2_bit": 0,
+        "same_backing_established": false
+      }
+    ],
+    "second_preparation_used": false
+  },
+  "fibonacci": {
+    "carrier_probe_only_inverse_cannot_erase_retained_orthogonal_response": true,
+    "channel_weight_1": {
+      "radical_denominator": 2,
+      "radical_numerator": -1,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": 3
+    },
+    "channel_weight_tau": {
+      "radical_denominator": 2,
+      "radical_numerator": 1,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": -1
+    },
+    "character_table_rank": 2,
+    "coherently_copied_which_outcome_schmidt_rank": 2,
+    "five_loop_amplitude": {
+      "radical_denominator": 1,
+      "radical_numerator": 0,
+      "radicand": 5,
+      "rational_denominator": 1,
+      "rational_numerator": 1
+    },
+    "five_loop_amplitude_zeta5_coordinates": [
+      {
+        "denominator": 1,
+        "numerator": 1,
+        "power": 0
+      }
+    ],
+    "five_loop_probability": {
+      "radical_denominator": 1,
+      "radical_numerator": 0,
+      "radicand": 5,
+      "rational_denominator": 1,
+      "rational_numerator": 1
+    },
+    "phi": {
+      "radical_denominator": 2,
+      "radical_numerator": 1,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": 1
+    },
+    "response_release_with_exact_factorized_restoration_authorized": false,
+    "single_loop_amplitude": {
+      "radical_denominator": 2,
+      "radical_numerator": 1,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": -3
+    },
+    "single_loop_amplitude_zeta5_coordinates": [
+      {
+        "denominator": 1,
+        "numerator": -2,
+        "power": 0
+      },
+      {
+        "denominator": 1,
+        "numerator": -1,
+        "power": 2
+      },
+      {
+        "denominator": 1,
+        "numerator": -1,
+        "power": 3
+      }
+    ],
+    "single_loop_complementary_probability": {
+      "radical_denominator": 2,
+      "radical_numerator": 3,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": -5
+    },
+    "single_loop_path_purity": {
+      "radical_denominator": 4,
+      "radical_numerator": -3,
+      "radicand": 5,
+      "rational_denominator": 4,
+      "rational_numerator": 9
+    },
+    "single_loop_probability": {
+      "radical_denominator": 2,
+      "radical_numerator": -3,
+      "radicand": 5,
+      "rational_denominator": 2,
+      "rational_numerator": 7
+    }
+  },
+  "fusion_dimensions": {
+    "fibonacci_even_tau_total_1_dimensions": [
+      1,
+      2,
+      5,
+      13,
+      34
+    ],
+    "fibonacci_even_tau_total_tau_dimensions": [
+      1,
+      3,
+      8,
+      21,
+      55
+    ],
+    "global_loop_scalar_on_every_enumerated_internal_basis_vector": true,
+    "ising_even_sigma_total_psi_dimensions": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "ising_odd_sigma_total_sigma_dimensions": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "maximum_enumerated_fixed_charge_basis_vectors": 55
+  },
+  "ising": {
+    "character_table": [
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        -1
+      ],
+      [
+        1,
+        -1,
+        1
+      ]
+    ],
+    "character_table_rank": 3,
+    "psi_psi_single_loop_amplitude": {
+      "denominator": 1,
+      "numerator": 1
+    },
+    "sigma_psi_single_loop_amplitude": {
+      "denominator": 1,
+      "numerator": -1
+    },
+    "sigma_sigma_phase_1": {
+      "imag": {
+        "radical_denominator": 2,
+        "radical_numerator": -1,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      },
+      "real": {
+        "radical_denominator": 2,
+        "radical_numerator": 1,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      }
+    },
+    "sigma_sigma_phase_psi": {
+      "imag": {
+        "radical_denominator": 2,
+        "radical_numerator": 1,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      },
+      "real": {
+        "radical_denominator": 2,
+        "radical_numerator": -1,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      }
+    },
+    "sigma_sigma_single_loop_amplitude": {
+      "imag": {
+        "radical_denominator": 1,
+        "radical_numerator": 0,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      },
+      "real": {
+        "radical_denominator": 1,
+        "radical_numerator": 0,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      }
+    },
+    "sigma_sigma_single_loop_probability": {
+      "denominator": 1,
+      "numerator": 0
+    },
+    "sigma_sigma_two_loop_common_phase": {
+      "imag": {
+        "radical_denominator": 1,
+        "radical_numerator": 0,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": -1
+      },
+      "real": {
+        "radical_denominator": 1,
+        "radical_numerator": 0,
+        "radicand": 2,
+        "rational_denominator": 1,
+        "rational_numerator": 0
+      }
+    },
+    "sigma_sigma_two_loop_probability": {
+      "denominator": 1,
+      "numerator": 1
+    }
+  },
+  "milestone": "M262",
+  "restoration": {
+    "classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "nonunit_vacuum_return_is_not_restoration": true,
+    "scope": "FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING"
+  },
+  "schema": "PHASE_QEMU_V4_FINITE_MTC_CENTRAL_WILSON_SEPARATE_REFERENCE_V1",
+  "scope_rejections": [
+    "NONCENTRAL_CONSTITUENT_WEAVE",
+    "TUBE_COUPON_MATRIX_UNIT",
+    "MULTIPLE_INDEPENDENT_REGIONS",
+    "GROWING_PROBE_LINK_NETWORK",
+    "ADAPTIVE_FORCED_MEASUREMENT",
+    "PREPARED_NONCENTRAL_EIGENSTATE",
+    "GROWING_MTC_FAMILY"
+  ],
+  "semion": {
+    "character_table": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        -1
+      ]
+    ],
+    "character_table_rank": 2,
+    "s_s_single_loop_amplitude": -1,
+    "s_s_single_loop_probability": 1
+  },
+  "source_dependencies": {
+    "finite_mtc_closed_probe_separate_reference.py": "36988ba192e9c88a9bd9bf6ce848e16aa3d18c16e1aa67c6adb3ec523669a363"
+  },
+  "theorem_checks": {
+    "balancing_scalar_on_each_multiplicity_copy": true,
+    "central_wilson_algebra_dimension_equals_simple_object_count": true,
+    "convex_channel_weights": true,
+    "prepared_noncentral_eigenstate_is_an_explicit_exception": true,
+    "repeated_loops_can_realign_root_of_unity_channel_phases": true,
+    "strict_triangle_equality_iff_phase_alignment": true
+  },
+  "verification_scope": "SEPARATE_REFERENCE_PARITY_FOR_DECLARED_FIXTURES_AND_FUNCTIONAL_TRANSACTIONS"
+}

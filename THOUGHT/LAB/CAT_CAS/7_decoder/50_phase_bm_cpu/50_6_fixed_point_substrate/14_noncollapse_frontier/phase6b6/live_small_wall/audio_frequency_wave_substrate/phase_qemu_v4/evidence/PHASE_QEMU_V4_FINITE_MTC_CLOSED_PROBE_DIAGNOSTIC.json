@@ -1,0 +1,1475 @@
+{
+  "calibrations": {
+    "fibonacci_tau_tau_single_loop": {
+      "category": "FIBONACCI",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 8
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              },
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 8
+              },
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 12
+              }
+            ]
+          }
+        },
+        {
+          "channel": "tau",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 4
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 8
+              },
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 12
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": false,
+      "deterministic_vacuum_return": false,
+      "loop_count": 1,
+      "maximum_amplitude_payload_bits": 9,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": -1,
+            "power": 0
+          },
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 8
+          },
+          {
+            "denominator": 1,
+            "numerator": -1,
+            "power": 12
+          }
+        ]
+      },
+      "probe_charge": "tau",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 2,
+            "numerator": 3,
+            "power": 0
+          },
+          {
+            "denominator": 2,
+            "numerator": -3,
+            "power": 8
+          },
+          {
+            "denominator": 2,
+            "numerator": 3,
+            "power": 12
+          }
+        ]
+      },
+      "supported_channel_phases_align": false,
+      "target_charge": "tau",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 2,
+            "power": 0
+          },
+          {
+            "denominator": 1,
+            "numerator": -3,
+            "power": 8
+          },
+          {
+            "denominator": 1,
+            "numerator": 3,
+            "power": 12
+          }
+        ]
+      }
+    },
+    "ising_psi_psi_single_loop": {
+      "category": "ISING",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": true,
+      "deterministic_vacuum_return": true,
+      "loop_count": 1,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "probe_charge": "psi",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": true,
+      "target_charge": "psi",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      }
+    },
+    "ising_sigma_psi_single_loop": {
+      "category": "ISING",
+      "channels": [
+        {
+          "channel": "sigma",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": true,
+      "deterministic_vacuum_return": true,
+      "loop_count": 1,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": -1,
+            "power": 0
+          }
+        ]
+      },
+      "probe_charge": "psi",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": true,
+      "target_charge": "sigma",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      }
+    },
+    "ising_sigma_sigma_single_loop": {
+      "category": "ISING",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 15
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 2,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        },
+        {
+          "channel": "psi",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 15
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 2,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": false,
+      "deterministic_vacuum_return": false,
+      "loop_count": 1,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": []
+      },
+      "probe_charge": "sigma",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 2,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": false,
+      "target_charge": "sigma",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": []
+      }
+    },
+    "semion_s_s_single_loop": {
+      "category": "SEMION",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": true,
+      "deterministic_vacuum_return": true,
+      "loop_count": 1,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": -1,
+            "power": 0
+          }
+        ]
+      },
+      "probe_charge": "s",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": true,
+      "target_charge": "s",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      }
+    }
+  },
+  "character_tables": [
+    {
+      "acts_as_scalar_on_each_fixed_charge_internal_multiplicity_block": true,
+      "algebra_dimension": 2,
+      "all_boundary_wilson_loops_commute": true,
+      "category": "SEMION",
+      "character_table_exact_scalar_cells": 4,
+      "character_table_rank": 2,
+      "simple_object_count_k": 2,
+      "table": [
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "acts_as_scalar_on_each_fixed_charge_internal_multiplicity_block": true,
+      "algebra_dimension": 3,
+      "all_boundary_wilson_loops_commute": true,
+      "category": "ISING",
+      "character_table_exact_scalar_cells": 9,
+      "character_table_rank": 3,
+      "simple_object_count_k": 3,
+      "table": [
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": []
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "acts_as_scalar_on_each_fixed_charge_internal_multiplicity_block": true,
+      "algebra_dimension": 2,
+      "all_boundary_wilson_loops_commute": true,
+      "category": "FIBONACCI",
+      "character_table_exact_scalar_cells": 4,
+      "character_table_rank": 2,
+      "simple_object_count_k": 2,
+      "table": [
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              },
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 8
+              },
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 12
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "claim": "EXACT_FIXED_FINITE_UMTC_SINGLE_GLOBAL_CLOSED_SIMPLE_PROBE_DIAGNOSTIC_ESTABLISHES_MULTIPLICITY_BLIND_TOTAL_CHARGE_SCALAR_ACTION_DETERMINISTIC_UNIT_MODULUS_BOUNDARIES_AS_CONSTANT_SIZE_SIMPLE_OBJECT_LOOKUPS_AND_STRICTLY_INTERMEDIATE_VACUUM_RETURN_RETAINED_BOUNDARY_OBSTRUCTION_WITH_FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_DISTINCT_PROBE_REUSE_AND_SEMION_ISING_FIBONACCI_FIXTURES",
+  "claim_ceiling": "ABSTRACT_EXACT_FIXED_FINITE_UMTC_SINGLE_SIMPLE_PROBE_GLOBAL_DISK_ENCIRCLEMENT_WITH_DECLARED_TOTAL_CHARGE_AND_SEMION_ISING_FIBONACCI_FIXTURES_ONLY",
+  "claim_limits": {
+    "adaptive_measurement_or_postselection_obstruction": false,
+    "catvm_custody": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "full_annular_or_tube_algebra_obstruction": false,
+    "growing_mtc_family_obstruction": false,
+    "growing_probe_network_constant_work": false,
+    "m257_escape": false,
+    "multiple_region_or_growing_genus_obstruction": false,
+    "noncentral_constituent_braid_obstruction": false,
+    "phase_qemu_device_execution": false,
+    "physical_anyons_or_interferometer": false,
+    "prepared_eigenstate_obstruction": false,
+    "replace_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "unbounded_compute": false
+  },
+  "deterministic_transactions": {
+    "boundaries_generation_1": [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "boundaries_generation_2": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "cases": [
+      {
+        "distinct_probe_reuse": true,
+        "functional_exact_returned_value_reuse": true,
+        "generation_1": {
+          "boundary_bit": 1,
+          "functional_exact_restoration": true,
+          "generation": 1,
+          "initial_commitment": "3beef388273f9bb54c73c5cdeb70007aec4b2cf40944318f4a21b2e3f04017ce",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "sigma",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "3beef388273f9bb54c73c5cdeb70007aec4b2cf40944318f4a21b2e3f04017ce",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "generation_2": {
+          "boundary_bit": 0,
+          "functional_exact_restoration": true,
+          "generation": 2,
+          "initial_commitment": "3beef388273f9bb54c73c5cdeb70007aec4b2cf40944318f4a21b2e3f04017ce",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "psi",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "3beef388273f9bb54c73c5cdeb70007aec4b2cf40944318f4a21b2e3f04017ce",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "internal_multiplicity_dimension": 1,
+        "preparation_count": 1,
+        "same_backing_reuse_established": false,
+        "target": "sigma^2_total_psi"
+      },
+      {
+        "distinct_probe_reuse": true,
+        "functional_exact_returned_value_reuse": true,
+        "generation_1": {
+          "boundary_bit": 1,
+          "functional_exact_restoration": true,
+          "generation": 1,
+          "initial_commitment": "0d398e05529ca05091068cdeebb06d158345822ba2a4137f0c879a6fc6e9bddc",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "sigma",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "0d398e05529ca05091068cdeebb06d158345822ba2a4137f0c879a6fc6e9bddc",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "generation_2": {
+          "boundary_bit": 0,
+          "functional_exact_restoration": true,
+          "generation": 2,
+          "initial_commitment": "0d398e05529ca05091068cdeebb06d158345822ba2a4137f0c879a6fc6e9bddc",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "psi",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "0d398e05529ca05091068cdeebb06d158345822ba2a4137f0c879a6fc6e9bddc",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "internal_multiplicity_dimension": 2,
+        "preparation_count": 1,
+        "same_backing_reuse_established": false,
+        "target": "sigma^4_total_psi"
+      },
+      {
+        "distinct_probe_reuse": true,
+        "functional_exact_returned_value_reuse": true,
+        "generation_1": {
+          "boundary_bit": 1,
+          "functional_exact_restoration": true,
+          "generation": 1,
+          "initial_commitment": "6e3ffab8e112e4c1e39a8c39c7d43dc7677fdf4c54d740ebe3ef200bcb57acb0",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "sigma",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "6e3ffab8e112e4c1e39a8c39c7d43dc7677fdf4c54d740ebe3ef200bcb57acb0",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "generation_2": {
+          "boundary_bit": 0,
+          "functional_exact_restoration": true,
+          "generation": 2,
+          "initial_commitment": "6e3ffab8e112e4c1e39a8c39c7d43dc7677fdf4c54d740ebe3ef200bcb57acb0",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "psi",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "6e3ffab8e112e4c1e39a8c39c7d43dc7677fdf4c54d740ebe3ef200bcb57acb0",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "internal_multiplicity_dimension": 4,
+        "preparation_count": 1,
+        "same_backing_reuse_established": false,
+        "target": "sigma^6_total_psi"
+      },
+      {
+        "distinct_probe_reuse": true,
+        "functional_exact_returned_value_reuse": true,
+        "generation_1": {
+          "boundary_bit": 1,
+          "functional_exact_restoration": true,
+          "generation": 1,
+          "initial_commitment": "7feeb01fa15d027a179b4f5c2f48958cd5822cdb0df63499a81fb48e8e72f1b4",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "sigma",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "7feeb01fa15d027a179b4f5c2f48958cd5822cdb0df63499a81fb48e8e72f1b4",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "generation_2": {
+          "boundary_bit": 0,
+          "functional_exact_restoration": true,
+          "generation": 2,
+          "initial_commitment": "7feeb01fa15d027a179b4f5c2f48958cd5822cdb0df63499a81fb48e8e72f1b4",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "psi",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "7feeb01fa15d027a179b4f5c2f48958cd5822cdb0df63499a81fb48e8e72f1b4",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "internal_multiplicity_dimension": 8,
+        "preparation_count": 1,
+        "same_backing_reuse_established": false,
+        "target": "sigma^8_total_psi"
+      },
+      {
+        "distinct_probe_reuse": true,
+        "functional_exact_returned_value_reuse": true,
+        "generation_1": {
+          "boundary_bit": 1,
+          "functional_exact_restoration": true,
+          "generation": 1,
+          "initial_commitment": "8a86e7862a23c3a480d549ca711600ae01c8a4825db3700c3fec6b1b9f6903a5",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "sigma",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "8a86e7862a23c3a480d549ca711600ae01c8a4825db3700c3fec6b1b9f6903a5",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "generation_2": {
+          "boundary_bit": 0,
+          "functional_exact_restoration": true,
+          "generation": 2,
+          "initial_commitment": "8a86e7862a23c3a480d549ca711600ae01c8a4825db3700c3fec6b1b9f6903a5",
+          "path_and_loop_branches_exactly_restored": true,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "probe": "psi",
+          "public_inverse_derived_from_phase_conjugation": true,
+          "response_copied_only_after_deterministic_port": true,
+          "restored_commitment": "8a86e7862a23c3a480d549ca711600ae01c8a4825db3700c3fec6b1b9f6903a5",
+          "retained_boundary_survives_inverse": true,
+          "retained_response_register": [
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": [
+                {
+                  "denominator": 1,
+                  "numerator": 1,
+                  "power": 0
+                }
+              ]
+            },
+            {
+              "basis": "Q_ZETA40_POWER_MOD_PHI40",
+              "nonzero": []
+            }
+          ],
+          "retained_response_register_unchanged_through_inverse": true,
+          "same_backing_restoration_established": false
+        },
+        "internal_multiplicity_dimension": 16,
+        "preparation_count": 1,
+        "same_backing_reuse_established": false,
+        "target": "sigma^10_total_psi"
+      }
+    ],
+    "dimensions": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "second_preparation_used": false
+  },
+  "disposition": "SINGLE_GLOBAL_CLOSED_PROBE_HOLONOMY_IN_A_FIXED_FINITE_UMTC_IS_MULTIPLICITY_BLIND_AND_REDUCES_TO_A_CONSTANT_SIZE_TOTAL_CHARGE_MONODROMY_TABLE",
+  "milestone": "M262",
+  "next_mechanism": "NONCENTRAL_INTERACTING_SCATTERING_OR_FLOQUET_EIGENPHASE_WITH_PREPARED_EIGENSTATE_COST_REFERENCE_COMPLETE_FACTORIZATION_AND_GROWING_RELATIONAL_INVARIANT",
+  "repeated_loop_controls": {
+    "fibonacci_tau_tau_five_loops": {
+      "category": "FIBONACCI",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              },
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 8
+              },
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 12
+              }
+            ]
+          }
+        },
+        {
+          "channel": "tau",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": 1,
+                "power": 8
+              },
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 12
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": true,
+      "deterministic_vacuum_return": true,
+      "loop_count": 5,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "probe_charge": "tau",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": true,
+      "target_charge": "tau",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      }
+    },
+    "ising_sigma_sigma_two_loops": {
+      "category": "ISING",
+      "channels": [
+        {
+          "channel": "1",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 10
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 2,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        },
+        {
+          "channel": "psi",
+          "multiplicity": 1,
+          "phase": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 1,
+                "numerator": -1,
+                "power": 10
+              }
+            ]
+          },
+          "weight": {
+            "basis": "Q_ZETA40_POWER_MOD_PHI40",
+            "nonzero": [
+              {
+                "denominator": 2,
+                "numerator": 1,
+                "power": 0
+              }
+            ]
+          }
+        }
+      ],
+      "common_full_monodromy_scalar_across_supported_channels": true,
+      "deterministic_vacuum_return": true,
+      "loop_count": 2,
+      "maximum_amplitude_payload_bits": 2,
+      "normalized_vacuum_return_amplitude": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": -1,
+            "power": 10
+          }
+        ]
+      },
+      "probe_charge": "sigma",
+      "probe_path_reduced_purity": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      },
+      "supported_channel_phases_align": true,
+      "target_charge": "sigma",
+      "vacuum_return_probability": {
+        "basis": "Q_ZETA40_POWER_MOD_PHI40",
+        "nonzero": [
+          {
+            "denominator": 1,
+            "numerator": 1,
+            "power": 0
+          }
+        ]
+      }
+    }
+  },
+  "resource_law": {
+    "accepted_transaction_max_logical_carrier_field_cells": 16,
+    "accepted_transaction_two_path_logical_field_cells": 32,
+    "category_character_table_field_cells": {
+      "FIBONACCI": 4,
+      "ISING": 9,
+      "SEMION": 4
+    },
+    "exact_field": "Q_ZETA40_POWER_BASIS_MOD_PHI40",
+    "field_inversion_gaussian_matrix_rational_cells": 272,
+    "full_internal_multiplicity_identity_matrices_materialized": false,
+    "physical_energy_noise_bandwidth_latency_area_shots_uninstrumented": true,
+    "python_objects_allocator_hash_json_serialization_timing_rss_uninstrumented": true,
+    "rational_coordinates_per_field_scalar": 16,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "retained_boundary_bits_during_inverse": 1,
+    "whole_process_liveness_complete": false
+  },
+  "restoration": {
+    "classification": "EXACT_ALGEBRAIC_RESTORATION",
+    "response_preserving_bounded_functional_transaction_executed": true,
+    "result_free_full_monodromy_adjoint_identity": true,
+    "same_backing_restoration_or_reuse_established": false,
+    "scope": "FUNCTIONAL_EXACT_PLUS_MINUS_ONE_SCALAR_LOOP_RESTORATION_AND_DISTINCT_PROBE_REUSE_WITHOUT_SAME_BACKING",
+    "vacuum_return_probability_is_not_catalytic_restoration": true
+  },
+  "schema": "PHASE_QEMU_V4_FINITE_MTC_CENTRAL_WILSON_OBSTRUCTION_V1",
+  "scope_controls": {
+    "accepted_descriptor_class": "BOUNDARY_PARALLEL_SIMPLE_CLOSED_WILSON_LOOP_ONE_DISK",
+    "indefinite_charge_control": {
+      "category": "ISING",
+      "charges": [
+        "1",
+        "psi"
+      ],
+      "equal_superposition_path_purity": {
+        "denominator": 2,
+        "numerator": 1
+      },
+      "fixed_charge_hypothesis_required": true,
+      "monodromy_phases": [
+        1,
+        -1
+      ],
+      "probe": "sigma"
+    },
+    "noncentral_two_eigenphase_control": {
+      "eigenstate_one_factorizes": true,
+      "eigenstate_zero_factorizes": true,
+      "equal_superposition_path_purity": {
+        "denominator": 2,
+        "numerator": 1
+      },
+      "reference_complete_uniform_factorization": false,
+      "uniform_factorization_over_whole_space": false
+    },
+    "rejected_descriptor_classes": {
+      "ADAPTIVE_FORCED_MEASUREMENT": "STOCHASTIC_HISTORY_CORRECTIONS_AND_POSTSELECTION_OUTSIDE_SCOPE",
+      "GROWING_MTC_FAMILY": "CATEGORY_TABLE_AND_SIMPLE_OBJECT_COUNT_NOT_FIXED",
+      "GROWING_PROBE_LINK_NETWORK": "DESCRIPTOR_AND_LINK_INVARIANT_WORK_NOT_CONSTANT",
+      "MULTIPLE_INDEPENDENT_REGIONS": "OBSERVABLE_GEOMETRY_GROWS_BEYOND_ONE_DISK_LABEL",
+      "NONCENTRAL_CONSTITUENT_WEAVE": "PATH_ENTERS_OR_SEPARATES_TARGET_PUNCTURES",
+      "PREPARED_NONCENTRAL_EIGENSTATE": "SINGLE_STATE_FACTORIZATION_DOES_NOT_IMPLY_UNIFORM_CENTRALITY",
+      "TUBE_COUPON_MATRIX_UNIT": "NOT_IN_CENTRAL_BOUNDARY_WILSON_CHARACTER_ALGEBRA"
+    }
+  },
+  "source_dependencies": {
+    "finite_mtc_closed_probe_obstruction.py": "a6dd20ad06709afc3c5d82940803ab5da89a964cf201d14c5134a57e9f064226"
+  },
+  "strictly_intermediate_return_control": {
+    "both_exact_outcome_weights_nonzero": true,
+    "carrier_probe_only_inverse_cannot_erase_retained_orthogonal_response": true,
+    "coherently_copied_which_outcome_schmidt_rank": 2,
+    "complementary_outcome_probability": {
+      "basis": "Q_ZETA40_POWER_MOD_PHI40",
+      "nonzero": [
+        {
+          "denominator": 1,
+          "numerator": -1,
+          "power": 0
+        },
+        {
+          "denominator": 1,
+          "numerator": 3,
+          "power": 8
+        },
+        {
+          "denominator": 1,
+          "numerator": -3,
+          "power": 12
+        }
+      ]
+    },
+    "fixture": "FIBONACCI_TAU_TAU_SINGLE_LOOP",
+    "response_release_with_exact_factorized_restoration_authorized": false,
+    "result_free_full_unitary_adjoint_can_restore": true,
+    "vacuum_return_probability": {
+      "basis": "Q_ZETA40_POWER_MOD_PHI40",
+      "nonzero": [
+        {
+          "denominator": 1,
+          "numerator": 2,
+          "power": 0
+        },
+        {
+          "denominator": 1,
+          "numerator": -3,
+          "power": 8
+        },
+        {
+          "denominator": 1,
+          "numerator": 3,
+          "power": 12
+        }
+      ]
+    },
+    "zero_or_unit_probability_endpoints_excluded": true
+  },
+  "strongest_classical_comparator": {
+    "arbitrary_growing_probe_link_network_constant_work_established": false,
+    "arbitrary_internal_many_anyon_state_represented_by_comparator": false,
+    "boundary_charge_coherence_state_if_required": "O_K_SQUARED_EXACT_SCALARS",
+    "deriving_charge_statistics_from_large_input_is_free": false,
+    "fixed_category_definite_charge_query": "O1_EXACT_FINITE_MONODROMY_CHARACTER_TABLE_LOOKUP_AFTER_VALIDATION",
+    "fixed_level_noncentral_braid_or_jones_complexity_killed": false,
+    "generic_sequential_charge_recurrence": "O_N_K_SQUARED_ARITHMETIC_O_K_CELLS_WITH_COEFFICIENT_HEIGHT_COUNTED",
+    "single_probe_charge_distribution_state": "O_K_EXACT_SCALARS"
+  },
+  "theorem": {
+    "all_simple_boundary_wilson_loops_span_k_dimensional_charge_projector_algebra": true,
+    "balancing_identity_is_scalar_on_each_fusion_multiplicity_copy": true,
+    "channel_weights_positive_and_sum_to_one": true,
+    "declared_internal_multiplicity_dimensions_without_materialized_identity_matrices": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "fixed_charge_internal_multiplicity_observable_rank": 1,
+    "normalized_monodromy_formula": "M_ab=sum_c[N_ab^c*d_c/(d_a*d_b)]*theta_c/(theta_a*theta_b)=S_ab*S_00/(S_0a*S_0b)",
+    "scope": "FIXED_FINITE_UMTC_ONE_DISK_DEFINITE_SIMPLE_TOTAL_CHARGE_BOUNDARY_PARALLEL_SIMPLE_CLOSED_WILSON_LOOPS",
+    "single_loop_absolute_value_at_most_one": true,
+    "single_loop_equality_iff_all_supported_channel_phases_align": true,
+    "whole_region_wilson_action_is_scalar_on_internal_multiplicity": true
+  },
+  "verification_scope": {
+    "fixture_arithmetic_dimensions_character_ranks_and_transactions": "SEPARATE_REFERENCE_PARITY",
+    "general_fixed_umtc_centrality_and_equality_theorem": "FORMAL_DERIVATION_SOURCE_AUDITED",
+    "resource_accounting": "PACKAGE_SELF_REVIEW"
+  }
+}
