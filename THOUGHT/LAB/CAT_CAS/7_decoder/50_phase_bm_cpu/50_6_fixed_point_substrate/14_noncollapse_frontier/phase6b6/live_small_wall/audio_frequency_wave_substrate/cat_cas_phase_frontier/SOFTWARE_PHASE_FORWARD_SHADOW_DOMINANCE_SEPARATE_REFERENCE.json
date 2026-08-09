@@ -1,0 +1,227 @@
+{
+  "applicability_controls": {
+    "cell_only_claim_with_unmeasured_coefficient_height": "REJECTED_BIT_COST_NOT_ESTABLISHED",
+    "dense_only_comparator_substitution": "REJECTED_STRONGER_COMPACT_BASELINE_REQUIRED",
+    "fixed_fixture_o1_certificate_promoted_to_transferable_algorithm": "REJECTED_GENERALIZATION",
+    "physical_or_opaque_primitive": "INAPPLICABLE_OUTSIDE_EXACT_SOFTWARE_DOMAIN",
+    "private_input_denied_to_shadow": "INAPPLICABLE_ACCESS_MISMATCH",
+    "restoration_and_reuse_required_as_output": "INAPPLICABLE_FULL_TRANSACTION_TASK"
+  },
+  "claim_limits": {
+    "all_catalytic_tasks_dominated": false,
+    "all_future_phase_representations_dominated": false,
+    "computational_advantage_established": false,
+    "opaque_oracle_advantage_ruled_out": false,
+    "physical_phase_computation_ruled_out": false,
+    "small_wall_crossing": false
+  },
+  "method": "INDEPENDENT_TEXT_ANCHOR_SOURCE_ORDER_PLUS_EXPLICIT_RESOURCE_VECTOR_RECONSTRUCTION_WITHOUT_IMPORTING_M257_PRODUCTION",
+  "milestone": 257,
+  "packages": [
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "catalyst_field_cells": 5,
+        "joint_scratch_field_cells": 25,
+        "phase_signature_field_cells": 10,
+        "projection_workspace_field_cells": 1
+      },
+      "boundary_sha256": "44dd448123f824a2679bd94e7b1a9a00e347e4b2a617cea84fd226dd4694e178",
+      "package": "M248_CUBIC_MAGIC_CATALYST",
+      "primary_run_kind": "TWO_SYNDROME_PRIMARY",
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_catalyst_rematerializations": 2
+      },
+      "sealed_result_sha256": "e88e8bb28069e8fa999331b99dd1cdccc90041684d5d6d335a3a21d28b31530b",
+      "sealed_service_sha256": "627b2361ff9e1768013eec4c30572055bba8d412b29f2674ff4266f03731f72b",
+      "shadow_forward_state_shape_upper_bound": {
+        "catalyst_field_cells": 5,
+        "joint_scratch_field_cells": 25,
+        "phase_signature_field_cells": 10,
+        "projection_workspace_field_cells": 1
+      },
+      "source_order": {
+        "forward_line": 517,
+        "inverse_line": 531,
+        "projection_line": 524,
+        "release_line": 532,
+        "response_line": 539
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "carrier_field_cells": 4,
+        "context_signature_cells": 6,
+        "scratch_field_cells": 4,
+        "typed_port_receipts": 9
+      },
+      "boundary_sha256": "1eb44632ebc2dd5f017387b9e3967f2c40f16cab2cc0eaa339348f8cd842103a",
+      "package": "M250_PROJECTIVE_WEYL_MERMIN",
+      "primary_run_kind": "PRIMARY",
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_pauli_actions": 18,
+        "inverse_port_releases": 18,
+        "inverse_signature_compositions": 18,
+        "inverse_vector_cell_reads": 72,
+        "inverse_vector_cell_writes": 144
+      },
+      "sealed_result_sha256": "54ae5909f9133c3e2e1d828836665f95e8dbd264a04fca1fad5de9057eabd7f3",
+      "sealed_service_sha256": "d99b2abf571fad82071984fca61e81fc1133826e00f2df286d03f9512ac416e5",
+      "shadow_forward_state_shape_upper_bound": {
+        "carrier_field_cells": 4,
+        "context_signature_cells": 6,
+        "scratch_field_cells": 4,
+        "typed_port_receipts": 9
+      },
+      "source_order": {
+        "forward_line": 557,
+        "inverse_line": 570,
+        "projection_line": 560,
+        "release_line": 575,
+        "response_line": 580
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 21,
+        "compiled_plan_references": 5,
+        "fourier_scratch_field_cells": 7,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 7
+      },
+      "boundary_sha256": "66fc0e58fa48daf4c7421b9aedb96fa9f4e3f4592799cc0fa6d4f3836cf3b6bc",
+      "package": "M253_GRASSMANN_GAUSSIAN",
+      "primary_run_kind": "PRIMARY",
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28
+      },
+      "sealed_result_sha256": "c04095a236e61a081086f17cd8b182640468c1a874821a0611a9abff66fe452e",
+      "sealed_service_sha256": "7851b4bc68de0efdb5522428bdbfbaf02f3484a758385b37f7671c8918e75db6",
+      "shadow_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 21,
+        "compiled_plan_references": 5,
+        "fourier_scratch_field_cells": 7,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 7
+      },
+      "source_order": {
+        "forward_line": 386,
+        "inverse_line": 401,
+        "projection_line": 389,
+        "release_line": 405,
+        "response_line": 410
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 24,
+        "compiled_plan_references": 5,
+        "hodge_scratch_field_cells": 1,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 8
+      },
+      "boundary_sha256": "044f52d04fc632d2f86f7dce4a6eda0a4804dbebe7719b7c586549734b21e261",
+      "package": "M254_GRASSMANN_FULL_EVEN",
+      "primary_run_kind": "PRIMARY",
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3
+      },
+      "sealed_result_sha256": "ddb0a7b8f1899f9bc8333ecbe9b4d6d4dbc54afc2991a8a96d784457dd04a7a2",
+      "sealed_service_sha256": "2e2fe4154786270312ed336dde6525dcaff932e918a4f8967b1f57f091421f5e",
+      "shadow_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 24,
+        "compiled_plan_references": 5,
+        "hodge_scratch_field_cells": 1,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 8
+      },
+      "source_order": {
+        "forward_line": 398,
+        "inverse_line": 413,
+        "projection_line": 401,
+        "release_line": 415,
+        "response_line": 420
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "receipt_rational_cells": 3,
+        "resident_waveform_field_cells": 8,
+        "retained_degree_integer_cells": 2,
+        "retained_winding_integer_cells": 1,
+        "scratch_waveform_field_cells": 8
+      },
+      "boundary_sha256": "cad14cd03d09e80b7405e5ef29601fabdac01896e9986fd8e804167924ce462b",
+      "package": "M256_SCHUR_ALLPASS_WAVEFORM",
+      "primary_run_kind": "PRIMARY",
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_divisibility_checks": 3,
+        "inverse_field_scalar_multiplications": 42,
+        "inverse_field_subtractions": 21,
+        "inverse_public_rational_divisions": 3,
+        "inverse_public_rational_multiplications": 3,
+        "inverse_public_rational_subtractions": 3,
+        "inverse_scratch_writes": 24,
+        "inverse_sections": 3
+      },
+      "sealed_result_sha256": "a7a28bc73f9d31aabde7ce95d8893c50e9cd0286cdbc17deb6b55855bcf5552f",
+      "sealed_service_sha256": "65893817997b41635a4dfb04171aa3a95eee76e0a14540cd88fd7489f16d3705",
+      "shadow_forward_state_shape_upper_bound": {
+        "receipt_rational_cells": 3,
+        "resident_waveform_field_cells": 8,
+        "retained_degree_integer_cells": 2,
+        "retained_winding_integer_cells": 1,
+        "scratch_waveform_field_cells": 8
+      },
+      "source_order": {
+        "forward_line": 357,
+        "inverse_line": 374,
+        "projection_line": 360,
+        "release_line": 375,
+        "response_line": 386
+      }
+    }
+  ],
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "result": "PASS_INDEPENDENT_SOFTWARE_FORWARD_SHADOW_SOURCE_ORDER_AND_RESOURCE_ORACLE",
+  "source_dependencies": {
+    "CATVM_GRASSMANN_EVEN_EXTERIOR_RELATION_RESULTS.json": "ddb0a7b8f1899f9bc8333ecbe9b4d6d4dbc54afc2991a8a96d784457dd04a7a2",
+    "CATVM_GRASSMANN_GAUSSIAN_OPEN_RELATION_RESULTS.json": "c04095a236e61a081086f17cd8b182640468c1a874821a0611a9abff66fe452e",
+    "CATVM_P5_CUBIC_MAGIC_CATALYST_RESULTS.json": "e88e8bb28069e8fa999331b99dd1cdccc90041684d5d6d335a3a21d28b31530b",
+    "CATVM_PROJECTIVE_WEYL_MERMIN_SQUARE_RESULTS.json": "54ae5909f9133c3e2e1d828836665f95e8dbd264a04fca1fad5de9057eabd7f3",
+    "CATVM_SCHUR_ALLPASS_WAVEFORM_RESULTS.json": "a7a28bc73f9d31aabde7ce95d8893c50e9cd0286cdbc17deb6b55855bcf5552f",
+    "catvm_grassmann_even_exterior_relation_service.py": "2e2fe4154786270312ed336dde6525dcaff932e918a4f8967b1f57f091421f5e",
+    "catvm_grassmann_gaussian_open_relation_service.py": "7851b4bc68de0efdb5522428bdbfbaf02f3484a758385b37f7671c8918e75db6",
+    "catvm_p5_cubic_magic_catalyst_service.py": "627b2361ff9e1768013eec4c30572055bba8d412b29f2674ff4266f03731f72b",
+    "catvm_projective_weyl_mermin_square_service.py": "d99b2abf571fad82071984fca61e81fc1133826e00f2df286d03f9512ac416e5",
+    "catvm_schur_allpass_waveform_service.py": "65893817997b41635a4dfb04171aa3a95eee76e0a14540cd88fd7489f16d3705",
+    "software_phase_forward_shadow_dominance_separate_reference.py": "a4b73d74a63d023964ca4e046b4af00ca99fe285b64d01efd77ded77e1eefa81"
+  },
+  "theorem_certificate": {
+    "final_boundary_task_only": true,
+    "full_atomic_transaction_is_a_different_task": true,
+    "heterogeneous_operation_counters_are_not_summed": true,
+    "identical_prefix_gives_componentwise_no_greater_forward_state_and_work": true,
+    "identical_prefix_gives_exact_boundary_equality": true,
+    "positive_inverse_stage_makes_the_declared_transaction_work_strictly_larger_in_at_least_one_reported_class": true,
+    "same_access_model_required": true
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

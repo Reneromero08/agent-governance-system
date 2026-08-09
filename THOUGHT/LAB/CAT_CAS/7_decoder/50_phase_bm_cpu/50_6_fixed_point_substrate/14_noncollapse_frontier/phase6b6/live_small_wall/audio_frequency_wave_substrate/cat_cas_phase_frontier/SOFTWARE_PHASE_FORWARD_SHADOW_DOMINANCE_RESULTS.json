@@ -1,0 +1,393 @@
+{
+  "aggregate": {
+    "algebraically_distinct_packages": 5,
+    "all_exact_boundaries_have_constructive_forward_shadows": true,
+    "all_forward_projection_inverse_release_response_orders_verified": true,
+    "all_shadow_forward_state_shapes_no_greater_componentwise": true,
+    "all_shadow_forward_work_no_greater_componentwise": true,
+    "all_shadow_paths_omit_nonzero_inverse_stage_witnesses": true,
+    "all_source_hashes_match_sealed_dependencies": true,
+    "distinct_phase_resource_established": false,
+    "same_domain_software_advantage_established": false,
+    "small_wall_crossed": false
+  },
+  "claim": "BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION",
+  "claim_ceiling": "FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY",
+  "claim_limits": {
+    "computational_advantage": false,
+    "computational_complexity_lower_bound": false,
+    "distinct_phase_resource": false,
+    "external_secret_resource_ruled_out": false,
+    "general_all_software_no_go_theorem": false,
+    "oracle_advantage_ruled_out": false,
+    "physical_phase_computation_ruled_out": false,
+    "physical_waveform_execution": false,
+    "replacement_of_physical_bits_with_pi": false,
+    "small_wall_crossing": false,
+    "stochastic_or_approximate_advantage_ruled_out": false,
+    "unbounded_catalytic_computation": false
+  },
+  "classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "escape_criteria": [
+    "AN_EXTERNAL_ORACLE_OR_INTERACTION_NOT_AVAILABLE_AS_THE_SAME_SOFTWARE_FORWARD_UPDATE",
+    "A_PHYSICAL_WAVEFORM_OR_ANALOG_RESOURCE_WITH_AN_INDEPENDENTLY_MEASURED_COST_MODEL",
+    "A_SECRET_OR_EXOGENOUS_CARRIER_STATE_THAT_THE_COMPARATOR_IS_NOT_LAWFULLY_GIVEN",
+    "STOCHASTIC_APPROXIMATE_OR_IRREVERSIBLE_SEMANTICS_THAT_CHANGE_THE_EXACT_FUNCTIONAL_COMPARISON",
+    "AN_INTERACTIVE_QUERY_MODEL_WITH_A_JUSTIFIED_BLACK_BOX_BOUNDARY_EXCLUDING_BACKEND_IMPLEMENTATION_COST",
+    "A_SCIENTIFICALLY_JUSTIFIED_COMPARATOR_RESTRICTION_NOT_MANUFACTURED_BY_HIDING_THE_ACTUAL_SOFTWARE_BACKEND"
+  ],
+  "milestone": 257,
+  "packages": [
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "catalyst_field_cells": 5,
+        "joint_scratch_field_cells": 25,
+        "phase_signature_field_cells": 10,
+        "projection_workspace_field_cells": 1
+      },
+      "baseline_reload_used": false,
+      "boundary_fields": [
+        "final_amplitude"
+      ],
+      "boundary_sha256": "44dd448123f824a2679bd94e7b1a9a00e347e4b2a617cea84fd226dd4694e178",
+      "constructive_shadow": "EXECUTE_THE_IDENTICAL_ACCEPTED_FORWARD_PREFIX_AND_FINAL_PROJECTION_THEN_RETURN_WITHOUT_CATVM_INVERSE_RESTORATION_OR_RELEASE_PROTOCOL",
+      "exact_boundary_equality_reason": "THE_SHADOW_IS_THE_SAME_DETERMINISTIC_FORWARD_AND_PROJECTION_PREFIX",
+      "package": "M248_CUBIC_MAGIC_CATALYST",
+      "primary_run_kind": "TWO_SYNDROME_PRIMARY",
+      "reported_forward_work_instrumentation_complete": false,
+      "reported_forward_work_vector_reused_by_shadow": {
+        "forward_catalyst_uses": 2
+      },
+      "reported_projection_work_vector_reused_by_shadow": {
+        "final_projection_phase_multiplications": 50,
+        "final_projection_terms": 25
+      },
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_catalyst_rematerializations": 2
+      },
+      "same_backing_restoration": true,
+      "sealed_result_file": "CATVM_P5_CUBIC_MAGIC_CATALYST_RESULTS.json",
+      "sealed_result_sha256": "e88e8bb28069e8fa999331b99dd1cdccc90041684d5d6d335a3a21d28b31530b",
+      "sealed_service_file": "catvm_p5_cubic_magic_catalyst_service.py",
+      "sealed_service_sha256": "627b2361ff9e1768013eec4c30572055bba8d412b29f2674ff4266f03731f72b",
+      "shadow_forward_state_shape_upper_bound": {
+        "catalyst_field_cells": 5,
+        "joint_scratch_field_cells": 25,
+        "phase_signature_field_cells": 10,
+        "projection_workspace_field_cells": 1
+      },
+      "source_order": {
+        "forward_line": 517,
+        "inverse_line": 531,
+        "projection_line": 524,
+        "release_line": 532,
+        "response_line": 539
+      },
+      "strongest_existing_classical_baselines": {
+        "strongest_implemented_classical_baselines": [
+          "EXACT_SYMBOLIC_CATALYST_IDENTITY_PHASE_S_OF_S_EQUALS_MINUS_A_S_CUBED",
+          "DIRECT_NONCATALYTIC_SINGLE_QUDIT_CUBIC_PHASE_SIGNATURE_PLUS_IDENTICAL_STREAMED_FINAL_BOUNDARY"
+        ]
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "carrier_field_cells": 4,
+        "context_signature_cells": 6,
+        "scratch_field_cells": 4,
+        "typed_port_receipts": 9
+      },
+      "baseline_reload_used": false,
+      "boundary_fields": [
+        "central_phase_exponent_mod4",
+        "central_phase"
+      ],
+      "boundary_sha256": "1eb44632ebc2dd5f017387b9e3967f2c40f16cab2cc0eaa339348f8cd842103a",
+      "constructive_shadow": "EXECUTE_THE_IDENTICAL_ACCEPTED_FORWARD_PREFIX_AND_FINAL_PROJECTION_THEN_RETURN_WITHOUT_CATVM_INVERSE_RESTORATION_OR_RELEASE_PROTOCOL",
+      "exact_boundary_equality_reason": "THE_SHADOW_IS_THE_SAME_DETERMINISTIC_FORWARD_AND_PROJECTION_PREFIX",
+      "package": "M250_PROJECTIVE_WEYL_MERMIN",
+      "primary_run_kind": "PRIMARY",
+      "reported_forward_work_instrumentation_complete": false,
+      "reported_forward_work_vector_reused_by_shadow": {
+        "forward_pauli_actions": 18,
+        "forward_port_consumptions": 18,
+        "forward_signature_compositions": 18,
+        "forward_vector_cell_reads": 72,
+        "forward_vector_cell_writes": 144
+      },
+      "reported_projection_work_vector_reused_by_shadow": {
+        "final_overlap_accumulations": 4,
+        "final_overlap_field_multiplications": 4
+      },
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_pauli_actions": 18,
+        "inverse_port_releases": 18,
+        "inverse_signature_compositions": 18,
+        "inverse_vector_cell_reads": 72,
+        "inverse_vector_cell_writes": 144
+      },
+      "same_backing_restoration": true,
+      "sealed_result_file": "CATVM_PROJECTIVE_WEYL_MERMIN_SQUARE_RESULTS.json",
+      "sealed_result_sha256": "54ae5909f9133c3e2e1d828836665f95e8dbd264a04fca1fad5de9057eabd7f3",
+      "sealed_service_file": "catvm_projective_weyl_mermin_square_service.py",
+      "sealed_service_sha256": "d99b2abf571fad82071984fca61e81fc1133826e00f2df286d03f9512ac416e5",
+      "shadow_forward_state_shape_upper_bound": {
+        "carrier_field_cells": 4,
+        "context_signature_cells": 6,
+        "scratch_field_cells": 4,
+        "typed_port_receipts": 9
+      },
+      "source_order": {
+        "forward_line": 557,
+        "inverse_line": 570,
+        "projection_line": 560,
+        "release_line": 575,
+        "response_line": 580
+      },
+      "strongest_existing_classical_baselines": {
+        "strongest_classical_baseline": "PUBLIC_VARIANT_VALIDATION_PLUS_FIXED_MERMIN_PARITY_COCYCLE_INVARIANT_RETURNING_CENTRAL_EXPONENT2_IN_O1_WORK",
+        "strongest_transferable_descriptor_level_classical_baseline": "IDENTICAL_BINARY_SYMPLECTIC_PROJECTIVE_2_COCYCLE_RECURRENCE_WITH_CONSTANT_SIGNATURE_STATE_AND18_PUBLIC_COMPOSITIONS"
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 21,
+        "compiled_plan_references": 5,
+        "fourier_scratch_field_cells": 7,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 7
+      },
+      "baseline_reload_used": false,
+      "boundary_fields": [
+        "top_form_boundary"
+      ],
+      "boundary_sha256": "66fc0e58fa48daf4c7421b9aedb96fa9f4e3f4592799cc0fa6d4f3836cf3b6bc",
+      "constructive_shadow": "EXECUTE_THE_IDENTICAL_ACCEPTED_FORWARD_PREFIX_AND_FINAL_PROJECTION_THEN_RETURN_WITHOUT_CATVM_INVERSE_RESTORATION_OR_RELEASE_PROTOCOL",
+      "exact_boundary_equality_reason": "THE_SHADOW_IS_THE_SAME_DETERMINISTIC_FORWARD_AND_PROJECTION_PREFIX",
+      "package": "M253_GRASSMANN_GAUSSIAN",
+      "primary_run_kind": "PRIMARY",
+      "reported_forward_work_instrumentation_complete": false,
+      "reported_forward_work_vector_reused_by_shadow": {
+        "forward_carrier_field_writes": 35,
+        "forward_field_accumulations": 22,
+        "forward_field_inversions": 2,
+        "forward_field_multiplications": 23,
+        "forward_fourier_closures": 2,
+        "forward_intersections": 3,
+        "forward_scratch_field_writes_and_clears": 28
+      },
+      "reported_projection_work_vector_reused_by_shadow": {
+        "boundary_field_accumulations": 2,
+        "boundary_field_multiplications": 4
+      },
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_carrier_field_writes": 35,
+        "inverse_field_accumulations": 22,
+        "inverse_field_inversions": 5,
+        "inverse_field_multiplications": 23,
+        "inverse_fourier_closures": 2,
+        "inverse_intersections": 3,
+        "inverse_scratch_field_writes_and_clears": 28
+      },
+      "same_backing_restoration": true,
+      "sealed_result_file": "CATVM_GRASSMANN_GAUSSIAN_OPEN_RELATION_RESULTS.json",
+      "sealed_result_sha256": "c04095a236e61a081086f17cd8b182640468c1a874821a0611a9abff66fe452e",
+      "sealed_service_file": "catvm_grassmann_gaussian_open_relation_service.py",
+      "sealed_service_sha256": "7851b4bc68de0efdb5522428bdbfbaf02f3484a758385b37f7671c8918e75db6",
+      "shadow_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 21,
+        "compiled_plan_references": 5,
+        "fourier_scratch_field_cells": 7,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 7
+      },
+      "source_order": {
+        "forward_line": 386,
+        "inverse_line": 401,
+        "projection_line": 389,
+        "release_line": 405,
+        "response_line": 410
+      },
+      "strongest_existing_classical_baselines": {
+        "stronger_general_algorithmic_ceiling_not_claimed_as_implemented_baseline": "GENERAL_PLANAR_MATCHGATE_OR_GRASSMANN_GAUSSIAN_CONTRACTION_BY_POLYNOMIAL_TIME_PFAFFIAN_ALGORITHMS",
+        "strongest_fixed_fixture_classical_baseline": "PUBLIC_DESCRIPTOR_VALIDATION_PLUS_FROZEN_EXACT_TOP_FORM_BOUNDARY_IN_O1_WORK",
+        "strongest_implemented_transferable_descriptor_level_classical_baseline": "IDENTICAL_EXACT_INPLACE_SEVEN_QZETA8_CELL_ANTISYMMETRIC_PFAFFIAN_INTERSECTION_AND_COMPLEMENTARY_PAIR_BEREZIN_RECURRENCE_WITH_TWO_REUSABLE_FIELD_SCRATCH_CELLS_NO_CATVM_RESTORATION"
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 24,
+        "compiled_plan_references": 5,
+        "hodge_scratch_field_cells": 1,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 8
+      },
+      "baseline_reload_used": false,
+      "boundary_fields": [
+        "top_form_boundary"
+      ],
+      "boundary_sha256": "044f52d04fc632d2f86f7dce4a6eda0a4804dbebe7719b7c586549734b21e261",
+      "constructive_shadow": "EXECUTE_THE_IDENTICAL_ACCEPTED_FORWARD_PREFIX_AND_FINAL_PROJECTION_THEN_RETURN_WITHOUT_CATVM_INVERSE_RESTORATION_OR_RELEASE_PROTOCOL",
+      "exact_boundary_equality_reason": "THE_SHADOW_IS_THE_SAME_DETERMINISTIC_FORWARD_AND_PROJECTION_PREFIX",
+      "package": "M254_GRASSMANN_FULL_EVEN",
+      "primary_run_kind": "PRIMARY",
+      "reported_forward_work_instrumentation_complete": false,
+      "reported_forward_work_vector_reused_by_shadow": {
+        "forward_carrier_field_writes": 40,
+        "forward_field_accumulations": 42,
+        "forward_field_multiplications": 63,
+        "forward_field_negations": 14,
+        "forward_hodge_closures": 2,
+        "forward_hodge_scratch_writes_and_clears": 16,
+        "forward_intersections": 3
+      },
+      "reported_projection_work_vector_reused_by_shadow": {},
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_carrier_field_writes": 40,
+        "inverse_factor_field_accumulations": 21,
+        "inverse_factor_field_inversions": 3,
+        "inverse_factor_field_multiplications": 48,
+        "inverse_factor_field_negations": 27,
+        "inverse_factor_rematerializations": 3,
+        "inverse_factor_returned_field_cells_materialized": 24,
+        "inverse_field_accumulations": 42,
+        "inverse_field_multiplications": 63,
+        "inverse_field_negations": 14,
+        "inverse_hodge_closures": 2,
+        "inverse_hodge_scratch_writes_and_clears": 16,
+        "inverse_intersections": 3
+      },
+      "same_backing_restoration": true,
+      "sealed_result_file": "CATVM_GRASSMANN_EVEN_EXTERIOR_RELATION_RESULTS.json",
+      "sealed_result_sha256": "ddb0a7b8f1899f9bc8333ecbe9b4d6d4dbc54afc2991a8a96d784457dd04a7a2",
+      "sealed_service_file": "catvm_grassmann_even_exterior_relation_service.py",
+      "sealed_service_sha256": "2e2fe4154786270312ed336dde6525dcaff932e918a4f8967b1f57f091421f5e",
+      "shadow_forward_state_shape_upper_bound": {
+        "compiled_intersection_field_cells": 24,
+        "compiled_plan_references": 5,
+        "hodge_scratch_field_cells": 1,
+        "module_receipt_cells": 8,
+        "relation_field_cells": 8
+      },
+      "source_order": {
+        "forward_line": 398,
+        "inverse_line": 413,
+        "projection_line": 401,
+        "release_line": 415,
+        "response_line": 420
+      },
+      "strongest_existing_classical_baselines": {
+        "strongest_fixed_fixture_classical_baseline": "PUBLIC_DESCRIPTOR_VALIDATION_PLUS_FROZEN_EXACT_TOP_FORM_BOUNDARY_IN_O1_WORK",
+        "strongest_implemented_transferable_descriptor_level_classical_baseline": "IDENTICAL_EXACT_INPLACE_EIGHT_QZETA8_CELL_FULL_EVEN_EXTERIOR_WEDGE_AND_HODGE_RECURRENCE_WITH_ONE_REUSABLE_FIELD_SCRATCH_CELL_NO_CATVM_RESTORATION"
+      }
+    },
+    {
+      "accepted_forward_state_shape_upper_bound": {
+        "receipt_rational_cells": 3,
+        "resident_waveform_field_cells": 8,
+        "retained_degree_integer_cells": 2,
+        "retained_winding_integer_cells": 1,
+        "scratch_waveform_field_cells": 8
+      },
+      "baseline_reload_used": false,
+      "boundary_fields": [
+        "winding",
+        "evaluation"
+      ],
+      "boundary_sha256": "cad14cd03d09e80b7405e5ef29601fabdac01896e9986fd8e804167924ce462b",
+      "constructive_shadow": "EXECUTE_THE_IDENTICAL_ACCEPTED_FORWARD_PREFIX_AND_FINAL_PROJECTION_THEN_RETURN_WITHOUT_CATVM_INVERSE_RESTORATION_OR_RELEASE_PROTOCOL",
+      "exact_boundary_equality_reason": "THE_SHADOW_IS_THE_SAME_DETERMINISTIC_FORWARD_AND_PROJECTION_PREFIX",
+      "package": "M256_SCHUR_ALLPASS_WAVEFORM",
+      "primary_run_kind": "PRIMARY",
+      "reported_forward_work_instrumentation_complete": false,
+      "reported_forward_work_vector_reused_by_shadow": {
+        "forward_field_additions": 24,
+        "forward_field_scalar_multiplications": 24,
+        "forward_scratch_writes": 24,
+        "forward_sections": 3
+      },
+      "reported_projection_work_vector_reused_by_shadow": {
+        "evaluation_field_additions": 8,
+        "evaluation_field_inversions": 1,
+        "evaluation_field_multiplications": 8
+      },
+      "reported_transaction_only_inverse_work_vector_omitted_by_shadow": {
+        "inverse_divisibility_checks": 3,
+        "inverse_field_scalar_multiplications": 42,
+        "inverse_field_subtractions": 21,
+        "inverse_public_rational_divisions": 3,
+        "inverse_public_rational_multiplications": 3,
+        "inverse_public_rational_subtractions": 3,
+        "inverse_scratch_writes": 24,
+        "inverse_sections": 3
+      },
+      "same_backing_restoration": true,
+      "sealed_result_file": "CATVM_SCHUR_ALLPASS_WAVEFORM_RESULTS.json",
+      "sealed_result_sha256": "a7a28bc73f9d31aabde7ce95d8893c50e9cd0286cdbc17deb6b55855bcf5552f",
+      "sealed_service_file": "catvm_schur_allpass_waveform_service.py",
+      "sealed_service_sha256": "65893817997b41635a4dfb04171aa3a95eee76e0a14540cd88fd7489f16d3705",
+      "shadow_forward_state_shape_upper_bound": {
+        "receipt_rational_cells": 3,
+        "resident_waveform_field_cells": 8,
+        "retained_degree_integer_cells": 2,
+        "retained_winding_integer_cells": 1,
+        "scratch_waveform_field_cells": 8
+      },
+      "source_order": {
+        "forward_line": 357,
+        "inverse_line": 374,
+        "projection_line": 360,
+        "release_line": 375,
+        "response_line": 386
+      },
+      "strongest_existing_classical_baselines": {
+        "strongest_actual_boundary_classical_baseline": "ONE_QZETA8_SCALAR_PLUS_ONE_WINDING_INTEGER_SCHUR_RECURRENCE_IN_O1_LIVE_ALGEBRAIC_STATE",
+        "strongest_fixed_fixture_classical_baseline": "PUBLIC_DESCRIPTOR_VALIDATION_PLUS_FROZEN_EXACT_WINDING_AND_POINT_EVALUATION_CERTIFICATE_IN_O1_WORK",
+        "strongest_full_formal_waveform_classical_baseline": "IDENTICAL_TWO_POLYNOMIAL_EXACT_SCHUR_RECURRENCE_WITHOUT_CATVM_INVERSE_RESTORATION"
+      }
+    }
+  ],
+  "resource_law": {
+    "comparison_is_componentwise_not_a_sum_of_heterogeneous_counters": true,
+    "existing_stronger_package_specific_baselines_remain_authoritative": true,
+    "resource_verification_level": "PACKAGE_SELF_REVIEW",
+    "shadow_can_use_identical_forward_state_and_operations": true,
+    "shadow_omits_inverse_restoration_and_atomic_release_requirement": true,
+    "whole_process_python_object_allocator_socket_hash_serialization_timing_and_rss_costs_complete": false
+  },
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "result": "PASS_EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_STRICT_SCOPE",
+  "source_dependencies": {
+    "CATVM_GRASSMANN_EVEN_EXTERIOR_RELATION_RESULTS.json": "ddb0a7b8f1899f9bc8333ecbe9b4d6d4dbc54afc2991a8a96d784457dd04a7a2",
+    "CATVM_GRASSMANN_GAUSSIAN_OPEN_RELATION_RESULTS.json": "c04095a236e61a081086f17cd8b182640468c1a874821a0611a9abff66fe452e",
+    "CATVM_P5_CUBIC_MAGIC_CATALYST_RESULTS.json": "e88e8bb28069e8fa999331b99dd1cdccc90041684d5d6d335a3a21d28b31530b",
+    "CATVM_PROJECTIVE_WEYL_MERMIN_SQUARE_RESULTS.json": "54ae5909f9133c3e2e1d828836665f95e8dbd264a04fca1fad5de9057eabd7f3",
+    "CATVM_SCHUR_ALLPASS_WAVEFORM_RESULTS.json": "a7a28bc73f9d31aabde7ce95d8893c50e9cd0286cdbc17deb6b55855bcf5552f",
+    "catvm_grassmann_even_exterior_relation_service.py": "2e2fe4154786270312ed336dde6525dcaff932e918a4f8967b1f57f091421f5e",
+    "catvm_grassmann_gaussian_open_relation_service.py": "7851b4bc68de0efdb5522428bdbfbaf02f3484a758385b37f7671c8918e75db6",
+    "catvm_p5_cubic_magic_catalyst_service.py": "627b2361ff9e1768013eec4c30572055bba8d412b29f2674ff4266f03731f72b",
+    "catvm_projective_weyl_mermin_square_service.py": "d99b2abf571fad82071984fca61e81fc1133826e00f2df286d03f9512ac416e5",
+    "catvm_schur_allpass_waveform_service.py": "65893817997b41635a4dfb04171aa3a95eee76e0a14540cd88fd7489f16d3705",
+    "qualify_software_phase_forward_shadow_dominance.sh": "bf17f1b0e481ce2d5f135f49fe0d1973f436f18197a259441975b6190b98881a",
+    "software_phase_forward_shadow_dominance.py": "187cb632db13c6aeb6ac7d7b62789d1cb23c63c7bcfeb1c577c847c207b3a76c",
+    "software_phase_forward_shadow_dominance_separate_reference.py": "a4b73d74a63d023964ca4e046b4af00ca99fe285b64d01efd77ded77e1eefa81"
+  },
+  "theorem": {
+    "assumptions": [
+      "THE_ACCEPTED_BACKEND_IS_AN_ORDINARY_DETERMINISTIC_SOFTWARE_PROGRAM",
+      "THE_COMPARATOR_MAY_EXECUTE_THE_SAME_FORWARD_ALGEBRA_ON_THE_SAME_CANONICAL_INPUT_STATE",
+      "ANY_AUXILIARY_STATE_SECRET_INPUT_OR_ORACLE_ACCESS_IS_GRANTED_EQUALLY_TO_ACCEPTED_AND_SHADOW_PATHS",
+      "THE_RELEASED_BOUNDARY_IS_COMPUTED_BY_A_DETERMINISTIC_PROJECTION_OF_THE_FORWARD_STATE",
+      "THE_ACCEPTED_FORWARD_STATE_CREATION_AND_PUBLIC_DESCRIPTORS_ARE_AVAILABLE_ON_THE_SAME_ACCOUNTING_BASIS",
+      "EXACT_BOUNDARY_EQUALITY_IS_THE_COMPARISON_SEMANTIC"
+    ],
+    "boundary_law": "SHADOW_T_X_EQUALS_PROJECT_FORWARD_X_EQUALS_ACCEPTED_BOUNDARY_T_X",
+    "construction": "SHADOW_T_EQUALS_PROJECT_AFTER_FORWARD_USING_THE_ACCEPTED_PREFIX_AND_RETURNS_BEFORE_INVERSE",
+    "does_not_require_summing_heterogeneous_operation_counters": true,
+    "forward_state_law": "SHADOW_MAY_REUSE_THE_EXACT_ACCEPTED_FORWARD_ALLOCATION_SO_ITS_FORWARD_STATE_IS_NO_GREATER_COMPONENTWISE",
+    "forward_work_law": "SHADOW_MAY_REUSE_THE_EXACT_ACCEPTED_FORWARD_AND_PROJECTION_OPERATIONS_SO_ITS_FORWARD_WORK_IS_NO_GREATER_COMPONENTWISE",
+    "name": "DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_SUFFICIENT_CONDITION",
+    "strict_transaction_law": "EACH_DECLARED_ACCEPTED_PATH_HAS_AT_LEAST_ONE_POSITIVE_INVERSE_STAGE_COUNTER_THAT_THE_SHADOW_OMITS"
+  },
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}
