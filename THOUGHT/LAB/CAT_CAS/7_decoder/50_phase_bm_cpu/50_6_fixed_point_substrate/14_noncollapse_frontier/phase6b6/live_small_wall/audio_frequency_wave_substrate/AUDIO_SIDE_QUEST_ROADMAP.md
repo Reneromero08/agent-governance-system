@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `STRICT_SCHUR_ALLPASS_WAVEFORM_CLOSED_FORWARD_SHADOW_THEOREM_OPEN`
-**Roadmap version:** `15.40`
+**Status:** `STRICT_SOFTWARE_FORWARD_SHADOW_THEOREM_ESTABLISHED_RESOURCE_DOMAIN_ESCAPE_REQUIRED`
+**Roadmap version:** `15.41`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `2105a5de80b4b60c15137f1c0b20ff0a1127d82d`
+**Reconciled source head:** `26f0a9f0374dc1edc367c581492fa29d2feee49b`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED`
-**Current claim ceiling:** `EXACT_SOFTWARE_QZETA8_SEEDED_THREE_SECTION_RATIONAL_SCHUR_ALLPASS_WORDS_AT_ONE_PUBLIC_ZETA8_EVALUATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY`
+**Current highest milestone:** `BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION`
+**Current claim ceiling:** `FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
-**New mechanism development:** `ACTIVE_AFTER_M256_PROVES_EXACT_ATOMIC_FORMAL_SCHUR_WAVEFORM_EXECUTION_BUT_THE_RELEASED_BOUNDARY_HAS_A_STRICTLY_SMALLER_SCALAR_CLASSICAL_BISIMULATION_THEN_FORMALIZES_THE_SOFTWARE_FORWARD_SHADOW_ESCAPE_CRITERION`
+**New mechanism development:** `HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `NOT_AUTHORIZED`
 **P0:** `FROZEN_AND_PARKED`
-**Active primary successor:** `EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION`
+**Active primary successor:** `NO_AUTHORIZED_SOFTWARE_ONLY_SUCCESSOR_CAN_ESCAPE_M257_WITHOUT_CHANGING_THE_ACCESS_OR_RESOURCE_MODEL`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
 ```
 
 Not established:
@@ -12628,23 +12628,50 @@ advantage, Small Wall crossing, physical-bit replacement, inference, or
 unbounded computation is established. Do not add filter sections, evaluation
 points, or matrix-valued variants merely to enlarge this fixture.
 
-Selected phase-owned successor:
+## M257 deterministic software forward-shadow theorem
+
+The accepted strict-scope claim is:
 
 ```text
-EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
+BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
 ```
 
-M257 must now formalize the obstruction exposed repeatedly across the lane:
-for a deterministic software phase transaction implemented by an ordinary
-backend, the accepted forward carrier update followed by boundary projection
-itself supplies a forward-only classical shadow that omits CATVM inverse,
-restoration, and custody overhead. The experiment must reconstruct that shadow
-from several algebraically distinct verified packages, compare state and work
-on the same basis, and state exact escape conditions. It may not claim that
-the theorem rules out physical, oracle, stochastic, approximate, or
-externally supplied phase resources. Its purpose is to stop manufacturing
-software-only advantage claims and identify the smallest additional resource
-that a future phase machine would actually need.
+The diagnostic pins M248, M250, M253, M254, and M256 at their sealed primary
+fixtures. An AST reconstruction and a separate text-anchor oracle both verify
+the exact source order
+
+```text
+forward -> final projection -> inverse -> release -> response
+```
+
+for every service. Under the declared equal-access assumption, the ordinary
+shadow executes the identical deterministic forward prefix and final
+projection, then returns. Boundary equality follows constructively; the
+shadow can use the same forward state and work componentwise, while every
+accepted CATVM path has at least one positive reported inverse-stage counter
+that the boundary-only task omits. Heterogeneous counters are not summed, and
+all stronger package-specific compact baselines remain authoritative.
+
+This milestone is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` and has `NO_RESTORATION_CLAIM`: it proves a
+conditional theorem about the requested final-boundary task, not a new
+catalytic transaction. Exact restoration and reuse in the five source
+packages remain valid and scientifically useful. Requiring restoration and
+reuse as the output is a different task, not a counterexample.
+
+The result supplies a concrete software-domain obstruction. A lawful escape
+must change at least one assumption through an external oracle or interaction,
+a physical waveform resource with an independently measured cost model, a
+secret or exogenous carrier state not lawfully given to the comparator,
+stochastic/approximate/irreversible semantics, a justified interactive query
+model, or a scientifically justified comparator restriction. Hiding the
+actual deterministic software backend does not qualify. No such resource is
+currently available within the authorized exact-software scope.
+
+The branch remains nonterminal and user-owned. Resume mechanism development
+only when a concrete resource or access model outside the M257 assumptions is
+available and authorized. Do not add another exact deterministic software
+fixture and describe its CATVM inverse overhead as a computational resource.
 
 ## 10. Roadmap Maintenance
 

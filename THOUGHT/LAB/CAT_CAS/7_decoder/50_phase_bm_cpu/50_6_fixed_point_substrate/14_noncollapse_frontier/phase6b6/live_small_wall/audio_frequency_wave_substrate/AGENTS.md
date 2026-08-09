@@ -16,12 +16,14 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`2105a5de80b4b60c15137f1c0b20ff0a1127d82d`. The registry assigns one
+`26f0a9f0374dc1edc367c581492fa29d2feee49b`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 256-milestone lane is active by user direction. Continue from the
-selected successor in the roadmap and lane state; do not restart completed
-mechanisms or infer a stop from historical package language.
+The current 257-milestone lane remains nonterminal under user-only closure,
+but exact deterministic software-only successor work is held at the M257
+forward-shadow blocker. Resume mechanism development only from the explicit
+resource/access-model condition in the roadmap and lane state; do not restart
+completed mechanisms or infer broader claims from historical package language.
 
 ## 1. Prime Directive
 
@@ -53,43 +55,46 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FORMAL_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_RETAINS_TWO_UNRESOLVED_POLYNOMIAL_BACKINGS_THROUGH_THREE_SECTIONS_AND_RELEASES_ONLY_WINDING_AND_ONE_POINT_EVALUATION_AFTER_EXACT_SAME_BACKING_INVERSE_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SCALAR_SCHUR_BOUNDARY_RECURRENCE_IS_STRICTLY_SMALLER_AND_NO_DISTINCT_PHASE_RESOURCE_OR_ADVANTAGE_IS_ESTABLISHED
+BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_QZETA8_SEEDED_THREE_SECTION_RATIONAL_SCHUR_ALLPASS_WORDS_AT_ONE_PUBLIC_ZETA8_EVALUATION_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone `Q[z]/(z^4+1)` oracle independently reproduce exact Schur
-updates, the divisibility-gated inverse, formal Laurent all-pass identity,
-final winding/evaluation, same-backing restoration, and generation-two reuse.
+`SEPARATE_REFERENCE_PARITY` with `NO_RESTORATION_CLAIM`. It pins M248, M250,
+M253, M254, and M256 to their sealed primary fixtures, verifies the actual
+`forward -> projection -> inverse -> release -> response` source order, and
+constructs the same final boundary by executing the identical deterministic
+forward prefix and projection while omitting the positive inverse-stage work.
+Forward state and work dominance are componentwise; heterogeneous counters
+are not summed. Every stronger package-specific compact baseline remains
+authoritative.
 
-M256 changes the primitive to a formal rational waveform phase. Native
-feedback is causal and machine-enforced, but the declared boundary is exactly
-reproduced by one field scalar plus one winding integer. The complete formal
-waveform is reproduced by the identical two-polynomial classical recurrence.
-No physical waveform, compact bounded-width exact state, distinct phase
-resource, advantage, Small Wall crossing, physical-bit replacement,
-inference, or unbounded computation is established. The all-pass route is
-retired after this three-section diagnostic.
+M257 applies only when the comparator receives the same canonical input,
+descriptors, auxiliary/secret state, and oracle access as the accepted exact
+deterministic software backend. It does not cover physical, oracle,
+stochastic, approximate, irreversible, or scientifically justified
+restricted-access models. It establishes no general all-software no-go,
+complexity lower bound, distinct phase resource, advantage, Small Wall
+crossing, physical waveform execution, physical-bit replacement, inference,
+or unbounded computation.
 
-Selected successor:
+Resume condition:
 
 ```text
-EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
+RESOURCE_OR_ACCESS_MODEL_OUTSIDE_M257_ASSUMPTIONS
 ```
 
-Formalize and execute the forward-shadow comparison across algebraically
-distinct verified software phase transactions. A deterministic software
-backend's own forward update plus boundary projection is an ordinary
-classical implementation that omits CATVM inverse, restoration, and custody
-overhead. Derive the exact scope and escape criteria rather than adding another
-bounded fixture. Do not generalize the software theorem to physical, oracle,
-stochastic, approximate, or externally supplied phase resources.
+The next mechanism must identify a concrete external oracle/interaction,
+independently measured physical waveform or analog resource, lawfully withheld
+exogenous carrier state, changed stochastic/approximate/irreversible semantic,
+justified interactive black-box model, or another scientifically defensible
+comparator restriction. Do not add another exact deterministic software
+fixture and relabel CATVM inverse/restoration overhead as a phase resource.
 
 The accumulated bounded architecture includes:
 
@@ -252,15 +257,17 @@ update roadmap authority files
 select the next experiment from accumulated evidence
 ```
 
-The user has explicitly resumed autonomous mechanism development, commit, and
-push on the canonical branch. Do not reintroduce a ceremony or approval pause
-from stale predecessor language inside this LAB lane.
-
-Use judgment. Choose work that most directly removes the blocker between current evidence and the next C-rung.
+Autonomous implementation, verification, commit, and push remain the default
+for an in-scope successor. M257 now establishes that no additional exact
+deterministic software-only fixture can remove the current blocker under the
+same equal-access comparison. Do not turn that scientific stopping condition
+into lane completion, and do not invent an out-of-scope resource to keep the
+loop moving.
 
 ## 5. Operating Loop
 
-This loop is active.
+This loop resumes when a concrete resource or access model outside the M257
+assumptions is available and authorized.
 
 ```text
 explore
@@ -283,25 +290,24 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M256_PROVES_EXACT_ATOMIC_FORMAL_SCHUR_WAVEFORM_EXECUTION_BUT_THE_RELEASED_BOUNDARY_HAS_A_STRICTLY_SMALLER_SCALAR_CLASSICAL_BISIMULATION_THEN_FORMALIZES_THE_SOFTWARE_FORWARD_SHADOW_ESCAPE_CRITERION
+HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE
 ```
 
 The named
 `COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
 work already exists at the reconciled source head; do not restart or extend
-it. The selected next experiment is:
+it. The exact resume condition is:
 
 ```text
-EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
+RESOURCE_OR_ACCESS_MODEL_OUTSIDE_M257_ASSUMPTIONS
 ```
 
-M256 closes the formal all-pass route: the hidden polynomial waveform,
-feedback law, atomic restoration, and reuse are exact, but one scalar plus one
-winding integer reproduces the released boundary and the identical
-two-polynomial recurrence reproduces the whole function. Do not add Schur
-sections, evaluation points, or matrix-valued variants merely to enlarge the
-fixture. M257 must formalize the same-domain forward-shadow obstruction and
-the exact resource conditions required to escape it.
+M257 has formalized the same-domain forward-shadow obstruction across five
+algebraically distinct sealed exact software CATVM packages. Do not add Schur
+sections, more software CATVM fixtures, or representation optimizations merely
+to enlarge the evidence set. The next mechanism must change the resource or
+access model in one of the explicitly declared ways and preserve M257's equal-
+access boundary whenever that assumption still applies.
 
 ## 7. Native No-Smuggle Law
 

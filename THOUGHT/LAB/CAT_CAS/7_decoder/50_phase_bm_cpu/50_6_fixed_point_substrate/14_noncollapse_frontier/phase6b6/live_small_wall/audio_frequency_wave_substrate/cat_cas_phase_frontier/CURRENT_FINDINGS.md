@@ -13288,7 +13288,7 @@ law, not a physical filter, distinct phase resource, advantage, Small Wall
 crossing, physical-bit replacement, inference, or unbounded computation. Do
 not add all-pass fixture sizes.
 
-Next:
+Completed by M257 below:
 
 ```text
 EXACT_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_DOMINANCE_THEOREM_AND_PHASE_RESOURCE_ESCAPE_CRITERION
@@ -13299,3 +13299,49 @@ same-domain theorem and executable cross-package diagnostic. It must separate
 what follows from an ordinary deterministic software backend from resources
 that could escape the shadow only if supplied externally, physically,
 stochastically, approximately, or under a different oracle/cost model.
+
+## M257 exact deterministic software forward-shadow blocker
+
+The accepted strict-scope claim is:
+
+```text
+BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
+```
+
+M257 pins the sealed primary fixtures from M248 cubic magic catalysis, M250
+projective Weyl contextual holonomy, M253 Grassmann Gaussian relations, M254
+full-even Grassmann relations, and M256 formal Schur waveform feedback. For
+each package it verifies the actual source order
+`forward -> projection -> inverse -> release -> response`. The constructive
+shadow executes the identical deterministic forward prefix and final
+projection, returns the same exact boundary, and omits a positive
+inverse-stage work witness. It may reuse the accepted forward allocation and
+operations, so forward state and work are no greater componentwise. No sum of
+heterogeneous work counters is used, and every stronger package-specific
+compact baseline remains controlling.
+
+The standalone text-anchor/resource oracle independently reproduces all five
+source hashes, source orders, boundary records, forward state vectors, forward
+and projection work vectors, and positive omitted inverse witnesses. Focused
+review returned `PASS_STRICT_SCOPE`. The milestone is classified
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY` with
+`NO_RESTORATION_CLAIM`: it compares the final-boundary task and does not claim
+that the shadow performs the accepted atomic restoration/reuse transaction.
+
+The ceiling is five declared exact deterministic Python software CATVM
+packages at their sealed primary fixtures. The theorem assumes equal access to
+the canonical input, descriptors, auxiliary or secret state, and oracle
+interfaces used by the accepted backend. It does not cover physical waveform
+resources, external oracles, lawfully withheld exogenous carrier state,
+stochastic or approximate semantics, irreversible computation, or a justified
+interactive black-box access model. It is not a general software no-go or a
+complexity lower bound.
+
+Within the currently authorized exact deterministic software domain, this is
+a concrete blocker: another software-only phase fixture cannot establish a
+same-domain advantage by counting CATVM inverse, restoration, custody, or
+release work as a resource unavailable to the forward shadow. Resume requires
+a concrete resource or access model outside the M257 assumptions. No distinct
+phase resource, computational advantage, Small Wall crossing, physical
+waveform execution, physical-bit replacement, inference, or unbounded
+catalytic computation has been established.
