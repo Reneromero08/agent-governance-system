@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`d809b451c335fe2c03e13b6b724387d3fba8ae2b`. The registry assigns one
+`139a337a8b0bc39562eb25771409ef8fb5095c74`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 269-milestone lane remains nonterminal under user-only closure.
+The current 270-milestone lane remains nonterminal under user-only closure.
 M257 blocks same-domain exact deterministic software advantage claims; the
 authorized Phase-QEMU frontier changes the architecture under test without
 treating emulation itself as a physical resource. Resume only from the active
@@ -54,6 +54,58 @@ final computational architecture. Phase-circuit scaling is support work only
 when it enables the relational lift.
 
 ## 2. Current Highest Milestone
+
+```text
+COMPILED_QEMU_10_2_4_PHASE_QEMU_V12_COMMON_GUEST_VISIBLE_PCI_DEVICE_BACKEND_EXERCISES_A_HARDWARE_DISCONNECTED_TEST_ONLY_DETERMINISTIC_21_BIT_INTEGRITY_TWO_SLOT_ASYNCHRONOUS_EXTERNAL_ADAPTER_FOR_ALL_NINE_INTERNAL_ZOMEGA_PAIRS_AND_COMMITS_ONLY_APPROX_MODEL_OUTPUTS_HELD_UNTIL_ACK_THEN_SPENT_WITH_NO_BEGIN_REUSE_WHILE_PENDING_RESET_REAL_QMP_MIGRATION_AND_SERVICE_DEFAULT_FAIL_CLOSED
+```
+
+Claim ceiling:
+
+```text
+NO_HARDWARE_PHYSICAL_CARRIER_COHERENT_PORT_CRYPTOGRAPHIC_SECURITY_STATISTICAL_PHYSICAL_EVIDENCE_CUSTODY_PHYSICAL_RETURN_RESTORATION_REUSE_OR_ADVANTAGE_ALL_EXTERNAL_PHYSICAL_QUANTITIES_UNKNOWN_AND_FINITE_PHYSICAL_EVIDENCE_MAY_NEVER_BE_EXACT_FORMAL_OR_AUTHORIZE_BEGIN_REUSE
+```
+
+M270 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` with scientific evidence at
+`SEPARATE_REFERENCE_PARITY`, resources at `PACKAGE_SELF_REVIEW`, and
+restoration `NO_RESTORATION_CLAIM` at exact scope:
+
+```text
+COMPILED_QEMU_10_2_4_PHASE_QEMU_V12_PCI_ABI_HARDWARE_DISCONNECTED_TEST_ONLY_TWO_SLOT_ASYNC_ADAPTER_PROTOCOL_AND_INTERNAL_96_DIMENSION_ZOMEGA_SOFTWARE_MODEL_ONLY
+```
+
+V12 is an actual compiled QEMU 10.2.4 PCI device with the common V11 register
+prefix and a swappable backend boundary. Its hardware-disconnected test-only
+adapter exercises two-slot asynchronous begin/poll/cancel/timeout/ack/spent
+lifecycle, deterministic 21-bit integrity, expiry ordering, sealed failure
+receipts, reset and migration sham lineage, and service-default fail-closed
+behavior across all nine internal `Z(omega)` pairs. Successful external-stub
+receipts are only `APPROX_MODEL`; they are held until acknowledgement and can
+never authorize begin reuse. Pending reset, source migration, second-hop
+migration, cancellation, timeout, and teardown sanitize or burn lineage.
+
+The exact route disposition is:
+
+```text
+V12_ESTABLISHES_COMMON_COMPILED_ASYNC_ADAPTER_LIFECYCLE_INTEGRITY_ORDER_EXPIRY_CANCEL_TIMEOUT_ACK_SPENT_AND_SHAM_CONTROLS_BUT_NOT_PHYSICAL_OR_CRYPTOGRAPHIC_PROMOTION_DIRECT_EQUAL_ACCESS_PHASE_COMPILER_CONTROLS_AND_M257_REMAINS_INTACT
+```
+
+M270 passes common compiled device/backend reintegration for the asynchronous
+adapter protocol. It does not connect hardware, authenticate cryptographically,
+produce statistical physical evidence, establish physical custody or return,
+authorize physical reuse, show advantage, or escape M257. V0, V1, V11, and
+V12 are compiled common guest-visible QEMU PCI devices; V2 through V10 remain
+mechanism-search/digital twins that may kill or nominate only.
+
+The active M271 successor is:
+
+```text
+REAL_AUTHENTICATED_HARDWARE_CONNECTED_DUAL_RAIL_DISPERSIVE_ADAPTER_BEHIND_THE_COMMON_PHASE_QEMU_BACKEND_WITH_BOUNDED_PHYSICAL_RECEIPTS_AND_INDEPENDENT_STATISTICAL_VALIDATION_WITHOUT_EXACT_FORMAL_PHYSICAL_RETURN_OR_REUSE
+```
+
+It remains a design and certification target. Actual external physical
+connection or execution is not authorized or claimed.
+
+### Frozen M269/V11 predecessor
 
 ```text
 COMMON_PHASE_QEMU_V11_SWAPPABLE_BACKEND_DEVICE_EXECUTES_TWO_LATE_BOUND_DUAL_RAIL_NUMBER_EIGENSPACE_DISPERSIVE_KICKBACK_QUERIES_ON_ONE_HIDDEN_CARRIER_REFERENCE_STATE_AND_RELEASES_ATOMIC_RECEIPTS_ONLY_AFTER_EXACT_COMPLETE_RETURN_WHILE_OPEN_AND_EXTERNAL_BACKENDS_FAIL_CLOSED
@@ -371,16 +423,16 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_DESIGN_AND_TOTAL_RESOURCE_CERTIFICATION_AFTER_M269_COMPILED_REINTEGRATION
+ACTIVE_REAL_AUTHENTICATED_HARDWARE_CONNECTED_DUAL_RAIL_DISPERSIVE_ADAPTER_DESIGN_WITH_BOUNDED_PHYSICAL_RECEIPTS_AND_INDEPENDENT_STATISTICAL_VALIDATION_AFTER_M270_HARDWARE_DISCONNECTED_STUB
 ```
 
 The named
 `COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
 work already exists at the reconciled source head; do not restart or extend
-it. The exact active successor is:
+it. The exact active M271 successor is:
 
 ```text
-AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_WITH_COHERENT_CLIENT_PORT_REFERENCE_PRESERVATION_LATE_BOUND_PRIVATE_CONTROL_AND_TOTAL_RESOURCE_CERTIFICATION
+REAL_AUTHENTICATED_HARDWARE_CONNECTED_DUAL_RAIL_DISPERSIVE_ADAPTER_BEHIND_THE_COMMON_PHASE_QEMU_BACKEND_WITH_BOUNDED_PHYSICAL_RECEIPTS_AND_INDEPENDENT_STATISTICAL_VALIDATION_WITHOUT_EXACT_FORMAL_PHYSICAL_RETURN_OR_REUSE
 ```
 
 M257 formalized the same-domain forward-shadow obstruction across five
@@ -397,9 +449,13 @@ comparator kill any unique resource or advantage claim. M269 returns the
 surviving mechanism to the compiled common Phase-QEMU architecture and closes
 the exact ideal backend machine law, but its private binding remains test-only
 and its direct equal-interface phase shadow still forbids resource promotion.
+M270 then compiles the asynchronous adapter lifecycle into V12 and verifies
+integrity, ordering, expiry, cancel, timeout, acknowledgement, spent, and sham
+controls, but the exercised adapter remains a hardware-disconnected
+deterministic test stub with no cryptographic or physical evidence authority.
 
 Phase-QEMU architectural lineage is now explicit current authority. V0, V1,
-and V11 are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
+V11, and V12 are real compiled common guest-visible QEMU PCI devices. V2 through V10 are
 mechanism-search/digital-twin packages outside the QEMU device; they may kill
 or refine ideas cheaply, but they do not by themselves qualify common
 Phase-QEMU architecture. M268 is classified
@@ -416,9 +472,11 @@ migration-sham lineage before machine-architecture promotion. The required
 V11 target was the swappable common backend/device implementation of the
 dual-rail one-photon dispersive-kickback minimum, not another standalone
 Python twin. M269 passed that reintegration gate for the exact ideal backend;
-the next gate is an authenticated external adapter with real coherent client
-ports, reference preservation, late-bound private control, and certified total
-resources. No physical execution or advantage is authorized or established.
+M270 passed the same common-device gate for the asynchronous adapter protocol.
+The next gate is a genuinely authenticated hardware-connected adapter with
+bounded physical receipts and independent statistical validation. Exact formal
+physical return or reuse remains forbidden, and no physical execution or
+advantage is authorized or established.
 
 ## 7. Native No-Smuggle Law
 

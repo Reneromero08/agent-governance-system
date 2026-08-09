@@ -6,12 +6,12 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`d809b451c335fe2c03e13b6b724387d3fba8ae2b`. The canonical verification
+`139a337a8b0bc39562eb25771409ef8fb5095c74`. The canonical verification
 levels, restoration classifications, source-audit authority, and strict
-ceilings for all 269 milestones are recorded in
+ceilings for all 270 milestones are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
 
-Phase-QEMU architecture discipline is current authority. V0, V1, and V11 are
+Phase-QEMU architecture discipline is current authority. V0, V1, V11, and V12 are
 real compiled common guest-visible QEMU PCI devices. V2 through V10 are
 standalone mechanism-search/digital-twin packages that may cheaply kill or
 nominate an idea but cannot promote architecture. Every promoted survivor must
@@ -14169,3 +14169,74 @@ AUTHENTICATED_EXTERNAL_DUAL_RAIL_DISPERSIVE_ORACLE_ADAPTER_WITH_COHERENT_CLIENT_
 It must remain behind the existing common V11 guest-visible device/backend
 boundary. Actual external physical connection and execution are not authorized
 or claimed.
+
+## M270 compiled Phase-QEMU V12 authenticated-adapter test stub
+
+The accepted claim is:
+
+```text
+COMPILED_QEMU_10_2_4_PHASE_QEMU_V12_COMMON_GUEST_VISIBLE_PCI_DEVICE_BACKEND_EXERCISES_A_HARDWARE_DISCONNECTED_TEST_ONLY_DETERMINISTIC_21_BIT_INTEGRITY_TWO_SLOT_ASYNCHRONOUS_EXTERNAL_ADAPTER_FOR_ALL_NINE_INTERNAL_ZOMEGA_PAIRS_AND_COMMITS_ONLY_APPROX_MODEL_OUTPUTS_HELD_UNTIL_ACK_THEN_SPENT_WITH_NO_BEGIN_REUSE_WHILE_PENDING_RESET_REAL_QMP_MIGRATION_AND_SERVICE_DEFAULT_FAIL_CLOSED
+```
+
+V12 is an actual compiled QEMU 10.2.4 PCI device, not a standalone mechanism
+twin. It preserves the complete V11 register prefix and adds the two-slot
+asynchronous adapter and boundary registers behind the common swappable backend
+architecture. EXTERNAL remains service-default unavailable. Only the explicit
+hardware-disconnected test provider enables the deterministic adapter path.
+
+The test envelope has a 43-bit payload and deterministic 21-bit integrity tag
+inside 64 bits. This is not cryptographic authentication. All nine internal
+`Z(omega)` pairs execute, but every successful external-stub receipt is only
+`APPROX_MODEL`, held until acknowledgement, then irreversibly `SPENT`. No such
+receipt can authorize begin reuse. The direct equal-access phase compiler
+independently reproduces the boundary and remains the controlling M257 shadow.
+
+The compiled common core exercises order, expiry, cancel, timeout, sealed
+failed receipts, acknowledgement, spent state, invalid MMIO, reset, migration,
+and teardown controls. Pending reset cancels once and burns lineage to `SHAM`.
+Source pre-save migration cancels and burns the source; the destination and
+second hop remain `SHAM`. Clean process teardown invokes the registered
+unrealize sanitizer. None of those paths is restoration.
+
+Restoration is exactly `NO_RESTORATION_CLAIM` at scope:
+
+```text
+COMPILED_QEMU_10_2_4_PHASE_QEMU_V12_PCI_ABI_HARDWARE_DISCONNECTED_TEST_ONLY_TWO_SLOT_ASYNC_ADAPTER_PROTOCOL_AND_INTERNAL_96_DIMENSION_ZOMEGA_SOFTWARE_MODEL_ONLY
+```
+
+The exact ceiling is:
+
+```text
+NO_HARDWARE_PHYSICAL_CARRIER_COHERENT_PORT_CRYPTOGRAPHIC_SECURITY_STATISTICAL_PHYSICAL_EVIDENCE_CUSTODY_PHYSICAL_RETURN_RESTORATION_REUSE_OR_ADVANTAGE_ALL_EXTERNAL_PHYSICAL_QUANTITIES_UNKNOWN_AND_FINITE_PHYSICAL_EVIDENCE_MAY_NEVER_BE_EXACT_FORMAL_OR_AUTHORIZE_BEGIN_REUSE
+```
+
+The complete V11 name/offset register map remains preserved. Installer checks
+fail closed on unknown nonidentical V12 targets and preserve the V0, V1, and
+V11 snapshots. Resource receipts use structured unknown values for every
+physical coordinate; deterministic envelope capacity and process-local memory
+floors are not relabeled as entropy or total physical resources. Qtest and the
+separate exact reference agree at their declared boundaries.
+
+The exact disposition is:
+
+```text
+V12_ESTABLISHES_COMMON_COMPILED_ASYNC_ADAPTER_LIFECYCLE_INTEGRITY_ORDER_EXPIRY_CANCEL_TIMEOUT_ACK_SPENT_AND_SHAM_CONTROLS_BUT_NOT_PHYSICAL_OR_CRYPTOGRAPHIC_PROMOTION_DIRECT_EQUAL_ACCESS_PHASE_COMPILER_CONTROLS_AND_M257_REMAINS_INTACT
+```
+
+M270 is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE`, with
+`SEPARATE_REFERENCE_PARITY`, `PACKAGE_SELF_REVIEW` resource authority, and
+`terminal=false`. The common compiled Phase-QEMU reintegration gate passes for
+the adapter protocol. Hardware connection, physical carrier and coherent port,
+cryptographic security, statistical physical evidence, custody, physical
+return, restoration, reuse, advantage, Small Wall crossing, and M257 escape
+all remain false. V0, V1, V11, and V12 are compiled common guest-visible
+devices; V2 through V10 remain mechanism twins that may kill or nominate only.
+
+The exact active M271 successor is:
+
+```text
+REAL_AUTHENTICATED_HARDWARE_CONNECTED_DUAL_RAIL_DISPERSIVE_ADAPTER_BEHIND_THE_COMMON_PHASE_QEMU_BACKEND_WITH_BOUNDED_PHYSICAL_RECEIPTS_AND_INDEPENDENT_STATISTICAL_VALIDATION_WITHOUT_EXACT_FORMAL_PHYSICAL_RETURN_OR_REUSE
+```
+
+It must remain behind the common compiled Phase-QEMU backend. Actual external
+physical connection and execution remain outside current authority.
