@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`aad46509f9760a5e03998c2405f334e2e9ff28d6`. The canonical per-milestone
+`7801dc7d0ab4a0a40c25d723f8758019c4cf9420`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13210,3 +13210,48 @@ port count rather than materializing another full even signature. It must
 either close Gaussian plus decomposable quartic cumulants with compact exact
 rank, height, history, and projection cost, or publish the exact cumulant-rank
 growth obstruction against the matched Pfaffian/exterior-tensor recurrence.
+
+## M255 compact quartic cumulants fail rank-one closure at six ports
+
+The accepted result is:
+
+```text
+BOUNDED_EXACT_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_GAUSSIAN_PLUS_DECOMPOSABLE_QUARTIC_CHAIN_GRASSMANN_CUMULANT_INTERSECTION_HAS_A_COMPACT_PFAFFIAN_HODGE_PROJECTION_BUT_ESCAPES_THE_RANK1_DEGREE4_CHART_AT_SIX_PORTS_AND_GENERATES_NONZERO_TOP_CUMULANTS_THROUGH_EIGHT_PORTS_WITH_DIRECT_PROCESS_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE
+```
+
+At 4, 6, and 8 ports the accepted carrier retains only the quadratic
+coefficient array and one, two, or three decomposable quartic terms. Native
+intersection is exact addition in this logarithmic relation chart. The final
+Hodge boundary is evaluated by public Pfaffian coefficient rematerialization
+and streamed even set partitions; the full even basis dimensions 8, 32, and
+128 are verifier-only ceilings rather than accepted resident vectors.
+
+The independent full-exterior exponential/Hodge/logarithm oracle reproduces
+connected top cumulants `1/4`, `-2/27`, and `14/625`. The six-port accumulated
+quartic has two displayed decomposable summands. Its complementary dual
+two-form has square coefficient `2` on support `[0,1,4,5]`, giving rank at
+least two, while the displayed sum gives rank at most two. The exact quartic
+rank is therefore two. Six ports are minimal because every four-form below
+six dimensions is decomposable. Eight ports confirms that the escaped chart
+generates a nonzero connected top-degree cumulant rather than closing after a
+single special witness.
+
+Exact subtractive inverse execution restores the actual pair and quartic
+backings. Descriptor-distinct generation-two reuse agrees with a fresh
+carrier and uses no reload. This is direct-process restoration, not
+machine-enforced custody. Fixed fixtures have `O(1)` public certificates; the
+normalization scalar has a two-field continuant, and the descriptor-level
+selected-cumulant comparator is the identical streamed recurrence. No phase
+resource or advantage is established, so the quartic chart stops here.
+
+Next:
+
+```text
+CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC
+```
+
+The successor changes the primitive to an exact formal all-pass waveform
+phase under native Schur feedback. It must retain the unresolved numerator and
+denominator inside CATVM, release only winding plus one exact boundary
+evaluation after same-backing inverse restoration, and compare against the
+stronger scalar-plus-winding and identical full-polynomial classical laws.

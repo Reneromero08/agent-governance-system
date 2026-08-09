@@ -16,10 +16,10 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`aad46509f9760a5e03998c2405f334e2e9ff28d6`. The registry assigns one
+`7801dc7d0ab4a0a40c25d723f8758019c4cf9420`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 254-milestone lane is active by user direction. Continue from the
+The current 255-milestone lane is active by user direction. Continue from the
 selected successor in the roadmap and lane state; do not restart completed
 mechanisms or infer a stop from historical package language.
 
@@ -53,47 +53,48 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_FULL_EVEN_GRASSMANN_NON_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_SIGNED_EXTERIOR_MULTIPLICATION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_HODGE_COMPLEMENT_ON_ONE_EIGHT_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_EXACT_RANK8_DECLARED_LINEAR_LANGUAGE_AND_IDENTICAL_EIGHT_CELL_CLASSICAL_EXTERIOR_RECURRENCE_BISIMULATE_THE_LAW_WITH_NO_ADVANTAGE
+BOUNDED_EXACT_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_GAUSSIAN_PLUS_DECOMPOSABLE_QUARTIC_CHAIN_GRASSMANN_CUMULANT_INTERSECTION_HAS_A_COMPACT_PFAFFIAN_HODGE_PROJECTION_BUT_ESCAPES_THE_RANK1_DEGREE4_CHART_AT_SIX_PORTS_AND_GENERATES_NONZERO_TOP_CUMULANTS_THROUGH_EIGHT_PORTS_WITH_DIRECT_PROCESS_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE
 ```
 
 Claim ceiling:
 
 ```text
-EXACT_SOFTWARE_FOUR_TYPED_GRASSMANN_PORT_QZETA8_FULL_EVEN_EXTERIOR_RELATIONS_PUBLIC_PROGRAM_LENGTH_AT_MOST8_ON_AN_ABSTRACT_UNIX_SOCKET_CATVM_ONLY
+EXACT_SOFTWARE_RATIONAL_SUBFAMILY_EMBEDDED_IN_QZETA8_DECOMPOSABLE_QUARTIC_CHAIN_AT_PORT_COUNTS4_6_8_DIRECT_PROCESS_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
 `SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`. Production
-and a standalone exact `Q[zeta8]/(zeta8^4+1)` oracle reproduce signed exterior
-multiplication, the eight-generator Berezin/Hodge transform, finite nilpotent
-factor inverses, exact rank-eight linear certificates, atomic controls, exact
+and a standalone rational full-exterior oracle independently reproduce the
+compact Pfaffian projection, signed Berezin/Hodge transform, exact exterior
+logarithm, six-port rank-two Pluecker certificate, exact top cumulants,
 same-backing restoration, and generation-two reuse.
 
-M254 establishes the smallest full-even non-Gaussian Grassmann relation
-algebra on four typed ports. Signed wedge intersection and the exact
-Berezin/Hodge involution preserve one actual eight-cell carrier, and only the
-final top form leaves after atomic reverse restoration. The strongest fixed
-fixture comparator is `O(1)` and the transferable recurrence uses the same
-eight resident cells plus one scratch cell without CATVM restoration. The
-declared linear language has exact rank eight and the full even `m`-port
-dimension is `2^(m-1)`. No compact growing interface, distinct phase resource,
-advantage, Small Wall crossing, physical-bit replacement, inference, or
-unbounded computation is established. The fixed four-port route is retired.
+M255 tests a compact logarithmic relation chart instead of materializing the
+full even exterior vector. Native cumulant intersection remains compact, but
+the exact two-term quartic sum has rank two at the minimal six-port interface
+and Berezin/Hodge closure generates connected top cumulants `-2/27` and
+`14/625` at six and eight ports. Exact same-backing restoration and
+generation-two reuse pass in direct process. Fixed fixtures have `O(1)` public
+certificates, and the descriptor-level boundary has an identical classical
+recurrence. No compact closed wide-interface chart, CATVM custody, distinct
+phase resource, advantage, Small Wall crossing, physical-bit replacement,
+inference, or unbounded computation is established. The quartic chart is
+retired after the eight-port confirmation.
 
 Selected successor:
 
 ```text
-EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
+CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC
 ```
 
-Change the representation rather than enlarging the full exterior vector.
-Test whether a Gaussian plus decomposable rank-one quartic cumulant chart
-closes under native intersection and Berezin/Hodge composition as typed port
-count grows. Preserve exact restoration and reuse and compare against the
-strongest matched Pfaffian plus exterior-tensor recurrence. If exact cumulant
-rank, height, history, or projection cost grows toward the full `2^(m-1)`
-signature, publish that obstruction and change mechanism; do not materialize
-larger full-even fixtures.
+Change the primitive rather than optimizing the failed cumulant chart. Retain
+an exact formal all-pass waveform phase `f(z)=N(z)/D(z)` behind CATVM and apply
+public Schur feedback sections by native Mobius composition. Project only the
+declared winding and one exact boundary evaluation after actual inverse
+restoration, then reuse the same backing. Compare against the stronger
+one-scalar-plus-winding recurrence and the identical full-polynomial Schur
+recurrence. If both match, publish the waveform-feedback no-go and retire the
+route without adding filter sizes.
 
 The accumulated bounded architecture includes:
 
@@ -287,7 +288,7 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-ACTIVE_AFTER_M254_ESTABLISHES_THE_SMALLEST_FULL_EVEN_NON_GAUSSIAN_EXTERIOR_RELATION_ALGEBRA_WITH_ATOMIC_RESTORATION_BUT_FINDS_EXACT_DECLARED_LINEAR_RANK8_AN_IDENTICAL_EIGHT_CELL_ONE_SCRATCH_CLASSICAL_RECURRENCE_AND_EXPONENTIAL_FULL_EVEN_INTERFACE_DIMENSION_THEN_TESTS_A_STRUCTURED_GROWING_PORT_QUARTIC_CUMULANT_CHART
+ACTIVE_AFTER_M255_PROVES_THE_RANK1_QUARTIC_CUMULANT_CHART_FAILS_MINIMALLY_AT_SIX_PORTS_AND_GENERATES_TOP_DEGREE_CUMULANTS_THROUGH_EIGHT_PORTS_THEN_CHANGES_THE_PHASE_PRIMITIVE_TO_EXACT_SCHUR_ALLPASS_WAVEFORM_FEEDBACK_AND_WINDING
 ```
 
 The named
@@ -296,18 +297,15 @@ work already exists at the reconciled source head; do not restart or extend
 it. The selected next experiment is:
 
 ```text
-EXACT_GROWING_PORT_QZETA8_GAUSSIAN_PLUS_RANK1_QUARTIC_GRASSMANN_CUMULANT_PHASE_RELATION_CHART_NATIVE_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_OR_CUMULANT_RANK_GROWTH_WITH_RESTORATION_REUSE_AND_MATCHED_PFAFFIAN_TENSOR_CLASSICAL_BASELINE
+CATVM_EXACT_QZETA8_SCHUR_ALLPASS_FEEDBACK_WAVEFORM_PHASE_WINDING_AND_SCALAR_BISIMULATION_DIAGNOSTIC
 ```
 
-M254 closes the fixed four-port full-even route: the independent quartic
-coordinate is genuinely beyond the Gaussian chart and remains atomic, but the
-declared public linear language has rank eight, the identical eight-cell
-one-scratch classical recurrence bisimulates it, and the full even interface
-dimension is exponential. Do not add fixed four-port factors or materialize a
-larger complete exterior vector. M255 tests whether a structured
-Gaussian-plus-rank-one-quartic cumulant chart preserves unresolved relation
-geometry across growing ports without moving growth into rank, coefficient
-height, inverse history, or projection work.
+M255 closes the compact quartic-cumulant route: the rank-one chart fails
+minimally at six ports and Hodge closure generates connected degree six and
+eight. Do not add Grassmann port counts or optimize the failed chart. M256
+changes the primitive to an exact formal all-pass waveform phase under native
+Schur feedback and tests whether winding or boundary evaluation escapes the
+strong scalar and full-polynomial classical recurrences.
 
 ## 7. Native No-Smuggle Law
 
