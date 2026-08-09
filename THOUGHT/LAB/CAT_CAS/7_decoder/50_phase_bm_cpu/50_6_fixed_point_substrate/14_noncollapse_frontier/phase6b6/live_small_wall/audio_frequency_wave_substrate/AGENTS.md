@@ -16,13 +16,14 @@ package-local contracts and reports
 Mission and roadmap authority outrank package-local completion language. Frozen evidence remains authoritative for what has actually been proved.
 
 Canonical claim authority is reconciled through source head
-`26f0a9f0374dc1edc367c581492fa29d2feee49b`. The registry assigns one
+`c79693808f10540d6ec80a0084444f72f1a364e8`. The registry assigns one
 verification level and one restoration classification to every recorded
 milestone. Its corrections and ceilings supersede stale package summaries.
-The current 257-milestone lane remains nonterminal under user-only closure,
-but exact deterministic software-only successor work is held at the M257
-forward-shadow blocker. Resume mechanism development only from the explicit
-resource/access-model condition in the roadmap and lane state; do not restart
+The current 260-milestone lane remains nonterminal under user-only closure.
+M257 blocks same-domain exact deterministic software advantage claims; the
+authorized Phase-QEMU frontier changes the architecture under test without
+treating emulation itself as a physical resource. Resume only from the active
+hardware-model successor in the roadmap and lane state; do not restart
 completed mechanisms or infer broader claims from historical package language.
 
 ## 1. Prime Directive
@@ -55,24 +56,24 @@ when it enables the relational lift.
 ## 2. Current Highest Milestone
 
 ```text
-BOUNDED_SOURCE_PINNED_DETERMINISTIC_SOFTWARE_PHASE_TRANSACTION_FORWARD_SHADOW_CONSTRUCTION_ACROSS_FIVE_ALGEBRAICALLY_DISTINCT_CATVM_PACKAGES_PROVES_EACH_ACCEPTED_FORWARD_PREFIX_PLUS_FINAL_PROJECTION_IS_AN_ORDINARY_CLASSICAL_PROGRAM_WITH_NO_GREATER_FORWARD_STATE_OR_WORK_WHILE_THE_CATVM_PATH_ADDS_A_NONZERO_INVERSE_RESTORATION_STAGE_SO_NO_SAME_DOMAIN_SOFTWARE_ADVANTAGE_FOLLOWS_WITHOUT_AN_EXTERNAL_RESOURCE_OR_JUSTIFIED_COMPARATOR_RESTRICTION
+EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE
 ```
 
 Claim ceiling:
 
 ```text
-FIVE_DECLARED_EXACT_DETERMINISTIC_PYTHON_SOFTWARE_CATVM_PACKAGES_M248_M250_M253_M254_M256_AT_THEIR_SEALED_PRIMARY_FIXTURES_ONLY
+EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY
 ```
 
 This current result is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
-`SEPARATE_REFERENCE_PARITY` with `NO_RESTORATION_CLAIM`. It pins M248, M250,
-M253, M254, and M256 to their sealed primary fixtures, verifies the actual
-`forward -> projection -> inverse -> release -> response` source order, and
-constructs the same final boundary by executing the identical deterministic
-forward prefix and projection while omitting the positive inverse-stage work.
-Forward state and work dominance are componentwise; heterogeneous counters
-are not summed. Every stronger package-specific compact baseline remains
-authoritative.
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION` restricted to
+`FUNCTIONAL_NORMALIZED_EXACT_STATE_EQUALITY_AND_RETURNED_VALUE_REUSE_WITHOUT_SAME_BACKING`.
+It finds sector dimensions `10,56,330` and peak central ranks `2,8,18`, but
+the connected growing primary loses deterministic QND parity at n=6 and n=8.
+An exhaustive n=6 search finds no Kerr-distinguishing deterministic proper
+selector, while the deterministic n=8 fixed-core control is disconnected.
+No QEMU/CATVM custody, same-backing reuse, physical resource, advantage, or
+general cross-Kerr no-go is established.
 
 M257 applies only when the comparator receives the same canonical input,
 descriptors, auxiliary/secret state, and oracle access as the accepted exact
@@ -83,18 +84,20 @@ complexity lower bound, distinct phase resource, advantage, Small Wall
 crossing, physical waveform execution, physical-bit replacement, inference,
 or unbounded computation.
 
-Resume condition:
+M257 remains the controlling guardrail:
 
 ```text
-RESOURCE_OR_ACCESS_MODEL_OUTSIDE_M257_ASSUMPTIONS
+EQUAL_ACCESS_EXACT_DETERMINISTIC_SOFTWARE_FORWARD_SHADOW_MUST_NOT_BE_COUNTED_AS_A_PHASE_RESOURCE
 ```
 
-The next mechanism must identify a concrete external oracle/interaction,
-independently measured physical waveform or analog resource, lawfully withheld
-exogenous carrier state, changed stochastic/approximate/irreversible semantic,
-justified interactive black-box model, or another scientifically defensible
-comparator restriction. Do not add another exact deterministic software
-fixture and relabel CATVM inverse/restoration overhead as a phase resource.
+The active successor is
+`CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND`.
+Its first falsifier is an ideal exact Ising-anyon controlled-monodromy machine
+law with actual F/R or Majorana evolution, coherent probe-path restoration,
+distinct-loop reuse, independently measured cut ranks, full preparation and
+verification cost, and compact topological-charge/Majorana comparators. QEMU
+is the virtual hardware laboratory, not evidence of a physical resource. Do
+not add another ordinary exact software algebra or relabel inverse overhead.
 
 The accumulated bounded architecture includes:
 
@@ -266,8 +269,8 @@ loop moving.
 
 ## 5. Operating Loop
 
-This loop resumes when a concrete resource or access model outside the M257
-assumptions is available and authorized.
+This loop is active in Phase-QEMU under the authorized software-emulation and
+hardware-design boundary. Physical execution remains unauthorized.
 
 ```text
 explore
@@ -290,24 +293,26 @@ Verification follows a substantive result. One focused independent review is nor
 Development state:
 
 ```text
-HELD_AFTER_M257_ESTABLISHES_A_CONSTRUCTIVE_FORWARD_SHADOW_FOR_THE_DECLARED_EXACT_DETERMINISTIC_SOFTWARE_DOMAIN_PENDING_A_GENUINELY_EXTERNAL_PHYSICAL_OR_JUSTIFIED_RESTRICTED_ACCESS_RESOURCE
+ACTIVE_PHASE_QEMU_CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_AFTER_M260_QND_VERSUS_BOND_GROWTH_OBSTRUCTION
 ```
 
 The named
 `COHERENCE_DEPENDENT_OPEN_RELATIONAL_CATALYTIC_INFERENCE_ON_NECKLACE_CARRIER`
 work already exists at the reconciled source head; do not restart or extend
-it. The exact resume condition is:
+it. The exact active successor is:
 
 ```text
-RESOURCE_OR_ACCESS_MODEL_OUTSIDE_M257_ASSUMPTIONS
+CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
 ```
 
-M257 has formalized the same-domain forward-shadow obstruction across five
-algebraically distinct sealed exact software CATVM packages. Do not add Schur
-sections, more software CATVM fixtures, or representation optimizations merely
-to enlarge the evidence set. The next mechanism must change the resource or
-access model in one of the explicitly declared ways and preserve M257's equal-
-access boundary whenever that assumption still applies.
+M257 formalized the same-domain forward-shadow obstruction across five
+algebraically distinct sealed exact software CATVM packages. M258-M260 moved
+into QEMU process modeling and then established that growing bond rank and
+deterministic Kerr-sensitive QND closure do not coexist in the tested
+single-pi family. Do not add Schur sections, more software CATVM fixtures,
+larger Kerr ladders, or representation optimizations merely to enlarge the
+evidence set. Test the minimum many-body eigenphase/holonomy mechanism and
+preserve M257's equal-access boundary wherever it still applies.
 
 ## 7. Native No-Smuggle Law
 

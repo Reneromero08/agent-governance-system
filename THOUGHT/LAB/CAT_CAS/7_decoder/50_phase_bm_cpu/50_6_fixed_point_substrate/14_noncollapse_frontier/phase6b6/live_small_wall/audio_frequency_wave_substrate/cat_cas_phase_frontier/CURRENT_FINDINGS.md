@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`. The canonical per-milestone
+`c79693808f10540d6ec80a0084444f72f1a364e8`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13458,7 +13458,7 @@ compute, or physical-bit replacement. The accepted QND copy is lawful only
 for parity-eigenstate boundaries, and the four-mode fixtures have smaller
 exact classical descriptions.
 
-The active successor is:
+That successor completed as M260:
 
 ```text
 GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
@@ -13472,3 +13472,76 @@ If rank growth makes the pointer mixed, or deterministic cases merely extend
 a disconnected four-mode core, the result becomes a bounded QND-versus-rank
 obstruction and the mechanism changes to controlled many-body eigenphase or
 holonomy scattering.
+
+## M260 growing even-mode QND-versus-bond obstruction
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE
+```
+
+The fixed-number sectors at `n=4,6,8` have exact dimensions `10,56,330`.
+The primary alternating-matching word reaches final supports `1,54,292` and
+peak central Schmidt ranks `2,8,18`, but its deterministic mode-parity
+boundary survives only at n=4. The six- and eight-mode last-mode and central
+selectors are mixed. Exact public adjoints restore every normalized state;
+descriptor-distinct reuse consumes the returned restored value. Because the
+Python implementation does not retain one mutable allocation, same-backing
+reuse is not established and the restoration scope is explicitly functional.
+
+The exact n=6 exhaustive search covers all `32,767` nonempty Kerr edge sets
+and `62` nonempty proper selectors. `A B K_E A B` has zero proper
+deterministic selectors. `A B K_E B_DAG A_DAG` has `180,162` raw
+deterministic closures across `16,383` graphs, but zero Kerr-distinguishing
+parity flips. The fixed-N all-mode parity is separately recorded as a trivial
+conserved sham. The deterministic fixed-core control is connected at n=6,
+but at n=8 it has components `[6,2]`, support four, and rank two. Its active
+Kerr edges are causal, yet the larger instance is only a disconnected bounded
+core extension.
+
+Fresh production and an independent dense shared-sqrt2-exponent reference are
+byte-identical to their seals and agree on every exact rank, support, parity,
+search count, ablation, and restoration predicate. The classification is
+`INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY`, with
+`EXACT_ALGEBRAIC_RESTORATION` restricted to
+`FUNCTIONAL_NORMALIZED_EXACT_STATE_EQUALITY_AND_RETURNED_VALUE_REUSE_WITHOUT_SAME_BACKING`.
+
+The claim ceiling is:
+
+```text
+EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY
+```
+
+Each exhaustive word generates one verifier-only
+`56 x 32768 = 1,835,008` integer FWHT table and performs `27,525,120` integer
+add/sub operations. The two tables are sequential. These figures are
+`PACKAGE_SELF_REVIEW`, not a complete live-resource result. Transition caches,
+object/allocator state, whole-process payload, serialization, and all physical
+costs are uninstrumented. Exact sparse recurrence, adaptive U(1) MPS,
+TTN/boundary contraction, linear-optical recurrence, symmetry/finite-order,
+and O(1) active-component certificates remain the strongest disclosed
+classical comparison family; adaptive optimality is neither implemented nor
+claimed.
+
+The result is a bounded obstruction, not a resource win. Deterministic QND
+parity closure and connected bond growth do not coexist in the tested
+single-pi cross-Kerr alternating-matching family. No QEMU/CATVM custody,
+same-backing reuse, physical carrier/QND law, distinct phase resource,
+advantage, M257 escape, Small Wall crossing, unbounded compute, or bit-to-pi
+replacement is established.
+
+The active successor is:
+
+```text
+CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
+```
+
+Its minimum falsifier is an ideal exact Ising-anyon controlled-monodromy
+machine law with actual F/R or equivalent Majorana evolution, independently
+measured fusion-vector cut ranks, a coherent probe path, public inverse echo,
+and distinct-loop reuse. The compact enclosed-charge and Majorana/stabilizer
+recurrences remain controlling. If they reproduce the boundary and internal
+state changes inside a fixed charge sector are invisible, Ising holonomy is
+retired immediately as a computational resource and the mechanism must change
+to a non-Gaussian interacting eigenphase rather than another loop fixture.

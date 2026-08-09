@@ -1,20 +1,20 @@
 # CAT_CAS Audio and Phase-Native Compute Roadmap
 
-**Status:** `PHASE_QEMU_V1_EXACT_BOUNDED_ECHO_CALIBRATED_GROWING_EVEN_MODE_QND_BOND_GROWTH_DIAGNOSTIC_ACTIVE`
-**Roadmap version:** `15.43`
+**Status:** `PHASE_QEMU_V2_GROWING_QND_BOND_OBSTRUCTION_VERIFIED_CONTROLLED_MANY_BODY_HOLONOMY_SCATTERING_ACTIVE`
+**Roadmap version:** `15.44`
 **Standing mission:** `CAT_CAS_HOLOGRAPHIC_RELATIONAL_COMPUTE_V1`
 **Canonical branch:** `codex/audio-frequency-wave-substrate`  
-**Reconciled source head:** `1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`
+**Reconciled source head:** `c79693808f10540d6ec80a0084444f72f1a364e8`
 **Claim registry:** `CLAIM_AUTHORITY_REGISTRY.json`
-**Current highest milestone:** `PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE`
-**Current claim ceiling:** `DETERMINISTIC_EXACT_IDEAL_QEMU_4_MODE_2_BOSON_BACKEND_ONLY`
+**Current highest milestone:** `EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE`
+**Current claim ceiling:** `EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY`
 **Current evidence authority:** `SEPARATE_REFERENCE_PARITY`
 **New mechanism development:** `ACTIVE_PHASE_QEMU_HARDWARE_EMULATION_FRONTIER_OUTSIDE_THE_M257_SAME_DOMAIN_SOFTWARE_ADVANTAGE_SEARCH_WITHOUT_CLAIMING_EMULATION_IS_A_PHYSICAL_RESOURCE`
 **Milestone terminal:** `false`  
 **Lane closure authority:** `USER_ONLY`  
 **Physical carrier work:** `SOFTWARE_MODELING_AND_DESIGN_AUTHORIZED_ACTUAL_PHYSICAL_EXECUTION_NOT_AUTHORIZED`
 **P0:** `REFERENCE_HARDWARE_MODEL_0_SELECTED_NATURAL_RINGDOWN_EMULATED_NOT_FINAL_ARCHITECTURE`
-**Active primary successor:** `GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC`
+**Active primary successor:** `CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND`
 
 This file is the active local planning authority for the lane. Frozen packages remain authoritative for evidence and claim ceilings. No package-local word such as `final`, `verified`, `complete`, or `mission result` authorizes the agent to stop.
 
@@ -185,7 +185,7 @@ compact unresolved relational state
 
 This roadmap and `AUTONOMOUS_LANE_STATE.json` are reconciled through the exact
 pushed scientific source head
-`1fcee10bdac00cdc77de7074b68a71a7bc0d3a11`. The current 259-milestone
+`c79693808f10540d6ec80a0084444f72f1a364e8`. The current 260-milestone
 verification and restoration partitions are in
 `CLAIM_AUTHORITY_REGISTRY.json`; that registry controls whenever legacy
 package prose or frozen evidence uses a stronger unqualified label.
@@ -751,11 +751,11 @@ Verification follows a substantive result. One focused review is normally suffic
 Current execution state:
 
 ```text
-NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_GROWING_FAMILY_DIAGNOSTIC
-SCIENTIFIC_SOURCE_HEAD       1fcee10bdac00cdc77de7074b68a71a7bc0d3a11
-COMPLETED_MECHANISM          PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
-ACTIVE_SUCCESSOR             GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
-NEXT_OBSTRUCTION             DETERMINISTIC_QND_EXTRACTION_AND_GROWING_BOND_RANK_HAVE_NOT_YET_COEXISTED_IN_ONE_CONNECTED_CAUSAL_FAMILY
+NEW_MECHANISM_DEVELOPMENT    ACTIVE_PHASE_QEMU_CONTROLLED_MANY_BODY_HOLONOMY_SCATTERING
+SCIENTIFIC_SOURCE_HEAD       c79693808f10540d6ec80a0084444f72f1a364e8
+COMPLETED_MECHANISM          M260_GROWING_EVEN_MODE_QND_VERSUS_BOND_GROWTH_OBSTRUCTION
+ACTIVE_SUCCESSOR             CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
+NEXT_OBSTRUCTION             FACTORIZED_PROBE_PHASE_MUST_DEPEND_ON_A_GROWING_MANY_BODY_EIGENSTATE_OR_HOLONOMY_WITH_FULL_PREPARATION_RESTORATION_AND_CLASSICAL_COMPARATOR_COST
 ```
 
 The earlier route remains historical context:
@@ -4814,7 +4814,7 @@ Discrete decoding occurs only at a declared boundary. The borrowed carrier must 
 Current highest claim:
 
 ```text
-PHASE_QEMU_V1_BOUNDED_EXACT_FOUR_MODE_TWO_BOSON_CROSS_KERR_QND_PARITY_POINTER_PUBLIC_ADJOINT_RESTORATION_AND_GENERATION2_REUSE
+EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE
 ```
 
 Not established:
@@ -12791,7 +12791,7 @@ crossing, unbounded compute, or replacement of physical bits with pi. Its QND
 copy is lawful only on parity-eigenstate boundaries, and the bounded accepted
 words have smaller exact classical descriptions.
 
-The active successor is:
+That successor completed as M260:
 
 ```text
 GROWING_EVEN_MODE_ALTERNATING_MATCHING_CROSS_KERR_PARITY_QND_TRANSFER_AND_BOND_GROWTH_DIAGNOSTIC
@@ -12806,6 +12806,79 @@ all three sizes. A family that becomes mixed when rank grows, or remains
 deterministic only by extending a disconnected fixed core, is a bounded
 QND-versus-rank obstruction and forces a change to controlled many-body
 eigenphase or holonomy scattering rather than more four-mode fixtures.
+
+## M260 growing even-mode QND-versus-bond obstruction
+
+The accepted strict-scope claim is:
+
+```text
+EXACT_GROWING_EVEN_MODE_FIXED_NUMBER_ALTERNATING_MATCHING_PI_CROSS_KERR_DIAGNOSTIC_HAS_SECTOR_DIMENSIONS10_56_330_AND_PEAK_CENTRAL_SCHMIDT_RANKS2_8_18_BUT_PRIMARY_QND_PARITY_FACTORIZATION_FAILS_AT_N6_N8_EXHAUSTIVE_N6_ALL_EDGESET_PROPER_SELECTOR_SEARCH_FINDS_ZERO_KERR_DISTINGUISHING_DETERMINISTIC_BOUNDARIES_AND_THE_DECLARED_DETERMINISTIC_N8_FIXED_CORE_ECHO_CONTROL_IS_DISCONNECTED_WITH_FUNCTIONAL_EXACT_PUBLIC_ADJOINT_RESTORATION_AND_NO_ADVANTAGE
+```
+
+The exact fixed-number sectors at `n=4,6,8`, `N=n/2` have dimensions
+`10,56,330`. The primary alternating-matching word reaches final supports
+`1,54,292` and peak central Schmidt ranks `2,8,18`. The four-mode boundary is
+deterministic, but both declared six- and eight-mode subset-parity boundaries
+are mixed. Exact public adjoints restore every normalized value and a
+descriptor-distinct word consumes the returned restored value, but the Python
+diagnostic does not preserve one mutable allocation. Restoration is therefore
+`EXACT_ALGEBRAIC_RESTORATION` only at scope
+`FUNCTIONAL_NORMALIZED_EXACT_STATE_EQUALITY_AND_RETURNED_VALUE_REUSE_WITHOUT_SAME_BACKING`.
+
+The independent n=6 search covers all `32,767` nonempty Kerr edge sets and all
+`62` nonempty proper selectors. `A B K_E A B` has no proper deterministic
+selector. `A B K_E B_DAG A_DAG` has `180,162` raw deterministic closures over
+`16,383` graphs, but none changes the Kerr-disabled parity. The all-mode
+selector is separately excluded as the fixed-particle-number parity sham.
+
+The deterministic fixed-core echo is also decisive. At n=6 its active graph
+is connected with support four and rank four. At n=8 it merely appends an
+isolated two-mode component; support remains four and rank falls to two.
+Deleting either active Kerr edge changes the exact ray and makes the boundary
+mixed, so the small core is causal, but it does not scale as connected
+relational geometry.
+
+Production and the independent dense recurrence agree exactly. Qualification
+is `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at `SEPARATE_REFERENCE_PARITY`.
+Resource figures remain `PACKAGE_SELF_REVIEW`: each exhaustive word
+materializes one verifier-only `56 x 32768 = 1,835,008` integer FWHT table,
+the two tables are sequential, and each transform performs `27,525,120`
+integer additions/subtractions. Transition caches, Python object/allocator
+state, whole-process payload, serialization, and physical energy, noise,
+precision, bandwidth, and latency are uninstrumented. Adaptive U(1) MPS,
+TTN/boundary-only contraction, exact sparse evolution, linear-optical
+recurrences, symmetry/finite-order certificates, and O(1) component
+certificates remain controlling comparators; the adaptive comparator is not
+implemented, optimality is not established, and no resource comparison is
+authorized.
+
+M260 therefore retires this single-pi cross-Kerr alternating-matching route.
+It does not establish QEMU or CATVM custody, same-backing reuse, a physical QND
+detector, physical bosons or phonons, a distinct phase resource, advantage,
+M257 escape, Small Wall crossing, unbounded computation, or physical-bit
+replacement. Its claim ceiling is:
+
+```text
+EXACT_SOFTWARE_FIXED_NUMBER_BOSONIC_ALTERNATING_MATCHING_SINGLE_PI_CROSS_KERR_QND_PARITY_DIAGNOSTIC_AT_N4_N6_N8_ONLY
+```
+
+The active successor is:
+
+```text
+CONTROLLED_MANY_BODY_EIGENPHASE_HOLONOMY_SCATTERING_PHASE_QEMU_BACKEND
+```
+
+The smallest falsifier is an ideal exact Ising-anyon controlled-monodromy
+backend. It must derive a factorized probe phase from actual F/R or equivalent
+Majorana evolution on a prepared growing fusion carrier, restore probe path,
+worldline, couplers, and carrier by the public inverse, and reuse one carrier
+for a distinct loop. Dense fusion-vector flattenings must measure any claimed
+rank growth; definite enclosed charge, simultaneous loop eigenstate status,
+state preparation, framing, verification, and all echo cost must be counted.
+The compact topological-charge and Majorana/stabilizer recurrences are the
+controlling classical baselines. If they reproduce every boundary and
+internal-state scrambling at fixed charge is invisible, publish the bounded
+holonomy machine law and retire Ising immediately rather than adding fixtures.
 
 ## 10. Roadmap Maintenance
 
