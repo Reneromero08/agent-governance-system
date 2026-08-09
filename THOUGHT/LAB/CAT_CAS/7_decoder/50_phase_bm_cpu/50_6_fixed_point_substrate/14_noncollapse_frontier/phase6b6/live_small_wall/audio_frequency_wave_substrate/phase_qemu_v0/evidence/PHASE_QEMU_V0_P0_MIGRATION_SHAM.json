@@ -1,0 +1,68 @@
+{
+  "classification": {
+    "accepted_catalytic_path": false,
+    "carrier_backing_identity_preserved_across_processes": false,
+    "host_migration_no_smuggle_enforcement_established": false,
+    "migration_stream_guest_mmio_visible": false,
+    "migration_stream_is_trusted_backend_state": true,
+    "recovery_classification": "SNAPSHOT_RELOAD",
+    "restoration_classification": "NO_RESTORATION_CLAIM"
+  },
+  "continued_boundary": {
+    "barrier_receipt": 8,
+    "energy_q30": 315453609,
+    "i": 581926496,
+    "q": 8791306,
+    "virtual_cycles": 20480
+  },
+  "controls": {
+    "continued_boundary_matches_uninterrupted_qtest": true,
+    "hidden_boundary_remains_locked_after_reload": true,
+    "migration_stream_nonempty": true,
+    "nonsecret_prefix_state_exact_after_reload": true,
+    "pci_bar_and_command_state_restored_without_guest_replay": true,
+    "qemu_stderr_empty": true,
+    "reloaded_carrier_is_spent_not_restored": true,
+    "response_released_only_after_continuation": true,
+    "source_prefix_is_leased_prepared_isolated": true
+  },
+  "migration_stream_bytes": 575869,
+  "migration_stream_sha256": "097b90839c497b7d859105d41eacef856292100043da102cf23184ba586cde70",
+  "production_qtest_result_sha256": "b0055efb05c9b5932ab05e0af7cc7e4a68e6f3718e2ae311463130b5ab6f7639",
+  "qemu_binary_sha256": "97a60af55d782a0db8814acd0f1463534d12633cdd52cb9a0ae532a068e22c2e",
+  "reloaded_prefix": {
+    "barrier_receipt": 8,
+    "boundary_locked": true,
+    "generation": 0,
+    "status": 270,
+    "virtual_cycles": 17408
+  },
+  "resource_law": {
+    "guest_replayed_prefix_commands": 0,
+    "migration_storage_lifetime_instrumented": false,
+    "migration_stream_bytes": 575869,
+    "migration_stream_hashing_reads": 1,
+    "migration_stream_reads": 1,
+    "migration_stream_writes": 1,
+    "phase_device_v1_nominal_vmstate_payload_bytes_before_pci_and_framing": 143,
+    "phase_device_vmstate_boolean_fields": 7,
+    "phase_device_vmstate_i64_fields": 8,
+    "phase_device_vmstate_u32_fields": 12,
+    "phase_device_vmstate_u64_fields": 3,
+    "process_recreation_used": true,
+    "qmp_and_qtest_message_bytes_instrumented": false,
+    "snapshot_creation_and_reload_wall_time_instrumented": false,
+    "source_and_target_peak_rss_pss_instrumented": false,
+    "source_and_target_qemu_processes": 2,
+    "warm_uninterrupted_qtest_boundary_used_as_baseline": true,
+    "whole_qemu_process_memory_accounted": false
+  },
+  "schema": "phase-qemu-v0-migration-sham-v1",
+  "source_prefix": {
+    "barrier_receipt": 8,
+    "boundary_locked": true,
+    "generation": 0,
+    "status": 270,
+    "virtual_cycles": 17408
+  }
+}

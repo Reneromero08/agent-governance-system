@@ -1,0 +1,43 @@
+{
+  "schema": "PHASE_QEMU_V0_BUILD_RECEIPT_V1",
+  "build_scope": "PROJECT_LOCAL_MANAGED_SCRATCH_BUILD_ONLY",
+  "build_date": "2026-08-08",
+  "qemu": {
+    "version": "10.2.4",
+    "source_url": "https://download.qemu.org/qemu-10.2.4.tar.xz",
+    "signature_url": "https://download.qemu.org/qemu-10.2.4.tar.xz.sig",
+    "source_archive_sha256": "821b545b92f165e57dddccac5077d76d4d436a226595b8813ad59306bbfd0746",
+    "detached_signature_sha256": "aca12b432b3c12c03812763ab306936c62550f4a120d94e454aee18de3e0eb84",
+    "signing_key_fingerprint": "CEACC9E15534EBABB82D3FA03353C9CEF108B584",
+    "signature_result": "VALID_SIGNATURE_WITH_EXPIRED_SIGNING_KEY",
+    "signature_caveat": "The detached signature verified against the stated QEMU signing-key fingerprint, but the signing key was expired at verification time."
+  },
+  "configure_arguments": [
+    "--target-list=x86_64-softmmu",
+    "--disable-docs",
+    "--disable-werror",
+    "--enable-debug"
+  ],
+  "toolchain": {
+    "compiler": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "ninja": "1.13.2"
+  },
+  "source_dependencies": {
+    "apply_to_qemu.py": "4c145676f6caacbf5fd59d31fe71e8e497b60f1db46cd364e145a19c3f10feee",
+    "qemu/hw/misc/phase-qemu-v0.c": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764",
+    "tests/phase_qemu_v0_separate_reference.py": "0c8c0b5bb4a76601bda84a1e28294937144ef720a13cfe883cf0cc3f33051d49",
+    "tests/qualify_phase_qemu_v0.py": "3a2a49ea536cd6bc6fd1df7496776c2d7dc7ed9374634f9b166ecbabb9378585",
+    "tests/run_phase_qemu_v0_migration_sham.py": "d14a01d2538a15b6daa6f6a3e36aa6c6766146c622c90eab1ab2dc270ca3fa65",
+    "tests/run_phase_qemu_v0_qtest.py": "f357cb3df9a679b0e6d5855a6efd744c48b4c15da44f9afbadd92d70a0b7c5ef"
+  },
+  "phase_qemu_device_source_sha256": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764",
+  "qemu_binary_sha256": "97a60af55d782a0db8814acd0f1463534d12633cdd52cb9a0ae532a068e22c2e",
+  "sealed_qtest_result_sha256": "b0055efb05c9b5932ab05e0af7cc7e4a68e6f3718e2ae311463130b5ab6f7639",
+  "sealed_separate_reference_sha256": "835995cdbaaaa7609191a232f7590614ec70186bc8327f26053e5dbddd516470",
+  "sealed_migration_sham_sha256": "72d80465ae4380e0279a32b59c1ac9a7af25741f7c296f24d2f60f349c411137",
+  "system_install_performed": false,
+  "system_qemu_modified": false,
+  "additional_ags_worktree_or_clone_created": false,
+  "ram_backed_scratch_used": false,
+  "physical_hardware_accessed": false
+}

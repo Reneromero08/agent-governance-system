@@ -1,0 +1,66 @@
+{
+  "claim_ceiling": "DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY",
+  "controls": {
+    "all_source_boundary_audits_pass": true,
+    "canonical_model_reinitialization_not_restoration": true,
+    "m257_not_escaped_by_deterministic_model": true,
+    "migration_stream_no_smuggle_not_claimed": true,
+    "p0_capabilities_omit_inverse_restore_reuse": true,
+    "primary_0_exact_reference_parity": true,
+    "primary_pi_exact_reference_parity": true,
+    "production_controls_all_pass": true,
+    "reference_antipodal_quadratures_within_fixed_point_quantization": true,
+    "reference_carrier_dissipates_positive_energy": true,
+    "reference_matched_energy_within_fixed_point_quantization": true,
+    "reference_removed_carrier_strictly_smaller": true,
+    "removed_carrier_exact_reference_parity": true,
+    "removed_carrier_has_zero_mechanical_dissipation": true
+  },
+  "device_source_audit": {
+    "backend_ops_interface_present": true,
+    "boundary_lock_sentinel_present": true,
+    "canonical_model_reinitialization_is_separate_command": true,
+    "hidden_process_coordinates_absent_from_mmio_reads": true,
+    "migration_post_load_validates_topology_and_machine_state": true,
+    "native_p0_inverse_explicitly_unavailable": true,
+    "native_p0_restoration_explicitly_unavailable": true,
+    "no_answer_table_tokens": true,
+    "owner_program_custody_capability_is_narrowly_named": true,
+    "p0_is_one_backend_not_frontend_contract": true,
+    "qemu_vmstate_includes_hidden_process_domains": true,
+    "source_sha256": "b79ec06f870b611142f5df5c97db2f8e34027458da5acc933f90b694b2055764"
+  },
+  "dissipated_energy_q30": {
+    "primary_0": 777117752,
+    "primary_pi": 777117760,
+    "removed_carrier": 0
+  },
+  "expected_primary_0": {
+    "barrier_receipt": 8,
+    "energy_q30": 315453609,
+    "i": 581926496,
+    "q": 8791306,
+    "virtual_cycles": 20480
+  },
+  "expected_primary_pi": {
+    "barrier_receipt": 8,
+    "energy_q30": 315453619,
+    "i": -581926504,
+    "q": -8791401,
+    "virtual_cycles": 20480
+  },
+  "expected_removed_carrier": {
+    "barrier_receipt": 8,
+    "energy_q30": 0,
+    "i": 1021,
+    "q": 0,
+    "virtual_cycles": 20480
+  },
+  "migration_topology_guard_verification_level": "SOURCE_AUDITED_PACKAGE_LOCAL",
+  "next_obstruction": "P0_RINGDOWN_IS_DISSIPATIVE_AND_HAS_NO_NATIVE_INVERT_RESTORE_REUSE_LAW_WHILE_THE_IDENTICAL_FIXED_POINT_STATE_RECURRENCE_IS_AN_EQUAL_ACCESS_CLASSICAL_SHADOW",
+  "production_result_sha256": "b0055efb05c9b5932ab05e0af7cc7e4a68e6f3718e2ae311463130b5ab6f7639",
+  "restoration_classification": "NO_RESTORATION_CLAIM",
+  "schema": "phase-qemu-v0-separate-reference-v1",
+  "verification_classification": "INDEPENDENTLY_VERIFIED_STRICT_SCOPE",
+  "verification_level": "SEPARATE_REFERENCE_PARITY"
+}

@@ -1,0 +1,115 @@
+{
+  "boundary_security_scope": {
+    "hidden_process_coordinates_absent_from_guest_mmio_reads": true,
+    "host_or_migration_stream_no_smuggle_enforcement_established": false,
+    "migration_and_snapshot_streams_are_trusted_backend_state": true
+  },
+  "canonical_model_reinitialization_after_0": {
+    "canonical_after_reinitialization": true,
+    "generation_after": 1,
+    "generation_before": 0,
+    "reinitialization_count": 1,
+    "reinitialization_marker_persistent": true
+  },
+  "canonical_model_reinitialization_after_pi": {
+    "canonical_after_reinitialization": true,
+    "generation_after": 2,
+    "generation_before": 1,
+    "reinitialization_count": 2,
+    "reinitialization_marker_persistent": true
+  },
+  "claim_limits": {
+    "catalytic_restoration": false,
+    "computational_advantage": false,
+    "distinct_phase_resource": false,
+    "p0_is_final_phase_architecture": false,
+    "physical_bit_replacement": false,
+    "physical_restoration": false,
+    "physical_waveform_execution": false,
+    "restored_carrier_reuse": false,
+    "small_wall_crossed": false,
+    "unbounded_compute": false
+  },
+  "classification": {
+    "claim": "PHASE_QEMU_V0_P0_REFERENCE_PROCESS_GEOMETRY_AND_SOURCE_ISOLATED_UPSTREAM_ENERGIZED_RINGDOWN_CALIBRATION",
+    "claim_ceiling": "DETERMINISTIC_FIXED_POINT_QEMU_PCI_MODEL_OF_SELECTED_P0_PROCESS_GEOMETRY_ONLY",
+    "model_reinitialization_classification": "NO_RESTORATION_CLAIM",
+    "restoration_classification": "NO_RESTORATION_CLAIM",
+    "verification_level": "PACKAGE_SELF_REVIEW"
+  },
+  "controls": {
+    "antipodal_i_within_fixed_point_quantization": true,
+    "antipodal_q_within_fixed_point_quantization": true,
+    "barrier_code_8_both_arms": true,
+    "boundary_locked_until_explicit_diagnostic_release": true,
+    "canonical_model_reinitialization_required_between_arms": true,
+    "carrier_spent_after_nonrestoring_diagnostic": true,
+    "matched_energy_within_fixed_point_quantization": true,
+    "native_inverse_unavailable": true,
+    "native_restoration_unavailable": true,
+    "pi_arm_has_same_response_ordering": true,
+    "projection_before_source_isolation_rejected": true,
+    "qemu_stderr_empty": true,
+    "removed_carrier_boundary_strictly_smaller": true,
+    "removed_carrier_response_ordering_preserved": true,
+    "response_ready_after_diagnostic_release": true,
+    "restored_reuse_rejected": true,
+    "wrong_owner_rejected_before_source_isolation": true,
+    "wrong_program_rejected_before_source_isolation": true
+  },
+  "device": {
+    "abi": 65536,
+    "backend": 0,
+    "capabilities": 31,
+    "magic": 1346917936,
+    "model_numeric_state_cells": 10,
+    "retained_dynamic_inverse_history_cells": 0
+  },
+  "primary_0": {
+    "barrier_receipt": 8,
+    "energy_q30": 315453609,
+    "i": 581926496,
+    "q": 8791306,
+    "virtual_cycles": 20480
+  },
+  "primary_pi": {
+    "barrier_receipt": 8,
+    "energy_q30": 315453619,
+    "i": -581926504,
+    "q": -8791401,
+    "virtual_cycles": 20480
+  },
+  "qemu_binary_sha256": "97a60af55d782a0db8814acd0f1463534d12633cdd52cb9a0ae532a068e22c2e",
+  "removed_carrier": {
+    "barrier_receipt": 8,
+    "energy_q30": 0,
+    "i": 1021,
+    "q": 0,
+    "virtual_cycles": 20480
+  },
+  "resource_law": {
+    "barrier_state_fields": 1,
+    "boundary_state_cells": 3,
+    "carrier_model_state": "TWO_Q30_MECHANICAL_ROTATING_FRAME_QUADRATURES",
+    "carrier_state_cells": 2,
+    "clock_state_fields": 2,
+    "controller_custody_boolean_fields": 6,
+    "controller_custody_u32_fields": 10,
+    "declared_numeric_model_cells": 10,
+    "detector_state_cells": 2,
+    "environment_dissipation_cells": 1,
+    "exact_fixed_point_fraction_bits": 30,
+    "fixed_point_primitive_operation_counts_instrumented": false,
+    "migration_snapshot_bytes_and_work_instrumented": false,
+    "mmio_read_write_traffic_instrumented": false,
+    "preparation_steps": 256,
+    "qemu_build_cost_instrumented": false,
+    "retained_dynamic_inverse_history_cells": 0,
+    "ringdown_steps_per_primary": 64,
+    "source_state_cells": 2,
+    "topology_property_and_migration_guard_boolean_fields": 2,
+    "virtual_carrier_cycles_per_step": 64,
+    "whole_qemu_process_memory_accounted": false
+  },
+  "schema": "phase-qemu-v0-qtest-result-v1"
+}
