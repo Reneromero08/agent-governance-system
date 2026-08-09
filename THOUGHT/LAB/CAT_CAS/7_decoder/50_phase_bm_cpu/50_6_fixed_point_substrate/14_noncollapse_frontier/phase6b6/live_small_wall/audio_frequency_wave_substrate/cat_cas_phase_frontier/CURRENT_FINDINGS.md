@@ -6,7 +6,7 @@ package, promotion packet, or new stopping point.
 ## Canonical claim reconciliation
 
 Claim authority is reconciled through source head
-`27ba6c975e1451f66ef9c202a77fb4bb88c0bb05`. The canonical per-milestone
+`24fbc1acb2095d4bef0bfb649b44d76014a19859`. The canonical per-milestone
 verification levels, restoration classifications, source-audit authority,
 and strict ceilings are recorded in
 `../CLAIM_AUTHORITY_REGISTRY.json`.
@@ -13106,17 +13106,53 @@ physical indefinite order, oracle separation, a distinct phase resource,
 advantage, Small Wall crossing, inference, physical execution, bit
 replacement, or unbounded computation. The route stops here.
 
+## M253 four-port Grassmann-Gaussian open-relation calibration
+
+The accepted strict-scope claim is:
+
+```text
+CATVM_ENFORCED_BOUNDED_EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_INTERSECTS_BY_ANTISYMMETRIC_COEFFICIENT_ADDITION_AND_CLOSES_BY_AN_INVERTIBLE_BEREZIN_PFAFFIAN_TRANSFORM_ON_ONE_SEVEN_CELL_RESIDENT_SIGNATURE_WITH_FINAL_TOP_FORM_ONLY_ATOMIC_EXACT_SAME_BACKING_RESTORATION_AND_GENERATION2_REUSE_BUT_THE_IDENTICAL_SEVEN_CELL_CLASSICAL_RECURRENCE_AND_GENERAL_PFAFFIAN_MATCHGATE_ALGORITHMS_BISIMULATE_THE_DECLARED_LAW_WITH_NO_ADVANTAGE
+```
+
+The abstract Unix-socket CATVM retains one actual seven-cell `Q(zeta8)`
+signature for `lambda*exp(theta^T A theta/2)` on four typed Grassmann ports.
+Intersection multiplies `lambda` and adds the six independent antisymmetric
+coefficients. The formal Berezin/Fourier closure maps
+`(lambda,A)` to `(lambda*Pf(A),A^-1)` exactly on the nonsingular chart and is
+an involution at four ports. Only the final top-form coefficient is returned,
+after exact reverse execution, canonical verification, and release. The same
+backing supports descriptor-distinct generation-two reuse with no reload.
+
+The independent polynomial-quotient oracle reconstructs the dense
+antisymmetric matrix, recursive Pfaffian, and Gauss-Jordan inverse. It agrees
+with every accepted final boundary and work record, exercises independent
+custody and generation state, and compares the one-step dense closure to a
+separate in-place complementary-pair formula. Focused review returned
+`PASS_STRICT_SCOPE`, classified `INDEPENDENTLY_VERIFIED_STRICT_SCOPE` at
+`SEPARATE_REFERENCE_PARITY` with `EXACT_ALGEBRAIC_RESTORATION`.
+
+The strongest implemented transferable classical comparator is smaller than
+the accepted CATVM lifecycle: seven resident field cells plus two explicit
+reusable scratch cells, with no restoration transaction. General Pfaffian and
+matchgate algorithms remain the broader controlling ceiling. This establishes
+one bounded formal open Gaussian relation algebra and machine law, not a
+distinct phase resource, computational advantage, general or non-Gaussian
+relation closure, Small Wall crossing, physical fermionic/waveform execution,
+physical-bit replacement, inference, or unbounded computation. The Gaussian
+matchgate route stops here.
+
 Next:
 
 ```text
-EXACT_QZETA8_FOUR_PORT_GRASSMANN_GAUSSIAN_OPEN_RELATION_BEREZIN_COMPOSITION_INTERSECTION_WITH_CATVM_RESTORATION_REUSE_AND_PFAFFIAN_BISIMULATION
+EXACT_QZETA8_FOUR_PORT_EVEN_GRASSMANN_NON_GAUSSIAN_EXTERIOR_RELATION_INTERSECTION_AND_BEREZIN_HODGE_CLOSURE_WITH_CATVM_RESTORATION_REUSE_AND_EIGHT_CELL_CLASSICAL_BISIMULATION
 ```
 
-M253 returns to open relational geometry. It represents one typed four-port
-Grassmann-Gaussian relation in seven exact field cells, intersects by scalar
-multiplication and antisymmetric coefficient addition, and composes through a
-Berezin/Pfaffian transform without truth-table expansion. Only a final top-form
-scalar may leave after exact restoration and reuse. The identical seven-cell
-antisymmetric-matrix/Pfaffian recurrence and general matchgate algorithm are
-the controlling compact classical baselines. A match retires this bounded
-Gaussian relation route rather than starting a planar-fixture series.
+The successor removes the Gaussian/pure-spinor constraint at the smallest
+closed interface. It must retain all eight even exterior coefficients, use
+native signed Grassmann multiplication for relation intersection, close with
+the exact four-port Berezin/Hodge transform, project only the final top-form,
+and restore/reuse the actual relation. Public inverse intersection must be
+derived in the nilpotent exterior algebra without dynamic old-state history.
+The identical eight-cell exterior recurrence is the strongest immediate
+comparator, so this is a strict algebra-broadening test rather than an expected
+advantage or arbitrary-port claim.
